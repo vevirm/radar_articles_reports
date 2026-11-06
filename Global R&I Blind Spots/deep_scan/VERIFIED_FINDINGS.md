@@ -1,8 +1,202 @@
 # Global R&I Deep Scan — verified findings
 
-Imported: 2026-11-04T09:58:48.237980+00:00. **21 verified KEEP** findings, **9 REVIEW**, **6 DROP**.
+Imported: 2026-11-06T10:22:16.913548+00:00. **32 verified KEEP** findings, **19 REVIEW**, **9 DROP**.
 
 A KEEP records a source-checked reviewer assessment; the GitHub importer validates evidence structure but does not itself browse or certify truth.
+
+## Canada looks forward to deepening research and education cooperation with EU
+
+**Canada · Research security and international cooperation** | 2026-09-21 | confidence high
+
+**Verified finding:** Canada publicly proposed deeper research and education integration with Europe, including possible membership in Erasmus+ and the *next generation* of Horizon; as of the reviewed primary speech these are aspirations, not a concluded future programme association.
+
+**Evidence:** [Canada looks forward to deepening research and education cooperation with EU](https://community.era.gv.at/news-items/canada-in-favour-of-depending-research-and-education-cooperation-with-eu/) — Moved ERA Portal 21 September item; PM Canada 17 September address, “So let me say plainly what Canada proposes” section.
+
+**Independent check:** Official speech independently authenticates the precise policy proposal and prevents exaggeration into an enacted partnership. [1](https://www.pm.gc.ca/en/news/speeches/2026/09/17/prime-minister-carney-delivers-address-european-parliament?source=voice4.com)
+
+**Why global R&I matters:** Political intent to expand access to education and research frameworks could diversify talent flows and deepen EU-Canada institutional coordination if agreements are negotiated.
+
+**Main Radar comparison (confirms_main_radar):** Existing main-Radar record (A: Canada looks forward to deepening research and education cooperation with EU). Independently checked; confirms the limited factual structural finding stated here, not every claim on the original page.
+
+**Limitations:** Date of speech and reporting verified; no treaty, negotiation timetable, membership fee, research call or integration outcome demonstrated.
+
+- Existing main Radar A: [Canada looks forward to deepening research and education cooperation with EU](https://era.gv.at/news-items/canada-in-favour-of-deepending-research-and-education-cooperation-with-eu/)
+
+## EU: Shepherded by Brussels, Europe awakens to Chinese technology
+
+**China · Research security and international cooperation** | 2026-06-30 | confidence high
+
+**Verified finding:** EU research and technology policy is moving toward differentiated China-related de-risking and targeted safeguards rather than simple disengagement, with Horizon eligibility exclusions in specified fields.
+
+**Evidence:** [EU: Shepherded by Brussels, Europe awakens to Chinese technology](https://merics.org/en/report/eu-shepherded-brussels-europe-awakens-chinese-technology) — MERICS EU chapter and EU Council / EURAXESS guidance on programme rules.
+
+**Independent check:** Official EU instruments corroborate concrete science-cooperation rules; they do not independently audit every MERICS market/industrial assertion. [1](https://www.consilium.europa.eu/en/press/press-releases/2024/05/23/council-adopts-a-recommendation-to-enhance-research-security/) [2](https://euraxess.ec.europa.eu/worldwide/china/news/horizon-europe-work-programmes-2026-2027)
+
+**Why global R&I matters:** EU strategic technology interdependence with China shapes research eligibility, industrial partnerships, knowledge transfer and diversification incentives.
+
+**Main Radar comparison (confirms_main_radar):** Existing main-Radar record (A: EU: Shepherded by Brussels, Europe awakens to Chinese technology). Independently checked; confirms the limited factual structural finding stated here, not every claim on the original page.
+
+**Limitations:** Policy synthesis; no causal evaluation of effect on patents, firms, joint grants or technology dependence. Treat dramatic capacity assertions with caution.
+
+- Existing main Radar A: [EU: Shepherded by Brussels, Europe awakens to Chinese technology](https://merics.org/en/report/eu-shepherded-brussels-europe-awakens-chinese-technology)
+
+## NRF-SAEON Egagasini Node showcases ocean science diplomacy at Nairobi Convention COP 12
+
+**South Africa · Research security and international cooperation** | 2026-10-16 | confidence high
+
+**Verified finding:** South African marine research unit co-organised a documented women-and-youth ocean leadership/green investment side event at Nairobi Convention COP12 in Tanzania in October 2026, linking ocean science diplomacy and policy dialogue.
+
+**Evidence:** [NRF-SAEON Egagasini Node showcases ocean science diplomacy at Nairobi Convention COP 12](https://www.nrf.ac.za/nrf-saeon-egagasini-node-showcases-ocean-science-diplomacy-at-nairobi-convention-cop-12/) — NRF-SAEON article event account and Nairobi Convention COP12 side-event organiser/description.
+
+**Independent check:** Independent conference programme verifies scheduled event and organiser, not policy implementation, eventual funding or broad diffusion. [1](https://www.nairobiconvention.org/cop-12/side-events/empowering-women-and-youth-ocean-leaders-untangling-environmental-investment)
+
+**Why global R&I matters:** Research-to-policy convening can translate South African ocean monitoring expertise into regional governance networks and interdisciplinary investment-risk dialogue.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in main Radar per package manifest. This is a coverage comparison only, not proof of an overlooked trend.
+
+**Limitations:** One completed conference engagement; neither adoption nor budget/infrastructure effect independently evaluated. Event presence is not sustained national diplomatic capability.
+
+
+## Europe’s research dilemma – balancing security and scientific cooperation with China
+
+**China · Research security and international cooperation** | 2026-03-18 | confidence high
+
+**Verified finding:** European research actors are balancing continued scientific exchange with China against dual-use and knowledge-transfer security controls, with new Horizon Europe 2026–27 China participation limits.
+
+**Evidence:** [Europe’s research dilemma – balancing security and scientific cooperation with China](https://merics.org/en/comment/europes-research-dilemma-balancing-security-and-scientific-cooperation-china) — Introduction and discussion of research security, Horizon 2026–27 and research-cooperation tradeoffs.
+
+**Independent check:** Independent Council recommendation establishes the EU research-security policy; EURAXESS describes 2026–27 programme eligibility restrictions. Neither verifies every illustrative MERICS dual-use case. [1](https://www.consilium.europa.eu/en/press/press-releases/2024/05/23/council-adopts-a-recommendation-to-enhance-research-security/) [2](https://euraxess.ec.europa.eu/worldwide/china/news/horizon-europe-work-programmes-2026-2027)
+
+**Why global R&I matters:** Structural governance change: heightened risk assessment and conditional eligibility may alter cross-border science partnerships and collaboration overhead.
+
+**Main Radar comparison (confirms_main_radar):** Existing main-Radar record (A: Europe’s research dilemma – balancing security and scientific cooperation with China). Independently checked; confirms the limited factual structural finding stated here, not every claim on the original page.
+
+**Limitations:** Commentary and policy analysis, not original empirical measurement. China-specific threat anecdotes and each member state’s implementation require project-level verification.
+
+- Existing main Radar A: [Europe’s research dilemma – balancing security and scientific cooperation with China](https://merics.org/en/comment/europes-research-dilemma-balancing-security-and-scientific-cooperation-china)
+
+## Frontlines and faultlines: how the Russo-Ukrainian conflict reshapes the landscape of scientific research
+
+**Russia · Research security and international cooperation** | 2026-07-06 | confidence medium
+
+**Verified finding:** Across 2000–2023 publication/affiliation metadata, the author identifies dislocation of Russian and Ukrainian scholars, shifts in topics and a move in collaboration patterns away from Russia–Ukraine / Russia–West relationships following 2014 and 2022. Independent datasets support significant Ukraine-related publication/collaboration disruptions but differ in definitions and magnitudes.
+
+**Evidence:** [Frontlines and faultlines: how the Russo-Ukrainian conflict reshapes the landscape of scientific research](https://arxiv.org/pdf/2606.01124) — arXiv full PDF pp.1,7–8,36–37 and supplemental audit; PMC full article Abstract, Methods and International Collaboration Patterns.
+
+**Independent check:** Independent bibliometric papers corroborate broad collaboration disruption while adding nuance: Russian coauthorship share can be steadier than raw publication counts, so avoid simplistic sanctions-causality attribution. [1](https://pmc.ncbi.nlm.nih.gov/articles/PMC13641027/) [2](https://link.springer.com/article/10.1007/s11192-024-04984-7)
+
+**Why global R&I matters:** Conflict shocks to R&I systems alter talent locations, specialties, and network structure, and affect capacity beyond physical infrastructure losses.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in main Radar per package manifest. This is a coverage comparison only, not proof of an overlooked trend.
+
+**Limitations:** OpenAlex metadata (migration inferred from affiliations; author disambiguation), 2023 cutoff and publication lags; authors themselves caution the results are not definitive causal effects. Other Web of Science-based comparisons use different journal coverage. Original journal page blocked; exact author preprint used.
+
+
+## The State of U.S. Science and Engineering 2026 — Global Research and Development
+
+**United States · Technology leadership and industrial capacity** | 2026-05-04 | confidence high
+
+**Verified finding:** On NCSES 2024 current purchasing-power-parity estimates, China performs about USD 1.028 trillion R&D and the U.S. about USD 1.009 trillion; these *PPP comparisons* do not mean China spends more in market-exchange-rate U.S. dollars. U.S. intensity approx 3.44%, China approx 2.69% (NCSES methods).
+
+**Evidence:** [The State of U.S. Science and Engineering 2026 — Global Research and Development](https://ncses.nsf.gov/pubs/nsbsep20261/discovery-r-d-activity-and-research-publications-2) — NCSES 2026 “Global Research and Development” chart, supporting notes; OECD March 2026 statistical release.
+
+**Independent check:** OECD independently documents methodology and macro R&D trends and warns of PPP/base-year sensitivity. Magnitude of a two-country 2024 ordering should be treated as methodology dependent. [1](https://www.oecd.org/en/data/insights/statistical-releases/2026/03/oecd-overall-rd-growth-stable-government-rd-budgets-decline-and-reorient-towards-defence.html)
+
+**Why global R&I matters:** Global R&D scale, intensity, research publication and business R&D mix shape technology leadership and science policy; a cross-national resource shift rather than a simple innovation-quality winner.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in main Radar per package manifest. This is a coverage comparison only, not proof of an overlooked trend.
+
+**Limitations:** 2024 figures are estimates reported in 2026; PPP vs market USD, base-year and methodological differences can reverse interpretations. Expenditure is input, not quality of science or patents.
+
+
+## Germany: From mutual benefit to existential competition with China
+
+**China · Research security and international cooperation** | 2026-06-30 | confidence high
+
+**Verified finding:** Germany’s research system is applying differentiated security assessments to China collaboration while continuing substantial academic engagement, instead of a universal research break.
+
+**Evidence:** [Germany: From mutual benefit to existential competition with China](https://merics.org/en/report/germany-mutual-benefit-existential-competition-china) — MERICS Germany chapter and DLR project implementation description, Max Planck China risk-benefit traffic-light approach.
+
+**Independent check:** Independent German research institutions directly evidence implemented assessment/support mechanisms, although they do not validate every MERICS description of competition or trade statistics. [1](https://projekttraeger.dlr.de/en/referenzen/orientierung-geben-fuer-die-wissenschaftskooperation-mit-china) [2](https://www.mpg.de/china)
+
+**Why global R&I matters:** Differentiated compliance structures allow scientific collaboration with due diligence and tighter controls for sensitive military/dual-use partnerships, creating heterogeneous outcomes across universities and disciplines.
+
+**Main Radar comparison (extends_main_radar):** Extends existing Germany–China Radar context with directly observable DLR and Max Planck risk-guidance implementation; overall cooperation/security tradeoff is confirmed.
+
+**Limitations:** Think-tank synthesis and institutional documentation; no representative longitudinal university-collaboration dataset or outcome causal evaluation here.
+
+- Existing main Radar A: [Germany: From mutual benefit to existential competition with China](https://merics.org/en/report/germany-mutual-benefit-existential-competition-china)
+
+## EU–China research cooperation under a “de-risking” framework: the securitisation of knowledge in EU science policy (2021–2025)
+
+**China · Research security and international cooperation** | 2026-07-01 | confidence high
+
+**Verified finding:** EU–China research cooperation shows a dual governance pattern in 2021–25: institutional partnership structures persist while eligibility tests, risk screening and research-security instruments tighten.
+
+**Evidence:** [EU–China research cooperation under a “de-risking” framework: the securitisation of knowledge in EU science policy (2021–2025)](https://link.springer.com/article/10.1007/s44216-026-00080-0) — Article Abstract lines 39–44; Introduction and methods, Horizon Article 22 analysis.
+
+**Independent check:** Independent EU policy documents verify actual instruments. Academic paper adds interpretation of narratives and persistence of institutional relations; no direct evidence of downstream project rejection rates. [1](https://www.consilium.europa.eu/en/press/press-releases/2024/05/23/council-adopts-a-recommendation-to-enhance-research-security/) [2](https://euraxess.ec.europa.eu/worldwide/china/news/horizon-europe-work-programmes-2026-2027)
+
+**Why global R&I matters:** Formal rules and a “conditional openness” logic change how universities qualify international research partnerships while retaining diplomatic exchanges.
+
+**Main Radar comparison (confirms_main_radar):** Confirms existing EU–China research security issue using peer-reviewed policy-document mechanism and independent EU legal instruments.
+
+**Limitations:** Qualitative content analysis of policy/official statements; intended rules ≠ field-level enforcement; documentary selection and rhetoric can bias interpretations.
+
+- Existing main Radar A: [EU–China research cooperation under a “de-risking” framework: the securitisation of knowledge in EU science policy (2021–2025)](https://doi.org/10.1007/s44216-026-00080-0)
+
+## System using drones and artificial intelligence identifies the ideal time for cattle slaughter
+
+**Brazil · Technology leadership and industrial capacity** | 2026-10-30 | confidence high
+
+**Verified finding:** Brazilian research team demonstrated non-invasive UAV image analysis of Nellore feedlot cattle morphology and growth over 112 days using machine vision; FAPESP’s commercial slaughter-timing framing remains an envisaged application rather than validated deployment.
+
+**Evidence:** [System using drones and artificial intelligence identifies the ideal time for cattle slaughter](https://agencia.fapesp.br/system-using-drones-and-artificial-intelligence-identifies-the-ideal-time-for-cattle-slaughter/59520) — FAPESP researcher quotation on prototype status; Yan et al. PDF p.1 abstract, framework and data section.
+
+**Independent check:** Independently published technical work, accessible via Embrapa repository, validates the underlying research mechanism and Brazilian study context; it does not validate commercial sales or slaughter optimisation benefits. [1](https://www.alice.cnptia.embrapa.br/alice/bitstream/doc/1184800/1/AP-Deep-learning-based-2026.pdf)
+
+**Why global R&I matters:** An applied precision-livestock computer-vision pipeline potentially reduces stressful physical weighing and provides longitudinal signals to inform farm decisions.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in main Radar per package manifest. This is a coverage comparison only, not proof of an overlooked trend.
+
+**Limitations:** Single feedlot/species observational case; morphology as proxy for economics, no independent economic or welfare outcome trial, likely domain shift across herds/cameras/conditions. FAPESP future-product pitch is not a deployed service.
+
+
+## As open as possible? Comparing Scandinavian approaches to research security
+
+**Norway · Research security and international cooperation** | 2026-06-08 | confidence high
+
+**Verified finding:** Norway uses a relatively collaborative, guidance-oriented model for research security, contrasted with distinct Danish and Swedish governance emphases; research security is not a uniform Scandinavian policy.
+
+**Evidence:** [As open as possible? Comparing Scandinavian approaches to research security](https://doi.org/10.1093/scipol/scag056) — Comparative findings and section 4.2 Norway; HK-dir official guidance page.
+
+**Independent check:** Norwegian government agency independently confirms real guidelines and support system; Denmark/Sweden characterisations are based primarily on article’s comparative research. [1](https://hkdir.no/en/guidelines-and-tools-for-responsible-international-knowledge-cooperation)
+
+**Why global R&I matters:** Institutional design affects researcher agency, administrative risk screening and the balance between open scientific exchange and sensitive knowledge controls.
+
+**Main Radar comparison (confirms_main_radar):** Existing main-Radar record (A: As open as possible? Comparing Scandinavian approaches to research security). Independently checked; confirms the limited factual structural finding stated here, not every claim on the original page.
+
+**Limitations:** Qualitative institutional and policy comparison; not national espionage incidence statistics nor causal evidence of better security outcomes.
+
+- Existing main Radar A: [As open as possible? Comparing Scandinavian approaches to research security](https://doi.org/10.1093/scipol/scag056)
+
+## Ukraine bets on research talent and a thriving startup sector
+
+**Ukraine · Research funding, institutions and talent** | 2026-05-05 | confidence high
+
+**Verified finding:** Ukraine implemented a competitive researcher-retention scholarship scheme: 2,650 state scholarships allocated; 1,934 first-wave recipients approved for October 2026–September 2028 at UAH 10,000 per month. This updates the earlier European Commission estimate of 2,625 planned awards.
+
+**Evidence:** [Ukraine bets on research talent and a thriving startup sector](https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/association-horizon-europe/international-coalition-science-research-and-innovation-ukraine/highlights/ukraine-bets-research-talent-and-thriving-startup-sector_en) — European Commission article: research talent and national support sections; nauka.gov.ua 30 October 2026 first four paragraphs.
+
+**Independent check:** The Ukrainian ministry-affiliated national portal corroborates the launch with administrative details and supersedes the earlier planned total; it is official implementation evidence rather than an impact evaluation. [1](https://nauka.gov.ua/en/news/national-system-of-researchers-of-ukraine-mesu-awards-first-wave-state-scholarships/)
+
+**Why global R&I matters:** Researcher retention and predictable supplementary payments counter wartime erosion of national R&I human capital; this is actual awards issued, not merely a programme announcement.
+
+**Main Radar comparison (changes_main_radar):** Existing Radar note is now outdated in one numeric detail: later official awards show 2,650 places, not initial 2,625 estimate, plus first-wave approval of 1,934; this changes and extends source context.
+
+**Limitations:** Number of awarded scholarships is an administrative output, not proof of retention, startup formation or researcher productivity. 2,650 are allocated positions, not all awarded.
+
+- Existing main Radar C: [Ukraine bets on research talent and a thriving startup sector](https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/association-horizon-europe/international-coalition-science-research-and-innovation-ukraine/highlights/ukraine-bets-research-talent-and-thriving-startup-sector_en)
 
 ## Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China
 

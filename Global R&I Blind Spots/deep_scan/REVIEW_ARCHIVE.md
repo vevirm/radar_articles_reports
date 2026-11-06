@@ -2,6 +2,222 @@
 
 All reviewed package items are retained here; only KEEP appears in VERIFIED_FINDINGS.md.
 
+## Canada looks forward to deepening research and education cooperation with EU
+
+**KEEP** — Canada / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://era.gv.at/news-items/canada-in-favour-of-deepending-research-and-education-cooperation-with-eu/
+
+Canada publicly proposed deeper research and education integration with Europe, including possible membership in Erasmus+ and the *next generation* of Horizon; as of the reviewed primary speech these are aspirations, not a concluded future programme association.
+
+## EU: Shepherded by Brussels, Europe awakens to Chinese technology
+
+**KEEP** — China / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://merics.org/en/report/eu-shepherded-brussels-europe-awakens-chinese-technology
+
+EU research and technology policy is moving toward differentiated China-related de-risking and targeted safeguards rather than simple disengagement, with Horizon eligibility exclusions in specified fields.
+
+## Russia — Nature Index research output and international research collaborations
+
+**REVIEW** — Russia / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://www.nature.com/nature-index/country-outputs/Russia
+
+Authentic dashboard but single rolling snapshot, without longitudinal independent corroboration or national trend inference.
+
+## NRF-SAEON Egagasini Node showcases ocean science diplomacy at Nairobi Convention COP 12
+
+**KEEP** — South Africa / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://www.nrf.ac.za/nrf-saeon-egagasini-node-showcases-ocean-science-diplomacy-at-nairobi-convention-cop-12/
+
+South African marine research unit co-organised a documented women-and-youth ocean leadership/green investment side event at Nairobi Convention COP12 in Tanzania in October 2026, linking ocean science diplomacy and policy dialogue.
+
+## Science. Technology. Innovation: 2026 — HSE Statistical Data Book
+
+**REVIEW** — Russia / Research funding, institutions and talent
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://www.hse.ru/en/primarydata/niio2026
+
+Primary statistical tables uninspected due oversized PDF; no verified trend or independent corroborating series.
+
+## Research commercialisation
+
+**REVIEW** — United Kingdom / Innovation systems, infrastructure and knowledge transfer
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://www.ukri.org/what-we-do/commercialisation/
+
+Real official page, but lacks dated change, meaningful verified mechanism in operation, independent outcome data or structural comparison.
+
+## Europe’s research dilemma – balancing security and scientific cooperation with China
+
+**KEEP** — China / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://merics.org/en/comment/europes-research-dilemma-balancing-security-and-scientific-cooperation-china
+
+European research actors are balancing continued scientific exchange with China against dual-use and knowledge-transfer security controls, with new Horizon Europe 2026–27 China participation limits.
+
+## Frontlines and faultlines: how the Russo-Ukrainian conflict reshapes the landscape of scientific research
+
+**KEEP** — Russia / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://www.nature.com/articles/s41599-026-08253-1
+
+Across 2000–2023 publication/affiliation metadata, the author identifies dislocation of Russian and Ukrainian scholars, shifts in topics and a move in collaboration patterns away from Russia–Ukraine / Russia–West relationships following 2014 and 2022. Independent datasets support significant Ukraine-related publication/collaboration disruptions but differ in definitions and magnitudes.
+
+## Industrial policy and technology linkages: Conceptualizing China’s approach
+
+**REVIEW** — China / Technology leadership and industrial capacity
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://merics.org/sites/default/files/2026-08/vives-discussion-paper-107-schindowski-zenglein-groenewegen-lau-dp-industrial-policy-and-technology-linkages-conceptualizing-chinas-approach-004.pdf
+
+The primary source identifies publication only as April 2026, without a verified day. The required exact YYYY-MM-DD source_date cannot be supplied without inventing a date; recheck publisher metadata before KEEP.
+
+## The State of U.S. Science and Engineering 2026 — Global Research and Development
+
+**KEEP** — United States / Technology leadership and industrial capacity
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://ncses.nsf.gov/pubs/nsbsep20261/discovery-r-d-activity-and-research-publications-2
+
+On NCSES 2024 current purchasing-power-parity estimates, China performs about USD 1.028 trillion R&D and the U.S. about USD 1.009 trillion; these *PPP comparisons* do not mean China spends more in market-exchange-rate U.S. dollars. U.S. intensity approx 3.44%, China approx 2.69% (NCSES methods).
+
+## Embedding anticipatory science diplomacy in South African higher education governance: A framework for ethical foresight and adaptive leadership
+
+**REVIEW** — South Africa / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://doi.org/10.1186/s40309-026-00280-0
+
+Authentic country-relevant method proposal, but not independently corroborated as an operating national institutional practice or measured development.
+
+## Germany: From mutual benefit to existential competition with China
+
+**KEEP** — China / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://merics.org/en/report/germany-mutual-benefit-existential-competition-china
+
+Germany’s research system is applying differentiated security assessments to China collaboration while continuing substantial academic engagement, instead of a universal research break.
+
+## EU–China research cooperation under a “de-risking” framework: the securitisation of knowledge in EU science policy (2021–2025)
+
+**KEEP** — China / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://doi.org/10.1007/s44216-026-00080-0
+
+EU–China research cooperation shows a dual governance pattern in 2021–25: institutional partnership structures persist while eligibility tests, risk screening and research-security instruments tighten.
+
+## Artificial Intelligence and Foreign Information Manipulation: Chinese and Russian approaches
+
+**REVIEW** — China / Technology leadership and industrial capacity
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf
+
+Valid cross-border security analysis but insufficient independent corroboration and weak direct linkage to national research/innovation-system development.
+
+## System using drones and artificial intelligence identifies the ideal time for cattle slaughter
+
+**KEEP** — Brazil / Technology leadership and industrial capacity
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://agencia.fapesp.br/system-using-drones-and-artificial-intelligence-identifies-the-ideal-time-for-cattle-slaughter/59520
+
+Brazilian research team demonstrated non-invasive UAV image analysis of Nellore feedlot cattle morphology and growth over 112 days using machine vision; FAPESP’s commercial slaughter-timing framing remains an envisaged application rather than validated deployment.
+
+## As open as possible? Comparing Scandinavian approaches to research security
+
+**KEEP** — Norway / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://doi.org/10.1093/scipol/scag056
+
+Norway uses a relatively collaborative, guidance-oriented model for research security, contrasted with distinct Danish and Swedish governance emphases; research security is not a uniform Scandinavian policy.
+
+## Ukraine within Eureka’s innovation landscape
+
+**REVIEW** — Ukraine / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://www.eurekanetwork.org/impact/ukraine-within-eurekas-innovation-landscape/
+
+Primary full article inaccessible; national-level outcomes/quantitative trend unverified. Need Eureka award data or participant project details.
+
+## Appeal of the ALLEA General Assembly in Support of Ukrainian Science
+
+**REVIEW** — Ukraine / Research security and international cooperation
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf
+
+Appeal is independently real but does not establish a development or achieved research-system outcome. Requires adopted/funded measure.
+
+## Strategic competitiveness between the EU and the United States in artificial intelligence development – human capital, legal frameworks and data
+
+**REVIEW** — United States / Technology leadership and industrial capacity
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://doi.org/10.31648/kpp.12912
+
+Primary article and source-specific argument were not opened; requires publisher PDF, repository copy, and independent source cross-check.
+
+## Making social science matter: How conceptual architecture structured socio-technical integration in a large interdisciplinary genomics project
+
+**DROP** — South Africa / Health, biotechnology and life sciences
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://doi.org/10.1016/j.techsoc.2026.103592
+
+Duplicate of candidate 14, incorrectly assigned to South Africa; the studied site and research programme are Canadian.
+
+## Making social science matter: How conceptual architecture structured socio-technical integration in a large interdisciplinary genomics project
+
+**REVIEW** — Canada / Health, biotechnology and life sciences
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://doi.org/10.1016/j.techsoc.2026.103592
+
+Correct Canadian country attribution and substantive indexed text, but primary journal article could not be directly opened (403/redirect failure); strict KEEP access requirement not met. Re-check author repository or publisher PDF.
+
+## Podcast: New quantum-enabled materials
+
+**DROP** — United States / Technology leadership and industrial capacity
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://www.nsf.gov/news/podcast-new-quantum-enabled-materials
+
+General single-researcher outreach with no substantive verified national development or trend.
+
+## Scientific and technological trajectories in electrolyzed hydrogen: The emergence of a green–green hybridization process
+
+**DROP** — South Africa / Climate, energy and environmental research
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://doi.org/10.1007/s00191-026-00991-4
+
+Assigned to South Africa but substantively about global hydrogen research trajectories; South African affiliation is not evidence of South African trend.
+
+## Ukraine bets on research talent and a thriving startup sector
+
+**KEEP** — Ukraine / Research funding, institutions and talent
+Package `gri-1e123db40a3fc382e8fcddff`; 2026-11-06T10:22:16.913548+00:00.
+
+Source: https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/association-horizon-europe/international-coalition-science-research-and-innovation-ukraine/highlights/ukraine-bets-research-talent-and-thriving-startup-sector_en
+
+Ukraine implemented a competitive researcher-retention scholarship scheme: 2,650 state scholarships allocated; 1,934 first-wave recipients approved for October 2026–September 2028 at UAH 10,000 per month. This updates the earlier European Commission estimate of 2,625 planned awards.
+
 ## Digital architecture of information governance for education and research in Ukraine
 
 **REVIEW** — Ukraine / Innovation systems, infrastructure and knowledge transfer
