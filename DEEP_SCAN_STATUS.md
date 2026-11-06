@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3737** (Main **1863** + Historical **1874**)
-- Automatic queue still needing V2 verification: **75** (Main **33** + Historical **42**)
-- Currently assigned to workers: **75** (Main **33** + Historical **42**)
+- Authoritative V2 verified: **3769** (Main **1889** + Historical **1880**)
+- Automatic queue still needing V2 verification: **43** (Main **7** + Historical **36**)
+- Currently assigned to workers: **43** (Main **7** + Historical **36**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **45**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,25 +16,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261106T075913Z-d88f75a4bc8c`
-- Assigned unresolved records: **36**
-  1. `link:https://cdn.ceps.eu/2026/11/2026-13-FMI-Digital-euro-1.pdf` — Governing the digital euro ecosystem – CEPS
-  2. `link:https://op.europa.eu/en/publication-detail/-/publication/614a4c42-d7fe-11f1-8501-01aa75ed71a1/language-en` — SET plan progress report 2026 - Publications Office of the EU
-  3. `link:https://doi.org/10.1007/s11192-026-05866-w` — Gender differences in international research collaboration in European Union
-  4. `link:https://doi.org/10.82135/tno-2026-17904` — Speed as key success factor for scale-ups: The Dutch scale-up ecosystem in international
-  5. `link:https://doi.org/10.1016/j.joitmc.2026.100760` — Accelerating green innovation dynamics: Cross-scale modelling of technology competition and institutional inertia
-  6. `link:https://doi.org/10.1365/s43439-026-00178-4` — One product, two rulebooks: the cybersecurity of high-risk AI systems between article 15 AI act and the cyber resilience act after the digital omnibus
-  7. `link:https://doi.org/10.13140/rg.2.2.31563.35361` — Advancing EU Digital Sovereignty in Public Administrations
-  8. `link:https://data.consilium.europa.eu/doc/document/ST-10476-2026-ADD-1-REV-1/en/pdf` — Encl.: COM(2026) 288 final/2 annex EN EN EUROPEAN COMMISSION Brussels, 3.11.2026 COM(2026) 288 final/2 ANNEX 1 CORRIGENDUM This document corrects document COM(2026) 288 final, adopted on 17.6.2026.
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261106T083505Z-f0040d3c58c6`
+- Assigned unresolved records: **8**
+  1. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxQeGt4VFN5d3pBVVlzS0hDRmEtdzZtbE90d2FZRjFZWVRMWFhIdVVZR0tndGNKbjdpLUxheUJxaG0tX0F5UnVGVUN2azRXMUtvT1Fab1VDZ3NMaC0zT3JrVW5JbHhvWDVBNTBkT2s5dHlsZFJiMUlMcGJEcXRwV09FbjUwM0NadVgwY3NkcklBdTlXWk5iSURNbUdHak1QOXFQdE1aZ2E3UGk?oc=5` — Research Europe – 5 November 2026 — recovery attempt 2/3
+  2. `link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxOdUJrbUVpbXFidlk2MUhmR2lDU21NTTQxSkZtSHVaY2lCZk4tWDh1NDluS1hyXy1qSDdkUFJsb3ZxTDZKZlVpcFRBOXlOeFBKU19xUWFha2N5N3F6U3IyMWU0YmJ1U0NoNXlGcHBLSkxha2NYc1ZDRW1UcTE0WFhFQjBYWGZCSzk1aUxLYU5nX3Z3bG05UjdJZlhEWUtNTDZzbFZaYmJSRjh5OUhGLXRoeERabExfa0VzZF96MVNvYm4zeW5HVUljbUxtcnBSUHBK?oc=5` — Newcomers need more support in the EU’s R&I programmes — recovery attempt 2/3
+  3. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONlphSjYxOUVvU1ZCYjhDclZ3RXNKV1RfUzVGbXliVnZwVWVEN0F0VGg4ME1lZUtYMFdTeE1ISDg2Z1lXZHVfZ0xteUhfaXZUbUhRUlBxTF95dzJZbE5mVmtsdG5uc04yNHcwdUxOOF9EZU1NZDB5ckNTZ2xhMExjSXFsVlMzNjFOVWdULWh1WFN2M1dPV2dIOWxkbTZRbE4tdEZRZFJsNUNENllsT3NZ?oc=5` — Full FP10 association a win-win for UK and EU, says universities leader — recovery attempt 2/3
+  4. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxNNE5sRGRXcDd1N3dWeTRTOGFkcTNadkl3c05DWTZaVTVjYzlITmRLaHkyOG0wNF9sQ212a0VTV2FWY2pLTmxSbXpQdUlhUUNOLXF4dVRRYUszOWdsMkRvV2lyYUV5YldSa2ZZX29XNEY2QU91aFlEX1NzR3F5WUJXTkpnazZINk42WlMwdW91Z1hZRDg2bld4OQ?oc=5` — Viewpoint: The EU must focus on women’s health research – now — recovery attempt 2/3
+  5. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPVjFqYThJU3psX2xvRUJVN3oxTk9RcDR1bExIcFVYY1JyVUlQanBqX2hQbHFXbV85ZnhHQVVuLW55aW5iZVJ1VWZ3UXhLY3N5MFF1UWh5NURUT3k1Z2NrcmIzOEVpZFQyLWp0R0hxdjFHejlrNzgzSW9ZSkRGUGcxS094ellTclhPbTY0X056YTFUQTBCUVRPWjd4M3BXTWNfSTFreWJPbTRHMENPWEUxSXl1azQ1MlRmREx1WkxkekxSRjhSbS1J?oc=5` — ERC president: 5% success rate ‘a wake-up call’ for EU — recovery attempt 2/3
+  6. `link:https://doi.org/10.1016/j.techfore.2026.124948` — From exponential extrapolation to regime-aware foresight: A Cognitive Scaling Framework for long-run AI progress — recovery attempt 2/3
+  7. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxPZm5Pd1JhWEd5WmpjWW9NOWZ4b3VnM20xVUpGVi1JWlp3R1J0NG8wTTRfdThyaFIwRG1fX3dWcVZJQTk3d2dWUk1OemJFZXpxWF9RUzNWRVI2RWNjaXFjT1JqNkpyLU1RSlVtZjJYS0stV0ZieU9FdEFYVFgxakkta2VvRDRYcmV6QXF0bm10R19FdUdHTS1PWkRDaHEwR3dz?oc=5` — Horizon Europe rapporteurs take budget fight to Berlin — recovery attempt 2/3
+  8. `historical:id:d0284517631b9d2a` — European Democracy Shield - Assessing the Commission’s Communication — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20261106T075923Z-9b754c146837`
-- Assigned unresolved records: **4**
-  1. `historical:id:015c36000ad2847d` — Fostering innovation in less-developed and low institutional capacity regions
-  2. `historical:id:cd57c0d62de56c18` — Recent Developments in China–U.S. Cooperation in Science
-  3. `historical:id:e3b110c561a0a66a` — Linking generative AI and morphological analysis to conduct foresight evaluation
-  4. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxQR2QtbGZUX3dUM0h5a2hVaWNWLXhfTXYxSlJxMDN5aVFUY1FnWjRFMDFxenZ3YjZ0bWJYamVYWEFkQW5RLUN6M3huWkp1LVg5UkViMXlVTjQtU3FEb2Z5MExoS0lnVFo3LVVSVk5GZlJIT3J2a242M3dCUl9fZHVyWXgybS1jZzlaWVNwdy1ZbWRlb3V5bzJfMnpINlBmOWNKYjBMblZ5R3VuR2g0SUJj?oc=5` — European scientists face uncertainty as pandemic recovery fund winds down - Science | AAAS — recovery attempt 2/3
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
