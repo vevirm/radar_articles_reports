@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3737** (Main **1863** + Historical **1874**)
-- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
-- Currently assigned to workers: **36** (Main **1** + Historical **35**)
+- Automatic queue still needing V2 verification: **75** (Main **33** + Historical **42**)
+- Currently assigned to workers: **75** (Main **33** + Historical **42**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **45**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,13 +16,25 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261104T080154Z-b5e2a5c92ec1`
-- Assigned unresolved records: **1**
-  1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxQR2QtbGZUX3dUM0h5a2hVaWNWLXhfTXYxSlJxMDN5aVFUY1FnWjRFMDFxenZ3YjZ0bWJYamVYWEFkQW5RLUN6M3huWkp1LVg5UkViMXlVTjQtU3FEb2Z5MExoS0lnVFo3LVVSVk5GZlJIT3J2a242M3dCUl9fZHVyWXgybS1jZzlaWVNwdy1ZbWRlb3V5bzJfMnpINlBmOWNKYjBMblZ5R3VuR2g0SUJj?oc=5` — European scientists face uncertainty as pandemic recovery fund winds down - Science | AAAS — recovery attempt 2/3
+- Current package: `worker-a-20261106T075913Z-d88f75a4bc8c`
+- Assigned unresolved records: **36**
+  1. `link:https://cdn.ceps.eu/2026/11/2026-13-FMI-Digital-euro-1.pdf` — Governing the digital euro ecosystem – CEPS
+  2. `link:https://op.europa.eu/en/publication-detail/-/publication/614a4c42-d7fe-11f1-8501-01aa75ed71a1/language-en` — SET plan progress report 2026 - Publications Office of the EU
+  3. `link:https://doi.org/10.1007/s11192-026-05866-w` — Gender differences in international research collaboration in European Union
+  4. `link:https://doi.org/10.82135/tno-2026-17904` — Speed as key success factor for scale-ups: The Dutch scale-up ecosystem in international
+  5. `link:https://doi.org/10.1016/j.joitmc.2026.100760` — Accelerating green innovation dynamics: Cross-scale modelling of technology competition and institutional inertia
+  6. `link:https://doi.org/10.1365/s43439-026-00178-4` — One product, two rulebooks: the cybersecurity of high-risk AI systems between article 15 AI act and the cyber resilience act after the digital omnibus
+  7. `link:https://doi.org/10.13140/rg.2.2.31563.35361` — Advancing EU Digital Sovereignty in Public Administrations
+  8. `link:https://data.consilium.europa.eu/doc/document/ST-10476-2026-ADD-1-REV-1/en/pdf` — Encl.: COM(2026) 288 final/2 annex EN EN EUROPEAN COMMISSION Brussels, 3.11.2026 COM(2026) 288 final/2 ANNEX 1 CORRIGENDUM This document corrects document COM(2026) 288 final, adopted on 17.6.2026.
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261029T085853Z-64145a2dbff2`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261106T075923Z-9b754c146837`
+- Assigned unresolved records: **4**
+  1. `historical:id:015c36000ad2847d` — Fostering innovation in less-developed and low institutional capacity regions
+  2. `historical:id:cd57c0d62de56c18` — Recent Developments in China–U.S. Cooperation in Science
+  3. `historical:id:e3b110c561a0a66a` — Linking generative AI and morphological analysis to conduct foresight evaluation
+  4. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxQR2QtbGZUX3dUM0h5a2hVaWNWLXhfTXYxSlJxMDN5aVFUY1FnWjRFMDFxenZ3YjZ0bWJYamVYWEFkQW5RLUN6M3huWkp1LVg5UkViMXlVTjQtU3FEb2Z5MExoS0lnVFo3LVVSVk5GZlJIT3J2a242M3dCUl9fZHVyWXgybS1jZzlaWVNwdy1ZbWRlb3V5bzJfMnpINlBmOWNKYjBMblZ5R3VuR2g0SUJj?oc=5` — European scientists face uncertainty as pandemic recovery fund winds down - Science | AAAS — recovery attempt 2/3
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
