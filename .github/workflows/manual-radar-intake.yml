@@ -1,0 +1,142 @@
+name: Manual Radar findings — safe one-time import
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Install document inspection dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Verify and stage manually found publications
+        shell: bash
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import json
+          import re
+          from pathlib import Path
+          from urllib.parse import urlparse
+          import requests
+          from bs4 import BeautifulSoup
+
+          # The four leads in the 28-item list that include actual official URLs.
+          # Other 24 are not silently invented or imported without a source link.
+          LEADS = [
+              ('Commission Work Programme 2027', '2026-11-04',
+               'https://commission.europa.eu/strategy-and-policy/strategy-documents/commission-work-programme/commission-work-programme-2027_en', 'C'),
+              ('EU Public Procurement Act', '2026-09-09',
+               'https://single-market-economy.ec.europa.eu/publications/proposal-regulation-public-contracts-and-concessions_en', 'C'),
+              ('EIC Work Programme 2027', '2026-11-05',
+               'https://eic.ec.europa.eu/eic-funding-opportunities/eic-funding-opportunities-2027_en', 'C'),
+              ('European Innovation Scoreboard 2026', '2026-07-09',
+               'https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/european-innovation-scoreboard-2026_en', 'A'),
+          ]
+          corpus_path = Path('radar.json')
+          assert corpus_path.is_file(), 'No radar.json: refusing to create or replace it'
+          corpus = json.loads(corpus_path.read_text(encoding='utf-8'))
+          assert isinstance(corpus, dict) and all(isinstance(corpus.get(k), list) for k in ('strand_a','strand_c')), 'Unexpected Radar shape; no changes'
+          known = set()
+          known_titles = set()
+          for kind in ('strand_a','strand_b','strand_c','frontier_evidence'):
+              for row in corpus.get(kind, []):
+                  if isinstance(row, dict):
+                      if row.get('link'):
+                          known.add(row['link'].rstrip('/').lower())
+                      if row.get('title'):
+                          known_titles.add(re.sub(r'[^a-z0-9]+', '', row['title'].lower()))
+          changed = 0
+          now = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds').replace('+00:00','Z')
+          for title, day, url, strand in LEADS:
+              if url.rstrip('/').lower() in known or re.sub(r'[^a-z0-9]+', '', title.lower()) in known_titles:
+                  print('Already in Radar:', title)
+                  continue
+              try:
+                  response = requests.get(url, timeout=18, headers={'User-Agent':'EU-RI-Radar-manual-document-check/1.0','Accept':'text/html'}, allow_redirects=True)
+                  response.raise_for_status()
+                  final = urlparse(response.url)
+                  if final.scheme != 'https' or not (final.hostname or '').endswith('.europa.eu'):
+                      raise ValueError('Not an official Commission HTTPS endpoint')
+                  if not ('html' in response.headers.get('content-type','').lower() or '<html' in response.text[:1000].lower()):
+                      raise ValueError('Not a readable official HTML publication')
+                  soup = BeautifulSoup(response.text, 'html.parser')
+                  for element in soup(['script','style','nav','footer','header']):
+                      element.decompose()
+                  text = ' '.join(soup.stripped_strings)
+                  text = re.sub(r'\s+', ' ', text)
+                  words = text.split()
+                  if len(words) < 120:
+                      raise ValueError('Insufficient official source text')
+                  # Require the central distinctive words of the claimed document title.
+                  distinctive = [w.lower() for w in re.findall(r'[A-Za-z0-9]+', title) if len(w)>3]
+                  first_text = text[:15000].lower()
+                  hits = sum(1 for w in distinctive if w in first_text)
+                  if hits < max(2, len(distinctive)//2):
+                      raise ValueError('Official page does not clearly match the claimed title')
+                  if response.url.rstrip('/').lower() in known:
+                      print('Already in Radar (canonical URL):', title)
+                      continue
+                  summary = text[:1800]
+                  base = {
+                      'title': title, 'date': day, 'link': response.url,
+                      'source': 'European Commission', 'authors': 'European Commission',
+                      'type': 'institutional report' if strand=='A' else 'official EU policy document',
+                      'strand': strand, 'summary': summary,
+                      'first_seen': now, 'new_this_scan': False,
+                      'deep_scan_status': 'pending',
+                      'discovery_method': 'manual',
+                      'manual_discovery_status': 'official_page_checked_pending_deep_scan',
+                  }
+                  if strand == 'C':
+                      base.update({'headline': title, 'what': summary[:900], 'why_it_matters': 'Official EU policy development; significance to be checked by Deep Scan.'})
+                  else:
+                      base.update({'source_tier': 'Tier 1', 'eu_relevance': 'European Union'})
+                  corpus['strand_a' if strand=='A' else 'strand_c'].append(base)
+                  known.add(response.url.rstrip('/').lower())
+                  known_titles.add(re.sub(r'[^a-z0-9]+', '', title.lower()))
+                  changed += 1
+                  print('Staged for normal Deep Scan:', title)
+              except (requests.RequestException, ValueError) as exc:
+                  print('SKIPPED (no changes for this item):', title, '-', str(exc)[:250])
+          if changed:
+              corpus_path.write_text(json.dumps(corpus, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+          print(f'Added {changed} confirmed-source manual findings; 24 remaining leads require official URLs or publication confirmation.')
+          with open('manual_import_count.txt','w') as f:
+              f.write(str(changed))
+          PY
+
+      - name: Commit only new Radar findings
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f manual_import_count.txt
+          if git diff --quiet -- radar.json; then
+            echo 'No eligible new records: radar.json unchanged.'
+            exit 0
+          fi
+          git config user.name 'radar-manual-intake'
+          git config user.email 'actions@github.com'
+          git add radar.json
+          git commit -m 'Stage verified manual discoveries pending Deep Scan'
+          git push origin HEAD:main
