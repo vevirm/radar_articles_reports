@@ -13,23 +13,20 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - name: Check out main
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           ref: main
           fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: '3.12'
-
-      - name: Install document inspection dependencies
+      - name: Install inspection dependencies
         run: pip install requests beautifulsoup4
-
-      - name: Verify and stage manually found publications
+      - name: Stage remaining manually discovered findings
         shell: bash
         run: |
           python - <<'PY'
@@ -40,103 +37,104 @@ jobs:
           from urllib.parse import urlparse
           import requests
           from bs4 import BeautifulSoup
-
-          # The four leads in the 28-item list that include actual official URLs.
-          # Other 24 are not silently invented or imported without a source link.
-          LEADS = [
-              ('Commission Work Programme 2027', '2026-11-04',
-               'https://commission.europa.eu/strategy-and-policy/strategy-documents/commission-work-programme/commission-work-programme-2027_en', 'C'),
-              ('EU Public Procurement Act', '2026-09-09',
-               'https://single-market-economy.ec.europa.eu/publications/proposal-regulation-public-contracts-and-concessions_en', 'C'),
-              ('EIC Work Programme 2027', '2026-11-05',
-               'https://eic.ec.europa.eu/eic-funding-opportunities/eic-funding-opportunities-2027_en', 'C'),
-              ('European Innovation Scoreboard 2026', '2026-07-09',
-               'https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/european-innovation-scoreboard-2026_en', 'A'),
-          ]
-          corpus_path = Path('radar.json')
-          assert corpus_path.is_file(), 'No radar.json: refusing to create or replace it'
-          corpus = json.loads(corpus_path.read_text(encoding='utf-8'))
-          assert isinstance(corpus, dict) and all(isinstance(corpus.get(k), list) for k in ('strand_a','strand_c')), 'Unexpected Radar shape; no changes'
-          known = set()
-          known_titles = set()
-          for kind in ('strand_a','strand_b','strand_c','frontier_evidence'):
-              for row in corpus.get(kind, []):
-                  if isinstance(row, dict):
-                      if row.get('link'):
-                          known.add(row['link'].rstrip('/').lower())
-                      if row.get('title'):
-                          known_titles.add(re.sub(r'[^a-z0-9]+', '', row['title'].lower()))
-          changed = 0
-          now = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds').replace('+00:00','Z')
-          for title, day, url, strand in LEADS:
-              if url.rstrip('/').lower() in known or re.sub(r'[^a-z0-9]+', '', title.lower()) in known_titles:
-                  print('Already in Radar:', title)
+          
+          LEADS=json.loads('[{"id":"MAN26-001","category":"Commission acts, strategies and programmes","title":"Commission Work Programme 2027","date_or_window":"2026-11-04","reference":"","primary_url":"https://commission.europa.eu/strategy-and-policy/strategy-documents/commission-work-programme/commission-work-programme-2027_en","source_hint":"European Commission","curator_note":"23 key initiatives; delivery of pending initiatives; European university alliances 2.0 and European Instrument for Strategic Enablers","publication_state":"published_claimed","verification":"primary_source_confirmed","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","skip_prior_import":true},{"id":"MAN26-002","category":"Commission acts, strategies and programmes","title":"Tech Sovereignty Package — non-legislative components","date_or_window":"2026-06-03","reference":"","primary_url":"https://digital-strategy.ec.europa.eu/en/library/communication-european-tech-sovereignty-accompanied-eu-open-source-strategy","source_hint":"European Commission","curator_note":"Open Source Strategy; Strategic Roadmap for Digitalisation and AI in Energy; Communication on European Tech Sovereignty; separate from CADA/Chips Act 2.0","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"digital-strategy.ec.europa.eu","text_anchors":["open source","tech sovereignty"]},{"id":"MAN26-003","category":"Commission acts, strategies and programmes","title":"EU Public Procurement Act — proposal for regulation on public contracts and concessions","date_or_window":"2026-09-09","reference":"COM(2026) 590","primary_url":"https://single-market-economy.ec.europa.eu/publications/proposal-regulation-public-contracts-and-concessions_en","source_hint":"European Commission","curator_note":"Proposal would replace three procurement directives; verify R&D services/pre-commercial procurement exception in primary text","publication_state":"published_claimed","verification":"primary_source_confirmed","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","skip_prior_import":true},{"id":"MAN26-004","category":"Commission acts, strategies and programmes","title":"Charter of Access for Industrial Users to Research and Technology Infrastructures","date_or_window":"2026-07-28","reference":"C(2026) 5174","primary_url":"https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/charter-access-industrial-users-research-and-technology-infrastructures_en","source_hint":"European Commission","curator_note":"Six principles; linked to Startup and Scaleup Strategy","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"research-and-innovation.ec.europa.eu","text_anchors":["charter","infrastructures"]},{"id":"MAN26-005","category":"Commission acts, strategies and programmes","title":"EU Missions mid-term assessment","date_or_window":"2026-09-14","reference":"","primary_url":"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52026DC0467","source_hint":"European Commission; ERRIN","curator_note":"Mission approach assessed effective; project-based Horizon Europe rules may not fit broader scope","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"eur-lex.europa.eu","text_anchors":["missions","mid-term"]},{"id":"MAN26-006","category":"Commission acts, strategies and programmes","title":"OceanEye","date_or_window":"2026-06-03","reference":"","primary_url":"https://commission.europa.eu/news-and-media/news/oceaneye-placing-eu-forefront-ocean-observation-2026-06-03_en","source_hint":"European Commission; EuroOcean","curator_note":"Ocean observation initiative; linked to future Ocean R&I Strategy","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"commission.europa.eu","text_anchors":["oceaneye"]},{"id":"MAN26-007","category":"Commission acts, strategies and programmes","title":"European Biotech Act I — staff working document","date_or_window":"2026-05-26","reference":"SWD(2026) 450","primary_url":"https://health.ec.europa.eu/publications/commission-staff-working-document-accompanying-proposal-european-biotech-act-c2026-3375-final_en","source_hint":"European Commission","curator_note":"Evidence base for Biotech Act I; distinguish Biotech Act II as anticipated","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"health.ec.europa.eu","text_anchors":["biotech","staff working"]},{"id":"MAN26-008","category":"Commission acts, strategies and programmes","title":"Scaleup Europe Fund","date_or_window":"2026-08-04","reference":"","primary_url":"https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/scaleup-europe-fund-start-making-investments-2026-08-04_en","source_hint":"European Innovation Council; ERA","curator_note":"Claimed €5bn fund inside EIC Fund; EQT management, Horizon Europe backing; verify fund establishment and portfolio claims","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"research-and-innovation.ec.europa.eu","text_anchors":["scaleup europe fund"]},{"id":"MAN26-009","category":"Commission acts, strategies and programmes","title":"EIC Work Programme 2027","date_or_window":"2026-11-05","reference":"","primary_url":"https://eic.ec.europa.eu/eic-funding-opportunities/eic-funding-opportunities-2027_en","source_hint":"European Innovation Council","curator_note":"Over €1.8bn; verify allocations to scaleup fund and defence in programme","publication_state":"published_claimed","verification":"primary_source_confirmed","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","skip_prior_import":true},{"id":"MAN26-010","category":"Commission acts, strategies and programmes","title":"State of the Union 2026 — primary address","date_or_window":"2026-09-16","reference":"","primary_url":"https://commission.europa.eu/strategy-and-policy/state-union_en","source_hint":"European Commission","curator_note":"Primary text for AI policy references; check wording of frontier-AI development claim","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"commission.europa.eu","text_anchors":["state of the union","2026"]},{"id":"MAN26-011","category":"Scoreboards, monitoring and statistics","title":"European Innovation Scoreboard 2026","date_or_window":"2026-07-09","reference":"","primary_url":"https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/european-innovation-scoreboard-2026_en","source_hint":"European Commission DG RTD","curator_note":"EU innovation performance / country rankings; verify figures and methodology","publication_state":"published_claimed","verification":"primary_source_confirmed","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","skip_prior_import":true},{"id":"MAN26-012","category":"Scoreboards, monitoring and statistics","title":"ERA Scoreboard 2025","date_or_window":"2026-06-01","reference":"","primary_url":"https://european-research-area.ec.europa.eu/index.php/era-monitoring-reports","source_hint":"European Commission; ERA","curator_note":"Third edition reportedly combining old scoreboard/dashboard","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"european-research-area.ec.europa.eu","text_anchors":["era scoreboard","2025"]},{"id":"MAN26-013","category":"Scoreboards, monitoring and statistics","title":"EIC Impact Report 2026","date_or_window":"2026-06-04","reference":"","primary_url":"https://eic.ec.europa.eu/impact_en","source_hint":"EIC","curator_note":"EIC Fund leverage and unicorn portfolio claims to check against official report","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"eic.ec.europa.eu","text_anchors":["impact report","2026"]},{"id":"MAN26-014","category":"Scoreboards, monitoring and statistics","title":"Eurostat government budget allocations for R&D (GBARD) 2025","date_or_window":"2026-08-07","reference":"","primary_url":"https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Government_budget_allocations_for_R%26D_(GBARD)","source_hint":"Eurostat","curator_note":"2025 EU government R&D budget allocations: claimed €130.2bn, 0.69% of GDP","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"ec.europa.eu","text_anchors":["government budget","r&d"]},{"id":"MAN26-015","category":"Scoreboards, monitoring and statistics","title":"ESFRI Roadmap 2026 — new projects selected","date_or_window":"2026-06","reference":"","primary_url":"https://www.esfri.eu/latest-esfri-news/six-new-project-proposals-selected-inclusion-esfri-roadmap-2026","source_hint":"ESFRI; ERA","curator_note":"Six projects approved; roadmap expected December 2026","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"www.esfri.eu","text_anchors":["esfri","roadmap"]},{"id":"MAN26-016","category":"Scoreboards, monitoring and statistics","title":"WIPO Global Innovation Index 2026","date_or_window":"2026-09-29","reference":"","primary_url":"https://www.wipo.int/en/web/global-innovation-index/2026/index","source_hint":"WIPO","curator_note":"Switzerland reportedly first; Europe 14 of top 25","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"www.wipo.int","text_anchors":["innovation index","2026"]},{"id":"MAN26-017","category":"Academies, stakeholders and think tanks","title":"Brussels Messages — Europe can only deliver on its ambitions with research and innovation","date_or_window":"2026-07-02","reference":"","primary_url":"https://www.leopoldina.org/en/publications-and-dates/publications/detail/brussels-messages-europe-can-only-deliver-on-its-ambitions-with-research-and-innovation-2026","source_hint":"Leopoldina; national academies","curator_note":"Ten messages on R&I compact, FP10 funding and ERC independence","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"www.leopoldina.org","text_anchors":["brussels messages"]},{"id":"MAN26-018","category":"Academies, stakeholders and think tanks","title":"Implementing the Draghi Report: The Moment of Truth","date_or_window":"2026-06-25","reference":"","primary_url":"https://www.institutmontaigne.org/en/press-release/implementing-draghi-report-moment-truth","source_hint":"Institut Montaigne","curator_note":"Tracks 567 recommendations; around 30% implemented","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"www.institutmontaigne.org","text_anchors":["draghi","moment of truth"]},{"id":"MAN26-019","category":"Academies, stakeholders and think tanks","title":"Investing in what makes Europe strong: R&I in the next EU budget","date_or_window":"2026-10-09","reference":"","primary_url":"https://www.coimbra-group.eu/report-investing-in-what-makes-europe-strong-research-and-innovation-in-the-next-eu-budget/","source_hint":"European University Association","curator_note":"Joint call by seven university associations for at least €200bn for FP10; possible duplicate of ERA Portal entry","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"www.coimbra-group.eu","text_anchors":["investing in what makes europe strong"]},{"id":"MAN26-020","category":"Academies, stakeholders and think tanks","title":"Quantum Flagship draft research and industry roadmaps","date_or_window":"2026-07-27","reference":"","primary_url":"https://qt.eu/news/2026/2026-07-27_2026-public-consultation-open","source_hint":"EU Quantum Flagship","curator_note":"Six draft roadmaps; consultation period; quantum chip industrialisation and standardisation","publication_state":"published_claimed","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"publication_candidate","expected_host":"qt.eu","text_anchors":["roadmaps","quantum"]},{"id":"MAN26-021","category":"Expected but not yet published","title":"ERA Act","date_or_window":"Q4 2026","reference":"","primary_url":"","source_hint":"ERA","curator_note":"Signalled for Q4 2026","publication_state":"expected","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"watchlist_only"},{"id":"MAN26-022","category":"Expected but not yet published","title":"Quantum Act","date_or_window":"Q3 2027","reference":"","primary_url":"","source_hint":"EU institutions","curator_note":"Reported rescheduling under April 2026 interinstitutional roadmap","publication_state":"expected","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"watchlist_only"},{"id":"MAN26-023","category":"Expected but not yet published","title":"Advanced Materials Act","date_or_window":"end 2026","reference":"","primary_url":"","source_hint":"European Commission","curator_note":"Expected by end of 2026","publication_state":"expected","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"watchlist_only"},{"id":"MAN26-024","category":"Expected but not yet published","title":"European Biotech Act II","date_or_window":"end 2026","reference":"","primary_url":"","source_hint":"European Commission","curator_note":"Industrial biotech and biomanufacturing; planned, not published","publication_state":"expected","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"watchlist_only"},{"id":"MAN26-025","category":"Expected but not yet published","title":"EU Fusion Strategy","date_or_window":"undated / in preparation","reference":"","primary_url":"","source_hint":"European Commission","curator_note":"In preparation as of 2026-09-07 ITER visit","publication_state":"expected","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"watchlist_only"},{"id":"MAN26-026","category":"Expected but not yet published","title":"2026 Strategic Foresight Report","date_or_window":"Q3 2026 planned","reference":"","primary_url":"","source_hint":"JRC","curator_note":"Publication unconfirmed; five 2040 world-order scenarios reportedly presented by JRC","publication_state":"expected","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"watchlist_only"},{"id":"MAN26-027","category":"Expected but not yet published","title":"Ocean and Water R&I Strategy","date_or_window":"Q4 2026","reference":"","primary_url":"","source_hint":"European Commission","curator_note":"Due Q4 2026","publication_state":"expected","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"watchlist_only"},{"id":"MAN26-028","category":"Expected but not yet published","title":"European Centre of Expertise on Research Security","date_or_window":"end 2026","reference":"","primary_url":"","source_hint":"European Commission","curator_note":"Launch planned before end of 2026","publication_state":"expected","verification":"needs_primary_url_and_verification","intake_status":"pending_dedup_and_admission","ingestion_route":"watchlist_only"}]')
+          p=Path('radar.json')
+          if not p.is_file():
+              raise SystemExit('Missing radar.json: no changes')
+          doc=json.loads(p.read_text(encoding='utf8'))
+          if not isinstance(doc,dict) or any(not isinstance(doc.get(s),list) for s in ('strand_a','strand_c')):
+              raise SystemExit('Unexpected Radar schema: no changes')
+          
+          def norm(t):
+              return re.sub(r'[^a-z0-9]+','',str(t).lower())
+          known_titles=set()
+          known_links=set()
+          for section in ('strand_a','strand_b','strand_c','frontier_evidence'):
+              for r in doc.get(section,[]):
+                  if isinstance(r,dict):
+                      known_titles.add(norm(r.get('title') or r.get('headline') or ''))
+                      if r.get('link'):known_links.add(str(r['link']).split('?')[0].rstrip('/').lower())
+          now=dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds').replace('+00:00','Z')
+          counts={'already_imported':0,'added':0,'skipped':0,'watchlist':0}
+          for r in LEADS:
+              title=r['title']
+              if r['publication_state']!='published_claimed':
+                  counts['watchlist']+=1
+                  print('WATCHLIST ONLY:',title)
+                  continue
+              if r.get('skip_prior_import'):
+                  counts['already_imported']+=1
+                  print('PRIOR IMPORT (left untouched):',title)
+                  continue
+              url=r.get('primary_url') or ''
+              if not url:
+                  counts['skipped']+=1
+                  print('SKIPPED no primary URL:',title)
+                  continue
+              if norm(title) in known_titles or url.split('?')[0].rstrip('/').lower() in known_links:
+                  counts['already_imported']+=1
+                  print('DUPLICATE:',title)
                   continue
               try:
-                  response = requests.get(url, timeout=18, headers={'User-Agent':'EU-RI-Radar-manual-document-check/1.0','Accept':'text/html'}, allow_redirects=True)
-                  response.raise_for_status()
-                  final = urlparse(response.url)
-                  if final.scheme != 'https' or not (final.hostname or '').endswith('.europa.eu'):
-                      raise ValueError('Not an official Commission HTTPS endpoint')
-                  if not ('html' in response.headers.get('content-type','').lower() or '<html' in response.text[:1000].lower()):
-                      raise ValueError('Not a readable official HTML publication')
-                  soup = BeautifulSoup(response.text, 'html.parser')
-                  for element in soup(['script','style','nav','footer','header']):
-                      element.decompose()
-                  text = ' '.join(soup.stripped_strings)
-                  text = re.sub(r'\s+', ' ', text)
-                  words = text.split()
-                  if len(words) < 120:
-                      raise ValueError('Insufficient official source text')
-                  # Require the central distinctive words of the claimed document title.
-                  distinctive = [w.lower() for w in re.findall(r'[A-Za-z0-9]+', title) if len(w)>3]
-                  first_text = text[:15000].lower()
-                  hits = sum(1 for w in distinctive if w in first_text)
-                  if hits < max(2, len(distinctive)//2):
-                      raise ValueError('Official page does not clearly match the claimed title')
-                  if response.url.rstrip('/').lower() in known:
-                      print('Already in Radar (canonical URL):', title)
+                  resp=requests.get(url,timeout=22,headers={'User-Agent':'EU-RI-Radar-manual-intake/1.1','Accept':'text/html'},allow_redirects=True)
+                  resp.raise_for_status()
+                  u=urlparse(resp.url)
+                  host=r.get('expected_host')
+                  if u.scheme!='https' or not host or (u.hostname or '')!=host:
+                      raise ValueError('Source redirected outside expected publisher domain')
+                  if 'html' not in resp.headers.get('content-type','').lower() and '<html' not in resp.text[:1200].lower():
+                      raise ValueError('Source is not an HTML publication page')
+                  soup=BeautifulSoup(resp.text,'html.parser')
+                  for el in soup(['script','style','footer','nav','header']):el.decompose()
+                  full=re.sub(r'\s+',' ',' '.join(soup.stripped_strings))
+                  if len(full.split())<90:
+                      raise ValueError('Insufficient source content')
+                  hay=full[:24000].lower()
+                  anchors=r.get('text_anchors') or []
+                  if not anchors or not all(a in hay for a in anchors):
+                      raise ValueError('Official page does not match all expected document anchors')
+                  canon=resp.url.split('?')[0].rstrip('/').lower()
+                  if canon in known_links:
+                      counts['already_imported']+=1
+                      print('DUPLICATE canonical URL:',title)
                       continue
-                  summary = text[:1800]
-                  base = {
-                      'title': title, 'date': day, 'link': response.url,
-                      'source': 'European Commission', 'authors': 'European Commission',
-                      'type': 'institutional report' if strand=='A' else 'official EU policy document',
-                      'strand': strand, 'summary': summary,
-                      'first_seen': now, 'new_this_scan': False,
-                      'deep_scan_status': 'pending',
-                      'discovery_method': 'manual',
-                      'manual_discovery_status': 'official_page_checked_pending_deep_scan',
+                  source=r.get('source_hint','').split(';')[0]
+                  date=r.get('date_or_window','')
+                  # Keep month-only dates as month-only. Do not fabricate a day.
+                  strand='A' if r['id'][-3:] in {'005','007','012','013','014','016','018'} else 'C'
+                  base={
+                     'title':title,'date':date,'link':resp.url,'source':source,'authors':source,
+                     'strand':strand,'type':'institutional report' if strand=='A' else 'official EU policy document',
+                     'summary':full[:1600], 'headline':title, 'what':full[:900],
+                     'why_it_matters':'Manual EU research and innovation lead awaiting normal Deep Scan assessment.',
+                     'first_seen':now,'new_this_scan':False,'deep_scan_status':'pending',
+                     'discovery_method':'manual','manual_lead_id':r['id'],
+                     'manual_discovery_status':'publisher_page_checked_pending_deep_scan',
+                     'source_provenance':'named publisher source; unverified until Deep Scan',
+                     'manual_curator_note':r.get('curator_note',''),
                   }
-                  if strand == 'C':
-                      base.update({'headline': title, 'what': summary[:900], 'why_it_matters': 'Official EU policy development; significance to be checked by Deep Scan.'})
-                  else:
-                      base.update({'source_tier': 'Tier 1', 'eu_relevance': 'European Union'})
-                  corpus['strand_a' if strand=='A' else 'strand_c'].append(base)
-                  known.add(response.url.rstrip('/').lower())
-                  known_titles.add(re.sub(r'[^a-z0-9]+', '', title.lower()))
-                  changed += 1
-                  print('Staged for normal Deep Scan:', title)
-              except (requests.RequestException, ValueError) as exc:
-                  print('SKIPPED (no changes for this item):', title, '-', str(exc)[:250])
-          if changed:
-              corpus_path.write_text(json.dumps(corpus, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
-          print(f'Added {changed} confirmed-source manual findings; 24 remaining leads require official URLs or publication confirmation.')
-          with open('manual_import_count.txt','w') as f:
-              f.write(str(changed))
+                  doc['strand_a' if strand=='A' else 'strand_c'].append(base)
+                  counts['added']+=1
+                  known_titles.add(norm(title));known_links.add(canon)
+                  print('STAGED pending Deep Scan:',title)
+              except (requests.RequestException,ValueError,UnicodeError) as exc:
+                  counts['skipped']+=1
+                  print('SKIPPED',title,':',str(exc)[:180])
+          if counts['added']:
+              p.write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+          print('BATCH OUTCOME:',json.dumps(counts,sort_keys=True))
           PY
-
-      - name: Commit only new Radar findings
+      - name: Commit only new Radar candidates
         shell: bash
         run: |
           set -euo pipefail
-          rm -f manual_import_count.txt
           if git diff --quiet -- radar.json; then
-            echo 'No eligible new records: radar.json unchanged.'
+            echo 'No change to radar.json.'
             exit 0
           fi
           git config user.name 'radar-manual-intake'
           git config user.email 'actions@github.com'
           git add radar.json
-          git commit -m 'Stage verified manual discoveries pending Deep Scan'
+          git commit -m 'Stage remaining source-checked manual findings pending Deep Scan'
           git push origin HEAD:main
