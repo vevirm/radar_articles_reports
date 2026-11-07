@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3769** (Main **1889** + Historical **1880**)
-- Automatic queue still needing V2 verification: **43** (Main **7** + Historical **36**)
-- Currently assigned to workers: **43** (Main **7** + Historical **36**)
+- Automatic queue still needing V2 verification: **70** (Main **30** + Historical **40**)
+- Currently assigned to workers: **70** (Main **30** + Historical **40**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **45**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,16 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261106T083505Z-f0040d3c58c6`
-- Assigned unresolved records: **8**
-  1. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxQeGt4VFN5d3pBVVlzS0hDRmEtdzZtbE90d2FZRjFZWVRMWFhIdVVZR0tndGNKbjdpLUxheUJxaG0tX0F5UnVGVUN2azRXMUtvT1Fab1VDZ3NMaC0zT3JrVW5JbHhvWDVBNTBkT2s5dHlsZFJiMUlMcGJEcXRwV09FbjUwM0NadVgwY3NkcklBdTlXWk5iSURNbUdHak1QOXFQdE1aZ2E3UGk?oc=5` — Research Europe – 5 November 2026 — recovery attempt 2/3
-  2. `link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxOdUJrbUVpbXFidlk2MUhmR2lDU21NTTQxSkZtSHVaY2lCZk4tWDh1NDluS1hyXy1qSDdkUFJsb3ZxTDZKZlVpcFRBOXlOeFBKU19xUWFha2N5N3F6U3IyMWU0YmJ1U0NoNXlGcHBLSkxha2NYc1ZDRW1UcTE0WFhFQjBYWGZCSzk1aUxLYU5nX3Z3bG05UjdJZlhEWUtNTDZzbFZaYmJSRjh5OUhGLXRoeERabExfa0VzZF96MVNvYm4zeW5HVUljbUxtcnBSUHBK?oc=5` — Newcomers need more support in the EU’s R&I programmes — recovery attempt 2/3
-  3. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONlphSjYxOUVvU1ZCYjhDclZ3RXNKV1RfUzVGbXliVnZwVWVEN0F0VGg4ME1lZUtYMFdTeE1ISDg2Z1lXZHVfZ0xteUhfaXZUbUhRUlBxTF95dzJZbE5mVmtsdG5uc04yNHcwdUxOOF9EZU1NZDB5ckNTZ2xhMExjSXFsVlMzNjFOVWdULWh1WFN2M1dPV2dIOWxkbTZRbE4tdEZRZFJsNUNENllsT3NZ?oc=5` — Full FP10 association a win-win for UK and EU, says universities leader — recovery attempt 2/3
-  4. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxNNE5sRGRXcDd1N3dWeTRTOGFkcTNadkl3c05DWTZaVTVjYzlITmRLaHkyOG0wNF9sQ212a0VTV2FWY2pLTmxSbXpQdUlhUUNOLXF4dVRRYUszOWdsMkRvV2lyYUV5YldSa2ZZX29XNEY2QU91aFlEX1NzR3F5WUJXTkpnazZINk42WlMwdW91Z1hZRDg2bld4OQ?oc=5` — Viewpoint: The EU must focus on women’s health research – now — recovery attempt 2/3
-  5. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPVjFqYThJU3psX2xvRUJVN3oxTk9RcDR1bExIcFVYY1JyVUlQanBqX2hQbHFXbV85ZnhHQVVuLW55aW5iZVJ1VWZ3UXhLY3N5MFF1UWh5NURUT3k1Z2NrcmIzOEVpZFQyLWp0R0hxdjFHejlrNzgzSW9ZSkRGUGcxS094ellTclhPbTY0X056YTFUQTBCUVRPWjd4M3BXTWNfSTFreWJPbTRHMENPWEUxSXl1azQ1MlRmREx1WkxkekxSRjhSbS1J?oc=5` — ERC president: 5% success rate ‘a wake-up call’ for EU — recovery attempt 2/3
-  6. `link:https://doi.org/10.1016/j.techfore.2026.124948` — From exponential extrapolation to regime-aware foresight: A Cognitive Scaling Framework for long-run AI progress — recovery attempt 2/3
-  7. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxPZm5Pd1JhWEd5WmpjWW9NOWZ4b3VnM20xVUpGVi1JWlp3R1J0NG8wTTRfdThyaFIwRG1fX3dWcVZJQTk3d2dWUk1OemJFZXpxWF9RUzNWRVI2RWNjaXFjT1JqNkpyLU1RSlVtZjJYS0stV0ZieU9FdEFYVFgxakkta2VvRDRYcmV6QXF0bm10R19FdUdHTS1PWkRDaHEwR3dz?oc=5` — Horizon Europe rapporteurs take budget fight to Berlin — recovery attempt 2/3
-  8. `historical:id:d0284517631b9d2a` — European Democracy Shield - Assessing the Commission’s Communication — recovery attempt 2/3
+- Current package: `worker-a-20261107T104759Z-b30f4b7d800e`
+- Assigned unresolved records: **35**
+  1. `link:https://doi.org/10.1016/j.respol.2026.105656` — Selective industrial policy for the EU open strategic autonomy: The role of products' relatedness
+  2. `link:https://doi.org/10.1080/08911916.2026.2743824` — Beyond the European Chips Act: Mobilizing Public Banks to Solve Europe’s Semiconductor Supply Chain Paradox
+  3. `link:https://doi.org/10.1186/s41239-026-00637-2` — Mind the AI policy gap: a policy analysis across global funding bodies
+  4. `link:https://doi.org/10.1177/17479541261503583` — A bibliometric review mapping a quarter-century of talent development research in sport (2000–2025): Knowledge structures, paradigm shifts, and future directions
+  5. `link:https://op.europa.eu/en/publication-detail/-/publication/d9b48ed2-d9b6-11f1-8501-01aa75ed71a1/language-en` — Fundamental rights in an uncertain future - Publications Office of the EU
+  6. `link:https://www.vttresearch.com/en/technology-infrastructures/industrial-biotechnology-infrastructure` — Industrial biotechnology infrastructure | VTT
+  7. `link:https://doi.org/10.1007/s41781-026-00193-4` — Big Science as Strategic Infrastructure: European Coordination, Public Value and Socio-economic Evidence
+  8. `link:https://data.consilium.europa.eu/doc/document/ST-15512-2026-INIT/en/pdf` — Other language versions are available on the following website: DM Search v5.6.1.
+  - … plus 27 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261106T075923Z-9b754c146837`
