@@ -1,0 +1,354 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261108T083714Z-109297a1ead0",
+  "results": [
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTUNndjVLeVhlcEE2X3Z3SmpoazQxQmlMQl9hTHkydHY1WUoxVXRBTVVBU24xdk1lc1pZYXI2aUFBeHJlbG9QWXhRVnQ3UWRQUlNBRVhGdWduZUM5dWhINVdSdXQySExqVkNTZEdKNURfdGhuMkZkbS1ySmQ3dmNCYm4wUTBIbmZFRlA0?oc=5",
+      "source_hash": "ad7c7772",
+      "identity_hash": "f3944166e24399c8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied Google News RSS record did not give full article text. Traced exact headline to original POLITICO link; reviewed accessible attribution and full corresponding report at https://www.internationly.com/news/eu-budget-battle-paralyzes-brussels-on-ai-chips-the-arctic-and-agriculture."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Located and read matching source for EU budget battle paralyzes Brussels on AI chips, the Arctic and agriculture at https://www.politico.eu/article/eu-budget-battle-paralyzes-brussels-key-priorities/."
+          },
+          {
+            "step": "secondary_syndication_recovery",
+            "outcome": "success",
+            "note": "Full POLITICO-attributed article reproduced at internationly.com/news/eu-budget-battle-paralyzes-brussels-on-ai-chips-the-arctic-and-agriculture with specific on-record EU budget and semiconductor-policy details."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_syndication",
+            "url": "https://www.internationly.com/news/eu-budget-battle-paralyzes-brussels-on-ai-chips-the-arctic-and-agriculture",
+            "title": "Full POLITICO-attributed EU budget battle report, accessible reproduction",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The original POLITICO story identity and headline were verified; the matching full report was read via attributed syndication because direct POLITICO access was blocked. Dependence on a reproduction reduces confidence relative to the primary news page."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C: a documented live EU chip-policy financing bottleneck directly affects funding certainty for strategic semiconductor capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "reader_title": "EU budget uncertainty constrains AI-chip plans",
+      "reader_what": "EU 2028–34 budget uncertainty is reportedly holding up definite financing for the Commission’s AI chipmaking policy; the proposal explicitly avoids pre-empting the budget decision.",
+      "reader_why": "C: a documented live EU chip-policy financing bottleneck directly affects funding certainty for strategic semiconductor capacity.",
+      "reader_more": "EU 2028–34 budget uncertainty is reportedly holding up definite financing for the Commission’s AI chipmaking policy; the proposal explicitly avoids pre-empting the budget decision. C: a documented live EU chip-policy financing bottleneck directly affects funding certainty for strategic semiconductor capacity.",
+      "deep_analysis": {
+        "work_kind": "current EU technology policy reporting",
+        "research_question": "",
+        "main_finding": "EU 2028–34 budget uncertainty is reportedly holding up definite financing for the Commission’s AI chipmaking policy; the proposal explicitly avoids pre-empting the budget decision.",
+        "method_or_basis": "POLITICO November 5 original reporting attributed by independently accessible full-text syndication; EU institutional submissions described therein.",
+        "qualification": "This is a reported financing and legislative sequencing impasse, not proof that planned chips facilities were cancelled.",
+        "radar_relevance": "C: a documented live EU chip-policy financing bottleneck directly affects funding certainty for strategic semiconductor capacity.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "chips.fab",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "conditions",
+          "direction": "becomes_conditional",
+          "status": "in_negotiation",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a reported financing and legislative sequencing impasse, not proof that planned chips facilities were cancelled.",
+          "text": "POLITICO reports that EU budget negotiations leave financing for the Commission chipmaking plan uncertain.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMipwFBVV95cUxONUtJQ05FYi1TTzhaWlRpN0lmSFIxdG42TnQ1dzhnRExMamJRMXVoVnR2VXIyczdoc0FLMy1hMlJyZU0xOGxLZlFvNndZcEhMLUFobXdxV25iUkJlTG93bDhBOFdFYUVROGlMMDB6QjM0d0tndU54YTRydFh2SlM5TXVPWXVVU0RndTRacVBZQ0txUkpFbExld19Ya0Vfd0gwbkNVeVFScw?oc=5",
+      "source_hash": "a67dd1b1",
+      "identity_hash": "ee3ce298c7c6a801",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied Google News RSS link contained no substantive content; matched original Reuters World News episode title and date to syndicated official description."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source for PODCAST: Wall Street's AI reckoning, Europe's hoax bomb scares and Paraguay at https://podfollow.com/reuters-world-news/episode/4f866e7f52f0d3314c6cf3b3e87ab634933924ab/view."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://podfollow.com/reuters-world-news/episode/4f866e7f52f0d3314c6cf3b3e87ab634933924ab/view",
+            "title": "Reuters World News — Wall Street’s AI reckoning, Europe’s hoax bomb scares and Paraguay",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://podfollow.com/reuters-world-news/episode/4f866e7f52f0d3314c6cf3b3e87ab634933924ab/view; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SCOPE_NOT_MET",
+        "reason": "C gate failed: no verifiable new EU research/innovation policy, capability, funding or technological development is reported; geographic Europe and AI keywords are unrelated."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "reader_title": "Reuters world-news podcast: unrelated headline mix",
+      "reader_what": "Reuters episode recap combines US AI-equity sentiment, European flight hoaxes and Paraguay political news.",
+      "reader_why": "",
+      "reader_more": "C gate failed: no verifiable new EU research/innovation policy, capability, funding or technological development is reported; geographic Europe and AI keywords are unrelated.",
+      "deep_analysis": {
+        "work_kind": "multi-topic news podcast",
+        "research_question": "",
+        "main_finding": "Reuters episode recap combines US AI-equity sentiment, European flight hoaxes and Paraguay political news.",
+        "method_or_basis": "Reuters World News syndicated episode details and synopsis dated November 6, 2026.",
+        "qualification": "The podcast exists, but its juxtaposed topics do not establish a European R&I connection.",
+        "radar_relevance": "C gate failed: no verifiable new EU research/innovation policy, capability, funding or technological development is reported; geographic Europe and AI keywords are unrelated.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMipgFBVV95cUxPS0RKQ2VWLVF2RE1Ka3Z5VkdoRWkyU2trTmtWQVJ6OUVZZkdqSnpSS3lFYmdFczd5NXlfYkJkTm5rcmljRXdKSm4zYVNBYTE4WTAtT0h0T0xEUWF1SVNvekF0VDI5cldqZEFfMGt5bkdjYko4QjJHYXBCd29JRDhjRGFOWFVmYzktanZXVGttV0NlWXdadlRnQWl6TFJ1aFdsRUhQWVJ3?oc=5",
+      "source_hash": "3a11f74b",
+      "identity_hash": "38124cd503475593",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News RSS link yielded only headline; traced to and read Reuters original published 6 November 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source for European shares fall as global AI rout gathers pace at https://www.reuters.com/markets/europe/european-shares-set-fall-global-ai-rout-gathers-pace-2026-11-06/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.reuters.com/markets/europe/european-shares-set-fall-global-ai-rout-gathers-pace-2026-11-06/",
+            "title": "Reuters — Risk-off mood sweeps European stocks as AI concerns deepen",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.reuters.com/markets/europe/european-shares-set-fall-global-ai-rout-gathers-pace-2026-11-06/; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SCOPE_NOT_MET",
+        "reason": "C gate failed: market-price fluctuations and investor sentiment are not a new European R&I policy, research funding, infrastructure or technology-capability development."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "reader_title": "European equities fall amid AI-investment concerns",
+      "reader_what": "Reuters documents a one-day 1% STOXX 600 decline amid global stock-market sentiment about AI valuations and US politics.",
+      "reader_why": "",
+      "reader_more": "C gate failed: market-price fluctuations and investor sentiment are not a new European R&I policy, research funding, infrastructure or technology-capability development.",
+      "deep_analysis": {
+        "work_kind": "financial-markets news",
+        "research_question": "",
+        "main_finding": "Reuters documents a one-day 1% STOXX 600 decline amid global stock-market sentiment about AI valuations and US politics.",
+        "method_or_basis": "Reuters original November 6 2026 stock market report with market closes and analyst comments.",
+        "qualification": "Market moves cannot be inferred to cause a change to EU R&I system capacity or funding.",
+        "radar_relevance": "C gate failed: market-price fluctuations and investor sentiment are not a new European R&I policy, research funding, infrastructure or technology-capability development.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.euronews.com/2026/11/07/brief-burst-of-intense-heat-could-give-hard-to-recycle-wind-turbine-blades-a-second-life",
+      "source_hash": "935f809b",
+      "identity_hash": "282a0100ba9506a7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Read exact supplied Euronews report and cross-checked the named research with the original journal study described at https://cen.acs.org/environment/recycling/recycling-wind-turbine-blades-flash-joule-heating/104/web/2026/11."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/11/07/brief-burst-of-intense-heat-could-give-hard-to-recycle-wind-turbine-blades-a-second-life",
+            "title": "Euronews — Brief burst of intense heat could give wind-turbine blades a second life",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.euronews.com/2026/11/07/brief-burst-of-intense-heat-could-give-hard-to-recycle-wind-turbine-blades-a-second-life; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SCOPE_NOT_MET",
+        "reason": "C gate failed: a foreign laboratory materials-recycling technique is presented as a possible solution for Europe’s future waste, not a documented change in European R&I capacity, programmes, investment or strategic industrial delivery."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "reader_title": "Experimental wind-blade recycling has no verified EU R&I development",
+      "reader_what": "Article summarizes a Chinese Tsinghua University lab study using flash Joule heating to turn turbine blade waste into composite additives; experiments remain small-scale.",
+      "reader_why": "",
+      "reader_more": "C gate failed: a foreign laboratory materials-recycling technique is presented as a possible solution for Europe’s future waste, not a documented change in European R&I capacity, programmes, investment or strategic industrial delivery.",
+      "deep_analysis": {
+        "work_kind": "technology science news",
+        "research_question": "",
+        "main_finding": "Article summarizes a Chinese Tsinghua University lab study using flash Joule heating to turn turbine blade waste into composite additives; experiments remain small-scale.",
+        "method_or_basis": "Euronews article 7 November 2026 and Chem Circularity study summarized by Chemical & Engineering News; laboratory batches reportedly around 10g.",
+        "qualification": "The laboratory-stage method is not evidence of EU deployment, financing or research-system impact.",
+        "radar_relevance": "C gate failed: a foreign laboratory materials-recycling technique is presented as a possible solution for Europe’s future waste, not a documented change in European R&I capacity, programmes, investment or strategic industrial delivery.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5d0af4e6f227ccec",
+      "source_hash": "24d812f9",
+      "identity_hash": "972ba73c4b4396bf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Historical item has no supplied reader-facing link; verified exact OECD DOI 10.1787/4fcb80c2-en, authors and substantive OECD institutional study."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Located and read matching source for Reinforcing the attractiveness of Europe’s Eastern Border Regions at https://www.oecd.org/en/publications/reinforcing-the-attractiveness-of-europe-s-eastern-border-regions_4fcb80c2-en.html."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.oecd.org/en/publications/reinforcing-the-attractiveness-of-europe-s-eastern-border-regions_4fcb80c2-en.html",
+            "title": "OECD — Reinforcing the attractiveness of Europe’s Eastern Border Regions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.oecd.org/en/publications/reinforcing-the-attractiveness-of-europe-s-eastern-border-regions_4fcb80c2-en.html; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Historical A Route 2: OECD provides cross-border evidence on innovation-system weaknesses and strategic regional capability at Europe’s geopolitical frontier."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "reader_title": "EU eastern border regions: innovation and resilience gaps",
+      "reader_what": "OECD finds the EU’s eastern border regions underperform on innovation and investment, while security shocks and demographic decline complicate long-term regional development.",
+      "reader_why": "Historical A Route 2: OECD provides cross-border evidence on innovation-system weaknesses and strategic regional capability at Europe’s geopolitical frontier.",
+      "reader_more": "OECD finds the EU’s eastern border regions underperform on innovation and investment, while security shocks and demographic decline complicate long-term regional development. Historical A Route 2: OECD provides cross-border evidence on innovation-system weaknesses and strategic regional capability at Europe’s geopolitical frontier.",
+      "deep_analysis": {
+        "work_kind": "historical OECD regional innovation/attractiveness research",
+        "research_question": "",
+        "main_finding": "OECD finds the EU’s eastern border regions underperform on innovation and investment, while security shocks and demographic decline complicate long-term regional development.",
+        "method_or_basis": "OECD 2025, Regional Development Papers 163, cross-regional framework, questionnaires and case evidence for eastern EU border areas.",
+        "qualification": "This is a 2025 regional-policy diagnosis, not a fresh 2026 development; region-level associations are not causal proof of policy effectiveness.",
+        "radar_relevance": "Historical A Route 2: OECD provides cross-border evidence on innovation-system weaknesses and strategic regional capability at Europe’s geopolitical frontier.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "OECD",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2025-09-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a 2025 regional-policy diagnosis, not a fresh 2026 development; region-level associations are not causal proof of policy effectiveness.",
+          "text": "OECD found persistent innovation and economic weaknesses in EU eastern border regions, partly compounded by geopolitical disruption.",
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}
