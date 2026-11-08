@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-11-07T11:15:13Z",
+  "generated_at": "2026-11-08T09:23:20Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -318209,8 +318209,990 @@
       "deep_scan_package_id": "worker-a-20261107T104759Z-b30f4b7d800e",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/european-innovation-scoreboard-2026_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "23baf70d",
+      "identity_hash": "005e218681f2a5d1",
+      "reader_title": "European Innovation Scoreboard 2026",
+      "reader_what": "The Commission reports that EU innovation performance rose 11.6 percentage points since 2019 and 1.7 points year-on-year in 2026.",
+      "reader_why": "A Route 2: comparative EU innovation-system performance and national gaps are the report’s core subject.",
+      "reader_more": "The Commission reports that EU innovation performance rose 11.6 percentage points since 2019 and 1.7 points year-on-year in 2026. A Route 2: comparative EU innovation-system performance and national gaps are the report’s core subject.",
+      "deep_analysis": {
+        "work_kind": "indicator-based EU innovation-system report",
+        "research_question": "",
+        "main_finding": "The Commission reports that EU innovation performance rose 11.6 percentage points since 2019 and 1.7 points year-on-year in 2026.",
+        "method_or_basis": "European Commission official 2026 EIS summary; 32 comparative indicators and country performance.",
+        "qualification": "This is descriptive evidence; it does not establish causal effects or future outcomes.",
+        "radar_relevance": "A Route 2: comparative EU innovation-system performance and national gaps are the report’s core subject.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened official 2026 report landing page; its matching Annex B was separately retrieved by the package and corroborated using the Commission official 2026 findings page."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source for European Innovation Scoreboard 2026 at https://research-and-innovation.ec.europa.eu/statistics/performance-indicators/european-innovation-scoreboard_en."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Reviewed matching Commission 2026 Annex B excerpt with 32 indicator table and country comparisons."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://research-and-innovation.ec.europa.eu/statistics/performance-indicators/european-innovation-scoreboard_en",
+            "title": "European Innovation Scoreboard 2026 — official results and analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Commission 2026 EIS landing page and 2026 official findings page both match, plus package Annex B title/indicator coverage; no reliance on PDF excerpt alone."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: comparative EU innovation-system performance and national gaps are the report’s core subject."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:10Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-07-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is descriptive evidence; it does not establish causal effects or future outcomes.",
+          "text": "EIS 2026 finds EU innovation performance 11.6 percentage points above 2019.",
+          "confidence": "high",
+          "record_key": "link:https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/european-innovation-scoreboard-2026_en",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:005e218681f2a5d1:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Government_budget_allocations_for_R%26D_(GBARD)": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "96175183",
+      "identity_hash": "2c93478f291ff2b7",
+      "reader_title": "EU public R&D allocations reached €130.2bn in 2025",
+      "reader_what": "Preliminary EU government R&D budget allocations reached €130.2 billion, or 0.69% of GDP, in 2025, up 2.4% from 2024.",
+      "reader_why": "A Routes 2 and 3: original EU R&D public-funding levels and changes directly measure the European research system.",
+      "reader_more": "Preliminary EU government R&D budget allocations reached €130.2 billion, or 0.69% of GDP, in 2025, up 2.4% from 2024. A Routes 2 and 3: original EU R&D public-funding levels and changes directly measure the European research system.",
+      "deep_analysis": {
+        "work_kind": "official EU research-funding statistics",
+        "research_question": "",
+        "main_finding": "Preliminary EU government R&D budget allocations reached €130.2 billion, or 0.69% of GDP, in 2025, up 2.4% from 2024.",
+        "method_or_basis": "Eurostat Statistics Explained 7 August 2026 article and supporting GBARD data.",
+        "qualification": "Figures are preliminary budget allocations, not actual R&D spending or experimentally measured impacts.",
+        "radar_relevance": "A Routes 2 and 3: original EU R&D public-funding levels and changes directly measure the European research system.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened original Eurostat article; recovered article text and data findings match package 7 August 2026 excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Government_budget_allocations_for_R%26D_(GBARD)",
+            "title": "Eurostat government budget allocations for R&D 2025",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Government_budget_allocations_for_R%26D_(GBARD); assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 2 and 3: original EU R&D public-funding levels and changes directly measure the European research system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:11Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Eurostat",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-08-07",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Figures are preliminary budget allocations, not actual R&D spending or experimentally measured impacts.",
+          "text": "Eurostat reported preliminary 2025 EU government R&D allocations of €130.2 billion, up 2.4% from 2024.",
+          "confidence": "high",
+          "record_key": "link:https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Government_budget_allocations_for_R%26D_(GBARD)",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:2c93478f291ff2b7:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://european-research-area.ec.europa.eu/index.php/era-monitoring-reports": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "74a8efd5",
+      "identity_hash": "21cc6db70fb06a1a",
+      "reader_title": "ERA Scoreboard 2025 benchmarks European research system",
+      "reader_what": "The third ERA Scoreboard edition uses 60 indicators to monitor European Research Area priorities at EU and national levels.",
+      "reader_why": "A Route 3: direct research-system monitoring covers governance, open science, infrastructure, funding and careers across Europe.",
+      "reader_more": "The third ERA Scoreboard edition uses 60 indicators to monitor European Research Area priorities at EU and national levels. A Route 3: direct research-system monitoring covers governance, open science, infrastructure, funding and careers across Europe.",
+      "deep_analysis": {
+        "work_kind": "ERA monitoring report",
+        "research_question": "",
+        "main_finding": "The third ERA Scoreboard edition uses 60 indicators to monitor European Research Area priorities at EU and national levels.",
+        "method_or_basis": "EU Publications Office publication metadata and matching official methodology excerpt from the package, covering 60 ERA indicators.",
+        "qualification": "Scoreboard indicators track system-level conditions; they do not by themselves prove policy interventions caused changes.",
+        "radar_relevance": "A Route 3: direct research-system monitoring covers governance, open science, infrastructure, funding and careers across Europe.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Official ERA monitoring reports listing and package ERA Scoreboard 2025 methodology PDF matched; checked EU Publications Office entry for 2026 publication and 60-indicator monitoring design."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source for ERA Scoreboard 2025 at https://op.europa.eu/en/publication-detail/-/publication/675add95-5bcc-11f1-aa6d-01aa75ed71a1/language-en."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Reviewed matching Commission ERA Scoreboard 2025 methodology excerpt from institutional source."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_methodology_document",
+            "url": "https://european-research-area.ec.europa.eu/sites/default/files/2026-05/ERA_Scoreboard_methodology_report_2025_FINAL.pdf",
+            "title": "European Commission ERA Scoreboard 2025 methodology report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The substantive source is the first-party Commission ERA 2025 Scoreboard methodology PDF excerpt supplied in the package, identifying 60 indicators; the Publications Office page corroborates report identity but was not the full text used."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: direct research-system monitoring covers governance, open science, infrastructure, funding and careers across Europe."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:13Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission DG Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-05-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Scoreboard indicators track system-level conditions; they do not by themselves prove policy interventions caused changes.",
+          "text": "The 2025 ERA Scoreboard monitors European Research Area progress using a set of 60 indicators.",
+          "confidence": "high",
+          "record_key": "link:https://european-research-area.ec.europa.eu/index.php/era-monitoring-reports",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:21cc6db70fb06a1a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1002/bit.70361": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "08b9aa3c",
+      "identity_hash": "651b7930611fc9b9",
+      "reader_title": "Global cell and gene therapy GMP manufacturing review",
+      "reader_what": "The review summarizes international cell/gene-therapy manufacturing controls and compares FDA, EMA and Indian requirements for GMP production.",
+      "reader_more": "A Route 1 failed: no Europe-specific strategic research dependency; Route 2 failed: no measured European R&I capacity or trajectory; Route 3 failed: the subject is general biomanufacturing practice, with European rules only a comparator, not a European research-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed bioprocess engineering review",
+        "research_question": "",
+        "main_finding": "The review summarizes international cell/gene-therapy manufacturing controls and compares FDA, EMA and Indian requirements for GMP production.",
+        "method_or_basis": "Matching Wiley peer-reviewed article page, authors and abstract reviewed; EMA mentioned as one of several global regulator comparisons.",
+        "qualification": "The topic can matter to European manufacturers but this paper does not itself study a European R&I-system mechanism.",
+        "radar_relevance": "A Route 1 failed: no Europe-specific strategic research dependency; Route 2 failed: no measured European R&I capacity or trajectory; Route 3 failed: the subject is general biomanufacturing practice, with European rules only a comparator, not a European research-system mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Checked claimed Wiley DOI and correct Wiley article, rather than the OpenAlex intermediate-hosting rendition."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Located and read matching source for Cell and Gene Therapies Manufacturing Challenges and Integrated Good Manufacturing Practices Solutions: A Lifecycle Perspective at https://analyticalsciencejournals.onlinelibrary.wiley.com/doi/10.1002/bit.70361."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://analyticalsciencejournals.onlinelibrary.wiley.com/doi/10.1002/bit.70361",
+            "title": "Samaga, Singh and Pawar — Cell and Gene Therapies Manufacturing Challenges and Integrated GMP Solutions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://analyticalsciencejournals.onlinelibrary.wiley.com/doi/10.1002/bit.70361; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "A Route 1 failed: no Europe-specific strategic research dependency; Route 2 failed: no measured European R&I capacity or trajectory; Route 3 failed: the subject is general biomanufacturing practice, with European rules only a comparator, not a European research-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:13Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.coimbra-group.eu/wp-content/uploads/Investing-in-what-makes-Europe-strong_Report.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "551aeccc",
+      "identity_hash": "fc120aeb812fa7ab",
+      "reader_title": "European university associations’ budget event report",
+      "reader_more": "A Route 1: strategic R&I framing is present but it is a position/event recap, not an independent analytical evidence product. Routes 2/3: neither original R&I-system outcomes nor a documented study design are supplied; stakeholder requests are policy advocacy.",
+      "deep_analysis": {
+        "work_kind": "stakeholder position and event synthesis",
+        "research_question": "",
+        "main_finding": "The report records a September Brussels advocacy event urging a strong autonomous FP10 research budget and coordination with a European Competitiveness Fund.",
+        "method_or_basis": "Full 2026 event-report text supplied in matching Coimbra Group PDF; official research-university group publication listing.",
+        "qualification": "This is an association’s policy preference; not independent evidence that advocated budget structures improve research performance.",
+        "radar_relevance": "A Route 1: strategic R&I framing is present but it is a position/event recap, not an independent analytical evidence product. Routes 2/3: neither original R&I-system outcomes nor a documented study design are supplied; stakeholder requests are policy advocacy.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened/checked original link https://www.coimbra-group.eu/wp-content/uploads/Investing-in-what-makes-Europe-strong_Report.pdf; the verified matching source was directly available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.coimbra-group.eu/wp-content/uploads/Investing-in-what-makes-Europe-strong_Report.pdf",
+            "title": "Coimbra Group, CESAER and partners — Investing in What Makes Europe Strong (October 2026 event report)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.coimbra-group.eu/wp-content/uploads/Investing-in-what-makes-Europe-strong_Report.pdf; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "A Route 1: strategic R&I framing is present but it is a position/event recap, not an independent analytical evidence product. Routes 2/3: neither original R&I-system outcomes nor a documented study design are supplied; stakeholder requests are policy advocacy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:13Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.vinnova.se/en/p/blue4circ--planning-for-a-horizon-europe-proposal-on-circular-blue-bio-based-materials-from-regenerative-marine-systems-": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "91b08cfe",
+      "identity_hash": "77e33a3c67cbccbe",
+      "reader_title": "Swedish BLUE4CIRC proposal-planning grant",
+      "reader_what": "Swedish project listing describes a modest planning grant and a future Horizon Europe proposal about regenerative marine-derived circular materials.",
+      "reader_more": "A Routes 1/2/3 fail: a single project-funding listing offers neither strategic EU R&I-system analysis nor measured innovation-state evidence nor a research study of funding, collaboration or transfer mechanisms.",
+      "deep_analysis": {
+        "work_kind": "administrative grant project listing",
+        "research_question": "",
+        "main_finding": "Swedish project listing describes a modest planning grant and a future Horizon Europe proposal about regenerative marine-derived circular materials.",
+        "method_or_basis": "Vinnova primary project listing, project purpose and funded period, no reported system-level study findings.",
+        "qualification": "Funding award or application preparation is not evidence of a completed research outcome or systemic impact.",
+        "radar_relevance": "A Routes 1/2/3 fail: a single project-funding listing offers neither strategic EU R&I-system analysis nor measured innovation-state evidence nor a research study of funding, collaboration or transfer mechanisms.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Checked supplied link https://www.vinnova.se/en/p/blue4circ--planning-for-a-horizon-europe-proposal-on-circular-blue-bio-based-materials-from-regenerative-marine-systems-; used matching original publication from https://www.vinnova.se/en/p/blue4circ--planning-for-a-horizon-europe-proposal-on-circular-blue-bio-based-materials-from-regenerative-marine-systems-/."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source for BLUE4CIRC – Planning for a Horizon Europe proposal on circular blue bio-based materials from regenerative marine systems | Vinnova at https://www.vinnova.se/en/p/blue4circ--planning-for-a-horizon-europe-proposal-on-circular-blue-bio-based-materials-from-regenerative-marine-systems-/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.vinnova.se/en/p/blue4circ--planning-for-a-horizon-europe-proposal-on-circular-blue-bio-based-materials-from-regenerative-marine-systems-/",
+            "title": "Vinnova BLUE4CIRC planning-grant project description",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.vinnova.se/en/p/blue4circ--planning-for-a-horizon-europe-proposal-on-circular-blue-bio-based-materials-from-regenerative-marine-systems-/; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "A Routes 1/2/3 fail: a single project-funding listing offers neither strategic EU R&I-system analysis nor measured innovation-state evidence nor a research study of funding, collaboration or transfer mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:13Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/11/07/europe-needs-cold-war-like-deterrence-for-ai-warfare-poland-says": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "91597425",
+      "identity_hash": "1f903456d70044fb",
+      "reader_title": "Ministerial AI warfare deterrence comments",
+      "reader_more": "C gate failed: the item is a ministerial rhetorical security recommendation, not a documented new EU technology development, programme, regulation, research investment or infrastructure action; an EU R&I effect would be speculative.",
+      "deep_analysis": {
+        "work_kind": "political remarks news",
+        "research_question": "",
+        "main_finding": "The story reports Polish Deputy Prime Minister Krzysztof Gawkowski’s argument for Cold War-style AI cyber deterrence, without an enacted or formally proposed funded European R&I instrument.",
+        "method_or_basis": "Full Euronews 7 November 2026 report with speaker quotations and policy rhetoric.",
+        "qualification": "Policy advocacy alone does not show a new enacted European AI R&I programme or capability.",
+        "radar_relevance": "C gate failed: the item is a ministerial rhetorical security recommendation, not a documented new EU technology development, programme, regulation, research investment or infrastructure action; an EU R&I effect would be speculative.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened/checked original link https://www.euronews.com/2026/11/07/europe-needs-cold-war-like-deterrence-for-ai-warfare-poland-says; the verified matching source was directly available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/11/07/europe-needs-cold-war-like-deterrence-for-ai-warfare-poland-says",
+            "title": "Euronews — Polish minister calls for AI-warfare deterrence",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.euronews.com/2026/11/07/europe-needs-cold-war-like-deterrence-for-ai-warfare-poland-says; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SCOPE_NOT_MET",
+        "reason": "C gate failed: the item is a ministerial rhetorical security recommendation, not a documented new EU technology development, programme, regulation, research investment or infrastructure action; an EU R&I effect would be speculative."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:17Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:27ba8bd20343ce45": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "adaa11ec",
+      "identity_hash": "c94281c5c86c4483",
+      "reader_title": "Swedish essay on applying Moore’s Law-style roadmaps",
+      "reader_what": "An opinion essay proposes using the long-horizon semiconductor roadmapping tradition as an inspiration for Swedish energy/green-transition coordination.",
+      "reader_more": "Historical A Route 1 considered: strategic framing exists, but no independently substantiated finding on geopolitical R&I dependencies. Route 2 failed: no measured Swedish/EU research capacity, investment trend or outcome. Route 3 failed: this is a future-oriented policy essay, not a research study of the R&I system.",
+      "deep_analysis": {
+        "work_kind": "expert opinion essay",
+        "research_question": "",
+        "main_finding": "An opinion essay proposes using the long-horizon semiconductor roadmapping tradition as an inspiration for Swedish energy/green-transition coordination.",
+        "method_or_basis": "First-party Swedish engineering academy full essay, proposing national coordination by analogy with semiconductor roadmaps.",
+        "qualification": "An analogy to known roadmapping is not new proof that it will improve Swedish R&I-system outcomes.",
+        "radar_relevance": "Historical A Route 1 considered: strategic framing exists, but no independently substantiated finding on geopolitical R&I dependencies. Route 2 failed: no measured Swedish/EU research capacity, investment trend or outcome. Route 3 failed: this is a future-oriented policy essay, not a research study of the R&I system.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Historical job provides primary source material from Swedish academy, corroborated title and original essay page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.iva.se/en/Swedish-futures/Essays/moores-law-the-key-to-a-sustainable-sweden/",
+            "title": "Swedish Royal Academy of Engineering Sciences — Moore’s Law and Sweden essay",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.iva.se/en/Swedish-futures/Essays/moores-law-the-key-to-a-sustainable-sweden/; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "Historical A Route 1 considered: strategic framing exists, but no independently substantiated finding on geopolitical R&I dependencies. Route 2 failed: no measured Swedish/EU research capacity, investment trend or outcome. Route 3 failed: this is a future-oriented policy essay, not a research study of the R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:18Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7006a14c63116431": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "2ced5cb3",
+      "identity_hash": "f9e78ddc43dd3fdf",
+      "reader_title": "European competitiveness and investment policy conversation",
+      "reader_what": "The publication is an interview/dialogue about European investment, competitiveness and financial-market coordination, including general discussion of innovation and startups.",
+      "reader_more": "Historical A Routes 1/2/3 fail the substantive-evidence-product gate: it is commentary with no research design, original longitudinal measurement of European R&I systems or empirical evaluation of EU innovation finance mechanisms.",
+      "deep_analysis": {
+        "work_kind": "published policy interview/roundtable",
+        "research_question": "",
+        "main_finding": "The publication is an interview/dialogue about European investment, competitiveness and financial-market coordination, including general discussion of innovation and startups.",
+        "method_or_basis": "Matched 2026 Institut Jacques Delors PDF transcript from supplied source, interview format and content.",
+        "qualification": "The participant’s opinions are not independently verified evidence of EU R&I structural outcomes.",
+        "radar_relevance": "Historical A Routes 1/2/3 fail the substantive-evidence-product gate: it is commentary with no research design, original longitudinal measurement of European R&I systems or empirical evaluation of EU innovation finance mechanisms.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matched exact interview publication title and institutional PDF body; primary source exists but does not constitute an analytical study."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://institutdelors.eu/content/uploads/2026/06/TEMPLATE-BLOGPOST-PIERRAKAKIS-EN.pdf",
+            "title": "Institut Jacques Delors — Conversation with Kyriakos Pierrakakis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://institutdelors.eu/content/uploads/2026/06/TEMPLATE-BLOGPOST-PIERRAKAKIS-EN.pdf; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "Historical A Routes 1/2/3 fail the substantive-evidence-product gate: it is commentary with no research design, original longitudinal measurement of European R&I systems or empirical evaluation of EU innovation finance mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:18Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ceaa7b529397fb8c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "6958e148",
+      "identity_hash": "e911feaf7b87d9f0",
+      "reader_title": "Swedish visiting-researcher administrative approval process",
+      "reader_more": "Historical A Route 3 subject of researcher mobility is related, but this is an administrative instructions page, not a research product measuring talent or mobility mechanisms. Routes 1/2 offer no structural R&I evidence or comparative trajectory.",
+      "deep_analysis": {
+        "work_kind": "standing government administrative guidance",
+        "research_question": "",
+        "main_finding": "The Swedish Research Council page gives standing procedures for an employer or research principal to apply for approval to host visiting researchers.",
+        "method_or_basis": "First-party Swedish Research Council instructions and application eligibility requirements.",
+        "qualification": "Presence of a mobility-related rule does not turn instructions into research-system evidence.",
+        "radar_relevance": "Historical A Route 3 subject of researcher mobility is related, but this is an administrative instructions page, not a research product measuring talent or mobility mechanisms. Routes 1/2 offer no structural R&I evidence or comparative trajectory.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Historical source material matching Swedish Research Council page reviewed; no original R&I evaluation or published empirical findings."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.vr.se/english/mandates/international-work/approval-for-research-principles-to-receive-visiting-researchers.html",
+            "title": "Swedish Research Council — Approval to receive visiting researchers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.vr.se/english/mandates/international-work/approval-for-research-principles-to-receive-visiting-researchers.html; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "Historical A Route 3 subject of researcher mobility is related, but this is an administrative instructions page, not a research product measuring talent or mobility mechanisms. Routes 1/2 offer no structural R&I evidence or comparative trajectory."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:18Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0e0fc124e2af45b5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4d1b1b60",
+      "identity_hash": "10361cf9b27cb7ef",
+      "reader_title": "Springer chapter on EU welfare-policy integration, outside R&I scope",
+      "reader_what": "This actual Springer chapter analyses how social-science research about European welfare-policy integration is co-produced with political processes.",
+      "reader_more": "Historical A Routes 1/2: the chapter does not investigate research/innovation capacity, technology position or trajectories. Route 3: its research-policy interaction concerns EU welfare-policy scholarship, not R&I funding, researchers, technology transfer, research infrastructures or R&I governance. A keyword “research” is not enough.",
+      "deep_analysis": {
+        "work_kind": "academic European social-policy book chapter",
+        "research_question": "",
+        "main_finding": "This actual Springer chapter analyses how social-science research about European welfare-policy integration is co-produced with political processes.",
+        "method_or_basis": "Matching Springer chapter DOI, title, publication and original substantive abstract supplied; unrelated to the scanner’s R&I system focus.",
+        "qualification": "The chapter itself is genuine and substantively unrelated to R&I systems; this is a scope exclusion, not a publication-identity failure.",
+        "radar_relevance": "Historical A Routes 1/2: the chapter does not investigate research/innovation capacity, technology position or trajectories. Route 3: its research-policy interaction concerns EU welfare-policy scholarship, not R&I funding, researchers, technology transfer, research infrastructures or R&I governance. A keyword “research” is not enough.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Confirmed actual claimed Springer book chapter and assessed its original abstract; unlike A36, it is correctly matched but unrelated."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/chapter/10.1057/9781137514509_3",
+            "title": "Co-producing European Integration: Research, Policy, and Welfare Activation — Springer book chapter",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://link.springer.com/chapter/10.1057/9781137514509_3; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "Historical A Routes 1/2: the chapter does not investigate research/innovation capacity, technology position or trajectories. Route 3: its research-policy interaction concerns EU welfare-policy scholarship, not R&I funding, researchers, technology transfer, research infrastructures or R&I governance. A keyword “research” is not enough."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:19Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONlphSjYxOUVvU1ZCYjhDclZ3RXNKV1RfUzVGbXliVnZwVWVEN0F0VGg4ME1lZUtYMFdTeE1ISDg2Z1lXZHVfZ0xteUhfaXZUbUhRUlBxTF95dzJZbE5mVmtsdG5uc04yNHcwdUxOOF9EZU1NZDB5ckNTZ2xhMExjSXFsVlMzNjFOVWdULWh1WFN2M1dPV2dIOWxkbTZRbE4tdEZRZFJsNUNENllsT3NZ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b5103c4a",
+      "identity_hash": "532ebf4b04c7d1f8",
+      "reader_title": "UK universities advocate full future FP10 association",
+      "reader_more": "C gate failed: this is an advocacy statement on a pre-existing negotiation, without a new EU/UK agreement, proposed legal amendment, access rule, budget decision or programme shift in this report. Association discussions are relevant background but not a newly verified change.",
+      "deep_analysis": {
+        "work_kind": "higher-education policy interview news",
+        "research_question": "",
+        "main_finding": "Interview relays Universities UK International leader Jamie Arrowsmith’s preference for unrestricted UK participation in the future FP10 programme, while EU negotiations continue.",
+        "method_or_basis": "Science|Business original 5 November 2026 article with direct interview and existing FP10 negotiation context.",
+        "qualification": "Preference for association is not evidence that the EU granted unrestricted UK access; status remains under negotiation.",
+        "radar_relevance": "C gate failed: this is an advocacy statement on a pre-existing negotiation, without a new EU/UK agreement, proposed legal amendment, access rule, budget decision or programme shift in this report. Association discussions are relevant background but not a newly verified change.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied Google News RSS article traced to matching full Science|Business original; read interview and factual timeline."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source for Full FP10 association a win-win for UK and EU, says universities leader at https://sciencebusiness.net/news/universities/full-fp10-association-win-win-uk-and-eu-says-universities-leader."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/news/universities/full-fp10-association-win-win-uk-and-eu-says-universities-leader",
+            "title": "Science|Business — Full FP10 association win-win for UK and EU, universities leader says",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://sciencebusiness.net/news/universities/full-fp10-association-win-win-uk-and-eu-says-universities-leader; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SCOPE_NOT_MET",
+        "reason": "C gate failed: this is an advocacy statement on a pre-existing negotiation, without a new EU/UK agreement, proposed legal amendment, access rule, budget decision or programme shift in this report. Association discussions are relevant background but not a newly verified change."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:19Z",
+      "deep_scan_package_id": "worker-a-20261108T083658Z-be31b92a1062",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMipwFBVV95cUxONUtJQ05FYi1TTzhaWlRpN0lmSFIxdG42TnQ1dzhnRExMamJRMXVoVnR2VXIyczdoc0FLMy1hMlJyZU0xOGxLZlFvNndZcEhMLUFobXdxV25iUkJlTG93bDhBOFdFYUVROGlMMDB6QjM0d0tndU54YTRydFh2SlM5TXVPWXVVU0RndTRacVBZQ0txUkpFbExld19Ya0Vfd0gwbkNVeVFScw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "a67dd1b1",
+      "identity_hash": "ee3ce298c7c6a801",
+      "reader_title": "Reuters world-news podcast: unrelated headline mix",
+      "reader_what": "Reuters episode recap combines US AI-equity sentiment, European flight hoaxes and Paraguay political news.",
+      "reader_more": "C gate failed: no verifiable new EU research/innovation policy, capability, funding or technological development is reported; geographic Europe and AI keywords are unrelated.",
+      "deep_analysis": {
+        "work_kind": "multi-topic news podcast",
+        "research_question": "",
+        "main_finding": "Reuters episode recap combines US AI-equity sentiment, European flight hoaxes and Paraguay political news.",
+        "method_or_basis": "Reuters World News syndicated episode details and synopsis dated November 6, 2026.",
+        "qualification": "The podcast exists, but its juxtaposed topics do not establish a European R&I connection.",
+        "radar_relevance": "C gate failed: no verifiable new EU research/innovation policy, capability, funding or technological development is reported; geographic Europe and AI keywords are unrelated.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied Google News RSS link contained no substantive content; matched original Reuters World News episode title and date to syndicated official description."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source for PODCAST: Wall Street's AI reckoning, Europe's hoax bomb scares and Paraguay at https://podfollow.com/reuters-world-news/episode/4f866e7f52f0d3314c6cf3b3e87ab634933924ab/view."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://podfollow.com/reuters-world-news/episode/4f866e7f52f0d3314c6cf3b3e87ab634933924ab/view",
+            "title": "Reuters World News — Wall Street’s AI reckoning, Europe’s hoax bomb scares and Paraguay",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://podfollow.com/reuters-world-news/episode/4f866e7f52f0d3314c6cf3b3e87ab634933924ab/view; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SCOPE_NOT_MET",
+        "reason": "C gate failed: no verifiable new EU research/innovation policy, capability, funding or technological development is reported; geographic Europe and AI keywords are unrelated."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:19Z",
+      "deep_scan_package_id": "worker-b-20261108T083714Z-109297a1ead0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMipgFBVV95cUxPS0RKQ2VWLVF2RE1Ka3Z5VkdoRWkyU2trTmtWQVJ6OUVZZkdqSnpSS3lFYmdFczd5NXlfYkJkTm5rcmljRXdKSm4zYVNBYTE4WTAtT0h0T0xEUWF1SVNvekF0VDI5cldqZEFfMGt5bkdjYko4QjJHYXBCd29JRDhjRGFOWFVmYzktanZXVGttV0NlWXdadlRnQWl6TFJ1aFdsRUhQWVJ3?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "3a11f74b",
+      "identity_hash": "38124cd503475593",
+      "reader_title": "European equities fall amid AI-investment concerns",
+      "reader_what": "Reuters documents a one-day 1% STOXX 600 decline amid global stock-market sentiment about AI valuations and US politics.",
+      "reader_more": "C gate failed: market-price fluctuations and investor sentiment are not a new European R&I policy, research funding, infrastructure or technology-capability development.",
+      "deep_analysis": {
+        "work_kind": "financial-markets news",
+        "research_question": "",
+        "main_finding": "Reuters documents a one-day 1% STOXX 600 decline amid global stock-market sentiment about AI valuations and US politics.",
+        "method_or_basis": "Reuters original November 6 2026 stock market report with market closes and analyst comments.",
+        "qualification": "Market moves cannot be inferred to cause a change to EU R&I system capacity or funding.",
+        "radar_relevance": "C gate failed: market-price fluctuations and investor sentiment are not a new European R&I policy, research funding, infrastructure or technology-capability development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News RSS link yielded only headline; traced to and read Reuters original published 6 November 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source for European shares fall as global AI rout gathers pace at https://www.reuters.com/markets/europe/european-shares-set-fall-global-ai-rout-gathers-pace-2026-11-06/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.reuters.com/markets/europe/european-shares-set-fall-global-ai-rout-gathers-pace-2026-11-06/",
+            "title": "Reuters — Risk-off mood sweeps European stocks as AI concerns deepen",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.reuters.com/markets/europe/european-shares-set-fall-global-ai-rout-gathers-pace-2026-11-06/; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SCOPE_NOT_MET",
+        "reason": "C gate failed: market-price fluctuations and investor sentiment are not a new European R&I policy, research funding, infrastructure or technology-capability development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:19Z",
+      "deep_scan_package_id": "worker-b-20261108T083714Z-109297a1ead0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/11/07/brief-burst-of-intense-heat-could-give-hard-to-recycle-wind-turbine-blades-a-second-life": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "935f809b",
+      "identity_hash": "282a0100ba9506a7",
+      "reader_title": "Experimental wind-blade recycling has no verified EU R&I development",
+      "reader_more": "C gate failed: a foreign laboratory materials-recycling technique is presented as a possible solution for Europe’s future waste, not a documented change in European R&I capacity, programmes, investment or strategic industrial delivery.",
+      "deep_analysis": {
+        "work_kind": "technology science news",
+        "research_question": "",
+        "main_finding": "Article summarizes a Chinese Tsinghua University lab study using flash Joule heating to turn turbine blade waste into composite additives; experiments remain small-scale.",
+        "method_or_basis": "Euronews article 7 November 2026 and Chem Circularity study summarized by Chemical & Engineering News; laboratory batches reportedly around 10g.",
+        "qualification": "The laboratory-stage method is not evidence of EU deployment, financing or research-system impact.",
+        "radar_relevance": "C gate failed: a foreign laboratory materials-recycling technique is presented as a possible solution for Europe’s future waste, not a documented change in European R&I capacity, programmes, investment or strategic industrial delivery.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Read exact supplied Euronews report and cross-checked the named research with the original journal study described at https://cen.acs.org/environment/recycling/recycling-wind-turbine-blades-flash-joule-heating/104/web/2026/11."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/11/07/brief-burst-of-intense-heat-could-give-hard-to-recycle-wind-turbine-blades-a-second-life",
+            "title": "Euronews — Brief burst of intense heat could give wind-turbine blades a second life",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title and publication provenance to source https://www.euronews.com/2026/11/07/brief-burst-of-intense-heat-could-give-hard-to-recycle-wind-turbine-blades-a-second-life; assessed substantive contents instead of search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SCOPE_NOT_MET",
+        "reason": "C gate failed: a foreign laboratory materials-recycling technique is presented as a possible solution for Europe’s future waste, not a documented change in European R&I capacity, programmes, investment or strategic industrial delivery."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct underlying publication; no exact identity duplicate demonstrated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-08T09:23:19Z",
+      "deep_scan_package_id": "worker-b-20261108T083714Z-109297a1ead0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-11-07T11:15:13Z"
+  "claims_updated_at": "2026-11-08T09:23:20Z"
 }

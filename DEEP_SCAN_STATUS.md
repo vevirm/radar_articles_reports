@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3795** (Main **1911** + Historical **1884**)
-- Automatic queue still needing V2 verification: **76** (Main **34** + Historical **42**)
-- Currently assigned to workers: **76** (Main **34** + Historical **42**)
+- Authoritative V2 verified: **3810** (Main **1922** + Historical **1888**)
+- Automatic queue still needing V2 verification: **61** (Main **23** + Historical **38**)
+- Currently assigned to workers: **61** (Main **23** + Historical **38**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **45**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,26 +16,23 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261108T083658Z-be31b92a1062`
-- Assigned unresolved records: **36**
-  1. `link:https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/european-innovation-scoreboard-2026_en` — European Innovation Scoreboard 2026
-  2. `link:https://eic.ec.europa.eu/impact_en` — EIC Impact Report 2026
-  3. `link:https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Government_budget_allocations_for_R%26D_(GBARD)` — Eurostat government budget allocations for R&D (GBARD) 2025
-  4. `link:https://www.wipo.int/en/web/global-innovation-index/2026/index` — WIPO Global Innovation Index 2026
-  5. `link:https://www.institutmontaigne.org/en/press-release/implementing-draghi-report-moment-truth` — Implementing the Draghi Report: The Moment of Truth
-  6. `link:https://european-research-area.ec.europa.eu/index.php/era-monitoring-reports` — ERA Scoreboard 2025
-  7. `link:https://doi.org/10.1080/1540496x.2026.2754815` — Does Financial Slack Facilitate Disclosed Corporate Artificial Intelligence Adoption? Evidence from Chinese Listed Firms
-  8. `link:https://doi.org/10.1080/14767724.2026.2758677` — Will Europe be able to align and accelerate global cooperation in S&T to foster a new knowledge-based global order ?
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261108T093236Z-19d4de2cd833`
+- Assigned unresolved records: **24**
+  1. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPVjFqYThJU3psX2xvRUJVN3oxTk9RcDR1bExIcFVYY1JyVUlQanBqX2hQbHFXbV85ZnhHQVVuLW55aW5iZVJ1VWZ3UXhLY3N5MFF1UWh5NURUT3k1Z2NrcmIzOEVpZFQyLWp0R0hxdjFHejlrNzgzSW9ZSkRGUGcxS094ellTclhPbTY0X056YTFUQTBCUVRPWjd4M3BXTWNfSTFreWJPbTRHMENPWEUxSXl1azQ1MlRmREx1WkxkekxSRjhSbS1J?oc=5` — ERC president: 5% success rate ‘a wake-up call’ for EU — recovery attempt 2/3
+  2. `link:https://doi.org/10.1016/j.techfore.2026.124948` — From exponential extrapolation to regime-aware foresight: A Cognitive Scaling Framework for long-run AI progress — recovery attempt 3/3
+  3. `link:https://doi.org/10.1080/08911916.2026.2743824` — Beyond the European Chips Act: Mobilizing Public Banks to Solve Europe’s Semiconductor Supply Chain Paradox — recovery attempt 3/3
+  4. `link:https://eic.ec.europa.eu/eic-funding-opportunities/eic-funding-opportunities-2027_en` — EIC Work Programme 2027
+  5. `link:https://commission.europa.eu/strategy-and-policy/strategy-documents/commission-work-programme/commission-work-programme-2027_en` — Commission Work Programme 2027
+  6. `link:https://single-market-economy.ec.europa.eu/publications/proposal-regulation-public-contracts-and-concessions_en` — EU Public Procurement Act
+  7. `link:https://eic.ec.europa.eu/impact_en` — EIC Impact Report 2026
+  8. `link:https://www.wipo.int/en/web/global-innovation-index/2026/index` — WIPO Global Innovation Index 2026
+  - … plus 16 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261108T083714Z-109297a1ead0`
-- Assigned unresolved records: **5**
+- Current package: `worker-b-20261108T093249Z-45de908a35e0`
+- Assigned unresolved records: **2**
   1. `link:https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTUNndjVLeVhlcEE2X3Z3SmpoazQxQmlMQl9hTHkydHY1WUoxVXRBTVVBU24xdk1lc1pZYXI2aUFBeHJlbG9QWXhRVnQ3UWRQUlNBRVhGdWduZUM5dWhINVdSdXQySExqVkNTZEdKNURfdGhuMkZkbS1ySmQ3dmNCYm4wUTBIbmZFRlA0?oc=5` — EU budget battle paralyzes Brussels on AI chips, the Arctic and agriculture
-  2. `link:https://news.google.com/rss/articles/CBMipwFBVV95cUxONUtJQ05FYi1TTzhaWlRpN0lmSFIxdG42TnQ1dzhnRExMamJRMXVoVnR2VXIyczdoc0FLMy1hMlJyZU0xOGxLZlFvNndZcEhMLUFobXdxV25iUkJlTG93bDhBOFdFYUVROGlMMDB6QjM0d0tndU54YTRydFh2SlM5TXVPWXVVU0RndTRacVBZQ0txUkpFbExld19Ya0Vfd0gwbkNVeVFScw?oc=5` — PODCAST: Wall Street's AI reckoning, Europe's hoax bomb scares and Paraguay
-  3. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxPS0RKQ2VWLVF2RE1Ka3Z5VkdoRWkyU2trTmtWQVJ6OUVZZkdqSnpSS3lFYmdFczd5NXlfYkJkTm5rcmljRXdKSm4zYVNBYTE4WTAtT0h0T0xEUWF1SVNvekF0VDI5cldqZEFfMGt5bkdjYko4QjJHYXBCd29JRDhjRGFOWFVmYzktanZXVGttV0NlWXdadlRnQWl6TFJ1aFdsRUhQWVJ3?oc=5` — European shares fall as global AI rout gathers pace
-  4. `link:https://www.euronews.com/2026/11/07/brief-burst-of-intense-heat-could-give-hard-to-recycle-wind-turbine-blades-a-second-life` — Why scientists are heating old wind turbine blades to 2,000°C
-  5. `historical:id:5d0af4e6f227ccec` — Reinforcing the attractiveness of Europe’s Eastern Border Regions
+  2. `historical:id:5d0af4e6f227ccec` — Reinforcing the attractiveness of Europe’s Eastern Border Regions
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
