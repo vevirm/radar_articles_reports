@@ -1,8 +1,79 @@
 # Global R&I Deep Scan — verified findings
 
-Imported: 2026-11-09T21:34:55.562941+00:00. **50 verified KEEP** findings, **24 REVIEW**, **10 DROP**.
+Imported: 2026-11-09T21:54:58.138267+00:00. **54 verified KEEP** findings, **24 REVIEW**, **10 DROP**.
 
 A KEEP records a source-checked reviewer assessment; the GitHub importer validates evidence structure but does not itself browse or certify truth.
+
+## Tech Sovereignty and the EU’s Chips Act 2.0 in Practice
+
+**South Korea · Technology leadership and industrial capacity** | 2026-10-15 | confidence high
+
+**Verified finding:** The EU–South Korea semiconductor relationship has funded R&D but limited demonstrated commercial integration. Four named joint projects (ENERGIZE, NEHIL, HAETAE and ViTFOX) received roughly €12 million combined EU/Korean public support, focusing on heterogeneous integration and neuromorphic/AI hardware. Interface’s October 2026 study recommends targeted joint value-chain mapping, industry dialogue and commercialisation-oriented R&D rather than presuming a Korean leading-edge fab investment in Europe is the next step.
+
+**Evidence:** [Tech Sovereignty and the EU’s Chips Act 2.0 in Practice: A Case Study on Commercial Cooperation Between the Republic of Korea and the EU (Julia Christina Hess, Interface)](https://www.interface-eu.org/publications/download/eu-chips-act-cooperation) — Interface full PDF pp. 3–4 Executive Summary; pp. 21–27 State of Play: ROK-EU Cooperation (especially printed p. 27, four joint projects and €12 million); pp. 28–38 Three Avenues and Strategic Building Blocks; cover dated 15 October 2026..
+
+**Independent check:** A European Commission announcement dated 17 July 2024 independently names all four semiconductor projects and the approximately €12 million split (EU and NRF). ENERGIZE’s consortium website independently documents Korean and European research partners, material-to-neuromorphic-circuit work, and its grant numbers, showing at least one funded consortium has operational activity. Neither source verifies future commercial spin-offs, major manufacturing investments or the study’s preferred policy options. [1](https://digital-strategy.ec.europa.eu/en/news/eu-republic-korea-digital-partnership-joint-eurepublic-korea-chips-projects-announced) [2](https://energize-project.eu/)
+
+**Why global R&I matters:** Korea’s established industrial memory-chip base and EU strengths in research, equipment and materials create complementary capabilities; co-funded pre-commercial research is a concrete mechanism for cross-border process, device and talent exchange. Moving into scalable industrial partnerships would require business participation, supply-chain mapping, coordinated incentives and commercial exploitation beyond research awards.
+
+**Main Radar comparison (extends_main_radar):** Extends the exact Strand A main-Radar entry rather than treating it as missing: the prior summary already states Interface’s recommendation to map EU–Korean complementarities and expand joint R&D before big investments. This review adds verifiable project names, grant amount, research foci and the gap between established R&D cooperation and unproven large-scale commercial investment.
+
+**Limitations:** The 42-page policy paper is a scenario-oriented author analysis, not a causal impact evaluation or an audit of achieved fabrication yields. Four announced projects have low technology-readiness levels; their existence/funding does not guarantee commercially viable AI chips. The €12 million refers to grants covering three years, not annual spending; EU Chips Act 2.0 remains a proposal in the paper’s framing. Recommendations, forecasts and possible Korean fab decisions are not presented as accomplished facts.
+
+- Existing main Radar A: [Tech Sovereignty and the EU’s Chips Act 2.0 in Practice](https://www.interface-eu.org/publications/download/eu-chips-act-cooperation)
+
+## EU faces mixed prospects in tech sovereignty, new policy brief finds
+
+**China · Technology leadership and industrial capacity** | 2026-04-17 | confidence high
+
+**Verified finding:** A 2026 European Commission cross-domain analysis identifies an asymmetric China–EU technology relationship: Chinese firms dominate industrial energy-harvesting technologies while the EU retains scientific/technological capability but increasingly imports solar and related goods. The report also warns that China remains import-dependent in broad micro/nanoelectronics categories; Chinese strength is therefore sector-specific, not universal high-tech self-sufficiency.
+
+**Evidence:** [New challenges of technological sovereignty — Europe’s changing position in the global R&I system (Henning Kroll, European Commission, 2026)](https://op.europa.eu/en/publication-detail/-/publication/4d26a23f-3acd-11f1-814f-01aa75ed71a1/language-en) — Full 37-page EU Commission report at https://euagenda.eu/publications/download/750663; printed pp. 3 (executive summary), 11–13 (patent capability), 15–22 (UN COMTRADE trade analysis), especially printed pp. 16–18 and Figures 12, 15, 22; official EU catalogue DOI 10.2777/7894124..
+
+**Independent check:** The International Energy Agency independently estimates China’s share of clean-energy manufacturing capacities at roughly 85% for solar and 80% for lithium-ion battery chains, including 95% of PV-wafer capacity. Its Global EV Outlook 2026 reports China held more than 80% of global battery manufacturing capacity at end-2025. This confirms concrete energy-industry concentration, not the entirety of the Commission report’s bibliometric or patent-network comparisons. [1](https://www.iea.org/reports/energy-technology-perspectives-2026/supply-chain-risks-and-industrial-competitiveness) [2](https://www.iea.org/reports/global-ev-outlook-2026/electric-vehicle-batteries)
+
+**Why global R&I matters:** Large process/manufacturing scale, vertically integrated supply chains and domestically controlled energy-technology patents can translate R&D and process learning into industrial advantages and overseas dependencies. Trade, patent ownership and scientific centrality can move differently, so an EU capacity strategy must distinguish scientific research strength from commercial production bottlenecks and technology control.
+
+**Main Radar comparison (confirms_main_radar):** Confirms the exact existing main-Radar Strand C entry describing relative EU strengths in advanced manufacturing/robotics and exposure to China-dominated energy technologies, while adding field-specific qualifications from the underlying report and IEA supply-chain estimates. The source does NOT establish China is self-sufficient in advanced microchips.
+
+**Limitations:** This is a comparative EU-focused publication, not a China-only national performance survey. Patent/publication and trade classifications cover different years (e.g. international co-patents 2020–2022 and trade through 2023); a relative goods balance is not proof of capability for the most advanced chips. The ERA news URL was unavailable at check time; the full 37-page underlying European Commission study was examined via a mirror and its bibliographic identity checked against the official EU record.
+
+- Existing main Radar C: [EU faces mixed prospects in tech sovereignty, new policy brief finds](https://era.gv.at/news-items/eu-faces-mixed-prospects-in-tech-sovereignty-new-policy-brief-finds/)
+
+## The EU Semiconductor Geopolitical Risk Survey: Outlook for 2026–2031
+
+**Taiwan · Technology leadership and industrial capacity** | 2026-07-01 | confidence high
+
+**Verified finding:** A 2026 survey of 55 European semiconductor-sector and policy respondents ranked a Taiwan Strait conflict the most severe single perceived threat to semiconductor supply over 2026–2031 (mean severity 8.20/10). Export controls on manufacturing materials also scored highly (7.96/10 for supply), while workforce, capital and energy costs were major EU-competitiveness concerns. These are expert judgements of combined threat, not observed conflict probabilities.
+
+**Evidence:** [The EU Semiconductor Geopolitical Risk Survey: Outlook for 2026–2031 (Joris Teer and Pierre Sel, Institut Montaigne/CHIPDIPLO)](https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf) — PDF pp. 16–19 survey design and sampling (55 of 237 invited, 23.2% response rate); pp. 20–24 supply and competitiveness risk findings; p. 27–28 limitations; Annex 1 printed p. 34–35 tabulated subgroups: 8.20 for Taiwan Strait conflict on semiconductor supply and 7.96 for export controls on semiconductor materials..
+
+**Independent check:** Independent Istituto Affari Internazionali research (May 2026) also maps EU–Taiwan supply-chain complementarity and Taiwan Strait/shipping chokepoint vulnerabilities; a 2025 European Court of Auditors report separately flags Taiwan concentration, export controls and EU chip-supply risks. These corroborate the structural exposure, not the survey’s exact subjective severity rankings, which are internal to the 55-respondent panel. [1](https://www.iai.it/en/publications/c03/stress-testing-eu-taiwan-semiconductor-supply-chains) [2](https://www.eca.europa.eu/ECAPublications/SR-2025-12/SR-2025-12_EN.pdf)
+
+**Why global R&I matters:** Concentration of advanced semiconductor manufacturing in Taiwan means disruptions could propagate through EU medical, industrial, AI, computing and defence product chains. Export restrictions on critical process inputs and bottlenecks in capital, energy and specialist labour can independently disrupt research-to-fab scaling. The method offers a structured stress-test agenda for EU R&I infrastructure and industrial resilience planning rather than a forecast.
+
+**Main Radar comparison (confirms_main_radar):** Confirms and deepens the exact existing Strand A main-Radar survey item: it verifies the sample, risks, distinct 0–10 supply/competitiveness dimensions and specific Taiwan/materials scores, while corroborating the structural chokepoint concern with separate IAI and European Court of Auditors work. No new Taiwan production achievement is inferred from European experts’ risk perceptions.
+
+**Limitations:** Expert judgement convenience panel: 55/237 invited responded (23.2%); not a representative probability sample. Threat scores blend probability and impact without separately eliciting them, as the authors themselves acknowledge, so 8.20 is NOT an 82% chance of war. The authors note missing IP-theft risk and a limited preselected list of 20. July 2026 has no confirmed day; the normalized first-of-month ISO date is a placeholder.
+
+- Existing main Radar A: [The EU Semiconductor Geopolitical Risk Survey: Outlook for 2026–2031](https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf)
+
+## Fundamental Quantum Science Program
+
+**Japan · Technology leadership and industrial capacity** | 2026-08-06 | confidence medium
+
+**Verified finding:** RIKEN operates an interdisciplinary Fundamental Quantum Science Program linking basic physics/chemistry, mathematics, quantum information and nonequilibrium science. Operational traces go beyond an aspirational programme page: Harvard hosted the second HQI–FQSP quantum-science workshop on 2–3 October 2025, and a Japanese national recruitment registry carried an August 2026 notice for a new programme-associated high-energy QCD research team.
+
+**Evidence:** [RIKEN TRIP Headquarters — Fundamental Quantum Science Program (FQSP)](https://www.riken.jp/en/research/labs/trip/fqsp/) — RIKEN page paragraphs headed TRIP Headquarters Fundamental Quantum Science Program, Director, Organization and core measures; JREC-IN post D126080473, lines on newly established High-Energy QCD Theory Research Team; Harvard HQI-FQSP workshop homepage, October 2–3, 2025..
+
+**Independent check:** The Harvard-hosted October 2025 FQSP joint workshop independently corroborates active international research exchange and names Harvard and RIKEN organisers. The JST-run JREC-IN public recruitment registry independently confirms a dated programme-linked research-group expansion. Neither establishes a quantified national quantum-technology performance improvement or commercial output. [1](https://hqifqsp.hsites.harvard.edu/) [2](https://jrecin.jst.go.jp/seek/SeekJorDetail?id=D126080473)
+
+**Why global R&I matters:** The approach is institutional: long-horizon research spanning quantum information, many-body/nonequilibrium physics and mathematical foundations, backed by specialist-team recruitment and repeated international workshops. Such cross-field human-capital and network building can generate basic-science capabilities that later underpin materials, sensors or computation, but those downstream commercial impacts are not yet demonstrated.
+
+**Main Radar comparison (not_in_main_radar):** No matching entry is identified in the supplied main Radar links. This adds a Japan-specific institutional mechanism: foundational quantum research and international talent exchange operating alongside Japan’s more application-oriented quantum computing infrastructure. It does not imply the EU has no comparable basic-science institutes.
+
+**Limitations:** Undated official programme description; the ISO date tracks a different, explicitly identified recruitment source. Harvard provides collaboration evidence, not an independent programme evaluation. Research publications authored by programme members cannot establish causation or national-level technology leadership. The QCD team notice describes a planned organisational start rather than independently audited staff levels.
+
 
 ## RIKEN Program for Drug Discovery and Medical Technology Platforms (DMP)
 

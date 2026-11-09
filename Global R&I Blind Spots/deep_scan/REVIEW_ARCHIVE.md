@@ -2,6 +2,42 @@
 
 All reviewed package items are retained here; only KEEP appears in VERIFIED_FINDINGS.md.
 
+## Tech Sovereignty and the EU’s Chips Act 2.0 in Practice
+
+**KEEP** — South Korea / Technology leadership and industrial capacity
+Package `gri-35d309abe75832ccd7a03414`; 2026-11-09T21:54:58.138267+00:00.
+
+Source: https://www.interface-eu.org/publications/download/eu-chips-act-cooperation
+
+The EU–South Korea semiconductor relationship has funded R&D but limited demonstrated commercial integration. Four named joint projects (ENERGIZE, NEHIL, HAETAE and ViTFOX) received roughly €12 million combined EU/Korean public support, focusing on heterogeneous integration and neuromorphic/AI hardware. Interface’s October 2026 study recommends targeted joint value-chain mapping, industry dialogue and commercialisation-oriented R&D rather than presuming a Korean leading-edge fab investment in Europe is the next step.
+
+## EU faces mixed prospects in tech sovereignty, new policy brief finds
+
+**KEEP** — China / Technology leadership and industrial capacity
+Package `gri-35d309abe75832ccd7a03414`; 2026-11-09T21:54:58.138267+00:00.
+
+Source: https://era.gv.at/news-items/eu-faces-mixed-prospects-in-tech-sovereignty-new-policy-brief-finds/
+
+A 2026 European Commission cross-domain analysis identifies an asymmetric China–EU technology relationship: Chinese firms dominate industrial energy-harvesting technologies while the EU retains scientific/technological capability but increasingly imports solar and related goods. The report also warns that China remains import-dependent in broad micro/nanoelectronics categories; Chinese strength is therefore sector-specific, not universal high-tech self-sufficiency.
+
+## The EU Semiconductor Geopolitical Risk Survey: Outlook for 2026–2031
+
+**KEEP** — Taiwan / Technology leadership and industrial capacity
+Package `gri-35d309abe75832ccd7a03414`; 2026-11-09T21:54:58.138267+00:00.
+
+Source: https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf
+
+A 2026 survey of 55 European semiconductor-sector and policy respondents ranked a Taiwan Strait conflict the most severe single perceived threat to semiconductor supply over 2026–2031 (mean severity 8.20/10). Export controls on manufacturing materials also scored highly (7.96/10 for supply), while workforce, capital and energy costs were major EU-competitiveness concerns. These are expert judgements of combined threat, not observed conflict probabilities.
+
+## Fundamental Quantum Science Program
+
+**KEEP** — Japan / Technology leadership and industrial capacity
+Package `gri-35d309abe75832ccd7a03414`; 2026-11-09T21:54:58.138267+00:00.
+
+Source: https://www.riken.jp/en/research/labs/trip/fqsp/
+
+RIKEN operates an interdisciplinary Fundamental Quantum Science Program linking basic physics/chemistry, mathematics, quantum information and nonequilibrium science. Operational traces go beyond an aspirational programme page: Harvard hosted the second HQI–FQSP quantum-science workshop on 2–3 October 2025, and a Japanese national recruitment registry carried an August 2026 notice for a new programme-associated high-energy QCD research team.
+
 ## RIKEN Program for Drug Discovery and Medical Technology Platforms (DMP)
 
 **KEEP** — Japan / Health, biotechnology and life sciences
