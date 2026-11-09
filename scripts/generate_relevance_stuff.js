@@ -10,6 +10,7 @@ const output=process.argv[3]||path.join(root,'Relevance Stuff','relevance_stuff.
 const data=JSON.parse(fs.readFileSync(input,'utf8'));
 const verified=Array.isArray(data.verified)?data.verified:[];
 const pending=Array.isArray(data.pending)?data.pending:[];
+const regionalLeads=Array.isArray(data.regional_leads)?data.regional_leads:[];
 const awaiting=pending.filter(r=>r.workflow_state==='Deep Scan not complete');
 const admissionReview=pending.filter(r=>r.workflow_state!=='Deep Scan not complete');
 const headers=['Relevance score','Title','Date','Source','Source location','Strand','Countries / subregions','Geographic group','Matched emerging issues','Stakeholders','Why matched','What evidence says','Why it matters','Admission','Workflow stage','Deep Scan status','Deep Scan checked at','Deep Scan package','Authors','Original source URL'];
@@ -26,20 +27,24 @@ for(const [type,names] of Object.entries(data.catalogue||{})){
   }
 }
 const notes=[
-  ['Purpose','Relevance-only evidence subset for the specified country/region, emerging-issue and stakeholder foresight priorities.'],
+  ['Purpose','Existing Radar issue evidence traced through single-region current and possible-future publications dated 2025-01-01 onward, with one-hit verified backfill.'],
   ['Created at (UTC)',String(data.generated_at||'')],
   ['Verified / retained rows',verified.length],
   ['Admission-review rows (Deep Scan completed)',admissionReview.length],
   ['Awaiting Deep Scan / source recovery rows',awaiting.length],
   ['Verified rule','Deep Scan work status=verified + authoritative reader identity verification + final admission KEEP.'],
   ['Admission review rule','Deep Scan identity verified, but final Admission decision is REVIEW. Requires human admission decision, not another normal Deep Scan package.'],
+  ['Latest regional discovery leads',regionalLeads.length],
   ['Awaiting Deep Scan rule','Deep Scan not complete; items may already be assigned to existing packages or held for hands-on verification. Check DEEP_SCAN_STATUS.md before creating jobs.'],
   ['Prior workbook correction','The earlier 125-review export was invalid: lowercasing case-sensitive Deep Scan URL keys hid stored KEEP and DROP decisions. Exact-key joins restore those decisions.'],
-  ['Source and scope','Main Radar A/B/C (including inactive), Historical, and all stored Deep Scan/Reader decisions. Original provenance is shown per row; dropped/unverifiable/duplicate decisions are excluded.'],
+  ['Source and scope','Only works published since 2025-01-01 from Main Radar A/B/C (including inactive) and stored Deep Scan/Reader decisions. The historical archive is not searched. Dropped/unverifiable/duplicate decisions are excluded.'],
   ['Relevance rule','Named emerging issue or substantive country/region R&I-policy focus in original title or leading Reader evidence. Stakeholder names alone never qualify.'],
   ['Score rule','A relevance-sorting signal, NOT an evidence-quality score or policy forecast.'],
   ['Normal Radar output','Focused discovery candidates are sent through the existing priority-candidate adapter and all ordinary source, A/B/C, duplicate and admission gates.'],
-  ['Backfill','No internet calls or new Deep Scan. Examines existing stored evidence from all four source pools.'],
+  ['Regional leads','DOI-bearing indexed discovery leads are separately displayed for inspection. A lead is NOT an admitted, source-verified, or Deep-Scan-verified Radar record.'],
+  ['EU connection','Each regional lead matches a thematic issue already evidenced by active Main Radar results, so its own publication does not need to mention Europe. Admission still requires ordinary Radar EU relevance and quality checks.'],
+  ['Regional balance','Non-EU/UK leads are limited to 40% of each discovery batch capacity, with an additional cap based on available EU/UK leads.'],
+  ['Backfill','No internet calls or new Deep Scan. Examines existing Main Radar and Deep Scan/Reader evidence dated 2025-01-01 onward.'],
   ['Limit','Keyword matching of titles and existing reader evidence can miss indirect references and can include some imperfect matches. Read original linked source before interpretation.'],
 ];
 const stats=Object.entries(data.statistics||{}).sort((a,b)=>a[0].localeCompare(b[0]));
@@ -61,6 +66,14 @@ const diagnostics=[
   ['',''],
   ...gaps.map(([,place,value])=>['Zero coverage: '+place,value]),
 ];
+const regionalHeaders=['Match score','Existing Radar issue/topic','Country / region','World area','Time perspective','Publication','Publication date','Publishing venue','Work type','Radar check status','DOI','Source URL','Relevance connection / review note'];
+const regionalRows=regionalLeads.map(r=>[
+  Number(r.focus_score||0), String(r.focus_issue||''), String(r.focus_region||''),
+  String(r.focus_group||''), String(r.temporal_lens||''), String(r.title||''),
+  String(r.date||''), String(r.source||''), String(r.publication_type||''),
+  String(r.radar_check_status||'indexed_lead_not_verified'), String(r.doi||''),
+  String(r.url||''), String(r.curator_note||'')
+]);
 const specs=[
   ['Verified and retained',headers,toRows(verified),widths],
   ['Admission review',headers,toRows(admissionReview),widths],
@@ -68,6 +81,7 @@ const specs=[
   ['Focus coverage',['Dimension','Requested country / issue / stakeholder','Verified','Admission review','Awaiting Deep Scan'],coverage,[26,55,16,18,20]],
   ['Read me',['Field','Notes'],notes,[26,110]],
   ['Coverage audit',['Metric','Count / value'],diagnostics,[56,25]],
+  ['Regional publication leads',regionalHeaders,regionalRows,[14,36,24,25,32,59,16,37,20,27,34,56,89]],
 ];
 const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const sheetType='application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml';
