@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-11-08T09:23:20Z",
+  "generated_at": "2026-11-09T07:08:21Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -319191,8 +319191,2631 @@
       "deep_scan_package_id": "worker-b-20261108T083714Z-109297a1ead0",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.belfercenter.org/research-analysis/eu-tech-sovereignty-package-policy-brief": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "20e6d6bb",
+      "identity_hash": "034e2eb272758bd6",
+      "reader_title": "EU Tech Sovereignty brief identifies policy dependencies",
+      "reader_what": "Belfer analysis assesses proposed EU sovereignty and semiconductor policy against strategic technological dependencies.",
+      "reader_why": "It identifies procurement and coordinated industrial support as mechanisms shaping EU technological autonomy.",
+      "reader_more": "The brief studies the EU technology sovereignty package and weaknesses in European cloud and semiconductor capacity. It advocates coordinated procurement and industrial measures as ways to address dependencies. Its prescriptions are proposals rather than proven results.",
+      "deep_analysis": {
+        "work_kind": "policy research brief",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "Belfer analysis assesses proposed EU sovereignty and semiconductor policy against strategic technological dependencies.",
+        "method_or_basis": "Policy brief evaluates proposed European cloud, open-source and Chips Act measures against existing capability gaps.",
+        "qualification": "Recommendations and policy scenarios are not implemented rules or observed effects.",
+        "radar_relevance": "A route 1: original European strategic-technology policy analysis links industrial capacity, procurement and foreign dependencies.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://www.belfercenter.org/research-analysis/eu-tech-sovereignty-package-policy-brief"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://www.belfercenter.org/sites/default/files/2026-07/Belfer_EU%20Tech%20Sovereignty_1.2.pdf",
+            "title": "EU Tech Sovereignty Package Policy Brief",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect policy research brief."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: original European strategic-technology policy analysis links industrial capacity, procurement and foreign dependencies."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:09Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Filippo Gualtiero Blancato",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-07-06",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Recommendations and policy scenarios are not implemented rules or observed effects.",
+          "text": "Belfer analysis assesses proposed EU sovereignty and semiconductor policy against strategic technological dependencies.",
+          "confidence": "high",
+          "record_key": "link:https://www.belfercenter.org/research-analysis/eu-tech-sovereignty-package-policy-brief",
+          "merit": 66,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:034e2eb272758bd6:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.bertelsmann-stiftung.de/fileadmin/files/Projekte/eupinions/ST-EZ_PolicyBrief_Ctrl_Alt_Europe_2026.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "59d89b7c",
+      "identity_hash": "66d7e609d2a7de85",
+      "reader_title": "Europeans express demand for homegrown digital alternatives",
+      "reader_what": "A Bertelsmann/eupinions survey finds broad public support for European digital alternatives despite uneven understanding of sovereignty.",
+      "reader_why": "Support for European alternatives could inform digital-market and procurement policy but does not establish realized demand.",
+      "reader_more": "The 2026 eupinions brief analyzes public views of European alternatives to US and other foreign technology providers. Respondents express substantial support for homegrown options, although familiarity with the sovereignty concept varies. Stated preferences do not establish purchasing behavior or technological independence.",
+      "deep_analysis": {
+        "work_kind": "European policy-opinion survey brief",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "A Bertelsmann/eupinions survey finds broad public support for European digital alternatives despite uneven understanding of sovereignty.",
+        "method_or_basis": "Original November 2026 policy brief by Martin Hullin and Daniela Schmidt reports European public-opinion survey percentages.",
+        "qualification": "Self-reported attitudes and hypothetical switching preferences are not proof of actual adoption or European technical capability.",
+        "radar_relevance": "A route 2: survey provides Europe-specific evidence about demand for sovereign technology, a relevant strategic ecosystem condition.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://www.bertelsmann-stiftung.de/fileadmin/files/Projekte/eupinions/ST-EZ_PolicyBrief_Ctrl_Alt_Europe_2026.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/Projekte/eupinions/ST-EZ_PolicyBrief_Ctrl_Alt_Europe_2026.pdf",
+            "title": "CTRL + ALT + Europe?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect European policy-opinion survey brief."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 2: survey provides Europe-specific evidence about demand for sovereign technology, a relevant strategic ecosystem condition."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:09Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Martin Hullin and Daniela Schmidt",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-11-02",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Self-reported attitudes and hypothetical switching preferences are not proof of actual adoption or European technical capability.",
+          "text": "A Bertelsmann/eupinions survey finds broad public support for European digital alternatives despite uneven understanding of sovereignty.",
+          "confidence": "high",
+          "record_key": "link:https://www.bertelsmann-stiftung.de/fileadmin/files/Projekte/eupinions/ST-EZ_PolicyBrief_Ctrl_Alt_Europe_2026.pdf",
+          "merit": 66,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:66d7e609d2a7de85:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1080/13511610.2026.2676831": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "dcd702e8",
+      "identity_hash": "3165ca67696bd73d",
+      "reader_title": "Innovation procurement correlates with European firms’ innovation outcomes",
+      "reader_what": "A 29-country firm study links innovation-oriented procurement with process innovation and innovative product sales.",
+      "reader_why": "Procurement can shape whether innovation is developed and commercialized in European firms.",
+      "reader_more": "The study compares public procurement for innovation and other demand-side policies using European firm data. Procurement exposure is positively associated with process innovation and sales of innovative products. The study offers policy evidence, not a randomized demonstration of causality.",
+      "deep_analysis": {
+        "work_kind": "empirical innovation-policy article",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "A 29-country firm study links innovation-oriented procurement with process innovation and innovative product sales.",
+        "method_or_basis": "Empirical study of about 1,911 European firms compares public procurement and export-support measures with firm innovation outcomes.",
+        "qualification": "Associations do not independently establish that procurement caused the reported outcomes.",
+        "radar_relevance": "A route 3: direct European R&I policy evidence on demand-side instruments and firm innovation mechanisms.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://doi.org/10.1080/13511610.2026.2676831"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://www.tandfonline.com/doi/full/10.1080/13511610.2026.2676831; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/13511610.2026.2676831",
+            "title": "Demand-side policies under scrutiny: triggering process innovations and innovative sales of European firms",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect empirical innovation-policy article."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 3: direct European R&I policy evidence on demand-side instruments and firm innovation mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:10Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Authors of the European demand-side policy study",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-05-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Associations do not independently establish that procurement caused the reported outcomes.",
+          "text": "A 29-country firm study links innovation-oriented procurement with process innovation and innovative product sales.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1080/13511610.2026.2676831",
+          "merit": 74,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3165ca67696bd73d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.48550/arxiv.2609.39198": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "0ccdb4c2",
+      "identity_hash": "ec4fad6c3ec741c1",
+      "reader_title": "Robotics manipulation algorithm is not transferable foresight",
+      "reader_what": "DSDyn-VLA describes real-time robotic manipulation, motion perception, predictive states and online correction.",
+      "reader_more": "The arXiv paper presents motion-sensitive perception, short-term future-state modeling and feedback correction for robot manipulation. Its performance claims concern robotic operation rather than analytical foresight. The B strand requires methodological usefulness for futures or forward-looking technology intelligence, which the paper does not establish.",
+      "deep_analysis": {
+        "work_kind": "robotics algorithm paper",
+        "research_question": "What does the verified work establish about the transferable foresight method?",
+        "main_finding": "DSDyn-VLA describes real-time robotic manipulation, motion perception, predictive states and online correction.",
+        "method_or_basis": "Matching arXiv paper presents an embodied AI control framework evaluated for robotic tasks.",
+        "qualification": "The term future awareness means short-horizon robot-state anticipation, not futures or technology-intelligence research.",
+        "radar_relevance": "B methodological route fails: an operational robot-control algorithm is not a foresight, horizon-scanning or R&I-intelligence method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://doi.org/10.48550/arxiv.2609.39198"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://arxiv.org/abs/2609.39198",
+            "title": "DSDyn-VLA: A Dual-Stream Dynamic Manipulation Framework with Motion Perception, Future Awareness, and Realtime Correction",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect robotics algorithm paper."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "NOT_IN_RADAR_SCOPE",
+        "reason": "Verified robotics research improves closed-loop manipulation control; its prediction task is real-time action control, not a transferable futures/foresight/R&I analytic technique."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:10Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMid0FVX3lxTE5MZU1PZkxBWV8wUnRPTkc1b3htUzBXY3pYVnMwN1pDSDhKcS1oU1RybUVfNnBLYXQ3b1ZqdFV5OTJTQTZrSFZZbnRtbjZsVTF3dEFDcnVzZGdfQzdtTC1UM0NUY205VUdzTHhyOXpWUWl4Y2JIRnZN?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "73aa98c3",
+      "identity_hash": "9fc4be5d0099068c",
+      "reader_title": "European Chips Act overview has no distinct new action",
+      "reader_what": "The Commission page describes the Chips Act and subsequent semiconductor policy developments.",
+      "reader_more": "This official page explains the European Chips Act and existing semiconductor support instruments. It is a useful reference for European research and industrial capacity. Its refresh or recirculation does not independently constitute a new event for the changes strand.",
+      "deep_analysis": {
+        "work_kind": "evergreen official policy overview",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "The Commission page describes the Chips Act and subsequent semiconductor policy developments.",
+        "method_or_basis": "Official Digital Strategy policy overview consolidates existing EU chip initiatives and updates.",
+        "qualification": "A recent page update is not itself a new legislative, funding or capability decision.",
+        "radar_relevance": "C change route fails: evergreen official policy overview summarizes existing actions rather than documenting a separate dateable change.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://news.google.com/rss/articles/CBMid0FVX3lxTE5MZU1PZkxBWV8wUnRPTkc1b3htUzBXY3pYVnMwN1pDSDhKcS1oU1RybUVfNnBLYXQ3b1ZqdFV5OTJTQTZrSFZZbnRtbjZsVTF3dEFDcnVzZGdfQzdtTC1UM0NUY205VUdzTHhyOXpWUWl4Y2JIRnZN?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://digital-strategy.ec.europa.eu/en/policies/european-chips-act; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/european-chips-act",
+            "title": "European Chips Act – Shaping Europe’s digital future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect evergreen official policy overview."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "NOT_IN_RADAR_SCOPE",
+        "reason": "EU R&I connection is strong, but the retrieved official overview is a standing summary of the 2023 Chips Act and other actions, not its own new development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:10Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMi8AFBVV95cUxPQ0tzY3lYOHJrMEQ5ZjlvME5wMHFDN0h2MVQzenMtaTluV2V4dGZwZGRHRURhZVVKUjF5dDJra2dIODRfckY5Q2tGcEFkRWxTMUFrSFVyZXZEQm00dVZmY3FDN1BuZDBHZGo0cF9La3h3YnhtazkzMDNrTWdXRE9pOTFfYmhLSmN3SWY2U1VqUDltVS1vQTBYSXgwaV9vWFZvVXVVZjVVU25kd3I5aTRERF91RlBQX20wZzRUM3BpcWlCZ1pyUUJnM1loRldLeUJlTW5xTHNmVGNHN0dybVhmeWNMdFVFaTdQbzI2Z3ZfbGM?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "164342ec",
+      "identity_hash": "3160b84ba1198e4e",
+      "reader_title": "EU farm safety project lacks systemic R&I change",
+      "reader_what": "A Commission project feature describes measures to reduce safety risks among agricultural workers.",
+      "reader_more": "The article describes an applied project identifying agricultural workplace hazards and recommendations to make farming safer. The existence of an EU research grant is not enough to make this a European R&I change. No new system-level decision or strategic capability action is reported.",
+      "deep_analysis": {
+        "work_kind": "EU-funded project success-story feature",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "A Commission project feature describes measures to reduce safety risks among agricultural workers.",
+        "method_or_basis": "European Commission project success-story page discusses SafeHabitus farmer interviews and workplace-safety recommendations.",
+        "qualification": "It is a project-results feature; a systemic research-policy or strategic technology change is not demonstrated.",
+        "radar_relevance": "C change route fails: despite EU research funding, this is applied farm occupational safety and not a new European R&I-system instrument or strategic technological shift.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://news.google.com/rss/articles/CBMi8AFBVV95cUxPQ0tzY3lYOHJrMEQ5ZjlvME5wMHFDN0h2MVQzenMtaTluV2V4dGZwZGRHRURhZVVKUjF5dDJra2dIODRfckY5Q2tGcEFkRWxTMUFrSFVyZXZEQm00dVZmY3FDN1BuZDBHZGo0cF9La3h3YnhtazkzMDNrTWdXRE9pOTFfYmhLSmN3SWY2U1VqUDltVS1vQTBYSXgwaV9vWFZvVXVVZjVVU25kd3I5aTRERF91RlBQX20wZzRUM3BpcWlCZ1pyUUJnM1loRldLeUJlTW5xTHNmVGNHN0dybVhmeWNMdFVFaTdQbzI2Z3ZfbGM?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://projects.research-and-innovation.ec.europa.eu/en/projects/success-stories/all/europes-farmers-face-hidden-dangers-new-research-shows-how-make-job-safer; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://projects.research-and-innovation.ec.europa.eu/en/projects/success-stories/all/europes-farmers-face-hidden-dangers-new-research-shows-how-make-job-safer",
+            "title": "Europe’s farmers face hidden dangers – new research shows how to make the job safer",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect EU-funded project success-story feature."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "NOT_IN_RADAR_SCOPE",
+        "reason": "The source supports occupational health improvements in agriculture but no dateable systemic R&I funding, governance, strategic-capability or technology-dependency development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:10Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:bff6eedb336d941d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "0dd966fd",
+      "identity_hash": "b5df8ad4bdeeecda",
+      "reader_title": "2017 EU budget scenarios are not centrally R&I evidence",
+      "reader_what": "The Jacques Delors paper compares EU budget futures after Brexit across broad integration scenarios.",
+      "reader_more": "This historical paper examines EU budget design scenarios during the Brexit period. It mentions research support as a possible function of EU spending, but the core object is fiscal organization and integration. Its R&I content is incidental rather than a completed study of research funding or capability.",
+      "deep_analysis": {
+        "work_kind": "historical EU fiscal policy paper",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "The Jacques Delors paper compares EU budget futures after Brexit across broad integration scenarios.",
+        "method_or_basis": "Complete 2017 Jacques Delors Institute working paper analyzes EU budget revenue, spending, and the Commission White Paper scenarios.",
+        "qualification": "Research appears as one possible spending heading, not a sustained empirical account of the EU research system.",
+        "radar_relevance": "A routes 1–3 fail the central-subject test: general EU budget governance with only incidental research expenditure references.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://institutdelors.eu/content/uploads/2025/04/thefutureoftheeuropeanbudget-rubiohaas-june2017-1.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://institutdelors.eu/content/uploads/2025/04/thefutureoftheeuropeanbudget-rubiohaas-june2017-1.pdf",
+            "title": "The future of the European budget: What does the Commission’s White Paper mean for EU finances?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect historical EU fiscal policy paper."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NOT_IN_RADAR_SCOPE",
+        "reason": "The full paper concentrates on the EU budget, Brexit, fiscal transfers and political integration. R&I is one among many budget headings, not substantive Europe-specific R&I-system analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:10Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4e9262a70ca2129c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1b90101c",
+      "identity_hash": "0d5ab274f7c18f67",
+      "reader_title": "Europe’s economic security tools lag its technology dependencies",
+      "reader_what": "ECFR argues EU economic security needs a mechanism to respond to extraterritorial restrictions on strategic technologies.",
+      "reader_why": "Conflicting US and EU export-control powers can alter European firms’ access to strategic technology markets.",
+      "reader_more": "The analysis identifies how foreign export restrictions on advanced chips and manufacturing equipment shape European autonomy. It urges the EU to create a more systematic economic security mechanism. The proposal is an analytical recommendation rather than an adopted rule.",
+      "deep_analysis": {
+        "work_kind": "European strategic-technology policy analysis",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "ECFR argues EU economic security needs a mechanism to respond to extraterritorial restrictions on strategic technologies.",
+        "method_or_basis": "Original ECFR 2023 analytical article uses semiconductor equipment export restrictions and transatlantic policy tensions as policy cases.",
+        "qualification": "It presents a policy argument and examples, not an implemented EU instrument or measured policy effects.",
+        "radar_relevance": "A route 1: direct European research/technology security analysis of jurisdiction, chip equipment and dependencies.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://ecfr.eu/article/a-maker-not-a-taker-why-europe-needs-an-economic-security-mechanism/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://ecfr.eu/article/a-maker-not-a-taker-why-europe-needs-an-economic-security-mechanism/",
+            "title": "A maker, not a taker: Why Europe needs an economic security mechanism",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect European strategic-technology policy analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: direct European research/technology security analysis of jurisdiction, chip equipment and dependencies."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:10Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "export_control.competence",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Tobias Gehrke",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "intention",
+          "status_date": "2023-11-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "It presents a policy argument and examples, not an implemented EU instrument or measured policy effects.",
+          "text": "ECFR argues EU economic security needs a mechanism to respond to extraterritorial restrictions on strategic technologies.",
+          "confidence": "high",
+          "record_key": "historical:id:4e9262a70ca2129c",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:0d5ab274f7c18f67:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPVjFqYThJU3psX2xvRUJVN3oxTk9RcDR1bExIcFVYY1JyVUlQanBqX2hQbHFXbV85ZnhHQVVuLW55aW5iZVJ1VWZ3UXhLY3N5MFF1UWh5NURUT3k1Z2NrcmIzOEVpZFQyLWp0R0hxdjFHejlrNzgzSW9ZSkRGUGcxS094ellTclhPbTY0X056YTFUQTBCUVRPWjd4M3BXTWNfSTFreWJPbTRHMENPWEUxSXl1azQ1MlRmREx1WkxkekxSRjhSbS1J?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "fe7c158c",
+      "identity_hash": "ea65862a9ef1f898",
+      "reader_title": "ERC 2027 Starting Grants could fund fewer than 5% of applicants",
+      "reader_what": "An original research-news article reports the ERC president’s warning about a projected 4.8% Starting Grant success rate.",
+      "reader_why": "A rising application-to-award imbalance can constrain research funding access and increase review pressure.",
+      "reader_more": "The university synopsis identifies the exact Research Professional News report and attributes the warning to ERC President Maria Leptin. ERC application counts and planned award numbers imply a projected success rate of roughly 4.8% for the 2027 Starting Grants. This is a forecast while evaluation is underway, and the original news article is paywalled.",
+      "deep_analysis": {
+        "work_kind": "attributed research-news story corroborated by funding data",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "An original research-news article reports the ERC president’s warning about a projected 4.8% Starting Grant success rate.",
+        "method_or_basis": "University of Lausanne institutional synopsis identifies the exact 5 November article; Nature and official ERC figures substantiate 7,710 applications and approximately 373 planned awards.",
+        "qualification": "4.8% is an arithmetic forecast, not a final award outcome; the quoted interview is verified by attributed institutional synopsis, not publisher full text.",
+        "radar_relevance": "C: unusual new funding-system pressure in Europe is substantively evidenced, although original news full text was inaccessible.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://news.google.com/rss/articles/CBMixwFBVV95cUxPVjFqYThJU3psX2xvRUJVN3oxTk9RcDR1bExIcFVYY1JyVUlQanBqX2hQbHFXbV85ZnhHQVVuLW55aW5iZVJ1VWZ3UXhLY3N5MFF1UWh5NURUT3k1Z2NrcmIzOEVpZFQyLWp0R0hxdjFHejlrNzgzSW9ZSkRGUGcxS094ellTclhPbTY0X056YTFUQTBCUVRPWjd4M3BXTWNfSTFreWJPbTRHMENPWEUxSXl1azQ1MlRmREx1WkxkekxSRjhSbS1J?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://synopsis.unil.ch/article/65576/; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://synopsis.unil.ch/article/65576/",
+            "title": "ERC president: 5% success rate ‘a wake-up call’ for EU",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_publisher_report",
+            "url": "https://www.nature.com/articles/d41586-026-03476-3",
+            "title": "Is research funding now a lottery? Elite funder ERC swamped by applications",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_funder_data",
+            "url": "https://erc.europa.eu/news-events/news/erc-2026-starting-grants-results",
+            "title": "ERC 2026 Starting Grant results and funding figures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full Research Professional News article was not available; matched University of Lausanne indexed synopsis plus independently checked ERC and Nature reported application totals."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: unusual new funding-system pressure in Europe is substantively evidenced, although original news full text was inaccessible."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:11Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "horizon.success_rate",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Council",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "contracts",
+          "status": "announced",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "4.8% is an arithmetic forecast, not a final award outcome; the quoted interview is verified by attributed institutional synopsis, not publisher full text.",
+          "text": "An original research-news article reports the ERC president’s warning about a projected 4.8% Starting Grant success rate.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPVjFqYThJU3psX2xvRUJVN3oxTk9RcDR1bExIcFVYY1JyVUlQanBqX2hQbHFXbV85ZnhHQVVuLW55aW5iZVJ1VWZ3UXhLY3N5MFF1UWh5NURUT3k1Z2NrcmIzOEVpZFQyLWp0R0hxdjFHejlrNzgzSW9ZSkRGUGcxS094ellTclhPbTY0X056YTFUQTBCUVRPWjd4M3BXTWNfSTFreWJPbTRHMENPWEUxSXl1azQ1MlRmREx1WkxkekxSRjhSbS1J?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:ea65862a9ef1f898:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.techfore.2026.124948": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "125c8e15",
+      "identity_hash": "e13055628c3a53f7",
+      "reader_title": "Regime-aware model challenges exponential AI progress extrapolation",
+      "reader_what": "A Cognitive Scaling Framework models transitions among different regimes of long-run AI progress rather than assuming constant exponential trends.",
+      "reader_why": "Accounting for regime shifts changes how uncertainty in long-run AI progress can be explored.",
+      "reader_more": "The article treats AI scaling as potentially passing through distinct growth regimes rather than extrapolating one curve. It proposes a formal way to explore long-run trajectories and sensitivity to transitions. The experiments illustrate methodological behavior, not verified future AI milestones.",
+      "deep_analysis": {
+        "work_kind": "formal technology-foresight methodology",
+        "research_question": "What does the verified work establish about the transferable foresight method?",
+        "main_finding": "A Cognitive Scaling Framework models transitions among different regimes of long-run AI progress rather than assuming constant exponential trends.",
+        "method_or_basis": "ScienceDirect original article presents a formal foresight framework, modeled AI progress regimes and numerical experiments.",
+        "qualification": "This is a scenario and analytical method; resulting future trajectories are modeled possibilities, not confirmed AI predictions.",
+        "radar_relevance": "B route: a transferable regime-aware technology foresight method offers a scrutiny-friendly alternative to single-trend forecasts.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://doi.org/10.1016/j.techfore.2026.124948"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://www.sciencedirect.com/science/article/pii/S0040162526004257; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0040162526004257",
+            "title": "From exponential extrapolation to regime-aware foresight: A Cognitive Scaling Framework for long-run AI progress",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect formal technology-foresight methodology."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "B route: a transferable regime-aware technology foresight method offers a scrutiny-friendly alternative to single-trend forecasts."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:11Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Authors of the Cognitive Scaling Framework",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11-03",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is a scenario and analytical method; resulting future trajectories are modeled possibilities, not confirmed AI predictions.",
+          "text": "A Cognitive Scaling Framework models transitions among different regimes of long-run AI progress rather than assuming constant exponential trends.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.1016/j.techfore.2026.124948",
+          "merit": 70,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e13055628c3a53f7:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://eic.ec.europa.eu/eic-funding-opportunities/eic-funding-opportunities-2027_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "e74143d5",
+      "identity_hash": "dbea0467aad9895d",
+      "reader_title": "EIC publishes €1.8 billion 2027 funding programme",
+      "reader_what": "The European Innovation Council sets out approximately €1.8 billion in 2027 research-to-market funding opportunities.",
+      "reader_why": "Open and upcoming calls create application pathways for disruptive European innovation.",
+      "reader_more": "The EIC adopted its 2027 work programme with about €1.8 billion of planned funding. The programme covers stages from exploratory research to startup financing. Published budgets and calls are funding commitments or opportunities, not evidence that beneficiaries have been funded.",
+      "deep_analysis": {
+        "work_kind": "formal policy development",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "The European Innovation Council sets out approximately €1.8 billion in 2027 research-to-market funding opportunities.",
+        "method_or_basis": "Official EIC 2027 programme webpage and approved work programme announce Pathfinder, Transition and Accelerator funding instruments.",
+        "qualification": "Amounts describe programmed funding opportunities, not grants or investments already delivered.",
+        "radar_relevance": "C: new adopted EU R&I work programme alters the 2027 funding opportunity set for frontier research and startups.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://eic.ec.europa.eu/eic-funding-opportunities/eic-funding-opportunities-2027_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-funding-opportunities-2027_en",
+            "title": "EIC Work Programme 2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect formal policy development."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: new adopted EU R&I work programme alters the 2027 funding opportunity set for frontier research and startups."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:12Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Innovation Council",
+            "class": "eu_body"
+          },
+          "mechanism": "allocates",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Amounts describe programmed funding opportunities, not grants or investments already delivered.",
+          "text": "The European Innovation Council sets out approximately €1.8 billion in 2027 research-to-market funding opportunities.",
+          "confidence": "high",
+          "record_key": "link:https://eic.ec.europa.eu/eic-funding-opportunities/eic-funding-opportunities-2027_en",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:dbea0467aad9895d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://commission.europa.eu/strategy-and-policy/strategy-documents/commission-work-programme/commission-work-programme-2027_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1331e118",
+      "identity_hash": "41aefcb3aec93500",
+      "reader_title": "European Commission adopts 2027 work-programme priorities",
+      "reader_what": "The Commission’s 2027 work programme announces legislative and policy priorities affecting European strategic technology and research.",
+      "reader_why": "Commission priorities shape sequencing of proposed EU technology and innovation measures.",
+      "reader_more": "The formal 2027 Commission work programme schedules legislation and policy actions that intersect with European industrial and digital capabilities. It is primary evidence of institutional intentions. The individual measures still require their own legislative or implementation steps.",
+      "deep_analysis": {
+        "work_kind": "formal policy development",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "The Commission’s 2027 work programme announces legislative and policy priorities affecting European strategic technology and research.",
+        "method_or_basis": "Official Commission Work Programme 2027, COM(2026) 710, includes scheduled initiatives across EU competitiveness, technology and innovation.",
+        "qualification": "A work programme commits to planning and proposals; it does not enact every listed legislative or budget measure.",
+        "radar_relevance": "C: formal new institutional agenda specifies forthcoming actions relevant to European innovation and technology governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://commission.europa.eu/strategy-and-policy/strategy-documents/commission-work-programme/commission-work-programme-2027_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://commission.europa.eu/strategy-and-policy/strategy-documents/commission-work-programme/commission-work-programme-2027_en",
+            "title": "Commission Work Programme 2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect formal policy development."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: formal new institutional agenda specifies forthcoming actions relevant to European innovation and technology governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:12Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "goal.strategic_autonomy",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "prioritises",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "A work programme commits to planning and proposals; it does not enact every listed legislative or budget measure.",
+          "text": "The Commission’s 2027 work programme announces legislative and policy priorities affecting European strategic technology and research.",
+          "confidence": "high",
+          "record_key": "link:https://commission.europa.eu/strategy-and-policy/strategy-documents/commission-work-programme/commission-work-programme-2027_en",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:41aefcb3aec93500:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://single-market-economy.ec.europa.eu/publications/proposal-regulation-public-contracts-and-concessions_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "39f80723",
+      "identity_hash": "a7bedc44eafd9fa8",
+      "reader_title": "Commission proposes changes to EU public procurement rules",
+      "reader_what": "A draft EU Public Procurement Act seeks to change strategic procurement conditions, including options linked to European technological capacity.",
+      "reader_why": "Purchasing rules can determine demand conditions for innovative European firms and strategic technology suppliers.",
+      "reader_more": "The Commission introduced a legislative proposal to revise EU procurement rules. Parts of the proposal address strategic sourcing and conditions relevant to European industrial innovation. Its effects cannot be counted as enacted because negotiations and adoption remain outstanding.",
+      "deep_analysis": {
+        "work_kind": "Commission legislative proposal",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "A draft EU Public Procurement Act seeks to change strategic procurement conditions, including options linked to European technological capacity.",
+        "method_or_basis": "Official Commission legislative proposal COM(2026)590 and EUR-Lex draft regulatory text supply detailed provisions.",
+        "qualification": "The regulation is proposed, not adopted or in force; market effects and final exemptions are unresolved.",
+        "radar_relevance": "C: an identifiable new EU procurement legislative proposal has a direct strategic technology and innovation-demand pathway.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://single-market-economy.ec.europa.eu/publications/proposal-regulation-public-contracts-and-concessions_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A52026PC0590",
+            "title": "Proposal for an EU Public Procurement Act — COM(2026) 590",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect Commission legislative proposal."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: an identifiable new EU procurement legislative proposal has a direct strategic technology and innovation-demand pathway."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:13Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "digital.public_procurement",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-09-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The regulation is proposed, not adopted or in force; market effects and final exemptions are unresolved.",
+          "text": "A draft EU Public Procurement Act seeks to change strategic procurement conditions, including options linked to European technological capacity.",
+          "confidence": "high",
+          "record_key": "link:https://single-market-economy.ec.europa.eu/publications/proposal-regulation-public-contracts-and-concessions_en",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:a7bedc44eafd9fa8:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://eic.ec.europa.eu/impact_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "42ef4ccf",
+      "identity_hash": "464c5aa16f5594fa",
+      "reader_title": "EIC reports European deep-tech financing and scaling outcomes",
+      "reader_what": "The EIC’s 2026 impact assessment tracks its funding footprint among European deep-tech companies.",
+      "reader_why": "The share of EIC-backed firms and investment activity indicates the scale and direction of public innovation finance.",
+      "reader_more": "The EIC compiles portfolio evidence on funding and investment in European deep-tech ventures, including strategic fields such as semiconductors and quantum. These statistics show programme reach and some measured company developments. They should not be interpreted as independently proven economy-wide impacts of EIC support.",
+      "deep_analysis": {
+        "work_kind": "official programme impact assessment",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "The EIC’s 2026 impact assessment tracks its funding footprint among European deep-tech companies.",
+        "method_or_basis": "EIC official impact report site and institutional report/factsheet tabulate supported companies, technology areas and investment mobilisation.",
+        "qualification": "Programme self-reporting is authoritative for EIC awards but not independent causal evidence of macroeconomic impact.",
+        "radar_relevance": "A route 2: directly measures European R&I finance, deep-tech firm support and strategic technology ecosystem indicators.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://eic.ec.europa.eu/impact_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://eic.ec.europa.eu/impact_en",
+            "title": "European Innovation Council Impact Report 2026",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect official programme impact assessment."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 2: directly measures European R&I finance, deep-tech firm support and strategic technology ecosystem indicators."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:13Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Innovation Council",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-06-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Programme self-reporting is authoritative for EIC awards but not independent causal evidence of macroeconomic impact.",
+          "text": "The EIC’s 2026 impact assessment tracks its funding footprint among European deep-tech companies.",
+          "confidence": "medium",
+          "record_key": "link:https://eic.ec.europa.eu/impact_en",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:464c5aa16f5594fa:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.wipo.int/en/web/global-innovation-index/2026/index": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "13afce73",
+      "identity_hash": "2e537526fb210715",
+      "reader_title": "Global innovation index is not Europe-centered evidence",
+      "reader_what": "WIPO’s annual index benchmarks innovation performance of economies worldwide.",
+      "reader_more": "WIPO’s index benchmarks innovation indicators and national performance across a large worldwide sample. It contains data about European countries, but its main research subject is the world innovation landscape. The package’s alleged full document is actually a Brazil-focused chapter and cannot be used as a matching report.",
+      "deep_analysis": {
+        "work_kind": "global innovation benchmarking report",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "WIPO’s annual index benchmarks innovation performance of economies worldwide.",
+        "method_or_basis": "Official Global Innovation Index 2026 portal documents global innovation rankings and indicators; package-supplied Brazil chapter is not the main GII report.",
+        "qualification": "European countries occur as members of a global comparison; the cited item is not a dedicated European R&I-system analysis.",
+        "radar_relevance": "A routes 1–3 fail the European central-subject gate: global league tables and an unrelated Brazil paper do not constitute Europe-focused R&I evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL checked and content verified directly: https://www.wipo.int/en/web/global-innovation-index/2026/index"
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "mismatch",
+            "note": "Package OpenAlex PDF is a Brazil science-based-startup paper, not the 2026 Global Innovation Index."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://www.wipo.int/en/web/global-innovation-index/2026/index",
+            "title": "Global Innovation Index 2026",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rejected scanner OpenAlex/GII text because it is a separate Brazil science-based startup paper, not the global index."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NOT_IN_RADAR_SCOPE",
+        "reason": "The official global index evaluates many world economies, while the scanner-retrieved 22,423-character “Brazil” chapter is a different work. European countries as a comparator do not alone satisfy any Europe-specific A route."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:13Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.institutmontaigne.org/en/press-release/implementing-draghi-report-moment-truth": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "eb9723a9",
+      "identity_hash": "276f30cb8cac0908",
+      "reader_title": "Draghi implementation tracker finds uneven European reforms",
+      "reader_what": "Institut Montaigne’s 2026 monitoring report rates implementation of recommendations from the Draghi competitiveness report.",
+      "reader_why": "Uneven completion of EU technology-related reforms constrains the pace of coordinated R&I and industrial policy.",
+      "reader_more": "The report tracks implementation of hundreds of Draghi recommendations across EU policy areas. It finds material but uneven progress, including gaps in strategic technology sectors. Progress scores depend on the report’s tracking criteria and do not demonstrate final economic effects.",
+      "deep_analysis": {
+        "work_kind": "comparative policy implementation tracker",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "Institut Montaigne’s 2026 monitoring report rates implementation of recommendations from the Draghi competitiveness report.",
+        "method_or_basis": "Original 2026 report systematically reviews hundreds of Draghi recommendations and tracks policy progress by strategic sector.",
+        "qualification": "An institute-defined implementation score is an evaluative classification; partial measures do not guarantee competitiveness gains.",
+        "radar_relevance": "A route 2: compares European strategic-technology and industrial-policy progress including semiconductors, finance and innovation capacity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://www.institutmontaigne.org/en/press-release/implementing-draghi-report-moment-truth"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://institutmontaigne.web.oxv.fr/en/publications/implementing-draghi-report-moment-truth",
+            "title": "Implementing the Draghi Report: The Moment of Truth",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect comparative policy implementation tracker."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 2: compares European strategic-technology and industrial-policy progress including semiconductors, finance and innovation capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:14Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Institut Montaigne",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-06-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "An institute-defined implementation score is an evaluative classification; partial measures do not guarantee competitiveness gains.",
+          "text": "Institut Montaigne’s 2026 monitoring report rates implementation of recommendations from the Draghi competitiveness report.",
+          "confidence": "high",
+          "record_key": "link:https://www.institutmontaigne.org/en/press-release/implementing-draghi-report-moment-truth",
+          "merit": 62,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:276f30cb8cac0908:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://commission.europa.eu/strategy-and-policy/state-union_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "71e6222a",
+      "identity_hash": "83e35f4dae2fce2d",
+      "reader_title": "2026 State of the Union announces European AI ambitions",
+      "reader_what": "The Commission president’s annual address announces new and planned measures for European AI and technology capabilities.",
+      "reader_why": "Announced European AI and startup priorities can shape future instruments but await subsequent formal action.",
+      "reader_more": "The Commission president set out 2026 priorities for European economic and digital capacity, including AI and startups. The address is direct evidence that these intentions were announced. Delivery, budget authorisation and legal effects must be assessed from later implementing decisions.",
+      "deep_analysis": {
+        "work_kind": "official policy address",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "The Commission president’s annual address announces new and planned measures for European AI and technology capabilities.",
+        "method_or_basis": "Primary 16 September 2026 State of the Union transcript records the Commission president’s commitments and proposed initiatives.",
+        "qualification": "Political announcements and future initiatives should not be treated as adopted funding, operating infrastructure or completed regulation.",
+        "radar_relevance": "C: specific new executive technology-policy intentions and strategic investment priorities are on the formal record.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://commission.europa.eu/strategy-and-policy/state-union_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://www.eeas.europa.eu/delegations/china/2026-state-union-address-president-von-der-leyen_en",
+            "title": "2026 State of the Union address by President von der Leyen",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect official policy address."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: specific new executive technology-policy intentions and strategic investment priorities are on the formal record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:14Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "ai.public_sector_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-16",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Political announcements and future initiatives should not be treated as adopted funding, operating infrastructure or completed regulation.",
+          "text": "The Commission president’s annual address announces new and planned measures for European AI and technology capabilities.",
+          "confidence": "high",
+          "record_key": "link:https://commission.europa.eu/strategy-and-policy/state-union_en",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:83e35f4dae2fce2d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/charter-access-industrial-users-research-and-technology-infrastructures_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "7d306536",
+      "identity_hash": "f9c69ec7513a9398",
+      "reader_title": "EU publishes voluntary research-infrastructure access charter",
+      "reader_what": "The Commission’s charter sets voluntary principles for industrial access to European research and technology infrastructures.",
+      "reader_why": "Shared access principles can reduce uncertainty about how firms use publicly supported research facilities.",
+      "reader_more": "The charter sets out common principles to facilitate industrial use of research and technology infrastructures. It addresses a concrete channel for knowledge transfer and firm innovation. Its implementation depends on voluntary uptake, and the charter itself does not compel access.",
+      "deep_analysis": {
+        "work_kind": "Commission voluntary charter",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "The Commission’s charter sets voluntary principles for industrial access to European research and technology infrastructures.",
+        "method_or_basis": "Official Commission charter page and published EUR-Lex communication set access principles for research/technology infrastructure operators.",
+        "qualification": "The charter is voluntary guidance, not a directly enforceable universal access entitlement.",
+        "radar_relevance": "C: new EU research-infrastructure governance guidance expressly addresses firms’ access to R&I assets.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/charter-access-industrial-users-research-and-technology-infrastructures_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/charter-access-industrial-users-research-and-technology-infrastructures_en",
+            "title": "Charter of Access for Industrial Users to Research and Technology Infrastructures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect Commission voluntary charter."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: new EU research-infrastructure governance guidance expressly addresses firms’ access to R&I assets."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:15Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "research.infrastructure_access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-07-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The charter is voluntary guidance, not a directly enforceable universal access entitlement.",
+          "text": "The Commission’s charter sets voluntary principles for industrial access to European research and technology infrastructures.",
+          "confidence": "high",
+          "record_key": "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/charter-access-industrial-users-research-and-technology-infrastructures_en",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:f9c69ec7513a9398:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://digital-strategy.ec.europa.eu/en/library/communication-european-tech-sovereignty-accompanied-eu-open-source-strategy": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1cf80dbf",
+      "identity_hash": "2b63a56ecd038afc",
+      "reader_title": "Commission proposes EU Open Source Strategy in sovereignty package",
+      "reader_what": "The 2026 technology sovereignty communication introduces a planned European Open Source Strategy and related non-legislative initiatives.",
+      "reader_why": "An EU open-source strategy may affect software dependence and research–industry reuse channels if implemented.",
+      "reader_more": "The Commission set out a technology-sovereignty communication accompanied by an Open Source Strategy initiative. It frames software openness as part of Europe’s digital autonomy agenda. Announcing the package is an event, but resulting software capacity and policy outcomes remain future questions.",
+      "deep_analysis": {
+        "work_kind": "formal policy package announcement",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "The 2026 technology sovereignty communication introduces a planned European Open Source Strategy and related non-legislative initiatives.",
+        "method_or_basis": "Official Commission June 2026 policy publication identifies the package and proposed open-source measures.",
+        "qualification": "The page documents a policy proposal and communication, not completion of a future open-source initiative.",
+        "radar_relevance": "C: an identified new EU strategic technology and open-source policy package creates a technology-governance development.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://digital-strategy.ec.europa.eu/en/library/communication-european-tech-sovereignty-accompanied-eu-open-source-strategy"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/library/communication-european-tech-sovereignty-accompanied-eu-open-source-strategy",
+            "title": "Communication on European Tech Sovereignty, accompanied by an EU Open Source Strategy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect formal policy package announcement."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: an identified new EU strategic technology and open-source policy package creates a technology-governance development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:15Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "research.openness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-06-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The page documents a policy proposal and communication, not completion of a future open-source initiative.",
+          "text": "The 2026 technology sovereignty communication introduces a planned European Open Source Strategy and related non-legislative initiatives.",
+          "confidence": "high",
+          "record_key": "link:https://digital-strategy.ec.europa.eu/en/library/communication-european-tech-sovereignty-accompanied-eu-open-source-strategy",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:2b63a56ecd038afc:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1080/14767724.2026.2758677": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "8c10606b",
+      "identity_hash": "885e897d88f520f6",
+      "reader_title": "European science collaboration shifts under securitisation",
+      "reader_what": "A 2026 academic analysis studies how science-security policy can redirect international S&T cooperation by field.",
+      "reader_why": "Research-security restrictions can selectively redirect international research networks instead of ending all cooperation.",
+      "reader_more": "The paper explores the interaction between security restrictions and international scientific collaboration. It distinguishes strategically sensitive disciplines from areas where cooperation remains mission-driven. The research is useful for understanding European science diplomacy, but its sector-level propositions are not universal empirical laws.",
+      "deep_analysis": {
+        "work_kind": "open-access science-policy research article",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "A 2026 academic analysis studies how science-security policy can redirect international S&T cooperation by field.",
+        "method_or_basis": "Matching open-access Globalisation, Societies and Education paper develops and examines propositions about securitisation and mission-oriented collaboration.",
+        "qualification": "Sector-specific collaboration predictions and interpretations should not be mistaken for universal observed effects.",
+        "radar_relevance": "A routes 1 and 3: directly studies European science internationalisation, research security and science-policy collaboration.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://doi.org/10.1080/14767724.2026.2758677"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://content.openalex.org/works/W7225417941.pdf",
+            "title": "Will Europe be able to align and accelerate global cooperation in S&T to foster a new knowledge-based global order?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect open-access science-policy research article."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A routes 1 and 3: directly studies European science internationalisation, research security and science-policy collaboration."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:16Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Manuel Heitor, Afonso Amaral and Hugo Horta",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Sector-specific collaboration predictions and interpretations should not be mistaken for universal observed effects.",
+          "text": "A 2026 academic analysis studies how science-security policy can redirect international S&T cooperation by field.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1080/14767724.2026.2758677",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:885e897d88f520f6:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ec.europa.eu/newsroom/dae/redirection/document/129100": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "6b9628d6",
+      "identity_hash": "85ee5c2661695d27",
+      "reader_title": "EU Technology Sovereignty Communication defines strategic dependencies",
+      "reader_what": "Commission communication COM(2026)503 formally sets out a European technology-sovereignty policy direction.",
+      "reader_why": "Identifying critical dependencies and proposed responses establishes a new strategic-technology governance agenda.",
+      "reader_more": "The Commission communication identifies vulnerabilities created by technological dependencies and outlines a European response. It is formal institutional policy material rather than a standalone academic study. The announced initiatives must be distinguished from legislation or capabilities actually delivered.",
+      "deep_analysis": {
+        "work_kind": "European Commission formal communication",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "Commission communication COM(2026)503 formally sets out a European technology-sovereignty policy direction.",
+        "method_or_basis": "Matching official Commission PDF and EUR-Lex document establish COM(2026)503 of 3 June 2026 and its discussion of strategic technology dependencies.",
+        "qualification": "The communication is an adopted Commission communication setting out measures and proposals, not proof of achieved sovereignty.",
+        "radar_relevance": "C rather than A: scanner recorded a sentence as the title; actual item is a dateable formal policy communication.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://ec.europa.eu/newsroom/dae/redirection/document/129100"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?qid=1783287951774&uri=CELEX%3A52026DC0503",
+            "title": "Communication on European Tech Sovereignty — COM(2026) 503",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect European Commission formal communication."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C rather than A: scanner recorded a sentence as the title; actual item is a dateable formal policy communication."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:17Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-06-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The communication is an adopted Commission communication setting out measures and proposals, not proof of achieved sovereignty.",
+          "text": "Commission communication COM(2026)503 formally sets out a European technology-sovereignty policy direction.",
+          "confidence": "high",
+          "record_key": "link:https://ec.europa.eu/newsroom/dae/redirection/document/129100",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:85ee5c2661695d27:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1371/journal.pone.0342837": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "7b0104e4",
+      "identity_hash": "105f421f67377134",
+      "reader_title": "European AI startups attract less growth capital than US peers",
+      "reader_what": "A transatlantic study finds comparable AI financing deal counts but considerably lower invested volumes in Europe.",
+      "reader_why": "A late-stage risk-capital gap can limit growth of European AI startups despite an active startup pipeline.",
+      "reader_more": "Using AI venture-financing data, the paper compares European and US startup deal activity and investment volumes. Europe does not appear to face an equally large deficit in deal formation, but it attracts much smaller total AI investment. The result suggests a scale-up finance constraint without proving a single institutional explanation.",
+      "deep_analysis": {
+        "work_kind": "empirical comparative venture-capital study",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "A transatlantic study finds comparable AI financing deal counts but considerably lower invested volumes in Europe.",
+        "method_or_basis": "Original 2026 PLOS ONE paper analyzes venture-capital rounds in Europe and the US from 2000–2025 with difference-in-differences and robustness tests.",
+        "qualification": "Observational identification does not isolate a single causal cause of the transatlantic financing gap.",
+        "radar_relevance": "A route 2: systematic Europe–US evidence on AI startup formation and scale-up financing, a central R&I ecosystem mechanism.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://doi.org/10.1371/journal.pone.0342837"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0342837&type=printable",
+            "title": "Limited capital? Explaining transatlantic divergences in artificial intelligence startup financing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect empirical comparative venture-capital study."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 2: systematic Europe–US evidence on AI startup formation and scale-up financing, a central R&I ecosystem mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:17Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "finance.venture_capital",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Authors of Limited capital?",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Observational identification does not isolate a single causal cause of the transatlantic financing gap.",
+          "text": "A transatlantic study finds comparable AI financing deal counts but considerably lower invested volumes in Europe.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1371/journal.pone.0342837",
+          "merit": 68,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:105f421f67377134:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://digital-strategy.ec.europa.eu/en/node/16824/printable/pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "779c5c0b",
+      "identity_hash": "861b30f31a910ae7",
+      "reader_title": "November printable page recirculates June sovereignty announcement",
+      "reader_what": "This printable Commission item repeats the June 2026 tech-sovereignty and open-source communication announcement.",
+      "reader_more": "This PDF reproduces the Commission’s previously issued June 2026 announcement. It does not add an independent analytic contribution and is not a new November policy event. The underlying sovereignty package is assessed in the primary communication and June announcement entries.",
+      "deep_analysis": {
+        "work_kind": "printable version of prior Commission announcement",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "This printable Commission item repeats the June 2026 tech-sovereignty and open-source communication announcement.",
+        "method_or_basis": "Original official webpage and its printable PDF are the same June communication listing, re-rendered in November.",
+        "qualification": "A printable generation timestamp is not a new publication or original analytical study.",
+        "radar_relevance": "A routes 1–3 fail the evidence-product gate: announcement text is not an A research study; C route fails as duplicate recirculation of June action.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://digital-strategy.ec.europa.eu/en/node/16824/printable/pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/node/16824/printable/pdf",
+            "title": "Communication on European Tech Sovereignty, accompanied by an EU Open Source Strategy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect printable version of prior Commission announcement."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NOT_IN_RADAR_SCOPE",
+        "reason": "The material is a print rendition of the existing June 3 Commission notice rather than a new European R&I analysis or new November policy act; similar underlying action is already described by separate C records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:17Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/11/05/europe-is-betting-525-million-on-chip-design-start-ups": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "f26bbb68",
+      "identity_hash": "396e42b51b5d1caf",
+      "reader_title": "EU announces €525 million European chip-design initiative",
+      "reader_what": "The EU announces a planned €525 million investment package aimed at strengthening European semiconductor design companies.",
+      "reader_why": "Design-startup support targets a known upstream bottleneck in Europe’s semiconductor ecosystem.",
+      "reader_more": "The Commission announced an investment initiative to support firms designing advanced chips in Europe. The €525 million figure concerns planned investment mobilisation rather than completed funding payments. This is a new capacity-building programme and overlaps with coverage of the EuroCDP launch.",
+      "deep_analysis": {
+        "work_kind": "official chip-design investment announcement",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "The EU announces a planned €525 million investment package aimed at strengthening European semiconductor design companies.",
+        "method_or_basis": "European Commission Digital Strategy statement and matching Euronews reporting describe EuroCDP investment launch and target beneficiaries.",
+        "qualification": "The €525 million is an investment mobilisation target or committed envelope, not an amount demonstrated as already disbursed.",
+        "radar_relevance": "C: a concrete EU-wide semiconductor design-finance initiative affects strategic technology capability and innovation scale-up.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://www.euronews.com/2026/11/05/europe-is-betting-525-million-on-chip-design-start-ups"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/news/eu525-million-investment-set-drive-new-generation-european-chip-design-companies",
+            "title": "€525 million EU investment set to drive chip design companies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect official chip-design investment announcement."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: a concrete EU-wide semiconductor design-finance initiative affects strategic technology capability and innovation scale-up."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:18Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission and European chip-design partners",
+            "class": "eu_body"
+          },
+          "mechanism": "invests",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The €525 million is an investment mobilisation target or committed envelope, not an amount demonstrated as already disbursed.",
+          "text": "The EU announces a planned €525 million investment package aimed at strengthening European semiconductor design companies.",
+          "confidence": "high",
+          "record_key": "link:https://www.euronews.com/2026/11/05/europe-is-betting-525-million-on-chip-design-start-ups",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:396e42b51b5d1caf:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1093/ser/mwag055": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e0e31e7b",
+      "identity_hash": "20db76797a6f3136",
+      "reader_title": "Big Tech’s power in EU policy evolved across four eras",
+      "reader_what": "A peer-reviewed study traces how major technology firms used market and political resources to influence EU digital governance.",
+      "reader_why": "Technology platform dominance can influence EU rule-setting and innovation-market governance.",
+      "reader_more": "The article periodizes large technology companies’ changing economic and political power in the EU. Interviews and documents connect platform-market resources to policy influence. Its historical interpretation is qualitative and should not be treated as measured causal effects of specific lobbying campaigns.",
+      "deep_analysis": {
+        "work_kind": "qualitative peer-reviewed EU political economy study",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "A peer-reviewed study traces how major technology firms used market and political resources to influence EU digital governance.",
+        "method_or_basis": "Full original Socio-Economic Review article by Matti Ylönen and Laura Nordström uses documentary study and 22 interviews with stakeholders.",
+        "qualification": "Qualitative era typology and interview interpretations are not a quantified estimate of causal lobbying effects.",
+        "radar_relevance": "A route 1: European strategic digital governance evidence on the political-economic mechanisms of large foreign tech dependence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL checked and content verified directly: https://doi.org/10.1093/ser/mwag055"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1093/ser/mwag055",
+            "title": "Big Tech’s power resources: four eras of corporate influence in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect qualitative peer-reviewed EU political economy study."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: European strategic digital governance evidence on the political-economic mechanisms of large foreign tech dependence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:18Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "digital.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Matti Ylönen and Laura Nordström",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-11-06",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Qualitative era typology and interview interpretations are not a quantified estimate of causal lobbying effects.",
+          "text": "A peer-reviewed study traces how major technology firms used market and political resources to influence EU digital governance.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1093/ser/mwag055",
+          "merit": 83,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:20db76797a6f3136:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxPUkFmM3oxeHJTUTJSeXREWkUyZ21faEVXNUxNZTZLZUpYeG5mc0JUcFRUMnhob0dBVXdEd090M3R5TFRDZ2VmZFF5Wk9Qb29xZ2lNWEktRGotZy1HUkc1em9hcGVwYmJSQ3NfZVYxNHF5TlFnNUpoTTFvdGRIamJuTEFoNU1wNHR5YmwwSm5fV2RsVk9oT1NjRHJuVExEX1Vlc2JCck9FcEpFQUk?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "560175b3",
+      "identity_hash": "148709dab32b9488",
+      "reader_title": "EU launches EuroCDP semiconductor design platform",
+      "reader_what": "An official Semiconductor Alliance notice reports the EuroCDP launch and investment coordination to expand European chip-design capabilities.",
+      "reader_why": "A common design platform can lower barriers for European chip developers to access design resources.",
+      "reader_more": "The official news item reports a Semiconductor Alliance meeting and describes the launch of EuroCDP on 4 November. The launch is the substantive chip design cooperation development, while the meeting provides context. It is the same underlying platform/investment family as the separate €525 million announcement and should not be counted as another independent funding pot.",
+      "deep_analysis": {
+        "work_kind": "official semiconductor alliance platform launch report",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "An official Semiconductor Alliance notice reports the EuroCDP launch and investment coordination to expand European chip-design capabilities.",
+        "method_or_basis": "Commission 5 November Alliance announcement documents the meeting and confirms the 4 November platform launch and associated investment actors.",
+        "qualification": "The meeting alone is not an R&I breakthrough; the independently dateable EuroCDP launch is the substantive event.",
+        "radar_relevance": "C: verified launch of semiconductor design-capacity cooperation provides an immediate European technology ecosystem change.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://news.google.com/rss/articles/CBMiqwFBVV95cUxPUkFmM3oxeHJTUTJSeXREWkUyZ21faEVXNUxNZTZLZUpYeG5mc0JUcFRUMnhob0dBVXdEd090M3R5TFRDZ2VmZFF5Wk9Qb29xZ2lNWEktRGotZy1HUkc1em9hcGVwYmJSQ3NfZVYxNHF5TlFnNUpoTTFvdGRIamJuTEFoNU1wNHR5YmwwSm5fV2RsVk9oT1NjRHJuVExEX1Vlc2JCck9FcEpFQUk?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://digital-strategy.ec.europa.eu/en/news/semiconductor-alliance-meets-discuss-tech-sovereignty-package; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/news/semiconductor-alliance-meets-discuss-tech-sovereignty-package",
+            "title": "Semiconductor Alliance meets to discuss Tech Sovereignty Package",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect official semiconductor alliance platform launch report."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: verified launch of semiconductor design-capacity cooperation provides an immediate European technology ecosystem change."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:18Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "chips.international_cooperation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Semiconductor Alliance and European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The meeting alone is not an R&I breakthrough; the independently dateable EuroCDP launch is the substantive event.",
+          "text": "An official Semiconductor Alliance notice reports the EuroCDP launch and investment coordination to expand European chip-design capabilities.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxPUkFmM3oxeHJTUTJSeXREWkUyZ21faEVXNUxNZTZLZUpYeG5mc0JUcFRUMnhob0dBVXdEd090M3R5TFRDZ2VmZFF5Wk9Qb29xZ2lNWEktRGotZy1HUkc1em9hcGVwYmJSQ3NfZVYxNHF5TlFnNUpoTTFvdGRIamJuTEFoNU1wNHR5YmwwSm5fV2RsVk9oT1NjRHJuVExEX1Vlc2JCck9FcEpFQUk?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:148709dab32b9488:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxObWQ2WUFhNnhncGQtQnItaF9xaUl3QU1qSXY0YVRlYWxFN3JpZ0U4M2V1V3Q2LWhOencyZTVaY3hnaUNVR1FUbkZLS2ZvREpZS1oxT0Y2Ym91cE9FRElVRDZsbDRYMzhlMGtXMVMxcm9TblN4cmlPNW9fb1psM1E1ZUN2VE9iRVhHODMwSlBYZlp1RzJvNGRoTEZIVDhlTXJJSmJJZXVzbWV6ZjVQNGZHRjRwWl9XV3Q4UmtjZ2YzeE1tS3VFZHZr?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1f6ea737",
+      "identity_hash": "9539ed766c33651f",
+      "reader_title": "Schwarz Digits and Bull announce European AI compute partnership",
+      "reader_what": "Schwarz Digits and Bull announce cooperation to provide European-jurisdiction AI computing services.",
+      "reader_why": "Domestic AI compute supply agreements can diversify access to strategic computational infrastructure.",
+      "reader_more": "Reuters reported an agreement between Schwarz Digits and Bull on sovereign AI computing services. The partnership speaks to supplier diversity and European control of AI infrastructure. A partnership agreement is not the same as an operating computing service or proven increase in capacity.",
+      "deep_analysis": {
+        "work_kind": "Reuters technology partnership report",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "Schwarz Digits and Bull announce cooperation to provide European-jurisdiction AI computing services.",
+        "method_or_basis": "Original Reuters November 2026 industry report documents the announced corporate agreement and its intended cloud/compute offering.",
+        "qualification": "The announcement is not evidence that planned capacity has been constructed, certified or delivered to customers.",
+        "radar_relevance": "C: specific cross-company European AI compute-services partnership targets strategic infrastructure and supplier dependence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://news.google.com/rss/articles/CBMixwFBVV95cUxObWQ2WUFhNnhncGQtQnItaF9xaUl3QU1qSXY0YVRlYWxFN3JpZ0U4M2V1V3Q2LWhOencyZTVaY3hnaUNVR1FUbkZLS2ZvREpZS1oxT0Y2Ym91cE9FRElVRDZsbDRYMzhlMGtXMVMxcm9TblN4cmlPNW9fb1psM1E1ZUN2VE9iRVhHODMwSlBYZlp1RzJvNGRoTEZIVDhlTXJJSmJJZXVzbWV6ZjVQNGZHRjRwWl9XV3Q4UmtjZ2YzeE1tS3VFZHZr?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://www.reuters.com/business/retail-consumer/schwarz-digits-bull-partner-up-build-european-ai-computing-services-2026-11-03/; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://www.reuters.com/business/retail-consumer/schwarz-digits-bull-partner-up-build-european-ai-computing-services-2026-11-03/",
+            "title": "Schwarz Digits and Bull partner up to build European AI computing services",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect Reuters technology partnership report."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: specific cross-company European AI compute-services partnership targets strategic infrastructure and supplier dependence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:19Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "compute.capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Schwarz Digits and Bull",
+            "class": "company"
+          },
+          "mechanism": "collaborates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-03",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The announcement is not evidence that planned capacity has been constructed, certified or delivered to customers.",
+          "text": "Schwarz Digits and Bull announce cooperation to provide European-jurisdiction AI computing services.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxObWQ2WUFhNnhncGQtQnItaF9xaUl3QU1qSXY0YVRlYWxFN3JpZ0U4M2V1V3Q2LWhOencyZTVaY3hnaUNVR1FUbkZLS2ZvREpZS1oxT0Y2Ym91cE9FRElVRDZsbDRYMzhlMGtXMVMxcm9TblN4cmlPNW9fb1psM1E1ZUN2VE9iRVhHODMwSlBYZlp1RzJvNGRoTEZIVDhlTXJJSmJJZXVzbWV6ZjVQNGZHRjRwWl9XV3Q4UmtjZ2YzeE1tS3VFZHZr?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:9539ed766c33651f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxNU3R5Tk4tNFpqYnVHOFlYTE1JRFJiTWtDRUxDcng2cmt6blVQcFNXbEVtaHVLTUhkOFBhZFd2NDlacy1ISnVELWxhOXZEVjc2TkZfMWo3cFRQdU4tLTRrdHlWZWQzdEhkUkhOUWd4cGxjT1ZpX3ZtZWdnM1lscmJoRUxSQzhGNXI3ZFA2N2FpVWVOZWh2SWk5OEUyRDlYLWNRSjNOQw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "5ac570aa",
+      "identity_hash": "cf6927784ff28d6d",
+      "reader_title": "Horizon Europe innovation-ecosystems programme amended for 2026–27",
+      "reader_what": "The Commission’s amended work programme confirms European Innovation Ecosystems funding opportunities and startup–research support actions.",
+      "reader_why": "EIE transnational hubs and technology transfer calls create funded channels between researchers and company scale-ups.",
+      "reader_more": "The 2026–27 Horizon Europe programme was amended on 29 September 2026, including the European Innovation Ecosystems section. It supports networks linking regional innovation actors, startups and research organisations. The work programme specifies opportunities and eligibility; outcomes depend on future project selection and delivery.",
+      "deep_analysis": {
+        "work_kind": "amended official EU research funding work programme",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "The Commission’s amended work programme confirms European Innovation Ecosystems funding opportunities and startup–research support actions.",
+        "method_or_basis": "Official amended EU 2026–27 work-programme documentation and EISMEA portal confirm the 29 September 2026 amendment and EIE calls.",
+        "qualification": "Budget schedules are authorised calls, not an assertion that projects were selected or grants disbursed.",
+        "radar_relevance": "C: formal dated amendment to Horizon Europe funding programme has a direct European innovation-system and knowledge-transfer connection.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://news.google.com/rss/articles/CBMipAFBVV95cUxNU3R5Tk4tNFpqYnVHOFlYTE1JRFJiTWtDRUxDcng2cmt6blVQcFNXbEVtaHVLTUhkOFBhZFd2NDlacy1ISnVELWxhOXZEVjc2TkZfMWo3cFRQdU4tLTRrdHlWZWQzdEhkUkhOUWd4cGxjT1ZpX3ZtZWdnM1lscmJoRUxSQzhGNXI3ZFA2N2FpVWVOZWh2SWk5OEUyRDlYLWNRSjNOQw?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://eismea.ec.europa.eu/programmes/european-innovation-ecosystems_en; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_original_source",
+            "url": "https://eismea.ec.europa.eu/programmes/european-innovation-ecosystems_en",
+            "title": "Horizon Europe Work Programme 2026–2027: European Innovation Ecosystems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect amended official EU research funding work programme."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: formal dated amendment to Horizon Europe funding programme has a direct European innovation-system and knowledge-transfer connection."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:19Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Budget schedules are authorised calls, not an assertion that projects were selected or grants disbursed.",
+          "text": "The Commission’s amended work programme confirms European Innovation Ecosystems funding opportunities and startup–research support actions.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxNU3R5Tk4tNFpqYnVHOFlYTE1JRFJiTWtDRUxDcng2cmt6blVQcFNXbEVtaHVLTUhkOFBhZFd2NDlacy1ISnVELWxhOXZEVjc2TkZfMWo3cFRQdU4tLTRrdHlWZWQzdEhkUkhOUWd4cGxjT1ZpX3ZtZWdnM1lscmJoRUxSQzhGNXI3ZFA2N2FpVWVOZWh2SWk5OEUyRDlYLWNRSjNOQw?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:cf6927784ff28d6d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:def8a212cc8f073c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "65571289",
+      "identity_hash": "e3111dfe6bfe9889",
+      "reader_title": "Foresight and design thinking integrated for cellular-agriculture innovation",
+      "reader_what": "A research framework combines futures methods with human-centered design to help prototype and assess emerging innovations.",
+      "reader_why": "Connecting possible futures to prototyping makes scenarios more actionable for innovation design.",
+      "reader_more": "The article links exploratory foresight techniques to design-thinking processes and participatory innovation. Cellular agriculture is a worked application, but the combined workflow can be used in other emerging-technology sectors. The paper develops a process rather than demonstrating that its forecasts are objectively accurate.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed futures-methods framework",
+        "research_question": "What does the verified work establish about the transferable foresight method?",
+        "main_finding": "A research framework combines futures methods with human-centered design to help prototype and assess emerging innovations.",
+        "method_or_basis": "Matching full original 2025 Futures & Foresight Science paper outlines integrated foresight/design-thinking stages and applies them to cellular agriculture.",
+        "qualification": "The domain illustration demonstrates a conceptual/process framework, not general empirical proof of better forecasting accuracy.",
+        "radar_relevance": "B: a transferable foresight-to-design integration method is relevant beyond cellular agriculture for anticipatory technology innovation.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://doi.org/10.1002/ffo2.70018"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70018",
+            "title": "Democratization of Tomorrow's Plate: Synergizing Foresight Methods and Design Thinking in Designing Cellular Agriculture Innovations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect peer-reviewed futures-methods framework."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "B: a transferable foresight-to-design integration method is relevant beyond cellular agriculture for anticipatory technology innovation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:20Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Simbarashe Nhokovedzo, Petri Tapio and coauthors",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-09-02",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The domain illustration demonstrates a conceptual/process framework, not general empirical proof of better forecasting accuracy.",
+          "text": "A research framework combines futures methods with human-centered design to help prototype and assess emerging innovations.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:def8a212cc8f073c",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e3111dfe6bfe9889:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e2171da787e92c9b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f1a1e418",
+      "identity_hash": "3b9d02aa37b434f8",
+      "reader_title": "Researcher mobility depends on careers, facilities and recruitment context",
+      "reader_what": "A Dutch academic-mobility study finds that researchers’ relocation decisions combine career, institutional and disciplinary factors.",
+      "reader_why": "Talent attraction depends on research facilities, professional networks and career opportunities as well as recruitment policy.",
+      "reader_more": "The conference paper analyzes international researcher mobility through Dutch policy material and exploratory interviews. It finds different recruitment dynamics for career stages and scientific fields. This is historical, small-sample evidence about research talent policy rather than a current mobility statistic.",
+      "deep_analysis": {
+        "work_kind": "historical research policy conference paper / manuscript",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "A Dutch academic-mobility study finds that researchers’ relocation decisions combine career, institutional and disciplinary factors.",
+        "method_or_basis": "KNAW institutional repository contains original conference-abstract/manuscript text describing policy analysis and researcher/stakeholder interviews.",
+        "qualification": "Small exploratory interview sample and conference-paper status limit generalisation; this is historical evidence from 2017.",
+        "radar_relevance": "A route 3: original European research-system study directly investigates researcher recruitment, mobility and science-policy instruments.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://pure.knaw.nl/portal/en/publications/2dbaa8d7-7c14-4013-846d-8226e07eb90f"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://pure.knaw.nl/portal/en/publications/attracting-the-best-and-the-brightest-policies-and-mobility-behav/",
+            "title": "Attracting the best and the brightest: policies and mobility behavior in the academic “war for talent”",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect historical research policy conference paper / manuscript."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 3: original European research-system study directly investigates researcher recruitment, mobility and science-policy instruments."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:21Z",
+      "deep_scan_package_id": "worker-a-20261109T062153Z-3929e266e48f",
+      "claims": [
+        {
+          "object": "talent.recruitment_abroad",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Scholten, Koier and Horlings",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2017-06-08",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Small exploratory interview sample and conference-paper status limit generalisation; this is historical evidence from 2017.",
+          "text": "A Dutch academic-mobility study finds that researchers’ relocation decisions combine career, institutional and disciplinary factors.",
+          "confidence": "medium",
+          "record_key": "historical:id:e2171da787e92c9b",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3b9d02aa37b434f8:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTUNndjVLeVhlcEE2X3Z3SmpoazQxQmlMQl9hTHkydHY1WUoxVXRBTVVBU24xdk1lc1pZYXI2aUFBeHJlbG9QWXhRVnQ3UWRQUlNBRVhGdWduZUM5dWhINVdSdXQySExqVkNTZEdKNURfdGhuMkZkbS1ySmQ3dmNCYm4wUTBIbmZFRlA0?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "ad7c7772",
+      "identity_hash": "f3944166e24399c8",
+      "reader_title": "EU budget impasse threatens planned chip and AI initiatives",
+      "reader_what": "A Politico Europe report says unresolved EU budget questions have slowed talks on strategic policy initiatives, including AI and chips.",
+      "reader_why": "Unsettled funding expectations may impede agreement on new technology, research and industrial measures.",
+      "reader_more": "The report describes legislative work and policy coordination slowed by uncertainty around forthcoming EU budget arrangements. EU chip and AI initiatives are among the areas reportedly affected. As this is a news account reproduced outside its original publisher, the evidence supports a review-grade account of a negotiating obstacle, not a formal policy freeze.",
+      "deep_analysis": {
+        "work_kind": "attributed European policy news report",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "A Politico Europe report says unresolved EU budget questions have slowed talks on strategic policy initiatives, including AI and chips.",
+        "method_or_basis": "Research-news indexing establishes exact article identity; an attributed syndicated original-text reproduction describes the policy impasse in detail.",
+        "qualification": "The claims are attributed to contemporaneous reporting; delayed negotiations are not cancellation or a final EU legal decision.",
+        "radar_relevance": "C: the reported impasse is a dateable current constraint on prospective strategic EU technology programmes.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTUNndjVLeVhlcEE2X3Z3SmpoazQxQmlMQl9hTHkydHY1WUoxVXRBTVVBU24xdk1lc1pZYXI2aUFBeHJlbG9QWXhRVnQ3UWRQUlNBRVhGdWduZUM5dWhINVdSdXQySExqVkNTZEdKNURfdGhuMkZkbS1ySmQ3dmNCYm4wUTBIbmZFRlA0?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://www.internationly.com/news/eu-budget-battle-paralyzes-brussels-on-ai-chips-the-arctic-and-agriculture; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://www.internationly.com/news/eu-budget-battle-paralyzes-brussels-on-ai-chips-the-arctic-and-agriculture",
+            "title": "EU budget battle paralyzes Brussels on AI chips, the Arctic and agriculture",
+            "evidence_used": true
+          },
+          {
+            "kind": "bibliographic_identity_record",
+            "url": "https://www.politico.eu/",
+            "title": "Politico Europe — original source publisher (full text not recovered)",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Original Politico publisher access was blocked. Article identity corroborated by external indexing; full article wording studied only through attributed third-party reproduction and classified REVIEW, not conclusive official evidence."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: the reported impasse is a dateable current constraint on prospective strategic EU technology programmes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:21Z",
+      "deep_scan_package_id": "worker-b-20261109T062211Z-45de908a35e0",
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union institutions",
+            "class": "eu_body"
+          },
+          "mechanism": "conditions",
+          "direction": "becomes_conditional",
+          "status": "in_negotiation",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The claims are attributed to contemporaneous reporting; delayed negotiations are not cancellation or a final EU legal decision.",
+          "text": "A Politico Europe report says unresolved EU budget questions have slowed talks on strategic policy initiatives, including AI and chips.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTUNndjVLeVhlcEE2X3Z3SmpoazQxQmlMQl9hTHkydHY1WUoxVXRBTVVBU24xdk1lc1pZYXI2aUFBeHJlbG9QWXhRVnQ3UWRQUlNBRVhGdWduZUM5dWhINVdSdXQySExqVkNTZEdKNURfdGhuMkZkbS1ySmQ3dmNCYm4wUTBIbmZFRlA0?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:f3944166e24399c8:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5d0af4e6f227ccec": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "24d812f9",
+      "identity_hash": "972ba73c4b4396bf",
+      "reader_title": "OECD eastern-border development report is not an R&I study",
+      "reader_what": "The OECD report examines living conditions and economic attractiveness in EU eastern border regions.",
+      "reader_more": "The OECD report compares the socio-economic attractiveness of European eastern border territories, including public services, mobility and investment. Although innovation is relevant to regional growth, the report’s primary object is broad territorial development. It is not an evidence-led study of Europe’s R&I system as required for A.",
+      "deep_analysis": {
+        "work_kind": "OECD historical regional development report",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "The OECD report examines living conditions and economic attractiveness in EU eastern border regions.",
+        "method_or_basis": "Full 2025 OECD Regional Development Papers No. 163 analyzes demography, services, infrastructure, territorial development and investment conditions.",
+        "qualification": "Innovation and related investments are secondary regional-development factors, not its core systematic research-policy object.",
+        "radar_relevance": "A routes 1–3 fail the central R&I-subject gate: the work is comparative regional development rather than focused evidence on European research institutions, finance, talent or technology capacity.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://doi.org/10.1787/4fcb80c2-en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/08/reinforcing-the-attractiveness-of-europe-s-eastern-border-regions_466f5273/4fcb80c2-en.pdf",
+            "title": "Reinforcing the attractiveness of Europe’s Eastern Border Regions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect OECD historical regional development report."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NOT_IN_RADAR_SCOPE",
+        "reason": "OECD primary report is credible and European, but its explanatory object is the attractiveness of Eastern Border Regions. R&I matters appear among many territorial conditions, not as an evidenced central mechanism of the European research system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-09T07:08:21Z",
+      "deep_scan_package_id": "worker-b-20261109T062211Z-45de908a35e0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-11-08T09:23:20Z"
+  "claims_updated_at": "2026-11-09T07:08:21Z"
 }

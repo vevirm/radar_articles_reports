@@ -6,33 +6,25 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3810** (Main **1922** + Historical **1888**)
-- Automatic queue still needing V2 verification: **70** (Main **30** + Historical **40**)
-- Currently assigned to workers: **70** (Main **30** + Historical **40**)
+- Authoritative V2 verified: **3842** (Main **1949** + Historical **1893**)
+- Automatic queue still needing V2 verification: **38** (Main **3** + Historical **35**)
+- Currently assigned to workers: **38** (Main **3** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **45**
+- Hands-on verification needed: **46**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261109T062153Z-3929e266e48f`
-- Assigned unresolved records: **33**
-  1. `link:https://www.belfercenter.org/research-analysis/eu-tech-sovereignty-package-policy-brief` — EU Tech Sovereignty Package Policy Brief
-  2. `link:https://www.bertelsmann-stiftung.de/fileadmin/files/Projekte/eupinions/ST-EZ_PolicyBrief_Ctrl_Alt_Europe_2026.pdf` — CTRL + ALT + Europe?
-  3. `link:https://doi.org/10.1080/1540496x.2026.2755507` — How the EU Regulates the Outflow of Emerging Technologies: A Perspective from China
-  4. `link:https://doi.org/10.1080/13511610.2026.2676831` — Demand-side policies under scrutiny: triggering process innovations and innovative sales of European firms
-  5. `link:https://doi.org/10.48550/arxiv.2609.39198` — DSDyn-VLA: A Dual-Stream Dynamic Manipulation Framework with Motion Perception, Future Awareness, and Realtime Correction
-  6. `link:https://news.google.com/rss/articles/CBMid0FVX3lxTE5MZU1PZkxBWV8wUnRPTkc1b3htUzBXY3pYVnMwN1pDSDhKcS1oU1RybUVfNnBLYXQ3b1ZqdFV5OTJTQTZrSFZZbnRtbjZsVTF3dEFDcnVzZGdfQzdtTC1UM0NUY205VUdzTHhyOXpWUWl4Y2JIRnZN?oc=5` — European Chips Act - Shaping Europe’s digital future
-  7. `link:https://news.google.com/rss/articles/CBMi8AFBVV95cUxPQ0tzY3lYOHJrMEQ5ZjlvME5wMHFDN0h2MVQzenMtaTluV2V4dGZwZGRHRURhZVVKUjF5dDJra2dIODRfckY5Q2tGcEFkRWxTMUFrSFVyZXZEQm00dVZmY3FDN1BuZDBHZGo0cF9La3h3YnhtazkzMDNrTWdXRE9pOTFfYmhLSmN3SWY2U1VqUDltVS1vQTBYSXgwaV9vWFZvVXVVZjVVU25kd3I5aTRERF91RlBQX20wZzRUM3BpcWlCZ1pyUUJnM1loRldLeUJlTW5xTHNmVGNHN0dybVhmeWNMdFVFaTdQbzI2Z3ZfbGM?oc=5` — Europe’s farmers face hidden dangers – new research shows how to make the job safer - projects.research-and-innovation.ec.europa.eu
-  8. `historical:id:bff6eedb336d941d` — Institut Jacques Delors - The future of the European budget: What does the Commission’s White Paper mean for EU finances?
-  - … plus 25 more in the package manifest
+- Current package: `worker-a-20261109T071743Z-c169fd0fab46`
+- Assigned unresolved records: **3**
+  1. `link:https://doi.org/10.1093/ia/iiag155` — Foundational vs functional: competing logics of digital sovereignty in China and the European Union
+  2. `link:https://doi.org/10.1080/1540496x.2026.2754815` — Does Financial Slack Facilitate Disclosed Corporate Artificial Intelligence Adoption? Evidence from Chinese Listed Firms — recovery attempt 3/3
+  3. `link:https://doi.org/10.1080/1540496x.2026.2755507` — How the EU Regulates the Outflow of Emerging Technologies: A Perspective from China — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20261109T062211Z-45de908a35e0`
-- Assigned unresolved records: **2**
-  1. `link:https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTUNndjVLeVhlcEE2X3Z3SmpoazQxQmlMQl9hTHkydHY1WUoxVXRBTVVBU24xdk1lc1pZYXI2aUFBeHJlbG9QWXhRVnQ3UWRQUlNBRVhGdWduZUM5dWhINVdSdXQySExqVkNTZEdKNURfdGhuMkZkbS1ySmQ3dmNCYm4wUTBIbmZFRlA0?oc=5` — EU budget battle paralyzes Brussels on AI chips, the Arctic and agriculture
-  2. `historical:id:5d0af4e6f227ccec` — Reinforcing the attractiveness of Europe’s Eastern Border Regions
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
@@ -96,3 +88,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://news.google.com/rss/articles/CBMiogFBVV95cUxNWXFqdkNNWHFLLTNFOXlPOU8xei11Q0ZENTNldXQ1cFNTcXZkYmUydlhqcV8xRXcwempVRlZyLWJBUEgtZFN0OWljX1RmNEsyNjZZakRObnRkZ0NCVGtnd3prT1dJYUw4Z0F6Z2Q5dlRDZmZsZThwb2txdXN1YU5LNnphU3AtLXZRazNUcUJJcVpiNkFNUGFvOVNCLTcza1dOZnc?oc=5` — **European CEOs warn against surrendering frontier AI to US and China** — attempts: 3/3 — Politico Europe — 2026-10-22T18:05Z — Primary substantive evidence remained inaccessible after documented recovery. — https://news.google.com/rss/articles/CBMiogFBVV95cUxNWXFqdkNNWHFLLTNFOXlPOU8xei11Q0ZENTNldXQ1cFNTcXZkYmUydlhqcV8xRXcwempVRlZyLWJBUEgtZFN0OWljX1RmNEsyNjZZakRObnRkZ0NCVGtnd3prT1dJYUw4Z0F6Z2Q5dlRDZmZsZThwb2txdXN1YU5LNnphU3AtLXZRazNUcUJJcVpiNkFNUGFvOVNCLTcza1dOZnc?oc=5
 - `link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxQSmQwRDRsSWF2MlRVb01PdXB4ZE9MWUtNQnBJXzZzZTUySWFoS18xbXZXN18yMXlTU1pmTjIxRXlIa2kzZTd3MFhHZnI2T2NINEJ1MFN2YUxUSm03TkdUOE52TFdsbDMtSndtZ1hqUTRHb09ncUdQOFZUWWk4R1BCYW5tN3F6bEtjbWJKb29UX0pmdkVWcG5mUGp0RWtkU1hwQm5VLWZvaTJzWTNrb3B2NGh3bXdTUlc4UFJ1QnpSWjdlRkRIN0hDNEM0TDNUTUla?oc=5` — **Should Europe be more regional in its research and innovation?** — attempts: 3/3 — Research Professional News — 2026-10-22T12:04Z — Primary substantive evidence remained inaccessible after documented recovery. — https://news.google.com/rss/articles/CBMi0AFBVV95cUxQSmQwRDRsSWF2MlRVb01PdXB4ZE9MWUtNQnBJXzZzZTUySWFoS18xbXZXN18yMXlTU1pmTjIxRXlIa2kzZTd3MFhHZnI2T2NINEJ1MFN2YUxUSm03TkdUOE52TFdsbDMtSndtZ1hqUTRHb09ncUdQOFZUWWk4R1BCYW5tN3F6bEtjbWJKb29UX0pmdkVWcG5mUGp0RWtkU1hwQm5VLWZvaTJzWTNrb3B2NGh3bXdTUlc4UFJ1QnpSWjdlRkRIN0hDNEM0TDNUTUla?oc=5
 - `link:https://doi.org/10.1093/ejhf/xuag328` — **DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial** — attempts: 3/3 — European Journal of Heart Failure — 2026-10-30 — Substantive text of the exact October 30 European Journal of Heart Failure research letter remains inaccessible despite the required third-pass recovery. The source article is confirmed by Oxford Academic, but a different October 7 European Heart Journal paper on CURE-SHOCK cannot substitute for its content. — https://doi.org/10.1093/ejhf/xuag328
+- `link:https://doi.org/10.1080/08911916.2026.2743824` — **Beyond the European Chips Act: Mobilizing Public Banks to Solve Europe’s Semiconductor Supply Chain Paradox** — attempts: 3/3 — International Journal of Political Economy — 2026-11-04 — This third-attempt hard-final item has publisher-verified identity, but DOI/publisher text is blocked and an OpenAlex GROBID document is demonstrably a different MOSFET textbook chapter. — https://doi.org/10.1080/08911916.2026.2743824
