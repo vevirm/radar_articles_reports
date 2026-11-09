@@ -530,4 +530,99 @@ class RegionalDiscoveryTests(unittest.TestCase):
         self.assertEqual(len(report['regional_leads']), 1)
         self.assertEqual(report['regional_leads'][0]['radar_check_status'], 'indexed_lead_not_verified')
 
+class SourceRotationTests(unittest.TestCase):
+    """New source diversity remains a soft preference, never a quality shortcut."""
+
+    @staticmethod
+    def row(doi, venue, score, *, issue='Health research', group='Asia & Pacific',
+            country='India'):
+        return (score, group, {
+            'candidate_id': 'REL-' + doi,
+            'doi': '10.1234/' + doi,
+            'source': venue,
+            'focus_issue': issue,
+            'focus_group': group,
+            'focus_region': country,
+            'discovery_provider': 'openalex',
+        })
+
+    def test_source_providers_alternate_across_runs_and_pairs(self):
+        from relevance_focus import focused_search_plan
+        focus = {'Health research': 'biomedical research'}
+        first = list(focused_search_plan(8, focus=focus))
+        next_run = list(focused_search_plan(9, focus=focus))
+        self.assertEqual([p[5] for p in first[:2]], ['openalex', 'crossref'])
+        self.assertEqual([p[5] for p in next_run[:2]], ['crossref', 'openalex'])
+        self.assertEqual({p[5] for p in first}, {'openalex', 'crossref'})
+        self.assertEqual({p[5] for p in next_run}, {'openalex', 'crossref'})
+        self.assertEqual(len({(p[4], p[5]) for p in first}), len(first))
+
+    def test_archive_venue_counts_do_not_double_count_recovered_snapshot(self):
+        from relevance_focus import previous_publication_venues
+        old = {'candidates': [
+            {'doi': '10.1234/ONE', 'source': 'Journal A'},
+            {'doi': '10.1234/TWO', 'source': 'Journal A'}]}
+        latest = {'candidates': [
+            {'doi': '10.1234/one', 'source': 'JOURNAL A'},
+            {'doi': '10.1234/three', 'source': 'Journal B'}]}
+        counts = previous_publication_venues(latest, [old])
+        self.assertEqual(counts['journal a'], 2)
+        self.assertEqual(counts['journal b'], 1)
+
+    def test_similarly_scored_venue_rotates_from_previous_publications(self):
+        from relevance_focus import balanced_candidates
+        from collections import Counter
+        a = self.row('a', 'Journal A', 82)
+        b = self.row('b', 'Journal B', 82)
+        chosen = balanced_candidates({'a': a, 'b': b}, 1,
+                                     venue_history=Counter({'journal a': 12}))
+        self.assertEqual(chosen[0]['source'], 'Journal B')
+
+    def test_venue_diversity_applies_across_different_countries(self):
+        from relevance_focus import balanced_candidates
+        shared_germany = self.row('sg', 'Repeated Journal', 82,
+                                  group='EU / UK', country='Germany')
+        other_germany = self.row('og', 'German Journal', 82,
+                                 group='EU / UK', country='Germany')
+        shared_france = self.row('sf', 'Repeated Journal', 82,
+                                 group='EU / UK', country='France')
+        other_france = self.row('of', 'French Journal', 82,
+                                group='EU / UK', country='France')
+        picked = {i: row for i, row in enumerate((
+            shared_germany, other_germany, shared_france, other_france))}
+        chosen = balanced_candidates(picked, 2)
+        self.assertEqual(len({r['source'] for r in chosen}), 2)
+        self.assertEqual({r['focus_region'] for r in chosen}, {'Germany', 'France'})
+
+    def test_source_rotation_never_displaces_much_stronger_work(self):
+        from relevance_focus import balanced_candidates
+        from collections import Counter
+        strongest = self.row('a', 'Journal A', 89)
+        weaker = self.row('b', 'Journal B', 68)
+        chosen = balanced_candidates({'a': strongest, 'b': weaker}, 1,
+                                     venue_history=Counter({'journal a': 100}))
+        self.assertEqual(chosen[0]['source'], 'Journal A')
+
+    def test_single_eligible_publication_source_is_not_blocked(self):
+        from relevance_focus import balanced_candidates
+        from collections import Counter
+        only = self.row('a', 'Journal A', 80)
+        chosen = balanced_candidates({'a': only}, 10,
+                                     venue_history=Counter({'journal a': 100}))
+        self.assertEqual([r['source'] for r in chosen], ['Journal A'])
+
+    def test_non_eu_ceiling_remains_unchanged_with_source_rotation(self):
+        from relevance_focus import balanced_candidates
+        from collections import Counter
+        picked = {}
+        for n in range(10):
+            picked['core' + str(n)] = self.row('c' + str(n), 'Journal A', 81,
+                                                group='EU / UK', country='Germany')
+            picked['outside' + str(n)] = self.row('x' + str(n), 'Journal B', 81)
+        chosen = balanced_candidates(picked, 10,
+                                     venue_history=Counter({'journal a': 5}))
+        self.assertLessEqual(sum(r['focus_group'] != 'EU / UK' for r in chosen), 4)
+        self.assertEqual(len(chosen), 10)
+
+
 if __name__ == '__main__': unittest.main()
