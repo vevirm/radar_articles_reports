@@ -333,7 +333,11 @@ class RegionalDiscoveryTests(unittest.TestCase):
                          clock=lambda: current[0], pause=lambda delay: current.__setitem__(0,current[0]+delay),
                          archive_path=archive)
             document = json.loads(target.read_text())
-            self.assertEqual(json.loads(archive.read_text()), document)
+            stored = json.loads(archive.read_text())
+            self.assertEqual(stored['archive_mode'], 'cumulative-doi-deduplicated')
+            self.assertEqual(stored['work_count'], 1)
+            self.assertEqual(stored['latest_batch_work_count'], 1)
+            self.assertEqual(stored['candidates'][0]['doi'], document['candidates'][0]['doi'])
             self.assertEqual(len(document['candidates']), 1)
             self.assertEqual(document['candidates'][0]['focus_region'], 'India')
             url, query, _ = session.requests[0]
@@ -369,6 +373,134 @@ class RegionalDiscoveryTests(unittest.TestCase):
         self.assertGreater(output['statistics']['source_rows_before_2025_or_undated'], 0)
         self.assertFalse(any(c.args[0] == 'historical/historical.json' for c in loader.call_args_list))
         self.assertEqual(files['radar_active.json']['strand_a'], [old, recent])
+
+
+    def test_doi_identity_normalizes_provider_links_and_preserves_legacy_leads(self):
+        from relevance_focus import doi_identity, lead_identity
+        self.assertEqual(doi_identity({'doi': 'HTTPS://DOI.ORG/10.1234/ABC/'}), '10.1234/abc')
+        self.assertEqual(doi_identity({'url': 'https://dx.doi.org/10.1234/abc'}), '10.1234/abc')
+        self.assertEqual(lead_identity({'candidate_id': 'REL-legacy'}), 'id:REL-legacy')
+
+    def test_cumulative_archive_retains_old_batches_and_collapses_duplicate_dois(self):
+        from relevance_focus import cumulative_discoveries
+        first = {'batch_id': 'first', 'candidates': [
+            {'title': 'India study', 'doi': '10.1234/INDIA', 'date': '2025-01-10'}],
+            'discovery_stats': {}}
+        latest = {'batch_id': 'latest', 'candidates': [
+            {'title': 'Brazil study', 'doi': '10.1234/BRAZIL', 'date': '2026-03-10'}],
+            'discovery_stats': {}}
+        fresh = {'batch_id': 'fresh', 'candidates': [
+            {'title': 'Canada study', 'doi': '10.1234/CANADA', 'date': '2026-04-10'},
+            {'title': 'Duplicate India study', 'url': 'https://doi.org/10.1234/india'}],
+            'discovery_stats': {'successful_requests': 8}}
+        cumulative = cumulative_discoveries(latest, fresh, slot=101,
+                                            older_snapshots=[first, latest])
+        self.assertEqual(cumulative['work_count'], 3)
+        self.assertEqual(cumulative['latest_batch_work_count'], 2)
+        self.assertEqual(cumulative['rotation_index'], 101)
+        self.assertEqual([x['title'] for x in cumulative['candidates']],
+                         ['India study', 'Brazil study', 'Canada study'])
+        self.assertEqual(cumulative['candidates'][0]['first_seen_batch_id'], 'first')
+        self.assertEqual(latest['candidates'][0]['title'], 'Brazil study')
+
+    def test_rotation_advances_every_successful_run_and_legacy_timestamp(self):
+        from relevance_focus import next_rotation_slot
+        from datetime import datetime, timezone
+        now = datetime(2026, 11, 9, 14, 0, tzinfo=timezone.utc)
+        self.assertEqual(next_rotation_slot({'rotation_index': 150}, now), 151)
+        previous = {'compiled_at': '2026-11-09T13:38:53+00:00'}
+        self.assertEqual(next_rotation_slot(previous, now),
+                         int(datetime(2026, 11, 9, 13, 38, tzinfo=timezone.utc).timestamp() // 14400) + 1)
+        self.assertEqual(next_rotation_slot({}, now), int(now.timestamp() // 14400))
+
+    def test_discovery_remembers_previous_doi_and_only_emits_new_batch(self):
+        import json
+        import tempfile
+        from relevance_focus import discover, load
+        vocabulary = load('topic_vocabulary.json', [])
+
+        original = self._india_openalex()
+        canada = {**original, 'display_name': 'Biomedical research in Canada',
+                  'doi': 'https://doi.org/10.1234/biomed-canada-2026',
+                  'publication_date': '2026-02-05'}
+        canada['abstract_inverted_index'] = {word: [i] for i, word in
+                 enumerate('Biomedical research investment and clinical trials in Canada'.split())}
+        class Response:
+            ok = True
+            status_code = 200
+            def json(self):
+                return {'results': [original, canada]}
+        class Session:
+            def __init__(self): self.headers = {}
+            def get(self, url, params, timeout): return Response()
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / 'batch.json'
+            archive = Path(tmp) / 'archive.json'
+            prior = {'batch_id': 'older', 'compiled_at': '2026-11-09T13:38:53+00:00',
+                     'candidates': [{'title': original['display_name'],
+                                     'doi': '10.1234/BIOMED-INDIA-2025',
+                                     'date': '2025-03-11'}]}
+            archive.write_text(json.dumps(prior))
+            plan_slots = []
+            def fake_plan(slot, focus=None):
+                plan_slots.append(slot)
+                return iter([('Asia & Pacific', 'India', 'Health research',
+                              'Current state / developments',
+                              'biomedical research India', 'openalex', 1)])
+            # Two identical searches: only Canada should be newly sent to Radar.
+            # An additional new country is deliberately NOT matched by an India
+            # query; use one expected region for both candidate titles instead.
+            canada['display_name'] = 'Biomedical research investment in India and Canada'
+            canada['abstract_inverted_index'] = {word: [i] for i, word in
+                 enumerate('Biomedical research and clinical trials in India and Canada'.split())}
+            for run_no in range(2):
+                t = [5.0]
+                with patch('relevance_focus.focus_areas', return_value={'Health research':'biomedical research'}), \
+                     patch('relevance_focus.focused_search_plan', side_effect=fake_plan), \
+                     patch('relevance_focus.historical_discovery_snapshots', return_value=[]), \
+                     patch('relevance_focus.load', side_effect=lambda n, d: vocabulary if n == 'topic_vocabulary.json' else {}):
+                    discover(target, max_seconds=5, archive_path=archive,
+                             session=Session(), clock=lambda: t[0],
+                             pause=lambda d: t.__setitem__(0, t[0]+d))
+                emitted = json.loads(target.read_text())['candidates']
+                stored = json.loads(archive.read_text())
+                self.assertEqual(len(emitted), 1 if run_no == 0 else 0)
+                self.assertEqual(len(stored['candidates']), 2)
+                self.assertEqual(stored['work_count'], 2)
+            self.assertEqual(plan_slots[1], plan_slots[0] + 1)
+
+    def test_legacy_git_snapshots_are_recovered_in_original_order(self):
+        import json
+        import subprocess
+        import tempfile
+        from relevance_focus import historical_discovery_snapshots
+        with tempfile.TemporaryDirectory() as tmp:
+            def git(*args):
+                subprocess.run(['git', '-C', tmp, *args], check=True,
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            git('init', '-q')
+            git('config', 'user.name', 'Test')
+            git('config', 'user.email', 'test@example.org')
+            path = Path(tmp) / 'Relevance Stuff' / 'regional_discoveries.json'
+            path.parent.mkdir(parents=True)
+            for batch in ('first', 'second'):
+                path.write_text(json.dumps({'batch_id': batch, 'candidates': [
+                    {'title': batch, 'doi': '10.1234/' + batch}]}))
+                git('add', '--', 'Relevance Stuff/regional_discoveries.json')
+                git('commit', '-qm', batch)
+            with patch('relevance_focus.ROOT', Path(tmp)):
+                recovered = historical_discovery_snapshots()
+            self.assertEqual([x['batch_id'] for x in recovered], ['first', 'second'])
+
+    def test_archive_rejects_malformed_json_without_erasing_it(self):
+        import tempfile
+        from relevance_focus import read_discovery_archive
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / 'regional.json'
+            p.write_text('NOT JSON')
+            with self.assertRaises(ValueError):
+                read_discovery_archive(p)
+            self.assertEqual(p.read_text(), 'NOT JSON')
 
     def test_one_hit_backfill_keeps_verified_standard_and_no_synthetic_promotion(self):
         # The independent one-hit backfill still requires the same KEEP and
