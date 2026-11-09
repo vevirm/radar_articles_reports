@@ -19,7 +19,6 @@ on:
       - R&I Radar Scan
       - R&I Radar Quick Scan — 6 min
       - R&I Radar Focused Strand Scan — 20 min
-      - Historical Top-Tier Scan
       - Deep Scan V2 — Import Returned Results
     types: [completed]
 
@@ -66,7 +65,7 @@ jobs:
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
-        run: python scripts/relevance_focus.py discover --max-seconds 1500 --output "$RUNNER_TEMP/relevance_candidates.json"
+        run: python scripts/relevance_focus.py discover --max-seconds 1500 --output "$RUNNER_TEMP/relevance_candidates.json" --archive "Relevance Stuff/regional_discoveries.json"
       - name: Admit ONLY focused candidates through Radar A/B/C checks (no second discovery)
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
         env:
@@ -103,7 +102,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' ':!radar_active.json' ':!stuff/main_radar_stuff.xlsx' ':!stuff/source_merit_ranking.xlsx' ':!Relevance Stuff/relevance_stuff.xlsx' || true)"
+          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' ':!radar_active.json' ':!stuff/main_radar_stuff.xlsx' ':!stuff/source_merit_ranking.xlsx' ':!Relevance Stuff/relevance_stuff.xlsx' ':!Relevance Stuff/regional_discoveries.json' || true)"
           if [[ -n "$tracked_unexpected" ]]; then
             printf 'Restoring unrelated tracked scanner changes:\n%s\n' "$tracked_unexpected"
             while IFS= read -r file; do
@@ -111,7 +110,7 @@ jobs:
               git restore --worktree -- "$file"
             done <<< "$tracked_unexpected"
           fi
-          unexpected_untracked="$(git ls-files --others --exclude-standard | grep -v -x 'Relevance Stuff/relevance_stuff.xlsx' || true)"
+          unexpected_untracked="$(git ls-files --others --exclude-standard | grep -v -x 'Relevance Stuff/relevance_stuff.xlsx' | grep -v -x 'Relevance Stuff/regional_discoveries.json' || true)"
           if [[ -n "$unexpected_untracked" ]]; then
             printf 'Removing unrelated untracked runtime files:\n%s\n' "$unexpected_untracked"
             while IFS= read -r file; do
@@ -128,6 +127,9 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- 'Relevance Stuff/relevance_stuff.xlsx'
+          if [[ -f 'Relevance Stuff/regional_discoveries.json' ]]; then
+            git add -- 'Relevance Stuff/regional_discoveries.json'
+          fi
           if [[ "${{ github.event_name }}" == 'schedule' || ( "${{ github.event_name }}" == 'workflow_dispatch' && "${{ inputs.mode }}" == 'scan' ) ]]; then
             git add -- radar.json radar_active.json stuff/main_radar_stuff.xlsx stuff/source_merit_ranking.xlsx
           fi
