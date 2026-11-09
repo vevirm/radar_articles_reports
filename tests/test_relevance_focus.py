@@ -326,8 +326,11 @@ class RegionalDiscoveryTests(unittest.TestCase):
                               'Current state / developments',
                               'biomedical research India',
                               'openalex', 1)])
+            # Keep this one-publication fixture independent of real Git history.
+            # Historical snapshot recovery is tested separately below.
             with patch('relevance_focus.focus_areas', return_value={'Health research':'biomedical research'}), \
                  patch('relevance_focus.load', side_effect=lambda name,default: vocabulary if name == 'topic_vocabulary.json' else {}), \
+                 patch('relevance_focus.historical_discovery_snapshots', return_value=[]), \
                  patch('relevance_focus.focused_search_plan', return_value=one_plan):
                 discover(target, max_seconds=5, session=session,
                          clock=lambda: current[0], pause=lambda delay: current.__setitem__(0,current[0]+delay),
