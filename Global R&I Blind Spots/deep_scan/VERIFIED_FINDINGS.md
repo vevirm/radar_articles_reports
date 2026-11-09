@@ -1,8 +1,323 @@
 # Global R&I Deep Scan — verified findings
 
-Imported: 2026-11-06T10:22:16.913548+00:00. **32 verified KEEP** findings, **19 REVIEW**, **9 DROP**.
+Imported: 2026-11-09T21:34:55.562941+00:00. **50 verified KEEP** findings, **24 REVIEW**, **10 DROP**.
 
 A KEEP records a source-checked reviewer assessment; the GitHub importer validates evidence structure but does not itself browse or certify truth.
+
+## RIKEN Program for Drug Discovery and Medical Technology Platforms (DMP)
+
+**Japan · Health, biotechnology and life sciences** | 2024-11-01 | confidence medium
+
+**Verified finding:** RIKEN’s DMP is a functioning multi-platform translational R&D capability, not merely a planned programme: RIKEN IMS reports eight 2025 collaborations and AI/molecular-simulation design work on over ten targets, while a DMP-associated cell-vaccine project (aAVC-CoV-2) appears in Japan’s independent clinical-trial registry as a Phase I safety/immunogenicity study with recruitment no longer open by 21 October 2026.
+
+**Evidence:** [RIKEN Program for Drug Discovery and Medical Technology Platforms (DMP)](https://www.riken.jp/en/research/labs/trip/dmp/) — RIKEN DMP platform overview; RIKEN IMS Annual Report 2025 "Linkage to DMP" (8 collaborative programmes, &gt;10 drug-design targets); Kagawa University 1 Nov 2024 press release; Japanese clinical trial register jRCT2063240097 last updated 21 Oct 2026.
+
+**Independent check:** University co-investigator release and national clinical-trial register on different domains identify a real DMP-related trial (jRCT2063240097). Registry page was indexed with substantive bilingual records but direct web-open returned 403; corroboration also exists in accessible Kagawa University dated release. These do not establish efficacy or regulator approval. [1](https://www.kagawa-u.ac.jp/covid-19baavc-cov-2/) [2](https://jrct.mhlw.go.jp/latest-detail/jRCT2063240097)
+
+**Why global R&I matters:** RIKEN couples basic target discovery, computational/structural biology, candidate optimisation and clinical translation via shared platform teams and partner hospitals. A clinically registered project is concrete evidence of the translational pathway functioning.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: Original Radar source included as candidate. — Not promoted to verified findings.
+
+**Limitations:** DMP existed before 2025; do not call entire platform newly founded in 2026. Its site and internal annual report are self-reports, while trial registry independently establishes study existence/status only. Phase I safety-immunogenicity registration does not demonstrate successful vaccine efficacy or clinical authorization.
+
+
+## China and Limits to the European Union's Geoeconomic Turn
+
+**China · Technology leadership and industrial capacity** | 2026-07-06 | confidence medium
+
+**Verified finding:** Two independently readable 2026 studies establish a structural governance constraint in EU–China technological and research relations: national discretion in Dutch semiconductor export licensing coexists with EU-level research-security eligibility and screening measures; China-directed knowledge/equipment flows are governed across both EU and member-state levels.
+
+**Evidence:** [China and Limits to the European Union's Geoeconomic Turn](https://onlinelibrary.wiley.com/doi/full/10.1111/jcms.70140) — Article comparative case discussion of 5G and export-control competences.
+
+**Independent check:** Independent Springer paper (different authors and domain) documents EU de-risking restrictions and continued research cooperation; Dutch government’s licensing change independently confirms member-state authority. Together they validate structural governance fragmentation but cannot prove effects on Chinese R&D productivity. [1](https://link.springer.com/article/10.1007/s44216-026-00080-0) [2](https://www.government.nl/latest/news/2025/01/15/klever-export-controls-on-advanced-semiconductor-manufacturing-equipment-to-be-tightened)
+
+**Why global R&I matters:** EU research-security rules plus country-level licensing/spectrum controls create fragmented project eligibility, information-flow and high-end-equipment pathways facing China-linked scientists and firms.
+
+**Main Radar comparison (confirms_main_radar):** Exact main-Radar topic. confirms: Because export controls and 5G security remain member state competences, they are hard tests of EU geoeconomic power, and the EU frames China primarily as a source of direct risks rather than a broad strategic rival. — Main-Radar description is supported as an interpretation of EU institutional competences, but not verified as a China technology-performance finding.
+
+**Limitations:** Both papers are policy-document/comparative analyses, not quantitative measurements of Chinese technology capability. Dutch controls evidence policy action, not effects on Chinese patenting, deployment or bilateral grant flows. The valid finding is an institutional constraint, not China technological weakness.
+
+- Existing main Radar A: [China and Limits to the European Union's Geoeconomic Turn](https://doi.org/10.1111/jcms.70140)
+
+## Shared gains, secure links: rethinking EU-Asia digital cooperation – CEPS
+
+**Taiwan · Research security and international cooperation** | 2026-06-19 | confidence medium
+
+**Verified finding:** A June 2026 CEPS analysis identifies an EU–Asia digital cooperation architecture in which Taiwan participates mainly through practical sectoral, research, industry and member-state routes rather than an EU–Taiwan formal Digital Partnership; legal/geopolitical constraints shape access.
+
+**Evidence:** [Shared gains, secure links: rethinking EU-Asia digital cooperation – CEPS](https://cdn.ceps.eu/2026/06/2026-08-FPU-EU-Asia-digital-cooperation.pdf) — CEPS report executive summary, country-partnership modes and digital cooperation recommendations.
+
+**Independent check:** European Commission lists Taiwan-related R&I co-funding arrangements; independent Institut Montaigne policy study describes concrete EU–Taiwan semiconductor collaboration; corroborates informal and practical links, not the lack of formal Digital Partnership by itself. [1](https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/bilateral-cooperation-science-and-technology-agreements-non-eu-countries_en) [2](https://institutmontaigne.org/ressources/pdfs/publications/semiconductors-in-eu-taiwan-relations-bridging-gaps-building-trust-policy-paper.pdf)
+
+**Why global R&I matters:** Project-level science funding, digital standards dialogue and supply-chain research ties allow cooperation with Asian partners under different political and legal structures; Taiwan’s route differs from formally established EU digital partnerships.
+
+**Main Radar comparison (extends_main_radar):** Exact main-Radar topic. extends: EU-Asia digital partnerships operate in a fragmented ecosystem without unifying institutional or legal architecture, so goals remain underachieved; the authors recommend anchoring alignment in research and innovation collaboration, broadening engagement beyond governments, and using sectoral minilateral formats, with non-recognition-dependent channels for Taiwan. — Distinguish an EU Digital Partnership treaty-type label from existing EC/Taiwan co-funding and bilateral science arrangements.
+
+**Limitations:** Policy-options synthesis and interviews, not causal outcome evaluation; avoid claiming that Taiwan has zero formal EU research links or that no cooperation mechanism currently exists. The EC lists existing co-funding arrangements.
+
+- Existing main Radar A: [Shared gains, secure links: rethinking EU-Asia digital cooperation – CEPS](https://cdn.ceps.eu/2026/06/2026-08-FPU-EU-Asia-digital-cooperation.pdf)
+
+## WIPO Global Innovation Index 2026 — cross-country innovation benchmarking
+
+**Russia · Technology leadership and industrial capacity** | 2026-09-29 | confidence medium
+
+**Verified finding:** Russia’s WIPO GII ranking moved from 45th in 2021 to 58th of 139 in 2026 (rank uncertainty 52–65), while its 2026 tracker finds a sharp 2024–2025 decline in venture deal counts. A separate Dsight 2025 venture dataset also reports a large decline in deal counts (42%) and investment (10%) for its own Russian market sample.
+
+**Evidence:** [WIPO Global Innovation Index 2026 — cross-country innovation benchmarking](https://www.wipo.int/gii-ranking/en/russian-federation?dir=ASC&sort=position) — WIPO country profile: GII Ranking (2020–2026), Innovation Inputs/Outputs, Global Innovation Tracker short-term measures; independent Dsight Venture Eurasia 2025 industry survey summary.
+
+**Independent check:** Independent market trackers separately report declining Russian VC volume/deal count; figures differ from WIPO because populations, definitions and samples differ. Do not state the WIPO -59.7% was replicated. [1](https://www.kamaflow.com/en/post/market-in-wait-and-see-mode-results-of-dsights-venture-eurasia-2025/) [2](https://www.kommersant.ru/doc/8360595)
+
+**Why global R&I matters:** Shrinking venture deal volumes constrain commercialization and startup scale-up despite continued scientific and industrial activity; Russia’s input/output rankings and longer run trajectory suggest an imbalanced innovation-system environment.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: Cross-country benchmarking, check country coverage and availability of Russia; missing data cannot support a finding. — Preserve as benchmark lead; do not treat a composite rank improvement as evidence of recovered innovation performance.
+
+**Limitations:** GII composite rankings are sensitive to indicator set, publication lags and measurement uncertainty (2026 rank confidence band 52–65). VC data coverage uncertain and possibly sparse under sanctions; rank is not an evaluation of defence R&D or proof of economic-policy causation.
+
+
+## WIPO Global Innovation Index 2026 — China innovation and global clusters
+
+**China · Technology leadership and industrial capacity** | 2026-09-29 | confidence high
+
+**Verified finding:** WIPO ranks China 10th in Global Innovation Index 2026 (among 139 countries), with notably stronger innovation output than input components (output rank 5, input rank 22) and 25 of the world’s top 100 science/technology clusters.
+
+**Evidence:** [WIPO Global Innovation Index 2026 — China innovation and global clusters](https://www.wipo.int/edocs/gii-ranking/2026/cn.pdf) — WIPO GII 2026 China economy profile, headline score/rank, Inputs/Outputs and cluster indicators.
+
+**Independent check:** US NSF State of U.S. Science and Engineering 2026 independently benchmarks the much larger scale of China’s R&D enterprise and comparative intensity using 2024 sources; corroborates capacity, not GII rank arithmetic. [1](https://www.ncses.nsf.gov/pubs/nsbsep20261/figure/29)
+
+**Why global R&I matters:** Scale, concentration in advanced urban research clusters and knowledge-output measures underpin an important China–EU competition/cooperation structural contrast; strong outputs do not show causation by any single industrial policy.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: International index of 2026 innovation and technology clusters, carefully distinguish patent quantities, innovative outcomes, and investment. — China’s 25 top-100 clusters is a WIPO-defined geographic aggregation; do not infer 25 globally leading companies or treat rank as underlying causal proof.
+
+**Limitations:** Composite ranks are sensitive to indicator choices, sampling periods, patent-citation definitions and confidence intervals. 2026 GII often compiles 2024/2025 indicators, not only 2026 achievements; it is not an independent audit of official China 2025 expenditure values.
+
+
+## WIPO Global Innovation Index 2026 country profile and innovation indicators — South Korea
+
+**South Korea · Innovation systems, infrastructure and knowledge transfer** | 2026-09-29 | confidence high
+
+**Verified finding:** South Korea placed fourth in WIPO Global Innovation Index 2026, alongside continued high R&D intensity: NSF international data place Korea near 5.1% of GDP in 2024 versus the EU27 near 2.1%.
+
+**Evidence:** [WIPO Global Innovation Index 2026 country profile and innovation indicators — South Korea](https://www.wipo.int/en/web/global-innovation-index/2026/index) — GII 2026 global ranking chart and Korean country-profile rank; NSF Global R&D comparison.
+
+**Independent check:** Independent U.S. National Science Foundation/NCSES 2026 international comparison shows Korea’s R&D intensity exceeds that of the EU27 on 2024 data, corroborating a structural research-intensity difference. [1](https://www.ncses.nsf.gov/pubs/nsbsep20261/figure/29)
+
+**Why global R&I matters:** Long-term R&D investment intensity and performance across advanced manufacturing, digital technologies and scientific institutions point to a structurally R&D-intensive innovation system relative to the EU average.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: Independent LLM review is required to identify any substantive 2026 change in South Korea innovation indicators, methodology and comparison with the existing EU-centred Radar. The index is international statistical evidence, not standalone proof of a causal improvement. — Structural difference is durable high intensity, not an asserted 2026 ranking surge.
+
+**Limitations:** Rank is composite and stable, not itself a new improvement or proof of all firms' ability to innovate; intensity uses 2024 (not 2026) and does not prove output per unit of spending.
+
+
+## The Neo-Academic Cold War: Political Traumas and Transnational Paranoia
+
+**China · Innovation systems, infrastructure and knowledge transfer** | 2026-08-10 | confidence medium
+
+**Verified finding:** The essay’s structural claim of fragmentation in science cooperation is corroborated in narrower observable terms: OECD analysis of Scopus finds China’s international collaboration intensity declined over 2020–2023 mainly through fewer US–China co-authored papers while China–EU research links continued to strengthen; NSF reports China international coauthor share was 16% in 2024, down from a 2018 peak of 22%.
+
+**Evidence:** [The Neo-Academic Cold War: Political Traumas and Transnational Paranoia](https://link.springer.com/article/10.1057/s41307-026-00465-z) — Full essay sections on Chinese/global transnational science cooperation, cited bibliometrics, new semi-autonomous networks; independent OECD STI Outlook 2025, scientific cooperation chapter Figures 2.1–2.4; US NSF NCSES 2026 collaboration article.
+
+**Independent check:** Separate OECD/NSF sources based on Scopus/Science-Metrix bibliometrics validate directional international-coauthor decline and continuing links; they do not prove the essay’s causal political claims, nor support blanket assertion that China–EU cooperation fell. [1](https://www.oecd.org/en/publications/oecd-science-technology-and-innovation-outlook-2025_5fe57b90-en/full-report/reconfiguring-scientific-co-operation-in-a-changing-geopolitical-environment_73f32116.html?wcmmode=json) [2](https://ncses.nsf.gov/pubs/nsbsep20261/figure/22)
+
+**Why global R&I matters:** Restrictions, security screening, geopolitical risk and domestic coauthor capacity can shift scientific knowledge flows; China’s international cooperation is rebalanced rather than uniformly shut down.
+
+**Main Radar comparison (confirms_main_radar):** Exact main-Radar topic. confirms: Global science is fragmenting into semi-autonomous cooperation silos under multipolar rivalry, with China and Europe positioned as relative beneficiaries of US decline and open science and collective problem-solving as the principal casualties. — Do not infer China is the sole actor or assume author affiliation determines geography of an academic-cold-war claim.
+
+**Limitations:** The essay is interpretive and polemical; strong assertions about political intent should not be represented as measured science. Independent bibliometrics pertain to 2018–2024 not full 2026, differ by database and counting methods, and cannot isolate policy causality.
+
+- Existing main Radar A: [The Neo-Academic Cold War: Political Traumas and Transnational Paranoia](https://doi.org/10.1057/s41307-026-00465-z)
+
+## Cleantech innovation, industrial decarbonisation and global competition: Focus on China
+
+**China · Technology leadership and industrial capacity** | 2026-09-17 | confidence medium
+
+**Verified finding:** A 2026 European Parliament briefing identifies China’s long-lived industrial policy model—demand subsidies, producer support, temporary localisation and integrated industrial clusters—as a mechanism for clean-technology scaling. Independently, IEA finds China has around 85% of solar and 80% of lithium-ion battery supply-chain production capacity (2024), supporting a structural industrial-strength finding, not the causal contribution of each policy.
+
+**Evidence:** [Cleantech innovation, industrial decarbonisation and global competition: Focus on China](https://op.europa.eu/en/publication-detail/-/publication/4fe7e0f5-b309-11f1-81de-01aa75ed71a1/language-en) — EU publication record: full substantive policy synopsis (industrial support, market protection, R&D/industrial clusters) and IEA Energy Technology Perspectives 2026 chapter supply-chain capacity statistics.
+
+**Independent check:** Independent international energy agency tracks supply-chain concentration and 2020–2025 investment history; supports China structural scale, not a proven causality chain from individual subsidies or a 2026 production milestone. [1](https://www.iea.org/reports/energy-technology-perspectives-2026/supply-chain-risks-and-industrial-competitiveness) [2](https://www.iea.org/reports/energy-technology-perspectives-2026/energy-technology-manufacturing-and-trade)
+
+**Why global R&I matters:** Policy-backed early industrial scaling, dense upstream/downstream clusters, manufacturing learning cycles and large R&D pools create low-cost manufacturing and rapid iteration. EU implications are supply-chain dependency, industrial diversification and R&D-to-scale coordination.
+
+**Main Radar comparison (confirms_main_radar):** Exact main-Radar topic. confirms: China’s long-term industrial policy and clustered value chains generate system-wide competitive pressure on European cleantech industries and research/innovation investment. — Not promoted to verified findings.
+
+**Limitations:** Full 2026 policy briefing PDF was not independently opened; only its substantive issuing-body synopsis was visible. IEA production-capacity shares differ by technology and base year; market share/production capacity is not innovation efficiency or quality. Industrial policy causality remains qualitative.
+
+- Existing main Radar A: [Cleantech innovation, industrial decarbonisation and global competition: Focus on China](https://op.europa.eu/o/opportal-service/download-handler?identifier=4fe7e0f5-b309-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=)
+
+## Japan's security policy under Prime Minister Takaichi
+
+**Japan · Research security and international cooperation** | 2026-09-03 | confidence medium
+
+**Verified finding:** A September 2026 Finnish Institute of International Affairs analysis documents Japan's security-policy reorientation under Prime Minister Takaichi, including tighter linkages between scientific/industrial capabilities, economic security, defence procurement and dual-use technologies.
+
+**Evidence:** [Japan's security policy under Prime Minister Takaichi](https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf) — FIIA briefing paper pp. 1–10, implications for defence, economic security and cooperation.
+
+**Independent check:** Japanese Ministry of Defense 2026 white-paper section records official defence-industry planning and technology links, confirming policy context from a distinct government domain; independent of FIIA authorship, not an impact audit. [1](https://www.mod.go.jp/j/press/wp/wp2026/html/n420401000.html)
+
+**Why global R&I matters:** Economic-security and defence-industrial priorities connect universities, public R&D entities and private advanced-technology suppliers; this changes incentives for dual-use technology development and research partnerships.
+
+**Main Radar comparison (extends_main_radar):** Exact main-Radar topic. extends: Takaichi is consolidating a realist security agenda through expanded defence exports, dual-use R&D and economic-security measures, shifting Japan from arms importer toward co-producer. — Extends national-security framing to R&I institutional coordination; achievements must not be inferred from planned reforms.
+
+**Limitations:** Independent analyst policy brief, not systematic industry outcome evaluation. Japanese Defence Ministry corroboration reflects government intent and consultation but not realized commercial/defence innovation effects.
+
+- Existing main Radar A: [Japan's security policy under Prime Minister Takaichi](https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf)
+
+## Japan officially joins Horizon Europe
+
+**Japan · Research security and international cooperation** | 2026-07-30 | confidence high
+
+**Verified finding:** Japan became an associated country to Horizon Europe Pillar II on 30 July 2026, allowing eligible Japan-based organisations to coordinate projects, compete for programme grants and participate broadly on similar terms to EU participants within that pillar.
+
+**Evidence:** [Japan officially joins Horizon Europe](https://era.gv.at/news-items/japan-officially-joins-horizon-europe/) — ERA Portal announcement body; EC Japan page, Policy background, Pillar II eligibility.
+
+**Independent check:** European Commission official association page is a separate institutional domain and authoritative agreement description; Japanese foreign ministry also reports conclusion of association. Exact Pillar II restriction independently established. [1](https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/association-horizon-europe/japan_en) [2](https://www.mofa.go.jp/press/release/pressite_000001_02554.html)
+
+**Why global R&I matters:** Formal association reduces administrative funding barriers in EU–Japan transnational collaborative research, gives access to calls in Global Challenges/European Industrial Competitiveness, and supports joint innovation teams.
+
+**Main Radar comparison (confirms_main_radar):** Exact main-Radar topic. confirms: Japan's association to Horizon Europe took effect on 30 July 2026, granting Japanese participants equal-terms access and extending the programme to the largest-population associated country. — Correct any broad assertion of full-programme equality: membership applies to Horizon Europe Pillar II.
+
+**Limitations:** Legal/programme eligibility changed, but funded proposals, actual joint patents and benefits will materialise only later. Pillars I and III must NOT be presented as automatically covered.
+
+- Existing main Radar C: [Japan officially joins Horizon Europe](https://era.gv.at/news-items/japan-officially-joins-horizon-europe/)
+
+## RIKEN Center for Quantum Computing (RQC)
+
+**Japan · Technology leadership and industrial capacity** | 2025-07-08 | confidence medium
+
+**Verified finding:** Japan has moved from RIKEN’s 64-qubit domestic superconducting research computer (2023) to a reported 256-qubit system developed with Fujitsu (2025), while RIKEN Center for Quantum Computing houses superconducting, optical, semiconductor and atom-based efforts.
+
+**Evidence:** [RIKEN Center for Quantum Computing (RQC)](https://www.riken.jp/en/research/labs/rqc/) — RIKEN RQC Overview and listed research teams; Science Japan 2025/07/08 article, first paragraphs.
+
+**Independent check:** Science Japan (Japan Science and Technology Agency publication, separate domain and editorial account) corroborates July 2025 256-qubit prototype and specific engineering change, but may rely on institutional announcements, not third-party benchmark testing. [1](https://sj.jst.go.jp/news/202507/n0708-01p.html)
+
+**Why global R&I matters:** Public-private lab/industry co-development and vertical hardware integration convert fundamental research into larger experimental platforms while maintaining alternative physical modalities.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: Original Radar source included as candidate. — This is a multi-year evidence-supported technical capacity shift, not a claim of quantum computing utility over classical methods.
+
+**Limitations:** Count of physical qubits is not fault-tolerant logical-qubit count, quantum advantage or production readiness. RIKEN programme page is undated; the dated machine progression is supported by the 2025 external report.
+
+
+## Statistical Communiqué on National Expenditures on Science and Technology in 2025
+
+**China · Research funding, institutions and talent** | 2026-10-16 | confidence medium
+
+**Verified finding:** China’s official finalized 2025 R&D survey reports CNY 3,928.82bn spending (+8.2% nominal YoY), 2.80% GDP intensity, CNY 283.46bn basic research, and 77.4% enterprise-performed expenditure; the broader scale/intensity shift is directionally consistent with independently compiled earlier-year NSF international R&D indicators and WIPO 2026 measures of Chinese research and patenting output, but precise 2025 Chinese figures remain official estimates.
+
+**Evidence:** [Statistical Communiqué on National Expenditures on Science and Technology in 2025](https://www.stats.gov.cn/english/PressRelease/202610/t20261019_1965621.html) — Final national 2025 R&D communiqué sections on performer type, basic vs applied vs experimental R&D and GDP intensity; independently compiled NSF international 2024 spending comparison plus WIPO 2026 China global innovation output indicators.
+
+**Independent check:** NCSES 2026 international comparison and WIPO 2026 innovation indicators independently place China among major global R&D and output systems and support a multi-year scale/intensity structural difference. Neither re-measures China’s CNY 3,928.82bn 2025 outlay or validates the 77.4% enterprise share. [1](https://www.ncses.nsf.gov/pubs/nsbsep20261/figure/29) [2](https://www.wipo.int/en/web/global-innovation-index/2026/index)
+
+**Why global R&I matters:** High enterprise R&D share, increasing research-intensity and basic-research funding enlarge national capacity for industrial and scientific programmes; the path from spending to productivity or social returns requires independent outcome evaluation.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: Chinese 2025 R&D expenditure release, including basic-research share and intensity. Government-reported statistics are primary evidence of reported figures; compare with OECD methodology and independent series. — Differentiate source date (Oct 16), posting (Oct 17) and package record (Oct 19).
+
+**Limitations:** Statistical survey not audited by an independent external body for 2025 totals; growth nominal unless adjusted. Cross-country PPP/currency, denominator and reporting convention changes complicate comparison. VERIFY official number as an official report, NOT externally audited actual GDP-normalized innovation output.
+
+
+## The UK–Ukraine ResearchBridge: Accelerating Reconstruction through Science & Innovation \| Royal Society
+
+**Ukraine · Research security and international cooperation** | 2026-07-28 | confidence medium
+
+**Verified finding:** The 2026 UK–Ukraine ResearchBridge report records a functioning institutional collaboration architecture and March 2026 workshop to connect UK/Ukrainian science with reconstruction priorities; this is a new partnership/process, not proof of completed reconstruction innovations.
+
+**Evidence:** [The UK–Ukraine ResearchBridge: Accelerating Reconstruction through Science & Innovation \| Royal Society](https://royalsociety.org/-/media/policy/publications/2026/uk-ukraine-research-bridge-workshop-report.pdf) — PDF executive/overview and workshop sections on programme, reconstruction priorities and examples.
+
+**Independent check:** Separately hosted UCL institutional project record confirms active ResearchBridge purpose, partners and collaboration methods; UCL is a programme participant, hence not an independent impact audit. [1](https://www.ucl.ac.uk/bartlett/research-projects/2026/oct/uk-ukraine-researchbridge)
+
+**Why global R&I matters:** Connects Ukrainian scientists, universities, public-sector organizations and UK R&I institutions to identify joint priorities and develop programmes despite wartime disruption and damaged research capacity.
+
+**Main Radar comparison (confirms_main_radar):** Exact main-Radar topic. confirms: Participants identify priority collaboration areas and call for sustained structures that connect researchers, align needs and reduce practical barriers. — Verified an active research-cooperation mechanism; do not infer measurable reconstruction outcomes from a workshop report.
+
+**Limitations:** Workshop/project reporting with self-selected participants and illustrative opportunities, not longitudinal impact evaluation. Royal Society PDF text was accessible but the web screenshot service denied the selected page; substantive PDF contents were still read in textual form.
+
+- Existing main Radar A: [The UK–Ukraine ResearchBridge: Accelerating Reconstruction through Science & Innovation \| Royal Society](https://royalsociety.org/-/media/policy/publications/2026/uk-ukraine-research-bridge-workshop-report.pdf)
+
+## Advanced Semiconductor Science Program (ASSP)
+
+**Japan · Technology leadership and industrial capacity** | 2025-12-16 | confidence medium
+
+**Verified finding:** RIKEN’s ASSP is part of a real 2025–2026 Japanese semiconductor R&D organisation and funded edge-AI design pipeline, not only an undated vision: Japan Science and Technology Agency selected a RIKEN-led Edge Intelligence for AI for Science project in Dec 2025; RIKEN’s ASSP Processor Design Platform Team advertises 2026 R&D on low-precision Bayesian deep-learning hardware–algorithm co-design and application-specific processors.
+
+**Evidence:** [Advanced Semiconductor Science Program (ASSP)](https://www.riken.jp/en/research/labs/trip/assp/) — RIKEN TRIP ASSP programme profile; JST 16 Dec 2025 eight selected projects, including RIKEN programme lead Makoto Taiji for Edge Intelligence for AI for Science; RIKEN 27 Jan 2026 job posting for ASSP Processor Design Platform Team.
+
+**Independent check:** JST independently confirms awarded project portfolio and original eligibility/call, while national researcher-job board republishes a concrete 2026 ASSP workstream. These substantiate active funding and organisation, not benchmarked device performance or realised energy savings. [1](https://www.jst.go.jp/pr/info/info1819/index.html) [2](https://www.jst.go.jp/program/edge-ai-semicon/overview/index.html) [3](https://jrecin.jst.go.jp/seek/SeekJorDetail?fn=0&id=D126011807&ln=1&ln_jor=1)
+
+**Why global R&I matters:** Cross-disciplinary basic semiconductor device research and computer-system co-design, connected to public research grants and engineering recruitment, links institutional science to prospective low-power AI applications and chiplet/3D approaches.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: Original Radar source included as candidate. — Not promoted to verified findings.
+
+**Limitations:** Program-level, grant-level and recruitment evidence validates an active institutional capability, not fabrication, silicon tape-out, power benchmark or commercial adoption. JST project publicly dated Dec 2025 and does not imply novel completed hardware in Nov 2026.
+
+
+## A new framework for industrial policy: the case of semiconductors in Japan and the United States
+
+**Japan · Technology leadership and industrial capacity** | 2026-07-24 | confidence high
+
+**Verified finding:** A 2026 multi-country paper finds Japan expanded and diversified semiconductor industrial-policy instruments after 2020: the study counts 8 interventions in 2010–2019 versus 29 in 2020–2023, reflecting greater government intervention across segments and technologies.
+
+**Evidence:** [A new framework for industrial policy: the case of semiconductors in Japan and the United States](https://link.springer.com/article/10.1007/s10961-026-10334-x) — Abstract, semiconductor industrial-policy comparison and Japanese intervention coding/results sections.
+
+**Independent check:** Independent Japan Ministry of Economy, Trade and Industry 2025 policy materials document large-scale multi-year support and named semiconductor investment/R&D programs, corroborating the actual post-2020 policy shift, not the article’s exact coded counts. [1](https://www.meti.go.jp/shingikai/sankoshin/shin_kijiku/pdf/20250603_7.pdf)
+
+**Why global R&I matters:** Subsidies and mission-oriented R&D support across fabs, advanced nodes, power semiconductors and equipment aim to rebuild domestic fabrication and supply resilience by combining industrial investment with applied R&D.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: Abstract Interest in industrial policy has intensified in recent years, calling for renewed conceptual understanding and more robust analytical tools. However, existing industrial policy frameworks remain insufficient to capture the complexity and dynamics of contemporary industrial systems and policies. To address this gap, this study proposes a novel industrial policy analysis framework comprising four analytically distinct yet interrelated dimensions: drivers shaping policy, value-chain segme — New not-in-main-Radar structural finding on Japan’s policy mix; coded interventions are study-defined, not observed productivity.
+
+**Limitations:** Document coding and 16 Japan interviews; counts depend on intervention definitions and chosen time windows, do not measure fab yields or innovation productivity. METI states planned ¥50 trillion combined investment to 2030, not realized investment.
+
+
+## Rethinking dual-use in quantum technology
+
+**United States · Technology leadership and industrial capacity** | 2026-08-26 | confidence high
+
+**Verified finding:** 2026 review of ten quantum dual-use studies documents a long-standing US/UK defence–science integration, contrasting the historically civilian-only EU research framework. In 2026 the US set out integrated quantum economic- and national-security R&D programmes.
+
+**Evidence:** [Rethinking dual-use in quantum technology](https://link.springer.com/article/10.1140/epjqt/s40507-026-00560-5) — Abstract and sections 2–4 (US/UK foundational funding, European reception, dual-use governance).
+
+**Independent check:** Two separate US government agencies document June/July 2026 integrated economic-security quantum policy and operational R&D aims, corroborating the institutional structure described by the academic authors; both are policy claims rather than independently audited success measures. [1](https://www.whitehouse.gov/presidential-actions/2026/06/ushering-in-the-next-frontier-of-quantum-innovation/) [2](https://www.nsf.gov/news/nsf-launches-project-triad-advance-quantum-technology-real)
+
+**Why global R&I matters:** Early defence/intelligence R&D, a coordinated National Quantum Initiative, and connected sensing/computing/networks pathways help quantum technology transfer across civilian and security applications. The source chiefly describes governance/institutions, not defence deployments.
+
+**Main Radar comparison (extends_main_radar):** Exact main-Radar topic. extends: The authors argue quantum technology has been dual-use since its foundational experiments, that this origin story is predominantly Anglo-American, and that dual-use denotes a status rather than resolving normative questions. — Extends US/EU contrast with concrete 2026 programmes; avoid presenting dual-use potential as validated battlefield impact.
+
+**Limitations:** Editorial/synthesis of ten themed contributions, not causal evaluation or a newly demonstrated machine. White House executive order and NSF Project Triad are statements of US policy and launch, not independent proof that deployment succeeded.
+
+- Existing main Radar A: [Rethinking dual-use in quantum technology](https://doi.org/10.1140/epjqt/s40507-026-00560-5)
+
+## Semiconductors in EU–Taiwan Relations: Bridging Gaps, Building Trust
+
+**Taiwan · Technology leadership and industrial capacity** | 2026-04-28 | confidence high
+
+**Verified finding:** A 2026 Institut Montaigne policy report finds EU–Taiwan semiconductor cooperation is substantial but asymmetric: Taiwanese manufacturing know-how and supply-chain control complement European equipment/materials capacity, while regulation/security complicate closer links.
+
+**Evidence:** [Semiconductors in EU–Taiwan Relations: Bridging Gaps, Building Trust](https://institutmontaigne.org/ressources/pdfs/publications/semiconductors-in-eu-taiwan-relations-bridging-gaps-building-trust-policy-paper.pdf) — Policy paper executive summary and EU–Taiwan semiconductor value-chain/investment recommendations.
+
+**Independent check:** European Commission State aid announcement independently confirms the Taiwanese-European ESMC joint venture, German public-aid authorization and future factory timetable; government approval is not evidence of completed fabrication. [1](https://ec.europa.eu/commission/presscorner/api/files/document/print/sw/ip_24_4287/)
+
+**Why global R&I matters:** Investment-backed joint fabrication and expertise transfer (including TSMC/Bosch/Infineon/NXP ESMC project in Dresden) can embed Taiwanese foundry methods into Europe’s chips ecosystem; political and trade restrictions affect collaboration.
+
+**Main Radar comparison (extends_main_radar):** Exact main-Radar topic. extends: The paper identifies gaps in EU-Taiwan semiconductor relations and argues for trust-building measures as the basis for deeper cooperation. — Avoid claiming 2026 operational output at ESMC Dresden: investment and State aid are planned/project-stage.
+
+**Limitations:** Qualitative stakeholder interviews and policy synthesis, not a plant-level causal study. European Commission ESMC approval establishes €5bn authorized German support and planned production; plant was not shown operational in 2026.
+
+- Existing main Radar A: [Semiconductors in EU–Taiwan Relations: Bridging Gaps, Building Trust](https://institutmontaigne.org/ressources/pdfs/publications/semiconductors-in-eu-taiwan-relations-bridging-gaps-building-trust-policy-paper.pdf)
+
+## When R&D workforce expansion does not translate into innovation capability: evidence from Türkiye’s Technopark ecosystem
+
+**Turkey · Innovation systems, infrastructure and knowledge transfer** | 2026-10-31 | confidence medium
+
+**Verified finding:** A 2026 Marmara-region qualitative study (38 manager/engineer interviews across eight technoparks and two R&D centres, as stated in its methods) identifies four practical constraints on conversion of rapidly expanding R&D employment into innovation: project competence, digital skills, mid-career retention, and unequal knowledge exchange.
+
+**Evidence:** [When R&D workforce expansion does not translate into innovation capability: evidence from Türkiye’s Technopark ecosystem](https://0-academic-oup-com.legcat.gov.ns.ca/spp/advance-article/doi/10.1093/scipol/scag087/9005904?searchresult=1) — Full article sections 3.1–3.3 (sampling/analysis), 4 (R&D FTE time series), 6.1–6.4 (interview themes) and 7.2 (limitations)..
+
+**Independent check:** European Commission Türkiye 2026 country report independently reports workforce scale and limited innovation relative to EU; secondary Eurostat-based time series confirms 2007–2024 workforce growth. Neither independently replicates interviews or establishes headcount causing an output gap. [1](https://publications.europa.eu/resource/cellar/4394204a-d86a-11f1-8501-01aa75ed71a1.0001.03/DOC_1) [2](https://apiardata.com/statistics/tr-rd-personnel-total/)
+
+**Why global R&I matters:** Personnel headcount growth requires complementary organisational absorptive capacity: mentoring, practical project work, AI/data-skills training, experienced researcher retention and firm–university knowledge-transfer routines.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in supplied main Radar. not in main radar: Abstract Many emerging economies use science, technology and innovation policy to expand R&D personnel, but larger research workforces do not necessarily generate stronger innovation capability. This article examines this problem through Türkiye as an illustrative emerging-economy case, where R&D personnel and researcher numbers have grown rapidly while selected innovation-output indicators continue to signal unresolved capability gaps. Drawing on comparative secondary indicators and semi-struct — Search metadata supports study design, not yet all substantive results; do not turn a single qualitative study into an economy-wide measured trend.
+
+**Limitations:** Purposeful, nonrandom Marmara sample of better-performing technoparks; observations cannot be projected to every Turkish firm or interpreted causally. Important internal arithmetic inconsistency: Table 1 states 18 managers and 20 engineers (total 38) but manager row counts listed as 14+4+4=22, alongside engineer 17+3=20. Verify table with author before quantitative use. 2024 FTE researcher figure is explicitly an estimate, not directly in official bulletin.
+
 
 ## Canada looks forward to deepening research and education cooperation with EU
 

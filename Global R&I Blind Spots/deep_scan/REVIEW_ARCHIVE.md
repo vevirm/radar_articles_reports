@@ -2,6 +2,222 @@
 
 All reviewed package items are retained here; only KEEP appears in VERIFIED_FINDINGS.md.
 
+## RIKEN Program for Drug Discovery and Medical Technology Platforms (DMP)
+
+**KEEP** — Japan / Health, biotechnology and life sciences
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://www.riken.jp/en/research/labs/trip/dmp/
+
+RIKEN’s DMP is a functioning multi-platform translational R&D capability, not merely a planned programme: RIKEN IMS reports eight 2025 collaborations and AI/molecular-simulation design work on over ten targets, while a DMP-associated cell-vaccine project (aAVC-CoV-2) appears in Japan’s independent clinical-trial registry as a Phase I safety/immunogenicity study with recruitment no longer open by 21 October 2026.
+
+## China and Limits to the European Union's Geoeconomic Turn
+
+**KEEP** — China / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://doi.org/10.1111/jcms.70140
+
+Two independently readable 2026 studies establish a structural governance constraint in EU–China technological and research relations: national discretion in Dutch semiconductor export licensing coexists with EU-level research-security eligibility and screening measures; China-directed knowledge/equipment flows are governed across both EU and member-state levels.
+
+## Shared gains, secure links: rethinking EU-Asia digital cooperation – CEPS
+
+**KEEP** — Taiwan / Research security and international cooperation
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://cdn.ceps.eu/2026/06/2026-08-FPU-EU-Asia-digital-cooperation.pdf
+
+A June 2026 CEPS analysis identifies an EU–Asia digital cooperation architecture in which Taiwan participates mainly through practical sectoral, research, industry and member-state routes rather than an EU–Taiwan formal Digital Partnership; legal/geopolitical constraints shape access.
+
+## WIPO Global Innovation Index 2026 — cross-country innovation benchmarking
+
+**KEEP** — Russia / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://www.wipo.int/en/web/global-innovation-index/2026/index
+
+Russia’s WIPO GII ranking moved from 45th in 2021 to 58th of 139 in 2026 (rank uncertainty 52–65), while its 2026 tracker finds a sharp 2024–2025 decline in venture deal counts. A separate Dsight 2025 venture dataset also reports a large decline in deal counts (42%) and investment (10%) for its own Russian market sample.
+
+## WIPO Global Innovation Index 2026 — China innovation and global clusters
+
+**KEEP** — China / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://www.wipo.int/en/web/global-innovation-index/2026/index
+
+WIPO ranks China 10th in Global Innovation Index 2026 (among 139 countries), with notably stronger innovation output than input components (output rank 5, input rank 22) and 25 of the world’s top 100 science/technology clusters.
+
+## WIPO Global Innovation Index 2026 country profile and innovation indicators — South Korea
+
+**KEEP** — South Korea / Innovation systems, infrastructure and knowledge transfer
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://www.wipo.int/en/web/global-innovation-index/2026/index
+
+South Korea placed fourth in WIPO Global Innovation Index 2026, alongside continued high R&D intensity: NSF international data place Korea near 5.1% of GDP in 2024 versus the EU27 near 2.1%.
+
+## 2025 national economic and social development science technology China
+
+**DROP** — China / Research funding, institutions and talent
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://www.stats.gov.cn/english/PressRelease/202602/t20260228_1962661.html
+
+Duplicate/superseded quantitative candidate for the same 2025 expenditure topic as #17. Retain the authoritative revised series in #17; archive #15 as DROP (superseded duplicate), not because preliminary source was fake.
+
+## Does Financial Slack Facilitate Disclosed Corporate Artificial Intelligence Adoption? Evidence from Chinese Listed Firms
+
+**REVIEW** — China / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://doi.org/10.1080/1540496x.2026.2754815
+
+Paper-specific methods/results remain wholly inaccessible; no direction, effect size, or causality may be claimed.
+
+## The Neo-Academic Cold War: Political Traumas and Transnational Paranoia
+
+**KEEP** — China / Innovation systems, infrastructure and knowledge transfer
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://doi.org/10.1057/s41307-026-00465-z
+
+The essay’s structural claim of fragmentation in science cooperation is corroborated in narrower observable terms: OECD analysis of Scopus finds China’s international collaboration intensity declined over 2020–2023 mainly through fewer US–China co-authored papers while China–EU research links continued to strengthen; NSF reports China international coauthor share was 16% in 2024, down from a 2018 peak of 22%.
+
+## Cleantech innovation, industrial decarbonisation and global competition: Focus on China
+
+**KEEP** — China / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://op.europa.eu/o/opportal-service/download-handler?identifier=4fe7e0f5-b309-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=
+
+A 2026 European Parliament briefing identifies China’s long-lived industrial policy model—demand subsidies, producer support, temporary localisation and integrated industrial clusters—as a mechanism for clean-technology scaling. Independently, IEA finds China has around 85% of solar and 80% of lithium-ion battery supply-chain production capacity (2024), supporting a structural industrial-strength finding, not the causal contribution of each policy.
+
+## Japan's security policy under Prime Minister Takaichi
+
+**KEEP** — Japan / Research security and international cooperation
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf
+
+A September 2026 Finnish Institute of International Affairs analysis documents Japan's security-policy reorientation under Prime Minister Takaichi, including tighter linkages between scientific/industrial capabilities, economic security, defence procurement and dual-use technologies.
+
+## Japan officially joins Horizon Europe
+
+**KEEP** — Japan / Research security and international cooperation
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://era.gv.at/news-items/japan-officially-joins-horizon-europe/
+
+Japan became an associated country to Horizon Europe Pillar II on 30 July 2026, allowing eligible Japan-based organisations to coordinate projects, compete for programme grants and participate broadly on similar terms to EU participants within that pillar.
+
+## RIKEN Center for Quantum Computing (RQC)
+
+**KEEP** — Japan / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://www.riken.jp/en/research/labs/rqc/
+
+Japan has moved from RIKEN’s 64-qubit domestic superconducting research computer (2023) to a reported 256-qubit system developed with Fujitsu (2025), while RIKEN Center for Quantum Computing houses superconducting, optical, semiconductor and atom-based efforts.
+
+## Statistical Communiqué on National Expenditures on Science and Technology in 2025
+
+**KEEP** — China / Research funding, institutions and talent
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://www.stats.gov.cn/english/PressRelease/202610/t20261019_1965621.html
+
+China’s official finalized 2025 R&D survey reports CNY 3,928.82bn spending (+8.2% nominal YoY), 2.80% GDP intensity, CNY 283.46bn basic research, and 77.4% enterprise-performed expenditure; the broader scale/intensity shift is directionally consistent with independently compiled earlier-year NSF international R&D indicators and WIPO 2026 measures of Chinese research and patenting output, but precise 2025 Chinese figures remain official estimates.
+
+## The UK–Ukraine ResearchBridge: Accelerating Reconstruction through Science & Innovation \| Royal Society
+
+**KEEP** — Ukraine / Research security and international cooperation
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://royalsociety.org/-/media/policy/publications/2026/uk-ukraine-research-bridge-workshop-report.pdf
+
+The 2026 UK–Ukraine ResearchBridge report records a functioning institutional collaboration architecture and March 2026 workshop to connect UK/Ukrainian science with reconstruction priorities; this is a new partnership/process, not proof of completed reconstruction innovations.
+
+## Global Fusion Energy Trends — Report from the F4E Fusion Observatory: Funding • Performance • Research • Innovation — A comparative Analysis of China, EU, Japan, UK, and the USA
+
+**REVIEW** — China / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf
+
+Cannot inspect assigned full report or reproduce its China-specific tables; independent construction activity corroborates broad momentum but not F4E exact totals.
+
+## Global Fusion Energy Trends — Report from the F4E Fusion Observatory: Funding • Performance • Research • Innovation — A comparative Analysis of China, EU, Japan, UK, and the USA
+
+**REVIEW** — Japan / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf
+
+Assigned full report tables and methods inaccessible, and the independently confirmed 2026 device milestone cannot substitute for verifying this F4E report’s quantitative comparison.
+
+## Advanced Semiconductor Science Program (ASSP)
+
+**KEEP** — Japan / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://www.riken.jp/en/research/labs/trip/assp/
+
+RIKEN’s ASSP is part of a real 2025–2026 Japanese semiconductor R&D organisation and funded edge-AI design pipeline, not only an undated vision: Japan Science and Technology Agency selected a RIKEN-led Edge Intelligence for AI for Science project in Dec 2025; RIKEN’s ASSP Processor Design Platform Team advertises 2026 R&D on low-precision Bayesian deep-learning hardware–algorithm co-design and application-specific processors.
+
+## Globalization unravelling? ASML and the geopolitics of Europe-China tech decoupling
+
+**REVIEW** — China / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://doi.org/10.1080/13563467.2026.2751102
+
+Full specific article not examined, leaving the causal claims and article’s evidence base unverified; additionally, direct output concerns Dutch policy, not demonstrated China semiconductor R&D results.
+
+## A new framework for industrial policy: the case of semiconductors in Japan and the United States
+
+**KEEP** — Japan / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://doi.org/10.1007/s10961-026-10334-x
+
+A 2026 multi-country paper finds Japan expanded and diversified semiconductor industrial-policy instruments after 2020: the study counts 8 interventions in 2010–2019 versus 29 in 2020–2023, reflecting greater government intervention across segments and technologies.
+
+## Rethinking dual-use in quantum technology
+
+**KEEP** — United States / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://doi.org/10.1140/epjqt/s40507-026-00560-5
+
+2026 review of ten quantum dual-use studies documents a long-standing US/UK defence–science integration, contrasting the historically civilian-only EU research framework. In 2026 the US set out integrated quantum economic- and national-security R&D programmes.
+
+## Semiconductors in EU–Taiwan Relations: Bridging Gaps, Building Trust
+
+**KEEP** — Taiwan / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://institutmontaigne.org/ressources/pdfs/publications/semiconductors-in-eu-taiwan-relations-bridging-gaps-building-trust-policy-paper.pdf
+
+A 2026 Institut Montaigne policy report finds EU–Taiwan semiconductor cooperation is substantial but asymmetric: Taiwanese manufacturing know-how and supply-chain control complement European equipment/materials capacity, while regulation/security complicate closer links.
+
+## When R&D workforce expansion does not translate into innovation capability: evidence from Türkiye’s Technopark ecosystem
+
+**KEEP** — Turkey / Innovation systems, infrastructure and knowledge transfer
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://doi.org/10.1093/scipol/scag087
+
+A 2026 Marmara-region qualitative study (38 manager/engineer interviews across eight technoparks and two R&D centres, as stated in its methods) identifies four practical constraints on conversion of rapidly expanding R&D employment into innovation: project competence, digital skills, mid-career retention, and unequal knowledge exchange.
+
+## How the EU Regulates the Outflow of Emerging Technologies: A Perspective from China
+
+**REVIEW** — China / Technology leadership and industrial capacity
+Package `gri-0413aa7b6254357614d00214`; 2026-11-09T21:34:55.562941+00:00.
+
+Source: https://doi.org/10.1080/1540496x.2026.2755507
+
+Full text and even reliable exact-article abstract inaccessible; retain rather than fabricating policy findings from topic/DOI.
+
 ## Canada looks forward to deepening research and education cooperation with EU
 
 **KEEP** — Canada / Research security and international cooperation
