@@ -15,9 +15,10 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import sys
 import time
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -359,6 +360,127 @@ def load(rel, default):
     except FileNotFoundError: return default
 
 
+
+def doi_identity(row):
+    """Stable DOI identity across Crossref/OpenAlex URL spellings and runs."""
+    if not isinstance(row, dict):
+        return ''
+    raw = clean(row.get('doi'))
+    if not raw:
+        link = clean(row.get('url') or row.get('link'))
+        parsed = urlsplit(link)
+        if parsed.netloc.casefold() in {'doi.org', 'www.doi.org', 'dx.doi.org'}:
+            raw = unquote(parsed.path.lstrip('/'))
+    raw = re.sub(r'^https?://(?:dx\.)?doi\.org/', '', raw, flags=re.I)
+    raw = re.sub(r'^doi\s*:', '', raw, flags=re.I).strip().rstrip('/')
+    return raw.casefold() if re.match(r'^10\.\d{4,9}/\S+$', raw, re.I) else ''
+
+
+def lead_identity(row):
+    """DOI first; preserve any legacy lead that lacks a DOI."""
+    doi = doi_identity(row)
+    if doi:
+        return 'doi:' + doi
+    if not isinstance(row, dict):
+        return ''
+    url = clean(row.get('url') or row.get('link')).casefold().rstrip('/')
+    if url:
+        return 'url:' + url
+    cid = clean(row.get('candidate_id'))
+    if cid:
+        return 'id:' + cid
+    title = clean(row.get('title')).casefold()
+    return 'title:' + title + '|' + clean(row.get('date')) if title else ''
+
+
+def read_discovery_archive(path):
+    """Read the scanner-owned archive without silently resetting invalid JSON."""
+    path = Path(path)
+    if not path.exists():
+        return {}
+    data = json.loads(path.read_text(encoding='utf8'))
+    if not isinstance(data, dict) or not isinstance(data.get('candidates'), list):
+        raise ValueError(f'Invalid Relevance Focus discovery archive: {path}')
+    return data
+
+
+def historical_discovery_snapshots():
+    """One-time migration: recover prior overwritten snapshots from Git history.
+
+    The workflow already checks out full Git history. This only reads the
+    Relevance Focus archive; it does not alter Git history or Radar records.
+    """
+    rel = 'Relevance Stuff/regional_discoveries.json'
+    try:
+        proc = subprocess.run(['git', '-C', str(ROOT), 'log', '--max-count=200',
+                               '--format=%H', '--', rel], capture_output=True,
+                              text=True, check=True, timeout=12)
+    except (FileNotFoundError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
+        print('Past regional snapshots unavailable; retaining current archive:',
+              type(exc).__name__, flush=True)
+        return []
+    recovered = []
+    for sha in proc.stdout.splitlines():
+        try:
+            old = subprocess.run(['git', '-C', str(ROOT), 'show', f'{sha}:{rel}'],
+                                 capture_output=True, text=True, check=True, timeout=12)
+            document = json.loads(old.stdout)
+            if isinstance(document, dict) and isinstance(document.get('candidates'), list):
+                recovered.append(document)
+        except (ValueError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
+            continue
+    # Git log is newest-first; restore oldest first so the earliest metadata
+    # wins when the same DOI appears in several archived batches.
+    return recovered[::-1]
+
+
+def next_rotation_slot(existing, now):
+    """One new search rotation per completed scan, not once per four hours."""
+    previous = existing.get('rotation_index') if isinstance(existing, dict) else None
+    if isinstance(previous, int) and previous >= 0:
+        return previous + 1
+    # Legacy latest-run snapshots have no rotation_index. Derive the previous
+    # slot from their timestamp so the first upgraded run also advances.
+    stamp = clean(existing.get('compiled_at')) if isinstance(existing, dict) else ''
+    if stamp:
+        try:
+            last = datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+            if last.tzinfo is not None:
+                return int(last.timestamp() // (4 * 3600)) + 1
+        except ValueError:
+            pass
+    return int(now.timestamp() // (4 * 3600))
+
+
+def cumulative_discoveries(existing, batch, *, slot, older_snapshots=()):
+    """Cumulative, DOI-deduplicated *leads*; never promotes them to verified.
+
+    The temporary batch passed to Radar admission is kept separate and only
+    contains never-seen-in-this-archive candidates. Earlier leads are retained
+    even if later searches do not rediscover them.
+    """
+    combined = {}
+    for document in [*older_snapshots, existing, batch]:
+        if not isinstance(document, dict):
+            continue
+        origin = clean(document.get('batch_id'))
+        for lead in document.get('candidates', []):
+            if not isinstance(lead, dict):
+                continue
+            key = lead_identity(lead)
+            if key and key not in combined:
+                combined[key] = {**lead, 'first_seen_batch_id':
+                                 clean(lead.get('first_seen_batch_id')) or origin}
+    archive = {**batch,
+               'archive_mode': 'cumulative-doi-deduplicated',
+               'rotation_index': slot,
+               'candidates': list(combined.values()),
+               'work_count': len(combined),
+               'latest_batch_work_count': len(batch['candidates']),
+               'discovery_stats': {**batch['discovery_stats'],
+                                   'cumulative_regional_leads': len(combined)}}
+    return archive
+
 def link_key(x):
     # Deep Scan's record_key preserves the case of URL paths, query strings, and
     # Google News opaque article identifiers. A lowercase URL is a DIFFERENT
@@ -507,10 +629,10 @@ def compile_records():
     stats['verified_kept_focus_matches'] = len(verified)
     stats['review_focus_matches'] = len(pending)
     stats['stored_only_focus_matches'] = sum(x['source_location'] == 'Stored Deep Scan / Reader' for x in verified + pending)
-    # The same scanner keeps its latest geographical discovery leads separately.
-    # These have *not* received KEEP or authoritative Deep Scan verification.
-    latest = load('Relevance Stuff/regional_discoveries.json', {})
-    latest_leads = latest.get('candidates', []) if isinstance(latest, dict) else []
+    # The scanner-owned cumulative archive keeps regional discovery leads across
+    # runs; none is promoted to verified without the authoritative Deep Scan.
+    archive = load('Relevance Stuff/regional_discoveries.json', {})
+    latest_leads = archive.get('candidates', []) if isinstance(archive, dict) else []
     test_results = {
         clean(row.get('candidate_id')): clean(row.get('status'))
         for row in (raw.get('curator_candidate_testing', {}).get('results', []) or [])
@@ -530,7 +652,7 @@ def compile_records():
             status = ('in_main_radar' if clean(lead.get('url')).casefold().rstrip('/') in in_main
                       else 'indexed_lead_not_verified')
         regional_leads.append({**lead, 'radar_check_status': status})
-    stats['latest_regional_indexed_leads'] = len(regional_leads)
+    stats['cumulative_regional_indexed_leads'] = len(regional_leads)
     return {
         'generated_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
         'verified': verified, 'pending': pending, 'regional_leads': regional_leads,
@@ -547,7 +669,7 @@ def compile_records():
 
 # Search geography rotates independently of the ordinary Radar's EU focus.
 # Fixed anchors preserve coverage of large research regions, including India;
-# rotating countries create new local combinations every 4-hour slot.
+# rotating countries create new local combinations every run.
 REGION_ANCHORS = {
     'EU / UK': ('European Union', 'United Kingdom', 'Germany'),
     'Americas': ('United States', 'Brazil'),
@@ -787,7 +909,14 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     if max_seconds <= 0:
         raise ValueError('Focused discovery duration must be positive')
     now = datetime.now(timezone.utc)
-    slot = int(now.timestamp() // (4*3600))
+    previous_archive = read_discovery_archive(archive_path) if archive_path else {}
+    slot = next_rotation_slot(previous_archive, now)
+    past_snapshots = (historical_discovery_snapshots()
+                      if archive_path and previous_archive.get('archive_mode') !=
+                      'cumulative-doi-deduplicated' else [])
+    seen_dois = {doi_identity(lead) for document in [*past_snapshots, previous_archive]
+                 for lead in document.get('candidates', []) if isinstance(lead, dict)}
+    seen_dois.discard('')
     api_key = clean(os.environ.get('OPENALEX_API_KEY'))
     crossref_mailto = clean(os.environ.get('CROSSREF_MAILTO'))
     known = {clean(x.get('link') or x.get('url')).lower().rstrip('/')
@@ -801,6 +930,10 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
         if isinstance(row, dict) and row.get('url'):
             known.add(clean(row['url']).lower().rstrip('/'))
     known.discard('')
+    for area in ('strand_a', 'strand_b', 'strand_c'):
+        for row in load('radar.json', {}).get(area, []):
+            if isinstance(row, dict) and doi_identity(row):
+                seen_dois.add(doi_identity(row))
     active_focus = focus_areas()
     if not active_focus:
         raise RuntimeError('No existing active Radar topics/issues to anchor relevance search')
@@ -898,7 +1031,8 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                 if rec is None:
                     continue
                 canonical, score, candidate = rec
-                if candidate['url'].lower().rstrip('/') in known:
+                if candidate['url'].lower().rstrip('/') in known or canonical in seen_dois:
+                    stats['already_seen_doi_or_radar_work'] += 1
                     continue
                 if canonical in picked and picked[canonical][0] >= score:
                     continue
@@ -948,7 +1082,14 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     if archive_path is not None:
         archive_path = Path(archive_path)
         archive_path.parent.mkdir(parents=True, exist_ok=True)
-        archive_path.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding='utf8')
+        merged = cumulative_discoveries(previous_archive, out, slot=slot,
+                                        older_snapshots=past_snapshots)
+        # Atomic replacement: an interrupted write never truncates prior leads.
+        temp_archive = archive_path.with_name(archive_path.name + '.tmp')
+        temp_archive.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding='utf8')
+        os.replace(temp_archive, archive_path)
+        print('Cumulative regional archive:', merged['work_count'], 'unique leads;',
+              len(past_snapshots), 'historical Git snapshots examined', flush=True)
     print('Focused discovery complete:',len(candidates),'new candidates;',dict(stats),'->',path,flush=True)
 
 
@@ -1057,7 +1198,7 @@ def main():
     p.add_argument('command',choices=['discover','scan','export-json'])
     p.add_argument('--output',type=Path,default=Path(os.getenv('RUNNER_TEMP','/tmp'))/'relevance_candidates.json')
     p.add_argument('--candidates',type=Path,default=Path(os.getenv('RUNNER_TEMP','/tmp'))/'relevance_candidates.json')
-    p.add_argument('--archive',type=Path,default=None,help='Scanner-owned snapshot of discovery leads for review')
+    p.add_argument('--archive',type=Path,default=None,help='Scanner-owned cumulative, DOI-deduplicated discovery archive')
     p.add_argument('--max-seconds',type=int,default=FOCUSED_DISCOVERY_SECONDS)
     args=p.parse_args()
     if args.command=='discover': discover(args.output,max_seconds=args.max_seconds,archive_path=args.archive)
