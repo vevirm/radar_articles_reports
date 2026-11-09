@@ -1,0 +1,153 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261109T062211Z-45de908a35e0",
+  "results": [
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTUNndjVLeVhlcEE2X3Z3SmpoazQxQmlMQl9hTHkydHY1WUoxVXRBTVVBU24xdk1lc1pZYXI2aUFBeHJlbG9QWXhRVnQ3UWRQUlNBRVhGdWduZUM5dWhINVdSdXQySExqVkNTZEdKNURfdGhuMkZkbS1ySmQ3dmNCYm4wUTBIbmZFRlA0?oc=5",
+      "source_hash": "ad7c7772",
+      "identity_hash": "f3944166e24399c8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied link did not give a usable matching full body: https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTUNndjVLeVhlcEE2X3Z3SmpoazQxQmlMQl9hTHkydHY1WUoxVXRBTVVBU24xdk1lc1pZYXI2aUFBeHJlbG9QWXhRVnQ3UWRQUlNBRVhGdWduZUM5dWhINVdSdXQySExqVkNTZEdKNURfdGhuMkZkbS1ySmQ3dmNCYm4wUTBIbmZFRlA0?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching document/report via https://www.internationly.com/news/eu-budget-battle-paralyzes-brussels-on-ai-chips-the-arctic-and-agriculture; checked against title, organization, date and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_matching_source",
+            "url": "https://www.internationly.com/news/eu-budget-battle-paralyzes-brussels-on-ai-chips-the-arctic-and-agriculture",
+            "title": "EU budget battle paralyzes Brussels on AI chips, the Arctic and agriculture",
+            "evidence_used": true
+          },
+          {
+            "kind": "bibliographic_identity_record",
+            "url": "https://www.politico.eu/",
+            "title": "Politico Europe — original source publisher (full text not recovered)",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Original Politico publisher access was blocked. Article identity corroborated by external indexing; full article wording studied only through attributed third-party reproduction and classified REVIEW, not conclusive official evidence."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: the reported impasse is a dateable current constraint on prospective strategic EU technology programmes."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU budget impasse threatens planned chip and AI initiatives",
+      "reader_what": "A Politico Europe report says unresolved EU budget questions have slowed talks on strategic policy initiatives, including AI and chips.",
+      "reader_why": "Unsettled funding expectations may impede agreement on new technology, research and industrial measures.",
+      "reader_more": "The report describes legislative work and policy coordination slowed by uncertainty around forthcoming EU budget arrangements. EU chip and AI initiatives are among the areas reportedly affected. As this is a news account reproduced outside its original publisher, the evidence supports a review-grade account of a negotiating obstacle, not a formal policy freeze.",
+      "deep_analysis": {
+        "work_kind": "attributed European policy news report",
+        "research_question": "What does the verified work establish about the reported European research and technology change?",
+        "main_finding": "A Politico Europe report says unresolved EU budget questions have slowed talks on strategic policy initiatives, including AI and chips.",
+        "method_or_basis": "Research-news indexing establishes exact article identity; an attributed syndicated original-text reproduction describes the policy impasse in detail.",
+        "qualification": "The claims are attributed to contemporaneous reporting; delayed negotiations are not cancellation or a final EU legal decision.",
+        "radar_relevance": "C: the reported impasse is a dateable current constraint on prospective strategic EU technology programmes.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union institutions",
+            "class": "eu_body"
+          },
+          "mechanism": "conditions",
+          "direction": "becomes_conditional",
+          "status": "in_negotiation",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The claims are attributed to contemporaneous reporting; delayed negotiations are not cancellation or a final EU legal decision.",
+          "text": "A Politico Europe report says unresolved EU budget questions have slowed talks on strategic policy initiatives, including AI and chips.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:5d0af4e6f227ccec",
+      "source_hash": "24d812f9",
+      "identity_hash": "972ba73c4b4396bf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied URL and matching substantive primary text from the package examined: https://doi.org/10.1787/4fcb80c2-en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/08/reinforcing-the-attractiveness-of-europe-s-eastern-border-regions_466f5273/4fcb80c2-en.pdf",
+            "title": "Reinforcing the attractiveness of Europe’s Eastern Border Regions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered primary or matching institutional record; reader claims reflect OECD historical regional development report."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NOT_IN_RADAR_SCOPE",
+        "reason": "OECD primary report is credible and European, but its explanatory object is the attractiveness of Eastern Border Regions. R&I matters appear among many territorial conditions, not as an evidenced central mechanism of the European research system."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-09-01"
+        },
+        "unset": [],
+        "reason": "The OECD original catalogue lists 1 September 2025 publication (rather than the provisional July date); authors are Donoso Salas, Białogłowska and Flood."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "OECD eastern-border development report is not an R&I study",
+      "reader_what": "The OECD report examines living conditions and economic attractiveness in EU eastern border regions.",
+      "reader_why": "",
+      "reader_more": "The OECD report compares the socio-economic attractiveness of European eastern border territories, including public services, mobility and investment. Although innovation is relevant to regional growth, the report’s primary object is broad territorial development. It is not an evidence-led study of Europe’s R&I system as required for A.",
+      "deep_analysis": {
+        "work_kind": "OECD historical regional development report",
+        "research_question": "What does the verified work establish about the European research and innovation system?",
+        "main_finding": "The OECD report examines living conditions and economic attractiveness in EU eastern border regions.",
+        "method_or_basis": "Full 2025 OECD Regional Development Papers No. 163 analyzes demography, services, infrastructure, territorial development and investment conditions.",
+        "qualification": "Innovation and related investments are secondary regional-development factors, not its core systematic research-policy object.",
+        "radar_relevance": "A routes 1–3 fail the central R&I-subject gate: the work is comparative regional development rather than focused evidence on European research institutions, finance, talent or technology capacity.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
