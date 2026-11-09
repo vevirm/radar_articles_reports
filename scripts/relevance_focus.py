@@ -737,7 +737,10 @@ def focused_search_plan(slot: int, focus=None):
             group, place = targets[(idx * stride + wave * 7 + slot) % len(targets)]
             lens_name, suffix = TEMPORAL_QUERIES[(idx + wave + slot) % len(TEMPORAL_QUERIES)]
             query = f'{term} {SEARCH_GEOGRAPHY.get(place, place)} {suffix}'.strip()
-            for provider in ('openalex', 'crossref'):
+            # Alternate provider priority on each run and each topic-region pair.
+            # Both providers remain available; this does not privilege a publisher.
+            providers = ('openalex', 'crossref') if (slot + idx + wave) % 2 == 0 else ('crossref', 'openalex')
+            for provider in providers:
                 key = (provider, query)
                 if key in seen:
                     continue
@@ -760,17 +763,47 @@ FOCUSED_REQUEST_PACING_SECONDS = 5.0   # polite API use, also avoids rate-limit 
 FOCUSED_PAGE_DEPTH = 24
 
 
-def balanced_candidates(picked, max_candidates):
-    """Round-robin by territory and issue, with a non-EU/UK volume ceiling.
+def publication_venue(row):
+    """Normalize a journal/publisher label for diversity tracking, not quality gates."""
+    if not isinstance(row, dict):
+        return ''
+    return re.sub(r'\s+', ' ', clean(row.get('source'))).casefold().strip()
 
-    A high-quality India-only candidate is welcome, including when no EU-only
-    papers were found, but non-EU/UK results must never crowd out the core.
-    All results here are bibliographic *leads*, not automatically admitted.
+
+def previous_publication_venues(existing, older_snapshots=()):
+    """Count different prior DOI leads per venue, without double-counting snapshots."""
+    counts = Counter()
+    observed = set()
+    for doc in [*older_snapshots, existing]:
+        if not isinstance(doc, dict):
+            continue
+        for row in doc.get('candidates', []):
+            identity = lead_identity(row)
+            if not identity or identity in observed:
+                continue
+            observed.add(identity)
+            venue = publication_venue(row)
+            if venue:
+                counts[venue] += 1
+    return counts
+
+
+def balanced_candidates(picked, max_candidates, *, venue_history=None):
+    """Region/topic balance and soft journal/publisher diversity across runs.
+
+    Prefer less-used publishing venues among similarly scored candidates, while
+    still accepting the only eligible journal if that is what the evidence has.
+    This is NOT a whitelist, blacklist, publisher-quality assessment, or
+    reason to waive the ordinary Radar / Deep Scan verification gates.
     """
+    history = venue_history or Counter()
     core, external = [], []
     for score, _group, row in picked.values():
         (core if row['focus_group'] == 'EU / UK' else external).append((score, row))
 
+    # The source diversity counter is shared across EU and external selections,
+    # so a venue already prominent in one region loses preference in another.
+    chosen_venues = Counter()
     def diverse_order(entries):
         buckets = {}
         for score, row in entries:
@@ -778,26 +811,32 @@ def balanced_candidates(picked, max_candidates):
             buckets.setdefault(key, []).append((score, row))
         for rows in buckets.values():
             rows.sort(key=lambda x: (-x[0], x[1]['candidate_id']))
-        # Favor different places. Inside a place, favor different observed
-        # issues before taking repeated works about the same issue.
         output = []
         by_topic = Counter()
         while any(buckets.values()):
             for key in sorted(buckets):
                 rows = buckets[key]
-                if rows:
-                    ix = min(range(len(rows)), key=lambda i:
-                             (by_topic[rows[i][1]['focus_issue']], -rows[i][0]))
-                    score, item = rows.pop(ix)
-                    by_topic[item['focus_issue']] += 1
-                    output.append(item)
+                if not rows:
+                    continue
+                # Venue diversity never displaces a much stronger lead. A soft
+                # eight-point window preserves the original quality priority.
+                best = max(score for score, _ in rows)
+                eligible = [i for i, (score, _) in enumerate(rows)
+                            if score >= best - 8]
+                ix = min(eligible, key=lambda i: (
+                    by_topic[rows[i][1]['focus_issue']],
+                    chosen_venues[publication_venue(rows[i][1])],
+                    history[publication_venue(rows[i][1])],
+                    -rows[i][0], rows[i][1]['candidate_id']))
+                score, item = rows.pop(ix)
+                by_topic[item['focus_issue']] += 1
+                chosen_venues[publication_venue(item)] += 1
+                output.append(item)
         return output
 
     core = diverse_order(core)
     external = diverse_order(external)
-    # Limit external discoveries to 40% of configured capacity, and also scale
-    # against EU/UK evidence available this run. A floor keeps genuinely useful
-    # external discoveries (e.g. biomedical research in India) from vanishing.
+    # Existing outside-EU/UK capacity safeguard remains unchanged.
     outside_limit = min(ceil(max_candidates * OUTSIDE_EU_UK_SHARE),
                         max(min(6, max_candidates), ceil(len(core) * 0.75)))
     external = external[:outside_limit]
@@ -1055,7 +1094,17 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
             pause(min(FOCUSED_REQUEST_PACING_SECONDS, deadline-clock()))
     if not successful_requests:
         raise RuntimeError('No successful focused discovery queries; no 25-minute scan can be claimed')
-    candidates = balanced_candidates(picked, max_candidates)
+    source_history = previous_publication_venues(previous_archive, past_snapshots)
+    candidates = balanced_candidates(picked, max_candidates,
+                                     venue_history=source_history)
+    stats['unique_publication_venues'] = len({publication_venue(row) for row in candidates
+                                             if publication_venue(row)})
+    stats['publication_venues_previously_seen'] = sum(
+        bool(source_history[publication_venue(row)]) for row in candidates)
+    stats['candidate_openalex'] = sum(row['discovery_provider'] == 'openalex'
+                                      for row in candidates)
+    stats['candidate_crossref'] = sum(row['discovery_provider'] == 'crossref'
+                                      for row in candidates)
     stats['outside_eu_uk_candidates'] = sum(
         row['focus_group'] != 'EU / UK' for row in candidates)
     stats['eu_uk_candidates'] = len(candidates) - stats['outside_eu_uk_candidates']
@@ -1074,7 +1123,8 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                    'earliest_publication_date':MIN_PUBLICATION_DATE.isoformat(),
                    'time_perspectives':['Current state / developments','Possible future / scenarios'],
                    'discovery_seconds_target':max_seconds,
-                   'processing_after_discovery':True},
+                   'processing_after_discovery':True,
+                   'publication_source_rotation':'Soft journal/publisher diversity among similarly relevant candidates, informed by cumulative DOI history; no source whitelist or bypass of Deep Scan'},
          'candidates':candidates,'work_count':len(candidates),
          'discovery_stats':dict(stats)}
     path.parent.mkdir(parents=True,exist_ok=True)
