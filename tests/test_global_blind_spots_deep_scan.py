@@ -85,6 +85,46 @@ class GlobalDeepScanTests(unittest.TestCase):
         self.assertEqual(len(found), 1)
         self.assertEqual(found[0]['radar_overlap'], 'not_identified')
 
+    def test_relevance_regional_handoff_without_eu_gate_or_main_radar_import(self):
+        archive = self.base / 'regional_discoveries.json'
+        archive.write_text(json.dumps({'candidates': [
+            {'candidate_id': 'REL-nonEU', 'focus_region': 'Senegal',
+             'focus_group': 'Additional Africa', 'focus_topics': ['Biotechnology'],
+             'title': 'Senegal biotechnology research infrastructure and national innovation',
+             'url': 'https://example.org/research/senegal-biotech', 'source': 'Journal',
+             'focus_score': 87, 'curator_note': 'Source metadata, not independently verified.'},
+            {'candidate_id': 'REL-EU', 'focus_region': 'Germany',
+             'focus_group': 'EU / UK', 'focus_topics': ['Biotechnology'],
+             'title': 'Germany biotechnology research infrastructure and innovation',
+             'url': 'https://example.org/research/germany-biotech'},
+            {'candidate_id': 'REL-unrelated', 'focus_region': 'Ghana',
+             'focus_group': 'Additional Africa', 'focus_topics': ['Security policy'],
+             'title': 'Ghana general elections and domestic political security analysis',
+             'url': 'https://example.org/research/ghana-elections'},
+            {'candidate_id': 'REL-insecure', 'focus_region': 'Ethiopia',
+             'focus_group': 'Additional Africa', 'focus_topics': ['Biotechnology'],
+             'title': 'Ethiopia biotechnology research infrastructure and innovation',
+             'url': 'http://example.org/research/ethiopia-biotech'}
+        ]}), encoding='utf-8')
+        original_radar = json.dumps(self.radar, sort_keys=True)
+        results = d.relevance_regional_candidates(self.config, self.radar, archive)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]['region'], 'Senegal')
+        self.assertEqual(results[0]['provenance'], 'relevance_regional_discovery')
+        self.assertEqual(results[0]['assessment_status'], 'indexed_lead_source_not_independently_verified')
+        self.assertEqual(json.dumps(self.radar, sort_keys=True), original_radar)
+        prepared, diag = d.plan_queue(self.radar, self.config, self.base, self.deep, 24)
+        self.assertEqual(diag['relevance_regional_eligible'], 1)
+        self.assertTrue(any(r['region'] == 'Senegal' for r in prepared))
+        self.assertTrue(all(r['region'] != 'Germany' for r in prepared))
+        # Reviewed entries, including REVIEW decisions, must not be requeued.
+        (self.deep / 'verified_findings.json').write_text(json.dumps({'items': [{
+            'document_key': results[0]['document_key'],
+            'region': 'Senegal', 'decision': 'REVIEW'}]}))
+        _, updated = d.plan_queue(self.radar, self.config, self.base, self.deep, 24)
+        self.assertEqual(updated['relevance_regional_eligible'], 1)
+        self.assertFalse(any(r['region'] == 'Senegal' for r in _))
+
     def test_zip_contains_review_instructions_and_real_work(self):
         radarfile = Path(self.tmp.name) / 'radar.json'
         radarfile.write_text(json.dumps(self.radar))
