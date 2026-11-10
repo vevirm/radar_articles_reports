@@ -76,6 +76,12 @@ system or science/technology development is at stake), why_could_matter
 (conditional, not a predicted outcome), uncertainty (what is not known),
 research_question (one investigable question, preferably ending '?').
 
+IMPORTANT OUTPUT REQUIREMENT: For every REVIEW or DROP, include a detailed
+"review_reason" (at least 20 characters). You may also include "decision_basis"
+as a more general explanation; the importer accepts decision_basis as a fallback
+if review_reason is missing, but review_reason is preferred. Every KEEP still
+requires all four substantive evidence sections.
+
 KEEP only when ALL identity, credible source, topic, geography and evidence
 conditions pass. If only a state-controlled press statement is available,
 DO NOT treat that as independent confirmation of a claimed technological
@@ -163,7 +169,11 @@ def prepare(*, batch_size=12, artifact=None):
             z.writestr('INSTRUCTIONS.md', INSTRUCTIONS)
             z.writestr('MANIFEST.json', json.dumps(manifest, ensure_ascii=False, indent=2))
             z.writestr('RESULTS_TEMPLATE.json', json.dumps({'format': RESULT_FORMAT,
-                'package_id': package_id, 'results': []}, indent=2))
+                'package_id': package_id, 'results': [],
+                '_guidance': ('Supply all assigned candidate results. For review/drop, '
+                              'provide review_reason (20+ chars); decision_basis is '
+                              'also accepted as a fallback. Keep requires complete '
+                              'source_verification, aboutness, topic and futures.')}, indent=2))
     print(f'Global Relevance Focus Deep Scan package: {len(jobs)} cases, {package_id}')
     return manifest
 
@@ -185,8 +195,16 @@ def validate_result(result, lead):
     if decision not in DECISIONS:
         raise ValueError('Unknown review decision')
     if decision != 'keep':
-        text_field(result.get('review_reason'), 'review_reason')
-        return {**result, 'title': lead['title'], 'focus_region': lead['focus_region'],
+        # The Deep Scan template historically taught models to supply a detailed
+        # decision_basis, while the importer only accepted review_reason. Accept
+        # either substantive explanation; keep a canonical review_reason for
+        # downstream consumers. Do not reduce the evidence-length requirement.
+        reason = result.get('review_reason')
+        if not isinstance(reason, str) or len(reason.strip()) < 20:
+            reason = result.get('decision_basis')
+        reason = text_field(reason, 'review_reason or decision_basis')
+        return {**result, 'review_reason': reason,
+                'title': lead['title'], 'focus_region': lead['focus_region'],
                 'focus_issue': lead['focus_issue'], 'url': lead['url']}
     src, geo, topic, fut = (result.get(k) for k in
                             ('source_verification','aboutness','topic','futures'))
