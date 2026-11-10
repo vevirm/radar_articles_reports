@@ -1,4 +1,4 @@
-name: Relevance Focus — 25 min + one-hit backfill
+name: Relevance Focus — global aboutness + futures
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'Scan (25-minute focused lane) or one-hit backfill of Deep Scanned material'
+        description: 'Scan world R&I topics (25 min) or refresh already reviewed material'
         required: true
         type: choice
         options:
@@ -37,8 +37,8 @@ jobs:
   relevance:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    # Dedicated 25-minute discovery PLUS normal Radar admission and publication.
-    timeout-minutes: 85
+    # Global discovery plus independent review-package preparation.
+    timeout-minutes: 55
     permissions:
       contents: write
     steps:
@@ -54,42 +54,51 @@ jobs:
           python-version: '3.12'
       - name: Install dependency required by relevance unit tests
         run: python -m pip install 'requests>=2.32,<3'
-      - name: Validate relevance matcher against deterministic fixtures
-        run: python -m unittest discover -s tests -p test_relevance_focus.py -q
-      - name: Install scanner requirements (scan runs only)
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
-        run: pip install -r requirements.txt
-      - name: Check scanner preflight (scan runs only)
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
-        run: python scripts/run_scan_preflight_tests.py
+      - name: Validate global topic–place aboutness and Deep Scan regression fixtures
+        run: python -m unittest discover -s tests -p 'test_relevance_focus*.py' -q
       - name: Discover relevance-specific candidate works (25 minutes minimum and maximum)
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
         run: python scripts/relevance_focus.py discover --max-seconds 1500 --output "$RUNNER_TEMP/relevance_candidates.json" --archive "Relevance Stuff/regional_discoveries.json"
-      - name: Admit ONLY focused candidates through Radar A/B/C checks (no second discovery)
+      - name: Prepare independent global R&I Deep Scan source-review package
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
-        env:
-          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
-          CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
-          RADAR_SCAN_BUDGET_SECONDS: '900'
         shell: bash
         run: |
           set -euo pipefail
-          # A zero-match initial page must NOT cancel discovery or admission.
-          # The dedicated research phase already spent its full 1500 seconds;
-          # Radar exact-candidate admission, dedupe and publication follow here;
-          # normal broad collectors are disabled for THIS run only.
-          python scripts/relevance_focus.py scan --candidates "$RUNNER_TEMP/relevance_candidates.json"
-          python scripts/validate_scanner_output.py
-          python scripts/rebuild_active_radar.py
-          python scripts/check_active_corpus.py
-          node scripts/generate_stuff_workbook.js
+          # Deliberately DO NOT run ordinary EU Radar admission here: a study
+          # about biodiversity in Kenya or chips in Taiwan needs NO EU bridge.
+          python scripts/relevance_focus_deep_scan.py prepare --batch-size 12 \
+            --artifact "$RUNNER_TEMP/relevance_focus_global_review.zip"
       - name: Generate focused Excel from authoritative and pending source material
         run: |
           python scripts/relevance_focus.py export-json --output "$RUNNER_TEMP/relevance_report.json"
           node scripts/generate_relevance_stuff.js "$RUNNER_TEMP/relevance_report.json"
+      - name: Upload evidence-review package for independent Deep Scan
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        uses: actions/upload-artifact@v4
+        with:
+          name: relevance-focus-global-deep-scan-review
+          path: ${{ runner.temp }}/relevance_focus_global_review.zip
+          retention-days: 21
+      - name: Explain verification handoff and prevent false Deep Scan claims
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Global Relevance Focus — source verification is still required
+          Discovery searched substantive regions **outside the EU and UK**; publishers
+          from anywhere are eligible. Download the **relevance-focus-global-deep-scan-review**
+          artifact and have its `MANIFEST.json` independently checked against
+          accessible source documents following `INSTRUCTIONS.md`. Submit the
+          reviewed JSON under `Relevance Stuff/deep_scan/inbox/`; the independent
+          import and workbook update then run automatically.
+
+          **The generated package is not an automatically completed Deep Scan.**
+          Until verified evidence is returned, region–topic findings remain
+          explicitly labeled *indexed leads / not verified*.
+          EOF
       - name: Validate focus workbook
         run: |
           python - <<'PY'
@@ -100,27 +109,16 @@ jobs:
               for i in range(1,5):assert f'xl/worksheets/sheet{i}.xml' in z.namelist()
           print('Focused workbook validated')
           PY
-      - name: Isolate generated outputs (never commit unrelated scanner runtime files)
+      - name: Ensure ordinary Radar and source sidecars were never altered
         shell: bash
         run: |
           set -euo pipefail
-          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' ':!radar_active.json' ':!stuff/main_radar_stuff.xlsx' ':!stuff/source_merit_ranking.xlsx' ':!Relevance Stuff/relevance_stuff.xlsx' ':!Relevance Stuff/regional_discoveries.json' || true)"
-          if [[ -n "$tracked_unexpected" ]]; then
-            printf 'Restoring unrelated tracked scanner changes:\n%s\n' "$tracked_unexpected"
-            while IFS= read -r file; do
-              [[ -z "$file" ]] && continue
-              git restore --worktree -- "$file"
-            done <<< "$tracked_unexpected"
+          unexpected="$(git diff --name-only -- . ':!Relevance Stuff/' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo "::error::Global focus scan modified unrelated files: $unexpected"
+            exit 2
           fi
-          unexpected_untracked="$(git ls-files --others --exclude-standard | grep -v -x 'Relevance Stuff/relevance_stuff.xlsx' | grep -v -x 'Relevance Stuff/regional_discoveries.json' || true)"
-          if [[ -n "$unexpected_untracked" ]]; then
-            printf 'Removing unrelated untracked runtime files:\n%s\n' "$unexpected_untracked"
-            while IFS= read -r file; do
-              [[ -z "$file" ]] && continue
-              rm -rf -- "$file"
-            done <<< "$unexpected_untracked"
-          fi
-      - name: Commit only scanner outputs and focused workbook
+      - name: Commit only global focus outputs and review queue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
@@ -132,11 +130,11 @@ jobs:
           if [[ -f 'Relevance Stuff/regional_discoveries.json' ]]; then
             git add -- 'Relevance Stuff/regional_discoveries.json'
           fi
-          if [[ "${{ github.event_name }}" == 'schedule' || ( "${{ github.event_name }}" == 'workflow_dispatch' && "${{ inputs.mode }}" == 'scan' ) ]]; then
-            git add -- radar.json radar_active.json stuff/main_radar_stuff.xlsx stuff/source_merit_ranking.xlsx
+          if [[ -f 'Relevance Stuff/deep_scan/pending_manifest.json' ]]; then
+            git add -- 'Relevance Stuff/deep_scan/pending_manifest.json'
           fi
           if git diff --cached --quiet; then echo 'No workbook or scanner output changes'; exit 0; fi
-          git commit -m 'Refresh relevance focus and Radar evidence'
+          git commit -m 'Refresh global topic-place focus and independent review queue'
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
           trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT

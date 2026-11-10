@@ -1,0 +1,70 @@
+name: Relevance Focus — global Deep Scan reviewed import
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'Relevance Stuff/deep_scan/inbox/*.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ri-radar-research-scanners
+  queue: max
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  import-global-relevance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Check out latest main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+      - name: Run global aboutness and Deep Scan regression tests
+        run: python -m unittest discover -s tests -p 'test_relevance_focus*.py' -q
+      - name: Import source-reviewed decisions (not ordinary Radar admissions)
+        run: python scripts/relevance_focus_deep_scan.py import-inbox
+      - name: Rebuild reader-friendly workbook
+        run: |
+          python scripts/relevance_focus.py export-json --output /tmp/relevance_report.json
+          node scripts/generate_relevance_stuff.js /tmp/relevance_report.json
+      - name: Enforce isolation from ordinary Radar
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only -- . ':!Relevance Stuff/' || true)"
+          if [[ -n "$unexpected" ]]; then echo "::error::Unexpected Radar change: $unexpected"; exit 2; fi
+      - name: Commit only independent global review outputs
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- 'Relevance Stuff/relevance_stuff.xlsx' \
+            'Relevance Stuff/deep_scan/verified_findings.json' \
+            'Relevance Stuff/deep_scan/review_archive.json'
+          git add -A -- 'Relevance Stuff/deep_scan/inbox' 'Relevance Stuff/deep_scan/processed_inbox'
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Import independently verified global R&I futures findings'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
