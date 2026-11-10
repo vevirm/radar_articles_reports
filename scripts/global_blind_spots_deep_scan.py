@@ -232,6 +232,110 @@ def curated_source_candidates(config, radar_candidates, path=ROOT / 'global_deep
     return result
 
 
+
+# The Relevance Focus archive is a discovery feed, not an admission decision.
+# Use only regionally specific, source-linked R&I works; EU relevance is not an
+# eligibility requirement for the separate Global Deep Scan.
+RELEVANCE_REGIONS = {'Türkiye': 'Turkey'}
+RELEVANCE_THEME_TERMS = {
+    'Research funding, institutions and talent': (
+        'research funding', 'science policy', 'research careers', 'researcher mobility',
+        'talent competition', 'bibliometrics', 'open science', 'research data',
+        'research infrastructure', 'science diplomacy', 'international collaboration',
+        'science-based international organisations', 'horizon europe'),
+    'Technology leadership and industrial capacity': (
+        'artificial intelligence', 'semiconductors', 'quantum', 'critical technologies',
+        'technology sovereignty', 'technology transfer', 'industrial policy',
+        'supply chains', 'computing power', 'space', 'batteries',
+        'critical raw materials', 'strategic autonomy', 'dual-use technology'),
+    'Research security and international cooperation': (
+        'research security', 'export controls', 'investment screening',
+        'international collaboration', 'science diplomacy', 'cybersecurity',
+        'transnational r&i', 'science-based international organisations',
+        'eu external r&i partnerships'),
+    'Climate, energy and environmental research': (
+        'energy technology', 'batteries', 'climate', 'environment', 'critical raw materials'),
+    'Health, biotechnology and life sciences': (
+        'biotechnology', 'health research', 'life sciences'),
+    'Innovation systems, infrastructure and knowledge transfer': (
+        'start-ups', 'scale-ups', 'venture capital', 'regional innovation',
+        'innovation policy', 'technology transfer', 'intellectual property',
+        'research infrastructure', 'research data', 'public procurement'),
+}
+
+
+def relevance_regional_candidates(config, radar, path=None):
+    """Bridge Relevance's archived regional *leads* into manual Global review.
+
+    No record is auto-verified and no normal Radar writes are made. Non-EU
+    countries outside the original Global discovery roster are intentionally
+    supported, but aggregate regions and non-R&I topics are not guessed into a
+    country/theme merely to fill a package.
+    """
+    path = path if path is not None else ROOT / 'Relevance Stuff' / 'regional_discoveries.json'
+    if not path.exists():
+        return []
+    payload = g.load_json(path)
+    radar_by_url, radar_by_title = main_radar_index(radar)
+    found = {}
+    for original in payload.get('candidates', []):
+        if not isinstance(original, dict):
+            continue
+        region = RELEVANCE_REGIONS.get(original.get('focus_region'), original.get('focus_region'))
+        group = str(original.get('focus_group') or '')
+        if (not isinstance(region, str) or not region or group == 'EU / UK'
+                or region in ('European Union', 'ASEAN', 'Africa (region)')
+                or '(' in region or ')' in region):
+            continue
+        # Do not accidentally include EU member-state records from malformed
+        # or changed source metadata.
+        if region in {'Germany', 'Poland', 'Sweden', 'Finland', 'Netherlands',
+                      'Denmark', 'Portugal', 'Ireland', 'United Kingdom', 'France',
+                      'Italy', 'Spain', 'Belgium', 'Austria', 'Czechia', 'Romania',
+                      'Greece', 'Hungary', 'Slovakia', 'Slovenia', 'Croatia',
+                      'Estonia', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta',
+                      'Cyprus', 'Bulgaria'}:
+            continue
+        url, title = original.get('url') or '', clean_title(original.get('title'))
+        if not https_url(url) or len(title) < 25 or 'news.google.com/' in url:
+            continue
+        topics = [str(t).casefold() for t in original.get('focus_topics', []) if isinstance(t, str)]
+        matches = []
+        for theme, terms in RELEVANCE_THEME_TERMS.items():
+            if theme not in config['themes']:
+                continue
+            strength = sum(any(term in topic for term in terms) for topic in topics)
+            if strength:
+                matches.append((strength, theme))
+        if not matches:
+            continue
+        # One review per document/country; a primary theme is an indexing aid,
+        # not an assertion that the finding has been substantiated.
+        _, theme = sorted(matches, key=lambda x: (-x[0], x[1]))[0]
+        key = document_key(url, title)
+        exact = radar_by_url.get(canonical_url(url)) or radar_by_title.get(title_key(title))
+        row = {'candidate_id': text_id(key + '|' + region + '|' + theme),
+               'document_key': key, 'title': title, 'url': url,
+               'date': original.get('date') or '', 'region': region, 'theme': theme,
+               'source': original.get('source') or '',
+               'source_kind': 'relevance_regional_bibliographic_lead',
+               'provenance': 'relevance_regional_discovery',
+               'relevance_candidate_id': original.get('candidate_id') or '',
+               'main_radar_links': exact['main_radar_links'] if exact else [],
+               'original_context': str(original.get('curator_note') or '')[:1100],
+               'radar_overlap': 'exact' if exact else 'not_identified',
+               'assessment_status': 'indexed_lead_source_not_independently_verified',
+               'theme_terms': original.get('focus_topics') or [],
+               'region_in_title': bool(g.find_terms(title, [region])),
+               'signal_role': 'research_output',
+               'investigation_question': g.question_for_signal({
+                   'region': region, 'theme': theme, 'signal_role': 'research_output'})}
+        pair = (key, region)
+        if pair not in found or (original.get('focus_score') or 0) > found[pair][0]:
+            found[pair] = (original.get('focus_score') or 0, row)
+    return [entry[1] for entry in found.values()]
+
+
 def load_completed(deep):
     path = deep / 'verified_findings.json'
     if not path.exists():
@@ -245,11 +349,14 @@ def plan_queue(radar, config, base=BASE, deep=DEEP, batch_size=12):
     main = main_radar_matches(radar, config)
     new = discoverable_candidates(base, config, main, radar=radar)
     curated = curated_source_candidates(config, main, radar=radar)
+    relevance_path = (ROOT / 'Relevance Stuff' / 'regional_discoveries.json'
+                      if base.resolve() == BASE.resolve() else base / 'regional_discoveries.json')
+    relevance = relevance_regional_candidates(config, radar, path=relevance_path)
     completed = load_completed(deep)
     # A discovery record representing a work already in main Radar is one
     # package item with both provenances, never a 'new finding' by default.
     merged = {}
-    for row in curated + new + main:
+    for row in curated + new + relevance + main:
         doc = (row['document_key'], row['region'])
         if doc in completed:
             continue
@@ -271,7 +378,8 @@ def plan_queue(radar, config, base=BASE, deep=DEEP, batch_size=12):
         # Genuine fresh discoveries should not be displaced by fixed, older
         # curated programme pages on every batch. Existing Radar remains eligible.
         origin_bonus = {'curated_high_quality_source': 30, 'global_discovery': 46,
-                        'both_main_radar_and_global_discovery': 48}.get(x['provenance'], 18)
+                        'both_main_radar_and_global_discovery': 48,
+                        'relevance_regional_discovery': 50}.get(x['provenance'], 18)
         role_bonus = {'development_candidate': 12, 'trend_evidence': 10,
                       'research_output': 5, 'structural_context': -8}.get(x.get('signal_role'), 0)
         return (origin_bonus + role_bonus + (8 if x.get('region_in_title') else 0)
@@ -318,6 +426,7 @@ def plan_queue(radar, config, base=BASE, deep=DEEP, batch_size=12):
         entry['investigation_question'] = entry.get('investigation_question') or g.question_for_signal(entry)
     return selected, {'main_radar_eligible': len(main), 'global_discovery_eligible': len(new),
                       'curated_source_eligible': len(curated),
+                      'relevance_regional_eligible': len(relevance),
                       'distinct_pending_documents': len(rows), 'previously_reviewed_documents': len(completed),
                       'selected': len(selected), 'by_region': dict(Counter(r['region'] for r in selected)),
                       'by_world_group': dict(Counter(config.get('country_groups', {}).get(r['region'],'Other') for r in selected))}
