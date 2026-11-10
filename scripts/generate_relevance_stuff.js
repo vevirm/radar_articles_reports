@@ -11,6 +11,7 @@ const data=JSON.parse(fs.readFileSync(input,'utf8'));
 const verified=Array.isArray(data.verified)?data.verified:[];
 const pending=Array.isArray(data.pending)?data.pending:[];
 const regionalLeads=Array.isArray(data.regional_leads)?data.regional_leads:[];
+const globalVerified=Array.isArray(data.global_verified)?data.global_verified:[];
 const awaiting=pending.filter(r=>r.workflow_state==='Deep Scan not complete');
 const admissionReview=pending.filter(r=>r.workflow_state!=='Deep Scan not complete');
 const headers=['Relevance score','Title','Date','Source','Source location','Strand','Countries / subregions','Geographic group','Matched emerging issues','Stakeholders','Why matched','What evidence says','Why it matters','Admission','Workflow stage','Deep Scan status','Deep Scan checked at','Deep Scan package','Authors','Original source URL'];
@@ -27,9 +28,10 @@ for(const [type,names] of Object.entries(data.catalogue||{})){
   }
 }
 const notes=[
-  ['Purpose','Existing Radar issue evidence traced through single-region current and possible-future publications dated 2025-01-01 onward, with one-hit verified backfill.'],
+  ['Purpose','Global R&I futures: Main Radar TOPICS × substantive places outside the EU/UK as the main study setting. Source origin is unrestricted. Global Deep Scan findings are separate from older Radar backfill.'],
   ['Created at (UTC)',String(data.generated_at||'')],
-  ['Verified / retained rows',verified.length],
+  ['Global verified + KEEP',globalVerified.length],
+  ['Legacy Radar verified / retained rows',verified.length],
   ['Admission-review rows (Deep Scan completed)',admissionReview.length],
   ['Awaiting Deep Scan / source recovery rows',awaiting.length],
   ['Verified rule','Deep Scan work status=verified + authoritative reader identity verification + final admission KEEP.'],
@@ -40,12 +42,14 @@ const notes=[
   ['Source and scope','Only works published since 2025-01-01 from Main Radar A/B/C (including inactive) and stored Deep Scan/Reader decisions. The historical archive is not searched. Dropped/unverifiable/duplicate decisions are excluded.'],
   ['Relevance rule','Named emerging issue or substantive country/region R&I-policy focus in original title or leading Reader evidence. Stakeholder names alone never qualify.'],
   ['Score rule','A relevance-sorting signal, NOT an evidence-quality score or policy forecast.'],
-  ['Normal Radar output','Focused discovery candidates are sent through the existing priority-candidate adapter and all ordinary source, A/B/C, duplicate and admission gates.'],
+  ['Independent global review','No EU relevance requirement. New global leads do NOT enter the ordinary EU Radar admission gate. Dedicated global Deep Scan verifies identity, topic, substantive geography, source integrity, propaganda risk and possible future R&I significance.'],
   ['Regional leads','Cumulative, DOI-deduplicated indexed discovery leads from all retained Relevance Focus runs are displayed separately. A lead is NOT an admitted, source-verified, or Deep-Scan-verified Radar record.'],
-  ['EU connection','Each regional lead matches a thematic issue already evidenced by active Main Radar results, so its own publication does not need to mention Europe. Admission still requires ordinary Radar EU relevance and quality checks.'],
-  ['Regional balance','Non-EU/UK leads are limited to 40% of each discovery batch capacity, with an additional cap based on available EU/UK leads.'],
-  ['Backfill','No internet calls or new Deep Scan. Examines existing Main Radar and Deep Scan/Reader evidence dated 2025-01-01 onward.'],
-  ['Limit','Keyword matching of titles and existing reader evidence can miss indirect references and can include some imperfect matches. Read original linked source before interpretation.'],
+  ['Main Radar connection','A topic must be grounded in the active Radar. The reviewed work may be about India, Kenya, Taiwan or anywhere else without mentioning the EU.'],
+  ['Regional balance','No EU/UK discovery quota or minimum: online global focus targets outside EU/UK. Research produced by EU/UK institutes on those places is fully eligible. Place tags come from aboutness, never publisher origin.'],
+  ['Backfill','No internet calls or new Deep Scan. Examines existing Main Radar and Deep Scan/Reader evidence dated 2025-01-01 onward; EU/UK-only records are not included in this global output.'],
+  ['Aboutness integrity','Legacy country tags without substantive title evidence are quarantined pending renewed discovery. No source/publisher country can create a country tag.'],
+  ['Futures discipline','A topic–place possibility is a QUESTION, not a forecast. Global Deep Scan must distinguish observed evidence from potential R&I implications, uncertainty and propaganda risk. Venue counts indicate diversity, not reliability.'],
+  ['Limit','A publisher anywhere in the world may publish on any region. Metadata and abstracts may mislead; only independent global Deep Scan KEEP reviews establish checked findings.'],
 ];
 const stats=Object.entries(data.statistics||{}).sort((a,b)=>a[0].localeCompare(b[0]));
 const gaps=[];
@@ -66,22 +70,89 @@ const diagnostics=[
   ['',''],
   ...gaps.map(([,place,value])=>['Zero coverage: '+place,value]),
 ];
-const regionalHeaders=['Match score','Existing Radar issue/topic','Country / region','World area','Time perspective','Publication','Publication date','Publishing venue','Work type','Radar check status','DOI','Source URL','Relevance connection / review note'];
+const regionalHeaders=['Match score','Existing Radar issue/topic','Substantive country / region','World area','Aboutness status','Aboutness evidence','Future R&I question (not forecast)','Time perspective','Publication','Publication date','Publishing venue','Work type','Radar check status','DOI','Source URL'];
 const regionalRows=regionalLeads.map(r=>[
   Number(r.focus_score||0), String(r.focus_issue||''), String(r.focus_region||''),
-  String(r.focus_group||''), String(r.temporal_lens||''), String(r.title||''),
-  String(r.date||''), String(r.source||''), String(r.publication_type||''),
+  String(r.focus_group||''), String(r.aboutness_status||''),
+  String(r.geographic_evidence||''), String(r.future_ri_question||''),
+  String(r.temporal_lens||''), String(r.title||''), String(r.date||''),
+  String(r.source||''), String(r.publication_type||''),
   String(r.radar_check_status||'indexed_lead_not_verified'), String(r.doi||''),
-  String(r.url||''), String(r.curator_note||'')
+  String(r.url||'')
+]);
+// Concise investigative roll-up: one entry per observed Radar-topic × place pair.
+// All provisional columns are labeled as bibliographic leads rather than facts.
+// Unlike counts by publisher headquarters, neither the venue string nor source
+// nationality can populate a region. A topic/place with one source is still a
+// legitimate possibility, but the thin evidence is made visible.
+const possibilities=new Map();
+function possibility(topic,place,area){
+  const key=topic+'\u0000'+place;
+  if(!possibilities.has(key))possibilities.set(key,{
+    topic,place,area,ids:new Set(),venues:new Set(),verified:[],best:null});
+  return possibilities.get(key);
+}
+for(const row of regionalLeads){
+  if(!row.focus_region||!row.focus_issue||row.focus_group==='EU / UK')continue;
+  const item=possibility(String(row.focus_issue),String(row.focus_region),String(row.focus_group||''));
+  const id=String(row.doi||row.url||row.candidate_id||'');
+  if(id)item.ids.add(id);
+  if(row.source)item.venues.add(String(row.source).toLocaleLowerCase());
+  const better=!item.best||Number(row.focus_score||0)>Number(item.best.focus_score||0);
+  if(better)item.best=row;
+}
+for(const result of globalVerified){
+  if(!result.focus_region||!result.focus_issue||result.focus_group==='EU / UK')continue;
+  const item=possibility(String(result.focus_issue),String(result.focus_region),String(result.focus_group||''));
+  item.verified.push(result);
+}
+const possibilityHeaders=[
+  'Main Radar topic','Place actually studied','World area','Evidence status',
+  'Verified global Deep Scans','Indexed publication leads','Different publishing venues',
+  'Observed signal / source excerpt (provisional until reviewed)',
+  'Why this place COULD matter to R&I futures','Main uncertainty / caveat',
+  'Further investigation question','Example source URL'];
+const possibilityRows=Array.from(possibilities.values()).sort((a,b)=>
+  b.verified.length-a.verified.length||b.venues.size-a.venues.size||
+  b.ids.size-a.ids.size||a.topic.localeCompare(b.topic)||a.place.localeCompare(b.place))
+  .map(item=>{
+    const v=item.verified[0],lead=item.best;
+    return [item.topic,item.place,item.area,
+      item.verified.length?'Some verified, others may remain provisional':'Indexed lead / NOT verified',
+      item.verified.length,item.ids.size,item.venues.size,
+      String(v?.aboutness?.verified_excerpt||lead?.geographic_evidence||''),
+      String(v?.futures?.why_could_matter||lead?.future_ri_question||''),
+      String(v?.futures?.uncertainty||'Source validity and future significance not yet assessed by global Deep Scan.'),
+      String(v?.futures?.research_question||lead?.future_ri_question||''),
+      String(v?.source_verification?.primary_url||lead?.url||'')];
+  });
+const globalHeaders=['Radar topic','Substantive geography','World area','Title','Evidence date','Publisher','Source integrity','Independent review of aboutness','Observed or possible','Mechanism','Why it COULD matter for R&I futures','Uncertainties / alternatives','Further research question','Primary evidence URL','Publication DOI','Reviewed at'];
+const globalRows=globalVerified.map(r=>[
+  String(r.focus_issue||''),String(r.focus_region||''),String(r.focus_group||''),
+  String(r.title||''),String(r.date||''),String(r.source||''),
+  String(r.source_verification?.source_integrity||''),String(r.aboutness?.basis||''),
+  String(r.futures?.classification||''),String(r.futures?.mechanism||''),
+  String(r.futures?.why_could_matter||''),String(r.futures?.uncertainty||''),
+  String(r.futures?.research_question||''),String(r.source_verification?.primary_url||''),
+  String(r.url||''),String(r.verified_at||'')
+]);
+const questionsHeaders=['Main Radar topic','Place genuinely studied','Area','Aboutness evidence','Possible R&I futures question (NOT verified)','Review status','Original publication','Source URL'];
+const questionsRows=regionalLeads.filter(r=>r.focus_region&&r.future_ri_question).map(r=>[
+  String(r.focus_issue||''),String(r.focus_region||''),String(r.focus_group||''),
+  String(r.geographic_evidence||''),String(r.future_ri_question||''),
+  String(r.aboutness_status||''),String(r.title||''),String(r.url||'')
 ]);
 const specs=[
-  ['Verified and retained',headers,toRows(verified),widths],
-  ['Admission review',headers,toRows(admissionReview),widths],
-  ['Awaiting Deep Scan',headers,toRows(awaiting),widths],
+  ['Global topic–place signals',possibilityHeaders,possibilityRows,[32,29,24,33,22,24,25,76,84,70,80,60]],
+  ['Global verified futures',globalHeaders,globalRows,[32,24,23,56,16,36,27,78,24,66,80,65,75,60,50,25]],
+  ['Radar verified backfill',headers,toRows(verified),widths],
+  ['Radar admission review',headers,toRows(admissionReview),widths],
+  ['Radar awaiting Deep Scan',headers,toRows(awaiting),widths],
   ['Focus coverage',['Dimension','Requested country / issue / stakeholder','Verified','Admission review','Awaiting Deep Scan'],coverage,[26,55,16,18,20]],
   ['Read me',['Field','Notes'],notes,[26,110]],
   ['Coverage audit',['Metric','Count / value'],diagnostics,[56,25]],
-  ['Regional publication leads',regionalHeaders,regionalRows,[14,36,24,25,32,59,16,37,20,27,34,56,89]],
+  ['R&I futures questions',questionsHeaders,questionsRows,[34,27,23,75,85,32,62,60]],
+  ['Regional publication leads',regionalHeaders,regionalRows,[14,36,29,25,32,67,85,32,59,16,37,20,27,34,56]],
 ];
 const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const sheetType='application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml';

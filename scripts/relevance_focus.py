@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Additional relevance lane: targeted OpenAlex discovery, standard Radar admission, verified backfill.
+"""Global region × Main Radar topic discovery, distinct from the EU-focused Radar.
 
-Standalone, non-destructive: existing scanners and Deep Scan decisions remain authoritative.
-Discovery candidates are locator hints, NEVER directly inserted into the Radar corpus.
+The automatic scanner searches primarily non-EU/UK regions.  Country tags
+represent the substantive setting studied, not source/publisher nationality.
+Discovery leads are hypotheses; independent global Deep Scan provides verification.
 """
 from __future__ import annotations
 
@@ -94,7 +95,7 @@ STAKEHOLDERS = {
  'Faith-based communities':r'\bfaith[ -]based\b|\breligious\s+(?:communit\w*|organi[sz]ations?)\b',
  'Foreign-affairs / trade / non-research ministries':r'\b(?:ministr(?:y|ies)|minister)\s+of\s+(?:foreign|trade|economic|industry|education|defen[cs]e|environment|health)\b|\bforeign\s+affairs\b|\btrade\s+ministr\w*\b',
 }
-RI = re.compile(r'\bresearch\b|\bscience\b|\bscientific\b|\binnovation\b|\btechnolog\w*\b|\bR&D\b|\bR&I\b|\bacademi\w*\b|\buniversit\w*\b|\bknowledge\b|\bforesight\b|\bsemiconductors?\b|\bAI\b',re.I)
+RI = re.compile(r'\bresearch\b|\bscience\b|\bscientific\b|\binnovation\b|\btechnolog\w*\b|\bR&D\b|\bR&I\b|\bacademi\w*\b|\buniversit\w*\b|\bknowledge\b|\bforesight\b|\bsemiconductors?\b|\bmicrochips?\b|\bbiodivers\w*\b|\becolog\w*\b|\bAI\b',re.I)
 POLICY = re.compile(r'\bpolic\w*\b|\bstrateg\w*\b|\bgeopolit\w*\b|\bgovern\w*\b|\bdiplomac\w*\b|\bcooperat\w*\b|\bcollaborat\w*\b|\bsecurity\b|\bcompetition\b|\bpartnership\w*\b|\bsovereign\w*\b|\bdevelopment\b|\bforesight\b|\bgeoeconom\w*\b|\btransform\w*\b|\btransition\b|\bfuture\b',re.I)
 STRONG = set(ISSUES) - {'Transnational R&I and innovation policy','Australia strategic reorientation to Europe'}
 COUNTRY_POLICY_ISSUE = 'Country / regional R&I policy or strategic foresight'
@@ -131,7 +132,42 @@ TOPIC_SEARCH_TERMS = {
 ACCEPTED_OPENALEX_TYPES = {'article', 'review', 'book', 'book-chapter', 'report'}
 ACCEPTED_CROSSREF_TYPES = {'journal-article', 'book', 'book-chapter', 'report', 'proceedings-article'}
 MIN_PUBLICATION_DATE = date(2025, 1, 1)  # All new leads and backfilled workbook rows
-OUTSIDE_EU_UK_SHARE = 0.40  # ceiling on candidate capacity for outside-EU/UK coverage
+OUTSIDE_EU_UK_SHARE = 1.0  # EU/UK are ordinary Radar territory, not a global discovery allocation
+TOPIC_EXTRA_DEFINITIONS = {
+    # Only activated when corresponding evidence exists in the current Main Radar.
+    'Biodiversity': ['biodiversity', 'ecosystem monitoring', 'conservation science',
+                     'ecological research', 'species loss', 'genetic resources'],
+}
+TOPIC_EXTRA_PATTERNS['Semiconductors'] = ['microchips', 'microchip', 'microelectronic',
+                                         'chipmaking', 'advanced packaging', 'chip fabrication']
+FUTURES_MECHANISMS = {
+    'Biodiversity': ('biodiversity science, ecosystem observation, genetic resources or conservation innovation',
+                     'Could the documented activity change biodiversity knowledge, research infrastructure or conservation innovation?'),
+    'Semiconductors': ('chip research, fabrication capacity, specialist talent or supply-chain resilience',
+                       'Could this develop into an important semiconductor research, skills, production or supply-chain capability?'),
+}
+FUTURES_SIGNAL = re.compile(r'\b(?:capacity|capabilit\w*|invest\w*|infrastructur\w*|fund\w*|'
+                            r'partnership\w*|collaborat\w*|research|innov\w*|govern\w*|'
+                            r'polic\w*|strateg\w*|technolog\w*|monitor\w*|manufactur\w*|'
+                            r'supply.chain|workforce|talent|training|commerciali[sz]\w*|'
+                            r'conserv\w*|knowledge|ecosystem|laborator\w*|funding)\b', re.I)
+# The country in a publisher, journal, affiliation, credit or syndicated attribution
+# is NOT evidence that the work investigates that country.  This also guards
+# backfilled Reader summaries where an outlet is repeated in narrative text.
+ATTRIBUTION = re.compile(
+    r'\b(?:The\s+Austrian\s+online\s+platform\s+for\s+the\s+European\s+Research\s+Area\s*\(ERA\)\s+is\s+a\s+promotion\s+initiative[^.!?]{0,280}|ERA\s+Portal\s+Austria|European\s+Research\s+Area\s+Portal\s+Austria|'
+    r'(?:published|distributed|syndicated|hosted|reprinted|written|issued)\s+by\s+[^,;.!?]{0,100}|'
+    r'(?:source|publisher|outlet|affiliation|author address|courtesy|via)\s*:\s*[^,;.!?]{0,110}|'
+    r'(?:published|hosted)\s+(?:in|at|from)\s+[^,;.!?]{0,70}|'
+    r'(?:authors?|publisher|journal|outlet|editors?)\s+(?:(?:are|were)\s+)?(?:based|located|headquartered)\s+in\s+[^,;.!?]{0,60}|'
+    r'(?:authors?|affiliations?)\s+from\s+[^,;.!?]{0,60})\b', re.I)
+CLAIM_CONTEXT = re.compile(r'\b(?:study|studies|research|investigat\w*|assess\w*|'
+                           r'analys\w*|evaluat\w*|examines?|finds?|demonstrat\w*|'
+                           r'develop\w*|policy|strateg\w*|fund\w*|capabilit\w*|'
+                           r'innov\w*|technolog\w*|scientific|science|govern\w*|'
+                           r'ecosystem|biodivers\w*|chip|manufactur\w*|'
+                           r'collaborat\w*|invest\w*|infrastructur\w*|biotechnolog\w*|future|outlook)\b', re.I)
+
 
 
 def topic_catalogue():
@@ -144,6 +180,8 @@ def topic_catalogue():
             continue
         pats = [clean(x) for x in row.get('patterns', []) if clean(x)]
         pats.extend(TOPIC_EXTRA_PATTERNS.get(label, []))
+        answer[label] = list(dict.fromkeys(pats))
+    for label, pats in TOPIC_EXTRA_DEFINITIONS.items():
         answer[label] = list(dict.fromkeys(pats))
     return answer
 
@@ -225,6 +263,60 @@ def location_hits(text):
             for place, pat in names.items() if re.search(pat, text, re.I)]
 
 
+# Nationality + research actor in a title is often author provenance, not the
+# country under investigation: "Austrian researchers study Kenya's ecosystems".
+# This check applies symmetrically to EVERY country, not just Austria.  It does
+# not suppress claims about science capacity or R&I policy *in* that country.
+AUTHOR_ACTOR = re.compile(
+    r'^\s+(?:researchers?|scientists?|academics?|scholars?|authors?|experts?|'
+    r'analysts?|research\s+(?:group|team|centre|center|institut\w*|laborator\w*)|'
+    r'universit\w*|academ\w*|institut\w*|laborator\w*|'
+    r'journals?|publishers?|portals?|think[ -]tanks?|press|centres?|centers?)\b', re.I)
+AUTHOR_VERBS = re.compile(
+    r'\b(?:stud(?:y|ies|ied)|investigat\w*|examin\w*|assess\w*|'
+    r'evaluat\w*|publish\w*|report\w*|review\w*|survey\w*|'
+    r'map(?:s|ped|ping)?|conduct\w*|undertak\w*|present\w*|releas\w*|produc\w*|analys\w*|analyz\w*|document\w*|describ\w*)\b', re.I)
+LOCAL_CAPACITY_VERBS = re.compile(
+    r'\b(?:invest\w*|fund\w*|establish\w*|open\w*|build\w*|'
+    r'expand\w*|launch\w*|develop\w*|adopt\w*|deploy\w*|'
+    r'implement\w*|manufactur\w*|operat\w*)\b', re.I)
+
+
+def substantive_location_hits(sentence):
+    """Location hits except clear publisher/author-attribution modifiers.
+
+    This is a conservative *discovery* heuristic, not source reading or
+    an assertion about the investigators' identity.  Source metadata is never
+    passed into this function.  Ambiguous cases remain for Deep Scan review.
+    """
+    places = []
+    for group, names in GEOGRAPHY.items():
+        for place, pat in names.items():
+            found = False
+            for m in re.finditer(pat, sentence, re.I):
+                after = sentence[m.end():m.end() + 160]
+                actor = AUTHOR_ACTOR.match(after)
+                if actor:
+                    before = sentence[max(0, m.start() - 36):m.start()]
+                    if re.search(r'\b(?:by|from|via|at|courtesy\s+of)\s+(?:a|an|the)?\s*$', before, re.I):
+                        continue
+                    next_clause = after[actor.end():]
+                    # Publishing, investigating or reporting *on* a foreign
+                    # subject does not make the authors' home country a setting.
+                    # In contrast, investing/building local R&I capabilities can.
+                    verb = AUTHOR_VERBS.search(next_clause)
+                    capacity = LOCAL_CAPACITY_VERBS.search(next_clause)
+                    if verb and (not capacity or verb.start() < capacity.start()):
+                        continue
+                    if re.match(r'^\s*(?:from|at|based\s+in|working\s+at)\b', next_clause, re.I):
+                        continue
+                found = True
+                break
+            if found:
+                places.append((group, place))
+    return places
+
+
 def temporal_lens(title, abstract=''):
     evidence = (clean(title) + ' ' + clean(abstract)[:350]).lower()
     if re.search(r'\b(?:prospect(?:s|ive)?|forecast\w*|scenario\w*|outlook|projection\w*|'
@@ -249,21 +341,56 @@ def publication_date_in_scope(value):
     return MIN_PUBLICATION_DATE <= published <= datetime.now(timezone.utc).date()
 
 
+def aboutness_locations(title, body='', *, limit=850):
+    """Return places actually discussed, with a short traceable context.
+
+    Source names, bibliographic metadata, and affiliations are deliberately
+    absent. A title location needs substantive R&I context; a body-only mention
+    must appear in a substantive topical sentence near the beginning. The
+    latter is a discovery hypothesis, NOT authoritative source verification.
+    """
+    title = ATTRIBUTION.sub(' ', clean(title))
+    body = ATTRIBUTION.sub(' ', clean(body)[:limit])
+    # Sentence extraction avoids assigning the geography from an unrelated
+    # credit, reference, or background country list in a long Reader summary.
+    sentences = re.split(r'(?<=[.!?])\s+|[;\n]+', body)
+    about = {}
+    if RI.search(title) and CLAIM_CONTEXT.search(title):
+        for group, place in substantive_location_hits(title):
+            about[(group, place)] = ('title', title[:240])
+    for sentence in sentences:
+        if not (RI.search(sentence) and CLAIM_CONTEXT.search(sentence)
+                and FUTURES_SIGNAL.search(sentence)):
+            continue
+        for group, place in substantive_location_hits(sentence):
+            about.setdefault((group, place), ('substantive abstract / reader claim', sentence[:240]))
+    return [(g, p, basis, excerpt) for (g, p), (basis, excerpt) in about.items()]
+
+
+def future_ri_question(topic, place, evidence=''):
+    """A question, not a claim, derived from a real topic/place match."""
+    mechanism, question = FUTURES_MECHANISMS.get(topic, (
+        'research capabilities, collaboration, infrastructure, regulation or knowledge production',
+        'Could these developments change research capacity, scientific cooperation or innovation trajectories?'))
+    return f'{place} × {topic}: {question} [Lens: {mechanism}; requires Deep Scan verification.]'
+
+
 def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
                       expected_topic=None):
-    """An evidenced issue with ONE substantive regional setting is sufficient.
+    """Match a Main Radar topic to the *substantive* place studied in a work.
 
-    There is no requirement to mention Europe or to compare two regions. All
-    geography evidence comes from the work's TITLE and ABSTRACT, not affiliation
-    or publisher location. Search-specific pairs must match their intended topic
-    and place so incidental results do not become candidates.
+    Neither publisher location, EU relevance nor nationality of the author is
+    evidence of regional aboutness. A specific searched place must be supported
+    by source title/abstract, not merely by the search query.
     """
     title, body = clean(title), clean(body)
     lead = title + '. ' + body[:900]
     if not title or not RI.search(lead):
         return None
-    locations = location_hits(lead)
+    locations = aboutness_locations(title, body)
     if not locations:
+        return None
+    if expected_region and not any(p == expected_region for _, p, _, _ in locations):
         return None
     catalogue = topic_catalogue()
     topics = allowed_topics if allowed_topics is not None else focus_areas()
@@ -274,32 +401,51 @@ def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
     matches = list(dict.fromkeys(topic_hits + issue_hits))
     if not matches or (expected_topic and expected_topic not in matches):
         return None
-    title_geo = location_hits(title)
+    # A place can be important for microchips and irrelevant for biodiversity,
+    # *within the very same abstract*. Do not transfer an unrelated country's
+    # tag onto the query's topic merely because both appear somewhere.
+    if expected_topic:
+        def has_pair(excerpt):
+            if expected_topic in catalogue:
+                return any(_phrase_occurs(excerpt, p) for p in catalogue[expected_topic])
+            if expected_topic in ISSUES:
+                return bool(re.search(ISSUES[expected_topic], excerpt, re.I))
+            return False
+        paired = [loc for loc in locations if
+                  (not expected_region or loc[1] == expected_region) and has_pair(loc[3])]
+        if not paired:
+            return None
+        # Geography on a topic-specific finding belongs ONLY to places whose
+        # substantive excerpt also supports THAT topic.  A semiconductor
+        # paragraph about India cannot add India to a biodiversity finding
+        # about Brazil, even when both paragraphs are in the same abstract.
+        locations = paired
     title_topic = [t for t in topic_hits
                    if any(_phrase_occurs(title, p) for p in catalogue[t])]
     title_issue = [t for t in issue_hits if re.search(ISSUES[t], title, re.I)]
-    # Country and issue must be in the title or early abstract; a remote
-    # incidental mention is not enough. A complete title match is strongest.
-    early_locations = location_hits(title + ' ' + body[:360])
-    if not early_locations or (expected_region and not any(
-            place == expected_region for _, place in early_locations)):
+    if not any(basis == 'title' for _, _, basis, _ in locations) and not (title_topic or title_issue):
+        # A paper with neither a topical title nor a geographic title is more
+        # likely a generic cross-country result with an incidental abstract hit.
         return None
-    if not (title_geo or title_topic or title_issue):
-        return None
-    score = min(99, 48 + 12*bool(title_geo) + 12*bool(title_topic or title_issue)
+    chosen = next((loc for loc in locations if loc[1] == expected_region), None)
+    if chosen is None:
+        chosen = next((loc for loc in locations if loc[0] != 'EU / UK'), locations[0])
+    score = min(99, 48 + 12*any(basis == 'title' for _, _, basis, _ in locations)
+                + 12*bool(title_topic or title_issue)
                 + min(12, len(matches)*3) + 5*bool(POLICY.search(lead)))
     return {'score': score,
-            'regions': '; '.join(dict.fromkeys(g for g, _ in early_locations)),
-            'countries': '; '.join(dict.fromkeys(p for _, p in early_locations)),
+            'regions': '; '.join(dict.fromkeys(g for g, _, _, _ in locations)),
+            'countries': '; '.join(dict.fromkeys(p for _, p, _, _ in locations)),
             'issues': '; '.join(matches),
             'stakeholders': '; '.join(hits(lead, STAKEHOLDERS)),
-            'match_reason': 'EU-relevant topic/issue identified in the active Main Radar: '+', '.join(matches[:4])+'; setting: '+
-                            ', '.join(p for _, p in early_locations[:4]),
+            'match_reason': 'Main Radar topic: ' + ', '.join(matches[:4]) + '; substantive setting: ' +
+                            ', '.join(p for _, p, _, _ in locations[:4]),
+            'aboutness_basis': chosen[2], 'geographic_evidence': chosen[3],
+            'future_ri_question': future_ri_question(expected_topic or matches[0], chosen[1], chosen[3]),
             'temporal_lens': temporal_lens(title, body),
             'matched_topics': matches,
-            'matched_locations': [p for _,p in early_locations],
-            'primary_group': next(g for g,p in early_locations
-                                  if not expected_region or p == expected_region)}
+            'matched_locations': [p for _, p, _, _ in locations],
+            'primary_group': chosen[0]}
 
 
 def hits(text: str, dictionary: dict) -> list[str]:
@@ -311,47 +457,68 @@ def clean(s):
 
 
 def matching(title: str, body: str, *, backfill: bool = False) -> dict | None:
+    """Backfill with *aboutness*, never with a publisher or source-country tag."""
     title, body = clean(title), clean(body)
-    text = f'{title}. {body}'[:14000]
-    if not title or not RI.search(text):
+    if not title or not RI.search(title + ' ' + body[:800]):
         return None
-    geo = [(group,place) for group,patterns in GEOGRAPHY.items() for place,pat in patterns.items() if re.search(pat,text,re.I)]
-    issues = hits(text,ISSUES)
+    locations = aboutness_locations(title, body, limit=700)
+    text = title + '. ' + body[:700]
+    issues = hits(text, ISSUES)
     people = hits(text, STAKEHOLDERS)
-    # The backfill must be able to find policy relevance even without one of the
-    # 12 narrow emerging-issue phrases. Discovery retains its stricter filter.
-    if not issues and not backfill: return None
-    strong = [s for s in issues if s in STRONG]
-    tgeo = [(g,p) for g,p in geo if re.search(GEOGRAPHY[g][p],title,re.I)]
-    tiss = [s for s in issues if re.search(ISSUES[s],title,re.I)]
-    # On general US/China/EU material a country name alone is not a relevance claim.
-    qualifying = bool(strong and (geo or any(s in tiss for s in strong))) or bool(geo and POLICY.search(text) and 'Transnational R&I and innovation policy' in issues)
-    eu_anchor = bool(re.search(r'\b(?:EU|Europe(?:an)?|Horizon Europe|European Research Area|Framework Programme)\b', text, re.I))
-    eu_facing = {'EU external R&I partnerships / enlargement', 'EU-facing technology standards / regulatory alignment', 'Equitable international research partnerships'}
-    if issues and set(issues).issubset(eu_facing) and not eu_anchor:
+    strong = [issue for issue in issues if issue in STRONG]
+    tiss = [issue for issue in issues if re.search(ISSUES[issue], title, re.I)]
+    qualifying = bool(strong and (locations or any(i in tiss for i in strong))) or bool(
+        locations and POLICY.search(text) and 'Transnational R&I and innovation policy' in issues)
+    if not qualifying and backfill and locations and RI.search(text) and POLICY.search(text):
+        # A country-specific R&I strategy or a substantive regional policy study
+        # is interesting even when it is outside the narrow emerging-issue list.
+        qualifying = True
+        if not issues:
+            issues = [COUNTRY_POLICY_ISSUE]
+    if not qualifying:
         return None
-    if not qualifying and backfill and geo and POLICY.search(title + ' ' + body[:700]):
-        # Do not infer country-specific relevance from an incidental mention deep
-        # in a long summary. Require the location to feature in the original title
-        # or lead evidence; that is a defensible, human-auditable policy signal.
-        leading = title + ' ' + body[:400]
-        lead_geo = any(re.search(GEOGRAPHY[g][p], leading, re.I) for g,p in geo)
-        explicit_policy = bool(re.search(r'\b(?:research|science|innovation|technolog\w*|R&I|R&D|universit\w*|AI)\b', leading, re.I)
-                         and POLICY.search(leading))
-        if lead_geo and explicit_policy:
-            qualifying = True
-            if not issues:
-                issues = [COUNTRY_POLICY_ISSUE]
-    if not qualifying: return None
-    if 'Science-based international organisations' in issues and not (geo or any(re.search(r'\b(?:withdraw\w*|future|scenario|reform|funding|governance|influence|multilateral|geopolit\w*|leadership|institutional|cooperation|diplomac\w*)\b',text,re.I) for _ in [0])) and len(issues)==1:
+    if 'Science-based international organisations' in issues and not locations and len(issues) == 1 and not re.search(
+            r'\b(?:withdraw\w*|future|scenario|reform|funding|governance|influence|'
+            r'multilateral|geopolit\w*|leadership|institutional|cooperation|diplomac\w*)\b', text, re.I):
         return None
-    score = min(99, 40 + (17 if strong else 0) + (11 if geo else 0) + min(12, len(tiss)*7) + min(8,len(tgeo)*4) + min(9,len(issues)*3) + (5 if POLICY.search(title) else 0))
-    # Explicit issue + region, or explicit title issue, is strongest.  Scores rank matches,
-    # not scientific validity; verification remains exclusively Deep Scan/admission.
-    reason = 'Region: ' + (', '.join(p for _,p in geo[:12]) or 'cross-regional / ABNJ') + '; issue: ' + ', '.join(issues[:6])
-    return {'score':score,'regions':'; '.join(dict.fromkeys(g for g,_ in geo)),
-            'countries':'; '.join(dict.fromkeys(p for _,p in geo)),
-            'issues':'; '.join(issues),'stakeholders':'; '.join(people),'match_reason':reason}
+    score = min(99, 40 + (17 if strong else 0) + (11 if locations else 0) +
+                min(12, len(tiss)*7) + min(8, len(locations)*4) +
+                min(9, len(issues)*3) + (5 if POLICY.search(title) else 0))
+    g, p, basis, excerpt = (next((loc for loc in locations if loc[0] != 'EU / UK'), locations[0])
+                           if locations else ('', '', '', ''))
+    return {'score': score,
+            'regions': '; '.join(dict.fromkeys(g for g, _, _, _ in locations)),
+            'countries': '; '.join(dict.fromkeys(p for _, p, _, _ in locations)),
+            'issues': '; '.join(issues), 'stakeholders': '; '.join(people),
+            'aboutness_basis': basis, 'geographic_evidence': excerpt,
+            'future_ri_question': future_ri_question(issues[0], p, excerpt) if p else '',
+            'match_reason': 'About: ' + (', '.join(p for _, p, _, _ in locations[:8]) or 'transnational / high seas') +
+                            '; issue: ' + ', '.join(issues[:6])}
+
+
+def external_focus_match(match):
+    """Return an external-focused copy or None for EU/UK-only backfill.
+
+    EU/UK material still belongs in the Main Radar.  Other countries can be
+    studied by EU/UK publishers and are not removed or penalised.  When both
+    regions occur, keep the subject geography, not incidental EU comparison.
+    """
+    if not match:
+        return None
+    original = [p for p in clean(match.get('countries')).split('; ') if p]
+    external = [(g, p) for g, names in GEOGRAPHY.items() if g != 'EU / UK'
+                for p in names if p in original]
+    if not external:
+        return None
+    result = dict(match)
+    result['countries'] = '; '.join(p for _, p in external)
+    result['regions'] = '; '.join(dict.fromkeys(g for g, _ in external))
+    result['match_reason'] = 'Global substantive setting: ' + ', '.join(p for _, p in external[:5]) +                              '; ' + clean(match.get('issues'))
+    # The question must point to the external subject (never the publisher).
+    primary = external[0][1]
+    issue = clean(match.get('issues')).split('; ')[0]
+    result['future_ri_question'] = future_ri_question(issue, primary)
+    return result
 
 
 def load(rel, default):
@@ -468,9 +635,12 @@ def cumulative_discoveries(existing, batch, *, slot, older_snapshots=()):
             if not isinstance(lead, dict):
                 continue
             key = lead_identity(lead)
-            if key and key not in combined:
+            if key and (key not in combined or
+                        (lead.get('aboutness_basis') and
+                         not combined[key].get('aboutness_basis'))):
+                first = combined.get(key, {}).get('first_seen_batch_id')
                 combined[key] = {**lead, 'first_seen_batch_id':
-                                 clean(lead.get('first_seen_batch_id')) or origin}
+                                 first or clean(lead.get('first_seen_batch_id')) or origin}
     archive = {**batch,
                'archive_mode': 'cumulative-doi-deduplicated',
                'rotation_index': slot,
@@ -565,12 +735,8 @@ def compile_records():
         analysis = rt.get('deep_analysis') if isinstance(rt.get('deep_analysis'), dict) else item.get('deep_analysis') or {}
         body = ' '.join(clean(x) for x in [
             item.get('summary'), item.get('core_message'), item.get('reader_point'),
-            item.get('why_it_matters'), item.get('relevance_note'),
-            item.get('reader_what'), item.get('reader_why'), item.get('reader_more'),
-            rt.get('reader_title'), rt.get('reader_what'), rt.get('reader_why'), rt.get('reader_more'),
-            analysis.get('research_question'), analysis.get('main_finding'),
-            analysis.get('radar_relevance'), analysis.get('method_or_basis'),
-            analysis.get('qualification')])
+            item.get('reader_what'), rt.get('reader_what'),
+            analysis.get('research_question'), analysis.get('main_finding')])
         decision = clean(ad.get('decision') or (rt.get('admission') or {}).get('decision')
                          or item.get('admission_status')).lower()
         deep_ok = (ds.get('status') == 'verified' and rt.get('profile') == DEEP_PROFILE
@@ -585,9 +751,9 @@ def compile_records():
         if decision in {'drop', 'drop_unverifiable', 'duplicate', 'needs_manual_verification'}:
             stats['source_rows_excluded_nonretained'] += 1
             continue
-        match = matching(title, body, backfill=True)
+        match = external_focus_match(matching(title, body, backfill=True))
         if not match:
-            stats['source_rows_not_matching_focus'] += 1
+            stats['source_rows_not_matching_external_focus'] += 1
             continue
         stats['source_rows_matched_focus'] += 1
         if source == 'Stored Deep Scan / Reader':
@@ -647,20 +813,52 @@ def compile_records():
     for lead in latest_leads:
         if not isinstance(lead, dict) or not lead.get('title') or not publication_date_in_scope(lead.get('date')):
             continue
+        if lead.get('focus_group') == 'EU / UK':
+            stats['eu_uk_legacy_leads_excluded_from_global_view'] += 1
+            continue
         status = test_results.get(clean(lead.get('candidate_id')))
         if not status:
             status = ('in_main_radar' if clean(lead.get('url')).casefold().rstrip('/') in in_main
                       else 'indexed_lead_not_verified')
-        regional_leads.append({**lead, 'radar_check_status': status})
+        # No grandfathering: v3 country tags came from less selective matching.
+        # The underlying DOI stays in the archive, but its old region is NOT a
+        # verified tag. Re-evaluate title alone; let a later v4 search confirm
+        # body-only aboutness before claiming a country in the workbook.
+        if not lead.get('aboutness_basis'):
+            title_locations = aboutness_locations(lead.get('title', ''))
+            claimed = clean(lead.get('focus_region'))
+            valid = next((loc for loc in title_locations if loc[1] == claimed), None)
+            if not valid:
+                stats['legacy_geography_quarantined'] += 1
+                regional_leads.append({**lead, 'legacy_claimed_region': claimed,
+                                       'focus_region': '', 'focus_group': '',
+                                       'aboutness_status': 'legacy geography quarantined',
+                                       'radar_check_status': 'requires_new_aboutness_check'})
+                continue
+            lead = {**lead, 'aboutness_basis': 'title-only legacy recheck',
+                    'geographic_evidence': valid[3],
+                    'future_ri_question': future_ri_question(
+                        clean(lead.get('focus_issue')), claimed, valid[3])}
+        regional_leads.append({**lead,
+                               'aboutness_status': 'preliminary — Deep Scan required',
+                               'radar_check_status': status})
+    # A separate global verification lane keeps the ordinary EU Radar admission
+    # contract untouched. These records have actually passed an independent
+    # topic/place, source-integrity and future-significance Deep Scan.
+    global_review = load('Relevance Stuff/deep_scan/verified_findings.json', {})
+    global_records = [r for r in global_review.get('records', []) if isinstance(r, dict)
+                      and r.get('decision') == 'keep']
+    stats['global_deep_scan_kept'] = len(global_records)
     stats['cumulative_regional_indexed_leads'] = len(regional_leads)
     return {
         'generated_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
         'verified': verified, 'pending': pending, 'regional_leads': regional_leads,
+        'global_verified': global_records,
         'statistics': dict(stats),
         'catalogue': {'countries': list(dict.fromkeys(k for group in GEOGRAPHY.values() for k in group)),
                       'regions': list(GEOGRAPHY), 'issues': list(ISSUES) + [COUNTRY_POLICY_ISSUE],
                       'stakeholders': list(STAKEHOLDERS)},
-        'policy': 'Only publications dated 2025-01-01 onward: audited active and inactive Main Radar and retained Deep Scan/Reader records (not historical archive). '
+        'policy': 'Relevance Focus is a global aboutness and R&I futures lane outside the EU/UK as primary study setting: no European relevance needed. Only publications dated 2025-01-01 onward: audited active and inactive Main Radar and retained Deep Scan/Reader records (not historical archive). '
                   'Verified requires Deep Scan identity verification and KEEP admission. '
                   'A geography+explicit R&I-policy focus may also qualify without a named emerging issue. '
                   'Archived records are labelled; this workbook never readmits dropped works.'
@@ -671,12 +869,11 @@ def compile_records():
 # Fixed anchors preserve coverage of large research regions, including India;
 # rotating countries create new local combinations every run.
 REGION_ANCHORS = {
-    'EU / UK': ('European Union', 'United Kingdom', 'Germany'),
     'Americas': ('United States', 'Brazil'),
     'Asia & Pacific': ('India', 'China'),
-    'Africa': ('Africa (region)', 'South Africa'),
-    'Middle East': ('Saudi Arabia',),
-    'Europe — enlargement': ('Ukraine',),
+    'Africa': ('Africa (region)', 'South Africa', 'Kenya'),
+    'Middle East': ('Saudi Arabia', 'UAE'),
+    'Europe — enlargement': ('Ukraine', 'Türkiye'),
 }
 SEARCH_GEOGRAPHY = {
     'Africa (region)': 'Africa',
@@ -695,7 +892,7 @@ TEMPORAL_QUERIES = (
 
 
 def regional_targets(slot):
-    """Balanced EU/UK and external rotation; no requirement to be EU-facing."""
+    """Rotate global investigation targets; EU and UK use the ordinary Radar."""
     targets = []
     for group, anchors in REGION_ANCHORS.items():
         targets.extend((group, place) for place in anchors)
@@ -703,9 +900,11 @@ def regional_targets(slot):
         available = [name for name in names if name not in REGION_ANCHORS.get(group, ())]
         if not available:
             continue
-        # More depth in EU/UK prevents the non-EU/UK lane from flooding selection;
-        # smaller country lists rotate so one location does not monopolize runs.
-        count = 3 if group == 'EU / UK' else 2 if group in ('Americas','Asia & Pacific','Africa') else 1
+        # Mostly external regions; EU/UK is optional context, not the primary lane.
+        # Rotate localities to avoid always searching established science powers.
+        if group == 'EU / UK':
+            continue
+        count = 3 if group in ('Americas','Asia & Pacific','Africa') else 2
         start = slot % len(available)
         targets.extend((group, available[(start + i) % len(available)])
                        for i in range(min(count, len(available))))
@@ -713,11 +912,10 @@ def regional_targets(slot):
 
 
 def focused_search_plan(slot: int, focus=None):
-    """Each query targets ONE existing Radar issue in ONE world region.
+    """Each query connects an active Radar topic to an external world region.
 
-    No search needs to mention Europe: EU relevance comes from matching the
-    already-admitted main Radar's topic/issue, not the geography of the paper.
-    Across runs, rotate regions and current/possible-future lenses only.
+    EU/UK are not target geographies, but their researchers, publishers and
+    partners may produce relevant work on external places.  No EU bridge needed.
     """
     focus = focus if focus is not None else focus_areas()
     if not focus:
@@ -731,10 +929,12 @@ def focused_search_plan(slot: int, focus=None):
     # number of currently selected Radar topics changes between runs.
     stride = next(i for i in range(5, 5 + len(targets))
                   if gcd(i, len(targets)) == 1)
+    wave_stride = next(i for i in range(7, 7 + len(targets))
+                       if gcd(i, len(targets)) == 1)
     seen = set()
     for wave in range(FOCUSED_PAGE_DEPTH):
         for idx, (topic, term) in enumerate(items):
-            group, place = targets[(idx * stride + wave * 7 + slot) % len(targets)]
+            group, place = targets[(idx * stride + wave * wave_stride + slot) % len(targets)]
             lens_name, suffix = TEMPORAL_QUERIES[(idx + wave + slot) % len(TEMPORAL_QUERIES)]
             query = f'{term} {SEARCH_GEOGRAPHY.get(place, place)} {suffix}'.strip()
             # Alternate provider priority on each run and each topic-region pair.
@@ -836,18 +1036,20 @@ def balanced_candidates(picked, max_candidates, *, venue_history=None):
 
     core = diverse_order(core)
     external = diverse_order(external)
-    # Existing outside-EU/UK capacity safeguard remains unchanged.
-    outside_limit = min(ceil(max_candidates * OUTSIDE_EU_UK_SHARE),
-                        max(min(6, max_candidates), ceil(len(core) * 0.75)))
-    external = external[:outside_limit]
-    selected = []
-    while len(selected) < max_candidates and (core or external):
-        for side in (core, core, external):
-            if len(selected) >= max_candidates:
-                break
-            if side:
-                selected.append(side.pop(0))
-    return selected
+    # A dedicated GLOBAL scanner does not reserve 15% of its batch for EU/UK.
+    # Choose external subjects first, regardless of publisher nationality.
+    # EU-only rows are ignored by default in online discovery (no EU targets).
+    preferred_external = min(len(external), ceil(max_candidates * OUTSIDE_EU_UK_SHARE))
+    selected = external[:preferred_external]
+    external = external[preferred_external:]
+    n_core = max(0, max_candidates-len(selected))
+    selected.extend(core[:n_core])
+    core = core[n_core:]
+    if len(selected) < max_candidates:
+        selected.extend(external[:max_candidates-len(selected)])
+    if len(selected) < max_candidates:
+        selected.extend(core[:max_candidates-len(selected)])
+    return selected[:max_candidates]
 
 
 def crossref_date(item):
@@ -922,9 +1124,14 @@ def relevance_work(source, work, *, allowed_topics=None, expected_region=None,
         'temporal_lens': match['temporal_lens'],
         'focus_score': match['score'],
         'focus_issue': expected_topic or match['matched_topics'][0],
-        'eu_relevance_basis': 'Same identified issue as active Main Radar; geographic context may be outside Europe',
-        'curator_note': 'Relevance focus: '+match['match_reason']+
-                        '. Indexed bibliographic lead; publisher/full text not yet independently verified.',
+        'aboutness_basis': match['aboutness_basis'],
+        'geographic_evidence': match['geographic_evidence'],
+        'future_ri_question': match['future_ri_question'],
+        'scope': 'global-topic-place; no EU relevance required',
+        'source_integrity_status': 'unverified — mandatory independent Deep Scan',
+        'curator_note': 'Global R&I futures question: ' + match['future_ri_question'] +
+                        ' Evidence to test: ' + match['geographic_evidence'] +
+                        '. Indexed bibliographic lead, not independent verification or evidence of a forecast.',
     }
     return canonical, match['score'], candidate
 
@@ -941,7 +1148,7 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     import requests  # no network dependency for backfill-only
     if session is None:
         session = requests.Session()
-    session.headers.update({'User-Agent':'EU-RI-Relevance-Scanner/2.0 (public research discovery)'})
+    session.headers.update({'User-Agent':'Global-RI-Relevance-Focus/4.0 (public research discovery)'})
     clock = clock or time.monotonic
     pause = pause or time.sleep
     max_seconds = float(max_seconds)
@@ -953,8 +1160,11 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     past_snapshots = (historical_discovery_snapshots()
                       if archive_path and previous_archive.get('archive_mode') !=
                       'cumulative-doi-deduplicated' else [])
+    # Pre-v4 leads have never passed the new aboutness check. They can be
+    # rediscovered and upgraded rather than being permanently grandfathered in.
     seen_dois = {doi_identity(lead) for document in [*past_snapshots, previous_archive]
-                 for lead in document.get('candidates', []) if isinstance(lead, dict)}
+                 for lead in document.get('candidates', []) if isinstance(lead, dict)
+                 and lead.get('aboutness_basis')}
     seen_dois.discard('')
     api_key = clean(os.environ.get('OPENALEX_API_KEY'))
     crossref_mailto = clean(os.environ.get('CROSSREF_MAILTO'))
@@ -1113,18 +1323,18 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     stats['seconds_spent_discovering'] = round(clock()-start,2)
     stats['successful_requests'] = successful_requests
     stats['coverage_buckets'] = len(per_bucket)
-    out={'profile_version':'v3-main-radar-issue-regional-25m',
+    out={'profile_version':'v4-global-aboutness-futures-25m',
          'batch_id':'relevance-'+now.strftime('%Y%m%dT%H%M%SZ'),
          'source_document':'OpenAlex and Crossref DOI-bearing, venue-identified publications; leads only',
          'compiled_at':datetime.now(timezone.utc).isoformat(),
-         'policy':{'admission':'Normal Radar A/B/C source, quality and EU-relevance gates are mandatory; no automatic admission',
-                   'eu_connection':'Each matched issue/topic is evidenced in the active Main Radar; the publication itself need not mention Europe',
-                   'outside_eu_uk_capacity_ceiling':OUTSIDE_EU_UK_SHARE,
+         'policy':{'admission':'Separate global R&I Deep Scan must independently verify aboutness, source integrity and future R&I significance; indexed leads are never auto-admitted',
+                   'topic_anchor':'Each matched issue/topic is evidenced in active Main Radar; neither European geography nor EU relevance is required',
+                   'outside_eu_uk_target_share':OUTSIDE_EU_UK_SHARE,
                    'earliest_publication_date':MIN_PUBLICATION_DATE.isoformat(),
                    'time_perspectives':['Current state / developments','Possible future / scenarios'],
                    'discovery_seconds_target':max_seconds,
                    'processing_after_discovery':True,
-                   'publication_source_rotation':'Soft journal/publisher diversity among similarly relevant candidates, informed by cumulative DOI history; no source whitelist or bypass of Deep Scan'},
+                   'publication_source_rotation':'Soft journal/publisher diversity; publisher location cannot determine aboutness; Deep Scan must reject propaganda and unverifiable claims'},
          'candidates':candidates,'work_count':len(candidates),
          'discovery_stats':dict(stats)}
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -1144,108 +1354,20 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
 
 
 def scan(candidate_path: Path):
-    """Admit the *already discovered* batch; do not launch a second discovery scan.
+    """Fail closed for the retired EU-Radar admission adapter.
 
-    The Main Radar engine has no native candidate-only CLI. In this dedicated
-    process, its broad-source collectors are replaced with empty collection
-    results, while exact DOI/title resolution and all ordinary admission,
-    duplicate, selection and publication logic remain the Main Radar's own.
-    No change is made to scan_radar.py or to the normal scanner's workflows.
+    Global Relevance Focus now goes to its OWN source-reviewed Deep Scan.
+    The ordinary European Radar is neither bypassed nor broadened by this lane.
     """
-    if not candidate_path.is_file():
-        raise FileNotFoundError(f'Missing focused candidate file: {candidate_path}')
-    batch = json.loads(candidate_path.read_text(encoding='utf8'))
-    if not isinstance(batch, dict) or not isinstance(batch.get('candidates'), list):
-        raise ValueError('Invalid relevance candidate batch; refusing broad Radar fallback')
-    candidates = batch['candidates']
-    if not candidates:
-        print('Focused discovery returned no novel candidates; admission stage skipped (no second scan).', flush=True)
-        return 0
-    if any(not isinstance(row, dict) or not clean(row.get('title')) or
-           not publication_date_in_scope(row.get('date')) for row in candidates):
-        raise ValueError('Invalid or pre-2025 relevance candidate entry')
-
-    os.environ['RADAR_PRIORITY_SCAN'] = 'true'
-    os.environ['RADAR_CURATOR_CANDIDATE_INPUTS'] = str(candidate_path.resolve())
-    # 15 minutes is an UPPER LIMIT for candidate checking + publication, not a
-    # required scan duration. The discovery phase already ran for 1500 seconds.
-    os.environ['RADAR_SCAN_BUDGET_SECONDS'] = '900'
-    os.environ['RADAR_RESCUE_MODE'] = 'false'
-    import scan_radar
-
-    # Reuse the exact existing source-derived tests and strict A/B/C admission.
-    # Allocate nearly all available work time to this batch, rather than other
-    # sources, and leave some time for corpus reconciliation and serialization.
-    cfg = scan_radar.CONFIG
-    cfg['curator_candidate_testing_enabled'] = True
-    cfg['curator_candidate_tests_per_scan'] = len(candidates)
-    cfg['curator_candidate_testing_stage_seconds'] = 750
-    cfg['network_reserve_seconds'] = 25
-    cfg['scan_finalize_reserve_seconds'] = 35
-
-    # No recall, secondary discovery, news rescue, Matrix expansion or journal
-    # rotation. These belong to ordinary Radar runs, which remain unaffected.
-    for flag in (
-        'priority_people_enabled', 'foresight_author_followup_enabled',
-        'quiet_scan_rescue_enabled', 'citation_snowball_enabled',
-        'source_failure_reallocation_enabled', 'legacy_a_recall_recovery_enabled',
-        'low_yield_fresh_rotation_enabled', 'low_yield_extended_fallback_enabled',
-        'low_yield_full_rescue_run_enabled', 'full_budget_continuation_enabled',
-        'weak_signal_evidence_followup_enabled', 'c_floor_rescue_enabled',
-        'c_floor_final_reserve_enabled', 'frontier_stubborn_recovery_enabled',
-        'journal_depth_enabled', 'crossref_full_source_census_each_scan',
-        'institution_full_census_each_scan', 'direct_top_journal_enabled',
-    ):
-        cfg[flag] = False
-    cfg['frontier_gap_deepening_max_waves'] = 0
-    cfg['frontier_gap_deepening_max_waves_no_empty'] = 0
-    cfg['low_yield_reserved_seconds'] = 0
-    cfg['c_min_new_per_successful_scan'] = 0
-
-    # Critical isolation: the Radar main pipeline otherwise ALWAYS starts broad
-    # collection even with the priority flag set. Stub just those collectors in
-    # memory, so final admissibility, cumulative deduplication and serialization
-    # still use unmodified Radar code. Never monkeypatch the actual exact-record
-    # resolver or its Crossref/OpenAlex gates.
-    blocked_calls = Counter()
-
-    def no_general_discovery(*args, **kwargs):
-        blocked_calls['broad_collector_invocations_skipped'] += 1
-        return []
-
-    def no_general_journal_discovery(*args, **kwargs):
-        blocked_calls['broad_journal_invocations_skipped'] += 1
-        return [], []
-
-    broad_collectors = (
-        'collect_news', 'collect_openalex', 'collect_crossref',
-        'collect_institutions', 'collect_must_not_miss_primary_evidence',
-        'collect_eurlex_cellar', 'collect_europarl_adopted_texts',
-        'collect_crossref_prefix_sources', 'collect_priority_news_references',
-        'collect_priority_people', 'collect_rule_fix_source_recovery',
-        'collect_manual_recovery', 'collect_weak_signal_evidence_followups',
-    )
-    # Fail loudly if the upstream Radar API changes. Silently failing to stub a
-    # renamed collector would bring back a second broad scanning phase.
-    for name in broad_collectors + ('collect_direct_top_journals',):
-        if not callable(getattr(scan_radar, name, None)):
-            raise RuntimeError(f'Candidate-only isolation needs updated Radar adapter: {name}')
-    for name in broad_collectors:
-        setattr(scan_radar, name, no_general_discovery)
-    scan_radar.collect_direct_top_journals = no_general_journal_discovery
-
-    print(f'Relevance ADMISSION-ONLY: {len(candidates)} exact candidates; '
-          'no broad Radar discovery; candidate processing budget up to 900s '
-          '(not a second 25-minute scan).', flush=True)
-    result = scan_radar.main()
-    print('Relevance admission complete; extra discovery collectors blocked:',
-          dict(blocked_calls), flush=True)
-    return result
+    raise RuntimeError(
+        'Relevance Focus global candidates must NOT pass through ordinary EU Radar admission. '
+        'Run: relevance_focus_deep_scan.py prepare; review its package; '
+        'then relevance_focus_deep_scan.py import-inbox.')
 
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('command',choices=['discover','scan','export-json'])
+    p.add_argument('command',choices=['discover','scan','export-json'])  # scan: explicit retired error
     p.add_argument('--output',type=Path,default=Path(os.getenv('RUNNER_TEMP','/tmp'))/'relevance_candidates.json')
     p.add_argument('--candidates',type=Path,default=Path(os.getenv('RUNNER_TEMP','/tmp'))/'relevance_candidates.json')
     p.add_argument('--archive',type=Path,default=None,help='Scanner-owned cumulative, DOI-deduplicated discovery archive')
