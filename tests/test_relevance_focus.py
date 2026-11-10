@@ -178,7 +178,8 @@ class RegionalDiscoveryTests(unittest.TestCase):
         self.assertEqual(result['focus_region'], 'India')
         self.assertEqual(result['focus_issue'], 'Health research')
         self.assertNotIn('Europe', result['title'])
-        self.assertIn('active Main Radar', result['curator_note'])
+        self.assertIn('Global R&I futures question', result['curator_note'])
+        self.assertEqual(result['scope'], 'global-topic-place; no EU relevance required')
         self.assertEqual(result['url'], 'https://doi.org/10.1234/biomed-india-2025')
 
     def test_no_unrelated_india_theme_is_allowed(self):
@@ -223,7 +224,7 @@ class RegionalDiscoveryTests(unittest.TestCase):
         plans = list(focused_search_plan(5, focus={'Health research': 'biomedical research'}))
         regions = {p[0] for p in plans}
         times = {p[3] for p in plans}
-        self.assertIn('EU / UK', regions)
+        self.assertNotIn('EU / UK', regions)
         self.assertIn('Asia & Pacific', regions)
         self.assertIn('Africa', regions)
         self.assertIn('Americas', regions)
@@ -235,7 +236,7 @@ class RegionalDiscoveryTests(unittest.TestCase):
         self.assertEqual(len({(p[4], p[5]) for p in plans}), len(plans))
         self.assertTrue(all(p[-1] == 1 for p in plans))
 
-    def test_balancing_keeps_india_but_prevents_external_flood(self):
+    def test_balancing_prioritizes_external_without_fabricating_europe(self):
         from relevance_focus import balanced_candidates, OUTSIDE_EU_UK_SHARE
         picked = {}
         for i in range(60):
@@ -251,12 +252,12 @@ class RegionalDiscoveryTests(unittest.TestCase):
         external = [x for x in selected if x['focus_group'] != 'EU / UK']
         self.assertTrue(external)
         self.assertTrue(all(x['focus_region'] == 'India' for x in external))
-        self.assertLessEqual(len(external), int(30 * OUTSIDE_EU_UK_SHARE))
+        self.assertGreaterEqual(len(external), int(30 * OUTSIDE_EU_UK_SHARE))
         self.assertEqual(len(selected), 30)
         external_only = {k: v for k, v in picked.items() if k.startswith('ext:')}
         solo = balanced_candidates(external_only, 30)
         self.assertGreater(len(solo), 0)
-        self.assertLessEqual(len(solo), 6)
+        self.assertEqual(len(solo), 30)
 
     def test_publication_cutoff_rejects_old_and_undated_discoveries(self):
         from relevance_focus import relevance_work, publication_date_in_scope, temporal_lens
@@ -347,7 +348,7 @@ class RegionalDiscoveryTests(unittest.TestCase):
             self.assertIn('openalex', url)
             self.assertIn('type,is_retracted', query['select'])
             self.assertIn('from_publication_date:2025-01-01', query['filter'])
-            self.assertEqual(document['policy']['outside_eu_uk_capacity_ceiling'], 0.4)
+            self.assertEqual(document['policy']['outside_eu_uk_target_share'], 1.0)
             self.assertEqual(document['policy']['earliest_publication_date'], '2025-01-01')
 
     def test_backfill_output_excludes_older_and_historical_without_mutating_sources(self):
@@ -450,7 +451,8 @@ class RegionalDiscoveryTests(unittest.TestCase):
                 return iter([('Asia & Pacific', 'India', 'Health research',
                               'Current state / developments',
                               'biomedical research India', 'openalex', 1)])
-            # Two identical searches: only Canada should be newly sent to Radar.
+            # Two searches: first must recheck the legacy India lead with the
+            # new aboutness rule, plus discover Canada. Second reuses v4 audit.
             # An additional new country is deliberately NOT matched by an India
             # query; use one expected region for both candidate titles instead.
             canada['display_name'] = 'Biomedical research investment in India and Canada'
@@ -467,7 +469,7 @@ class RegionalDiscoveryTests(unittest.TestCase):
                              pause=lambda d: t.__setitem__(0, t[0]+d))
                 emitted = json.loads(target.read_text())['candidates']
                 stored = json.loads(archive.read_text())
-                self.assertEqual(len(emitted), 1 if run_no == 0 else 0)
+                self.assertEqual(len(emitted), 2 if run_no == 0 else 0)
                 self.assertEqual(len(stored['candidates']), 2)
                 self.assertEqual(stored['work_count'], 2)
             self.assertEqual(plan_slots[1], plan_slots[0] + 1)
@@ -611,7 +613,7 @@ class SourceRotationTests(unittest.TestCase):
                                      venue_history=Counter({'journal a': 100}))
         self.assertEqual([r['source'] for r in chosen], ['Journal A'])
 
-    def test_non_eu_ceiling_remains_unchanged_with_source_rotation(self):
+    def test_global_external_priority_applies_with_source_rotation(self):
         from relevance_focus import balanced_candidates
         from collections import Counter
         picked = {}
@@ -621,7 +623,7 @@ class SourceRotationTests(unittest.TestCase):
             picked['outside' + str(n)] = self.row('x' + str(n), 'Journal B', 81)
         chosen = balanced_candidates(picked, 10,
                                      venue_history=Counter({'journal a': 5}))
-        self.assertLessEqual(sum(r['focus_group'] != 'EU / UK' for r in chosen), 4)
+        self.assertGreaterEqual(sum(r['focus_group'] != 'EU / UK' for r in chosen), 8)
         self.assertEqual(len(chosen), 10)
 
 
