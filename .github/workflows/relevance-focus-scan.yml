@@ -69,7 +69,7 @@ jobs:
           set -euo pipefail
           # Deliberately DO NOT run ordinary EU Radar admission here: a study
           # about biodiversity in Kenya or chips in Taiwan needs NO EU bridge.
-          python scripts/relevance_focus_deep_scan.py prepare --batch-size 12 \
+          python scripts/relevance_focus_deep_scan.py prepare --batch-size 30 \
             --artifact "$RUNNER_TEMP/relevance_focus_global_review.zip"
       - name: Generate focused Excel from authoritative and pending source material
         run: |
