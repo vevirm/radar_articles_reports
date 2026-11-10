@@ -120,9 +120,9 @@ def valid_v4_lead(row):
             and re.fullmatch(r'https://doi\.org/10\.\d{4,9}/\S+', str(row.get('url') or ''), re.I))
 
 
-def prepare(*, batch_size=12, artifact=None):
-    if not 1 <= batch_size <= 24:
-        raise ValueError('batch_size must be 1..24')
+def prepare(*, batch_size=30, artifact=None):
+    if not 1 <= batch_size <= 30:
+        raise ValueError('batch_size must be 1..30')
     archive = read(ARCHIVE, {})
     verified = read(VERIFIED, {}).get('records', [])
     decisions = read(REVIEW, {}).get('records', [])
@@ -294,7 +294,7 @@ def import_inbox():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('command', choices=['prepare','import-inbox'])
-    parser.add_argument('--batch-size', type=int, default=12)
+    parser.add_argument('--batch-size', type=int, default=30)
     parser.add_argument('--artifact', type=Path)
     args = parser.parse_args()
     if args.command == 'prepare':
