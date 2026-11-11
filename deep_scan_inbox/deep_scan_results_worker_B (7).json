@@ -1,0 +1,1210 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261111T152343Z-d877aaf27bfb",
+  "results": [
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1OdkpkQ3BWNVQtQVF0LTd5N2J3SjJsOEtYNjY5cjVNMlU4dHZiTlk2Z3VPbDBDQVl4bkI2bTFYU3RGeWx1UnZQOUc2S0VBVHRqWURuSUJRUjZpdjdYUzVtcEd2QW9nZG40VVM1WDhYOEhXLWtXSENmVkFR?oc=5",
+      "source_hash": "ff6572cb",
+      "identity_hash": "252caeab0cf6d930",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_resolved",
+            "note": "The scanner reader URL https://news.google.com/rss/articles/CBMiekFVX3lxTE1OdkpkQ3BWNVQtQVF0LTd5N2J3SjJsOEtYNjY5cjVNMlU4dHZiTlk2Z3VPbDBDQVl4bkI2bTFYU3RGeWx1UnZQOUc2S0VBVHRqWURuSUJRUjZpdjdYUzVtcEd2QW is a redirect/short link or did not itself provide matching substantive first-party content."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered the text of the European Parliament written question via a mirror; the official document URL did not yield substantive content in retrieval. Source: https://politique.pappers.fr/question/strategic-orientation-and-results-of-funding-for-cancer-research-QECR1040640"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_attributed_report",
+            "url": "https://politique.pappers.fr/question/strategic-orientation-and-results-of-funding-for-cancer-research-QECR1040640",
+            "title": "Strategic orientation and results of EU funding for cancer research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence. Provenance detail: Recovered the text of the European Parliament written question via a mirror; the official document URL did not yield substantive content in retrieval."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_NEW_SUBSTANTIVE_RI_CHANGE",
+        "reason": "C: an oversight question is not an EU cancer R&I funding decision, evaluation finding or adopted programme change; the question does not itself supply research results."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Strategic orientation and results of EU funding for cancer research",
+      "reader_what": "MEPs tabled a written parliamentary question asking the Commission about EU cancer-research funding strategy and results.",
+      "reader_why": "",
+      "reader_more": "MEPs tabled a written parliamentary question asking the Commission about EU cancer-research funding strategy and results. Relevance was evaluated against the assigned strand rather than inferred from keywords. C: an oversight question is not an EU cancer R&I funding decision, evaluation finding or adopted programme change; the question does not itself supply research results.",
+      "deep_analysis": {
+        "work_kind": "European Parliament written question",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "MEPs tabled a written parliamentary question asking the Commission about EU cancer-research funding strategy and results.",
+        "method_or_basis": "Checked the identifiable European Parliament written question and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "C: an oversight question is not an EU cancer R&I funding decision, evaluation finding or adopted programme change; the question does not itself supply research results.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.48550/arxiv.2606.12788",
+      "source_hash": "5061f337",
+      "identity_hash": "783961668afec259",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://doi.org/10.48550/arxiv.2606.12788 is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 24,000 characters of the matching source extracted in the uploaded packet, whose recorded source was https://arxiv.org/pdf/2606.12788."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://arxiv.org/abs/2606.12788",
+            "title": "To Share or Not to Share: Orchestrating Trustworthy Data in Global Value Chains",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered matching primary document and checked its substance in the supplied source material. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_NEW_TRANSFERABLE_METHOD",
+        "reason": "The source introduces a transferable technology planning and regulatory-data design sequence, rather than merely applying an established roadmap."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "To Share or Not to Share: Orchestrating Trustworthy Data in Global Value Chains",
+      "reader_what": "A proposed prospective roadmapping method connects EU carbon-border compliance, secure semiconductor-chain data sharing and circular-material feedback.",
+      "reader_why": "Linking material flows and regulatory data needs can support anticipatory industrial technology architecture decisions.",
+      "reader_more": "A proposed prospective roadmapping method connects EU carbon-border compliance, secure semiconductor-chain data sharing and circular-material feedback. The RegTech reference architecture remains a design proposal with limited operational validation. The source introduces a transferable technology planning and regulatory-data design sequence, rather than merely applying an established roadmap.",
+      "deep_analysis": {
+        "work_kind": "methodological engineering preprint",
+        "research_question": "Which EU R&I, industrial technology or method mechanism does this work establish?",
+        "main_finding": "A proposed prospective roadmapping method connects EU carbon-border compliance, secure semiconductor-chain data sharing and circular-material feedback.",
+        "method_or_basis": "Prospective multi-layer roadmapping coupled with IDSA trust architecture, CBAM requirements and circular feedback loops.",
+        "qualification": "The RegTech reference architecture remains a design proposal with limited operational validation.",
+        "radar_relevance": "The source introduces a transferable technology planning and regulatory-data design sequence, rather than merely applying an established roadmap.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.roadmapping",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Han-Teng Liao and Chang-Yi Kao",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-06-11",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The RegTech reference architecture remains a design proposal with limited operational validation.",
+          "text": "A proposed prospective roadmapping method connects EU carbon-border compliance, secure semiconductor-chain data sharing and circular-material feedback.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxQeU1hcGctaDdtenk2Q2otckR3SGdnc05iRktQZTRrdXBEanZnUXhPNnBjRDNjM2FVdVh6MkRYekI4UzV1dWFVOGpOa2R3dy05NmNiMU1tY0IwRHVRQnJkbURTb21MMU9SaTdaZzF2TlN1Z3hoQXliXzVtc2Z4WnlRY0NWcTRreTJPRjV6SWFxcUdYbVRndGZtX2t0X2hlejBJM01BLThfQ3A0eGZJUFE?oc=5",
+      "source_hash": "0a9f415f",
+      "identity_hash": "7ab6a25cb488c47a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_resolved",
+            "note": "The scanner reader URL https://news.google.com/rss/articles/CBMirgFBVV95cUxQeU1hcGctaDdtenk2Q2otckR3SGdnc05iRktQZTRrdXBEanZnUXhPNnBjRDNjM2FVdVh6MkRYekI4UzV1dWFVOGpOa2R3dy05NmNiMU1tY0IwRHVRQnJkbURTb2 is a redirect/short link or did not itself provide matching substantive first-party content."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered matching titled work through its issuing body/publisher reporting page: https://www.euronews.com/2026/11/11/eu-lawmakers-push-to-reduce-europes-dependence-on-foreign-cloud-providers. The source content identifies the assigned item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://www.euronews.com/2026/11/11/eu-lawmakers-push-to-reduce-europes-dependence-on-foreign-cloud-providers",
+            "title": "EU lawmakers seek to boost Europe's cloud and AI infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_RI_CHANGE",
+        "reason": "The legislative draft directly addresses European compute supply, foreign dependence and the growth of domestic cloud innovators."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "EU lawmakers seek to boost Europe's cloud and AI infrastructure",
+      "reader_what": "MEPs presented a joint draft report urging stronger EU cloud/AI infrastructure standards, EU-provider procurement and faster data-centre permits.",
+      "reader_why": "Common cloud and data-centre rules could improve European AI firms’ infrastructure access and market opportunities.",
+      "reader_more": "MEPs presented a joint draft report urging stronger EU cloud/AI infrastructure standards, EU-provider procurement and faster data-centre permits. This is a parliamentary draft report, not an adopted Cloud and AI Development Act; committee votes are expected in 2027. The legislative draft directly addresses European compute supply, foreign dependence and the growth of domestic cloud innovators.",
+      "deep_analysis": {
+        "work_kind": "EU parliamentary legislative draft",
+        "research_question": "Which EU R&I, industrial technology or method mechanism does this work establish?",
+        "main_finding": "MEPs presented a joint draft report urging stronger EU cloud/AI infrastructure standards, EU-provider procurement and faster data-centre permits.",
+        "method_or_basis": "Euronews reporting corroborated against the Parliament legislative-observatory record for CADA.",
+        "qualification": "This is a parliamentary draft report, not an adopted Cloud and AI Development Act; committee votes are expected in 2027.",
+        "radar_relevance": "The legislative draft directly addresses European compute supply, foreign dependence and the growth of domestic cloud innovators.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Members of the European Parliament",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-11-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is a parliamentary draft report, not an adopted Cloud and AI Development Act; committee votes are expected in 2027.",
+          "text": "MEPs presented a joint draft report urging stronger EU cloud/AI infrastructure standards, EU-provider procurement and faster data-centre permits.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxOZk9ZVF9FV1czYTBjVkVwVGVnNVpyRHBMTXl6VGNCZ3BGSnhWWC1zLURPZDVaRmNvaHdSUlVqOGQtVXVsMnozYmowcFJMMmVBdUxyUlZwV3d6WUtuTGxleUVXeno1S1NoTUpybV9XN1M3bzdhM2ktdFk2X09GM1JLWmZ5NjVWbWZRQVY2eEx6Qm9wMmpvVzhEVGJYRzBFTzE2ZmtQOFYxU1BBbnRxWjljWEoyTQ?oc=5",
+      "source_hash": "605d2877",
+      "identity_hash": "3843119b18fb5ce8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_resolved",
+            "note": "The scanner reader URL https://news.google.com/rss/articles/CBMiswFBVV95cUxOZk9ZVF9FV1czYTBjVkVwVGVnNVpyRHBMTXl6VGNCZ3BGSnhWWC1zLURPZDVaRmNvaHdSUlVqOGQtVXVsMnozYmowcFJMMmVBdUxyUlZwV3d6WUtuTGxleUVXen is a redirect/short link or did not itself provide matching substantive first-party content."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered matching titled work through its issuing body/publisher reporting page: https://joint-research-centre.ec.europa.eu/what-we-do/policy-spotlights/jrc-science-digital-fairness-wellbeing_en?prefLang=et. The source content identifies the assigned item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://joint-research-centre.ec.europa.eu/what-we-do/policy-spotlights/jrc-science-digital-fairness-wellbeing_en?prefLang=et",
+            "title": "JRC science for digital fairness and wellbeing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_NEW_SUBSTANTIVE_RI_CHANGE",
+        "reason": "C: evergreen research-navigation overview; no dated new EU R&I funding, research-governance instrument or strategic technology-capability action."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "JRC science for digital fairness and wellbeing",
+      "reader_what": "The JRC spotlight summarises existing research on digital fairness, platforms and public wellbeing.",
+      "reader_why": "",
+      "reader_more": "The JRC spotlight summarises existing research on digital fairness, platforms and public wellbeing. Relevance was evaluated against the assigned strand rather than inferred from keywords. C: evergreen research-navigation overview; no dated new EU R&I funding, research-governance instrument or strategic technology-capability action.",
+      "deep_analysis": {
+        "work_kind": "JRC policy spotlight",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "The JRC spotlight summarises existing research on digital fairness, platforms and public wellbeing.",
+        "method_or_basis": "Checked the identifiable JRC policy spotlight and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "C: evergreen research-navigation overview; no dated new EU R&I funding, research-governance instrument or strategic technology-capability action.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPVlRWM1JkZFR6Qy1vb0dDbkhqTHRsd2FIaGV4SUdSWkxITF9ndW1UNExHR2IyZk1uV2JjMU5XVndQRUxMVXI0d1QzV3ZfZkNYQVhHOEZueDEzb3ZWaDVwYjNyV3BvZnJpbGVQeFl0ZjBxNUxzdzdORWFodTBDSGtlQXBHaXAwc1pUMEMyeEtOdHhZdkMyYkVxLWYwR0FlTC0wWDNGck9HNG11b0NMN3NMbHVWcFlsTUlUSXc?oc=5",
+      "source_hash": "c2cde4bf",
+      "identity_hash": "99c3d0133207dc66",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_resolved",
+            "note": "The scanner reader URL https://news.google.com/rss/articles/CBMiugFBVV95cUxPVlRWM1JkZFR6Qy1vb0dDbkhqTHRsd2FIaGV4SUdSWkxITF9ndW1UNExHR2IyZk1uV2JjMU5XVndQRUxMVXI0d1QzV3ZfZkNYQVhHOEZueDEzb3ZWaDVwYjNyV3 is a redirect/short link or did not itself provide matching substantive first-party content."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered matching titled work through its issuing body/publisher reporting page: https://www.reuters.com/business/europes-stoxx-600-near-record-high-siemens-energy-coreweave-outlooks-lift-2026-11-11/. The source content identifies the assigned item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://www.reuters.com/business/europes-stoxx-600-near-record-high-siemens-energy-coreweave-outlooks-lift-2026-11-11/",
+            "title": "European stocks near record high on Siemens, CoreWeave AI optimism",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_NEW_SUBSTANTIVE_RI_CHANGE",
+        "reason": "C: daily stock-price news without an actual European research investment, funding policy, infrastructure or capability development."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "European stocks near record high on Siemens, CoreWeave AI optimism",
+      "reader_what": "A Reuters market article records European equity gains on company results and AI-linked investor optimism.",
+      "reader_why": "",
+      "reader_more": "A Reuters market article records European equity gains on company results and AI-linked investor optimism. Relevance was evaluated against the assigned strand rather than inferred from keywords. C: daily stock-price news without an actual European research investment, funding policy, infrastructure or capability development.",
+      "deep_analysis": {
+        "work_kind": "financial markets news",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "A Reuters market article records European equity gains on company results and AI-linked investor optimism.",
+        "method_or_basis": "Checked the identifiable financial markets news and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "C: daily stock-price news without an actual European research investment, funding policy, infrastructure or capability development.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMipgFBVV95cUxPcjU4LVZ3eWJxYkczRWlFeGdCTGg1bEFlUDRrWW51VVBkdnNaUVZjQlllU3NCX1NaNEtFdmpjUEtrNTVFSHdzYVZQTEhibThkd1BSbXU1TW5fUjNnekVCV3lMZGNZQkFOcDhMekxQZW1mLW5WYkhLTm9aV0dMY2p3X1BvNzF1TDRJdHhremF0a2kzYmExR2VKYjQyYjJHb1prLXExY1lR?oc=5",
+      "source_hash": "138c89c7",
+      "identity_hash": "c2a6f0c7bb5ae2e1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_resolved",
+            "note": "The scanner reader URL https://news.google.com/rss/articles/CBMipgFBVV95cUxPcjU4LVZ3eWJxYkczRWlFeGdCTGg1bEFlUDRrWW51VVBkdnNaUVZjQlllU3NCX1NaNEtFdmpjUEtrNTVFSHdzYVZQTEhibThkd1BSbXU1TW5fUjNnekVCV3lMZG is a redirect/short link or did not itself provide matching substantive first-party content."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered matching titled work through its issuing body/publisher reporting page: https://digital-strategy.ec.europa.eu/en/policies/european-quantum-communication-infrastructure-euroqci. The source content identifies the assigned item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/european-quantum-communication-infrastructure-euroqci",
+            "title": "European Quantum Communication Infrastructure - EuroQCI - Shaping Europe’s digital future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_NEW_SUBSTANTIVE_RI_CHANGE",
+        "reason": "C: standing explanatory page, not a newly announced 2026 build milestone, contract, funding increase or policy change."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "European Quantum Communication Infrastructure - EuroQCI - Shaping Europe’s digital future",
+      "reader_what": "The Commission’s EuroQCI policy page describes the existing EU quantum communications infrastructure initiative.",
+      "reader_why": "",
+      "reader_more": "The Commission’s EuroQCI policy page describes the existing EU quantum communications infrastructure initiative. Relevance was evaluated against the assigned strand rather than inferred from keywords. C: standing explanatory page, not a newly announced 2026 build milestone, contract, funding increase or policy change.",
+      "deep_analysis": {
+        "work_kind": "Commission standing programme overview",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "The Commission’s EuroQCI policy page describes the existing EU quantum communications infrastructure initiative.",
+        "method_or_basis": "Checked the identifiable Commission standing programme overview and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "C: standing explanatory page, not a newly announced 2026 build milestone, contract, funding increase or policy change.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6157af12ddf0500b",
+      "source_hash": "7f31cc16",
+      "identity_hash": "01fa9aad3f6f2c68",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://doi.org/10.1787/1ec20342-en is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 23,201 characters of the matching source extracted in the uploaded packet, whose recorded source was https://content.openalex.org/works/W7126098828.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://www.oecd.org/en/publications/a-comparison-of-the-innovation-and-regulatory-environments-for-biotechnology-and-biosolutions-across-the-european-union-and-the-united-states_1ec20342-en.html",
+            "title": "A comparison of the innovation and regulatory environments for biotechnology and biosolutions across the European Union and the United States",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered matching primary document and checked its substance in the supplied source material. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A substantive comparative evidence product examines the EU biotechnology research-to-market system and international position."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "A comparison of the innovation and regulatory environments for biotechnology and biosolutions across the European Union and…",
+      "reader_what": "OECD compares EU and US biotechnology innovation systems, identifying finance, scaling and regulatory conditions affecting biosolutions.",
+      "reader_why": "Different investment and regulatory environments can create structural gaps in commercialising European biosolutions.",
+      "reader_more": "OECD compares EU and US biotechnology innovation systems, identifying finance, scaling and regulatory conditions affecting biosolutions. This is historical comparative analysis; indicators do not prove that any later reform improved EU performance. A substantive comparative evidence product examines the EU biotechnology research-to-market system and international position.",
+      "deep_analysis": {
+        "work_kind": "OECD working paper",
+        "research_question": "Which EU R&I, industrial technology or method mechanism does this work establish?",
+        "main_finding": "OECD compares EU and US biotechnology innovation systems, identifying finance, scaling and regulatory conditions affecting biosolutions.",
+        "method_or_basis": "Cross-Atlantic empirical comparison of innovation finance, patenting, skills, manufacturing and regulatory frameworks.",
+        "qualification": "This is historical comparative analysis; indicators do not prove that any later reform improved EU performance.",
+        "radar_relevance": "A substantive comparative evidence product examines the EU biotechnology research-to-market system and international position.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "OECD",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-01-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is historical comparative analysis; indicators do not prove that any later reform improved EU performance.",
+          "text": "OECD compares EU and US biotechnology innovation systems, identifying finance, scaling and regulatory conditions affecting biosolutions.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:aa1b99fb6ac7d879",
+      "source_hash": "9bab0b71",
+      "identity_hash": "8b699cf821c82347",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://cdn.ceps.eu/wp-content/uploads/2024/12/978-3-031-74021-3.pdf is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 8,453 characters of the matching source extracted in the uploaded packet, whose recorded source was https://cdn.ceps.eu/wp-content/uploads/2024/12/978-3-031-74021-3.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://cdn.ceps.eu/wp-content/uploads/2024/12/978-3-031-74021-3.pdf",
+            "title": "Irregularising Human Mobility – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered matching primary document and checked its substance in the supplied source material. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_QUALIFYING_EVIDENCE",
+        "reason": "A: EU relevance is central, but neither strategic technology/innovation capacity (routes 1–2) nor a study of the European research-system mechanisms (route 3) is its substantive object."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Irregularising Human Mobility – CEPS",
+      "reader_what": "A law and migration study examines how EU institutions and policies irregularise human mobility.",
+      "reader_why": "",
+      "reader_more": "A law and migration study examines how EU institutions and policies irregularise human mobility. Relevance was evaluated against the assigned strand rather than inferred from keywords. A: EU relevance is central, but neither strategic technology/innovation capacity (routes 1–2) nor a study of the European research-system mechanisms (route 3) is its substantive object.",
+      "deep_analysis": {
+        "work_kind": "academic migration-law monograph",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "A law and migration study examines how EU institutions and policies irregularise human mobility.",
+        "method_or_basis": "Checked the identifiable academic migration-law monograph and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "A: EU relevance is central, but neither strategic technology/innovation capacity (routes 1–2) nor a study of the European research-system mechanisms (route 3) is its substantive object.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:62d381939da372c0",
+      "source_hash": "f69dc7fd",
+      "identity_hash": "6be1eafb05c63aa4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://resolver.tno.nl/uuid:354283b4-3901-40c8-9a8b-c98dd9e7c98f is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://assets.quantum-delta.prod.verveagency.com/assets/quantum-delta-nl-white-paper-quantum-sensing-supply-chains.pdf",
+            "title": "Critical Components and Market Dynamics of Quantum Sensors: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The research identifies concrete technology inputs and supplier dependencies in Europe’s emerging quantum hardware ecosystem."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-09-05",
+          "authors": "Clara Osorio Tamayo, Julian Rabbie, Fokel Ellen"
+        },
+        "unset": [],
+        "reason": "Corrected against the recovered issuing-body or publisher source, not scanner speculation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Critical Components and Market Dynamics of Quantum Sensors: Towards European technology sovereignty in an emerging industry",
+      "reader_what": "TNO and Quantum Delta NL mapped critical components and market forces in the European quantum-sensor supply chain.",
+      "reader_why": "Supply-chain mapping can identify where European quantum sensing needs investment or diversified critical suppliers.",
+      "reader_more": "TNO and Quantum Delta NL mapped critical components and market forces in the European quantum-sensor supply chain. A 2024 white paper focused on Dutch testbeds and interviews; market views and dependency rankings are context-bound. The research identifies concrete technology inputs and supplier dependencies in Europe’s emerging quantum hardware ecosystem.",
+      "deep_analysis": {
+        "work_kind": "industry-research white paper",
+        "research_question": "Which EU R&I, industrial technology or method mechanism does this work establish?",
+        "main_finding": "TNO and Quantum Delta NL mapped critical components and market forces in the European quantum-sensor supply chain.",
+        "method_or_basis": "Three Dutch quantum-sensing testbed case mappings, component taxonomy, expert interviews and adapted six-forces analysis.",
+        "qualification": "A 2024 white paper focused on Dutch testbeds and interviews; market views and dependency rankings are context-bound.",
+        "radar_relevance": "The research identifies concrete technology inputs and supplier dependencies in Europe’s emerging quantum hardware ecosystem.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "quantum.equipment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Quantum Delta NL and TNO",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-09-05",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "A 2024 white paper focused on Dutch testbeds and interviews; market views and dependency rankings are context-bound.",
+          "text": "TNO and Quantum Delta NL mapped critical components and market forces in the European quantum-sensor supply chain.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f3a8229babfeece0",
+      "source_hash": "f3027bbe",
+      "identity_hash": "8d3dce69a3409a3d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://doi.org/10.58875/wbcq3772 is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 12,673 characters of the matching source extracted in the uploaded packet, whose recorded source was https://issues.org/wp-content/uploads/2023/10/38-43-Schwaag-Serger-Martins-An-Age-of-Disentangled-Research-Fal."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://issues.org/wp-content/uploads/2023/10/38-43-Schwaag-Serger-Martins-An-Age-of-Disentangled-Research-Fall-2023.pdf",
+            "title": "An Age of Disentangled Research?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered matching primary document and checked its substance in the supplied source material. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "International scientific networks are a direct and substantive European R&I-system variable."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "An Age of Disentangled Research?",
+      "reader_what": "Researchers describe emerging changes in international coauthorship patterns and compare European collaboration with China and the United States.",
+      "reader_why": "Shifts in international coauthor networks can affect scientific knowledge flows and collaboration options for Europe.",
+      "reader_more": "Researchers describe emerging changes in international coauthorship patterns and compare European collaboration with China and the United States. The article synthesises bibliometrics and policy signals; an observed US–China change is not automatically a Europe-wide collapse. International scientific networks are a direct and substantive European R&I-system variable.",
+      "deep_analysis": {
+        "work_kind": "historical research-network analysis",
+        "research_question": "Which EU R&I, industrial technology or method mechanism does this work establish?",
+        "main_finding": "Researchers describe emerging changes in international coauthorship patterns and compare European collaboration with China and the United States.",
+        "method_or_basis": "Cross-national bibliometric collaboration indicators combined with country/discipline policy discussion.",
+        "qualification": "The article synthesises bibliometrics and policy signals; an observed US–China change is not automatically a Europe-wide collapse.",
+        "radar_relevance": "International scientific networks are a direct and substantive European R&I-system variable.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Sylvia Schwaag Serger and Igor Martins",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2023-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The article synthesises bibliometrics and policy signals; an observed US–China change is not automatically a Europe-wide collapse.",
+          "text": "Researchers describe emerging changes in international coauthorship patterns and compare European collaboration with China and the United States.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:4f76e30082778601",
+      "source_hash": "b90aad5e",
+      "identity_hash": "f4da9b852fb10384",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_resolved",
+            "note": "The scanner reader URL https://doi.org/10.1007/s11192-023-04657-x is a redirect/short link or did not itself provide matching substantive first-party content."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Recovered matching titled work through its issuing body/publisher reporting page: https://link.springer.com/article/10.1007/s11192-023-04657-x. The source content identifies the assigned item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-023-04657-x",
+            "title": "Research mobility to the United States: a bibliometric analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_QUALIFYING_EVIDENCE",
+        "reason": "A: the central object is US-bound global mobility; European R&I career/funding systems are not separately analysed (routes 2–3), and EU geography is incidental to the comparison."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Research mobility to the United States: a bibliometric analysis",
+      "reader_what": "A scientometrics study profiles international research mobility to the United States using affiliation/bibliometric indicators.",
+      "reader_why": "",
+      "reader_more": "A scientometrics study profiles international research mobility to the United States using affiliation/bibliometric indicators. Relevance was evaluated against the assigned strand rather than inferred from keywords. A: the central object is US-bound global mobility; European R&I career/funding systems are not separately analysed (routes 2–3), and EU geography is incidental to the comparison.",
+      "deep_analysis": {
+        "work_kind": "global bibliometric mobility article",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "A scientometrics study profiles international research mobility to the United States using affiliation/bibliometric indicators.",
+        "method_or_basis": "Checked the identifiable global bibliometric mobility article and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "A: the central object is US-bound global mobility; European R&I career/funding systems are not separately analysed (routes 2–3), and EU geography is incidental to the comparison.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:00c5339903a04905",
+      "source_hash": "97c07103",
+      "identity_hash": "90578e143037322e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_resolved",
+            "note": "The scanner reader URL https://doi.org/10.1093/icc/dtab032 is a redirect/short link or did not itself provide matching substantive first-party content."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Recovered matching titled work through its issuing body/publisher reporting page: https://academic.oup.com/icc/article/31/2/323/6394296. The source content identifies the assigned item."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 24,000 characters of the matching full-text PDF excerpt included in the uploaded worker packet. PDF source: https://content.openalex.org/works/W3175791175.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://content.openalex.org/works/W3175791175.pdf",
+            "title": "Beyond catch-up: could China become the global innovation powerhouse? China’s innovation progress and challenges from a holistic innovation perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered matching primary document and checked its substance in the supplied source material. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence. Provenance detail: The 24,000-character source text actually examined was the matching repository PDF included in the packet; the publisher website did not provide inspectable full text."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_QUALIFYING_EVIDENCE",
+        "reason": "A: Chinese national system is the substantive object; European R&I evidence and strategic EU technology dependence (routes 1–3) are incidental or missing."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Beyond catch-up: could China become the global innovation powerhouse? China’s innovation progress and challenges from a holistic…",
+      "reader_what": "An innovation-systems study assesses China’s domestic transition beyond technological catch-up.",
+      "reader_why": "",
+      "reader_more": "An innovation-systems study assesses China’s domestic transition beyond technological catch-up. Relevance was evaluated against the assigned strand rather than inferred from keywords. A: Chinese national system is the substantive object; European R&I evidence and strategic EU technology dependence (routes 1–3) are incidental or missing.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed China innovation study",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "An innovation-systems study assesses China’s domestic transition beyond technological catch-up.",
+        "method_or_basis": "Checked the identifiable peer-reviewed China innovation study and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "A: Chinese national system is the substantive object; European R&I evidence and strategic EU technology dependence (routes 1–3) are incidental or missing.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:1e258a0e794eaec6",
+      "source_hash": "e4278f51",
+      "identity_hash": "df2ca63e259d8ee9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://doi.org/10.1007/978-3-030-05417-5_5 is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 18,166 characters of the matching source extracted in the uploaded packet, whose recorded source was https://link.springer.com/chapter/10.1007/978-3-030-05417-5_5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-030-05417-5_5",
+            "title": "Security in Outer Space: Rising Stakes for Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered matching primary document and checked its substance in the supplied source material. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The European strategic space-technology ecosystem and infrastructure dependencies are the substantive subject."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "book chapter",
+          "source": "Springer"
+        },
+        "unset": [],
+        "reason": "Corrected against the recovered issuing-body or publisher source, not scanner speculation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Security in Outer Space: Rising Stakes for Europe",
+      "reader_what": "An academic chapter examines Europe’s dependence on space-based services and vulnerabilities arising from changes in the space industry.",
+      "reader_why": "Dependence on satellite services makes technology security and reliable access salient to European strategic capability.",
+      "reader_more": "An academic chapter examines Europe’s dependence on space-based services and vulnerabilities arising from changes in the space industry. A publisher chapter abstract and substantive introduction are accessible; the paywalled full chapter was not inspected. The European strategic space-technology ecosystem and infrastructure dependencies are the substantive subject.",
+      "deep_analysis": {
+        "work_kind": "academic edited-book chapter",
+        "research_question": "Which EU R&I, industrial technology or method mechanism does this work establish?",
+        "main_finding": "An academic chapter examines Europe’s dependence on space-based services and vulnerabilities arising from changes in the space industry.",
+        "method_or_basis": "Publisher chapter preview on Europe’s space-system industrial and security interdependencies.",
+        "qualification": "A publisher chapter abstract and substantive introduction are accessible; the paywalled full chapter was not inspected.",
+        "radar_relevance": "The European strategic space-technology ecosystem and infrastructure dependencies are the substantive subject.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Edward Burger and Giulia Bordacchini",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2019",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "A publisher chapter abstract and substantive introduction are accessible; the paywalled full chapter was not inspected.",
+          "text": "An academic chapter examines Europe’s dependence on space-based services and vulnerabilities arising from changes in the space industry.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:e7a4b48fae542370",
+      "source_hash": "937ad44b",
+      "identity_hash": "801dd90feb906ccb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://doi.org/10.1111/1758-5899.12812 is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 24,000 characters of the matching source extracted in the uploaded packet, whose recorded source was https://content.openalex.org/works/W3017306648.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://doi.org/10.1111/1758-5899.12812",
+            "title": "Enhancing Europe’s Power: A Rejoinder",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered matching primary document and checked its substance in the supplied source material. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_TRANSFERABLE_METHOD",
+        "reason": "B: a discussion of geopolitical scenario conclusions, not an original transferable scenario-generation, foresight evaluation or technology-intelligence method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Enhancing Europe’s Power: A Rejoinder",
+      "reader_what": "A journal rejoinder responds to commentators on a European foreign-policy scenario exercise.",
+      "reader_why": "",
+      "reader_more": "A journal rejoinder responds to commentators on a European foreign-policy scenario exercise. Relevance was evaluated against the assigned strand rather than inferred from keywords. B: a discussion of geopolitical scenario conclusions, not an original transferable scenario-generation, foresight evaluation or technology-intelligence method.",
+      "deep_analysis": {
+        "work_kind": "policy journal rejoinder",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "A journal rejoinder responds to commentators on a European foreign-policy scenario exercise.",
+        "method_or_basis": "Checked the identifiable policy journal rejoinder and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "B: a discussion of geopolitical scenario conclusions, not an original transferable scenario-generation, foresight evaluation or technology-intelligence method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/1540496x.2026.2754815",
+      "source_hash": "68ac1f0d",
+      "identity_hash": "9b5377c313aa2524",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://doi.org/10.1080/1540496x.2026.2754815 is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://doi.org/10.1080/1540496x.2026.2754815",
+            "title": "Does Financial Slack Facilitate Disclosed Corporate Artificial Intelligence Adoption? Evidence from Chinese Listed Firms",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_QUALIFYING_EVIDENCE",
+        "reason": "A: companies are Chinese; EU is neither the substantive innovation-system object nor a verified strategic dependency (routes 1–3)."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Does Financial Slack Facilitate Disclosed Corporate Artificial Intelligence Adoption? Evidence from Chinese Listed Firms",
+      "reader_what": "A corporate-finance empirical paper analyses financial slack and reported AI adoption among Chinese listed firms.",
+      "reader_why": "",
+      "reader_more": "A corporate-finance empirical paper analyses financial slack and reported AI adoption among Chinese listed firms. Relevance was evaluated against the assigned strand rather than inferred from keywords. A: companies are Chinese; EU is neither the substantive innovation-system object nor a verified strategic dependency (routes 1–3).",
+      "deep_analysis": {
+        "work_kind": "empirical emerging-markets finance article",
+        "research_question": "Does the recovered item pass the assigned A/B/C substantive evidence gate?",
+        "main_finding": "A corporate-finance empirical paper analyses financial slack and reported AI adoption among Chinese listed firms.",
+        "method_or_basis": "Checked the identifiable empirical emerging-markets finance article and its stated subject.",
+        "qualification": "Relevance was evaluated against the assigned strand rather than inferred from keywords.",
+        "radar_relevance": "A: companies are Chinese; EU is neither the substantive innovation-system object nor a verified strategic dependency (routes 1–3).",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/1540496x.2026.2755507",
+      "source_hash": "f8d0d01e",
+      "identity_hash": "6e3b345ecbca3f85",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://doi.org/10.1080/1540496x.2026.2755507 is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://doi.org/10.1080/1540496x.2026.2755507",
+            "title": "How the EU Regulates the Outflow of Emerging Technologies: A Perspective from China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The paper studies substantive EU technology-transfer governance and strategic R&I access rules."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "How the EU Regulates the Outflow of Emerging Technologies: A Perspective from China",
+      "reader_what": "A legal-policy study analyses EU emerging-technology export controls, investment screening and de-risking directed at China.",
+      "reader_why": "EU controls on technology outflows can limit and shape cross-border transfer of strategic emerging technologies.",
+      "reader_more": "A legal-policy study analyses EU emerging-technology export controls, investment screening and de-risking directed at China. This is legal analysis from a Chinese perspective, not a new 2026 regulation or demonstrated effect on EU innovation. The paper studies substantive EU technology-transfer governance and strategic R&I access rules.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed technology-governance analysis",
+        "research_question": "Which EU R&I, industrial technology or method mechanism does this work establish?",
+        "main_finding": "A legal-policy study analyses EU emerging-technology export controls, investment screening and de-risking directed at China.",
+        "method_or_basis": "Descriptive statistics and legal analysis of EU dual-use authorisations and investment screening.",
+        "qualification": "This is legal analysis from a Chinese perspective, not a new 2026 regulation or demonstrated effect on EU innovation.",
+        "radar_relevance": "The paper studies substantive EU technology-transfer governance and strategic R&I access rules.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "export_control.regulation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Wei He, Jiaxing Zhang, Haoyu Tian and Shuhong Zheng",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is legal analysis from a Chinese perspective, not a new 2026 regulation or demonstrated effect on EU innovation.",
+          "text": "A legal-policy study analyses EU emerging-technology export controls, investment screening and de-risking directed at China.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/ia/iiag155",
+      "source_hash": "43598505",
+      "identity_hash": "687efc640d2b6589",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied https://doi.org/10.1093/ia/iiag155 is the matching publication/document URL; inspected the matching provided first-party excerpt or publication record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/ia/article/102/6/2149/9015871",
+            "title": "Foundational vs functional: competing logics of digital sovereignty in China and the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Checked a matching publisher, institutional, source-attributed, or accountable reporting page and its substantive description. Source identity was checked against title, outlet/institution and stated dates; the scanner summary is not treated as verified evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European technology governance and industrial digital capacity are central objects, not incidental geographic references."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No definitive same-work identity established among suggested variants."
+      },
+      "reader_title": "Foundational vs functional: competing logics of digital sovereignty in China and the European Union",
+      "reader_what": "A comparative document analysis distinguishes the EU’s functional digital-sovereignty framework from China’s foundational model.",
+      "reader_why": "Different digital-sovereignty logics imply different regulatory routes for investment, capability and international digital technology relationships.",
+      "reader_more": "A comparative document analysis distinguishes the EU’s functional digital-sovereignty framework from China’s foundational model. Policy-document coding identifies governance frames, not proof that either jurisdiction achieved technology independence. European technology governance and industrial digital capacity are central objects, not incidental geographic references.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed comparative policy document analysis",
+        "research_question": "Which EU R&I, industrial technology or method mechanism does this work establish?",
+        "main_finding": "A comparative document analysis distinguishes the EU’s functional digital-sovereignty framework from China’s foundational model.",
+        "method_or_basis": "Content analysis of 245 EU and 231 Chinese digital-sovereignty policy documents.",
+        "qualification": "Policy-document coding identifies governance frames, not proof that either jurisdiction achieved technology independence.",
+        "radar_relevance": "European technology governance and industrial digital capacity are central objects, not incidental geographic references.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Grace X. Yang",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-11-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Policy-document coding identifies governance frames, not proof that either jurisdiction achieved technology independence.",
+          "text": "A comparative document analysis distinguishes the EU’s functional digital-sovereignty framework from China’s foundational model.",
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}
