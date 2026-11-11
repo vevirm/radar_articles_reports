@@ -4,7 +4,7 @@ This directory belongs to the **automatic Relevance Focus** scanner, NOT the sep
 
 ## Scope
 
-Each four-hour Relevance Focus run extracts **active Main Radar topic interests** (including biodiversity and semiconductors when present) and searches worldwide for **publications actually about those topics in those regions**. The search targets substantive settings outside the EU/UK, without restricting where evidence is published. The current country of the publishing journal, portal, institution, host or author is never evidence that the topic is *about* that country. A place and subject must appear as a substantive connected pair in the work's title/abstract; incidental citations, boilerplate, grant acknowledgements and affiliations do not count. A country can matter in one topic area and not another.
+Each scheduled, manual scan-mode, or successful upstream-triggered Relevance Focus run extracts **active Main Radar topic interests** (including biodiversity and semiconductors when present) and searches worldwide for **publications actually about those topics in those regions**. The search targets substantive settings outside the EU/UK, without restricting where evidence is published. The current country of the publishing journal, portal, institution, host or author is never evidence that the topic is *about* that country. A place and subject must appear as a substantive connected pair in the work's title/abstract; incidental citations, boilerplate, grant acknowledgements and affiliations do not count. A country can matter in one topic area and not another.
 
 Source discovery is bibliographic, **not** source validation. Candidate questions are hypothetical; even a strong match is not yet a verified forecast or a scientific claim.
 
@@ -35,3 +35,17 @@ python scripts/relevance_focus_deep_scan.py import-inbox
 ```
 
 A full online discovery normally runs for 1500 seconds and requires working OpenAlex/Crossref access. The command above for local reproduction deliberately does not make online calls.
+
+## Request additional packages without overwriting the original 30
+
+From **Actions → Relevance Focus — Prepare Next Deep Scan Package → Run workflow**,
+choose `package_size` (1–30). Download the run artifact named
+`relevance-focus-next-deep-scan-*`. Each click reserves the next batch from the
+existing discovery archive, excluding completed reviews and every candidate
+already reserved by the original package or any earlier additional package.
+The resulting manifest is saved in `packages/<package_id>.json`, so multiple
+independent packages may be imported through the same inbox without overwriting
+`pending_manifest.json`. Each reviewer must return their matching `package_id`.
+No new discovery is performed by this button; use the main Relevance Focus
+scanner for discovery. Packages can be generated until no eligible unassigned
+leads remain. An empty package means no additional eligible leads are available.
