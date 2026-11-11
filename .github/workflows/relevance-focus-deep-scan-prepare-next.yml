@@ -1,0 +1,83 @@
+name: Relevance Focus — Prepare Next Deep Scan Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_size:
+        description: 'Number of still-unassigned global relevance candidates (1–30)'
+        required: true
+        default: '30'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ri-radar-research-scanners
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  prepare-leftovers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Check out latest main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+      - name: Prepare next independent global Deep Scan package
+        shell: bash
+        env:
+          PACKAGE_SIZE: ${{ inputs.package_size }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$PACKAGE_SIZE" =~ ^[0-9]+$ ]] || (( PACKAGE_SIZE < 1 || PACKAGE_SIZE > 30 )); then
+            echo '::error::package_size must be an integer between 1 and 30'
+            exit 1
+          fi
+          python scripts/relevance_focus_deep_scan.py prepare --additional \
+            --batch-size "$PACKAGE_SIZE" --artifact "$RUNNER_TEMP/relevance_focus_next_review.zip"
+      - name: Commit additional package reservation
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- 'Relevance Stuff/deep_scan/packages/'
+          if git diff --cached --quiet; then
+            echo 'No new unassigned candidates; existing packages were left unchanged.'
+            exit 0
+          fi
+          git commit -m 'Reserve next global relevance Deep Scan review package'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Upload next Deep Scan review package
+        uses: actions/upload-artifact@v4
+        with:
+          name: relevance-focus-next-deep-scan-${{ github.run_number }}
+          path: ${{ runner.temp }}/relevance_focus_next_review.zip
+          retention-days: 21
+      - name: Explain handoff
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Additional global relevance Deep Scan package
+          Download the `relevance-focus-next-deep-scan-*` artifact and review its
+          `MANIFEST.json` using `INSTRUCTIONS.md`. It contains only unassigned
+          candidates, not the original 30 or any other outstanding package.
+          Submit results JSON to `Relevance Stuff/deep_scan/inbox/` for verified import.
+          The package is a research assignment, **not** a completed Deep Scan.
+          EOF

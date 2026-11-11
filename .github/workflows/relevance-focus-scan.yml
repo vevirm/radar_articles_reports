@@ -37,6 +37,7 @@ jobs:
   relevance:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    # A successful upstream trigger also runs full discovery; backfill-only is the sole refresh path.
     # Global discovery plus independent review-package preparation.
     timeout-minutes: 55
     permissions:
@@ -57,13 +58,13 @@ jobs:
       - name: Validate global topic–place aboutness and Deep Scan regression fixtures
         run: python -m unittest discover -s tests -p 'test_relevance_focus*.py' -q
       - name: Discover relevance-specific candidate works (25 minutes minimum and maximum)
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        if: github.event_name != 'workflow_dispatch' || inputs.mode == 'scan'
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
         run: python scripts/relevance_focus.py discover --max-seconds 1500 --output "$RUNNER_TEMP/relevance_candidates.json" --archive "Relevance Stuff/regional_discoveries.json"
       - name: Prepare independent global R&I Deep Scan source-review package
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        if: github.event_name != 'workflow_dispatch' || inputs.mode == 'scan'
         shell: bash
         run: |
           set -euo pipefail
@@ -76,14 +77,14 @@ jobs:
           python scripts/relevance_focus.py export-json --output "$RUNNER_TEMP/relevance_report.json"
           node scripts/generate_relevance_stuff.js "$RUNNER_TEMP/relevance_report.json"
       - name: Upload evidence-review package for independent Deep Scan
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        if: github.event_name != 'workflow_dispatch' || inputs.mode == 'scan'
         uses: actions/upload-artifact@v4
         with:
           name: relevance-focus-global-deep-scan-review
           path: ${{ runner.temp }}/relevance_focus_global_review.zip
           retention-days: 21
       - name: Explain verification handoff and prevent false Deep Scan claims
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        if: github.event_name != 'workflow_dispatch' || inputs.mode == 'scan'
         shell: bash
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
