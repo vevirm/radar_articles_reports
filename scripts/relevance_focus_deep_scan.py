@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'Relevance Stuff' / 'deep_scan'
 ARCHIVE = ROOT / 'Relevance Stuff' / 'regional_discoveries.json'
 MANIFEST = BASE / 'pending_manifest.json'
+PACKAGES = BASE / 'packages'  # Independently reserved additional review manifests
 VERIFIED = BASE / 'verified_findings.json'
 REVIEW = BASE / 'review_archive.json'
 INBOX = BASE / 'inbox'
@@ -120,7 +121,23 @@ def valid_v4_lead(row):
             and re.fullmatch(r'https://doi\.org/10\.\d{4,9}/\S+', str(row.get('url') or ''), re.I))
 
 
-def prepare(*, batch_size=30, artifact=None):
+def all_manifests():
+    """Return original and additional packages, rejecting conflicting package IDs."""
+    manifests = [read(MANIFEST, {})]
+    for path in sorted(PACKAGES.glob('*.json')) if PACKAGES.exists() else []:
+        manifests.append(read(path, {}))
+    by_id = {}
+    for manifest in manifests:
+        package_id = manifest.get('package_id')
+        if not package_id:
+            continue
+        if package_id in by_id and by_id[package_id] != manifest:
+            raise ValueError(f'Conflicting manifests for package {package_id}')
+        by_id[package_id] = manifest
+    return by_id
+
+
+def prepare(*, batch_size=30, artifact=None, additional=False):
     if not 1 <= batch_size <= 30:
         raise ValueError('batch_size must be 1..30')
     archive = read(ARCHIVE, {})
@@ -128,18 +145,23 @@ def prepare(*, batch_size=30, artifact=None):
     decisions = read(REVIEW, {}).get('records', [])
     finished = {x['candidate_id'] for x in [*verified, *decisions]
                 if isinstance(x, dict) and x.get('candidate_id')}
+    existing = all_manifests()
+    reserved = {row['candidate_id'] for manifest in existing.values()
+                for row in manifest.get('jobs', []) if row.get('candidate_id') not in finished}
     prior_manifest = read(MANIFEST, {})
     outstanding = prior_manifest.get('jobs', [])
     pending_ids = {row.get('candidate_id') for row in outstanding}
     # Reuse outstanding assignments to prevent silent abandonment or parallel
     # reassignment. A new batch is created after these have been reviewed.
-    if outstanding and pending_ids - finished:
+    if not additional and outstanding and pending_ids - finished:
         # Never invalidate the package ID while other workers are reviewing.
         # Keep the same package and the original full manifest until closed.
         jobs = outstanding
     else:
         available = [x for x in archive.get('candidates', [])
-                     if valid_v4_lead(x) and x['candidate_id'] not in finished]
+                     if valid_v4_lead(x) and x['candidate_id'] not in finished
+                     and (not additional or x['candidate_id'] not in reserved)
+                     and (additional or x['candidate_id'] not in (reserved - pending_ids))]
         available.sort(key=lambda x: (-int(x.get('focus_score') or 0), x['candidate_id']))
         # Fair coverage across topic × region; neither a single venue nor a
         # well-known research power can dominate each review package.
@@ -154,14 +176,23 @@ def prepare(*, batch_size=30, artifact=None):
     jobs = jobs[:batch_size]
     key = '|'.join(x['candidate_id'] for x in jobs)
     package_id = ('rfds-' + hashlib.sha256(key.encode()).hexdigest()[:18])
-    if outstanding and pending_ids - finished:
+    if not additional and outstanding and pending_ids - finished:
         package_id = prior_manifest['package_id']
     manifest = {'format': RESULT_FORMAT, 'package_id': package_id,
-                'generated_at': (prior_manifest.get('generated_at') if outstanding and pending_ids - finished
+                'generated_at': (prior_manifest.get('generated_at') if not additional and outstanding and pending_ids - finished
                                  else datetime.now(timezone.utc).isoformat()),
                 'global_scope': 'No EU relevance required; topical aboutness and R&I futures only',
                 'jobs': jobs}
-    atomic_write(MANIFEST, manifest)
+    if additional:
+        # Do not overwrite an active original package or other extra package.
+        # An empty queue is reported to the caller without creating a reservation.
+        if jobs:
+            previous = existing.get(package_id)
+            if previous and previous.get('jobs') != jobs:
+                raise ValueError('Package identifier collision')
+            atomic_write(PACKAGES / f'{package_id}.json', manifest)
+    else:
+        atomic_write(MANIFEST, manifest)
     if artifact:
         artifact = Path(artifact)
         artifact.parent.mkdir(parents=True, exist_ok=True)
@@ -243,8 +274,7 @@ def validate_result(result, lead):
 
 
 def import_inbox():
-    manifest = read(MANIFEST, {})
-    indexed = {x['candidate_id']: x for x in manifest.get('jobs', [])}
+    manifests = all_manifests()
     verified = read(VERIFIED, {'format': RESULT_FORMAT, 'records': []})
     review = read(REVIEW, {'format': RESULT_FORMAT, 'records': []})
     done = {r['candidate_id'] for r in verified['records'] + review['records']}
@@ -253,8 +283,10 @@ def import_inbox():
     all_new = set()
     for file in sorted(INBOX.glob('*.json')) if INBOX.exists() else []:
         data = read(file, {})
-        if data.get('format') != RESULT_FORMAT or data.get('package_id') != manifest.get('package_id'):
+        manifest = manifests.get(data.get('package_id'))
+        if data.get('format') != RESULT_FORMAT or manifest is None:
             raise ValueError(f'{file.name}: unknown/replayed package or format')
+        indexed = {x['candidate_id']: x for x in manifest.get('jobs', [])}
         if not isinstance(data.get('results'), list) or not data['results']:
             raise ValueError(f'{file.name}: empty/malformed results')
         local_seen = set()
@@ -273,19 +305,19 @@ def import_inbox():
         dest_path = PROCESSED / f'{file.stem}_{stamp}.json'
         if dest_path.exists():
             raise ValueError('Already processed inbox submission')
-        staged.append((file, dest_path, accepted))
+        staged.append((file, dest_path, accepted, manifest['package_id']))
     # Fail closed for the ENTIRE inbox before persisting any review result.
-    for _file, _dest, accepted in staged:
+    for _file, _dest, accepted, package_id in staged:
         for item in accepted:
             dest = verified if item['decision'] == 'keep' else review
-            dest['records'].append({**item, 'verified_package_id': manifest['package_id']})
+            dest['records'].append({**item, 'verified_package_id': package_id})
             changed += 1
     if changed:
         atomic_write(VERIFIED, verified)
         atomic_write(REVIEW, review)
     if staged:
         PROCESSED.mkdir(parents=True, exist_ok=True)
-    for file, dest_path, _accepted in staged:
+    for file, dest_path, _accepted, _package_id in staged:
         shutil.move(str(file), str(dest_path))
     print(f'Imported {changed} independently reviewed global R&I relevance decisions')
     return changed
@@ -296,9 +328,10 @@ def main():
     parser.add_argument('command', choices=['prepare','import-inbox'])
     parser.add_argument('--batch-size', type=int, default=30)
     parser.add_argument('--artifact', type=Path)
+    parser.add_argument('--additional', action='store_true', help='Reserve an additional package excluding all existing assignments')
     args = parser.parse_args()
     if args.command == 'prepare':
-        prepare(batch_size=args.batch_size, artifact=args.artifact)
+        prepare(batch_size=args.batch_size, artifact=args.artifact, additional=args.additional)
     else:
         import_inbox()
 
