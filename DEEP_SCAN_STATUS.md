@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3842** (Main **1949** + Historical **1893**)
-- Automatic queue still needing V2 verification: **88** (Main **45** + Historical **43**)
-- Currently assigned to workers: **88** (Main **45** + Historical **43**)
+- Authoritative V2 verified: **3894** (Main **1993** + Historical **1901**)
+- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
+- Currently assigned to workers: **36** (Main **1** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,30 +16,13 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261111T152335Z-aba16c636228`
-- Assigned unresolved records: **36**
-  1. `link:https://data.consilium.europa.eu/doc/document/ST-10476-2026-ADD-23-REV-1/en/pdf` — It concerns corrections in some figures.
-  2. `link:https://doi.org/10.1016/j.joitmc.2026.100811` — Digital economy development in Europe: Patterns and structural disparities
-  3. `link:https://era.gv.at/news-items/ec-explores-implementation-challenges-for-eu-research-security/` — EC explores implementation challenges for EU research security
-  4. `link:https://doi.org/10.1016/j.techfore.2026.124805` — The “Gold Rush” in AI and robotics patenting activity. Do innovation systems have a role?
-  5. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=a1ab1ec5-dd7e-11f1-8501-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Envisioning a European industrial transformation for EU 2040 - Publications Office of the EU
-  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=eeec4a25-dcb5-11f1-8501-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Marie Skłodowska-Curie Actions - Publications Office of the EU
-  7. `link:https://doi.org/10.1016/j.eist.2026.101220` — The security-sustainability nexus in innovation policy: Synergies, tensions and governance in a new era
-  8. `link:https://doi.org/10.31235/osf.io/ktcxd_v1` — Orchestrating the Twin Transition in Multinational Corporations: Technology Roadmapping for Green and Digital Global Business Services
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261111T155531Z-f9af5192b0bc`
+- Assigned unresolved records: **1**
+  1. `link:https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-11-europe-quadruples-ambition-of-tech-scaleup-investment-fund/` — Europe quadruples ambition of tech scaleup investment fund - Research Professional News
 
 ### Worker B
 - Current package: `worker-b-20261111T152343Z-d877aaf27bfb`
-- Assigned unresolved records: **17**
-  1. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1OdkpkQ3BWNVQtQVF0LTd5N2J3SjJsOEtYNjY5cjVNMlU4dHZiTlk2Z3VPbDBDQVl4bkI2bTFYU3RGeWx1UnZQOUc2S0VBVHRqWURuSUJRUjZpdjdYUzVtcEd2QW9nZG40VVM1WDhYOEhXLWtXSENmVkFR?oc=5` — Strategic orientation and results of EU funding for cancer research
-  2. `link:https://doi.org/10.48550/arxiv.2606.12788` — To Share or Not to Share: Orchestrating Trustworthy Data in Global Value Chains
-  3. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxQeU1hcGctaDdtenk2Q2otckR3SGdnc05iRktQZTRrdXBEanZnUXhPNnBjRDNjM2FVdVh6MkRYekI4UzV1dWFVOGpOa2R3dy05NmNiMU1tY0IwRHVRQnJkbURTb21MMU9SaTdaZzF2TlN1Z3hoQXliXzVtc2Z4WnlRY0NWcTRreTJPRjV6SWFxcUdYbVRndGZtX2t0X2hlejBJM01BLThfQ3A0eGZJUFE?oc=5` — EU lawmakers seek to boost Europe's cloud and AI infrastructure
-  4. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxOZk9ZVF9FV1czYTBjVkVwVGVnNVpyRHBMTXl6VGNCZ3BGSnhWWC1zLURPZDVaRmNvaHdSUlVqOGQtVXVsMnozYmowcFJMMmVBdUxyUlZwV3d6WUtuTGxleUVXeno1S1NoTUpybV9XN1M3bzdhM2ktdFk2X09GM1JLWmZ5NjVWbWZRQVY2eEx6Qm9wMmpvVzhEVGJYRzBFTzE2ZmtQOFYxU1BBbnRxWjljWEoyTQ?oc=5` — JRC science for digital fairness and wellbeing
-  5. `link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPVlRWM1JkZFR6Qy1vb0dDbkhqTHRsd2FIaGV4SUdSWkxITF9ndW1UNExHR2IyZk1uV2JjMU5XVndQRUxMVXI0d1QzV3ZfZkNYQVhHOEZueDEzb3ZWaDVwYjNyV3BvZnJpbGVQeFl0ZjBxNUxzdzdORWFodTBDSGtlQXBHaXAwc1pUMEMyeEtOdHhZdkMyYkVxLWYwR0FlTC0wWDNGck9HNG11b0NMN3NMbHVWcFlsTUlUSXc?oc=5` — European stocks near record high on Siemens, CoreWeave AI optimism
-  6. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxPcjU4LVZ3eWJxYkczRWlFeGdCTGg1bEFlUDRrWW51VVBkdnNaUVZjQlllU3NCX1NaNEtFdmpjUEtrNTVFSHdzYVZQTEhibThkd1BSbXU1TW5fUjNnekVCV3lMZGNZQkFOcDhMekxQZW1mLW5WYkhLTm9aV0dMY2p3X1BvNzF1TDRJdHhremF0a2kzYmExR2VKYjQyYjJHb1prLXExY1lR?oc=5` — European Quantum Communication Infrastructure - EuroQCI - Shaping Europe’s digital future
-  7. `historical:id:6157af12ddf0500b` — A comparison of the innovation and regulatory environments for biotechnology and biosolutions across the European Union and the United States
-  8. `historical:id:aa1b99fb6ac7d879` — Irregularising Human Mobility – CEPS
-  - … plus 9 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
