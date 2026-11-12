@@ -138,8 +138,9 @@ def all_manifests():
 
 
 def prepare(*, batch_size=30, artifact=None, additional=False):
-    if not 1 <= batch_size <= 30:
-        raise ValueError('batch_size must be 1..30')
+    limit = 60 if additional else 30
+    if not 1 <= batch_size <= limit:
+        raise ValueError(f'batch_size must be 1..{limit}')
     archive = read(ARCHIVE, {})
     verified = read(VERIFIED, {}).get('records', [])
     decisions = read(REVIEW, {}).get('records', [])
@@ -151,20 +152,35 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
     prior_manifest = read(MANIFEST, {})
     outstanding = prior_manifest.get('jobs', [])
     pending_ids = {row.get('candidate_id') for row in outstanding}
-    # Reuse outstanding assignments to prevent silent abandonment or parallel
-    # reassignment. A new batch is created after these have been reviewed.
-    if not additional and outstanding and pending_ids - finished:
-        # Never invalidate the package ID while other workers are reviewing.
-        # Keep the same package and the original full manifest until closed.
+    if additional:
+        # Catch-up mode for Relevance Focus ONLY: an assignment is not a scan.
+        # Revisit unfinished jobs from the oldest registered manifests, even if
+        # they are no longer present in the current discovery archive.
+        candidates = []
+        seen = set()
+        oldest_first = sorted(existing.values(), key=lambda m: (
+            m.get('generated_at') or '', m.get('package_id') or ''))
+        for old in oldest_first:
+            for row in old.get('jobs', []):
+                cid = row.get('candidate_id')
+                if cid and cid not in finished and cid not in seen and valid_v4_lead(row):
+                    candidates.append(row)
+                    seen.add(cid)
+        # Fill remaining capacity using never-assigned discoveries.
+        fresh = [x for x in archive.get('candidates', [])
+                 if valid_v4_lead(x) and x['candidate_id'] not in finished
+                 and x['candidate_id'] not in seen]
+        fresh.sort(key=lambda x: (-int(x.get('focus_score') or 0), x['candidate_id']))
+        candidates.extend(fresh)
+        jobs = candidates[:batch_size]
+    elif outstanding and pending_ids - finished:
+        # Preserve original Relevance Focus scan behavior and package identity.
         jobs = outstanding
     else:
         available = [x for x in archive.get('candidates', [])
                      if valid_v4_lead(x) and x['candidate_id'] not in finished
-                     and (not additional or x['candidate_id'] not in reserved)
-                     and (additional or x['candidate_id'] not in (reserved - pending_ids))]
+                     and x['candidate_id'] not in (reserved - pending_ids)]
         available.sort(key=lambda x: (-int(x.get('focus_score') or 0), x['candidate_id']))
-        # Fair coverage across topic × region; neither a single venue nor a
-        # well-known research power can dominate each review package.
         buckets = {}
         for row in available:
             buckets.setdefault((row['focus_issue'], row['focus_region']), []).append(row)
@@ -328,7 +344,7 @@ def main():
     parser.add_argument('command', choices=['prepare','import-inbox'])
     parser.add_argument('--batch-size', type=int, default=30)
     parser.add_argument('--artifact', type=Path)
-    parser.add_argument('--additional', action='store_true', help='Reserve an additional package excluding all existing assignments')
+    parser.add_argument('--additional', action='store_true', help='Prepare a catch-up Relevance Focus package, including unfinished older assignments (up to 60)')
     args = parser.parse_args()
     if args.command == 'prepare':
         prepare(batch_size=args.batch_size, artifact=args.artifact, additional=args.additional)
