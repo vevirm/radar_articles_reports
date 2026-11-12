@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       package_size:
-        description: 'Number of still-unassigned global relevance candidates (1–30)'
+        description: 'Number of not-yet-reviewed Relevance Focus candidates (1–60), oldest unfinished first'
         required: true
-        default: '30'
+        default: '60'
         type: string
 
 permissions:
@@ -34,19 +34,19 @@ jobs:
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: '3.12'
-      - name: Prepare next independent global Deep Scan package
+      - name: Prepare 60-item Relevance Focus catch-up package
         shell: bash
         env:
           PACKAGE_SIZE: ${{ inputs.package_size }}
         run: |
           set -euo pipefail
-          if ! [[ "$PACKAGE_SIZE" =~ ^[0-9]+$ ]] || (( PACKAGE_SIZE < 1 || PACKAGE_SIZE > 30 )); then
-            echo '::error::package_size must be an integer between 1 and 30'
+          if ! [[ "$PACKAGE_SIZE" =~ ^[0-9]+$ ]] || (( PACKAGE_SIZE < 1 || PACKAGE_SIZE > 60 )); then
+            echo '::error::package_size must be an integer between 1 and 60'
             exit 1
           fi
           python scripts/relevance_focus_deep_scan.py prepare --additional \
             --batch-size "$PACKAGE_SIZE" --artifact "$RUNNER_TEMP/relevance_focus_next_review.zip"
-      - name: Commit additional package reservation
+      - name: Commit Relevance Focus catch-up manifest
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,10 +56,10 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A -- 'Relevance Stuff/deep_scan/packages/'
           if git diff --cached --quiet; then
-            echo 'No new unassigned candidates; existing packages were left unchanged.'
+            echo 'No unreviewed Relevance Focus candidates found.'
             exit 0
           fi
-          git commit -m 'Reserve next global relevance Deep Scan review package'
+          git commit -m 'Prepare Relevance Focus catch-up review package'
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
           trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
@@ -74,10 +74,10 @@ jobs:
       - name: Explain handoff
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
-          ## Additional global relevance Deep Scan package
+          ## Relevance Focus catch-up Deep Scan package
           Download the `relevance-focus-next-deep-scan-*` artifact and review its
-          `MANIFEST.json` using `INSTRUCTIONS.md`. It contains only unassigned
-          candidates, not the original 30 or any other outstanding package.
+          `MANIFEST.json` using `INSTRUCTIONS.md`. It contains up to 60 unreviewed candidates, prioritizing the oldest
+          still-unfinished Relevance Focus manifests, including previously assigned items.
           Submit results JSON to `Relevance Stuff/deep_scan/inbox/` for verified import.
           The package is a research assignment, **not** a completed Deep Scan.
           EOF
