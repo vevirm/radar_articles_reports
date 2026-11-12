@@ -204,9 +204,14 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
         # An empty queue is reported to the caller without creating a reservation.
         if jobs:
             previous = existing.get(package_id)
-            if previous and previous.get('jobs') != jobs:
-                raise ValueError('Package identifier collision')
-            atomic_write(PACKAGES / f'{package_id}.json', manifest)
+            if previous:
+                if previous.get('jobs') != jobs:
+                    raise ValueError('Package identifier collision')
+                # Package IDs depend on ordered candidate IDs. Re-running catch-up
+                # must keep the original timestamp/metadata, not rewrite history.
+                manifest = previous
+            else:
+                atomic_write(PACKAGES / f'{package_id}.json', manifest)
     else:
         atomic_write(MANIFEST, manifest)
     if artifact:
