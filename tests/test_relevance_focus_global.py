@@ -248,7 +248,7 @@ class DeepScanTests(unittest.TestCase):
                 self.assertEqual(review.import_inbox(),0)
                 self.assertEqual(review.prepare()['jobs'],[])
 
-    def test_additional_packages_skip_original_and_each_other_and_import_independently(self):
+    def test_additional_packages_catch_up_unfinished_and_remain_stable(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             base = root / 'deep_scan'
@@ -268,27 +268,28 @@ class DeepScanTests(unittest.TestCase):
                                 REVIEW=base/'review_archive.json', INBOX=base/'inbox',
                                 PROCESSED=base/'processed_inbox'):
                 original = review.prepare(batch_size=2)
-                first = review.prepare(batch_size=2, additional=True, artifact=root/'first.zip')
-                second = review.prepare(batch_size=2, additional=True, artifact=root/'second.zip')
-                self.assertEqual([len(x['jobs']) for x in (original, first, second)], [2, 2, 1])
-                sets = [{x['candidate_id'] for x in m['jobs']} for m in (original, first, second)]
-                self.assertEqual(len(set.union(*sets)), 5)
-                self.assertEqual(sum(map(len, sets)), 5)
+                first = review.prepare(batch_size=4, additional=True, artifact=root/'first.zip')
+                self.assertEqual(len(first['jobs']),4)
+                self.assertEqual([row['candidate_id'] for row in first['jobs'][:2]],
+                                 [row['candidate_id'] for row in original['jobs']])
+                again = review.prepare(batch_size=4, additional=True, artifact=root/'again.zip')
+                self.assertEqual(again, first)
+                self.assertEqual(len(list((base/'packages').glob('*.json'))),1)
+                self.assertEqual(review.all_manifests()[first['package_id']], first)
+                # Once reviewed, the existing decisions exclude those candidates.
+                results = [{**self.result(lead), 'candidate_id':lead['candidate_id']}
+                           for lead in first['jobs']]
+                (base/'inbox'/'first.json').write_text(json.dumps({
+                    'format': review.RESULT_FORMAT, 'package_id': first['package_id'],
+                    'results': results}))
+                self.assertEqual(review.import_inbox(),4)
+                second = review.prepare(batch_size=60, additional=True,
+                                        artifact=root/'second.zip')
+                self.assertEqual(len(second['jobs']),1)
+                self.assertNotIn(second['jobs'][0]['candidate_id'],
+                                 {x['candidate_id'] for x in first['jobs']})
+                self.assertEqual(len(list((base/'packages').glob('*.json'))),2)
                 self.assertEqual(review.read(review.MANIFEST,{})['package_id'],original['package_id'])
-                self.assertEqual(len(list((base/'packages').glob('*.json'))),2)
-                empty = review.prepare(additional=True)
-                self.assertEqual(empty['jobs'],[])
-                self.assertEqual(len(list((base/'packages').glob('*.json'))),2)
-                for name, manifest in [('first',first), ('original',original), ('second',second)]:
-                    results = [{**self.result(lead), 'candidate_id':lead['candidate_id']}
-                               for lead in manifest['jobs']]
-                    (base/'inbox'/f'{name}.json').write_text(json.dumps({
-                        'format': review.RESULT_FORMAT, 'package_id': manifest['package_id'],
-                        'results': results}))
-                self.assertEqual(review.import_inbox(),5)
-                self.assertEqual(len(review.read(review.VERIFIED,{})['records']),5)
-                self.assertEqual(len(list((base/'processed_inbox').glob('*.json'))),3)
-                self.assertEqual(review.prepare()['jobs'],[])
 
     def test_invalid_review_file_never_changes_persisted_decisions(self):
         with tempfile.TemporaryDirectory() as tmp:
