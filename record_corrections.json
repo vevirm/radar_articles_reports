@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-11-13T09:00:20Z",
+  "updated_at": "2026-11-13T09:18:07Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -17927,6 +17927,97 @@
       ],
       "updated_at": "2026-11-11T15:48:27Z",
       "deep_scan_package_id": "worker-b-20261111T152343Z-d877aaf27bfb"
+    },
+    "historical:id:c8db698f04277423": {
+      "fields": {
+        "date": "2025-07-01"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report is explicitly dated July 2025 on its cover; scanner 2026-04-11 was an incorrect crawl or resurfacing date.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://institutdelors.eu/en/publications/en-investing-in-european-defence-industry-the-case-for-a-sovereign-defence-investment-fund/"
+      ],
+      "updated_at": "2026-11-13T09:18:02Z",
+      "deep_scan_package_id": "worker-b-20261113T082643Z-4b798cc9c137"
+    },
+    "historical:id:c0fa7ef7ad5026c0": {
+      "fields": {
+        "date": "2017-11-10"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "PDF first page clearly states 10 November 2017; the crawler date 2026-01-10 is incorrect for original publication.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://institutdelors.eu/content/uploads/2025/04/howtoscaleupintheeu-dittrich-jdib-nov17-1.pdf"
+      ],
+      "updated_at": "2026-11-13T09:18:03Z",
+      "deep_scan_package_id": "worker-b-20261113T082643Z-4b798cc9c137"
+    },
+    "historical:id:db05462c0519f931": {
+      "fields": {
+        "date": "2026-01-26"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "OECD publisher records publication 26 January 2026 and report copyright 2026; scanner date 2025-10-31 differs from final publication.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.oecd.org/en/publications/connecting-fdi-and-smes-for-productivity-and-innovation-in-europe_9848e952-en.html"
+      ],
+      "updated_at": "2026-11-13T09:18:04Z",
+      "deep_scan_package_id": "worker-b-20261113T082643Z-4b798cc9c137"
+    },
+    "historical:id:089a9f8e199ca66e": {
+      "fields": {
+        "date": "2026-05-19"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The original JRC report and repository record place publication in 2026 (19 May), not 6 July 2025 as the scanner assumed.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://publications.jrc.ec.europa.eu/repository/handle/JRC142643"
+      ],
+      "updated_at": "2026-11-13T09:18:06Z",
+      "deep_scan_package_id": "worker-b-20261113T082643Z-4b798cc9c137"
+    },
+    "historical:id:01563ddaca6b0b8d": {
+      "fields": {
+        "date": "2025-08-22",
+        "source": "Open Research Europe"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Article lists 14 April 2025 as manuscript-under-review publication and 22 August 2025 as Version of Record, whereas the scanner wrongly labels publisher as European Commission.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ore.eu/ore/article/view/902"
+      ],
+      "updated_at": "2026-11-13T09:18:06Z",
+      "deep_scan_package_id": "worker-b-20261113T082643Z-4b798cc9c137"
+    },
+    "historical:id:e619e08874e78d06": {
+      "fields": {
+        "source": "European Law Blog"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Actual publisher shown on first page and publisher website is European Law Blog, not Futures.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://europeanlawblog.pubpub.org/pub/the-commercialisation-challenge-to-academic-freedom-a-matter-for-eu-law"
+      ],
+      "updated_at": "2026-11-13T09:18:06Z",
+      "deep_scan_package_id": "worker-b-20261113T082643Z-4b798cc9c137"
     }
   }
 }

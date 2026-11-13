@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3929** (Main **2028** + Historical **1901**)
-- Automatic queue still needing V2 verification: **63** (Main **16** + Historical **47**)
-- Currently assigned to workers: **63** (Main **16** + Historical **47**)
+- Authoritative V2 verified: **3956** (Main **2043** + Historical **1913**)
+- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
+- Currently assigned to workers: **36** (Main **1** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,22 +16,13 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261113T091124Z-a44a871bef69`
+- Current package: `worker-a-20261113T093014Z-a44a871bef69`
 - Assigned unresolved records: **1**
   1. `link:https://doi.org/10.1016/j.respol.2026.105662` — From dual-use to omni-use: How firms' strategic responses reproduce institutional lock-in in European technology governance — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20261113T091126Z-171c68a80881`
-- Assigned unresolved records: **27**
-  1. `link:https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-11-europe-quadruples-ambition-of-tech-scaleup-investment-fund/` — Europe quadruples ambition of tech scaleup investment fund - Research Professional News
-  2. `link:https://news.google.com/rss/articles/CBMizAFBVV95cUxPTEE3MHAwVURwN05OMHJ3T0Y0Mk4xUGNadVZzYVZKckEtYVl4OGx3YTljTHhucnhrdkNJZVQ5N1ZIdXh6Y18zYzNPOHdyb0JHZENlNmk5MTNZX0NQTXNFb0lGSzhOZWJSSTVpYWozZDJHcFR3SzdrLWl3YWFReUhNN1lJM29KTXd5N25CMmpxZFByYV9RcmdHdWdvMFBZQXNDczIzRTNTTFM0dWN3SEpHZEtJVkktUTNFWERMemFScGx1N2I4T0lxcENEcTM?oc=5` — Commission invites feedback on deploying cellular-based dual-use drone detection capacity - Shaping Europe’s digital future
-  3. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxQV3NCcmtKMUpzSmJoWmt0LVFCQkdzblpLT3h1ZmhoNW01VE8yUjZaUlJIM192X2wyNmEySVNtRUsyMXdmY2JrMG5IT2h2clkyME5lR2lVQVpkNjhtQ2ZlQ3VmQnhzNEdnVTF5TkYzQ09ndzQxMF9aalF5MG5TNk5TMnlQVVl6YU5tZDBIa21wVHBzdlZGbURoUWlvcDlyVmlVWmsycGd2OWpNNXN4Xy01clp3WmhMZk81NG1ENjFCNkVKTGVGU3hOMHdaVQ?oc=5` — AI in democracy: ensuring oversight and compliance with EU values | Aktualności | Parlament Europejski
-  4. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQRXRwYlFVZHdJY21jMWc3cV8xUEtZZDhUZGZuSHRnTkw2T05DUk1PMVRpcHEzOE5kc21pcmlpRVBCUHpyWU5pV3I3LXdrdl9CSmVlN3lXSXNpZkdpak9aWm00T3NYSjRWYnc0Ynk0VXJySUFHSW93YXBsZUZfcEg3YXFaR0dQQmowd3BhRWpvYzBKV193?oc=5` — Australia signs up to EU’s Horizon Europe research program
-  5. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxPbkpZRkY5bUJ3dGJjV1llNVJSTUJ3MTdCRUM2MEpXTS1BMU52bS1ZQVQ5ZTRFb2szclVRNWFsSGYwNk00Wi12VXZYaFVoUzJFZGR1TDdmaWo3WDNmTXJJZThDU0wyeVAwdVB4Ymx3OUJJSUE3ZnpibHJxRmpUUElZdEcxXzJzTGtvVDRIUy1sNWhwLUhwLXgyS1laZU90M0FvUEpESg?oc=5` — Trump's upgrade of US-led AI alliance runs into European resistance
-  6. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPWFA1THktNnk1cTRPc04waGtjZnFHWndBZXo5OGdBYmFnVERGNXJvX3h1bGR6cVdMRUFrRDVVRG5GODM5ZDEwU2VTSHBtNDZIRW84UkRha2x3SU5QeEd5RVdvYzJWS2xHRW0xcHMycFdFamUzZXZlMGc4WHlQbFFhb3lmcXZCVE1Cbkg5OHhqdC16TC1pR09MZ2dWSFpDMm5CSW03UkxRVjlwRjdFaDBBbTFyeFE?oc=5` — Italy’s Poste Targets €600 Million Fund Amid AI Data Center Boom
-  7. `link:https://news.google.com/rss/articles/CBMijwFBVV95cUxNc2VtSnZ4eDdiWEo2UlVSQ0E2LXRJMklITXVVZ0dua2Jpc2lQUWlPYnpJVTRUWDNLOTNaaHM4WHdyXzhRUTU0R1N3Rlh0dzJleFdGb0ZyTkpobkJ2aFRpVmYyZGlYVVBEd1VOSXNJdVdQVlVlMTRDZGlDb1A4LWxZQXRrdWl5NHo4ZjQyRzV6Yw?oc=5` — AI pioneer Yoshua Bengio implores Europe to build frontier models
-  8. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxQNDFoMjRZVlRLdWhoaWdNc0lDNlFZSTQ1WVdJeHYxNjVDWHlob3E2bW12cFdTeXR3ZEt3MEwwX3hMQTc0VTNOLTFELVdDUGpKLURMVWgwZm5PNnhTNVA4RmY1aG9HNlNIRE5VanhEZlBxRFpFZlZlY1ZVekZmMjdkb1ZkMDhZeWJzNGd5NUJlcS0?oc=5` — ‘Blind spot’ no longer: Austria targets Russian espionage with new law
-  - … plus 19 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
