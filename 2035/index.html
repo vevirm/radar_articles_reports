@@ -23,92 +23,31 @@
 <title>2035 · Research &amp; Innovation × Geopolitics Radar</title>
 <link rel="stylesheet" href="../radar.css?v=28.4">
 <link rel="stylesheet" href="scenarios.css?v=3">
-<script src="../radar_data.js?v=28.1"></script>
-</head>
-<body>
-<main class="wrap future-main">
-  <section class="axis-pair-intro" aria-labelledby="axisPairTitle">
-    <p class="taxonomy-kicker">2035 scenario spaces</p>
-    <h1 id="axisPairTitle">Four ways to think about Europe in 2035</h1>
-    <p class="future-lede">Each pair of questions explores two uncertainties about Europe’s future. Together, they describe four possible worlds. Choose a pair to explore what each world could mean for European research, technology and economic resilience. The four lenses appear in a new order each week; their scenarios and underlying analysis do not change.</p>
-  </section>
-  <div id="axisLensGrid" class="axis-lens-grid"><p class="empty">Loading</p></div>
-</main>
-<script>
-const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
-const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-// Four fixed analytical lenses; weekly display order affects navigation only.
-const AXIS_PAIRS=[
-  {
-    id:'resources-connectedness',
-    title:'Resources × Global connectedness',
-    question:'Can Europe mobilise the resources it needs, and how connected is it to the world?',
-    readerNote:'Explore how the availability of finance and capabilities interacts with international openness.'
-  },
-  {
-    id:'integration-dependency',
-    title:'European integration × Strategic dependency',
-    question:'Does Europe act together, and how much does it depend on capabilities outside Europe?',
-    readerNote:'Compare coordinated European action with the consequences of relying on external suppliers and systems.'
-  },
-  {
-    id:'talent-scale-up',
-    title:'Talent × Scale-up capacity',
-    question:'Can Europe attract and retain skilled people, and can it grow what they create?',
-    readerNote:'Follow the link between research talent, commercial growth and Europe’s ability to retain value.'
-  },
-  {
-    id:'scale-up-dependency',
-    title:'Scale-up capacity × Strategic dependency',
-    question:'Can Europe grow its innovations into businesses and industries, and whose capabilities would that growth depend on?',
-    readerNote:'See how successful scale-up can still leave strategic dependencies unresolved.'
-  }
-];
-
-// Same order throughout each UTC week; changes automatically on the next week.
-const weeklyLensOrder=(items,date=new Date())=>{
-  const epoch=Date.UTC(2024,0,1);
-  const mondayOffset=(date.getUTCDay()+6)%7;
-  const thisMonday=Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate()-mondayOffset);
-  const week=Math.floor((thisMonday-epoch)/604800000);
-  const offset=((week%items.length)+items.length)%items.length;
-  return [...items.slice(offset),...items.slice(0,offset)];
-};
-
-(async()=>{
- try{
-  const data=await RadarData.load('../radar.json','../radar_seed.json');
-  const generated=data?.high_order_inference?.scenarios_2035?.frames||[];
-  const generatedById=new Map(generated.map(f=>[f.id,f]));
-  const frames=weeklyLensOrder(AXIS_PAIRS.map(base=>({...base,...(generatedById.get(base.id)||{}),readerNote:base.readerNote})));
-  document.getElementById('axisLensGrid').innerHTML=frames.map((f,i)=>`
-    <article class="axis-lens-card">
-      <a href="lens/?frame=${encodeURIComponent(f.id)}">
-        <p class="lens-number">0${i+1}</p>
-        <h2>${esc(f.title)}</h2>
-        <p>${esc(f.question)}</p>
-        <p class="lens-reader-note">${esc(f.readerNote)}</p>
-        <div class="lens-meta"><span>4 scenarios</span><span>4 variants each</span></div>
-        <strong>Explore these scenarios →</strong>
-      </a>
-    </article>`).join('');
- }catch(e){
-  console.error(e);
-  document.getElementById('axisLensGrid').innerHTML=weeklyLensOrder(AXIS_PAIRS).map((f,i)=>`
-    <article class="axis-lens-card">
-      <a href="lens/?frame=${encodeURIComponent(f.id)}">
-        <p class="lens-number">0${i+1}</p>
-        <h2>${esc(f.title)}</h2>
-        <p>${esc(f.question)}</p>
-        <p class="lens-reader-note">${esc(f.readerNote)}</p>
-        <div class="lens-meta"><span>4 scenarios</span><span>4 variants each</span></div>
-        <strong>Explore these scenarios →</strong>
-      </a>
-    </article>`).join('');
- }
-})();
-</script>
-<script src="../reader_language.js?v=5"></script>
-<script src="../site-shell.js?v=20261020-no-nested-gate-3"></script>
+<style id="manual-editorial-css">
+.publication-stamp{max-width:860px;margin:16px 0 26px;padding:12px 16px;border-left:3px solid #b4433a;background:rgba(127,127,127,.07);font-size:14px;line-height:1.55}
+.manual-sources{max-width:870px;margin:14px 0 0;font-size:14px}
+.manual-sources summary{cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-weight:650}
+.manual-sources a{word-break:break-word}
+.manual-source-list{padding-left:23px;margin:12px 0;line-height:1.45}
+.manual-source-list li{margin-bottom:10px}
+.manual-source-list small{display:block;color:var(--quiet,#59636a);line-height:1.4}
+.source-qualification{font-size:14px!important;line-height:1.5;color:var(--quiet,#59636a)}
+.manual-card-paragraph{font-size:16px;line-height:1.6;margin:10px 0;max-width:70ch}
+.manual-card-paragraph strong{font-weight:700}
+.page-priorities .priority-main{display:block;grid-template-columns:none}
+.page-priorities .priority-card .rank{display:none}
+.page-phenomena .pattern-simple-list li,.page-shocks .external-shock-list li{margin:0}
+.page-trends .pair .manual-card-paragraph{font-size:15px}
+.page-trends .pair .axis .side{min-width:0}
+.page-trends .tug-track{display:flex;overflow:hidden}
+.page-trends .tug-left{display:block;min-width:1%;background:#b4433a}
+.page-trends .tug-right{display:block;min-width:1%;background:#29414b}
+.manual-counter{color:var(--quiet,#59636a);font-size:14px;max-width:70ch;margin-top:12px}
+.manual-footnote{font-size:13px;color:var(--quiet,#59636a)}
+@media(max-width:740px){.page-priorities .grid{grid-template-columns:1fr}.publication-stamp{margin:8px 0 18px}}
+</style></head>
+<body class="radar-site page-future"><aside class="site-sidebar" aria-label="Site menu"><a class="site-sidebar-brand" href="../">R&amp;I × Geopolitics Radar</a><button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="siteMap">Menu</button><nav id="siteMap"><a href="../radar/">Radar</a><a href="../historical/">Earlier Findings</a><a href="../literature/">Sources</a><a href="../briefing/">Topics</a><a href="../read/" class="menu-group-start">Read At Least This</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends &amp; Counter-Trends</a><a href="../phenomena/">Ongoing Phenomena</a><a href="../priorities/">Risks &amp; Opportunities</a><a href="../shocks/">External Shocks</a><a href="../2035/" aria-current="page">2035</a><a href="../glossary/" class="menu-group-final">Glossary</a><a href="../stuff/">Stuff</a><a href="../2026-stuff/">2026 Stuff</a></nav></aside><section class="shared-page-intro"><div class="shared-page-intro-inner"><h1>2035</h1><p>Four lenses, sixteen possible worlds and sixty-four conditional variants in a fixed manual edition.</p></div></section>
+<main class="wrap future-main"><section class="axis-pair-intro" aria-labelledby="axisPairTitle"><p class="taxonomy-kicker">2035 scenario spaces</p><h1 id="axisPairTitle">Four ways to think about Europe in 2035</h1><p class="publication-stamp"><strong>Strategic outlook published: 13 November 2026</strong> · Manually curated and fixed until the next uploaded edition. Automated Radar scans do not change these assessments.</p><p class="future-lede">Two uncertain conditions shape each lens. Each lens contains four different possible worlds, and each world has four conditional variants. These are not forecasts. The lenses, stories and order are fixed until the next manual edition.</p></section><div class="axis-lens-grid" id="axisLensGrid"><article class="axis-lens-card"><a href="lens/?frame=resources-connectedness"><p class="lens-number">01</p><h2>Resources × Global connectedness</h2><p>Can Europe mobilise the resources it needs, and how connected is it to the world?</p><p class="lens-reader-note">What resources Europe can use, and how easily it can work with the world.</p><div class="lens-meta"><span>4 worlds</span><span>4 variants each</span></div><strong>Explore this lens →</strong></a></article><article class="axis-lens-card"><a href="lens/?frame=integration-dependency"><p class="lens-number">02</p><h2>European integration × Strategic dependency</h2><p>Does Europe act together, and how much does it depend on capabilities outside Europe?</p><p class="lens-reader-note">Whether European countries act together and can change suppliers.</p><div class="lens-meta"><span>4 worlds</span><span>4 variants each</span></div><strong>Explore this lens →</strong></a></article><article class="axis-lens-card"><a href="lens/?frame=talent-scale-up"><p class="lens-number">03</p><h2>Talent × Scale-up capacity</h2><p>Can Europe attract and keep the people, and can it grow what they create?</p><p class="lens-reader-note">Whether talented people stay and discoveries become successful businesses.</p><div class="lens-meta"><span>4 worlds</span><span>4 variants each</span></div><strong>Explore this lens →</strong></a></article><article class="axis-lens-card"><a href="lens/?frame=scale-up-dependency"><p class="lens-number">04</p><h2>Scale-up capacity × Strategic dependency</h2><p>Can Europe turn innovation into scale, and whose capabilities make that scale possible?</p><p class="lens-reader-note">Whether European firms grow, and how dependent their supply chains remain.</p><div class="lens-meta"><span>4 worlds</span><span>4 variants each</span></div><strong>Explore this lens →</strong></a></article></div></main>
+<script>document.querySelectorAll('.site-menu-toggle').forEach(function(b){b.addEventListener('click',function(){var sidebar=b.closest('.site-sidebar');var open=sidebar.classList.toggle('open');b.setAttribute('aria-expanded',String(open));});});</script>
 </body></html>

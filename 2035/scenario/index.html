@@ -21,33 +21,32 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>2035 scenario · Research &amp; Innovation × Geopolitics Radar</title>
 <link rel="stylesheet" href="../../radar.css?v=28.4"><link rel="stylesheet" href="../scenarios.css?v=2">
-<script src="../../radar_data.js?v=28.1"></script>
-</head><body>
-<main class="wrap future-main scenario-detail">
-<a id="scenarioBack" class="scenario-back" href="../">← Back to the 2035 lenses</a>
-<div id="scenarioContent"><p class="empty">Loading</p></div>
-</main>
-<script>
-const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
-const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const KIND={shock:'External shock',opportunity:'Opportunity',risk:'Risk',continuity:'Ongoing phenomenon',trend:'Trend'};
-const params=new URLSearchParams(location.search),FRAME_ID=params.get('frame')||'resources-connectedness',WORLD_ID=params.get('world')||'';
-const pole=(axis,id)=>id===axis?.high?.id?axis.high:id===axis?.low?.id?axis.low:null;
-const coordinates=(frame,w)=>{const q=w.quadrant||{},x=frame.axes.horizontal,y=frame.axes.vertical;const xp=pole(x,q[x.key]||q.horizontal),yp=pole(y,q[y.key]||q.vertical);return `${yp?.label||''} · ${xp?.label||''}`;};
-const storySummary=w=>{const b=(w.bullets||[]).find(x=>x.label==='Picture');return clean(b?.text||(w.story||[])[0]||'')};
-const sourceList=v=>{const xs=v.sources||[];return xs.length?`<details><summary>Sources</summary><ul class="scenario-sources">${xs.map(s=>`<li>${s.link?`<a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.source||s.title)}</a>`:esc(s.source||s.title)}</li>`).join('')}</ul></details>`:''};
-const variant=v=>{const facts=(v.bullets||[]).filter(b=>!['Evidence today'].includes(b.label));return `<article class="scenario-variant-card"><p class="kind">${esc(KIND[v.kind]||'Variant')}</p><h3>${esc(v.name)}</h3>${facts.map(b=>`<p><strong>${esc(b.label)}:</strong> ${esc(b.text)}</p>`).join('')}${sourceList(v)}</article>`};
-(async()=>{try{
- const data=await RadarData.load('../../radar.json','../../radar_seed.json');const sc=data?.high_order_inference?.scenarios_2035||{};
- let frame=(sc.frames||[]).find(f=>f.id===FRAME_ID);
- if(!frame&&FRAME_ID==='resources-connectedness')frame={id:FRAME_ID,title:'Resources × Global connectedness',axes:{vertical:{key:'resources',title:'Resources',low:{id:'fewer_resources',label:'Fewer resources'},high:{id:'more_resources',label:'More resources'}},horizontal:{key:'connectedness',title:'Global connectedness',low:{id:'less_connected',label:'Less connected'},high:{id:'more_connected',label:'More connected'}}},scenarios:sc.scenarios||[]};
- if(!frame)throw new Error('Scenario lens not found');
- const w=(frame.scenarios||[]).find(x=>x.id===WORLD_ID);if(!w)throw new Error('Scenario not found');
- document.getElementById('scenarioBack').href=`../${encodeURIComponent(frame.id)}/`;document.getElementById('scenarioBack').textContent=`← ${frame.title}`;
- document.title=`${w.name} · ${frame.title} · 2035`;const facts=(w.bullets||[]).filter(b=>!['Picture','Evidence today'].includes(b.label));
- document.getElementById('scenarioContent').innerHTML=`<section class="scenario-hero"><p class="coords">${esc(coordinates(frame,w))}</p><h2>${esc(w.name)}</h2><p class="scenario-tagline">${esc(w.tagline)}</p><p class="scenario-summary">${esc(storySummary(w))}</p></section><h2 class="scenario-variants-title">Four ways this future could develop</h2><p class="scenario-variants-intro">All four variants share this possible future. Each explores how a different development could change the consequences for Europe.</p><div class="scenario-variant-grid">${(w.variants||[]).slice(0,4).map(variant).join('')}</div><section class="scenario-section"><h3>What this future could mean for Europe</h3><div class="scenario-facts">${facts.map(b=>`<div class="scenario-fact"><strong>${esc(b.label)}</strong>${esc(b.text)}</div>`).join('')}</div></section>`;
-}catch(e){console.error(e);document.getElementById('scenarioContent').innerHTML='<p class="empty">This scenario is unavailable.</p>';}})();
+
+<style id="manual-editorial-css">
+.publication-stamp{max-width:860px;margin:16px 0 26px;padding:12px 16px;border-left:3px solid #b4433a;background:rgba(127,127,127,.07);font-size:14px;line-height:1.55}
+.manual-sources{max-width:870px;margin:14px 0 0;font-size:14px}
+.manual-sources summary{cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-weight:650}
+.manual-sources a{word-break:break-word}
+.manual-source-list{padding-left:23px;margin:12px 0;line-height:1.45}
+.manual-source-list li{margin-bottom:10px}
+.manual-source-list small{display:block;color:var(--quiet,#59636a);line-height:1.4}
+.source-qualification{font-size:14px!important;line-height:1.5;color:var(--quiet,#59636a)}
+.manual-card-paragraph{font-size:16px;line-height:1.6;margin:10px 0;max-width:70ch}
+.manual-card-paragraph strong{font-weight:700}
+.page-priorities .priority-main{display:block;grid-template-columns:none}
+.page-priorities .priority-card .rank{display:none}
+.page-phenomena .pattern-simple-list li,.page-shocks .external-shock-list li{margin:0}
+.page-trends .pair .manual-card-paragraph{font-size:15px}
+.page-trends .pair .axis .side{min-width:0}
+.page-trends .tug-track{display:flex;overflow:hidden}
+.page-trends .tug-left{display:block;min-width:1%;background:#b4433a}
+.page-trends .tug-right{display:block;min-width:1%;background:#29414b}
+.manual-counter{color:var(--quiet,#59636a);font-size:14px;max-width:70ch;margin-top:12px}
+.manual-footnote{font-size:13px;color:var(--quiet,#59636a)}
+@media(max-width:740px){.page-priorities .grid{grid-template-columns:1fr}.publication-stamp{margin:8px 0 18px}}
+</style></head><body class="radar-site page-future"><aside class="site-sidebar" aria-label="Site menu"><a class="site-sidebar-brand" href="../../">R&amp;I × Geopolitics Radar</a><button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="siteMap">Menu</button><nav id="siteMap"><a href="../../radar/">Radar</a><a href="../../historical/">Earlier Findings</a><a href="../../literature/">Sources</a><a href="../../briefing/">Topics</a><a href="../../read/" class="menu-group-start">Read At Least This</a><a href="../../frontier/quick/">Matrix</a><a href="../../trends/">Trends &amp; Counter-Trends</a><a href="../../phenomena/">Ongoing Phenomena</a><a href="../../priorities/">Risks &amp; Opportunities</a><a href="../../shocks/">External Shocks</a><a href="../../2035/" aria-current="page">2035</a><a href="../../glossary/" class="menu-group-final">Glossary</a><a href="../../stuff/">Stuff</a><a href="../../2026-stuff/">2026 Stuff</a></nav></aside><section class="shared-page-intro"><div class="shared-page-intro-inner"><h1>2035</h1><p>Four lenses, sixteen possible worlds and sixty-four conditional variants in a fixed manual edition.</p></div></section>
+<main class="wrap future-main scenario-detail"><a id="scenarioBack" class="scenario-back" href="../">← Back to the 2035 lenses</a><p class="publication-stamp"><strong>Strategic outlook published: 13 November 2026</strong> · Manually curated and fixed until the next uploaded edition. Automated Radar scans do not change these assessments.</p><div id="scenarioContent" aria-live="polite"><p>Loading the manually published scenario.</p></div></main><script src="../outlook.js?v=20261113"></script><script>
+(function(){'use strict';const data=window.Strategic2035,params=new URLSearchParams(location.search);const frame=data?.frames.find(f=>f.id===(params.get('frame')||'resources-connectedness'));const w=frame?.scenarios.find(s=>s.id===params.get('world'));const root=document.getElementById('scenarioContent');if(!w){root.textContent='This world could not be found. Return to the lenses and choose a world.';return;}document.getElementById('scenarioBack').href='../lens/?frame='+encodeURIComponent(frame.id);document.getElementById('scenarioBack').textContent='← '+frame.title;document.title=w.name+' · '+frame.title+' · 2035';const e=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const linkRows=xs=>{xs=Array.isArray(xs)?xs:[];const good=xs.filter(x=>/^https?:\/\//.test(x.link||''));if(!good.length)return '';const seen=new Set();return '<details class="manual-sources"><summary>Sources and verification</summary><p class="source-qualification">These are verified present-day inputs, not proof that a 2035 world or variant will occur. Global Relevance Focus KEEP evidence is marked separately.</p><ul class="manual-source-list">'+good.filter(x=>{if(seen.has(x.link))return false;seen.add(x.link);return true}).map(x=>'<li><a href="'+e(x.link)+'" target="_blank" rel="noopener noreferrer">'+e(x.title||x.source||'Primary source')+'</a><small>'+e([x.source||'',x.date||'',x.lane||'Radar scenario input'].filter(Boolean).join(' · '))+'</small></li>').join('')+'</ul></details>'};const bullets=(entries)=>'<div class="scenario-facts">'+entries.map(([label,txt])=>'<div class="scenario-fact"><strong>'+e(label)+'</strong>'+e(txt)+'</div>').join('')+'</div>';const edit=w.editorial;const variants=w.variants.map(v=>'<article class="scenario-variant-card" id="'+e(v.id)+'"><p class="kind">'+e(v.kind==='shock'?'Hypothetical shock':v.kind==='risk'?'Risk pathway':'Opportunity pathway')+'</p><h3>'+e(v.name)+'</h3><p><strong>Starting change:</strong> '+e(v.editorial.trigger)+'</p><p><strong>How it spreads:</strong> '+e(v.editorial.mechanism)+'</p><p><strong>Why Europe would care:</strong> '+e(v.editorial.importance)+'</p><p><strong>What could help:</strong> '+e(v.editorial.response)+'</p><p><strong>What could challenge it:</strong> '+e(v.editorial.limits)+'</p>'+linkRows(v.sources)+'</article>').join('');root.innerHTML='<section class="scenario-hero"><p class="coords">Conditional 2035 world · '+e(frame.title)+'</p><h2>'+e(w.name)+'</h2><p class="scenario-tagline">'+e(w.tagline)+'</p><p class="scenario-summary">'+e(edit.summary)+'</p></section><section class="scenario-section"><h3>How this world could happen</h3>'+bullets([['Steps from today',edit.mechanism],['Benefit and cost',edit.tradeoff],['What would change our assessment',edit.signpost]])+(edit.cross_lanes?'<p class="manual-card-paragraph"><strong>Verified global comparison:</strong> '+e(edit.cross_lanes)+'</p>':'')+linkRows(w.editorial_sources)+'</section><h2 class="scenario-variants-title">Four different versions of this world</h2><p class="scenario-variants-intro">Each version changes one part of the same starting conditions. These are possibilities, not predictions.</p><div class="scenario-variant-grid">'+variants+'</div>';})();
 </script>
-<script src="../../reader_language.js?v=5"></script>
-<script src="../../site-shell.js?v=20261020-no-nested-gate-3"></script>
+<script>document.querySelectorAll('.site-menu-toggle').forEach(function(b){b.addEventListener('click',function(){var sidebar=b.closest('.site-sidebar');var open=sidebar.classList.toggle('open');b.setAttribute('aria-expanded',String(open));});});</script>
 </body></html>
