@@ -312,3 +312,41 @@ class DeepScanTests(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
+class BibliometricsExclusionTests(unittest.TestCase):
+    """Only future Relevance Focus intake, not already verified records."""
+
+    def test_catalogue_does_not_offer_bibliometrics(self):
+        with patch.object(focus, 'load', return_value=[
+            {'label': 'Bibliometrics', 'patterns': ['bibliometric']},
+            {'label': 'Biodiversity', 'patterns': ['biodiversity']} ]):
+            catalogue = focus.topic_catalogue()
+        self.assertNotIn('Bibliometrics', catalogue)
+        self.assertIn('Biodiversity', catalogue)
+
+    def test_bibliometric_paper_cannot_enter_under_another_topic(self):
+        work = {'type': 'report', 'title': [
+            'Bibliometric analysis of biodiversity research in Kenya'],
+            'abstract': 'This study examines biodiversity research in Kenya.',
+            'published': {'date-parts': [[2026, 6, 1]]},
+            'DOI': '10.1234/bibliometric-kenya', 'publisher': 'Research Institute'}
+        self.assertIsNone(focus.relevance_work('crossref', work,
+            allowed_topics={'Biodiversity': 'biodiversity'},
+            expected_region='Kenya', expected_topic='Biodiversity'))
+        work['title'] = ['Biodiversity observation infrastructure in Kenya']
+        self.assertIsNotNone(focus.relevance_work('crossref', work,
+            allowed_topics={'Biodiversity': 'biodiversity'},
+            expected_region='Kenya', expected_topic='Biodiversity'))
+
+    def test_old_bibliometrics_lead_not_requeued_for_new_deep_scan(self):
+        row = {'candidate_id': 'REL-abc', 'aboutness_basis': 'title',
+               'geographic_evidence': 'Kenya', 'focus_region': 'Kenya',
+               'focus_group': 'Africa', 'focus_issue': 'Bibliometrics',
+               'title': 'Kenyan research collaborations',
+               'url': 'https://doi.org/10.1234/example'}
+        self.assertFalse(review.valid_v4_lead(row))
+        row['focus_issue'] = 'Biodiversity'
+        row['title'] = 'Scientometric mapping of biodiversity in Kenya'
+        self.assertFalse(review.valid_v4_lead(row))
+        row['title'] = 'Biodiversity observation in Kenya'
+        self.assertTrue(review.valid_v4_lead(row))
