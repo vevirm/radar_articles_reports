@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3956** (Main **2043** + Historical **1913**)
-- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
-- Currently assigned to workers: **36** (Main **1** + Historical **35**)
+- Automatic queue still needing V2 verification: **68** (Main **29** + Historical **39**)
+- Currently assigned to workers: **68** (Main **29** + Historical **39**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,9 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261113T093014Z-a44a871bef69`
-- Assigned unresolved records: **1**
-  1. `link:https://doi.org/10.1016/j.respol.2026.105662` — From dual-use to omni-use: How firms' strategic responses reproduce institutional lock-in in European technology governance — recovery attempt 2/3
+- Current package: `worker-a-20261114T105246Z-ecc58b416abd`
+- Assigned unresolved records: **33**
+  1. `link:https://doi.org/10.1016/j.cose.2026.105195` — A minimal-access security architecture for processing sensitive health data on shared supercomputing infrastructure
+  2. `link:https://doi.org/10.1016/j.clsr.2026.106418` — Building AI (In)dependence through EU’s AI Factories
+  3. `link:https://doi.org/10.1016/j.clsr.2026.106409` — Designing the technological and legal fabric of digital sovereignty for critical governmental data and essential services extraterritorially: The “data embassy” model
+  4. `link:https://doi.org/10.1007/s41959-026-00200-0` — Vocational education, entrepreneurial capability and national innovation ecosystems: a comparative institutional analysis
+  5. `link:https://doi.org/10.1016/j.jgar.2026.09.005` — Assessment of the antimicrobial resistance research ecosystem in the Caribbean region
+  6. `link:https://allea.org/ai-in-research-benefits-and-risks-for-ethics-and-integrity/` — AI in Research - Benefits and Risks for Ethics and Integrity - ALLEA
+  7. `link:https://doi.org/10.48550/arxiv.2611.09194` — Large Language Model Consensus and Corpus-Adaptive Topic Modeling for Classifying and Mapping Patent Innovation
+  8. `link:https://news.google.com/rss/articles/CBMikgFBVV95cUxPWEVLcjRfU0ZadTFfY1R1SzNtSUdpa2RmN0xpOEM1ekJ6cUdWbkMxSTVtS25jTm9QMWtNMEJGSmVzX1V6SXBtNWpmcjl3VHBER28wVVNqNzJDNnpUN0I1VlRwV2FHblVvYzd5Njl4YTZpTXg4enNlNjhOTkRlc25PUnFoOGtWRnFGWjBqRWlWVi1Odw?oc=5` — Ukraine envoy row hijacks EU leaders’ first AI summit
+  - … plus 25 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261113T091126Z-171c68a80881`
