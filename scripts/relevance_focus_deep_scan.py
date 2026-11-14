@@ -18,6 +18,8 @@ import re
 import shutil
 import zipfile
 
+from relevance_focus import excluded_future_relevance_lead
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'Relevance Stuff' / 'deep_scan'
 ARCHIVE = ROOT / 'Relevance Stuff' / 'regional_discoveries.json'
@@ -111,7 +113,8 @@ def atomic_write(path: Path, document):
 
 
 def valid_v4_lead(row):
-    return (isinstance(row, dict) and isinstance(row.get('candidate_id'), str)
+    return (isinstance(row, dict) and not excluded_future_relevance_lead(row)
+            and isinstance(row.get('candidate_id'), str)
             and row['candidate_id'].startswith('REL-') and row.get('aboutness_basis')
             in {'title', 'substantive abstract / reader claim'} and row.get('geographic_evidence')
             and row.get('focus_region') and row.get('focus_issue')

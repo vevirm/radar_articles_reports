@@ -108,6 +108,19 @@ GEO_TOPIC_LABELS = {'China', 'United States', 'Ukraine', 'India', 'Japan',
                     'United Kingdom', 'Taiwan', 'Global South'}
 VAGUE_TOPIC_LABELS = {'Universities', 'Research organisations', 'SMEs',
                       'Competitiveness', 'Regulation'}
+# Relevance Focus ONLY: no new bibliometrics/scientometrics studies.
+# Existing archived, verified and exported findings are not retroactively filtered.
+EXCLUDED_FUTURE_TOPICS = {'bibliometrics', 'scientometrics'}
+BIBLIOMETRIC_STUDY_TITLE = re.compile(
+    r'\b(?:bibliometric(?:s|al)?|scientometric(?:s|al)?|citation\s+analysis|'
+    r'co[ -]?citation\s+analysis|science\s+mapping|publication\s+trend\s+analysis)\b', re.I)
+
+
+def excluded_future_relevance_lead(row):
+    """Intake-only rule; never apply to already stored/exported findings."""
+    return (clean(row.get('focus_issue')).casefold() in EXCLUDED_FUTURE_TOPICS
+            or bool(BIBLIOMETRIC_STUDY_TITLE.search(clean(row.get('title')))))
+
 TOPIC_EXTRA_PATTERNS = {
     'Health research': ['biomedical research', 'biomedical science', 'medical sciences',
                         'biomedical innovation', 'clinical trials', 'medical R&D'],
@@ -176,7 +189,8 @@ def topic_catalogue():
     answer = {}
     for row in raw:
         label = clean(row.get('label')) if isinstance(row, dict) else ''
-        if not label or label in GEO_TOPIC_LABELS or label in VAGUE_TOPIC_LABELS:
+        if (not label or label in GEO_TOPIC_LABELS or label in VAGUE_TOPIC_LABELS
+                or label.casefold() in EXCLUDED_FUTURE_TOPICS):
             continue
         pats = [clean(x) for x in row.get('patterns', []) if clean(x)]
         pats.extend(TOPIC_EXTRA_PATTERNS.get(label, []))
@@ -1105,6 +1119,9 @@ def relevance_work(source, work, *, allowed_topics=None, expected_region=None,
     if re.search(r'\b(?:retraction|withdrawn|corrigendum|erratum|expression of concern)\b', title, re.I):
         return None
     if not publication_date_in_scope(published):
+        return None
+    if (BIBLIOMETRIC_STUDY_TITLE.search(title)
+            or (expected_topic or '').casefold() in EXCLUDED_FUTURE_TOPICS):
         return None
     match = regional_matching(title, abstract, allowed_topics=allowed_topics,
                               expected_region=expected_region, expected_topic=expected_topic)
