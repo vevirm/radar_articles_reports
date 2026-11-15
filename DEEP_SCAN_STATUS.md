@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3989** (Main **2072** + Historical **1917**)
-- Automatic queue still needing V2 verification: **44** (Main **9** + Historical **35**)
-- Currently assigned to workers: **44** (Main **9** + Historical **35**)
+- Automatic queue still needing V2 verification: **61** (Main **17** + Historical **44**)
+- Currently assigned to workers: **61** (Main **17** + Historical **44**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,17 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261114T122352Z-826eae15b000`
-- Assigned unresolved records: **9**
-  1. `link:https://op.europa.eu/en/publication-detail/-/publication/67de146a-e00d-11f1-b50a-01aa75ed71a1/language-en` — REPORT - on the proposal for a regulation of the European Parliament and of the Council establishing Horizon Europe, the Framework Programme for Research and Innovation, for the period 2028-2034 laying down its rules for participation and dissemination, and repealing Regulation (EU) 2021/695 - (COM(2025)0543 - C10-0164/2025 - 2025/0543(COD)) - Committee on Industry, Research and Energy - Rapporteur: Christian Ehler - Publications Office of the EU
-  2. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies
-  3. `link:https://doi.org/10.1007/s44163-026-02687-x` — Ghana’s national innovation system and the governance readiness gap for artificial intelligence
-  4. `link:https://doi.org/10.1093/eurpub/ckag169.542` — A.10. Round Table: A Just Transition for a Healthy Society: Leveraging Co-benefits to Build Sustainable Resilience
-  5. `link:https://defence-industry-space.ec.europa.eu/advanced-sensors-next-generation-communications-how-european-defence-fund-helps-european-defence-2026-11-13_en` — From advanced sensors to Next-Generation Communications: How the European Defence Fund helps the European defence industry develop critical technologies
-  6. `link:https://news.google.com/rss/articles/CBMijAJBVV95cUxOT1lzZUs2dkxmZ1h6NG1lbDBrLXB6Y3A1elNHU2NwZjNEZ3U4RGZJODYtYmNrY0dVSkxZVUEteXhkVWlBZDZockgxei1IaWVwQjY4TnViQ0ZnRFk4bkJ3OHJJQWdJM2lqQkk3dGFfeHFUMlpkUnJpcFdnUWRENWt0OGhrQkt2U3Zta0prOTJNYy0zQVlKSllncVhwNzczX0N4Z2NmenFlMnQ2T0FtSzZEa3VqeTBhODFuVHRwYXJiTldJekNBbDhremNaTjJ2UVVadXJfQjljbk5STzkxM3NHZl9Sc21tc3ZZbzd3MkFaVHhSTEJ1RGNzaE9WMXVFOTR5VVhCZG9Ub19TZllO?oc=5` — Commission launches first global alliance on climate and health research funding at COP31 - European Commission
-  7. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOMnFJSzdyOV9aaXFEc2QwYnBQVFBPVlVuTFBYWEZ3Y1NGc0swMDZ6Wkl4TWxyNWstVEJxNDlTTThaUHlFX1VLc1l0OGM1UmdXNWk3ckVZV2dfQ285UFhERjBvbUc1Qzc3SWtVbVdlU3kwUkdLd1NHVC11azk0UWpBN0g5WFY?oc=5` — Europe’s AI story. With Philip Lane
-  8. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxNZWt0NTQ5dUZ3RkhRUHdSMlpMT1Q4Nm53TEt3TDZ1ZGFIOEtvR0xPaHp5aVphZEMwdV9heUtpU1dEbE5fTGZKTXdESEZpa2hMc0d1UDVtdnp4SzZ6SFY1a3ZPMkc2UWxRT3VpYmFiSkxRQWxnZjJBQlBTclBHN3ROVUV3S2JNUGNMRkZYOVpJdXFHYUZtZlBoMmRzOTdQa3dVeGtsWGNYNWhWM21XamMw?oc=5` — Mobile Satellite Services for a more resilient and competitive EU - Shaping Europe’s digital future
-  - … plus 1 more in the package manifest
+- Current package: `worker-a-20261115T121112Z-e31f9587b6f2`
+- Assigned unresolved records: **26**
+  1. `link:https://doi.org/10.1016/j.enpol.2026.115585` — Bridging the hydrogen divide: how network evolution reveals future territorial imbalances in Europe
+  2. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions
+  3. `link:https://doi.org/10.1177/01600176261506518` — University Quality as Moderator of Technological Variety on Regional Innovation Performance
+  4. `link:https://doi.org/10.1002/nvsm.70075` — Functionally Useful but Strategically Unreliable: Exploring Crowdfunding Adoption and Campaign Development by Institutions
+  5. `link:https://rea.ec.europa.eu/publications/joint-doctorates-under-marie-sklodowska-curie-actions_en` — Joint doctorates under the Marie Skłodowska-Curie Actions
+  6. `link:https://data.consilium.europa.eu/doc/document/ST-13545-2026-INIT/en/pdf` — Changes in comparison to the Commission proposal, document ST 10094/26 + ADD1, are marked in bold for additions and in strikethrough for deletions.
+  7. `link:https://doi.org/10.1108/fs-09-2026-0239` — The Futures Thinking Kite scenario method
+  8. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQY1BoVTM2UVBsX1JmRkhtcE5kME5VVkVsZU4wX0xGZGRraUVBSnNsMEN1dmZEekhlUGpQbUh6cEZuSkRkUXNyMGpzalNOckVqNjkzR1MtRDgxM2lHZmotLWF5elowTW1lSVY3T24wZy1iM2ZyNDEzSVoyc1B5WlR4WmNEOTY?oc=5` — Quantum Systems drones grounded by German military after cyber attack
+  - … plus 18 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261113T091126Z-171c68a80881`
