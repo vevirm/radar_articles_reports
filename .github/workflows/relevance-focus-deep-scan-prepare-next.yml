@@ -4,10 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       package_size:
-        description: 'Number of not-yet-reviewed Relevance Focus candidates (1–60), oldest unfinished first'
+        description: 'Number of unassigned current-focus Relevance Deep Scan cases (1–60)'
         required: true
         default: '60'
         type: string
+      legacy_backlog:
+        description: 'Opt in to older unfinished focus assignments instead of the current 24 priorities'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -38,14 +43,20 @@ jobs:
         shell: bash
         env:
           PACKAGE_SIZE: ${{ inputs.package_size }}
+          LEGACY_BACKLOG: ${{ inputs.legacy_backlog }}
         run: |
           set -euo pipefail
           if ! [[ "$PACKAGE_SIZE" =~ ^[0-9]+$ ]] || (( PACKAGE_SIZE < 1 || PACKAGE_SIZE > 60 )); then
             echo '::error::package_size must be an integer between 1 and 60'
             exit 1
           fi
+          args=()
+          if [[ "$LEGACY_BACKLOG" == 'true' ]]; then
+            args+=(--legacy-backlog)
+          fi
           python scripts/relevance_focus_deep_scan.py prepare --additional \
-            --batch-size "$PACKAGE_SIZE" --artifact "$RUNNER_TEMP/relevance_focus_next_review.zip"
+            --batch-size "$PACKAGE_SIZE" "${args[@]}" \
+            --artifact "$RUNNER_TEMP/relevance_focus_next_review.zip"
       - name: Commit Relevance Focus catch-up manifest
         shell: bash
         env:
@@ -76,8 +87,10 @@ jobs:
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
           ## Relevance Focus catch-up Deep Scan package
           Download the `relevance-focus-next-deep-scan-*` artifact and review its
-          `MANIFEST.json` using `INSTRUCTIONS.md`. It contains up to 60 unreviewed candidates, prioritizing the oldest
-          still-unfinished Relevance Focus manifests, including previously assigned items.
+          `MANIFEST.json` using `INSTRUCTIONS.md`. By default it contains up to 60
+          unassigned cases following the **current 24-priority focus**, without
+          overlapping older reserved packages. Set `legacy_backlog=true` only if
+          deliberately preparing an older unfinished catch-up package.
           Submit results JSON to `Relevance Stuff/deep_scan/inbox/` for verified import.
           The package is a research assignment, **not** a completed Deep Scan.
           EOF
