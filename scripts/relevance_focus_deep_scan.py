@@ -20,7 +20,8 @@ import zipfile
 
 from relevance_focus import (excluded_future_relevance_lead, FOCUS_SCOPE_ID,
                              FOCUS_QUALITY_REVISION, FOCUS_TRACK,
-                             priority_region_match, substantive_policy_technology)
+                             priority_region_match, substantive_policy_technology,
+                             publication_title_venue_identity, doi_identity)
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'Relevance Stuff' / 'deep_scan'
@@ -81,9 +82,13 @@ PRECISION CHECKS (also apply to existing unfinished new-focus packages):
 - For critical technologies, verify substantive research, technical application,
   deployment, enabling capacity, or technology-specific governance. Merely
   surveying students' AI awareness/ethical attitudes does NOT establish AI
-  technological activity. Marketing, ESG, generic "green innovation" and
-  human-resource management do NOT establish ASEAN green technologies without
-  an identified technology. A title keyword alone is not enough.
+  technological activity. Using standard machine learning for a consumer
+  marketing/behaviour survey without a substantive AI-method or deployment
+  contribution is also insufficient. Marketing, ESG, generic "green innovation"
+  and human-resource management do NOT establish ASEAN green technologies
+  without an IDENTIFIED clean technology. Likewise, military morale or generic
+  organizational innovation is not Africa R&I technology innovation without
+  actual scientific/technical innovation capacity. A title keyword alone is not enough.
 - Secondary priority tags are not automatic cross-regional evidence. A study
   of Nigerian health does not also satisfy CELAC or UfM health; a study of
   African energy policy does not thereby satisfy CELAC energy priorities.
@@ -91,6 +96,10 @@ PRECISION CHECKS (also apply to existing unfinished new-focus packages):
   an incorrect primary focus to another track.
 - Check the exact DOI against the primary publisher record; an apparent /pdf
   suffix or landing-page URL is not proof of the article's canonical DOI.
+  For new precision-v3 jobs, provide source_verification.verified_doi and
+  source_verification.verified_title as independently checked publisher metadata;
+  KEEP cannot rely solely on an identity_verified checkbox. If the displayed
+  DOI/title differs from the manifest or cannot be confirmed, choose REVIEW.
 
 Technology and regional tracks are ALTERNATIVES, not an AND condition. Check the
 EXACT manifest `focus_issue` even when another track might also fit the paper.
@@ -122,7 +131,11 @@ source_type (scholarly_article, academic_book, institutional_report,
 official_announcement or other), source_integrity (independent_credible,
 credible_primary_claim_only, unverified, unreliable), propaganda_or_influence_risk
 (none_identified, suspected, confirmed), basis (specific accessible evidence),
-and independent_corrob_urls (array, possibly empty).
+and independent_corrob_urls (array, possibly empty). New precision-v3 jobs also
+require verified_doi (the exact canonical DOI from primary publisher metadata)
+and verified_title (the publisher's actual article title). For older issued
+packages these fields are optional for backward compatibility, but if supplied
+they must agree with the assigned publication.
 aboutness: place (EXACT manifest focus_region), is_substantive boolean,
 publisher_country_only boolean, basis (substantive research object, NOT outlet),
 verified_excerpt (short verifiable paraphrase/quote, NOT fabricated).
@@ -183,6 +196,20 @@ def valid_v4_lead(row):
     return True
 
 
+def current_focus_reviewable(row):
+    """Eligibility for NEW review packages, never a historical reclassification.
+
+    Previous precision-v2 *discoveries* can still be assigned when unreserved,
+    but only if they pass the stricter current selection guard. Already issued
+    v2 manifests and their imports remain valid and unchanged.
+    """
+    return (valid_v4_lead(row) and row.get('focus_scope_id') == FOCUS_SCOPE_ID
+            and row.get('focus_quality_revision') in {
+                'precision-aboutness-technology-v2', FOCUS_QUALITY_REVISION}
+            and substantive_policy_technology(row['focus_issue'],
+                                              row['title'], row.get('geographic_evidence', '')))
+
+
 def all_manifests():
     """Return original and additional packages, rejecting conflicting package IDs."""
     manifests = [read(MANIFEST, {})]
@@ -213,7 +240,9 @@ def write_review_artifact(manifest, artifact):
             '_guidance': ('Supply all assigned candidate results. For review/drop, '
                           'provide review_reason (20+ chars); decision_basis is '
                           'also accepted as a fallback. Keep requires complete '
-                          'source_verification, aboutness, topic and futures.')}, indent=2))
+                          'source_verification, aboutness, topic and futures. '
+                          'For precision-v3 leads, independently confirm '
+                          'source_verification.verified_doi and verified_title.')}, indent=2))
 
 
 def balanced_review_jobs(available, size):
@@ -229,7 +258,9 @@ def balanced_review_jobs(available, size):
                 jobs.append(buckets[key].pop(0))
     return jobs
 
-def prepare(*, batch_size=30, artifact=None, additional=False):
+def prepare(*, batch_size=30, artifact=None, additional=False, legacy_backlog=False):
+    if legacy_backlog and not additional:
+        raise ValueError('legacy_backlog requires additional=True')
     limit = 60 if additional else 30
     if not 1 <= batch_size <= limit:
         raise ValueError(f'batch_size must be 1..{limit}')
@@ -253,6 +284,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
         current_scope_outstanding = sorted((m for m in existing.values()
             if m.get('focus_scope_id') == FOCUS_SCOPE_ID
             and m.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
+            and m.get('package_purpose') != 'manual_current_focus'
             and any(row.get('candidate_id') not in finished for row in m.get('jobs', []))),
             key=lambda m: (m.get('generated_at') or '', m.get('package_id') or ''))
         if current_scope_outstanding:
@@ -261,11 +293,21 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
             print(f'Current-policy Relevance Focus Deep Scan package: '
                   f'{len(manifest["jobs"])} cases, {manifest["package_id"]}')
             return manifest
+        archive_contains_new_focus = any(
+            isinstance(x, dict) and x.get('focus_scope_id') == FOCUS_SCOPE_ID
+            for x in archive.get('candidates', []))
         new_scope_available = [x for x in archive.get('candidates', [])
             if isinstance(x, dict) and x.get('focus_scope_id') == FOCUS_SCOPE_ID
             and x.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
-            and valid_v4_lead(x) and x['candidate_id'] not in finished
+            and current_focus_reviewable(x) and x['candidate_id'] not in finished
             and x['candidate_id'] not in reserved]
+        if not new_scope_available and archive_contains_new_focus:
+            # On a no-discovery day, older *current-policy* v2 unassigned
+            # leads are a better handoff than the old Radar-derived scope.
+            new_scope_available = [x for x in archive.get('candidates', [])
+                if isinstance(x, dict) and current_focus_reviewable(x)
+                and x['candidate_id'] not in finished
+                and x['candidate_id'] not in reserved]
         if new_scope_available:
             jobs = balanced_review_jobs(new_scope_available, batch_size)
             key = '|'.join(x['candidate_id'] for x in jobs)
@@ -276,6 +318,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
                         'generated_at': datetime.now(timezone.utc).isoformat(),
                         'focus_scope_id': FOCUS_SCOPE_ID,
                         'focus_quality_revision': FOCUS_QUALITY_REVISION,
+                        'package_purpose': 'automatic_scan',
                         'global_scope': 'All 10 critical technologies OR geographically targeted regional R&I priorities; no EU relevance required',
                         'jobs': jobs}
             atomic_write(PACKAGES / f'{package_id}.json', manifest)
@@ -283,10 +326,53 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
             print(f'Current-policy Relevance Focus Deep Scan package: '
                   f'{len(jobs)} cases, {package_id}')
             return manifest
-    if additional:
+        if archive_contains_new_focus:
+            # Do not quietly hand off the legacy pending_manifest as the output
+            # of a current-policy scan. It remains intact and importable.
+            manifest = {'format': RESULT_FORMAT,
+                        'package_id': 'rfds-empty-current-focus',
+                        'generated_at': datetime.now(timezone.utc).isoformat(),
+                        'focus_scope_id': FOCUS_SCOPE_ID,
+                        'focus_quality_revision': FOCUS_QUALITY_REVISION,
+                        'jobs': []}
+            write_review_artifact(manifest, artifact)
+            print('No unreserved current-policy candidates for Deep Scan; old packages unchanged')
+            return manifest
+    if additional and not legacy_backlog:
+        # A user-requested 60-case package must follow the CURRENT 24 policy
+        # priorities, not the older (and much larger) legacy manifest backlog.
+        # Do not issue overlapping assignments already reserved elsewhere.
+        reserved_titles = {publication_title_venue_identity(row)
+            for manifest in existing.values() for row in manifest.get('jobs', [])
+            if row.get('candidate_id') not in finished}
+        reserved_titles.discard('')
+        available = [row for row in archive.get('candidates', [])
+                     if current_focus_reviewable(row)
+                     and row['candidate_id'] not in finished
+                     and row['candidate_id'] not in reserved
+                     and publication_title_venue_identity(row) not in reserved_titles]
+        # Preserve the highest-score/most recent revision for duplicate
+        # title+venue entries without modifying the discovery archive.
+        unique = {}
+        for row in available:
+            key = publication_title_venue_identity(row) or 'id:' + row['candidate_id']
+            if key not in unique or (
+                    row.get('focus_quality_revision') == FOCUS_QUALITY_REVISION,
+                    int(row.get('focus_score') or 0), row['candidate_id']) > (
+                    unique[key].get('focus_quality_revision') == FOCUS_QUALITY_REVISION,
+                    int(unique[key].get('focus_score') or 0), unique[key]['candidate_id']):
+                unique[key] = row
+        available = list(unique.values())
+        # Fill with the latest revision first; only then use still-useful
+        # unassigned v2 discoveries to reach a requested batch of up to 60.
+        latest = [r for r in available if r.get('focus_quality_revision') == FOCUS_QUALITY_REVISION]
+        older = [r for r in available if r.get('focus_quality_revision') != FOCUS_QUALITY_REVISION]
+        jobs = balanced_review_jobs(latest, batch_size)
+        jobs.extend(balanced_review_jobs(older, batch_size-len(jobs)))
+    elif additional:
         # Catch-up mode for Relevance Focus ONLY: an assignment is not a scan.
-        # Revisit unfinished jobs from the oldest registered manifests, even if
-        # they are no longer present in the current discovery archive.
+        # Explicit opt-in legacy catch-up: old manifests are still importable,
+        # and their previously assigned topics remain under their old rules.
         candidates = []
         seen = set()
         oldest_first = sorted(existing.values(), key=lambda m: (
@@ -322,6 +408,11 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
                                  else datetime.now(timezone.utc).isoformat()),
                 'global_scope': 'No EU relevance required; topical aboutness and R&I futures only',
                 'jobs': jobs}
+    if additional and not legacy_backlog:
+        manifest.update(focus_scope_id=FOCUS_SCOPE_ID,
+                        focus_quality_revision=FOCUS_QUALITY_REVISION,
+                        package_purpose='manual_current_focus',
+                        global_scope='Current 24 critical-technology OR regional R&I priorities; source verification required')
     if additional:
         # Do not overwrite an active original package or other extra package.
         # An empty queue is reported to the caller without creating a reservation.
@@ -416,6 +507,19 @@ def validate_result(result, lead):
         raise ValueError('KEEP lacks verified primary source, integrity or risk audit')
     if src['source_integrity'] not in {'independent_credible', 'credible_primary_claim_only'} or src['propaganda_or_influence_risk'] != 'none_identified':
         raise ValueError('KEEP prohibited by unverified/unreliable or propaganda-risk source')
+    if lead.get('focus_scope_id') == FOCUS_SCOPE_ID:
+        # Machine-check consistency with the manifest. Actual primary-record
+        # verification still belongs to the independent source reviewer.
+        needs_explicit_identity = lead.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
+        verified_doi = src.get('verified_doi')
+        verified_title = src.get('verified_title')
+        if needs_explicit_identity and (not verified_doi or not verified_title):
+            raise ValueError('Current-precision KEEP needs verified_doi and verified_title')
+        if verified_doi and doi_identity({'doi': verified_doi}) != doi_identity(lead):
+            raise ValueError('Publisher-verified DOI differs from manifest DOI')
+        if verified_title and re.sub(r'\W+', '', str(verified_title).casefold()) != re.sub(
+                r'\W+', '', str(lead['title']).casefold()):
+            raise ValueError('Publisher-verified title differs from manifest title')
     text_field(src.get('basis'), 'source_verification.basis', minimum=50)
     if not isinstance(src.get('independent_corrob_urls'), list) or any(
             not safe_url(u) for u in src['independent_corrob_urls']):
@@ -498,10 +602,12 @@ def main():
     parser.add_argument('command', choices=['prepare','import-inbox'])
     parser.add_argument('--batch-size', type=int, default=30)
     parser.add_argument('--artifact', type=Path)
-    parser.add_argument('--additional', action='store_true', help='Prepare a catch-up Relevance Focus package, including unfinished older assignments (up to 60)')
+    parser.add_argument('--additional', action='store_true', help='Prepare up to 60 NEW, unreserved current 24-priority assignments')
+    parser.add_argument('--legacy-backlog', action='store_true', help='With --additional, explicitly prepare old-scope catch-up assignments instead of the current 24-priority focus')
     args = parser.parse_args()
     if args.command == 'prepare':
-        prepare(batch_size=args.batch_size, artifact=args.artifact, additional=args.additional)
+        prepare(batch_size=args.batch_size, artifact=args.artifact,
+                additional=args.additional, legacy_backlog=args.legacy_backlog)
     else:
         import_inbox()
 

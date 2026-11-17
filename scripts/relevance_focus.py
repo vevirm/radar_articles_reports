@@ -20,6 +20,7 @@ import re
 import subprocess
 import sys
 import time
+import unicodedata
 from urllib.parse import unquote, urlsplit
 
 
@@ -145,7 +146,7 @@ TOPIC_SEARCH_TERMS = {
 # Regional topics follow the supplied EU-CELAC, UfM, EU-Africa, ASEAN-EU priorities.
 FOCUS_SCOPE_ID = 'critical-technologies-regional-priorities-2026-v1'
 # Narrow quality revision for FUTURE leads; never amend earlier candidate IDs or reviews.
-FOCUS_QUALITY_REVISION = 'precision-aboutness-technology-v2'
+FOCUS_QUALITY_REVISION = 'precision-aboutness-technology-v3'
 CRITICAL_TECHNOLOGIES = {
     'Advanced semiconductors': (
         ('semiconductor', 'microchip', 'microelectronics', 'chip fabrication',
@@ -704,6 +705,35 @@ TECHNOLOGY_ENGAGEMENT = re.compile(
     r'test\w*|optimis\w*|optimiz\w*|simulat\w*)\s+(?:a\s+|the\s+)?'
     r'(?:system|model|device|technology|robot|algorithm|sensor|platform))\b', re.I)
 
+# These guards only determine which NEW indexed leads merit scarce source-review
+# effort. They are not a retrospective verdict on an existing review or paper.
+NON_TECH_AI_APPLICATION = re.compile(
+    r'\b(?:consumer behavio[u]?r|customer satisfaction|purchase intentions?|'
+    r'marketing performance|brand loyalty|advertising effectiveness|'
+    r'social media engagement|shopping preferences?)\b', re.I)
+AI_METHOD_EVIDENCE = re.compile(
+    r'\b(?:model (?:development|evaluation|validation|benchmarking)|'
+    r'algorithm(?:ic)? (?:design|development|evaluation|benchmarking)|'
+    r'(?:novel|new|proposed|developed|validated|benchmarked|fine-tuned) '
+    r'(?:machine learning|deep learning|neural network|AI|algorithm|model)|'
+    r'neural network architecture|foundation model|AI deployment|'
+    r'AI system (?:deployment|evaluation|governance)|'
+    r'(?:machine learning|AI) (?:infrastructure|governance|safety|regulation))\b', re.I)
+GREEN_TECH_SPECIFIC = re.compile(
+    r'\b(?:solar (?:pv|photovoltaic|panels?|power|energy|cells?)|'
+    r'wind (?:turbines?|power|energy|farms?)|hydrogen (?:fuel|storage|production|'
+    r'energy|technology)|green hydrogen|electrolys(?:is|er|ers|zer|zers)|'
+    r'batter(?:y|ies)|energy storage|smart grids?|electric vehicles?|'
+    r'charging infrastructure|heat pumps?|geothermal|biofuels?|biogas|'
+    r'photovoltaic|recycl(?:ing|ers?) (?:technolog\w*|systems?|process\w*)|'
+    r'waste.to.energy|clean energy technolog\w*|renewable energy technolog\w*|'
+    r'energy efficiency technolog\w*|low.carbon technolog\w*)\b', re.I)
+SCIENCE_INNOVATION_ANCHOR = re.compile(
+    r'\b(?:research|scientific|science|R&D|technolog\w*|technical|'
+    r'digital innovation|innovation ecosystem|technology transfer|'
+    r'research commerciali[sz]ation|patents?|laborator\w*|'
+    r'university.industry|engineering|product development)\b', re.I)
+
 
 def substantive_policy_technology(label, title, body=''):
     """Conservative new-lead guard for opinion/management-only technology hits.
@@ -712,20 +742,27 @@ def substantive_policy_technology(label, title, body=''):
     Deep Scan still decides if a publication actually investigates the named
     technology, including substantive deployment, technical governance or use.
     """
+    title = clean(title)
+    body = clean(body)[:900]
+    if label == 'Africa: Innovation and technology':
+        # Military/managerial "organizational innovation" alone is not R&I.
+        return bool(SCIENCE_INNOVATION_ANCHOR.search(title + ' ' + body))
     if not (label.startswith('Critical technology: ') or label == 'ASEAN: Green technologies'):
         return True
-    title = clean(title)
     # Title defines the study's central object; an incidental technical term in
     # a survey abstract must not turn perceptions into a technology finding.
     if NON_TECHNOLOGY_SURVEY.search(title) and not TECHNOLOGY_ENGAGEMENT.search(title):
         return False
+    if (label == 'Critical technology: Artificial intelligence'
+            and NON_TECH_AI_APPLICATION.search(title)
+            and not AI_METHOD_EVIDENCE.search(title + ' ' + body)):
+        # Merely using an off-the-shelf ML predictor for marketing/social
+        # survey analysis is not evidence of substantive AI technology work.
+        return False
     if label == 'ASEAN: Green technologies':
-        # "Green innovation"/ESG without an identifiable technology is a
-        # firm-management subject, not the requested green technology track.
-        all_text = title + ' ' + clean(body)[:900]
-        strong = [p for p in FOCUS_PATTERNS[label]
-                  if p not in {'green innovation'}]
-        if not any(_phrase_occurs(all_text, p) for p in strong):
+        # An *identified* clean technology is mandatory. "Green technology
+        # innovation and firm efficiency" alone can be a management study.
+        if not GREEN_TECH_SPECIFIC.search(title + ' ' + body):
             return False
     return True
 
@@ -766,10 +803,11 @@ def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
         # Tag each secondary regional priority only when it is actually valid
         # in the same substantive country/paragraph. Never attach CELAC/UfM
         # health to a Nigerian public-health paper or vice versa.
-        matches = [topic for topic in matches if topic not in FOCUS_TRACK or any(
+        matches = [topic for topic in matches if topic not in FOCUS_TRACK or (
+            substantive_policy_technology(topic, title, body) and any(
             priority_region_match(topic, group, place)
             and any(_phrase_occurs(excerpt, phrase) for phrase in catalogue[topic])
-            for group, place, _basis, excerpt in locations)]
+            for group, place, _basis, excerpt in locations))]
         if expected_topic not in matches or not substantive_policy_technology(
                 expected_topic, title, body):
             return None
@@ -913,6 +951,23 @@ def doi_identity(row):
     raw = re.sub(r'^https?://(?:dx\.)?doi\.org/', '', raw, flags=re.I)
     raw = re.sub(r'^doi\s*:', '', raw, flags=re.I).strip().rstrip('/')
     return raw.casefold() if re.match(r'^10\.\d{4,9}/\S+$', raw, re.I) else ''
+
+
+def publication_title_venue_identity(row):
+    """Identify duplicate new leads with identical title and publishing venue.
+
+    DOI is the permanent primary key; this fingerprint is a future-intake
+    guard only, never a reason to merge or delete older archived records.
+    """
+    if not isinstance(row, dict):
+        return ''
+    def normalize(value):
+        folded = unicodedata.normalize('NFKD', clean(value)).casefold()
+        return ' '.join(re.findall(r'[a-z0-9]+', ''.join(
+            ch for ch in folded if not unicodedata.combining(ch))))
+    title = normalize(row.get('title'))
+    venue = normalize(row.get('source'))
+    return title + '|' + venue if len(title) >= 30 and venue else ''
 
 
 def lead_identity(row):
@@ -1556,6 +1611,10 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                  for lead in document.get('candidates', []) if isinstance(lead, dict)
                  and lead.get('aboutness_basis')}
     seen_dois.discard('')
+    seen_title_venues = {publication_title_venue_identity(lead)
+                         for doc in [*past_snapshots, previous_archive]
+                         for lead in doc.get('candidates', []) if isinstance(lead, dict)}
+    seen_title_venues.discard('')
     api_key = clean(os.environ.get('OPENALEX_API_KEY'))
     crossref_mailto = clean(os.environ.get('CROSSREF_MAILTO'))
     known = {clean(x.get('link') or x.get('url')).lower().rstrip('/')
@@ -1673,6 +1732,9 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                 if candidate['url'].lower().rstrip('/') in known or canonical in seen_dois:
                     stats['already_seen_doi_or_radar_work'] += 1
                     continue
+                if publication_title_venue_identity(candidate) in seen_title_venues:
+                    stats['already_seen_title_and_venue'] += 1
+                    continue
                 if canonical in picked and picked[canonical][0] >= score:
                     continue
                 if canonical not in picked:
@@ -1694,6 +1756,17 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
             pause(min(FOCUSED_REQUEST_PACING_SECONDS, deadline-clock()))
     if not successful_requests:
         raise RuntimeError('No successful focused discovery queries; no 25-minute scan can be claimed')
+    # Two bibliographic entries may refer to the same work under different
+    # DOIs. De-duplicate new intake only; never rewrite archive/history.
+    distinct = {}
+    for canonical, picked_row in picked.items():
+        key = publication_title_venue_identity(picked_row[2]) or 'doi:' + canonical
+        if key in distinct:
+            stats['same_batch_title_and_venue_duplicate'] += 1
+        if key not in distinct or (picked_row[0], canonical) > (
+                distinct[key][1][0], distinct[key][0]):
+            distinct[key] = (canonical, picked_row)
+    picked = {doi: value for doi, value in distinct.values()}
     source_history = previous_publication_venues(previous_archive, past_snapshots)
     candidates = balanced_candidates(picked, max_candidates,
                                      venue_history=source_history)
