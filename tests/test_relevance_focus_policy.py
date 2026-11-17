@@ -112,6 +112,149 @@ class NewFocusSelectionTests(unittest.TestCase):
         self.assertFalse(deep.valid_v4_lead(wrong))
 
 
+class PrecisionRegressionTests(unittest.TestCase):
+    """Specific false positives from the November 17 review package."""
+
+    def test_niger_delta_and_niger_state_are_not_the_country_niger(self):
+        cases = [
+            ('Struggles for a Just Energy Transition in Nigeria’s Niger Delta: Just for Whom?',
+             'This study evaluates the energy transition in Nigeria’s Niger Delta.',
+             'Africa: Green transition'),
+            ('Feasibility Analysis of Hybrid Renewable Energy Systems with Battery Storage '
+             'for Rural Electrification in Samunaka, Niger State: A Newton-Raphson Approach',
+             'Rural electrification systems in Niger State, Nigeria.',
+             'Critical technology: Energy technologies'),
+        ]
+        for title, abstract, label in cases:
+            with self.subTest(title=title):
+                locations = focus.aboutness_locations(title, abstract, policy=True)
+                self.assertNotIn('Niger', [row[1] for row in locations])
+                self.assertIsNone(focus.regional_matching(
+                    title, abstract, expected_topic=label, expected_region='Niger'))
+        # The African regional scope is retained, with the correct subject country.
+        locations = focus.aboutness_locations(cases[0][0], cases[0][1], policy=True)
+        self.assertIn('Nigeria', [row[1] for row in locations])
+        # Actual country Niger remains discoverable.
+        positive = focus.regional_matching('Green transition research in Niger',
+            'The study examines renewable-energy research capacity in the Republic of Niger.',
+            expected_topic='Africa: Green transition', expected_region='Niger')
+        self.assertIsNotNone(positive)
+
+    def test_benin_city_nigeria_is_not_the_country_benin(self):
+        title = ('Lipid Profiles and Metal Levels Assessment in Chicken Meat Sold '
+                 'in Benin, Nigeria: Implications for Public Health')
+        abstract = 'Public health research on food safety in Benin City, Edo State, Nigeria.'
+        locations = focus.aboutness_locations(title, abstract, policy=True)
+        self.assertNotIn('Benin', [row[1] for row in locations])
+        self.assertIn('Nigeria', [row[1] for row in locations])
+        self.assertIsNone(focus.regional_matching(
+            title, abstract, expected_topic='Africa: Public health', expected_region='Benin'))
+        self.assertIsNotNone(focus.regional_matching(
+            'Public health research infrastructure in the Republic of Benin',
+            'This research studies public health systems across Benin.',
+            expected_topic='Africa: Public health', expected_region='Benin'))
+
+    def test_attitude_surveys_and_green_hr_do_not_qualify_as_technologies(self):
+        self.assertFalse(focus.substantive_policy_technology(
+            'Critical technology: Artificial intelligence',
+            'Student perceptions of AI ethics and awareness in the Philippines',
+            'Students reported their views on artificial intelligence.'))
+        self.assertFalse(focus.substantive_policy_technology(
+            'ASEAN: Green technologies',
+            'Green Human Resource Management and Green Innovation in Timor-Leste',
+            'The study examines corporate green innovation and staff attitudes.'))
+        self.assertTrue(focus.substantive_policy_technology(
+            'Critical technology: Artificial intelligence',
+            'Research on neural network algorithms for medical imaging in the Philippines'))
+        self.assertTrue(focus.substantive_policy_technology(
+            'ASEAN: Green technologies',
+            'Green Hydrogen Technology Deployment in Timor-Leste',
+            'Researchers test renewable energy technology in Timor-Leste.'))
+
+    def test_no_cross_region_secondary_priority_tags(self):
+        match = focus.regional_matching(
+            'Public health research infrastructure in Nigeria',
+            'Researchers examine public health research in Nigeria.',
+            expected_topic='Africa: Public health', expected_region='Nigeria')
+        self.assertIsNotNone(match)
+        self.assertIn('Africa: Public health', match['matched_topics'])
+        self.assertNotIn('CELAC: Health', match['matched_topics'])
+        self.assertNotIn('Union for the Mediterranean: Health', match['matched_topics'])
+        self.assertNotIn('ASEAN: Green technologies', match['matched_topics'])
+        # Critical technologies are global, not region-locked.
+        match = focus.regional_matching(
+            'Quantum computing research infrastructure in Nigeria',
+            'Researchers evaluate quantum computing systems in Nigeria.',
+            expected_topic='Critical technology: Quantum technologies', expected_region='Nigeria')
+        self.assertIsNotNone(match)
+
+    def test_deep_scan_requires_current_precision_instructions(self):
+        instructions = deep.INSTRUCTIONS
+        for phrase in ['Niger Delta', 'Niger State', 'Benin City',
+                       'human-resource management', 'canonical DOI',
+                       'Secondary priority tags']:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase.lower(), instructions.lower())
+        old = {'candidate_id': 'REL-old', 'title':'Historical biodiversity research in Kenya',
+               'focus_issue':'Biodiversity', 'focus_region':'Kenya',
+               'focus_group':'Africa', 'aboutness_basis':'title',
+               'geographic_evidence':'Biodiversity research in Kenya',
+               'url':'https://doi.org/10.1234/historical'}
+        self.assertTrue(deep.valid_v4_lead(old))
+        self.assertTrue(deep.unambiguous_new_focus_geography(old))
+
+    def test_deep_scan_blocks_wrong_country_keep_without_touching_existing_results(self):
+        for place, title in [
+            ('Niger', 'Struggles for a Just Energy Transition in Nigeria’s Niger Delta: Just for Whom?'),
+            ('Niger', 'Hybrid Renewable Energy Systems in Samunaka, Niger State'),
+            ('Benin', 'Public Health of Chicken Meat Sold in Benin, Nigeria'),
+        ]:
+            lead = {'candidate_id':'REL-country-error', 'title':title,
+                    'focus_scope_id':focus.FOCUS_SCOPE_ID,
+                    'focus_region':place, 'focus_issue':'Africa: Public health',
+                    'focus_priority_track':'Africa', 'geographic_evidence':title,
+                    'url':'https://doi.org/10.1234/review-case'}
+            with self.subTest(place=place, title=title):
+                self.assertFalse(deep.unambiguous_new_focus_geography(lead))
+                # A source reviewer can still submit REVIEW or DROP for old packages.
+                result = deep.validate_result({'candidate_id':lead['candidate_id'],
+                    'decision':'review', 'review_reason':
+                    'The manifest country is incorrect and needs further verification.'}, lead)
+                self.assertEqual(result['decision'], 'review')
+        real = {'focus_scope_id':focus.FOCUS_SCOPE_ID, 'focus_region':'Niger',
+                'title':'Research infrastructure in the Republic of Niger'}
+        self.assertTrue(deep.unambiguous_new_focus_geography(real))
+
+    def test_new_revision_separates_previous_unfinished_policy_package(self):
+        lead = FocusPackageContinuityTests.new_lead()
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); base=root/'deep_scan'
+            (base/'packages').mkdir(parents=True)
+            old = {**lead, 'candidate_id':'REL-old-policy',
+                   'focus_quality_revision':None}
+            oldmanifest = {'format':deep.RESULT_FORMAT, 'package_id':'rfds-earlier-policy',
+                'generated_at':'2026-11-17T09:00:00+00:00',
+                'focus_scope_id':focus.FOCUS_SCOPE_ID, 'jobs':[old]}
+            old_file=base/'packages'/'rfds-earlier-policy.json'
+            old_file.write_text(json.dumps(oldmanifest))
+            earlier_bytes=old_file.read_bytes()
+            archive=root/'archive.json'; archive.write_text(json.dumps({'candidates':[old, lead]}))
+            verified=base/'verified_findings.json'; verified.write_text(json.dumps({'records':[
+                {'candidate_id':'REL-reviewed-import', 'decision':'keep'}]}))
+            verified_bytes=verified.read_bytes()
+            with patch.multiple(deep, ARCHIVE=archive, BASE=base,
+                MANIFEST=base/'pending_manifest.json', PACKAGES=base/'packages',
+                VERIFIED=verified, REVIEW=base/'review_archive.json',
+                INBOX=base/'inbox', PROCESSED=base/'processed_inbox'):
+                manifest=deep.prepare(artifact=root/'new.zip')
+                self.assertEqual(manifest['focus_quality_revision'], focus.FOCUS_QUALITY_REVISION)
+                self.assertEqual([x['candidate_id'] for x in manifest['jobs']], ['REL-new-scope'])
+                self.assertEqual(deep.prepare()['package_id'], manifest['package_id'])
+                self.assertEqual(earlier_bytes, old_file.read_bytes())
+                self.assertEqual(verified_bytes, verified.read_bytes())
+                self.assertIn('rfds-earlier-policy', deep.all_manifests())
+
+
 class FocusPackageContinuityTests(unittest.TestCase):
     @staticmethod
     def new_lead():
@@ -123,6 +266,7 @@ class FocusPackageContinuityTests(unittest.TestCase):
                 'focus_issue': 'Critical technology: Quantum technologies',
                 'focus_scope_id': focus.FOCUS_SCOPE_ID,
                 'focus_priority_track': 'critical_technology',
+                'focus_quality_revision': focus.FOCUS_QUALITY_REVISION,
                 'aboutness_basis': 'title',
                 'geographic_evidence': 'Quantum technology research in India',
                 'focus_score': 85}
