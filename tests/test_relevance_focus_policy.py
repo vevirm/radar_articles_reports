@@ -171,6 +171,41 @@ class PrecisionRegressionTests(unittest.TestCase):
             'Green Hydrogen Technology Deployment in Timor-Leste',
             'Researchers test renewable energy technology in Timor-Leste.'))
 
+    def test_real_november_batch_false_positives_and_policy_studies(self):
+        # These titles occurred in the November 17 candidate batch, not in
+        # hypothetical synthetic research or in old verified material.
+        for label, title in [
+            ('Africa: Innovation and technology',
+             'Troop Morale and Organizational Innovation Capacity Within the Armed Forces of the Democratic Republic of the Congo'),
+            ('ASEAN: Green technologies',
+             'Green Technology Innovation and Firm-Level Technical Efficiency: A Two-Stage Analysis in the Philippines'),
+            ('Critical technology: Artificial intelligence',
+             'Measuring the Impact of Digital Technology on Consumer Behavior Using Machine Learning: A Case Study of Saudi Arabia Research-in-progress'),
+        ]:
+            with self.subTest(title=title):
+                self.assertFalse(focus.substantive_policy_technology(label, title))
+        self.assertTrue(focus.substantive_policy_technology(
+            'Africa: Innovation and technology',
+            'Research commercialization and technology transfer networks in Kenya'))
+        self.assertTrue(focus.substantive_policy_technology(
+            'Critical technology: Artificial intelligence',
+            'Machine learning for drought forecasting in India: model development and validation'))
+        self.assertTrue(focus.substantive_policy_technology(
+            'Critical technology: Advanced materials, manufacturing and recycling technologies',
+            'Policy governance for advanced manufacturing in China'))
+
+    def test_candidate_title_and_publisher_identity_does_not_change_doi_archive(self):
+        title = 'Higher education-industry research partnership: engaging with South Africa forms'
+        first = {'title':title, 'source':'Human Science Research Council SA',
+                 'doi':'10.14749/32866847'}
+        second = {**first, 'doi':'10.14749/32866850',
+                  'title':title.upper() + '!!'}
+        self.assertNotEqual(focus.doi_identity(first), focus.doi_identity(second))
+        self.assertEqual(focus.publication_title_venue_identity(first),
+                         focus.publication_title_venue_identity(second))
+        self.assertNotEqual(focus.publication_title_venue_identity(first),
+                            focus.publication_title_venue_identity({**second, 'source':'Another journal'}))
+
     def test_no_cross_region_secondary_priority_tags(self):
         match = focus.regional_matching(
             'Public health research infrastructure in Nigeria',
@@ -321,6 +356,112 @@ class FocusPackageContinuityTests(unittest.TestCase):
         old.pop('focus_priority_track')
         self.assertTrue(deep.valid_v4_lead(old))
         self.assertIn('HISTORICAL COMPATIBILITY', deep.INSTRUCTIONS)
+
+    def test_current_focus_manual_60_excludes_legacy_reserved_and_duplicates(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); base=root/'deep_scan'; packages=base/'packages'
+            packages.mkdir(parents=True)
+            new = []
+            for i in range(95):
+                row = {**self.new_lead(), 'candidate_id':f'REL-current-{i:03}',
+                       'title':f'Quantum technology research infrastructure in India, programme {i}',
+                       'doi':f'10.1234/quantum-{i}', 'url':f'https://doi.org/10.1234/quantum-{i}',
+                       'focus_quality_revision':'precision-aboutness-technology-v2'}
+                new.append(row)
+            new[94]['title'] = new[93]['title']  # different DOI, same title and venue
+            old = [{**self.new_lead(), 'candidate_id':f'REL-legacy-{i}',
+                    'focus_issue':'Biodiversity', 'focus_scope_id':'',
+                    'focus_priority_track':'legacy'} for i in range(75)]
+            archive=root/'archive.json'
+            archive.write_text(json.dumps({'candidates':old+new}))
+            original={'format':deep.RESULT_FORMAT, 'package_id':'rfds-already-reserved',
+                      'generated_at':'2026-11-17T13:00:00+00:00', 'jobs':new[:30]}
+            (packages/'rfds-already-reserved.json').write_text(json.dumps(original))
+            original_bytes=(packages/'rfds-already-reserved.json').read_bytes()
+            verified=base/'verified_findings.json'
+            verified.write_text(json.dumps({'records':[{'candidate_id':'REL-current-030'}]}))
+            first_bytes=verified.read_bytes()
+            with patch.multiple(deep, ARCHIVE=archive, MANIFEST=base/'pending_manifest.json',
+                PACKAGES=packages, VERIFIED=verified, REVIEW=base/'review_archive.json',
+                INBOX=base/'inbox', PROCESSED=base/'processed_inbox'):
+                manifest=deep.prepare(batch_size=60, additional=True, artifact=root/'current.zip')
+                self.assertEqual(len(manifest['jobs']),60)
+                self.assertEqual(manifest['focus_scope_id'],focus.FOCUS_SCOPE_ID)
+                self.assertTrue(all(row['candidate_id'].startswith('REL-current-')
+                                    for row in manifest['jobs']))
+                self.assertFalse({row['candidate_id'] for row in manifest['jobs']}
+                                 & {row['candidate_id'] for row in new[:31]})
+                self.assertEqual(len({focus.publication_title_venue_identity(row)
+                                      for row in manifest['jobs']}),60)
+                next_batch=deep.prepare(batch_size=60,additional=True)
+                self.assertEqual(len(next_batch['jobs']),3)
+                self.assertFalse({x['candidate_id'] for x in next_batch['jobs']}
+                                 & {x['candidate_id'] for x in manifest['jobs']})
+                self.assertEqual((packages/'rfds-already-reserved.json').read_bytes(),original_bytes)
+                self.assertEqual(verified.read_bytes(),first_bytes)
+                with zipfile.ZipFile(root/'current.zip') as z:
+                    self.assertEqual(len(json.loads(z.read('MANIFEST.json'))['jobs']),60)
+                    self.assertIn('verified_doi',z.read('INSTRUCTIONS.md').decode())
+
+    def test_new_revision_keep_requires_matching_publisher_title_and_doi(self):
+        lead = self.new_lead()
+        result = {'candidate_id':lead['candidate_id'], 'decision':'keep',
+            'source_verification':{'identity_verified':True,
+                'primary_url':'https://example.com/primary-article',
+                'source_type':'scholarly_article', 'source_integrity':'independent_credible',
+                'propaganda_or_influence_risk':'none_identified',
+                'basis':'Reviewed primary publisher landing page against full text, authors, journal and article identifier.',
+                'independent_corrob_urls':[]},
+            'aboutness':{'place':'India', 'is_substantive':True,
+                'publisher_country_only':False,'basis':'The study examines Indian quantum research capacity.',
+                'verified_excerpt':'Research infrastructure and quantum technology activity are studied in India.'},
+            'topic':{'label':lead['focus_issue'], 'is_relevant':True,
+                'basis':'The work specifically studies quantum technology capability.'},
+            'futures':{'classification':'observed',
+                'mechanism':'Quantum technology research infrastructure and enabling technical skills.',
+                'why_could_matter':'The infrastructure might enable more domestic quantum science research.',
+                'uncertainty':'Long-term research outcomes have not been independently established.',
+                'research_question':'Could new infrastructure improve quantum research capacity in India?'}}
+        with self.assertRaisesRegex(ValueError,'verified_doi and verified_title'):
+            deep.validate_result(result,lead)
+        result['source_verification'].update(verified_doi=lead['doi'], verified_title=lead['title'])
+        self.assertEqual(deep.validate_result(result,lead)['decision'],'keep')
+        result['source_verification']['verified_doi']=lead['doi']+'/pdf'
+        with self.assertRaisesRegex(ValueError,'DOI differs'):
+            deep.validate_result(result,lead)
+        result['source_verification']['verified_doi']=lead['doi']
+        result['source_verification']['verified_title']='Entirely different article'
+        with self.assertRaisesRegex(ValueError,'title differs'):
+            deep.validate_result(result,lead)
+        # Existing issued v2 manifest schema remains importable.
+        result['source_verification'].pop('verified_title')
+        result['source_verification'].pop('verified_doi')
+        self.assertEqual(deep.validate_result(result, {**lead,
+            'focus_quality_revision':'precision-aboutness-technology-v2'})['decision'],'keep')
+
+    def test_automatic_30_does_not_reuse_manual_60_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); base=root/'deep_scan'; (base/'packages').mkdir(parents=True)
+            archive=root/'archive.json'
+            rows=[{**self.new_lead(), 'candidate_id':f'REL-auto-{i}',
+                    'title':f'Quantum research infrastructure in India programme {i}',
+                    'doi':f'10.1234/quantum-auto-{i}',
+                    'url':f'https://doi.org/10.1234/quantum-auto-{i}'}
+                  for i in range(5)]
+            archive.write_text(json.dumps({'candidates':rows}))
+            with patch.multiple(deep, ARCHIVE=archive, MANIFEST=base/'pending_manifest.json',
+                PACKAGES=base/'packages', VERIFIED=base/'verified_findings.json',
+                REVIEW=base/'review_archive.json',INBOX=base/'inbox',
+                PROCESSED=base/'processed_inbox'):
+                manual=deep.prepare(batch_size=3, additional=True)
+                auto=deep.prepare(batch_size=30)
+                self.assertEqual(len(manual['jobs']),3)
+                self.assertEqual(len(auto['jobs']),2)
+                self.assertEqual(auto['package_purpose'],'automatic_scan')
+                self.assertNotEqual(auto['package_id'],manual['package_id'])
+                self.assertFalse({r['candidate_id'] for r in manual['jobs']}
+                                 & {r['candidate_id'] for r in auto['jobs']})
+                self.assertEqual(deep.prepare(batch_size=30)['package_id'],auto['package_id'])
 
 
 if __name__ == '__main__':

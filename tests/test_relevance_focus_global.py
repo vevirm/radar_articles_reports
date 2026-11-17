@@ -235,6 +235,7 @@ class DeepScanTests(unittest.TestCase):
             (base/'inbox').mkdir(parents=True)
             with patch.multiple(review, ARCHIVE=archive,
                                 BASE=base, MANIFEST=base/'pending_manifest.json',
+                                PACKAGES=base/'packages',
                                 VERIFIED=base/'verified_findings.json',
                                 REVIEW=base/'review_archive.json',
                                 INBOX=base/'inbox', PROCESSED=base/'processed_inbox'):
@@ -270,11 +271,13 @@ class DeepScanTests(unittest.TestCase):
                                 REVIEW=base/'review_archive.json', INBOX=base/'inbox',
                                 PROCESSED=base/'processed_inbox'):
                 original = review.prepare(batch_size=2)
-                first = review.prepare(batch_size=4, additional=True, artifact=root/'first.zip')
+                first = review.prepare(batch_size=4, additional=True, legacy_backlog=True,
+                                       artifact=root/'first.zip')
                 self.assertEqual(len(first['jobs']),4)
                 self.assertEqual([row['candidate_id'] for row in first['jobs'][:2]],
                                  [row['candidate_id'] for row in original['jobs']])
-                again = review.prepare(batch_size=4, additional=True, artifact=root/'again.zip')
+                again = review.prepare(batch_size=4, additional=True, legacy_backlog=True,
+                                       artifact=root/'again.zip')
                 self.assertEqual(again, first)
                 self.assertEqual(len(list((base/'packages').glob('*.json'))),1)
                 self.assertEqual(review.all_manifests()[first['package_id']], first)
@@ -285,7 +288,7 @@ class DeepScanTests(unittest.TestCase):
                     'format': review.RESULT_FORMAT, 'package_id': first['package_id'],
                     'results': results}))
                 self.assertEqual(review.import_inbox(),4)
-                second = review.prepare(batch_size=60, additional=True,
+                second = review.prepare(batch_size=60, additional=True, legacy_backlog=True,
                                         artifact=root/'second.zip')
                 self.assertEqual(len(second['jobs']),1)
                 self.assertNotIn(second['jobs'][0]['candidate_id'],

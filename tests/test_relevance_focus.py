@@ -477,6 +477,38 @@ class RegionalDiscoveryTests(unittest.TestCase):
                 self.assertEqual(stored['work_count'], 2)
             self.assertEqual(plan_slots[1], plan_slots[0] + 1)
 
+    def test_future_discovery_deduplicates_same_title_and_venue_different_doi(self):
+        import json
+        import tempfile
+        from relevance_focus import discover, load
+
+        first = self._india_openalex()
+        duplicate = {**first, 'doi':'https://doi.org/10.1234/another-indexed-doi'}
+        class Response:
+            ok = True
+            status_code = 200
+            def __init__(self, rows): self.rows = rows
+            def json(self): return {'results':self.rows}
+        class Session:
+            def __init__(self, rows): self.rows=rows; self.headers={}
+            def get(self, *_args, **_kwargs): return Response(self.rows)
+        def plan(_slot, focus=None):
+            return iter([('Asia & Pacific','India','Health research',
+                          'Current state / developments','biomedical research India','openalex',1)])
+        vocabulary = load('topic_vocabulary.json', [])
+        with tempfile.TemporaryDirectory() as td:
+            archive=Path(td)/'archive.json'; batch=Path(td)/'batch.json'
+            for index, works in enumerate(([first, duplicate], [duplicate])):
+                now=[5.0]
+                with patch('relevance_focus.focus_areas',return_value={'Health research':'biomedical research'}), \
+                     patch('relevance_focus.focused_search_plan',side_effect=plan), \
+                     patch('relevance_focus.historical_discovery_snapshots',return_value=[]), \
+                     patch('relevance_focus.load',side_effect=lambda p,default: vocabulary if p=='topic_vocabulary.json' else {}):
+                    discover(batch,max_seconds=5,session=Session(works),archive_path=archive,
+                             clock=lambda:now[0],pause=lambda s:now.__setitem__(0,now[0]+s))
+                self.assertEqual(len(json.loads(batch.read_text())['candidates']),1 if index==0 else 0)
+                self.assertEqual(len(json.loads(archive.read_text())['candidates']),1)
+
     def test_legacy_git_snapshots_are_recovered_in_original_order(self):
         import json
         import subprocess
