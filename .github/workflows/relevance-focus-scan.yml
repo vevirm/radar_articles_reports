@@ -88,8 +88,9 @@ jobs:
         shell: bash
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
-          ## Global Relevance Focus — source verification is still required
-          Discovery searched substantive regions **outside the EU and UK**; publishers
+          ## Relevance Focus — new critical technologies and regional priorities
+          Discovery targets all 10 EU critical technology areas or CELAC/UfM/Africa/ASEAN
+          priorities, in substantive regions **outside the EU and UK**; publishers
           from anywhere are eligible. Download the **relevance-focus-global-deep-scan-review**
           artifact and have its `MANIFEST.json` independently checked against
           accessible source documents following `INSTRUCTIONS.md`. Submit the
@@ -134,6 +135,9 @@ jobs:
           if [[ -f 'Relevance Stuff/deep_scan/pending_manifest.json' ]]; then
             git add -- 'Relevance Stuff/deep_scan/pending_manifest.json'
           fi
+          # New focus packages use their own manifests, preserving any old
+          # pending package and just-imported review history.
+          git add -A -- 'Relevance Stuff/deep_scan/packages/'
           if git diff --cached --quiet; then echo 'No workbook or scanner output changes'; exit 0; fi
           git commit -m 'Refresh global topic-place focus and independent review queue'
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
