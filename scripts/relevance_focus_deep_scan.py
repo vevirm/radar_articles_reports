@@ -18,7 +18,8 @@ import re
 import shutil
 import zipfile
 
-from relevance_focus import excluded_future_relevance_lead
+from relevance_focus import (excluded_future_relevance_lead, FOCUS_SCOPE_ID,
+                             FOCUS_TRACK, priority_region_match)
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'Relevance Stuff' / 'deep_scan'
@@ -37,7 +38,7 @@ RISKS = {'none_identified', 'suspected', 'confirmed'}
 INSTRUCTIONS = '''# Relevance Focus: Global R&I Futures Deep Scan
 
 MISSION: Independently verify a publication's **aboutness**, source integrity,
-Main Radar TOPIC connection, and *possible* future R&I significance for its own
+the assigned policy PRIORITY connection, and *possible* future R&I significance for its own
 country/region. This is NOT the EU-centered Radar Deep Scan: **no European/EU
 relevance, European comparison, or EU impact is required or preferred**.
 
@@ -53,6 +54,36 @@ possible trajectories, and uncertainty. Where possible identify concrete
 mechanisms—ecological data and biodiversity infrastructures, chip research and
 skills, research partnerships, policy instruments, scientific capacity, etc.
 Do NOT assume all regions are interesting for all topics: reject non-connections.
+
+
+FOCUS RULES FOR NEWLY DISCOVERED CANDIDATES:
+A candidate with `focus_scope_id: critical-technologies-regional-priorities-2026-v1`
+must demonstrably fit at least ONE assigned track:
+- `Critical technology: ...`: the publication must actually concern the named
+  technology area from the TEN EU economic-security critical-technology areas.
+  The research subject can be any substantive external country/region already
+  covered by this Relevance Focus scanner; an EU impact claim is NOT required.
+- `CELAC: ...`, `Union for the Mediterranean: ...`, `Africa: ...`, or `ASEAN: ...`:
+  the work must actually concern the named R&I priority IN the assigned region.
+  A publication on an ASEAN country and an unrelated CELAC priority is NOT a match.
+  Confirm both the substantive priority and the region/country setting. For
+  space cooperation, verify cooperation rather than unrelated satellite mentions;
+  for AI in Science, verify AI is used for science, not generic AI news.
+
+Technology and regional tracks are ALTERNATIVES, not an AND condition. Check the
+EXACT manifest `focus_issue` even when another track might also fit the paper.
+The four geographic tracks are CELAC (climate/environment/energy transition,
+AI in Science, health); Union for the Mediterranean (climate change, renewable
+energies, health); Africa (innovation/technology, green transition, public health,
+science/higher-education capacity); ASEAN (green technologies, space cooperation,
+marine science, mobility). All TEN technologies, not merely the EU's four
+initial risk-assessment priorities, are in scope.
+
+HISTORICAL COMPATIBILITY: A lead without the new focus_scope_id belongs to an
+OLDER discovery package. Review its already assigned focus_issue under that
+package's original rules; do not apply new criteria retroactively, change old
+KEEP/REVIEW/DROP decisions, or relabel an existing finding. The source-integrity,
+aboutness, and conditional-futures standards remain unchanged for everyone.
 
 INTEGRITY GATE: Reject propaganda, deceptive pseudo-journals, influence outlets,
 source laundering, fabricated science, retracted material, and uncorroborated
@@ -85,7 +116,7 @@ as a more general explanation; the importer accepts decision_basis as a fallback
 if review_reason is missing, but review_reason is preferred. Every KEEP still
 requires all four substantive evidence sections.
 
-KEEP only when ALL identity, credible source, topic, geography and evidence
+KEEP only when ALL identity, credible source, assigned priority, geography and evidence
 conditions pass. If only a state-controlled press statement is available,
 DO NOT treat that as independent confirmation of a claimed technological
 breakthrough. REVIEW unresolved source access/conflicts/identity and explicitly
@@ -113,15 +144,21 @@ def atomic_write(path: Path, document):
 
 
 def valid_v4_lead(row):
-    return (isinstance(row, dict) and not excluded_future_relevance_lead(row)
+    if not (isinstance(row, dict) and not excluded_future_relevance_lead(row)
             and isinstance(row.get('candidate_id'), str)
             and row['candidate_id'].startswith('REL-') and row.get('aboutness_basis')
             in {'title', 'substantive abstract / reader claim'} and row.get('geographic_evidence')
             and row.get('focus_region') and row.get('focus_issue')
-            # Do not queue EU/UK-only place tags as global studies.
-            # An EU/UK publisher is fully eligible if the work studies elsewhere.
+            # Preserve the existing non-EU/UK primary research setting.
             and row.get('focus_group') != 'EU / UK'
-            and re.fullmatch(r'https://doi\.org/10\.\d{4,9}/\S+', str(row.get('url') or ''), re.I))
+            and re.fullmatch(r'https://doi\.org/10\.\d{4,9}/\S+', str(row.get('url') or ''), re.I)):
+        return False
+    if row.get('focus_scope_id') == FOCUS_SCOPE_ID:
+        return (row['focus_issue'] in FOCUS_TRACK and
+                row.get('focus_priority_track') == FOCUS_TRACK[row['focus_issue']] and
+                priority_region_match(row['focus_issue'], row['focus_group'], row['focus_region']))
+    # Do not retrofit the new policy to historical, already assigned material.
+    return True
 
 
 def all_manifests():
@@ -140,6 +177,36 @@ def all_manifests():
     return by_id
 
 
+
+def write_review_artifact(manifest, artifact):
+    if not artifact:
+        return
+    artifact = Path(artifact)
+    artifact.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(artifact, 'w', zipfile.ZIP_DEFLATED) as z:
+        z.writestr('INSTRUCTIONS.md', INSTRUCTIONS)
+        z.writestr('MANIFEST.json', json.dumps(manifest, ensure_ascii=False, indent=2))
+        z.writestr('RESULTS_TEMPLATE.json', json.dumps({'format': RESULT_FORMAT,
+            'package_id': manifest['package_id'], 'results': [],
+            '_guidance': ('Supply all assigned candidate results. For review/drop, '
+                          'provide review_reason (20+ chars); decision_basis is '
+                          'also accepted as a fallback. Keep requires complete '
+                          'source_verification, aboutness, topic and futures.')}, indent=2))
+
+
+def balanced_review_jobs(available, size):
+    """Balance priority areas and places without changing old assignments."""
+    available.sort(key=lambda x: (-int(x.get('focus_score') or 0), x['candidate_id']))
+    buckets = {}
+    for row in available:
+        buckets.setdefault((row['focus_issue'], row['focus_region']), []).append(row)
+    jobs = []
+    while len(jobs) < size and any(buckets.values()):
+        for key in sorted(buckets):
+            if buckets[key] and len(jobs) < size:
+                jobs.append(buckets[key].pop(0))
+    return jobs
+
 def prepare(*, batch_size=30, artifact=None, additional=False):
     limit = 60 if additional else 30
     if not 1 <= batch_size <= limit:
@@ -155,6 +222,42 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
     prior_manifest = read(MANIFEST, {})
     outstanding = prior_manifest.get('jobs', [])
     pending_ids = {row.get('candidate_id') for row in outstanding}
+    if not additional:
+        # Old pending_manifest.json and packages remain untouched, even if they
+        # are still awaiting review or were just imported in the live repository.
+        # New-policy packages are reserved in the existing packages/ namespace,
+        # which all_manifests()/import-inbox already understand.  This prevents
+        # legacy unfinished reviews from blocking future policy-focused reviews.
+        current_scope_outstanding = sorted((m for m in existing.values()
+            if m.get('focus_scope_id') == FOCUS_SCOPE_ID
+            and any(row.get('candidate_id') not in finished for row in m.get('jobs', []))),
+            key=lambda m: (m.get('generated_at') or '', m.get('package_id') or ''))
+        if current_scope_outstanding:
+            manifest = current_scope_outstanding[0]
+            write_review_artifact(manifest, artifact)
+            print(f'Current-policy Relevance Focus Deep Scan package: '
+                  f'{len(manifest["jobs"])} cases, {manifest["package_id"]}')
+            return manifest
+        new_scope_available = [x for x in archive.get('candidates', [])
+            if isinstance(x, dict) and x.get('focus_scope_id') == FOCUS_SCOPE_ID
+            and valid_v4_lead(x) and x['candidate_id'] not in finished
+            and x['candidate_id'] not in reserved]
+        if new_scope_available:
+            jobs = balanced_review_jobs(new_scope_available, batch_size)
+            key = '|'.join(x['candidate_id'] for x in jobs)
+            package_id = 'rfds-' + hashlib.sha256(key.encode()).hexdigest()[:18]
+            if package_id in existing:
+                raise ValueError('New policy package identifier already reserved')
+            manifest = {'format': RESULT_FORMAT, 'package_id': package_id,
+                        'generated_at': datetime.now(timezone.utc).isoformat(),
+                        'focus_scope_id': FOCUS_SCOPE_ID,
+                        'global_scope': 'All 10 critical technologies OR geographically targeted regional R&I priorities; no EU relevance required',
+                        'jobs': jobs}
+            atomic_write(PACKAGES / f'{package_id}.json', manifest)
+            write_review_artifact(manifest, artifact)
+            print(f'Current-policy Relevance Focus Deep Scan package: '
+                  f'{len(jobs)} cases, {package_id}')
+            return manifest
     if additional:
         # Catch-up mode for Relevance Focus ONLY: an assignment is not a scan.
         # Revisit unfinished jobs from the oldest registered manifests, even if
@@ -183,15 +286,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
         available = [x for x in archive.get('candidates', [])
                      if valid_v4_lead(x) and x['candidate_id'] not in finished
                      and x['candidate_id'] not in (reserved - pending_ids)]
-        available.sort(key=lambda x: (-int(x.get('focus_score') or 0), x['candidate_id']))
-        buckets = {}
-        for row in available:
-            buckets.setdefault((row['focus_issue'], row['focus_region']), []).append(row)
-        jobs = []
-        while len(jobs) < batch_size and any(buckets.values()):
-            for k in sorted(buckets):
-                if buckets[k] and len(jobs) < batch_size:
-                    jobs.append(buckets[k].pop(0))
+        jobs = balanced_review_jobs(available, batch_size)
     jobs = jobs[:batch_size]
     key = '|'.join(x['candidate_id'] for x in jobs)
     package_id = ('rfds-' + hashlib.sha256(key.encode()).hexdigest()[:18])
@@ -217,18 +312,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
                 atomic_write(PACKAGES / f'{package_id}.json', manifest)
     else:
         atomic_write(MANIFEST, manifest)
-    if artifact:
-        artifact = Path(artifact)
-        artifact.parent.mkdir(parents=True, exist_ok=True)
-        with zipfile.ZipFile(artifact, 'w', zipfile.ZIP_DEFLATED) as z:
-            z.writestr('INSTRUCTIONS.md', INSTRUCTIONS)
-            z.writestr('MANIFEST.json', json.dumps(manifest, ensure_ascii=False, indent=2))
-            z.writestr('RESULTS_TEMPLATE.json', json.dumps({'format': RESULT_FORMAT,
-                'package_id': package_id, 'results': [],
-                '_guidance': ('Supply all assigned candidate results. For review/drop, '
-                              'provide review_reason (20+ chars); decision_basis is '
-                              'also accepted as a fallback. Keep requires complete '
-                              'source_verification, aboutness, topic and futures.')}, indent=2))
+    write_review_artifact(manifest, artifact)
     print(f'Global Relevance Focus Deep Scan package: {len(jobs)} cases, {package_id}')
     return manifest
 
@@ -249,6 +333,12 @@ def validate_result(result, lead):
     decision = result.get('decision')
     if decision not in DECISIONS:
         raise ValueError('Unknown review decision')
+    # Scope metadata belongs to NEW decisions only.  Old imports retain their
+    # original schema and will not be reclassified or rewritten.
+    policy_metadata = ({
+        'focus_scope_id': lead['focus_scope_id'],
+        'focus_priority_track': lead['focus_priority_track']
+    } if lead.get('focus_scope_id') == FOCUS_SCOPE_ID else {})
     if decision != 'keep':
         # The Deep Scan template historically taught models to supply a detailed
         # decision_basis, while the importer only accepted review_reason. Accept
@@ -258,7 +348,7 @@ def validate_result(result, lead):
         if not isinstance(reason, str) or len(reason.strip()) < 20:
             reason = result.get('decision_basis')
         reason = text_field(reason, 'review_reason or decision_basis')
-        return {**result, 'review_reason': reason,
+        return {**result, **policy_metadata, 'review_reason': reason,
                 'title': lead['title'], 'focus_region': lead['focus_region'],
                 'focus_issue': lead['focus_issue'], 'url': lead['url']}
     src, geo, topic, fut = (result.get(k) for k in
@@ -282,7 +372,9 @@ def validate_result(result, lead):
     text_field(geo.get('basis'), 'aboutness.basis')
     text_field(geo.get('verified_excerpt'), 'aboutness.verified_excerpt')
     if topic.get('is_relevant') is not True or topic.get('label') != lead['focus_issue']:
-        raise ValueError('KEEP must independently confirm the current Radar topic')
+        raise ValueError('KEEP must independently confirm the assigned focus priority')
+    if lead.get('focus_scope_id') == FOCUS_SCOPE_ID and not valid_v4_lead(lead):
+        raise ValueError('KEEP cannot admit a new-policy theme outside its technology/region scope')
     text_field(topic.get('basis'), 'topic.basis')
     if fut.get('classification') not in {'observed', 'possible', 'mixed'}:
         raise ValueError('Future status must separate observed from possible')
@@ -290,7 +382,7 @@ def validate_result(result, lead):
         text_field(fut.get(name), 'futures.' + name)
     if not str(fut['research_question']).strip().endswith('?'):
         raise ValueError('Futures investigation must be framed as a question')
-    return {**result, 'title': lead['title'], 'date': lead['date'],
+    return {**result, **policy_metadata, 'title': lead['title'], 'date': lead['date'],
             'source': lead['source'], 'focus_region': lead['focus_region'],
             'focus_group': lead['focus_group'], 'focus_issue': lead['focus_issue'],
             'url': lead['url'], 'doi': lead['doi'],

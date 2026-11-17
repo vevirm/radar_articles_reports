@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Global region × Main Radar topic discovery, distinct from the EU-focused Radar.
+"""Policy-focused global R&I discovery, separate from the EU-focused Radar.
 
-The automatic scanner searches primarily non-EU/UK regions.  Country tags
-represent the substantive setting studied, not source/publisher nationality.
-Discovery leads are hypotheses; independent global Deep Scan provides verification.
+New searches target 10 critical technology areas OR the relevant CELAC, UfM,
+Africa and ASEAN R&I priorities. The existing non-EU/UK subject-region and
+source-neutral aboutness rules remain. Old discoveries are not reclassified;
+independent Relevance Deep Scan verifies new bibliographic leads.
 """
 from __future__ import annotations
 
@@ -100,10 +101,8 @@ POLICY = re.compile(r'\bpolic\w*\b|\bstrateg\w*\b|\bgeopolit\w*\b|\bgovern\w*\b|
 STRONG = set(ISSUES) - {'Transnational R&I and innovation policy','Australia strategic reorientation to Europe'}
 COUNTRY_POLICY_ISSUE = 'Country / regional R&I policy or strategic foresight'
 
-# This lane is not a second EU/UK-only Radar.  A source can investigate ONE
-# location and ONE issue; it need not compare countries or mention Europe.
-# The thematic vocabulary is an existing Radar data asset, while the selected
-# topics are recalculated from the actual current A/B/C corpus on each run.
+# Legacy topic helpers are retained for historical candidates and tests.
+# NEW discovery selection is instead fixed to the policy areas below.
 GEO_TOPIC_LABELS = {'China', 'United States', 'Ukraine', 'India', 'Japan',
                     'United Kingdom', 'Taiwan', 'Global South'}
 VAGUE_TOPIC_LABELS = {'Universities', 'Research organisations', 'SMEs',
@@ -139,9 +138,197 @@ TOPIC_SEARCH_TERMS = {
     'Research infrastructure': 'research infrastructure',
     'Research careers': 'research careers',
 }
+
+# Relevance Focus discovery policy — NEW LEADS ONLY.  Historical findings,
+# old package assignments, and ordinary Main Radar priorities are unchanged.
+# The ten technology areas come from Commission Recommendation (EU) 2023/2113.
+# Regional topics follow the supplied EU-CELAC, UfM, EU-Africa, ASEAN-EU priorities.
+FOCUS_SCOPE_ID = 'critical-technologies-regional-priorities-2026-v1'
+CRITICAL_TECHNOLOGIES = {
+    'Advanced semiconductors': (
+        ('semiconductor', 'microchip', 'microelectronics', 'chip fabrication',
+         'chip manufacturing', 'advanced packaging', 'chip design', 'compound semiconductor'),
+        ('advanced semiconductors', 'semiconductor manufacturing', 'microelectronics research')),
+    'Artificial intelligence': (
+        ('artificial intelligence', 'machine learning', 'generative AI', 'foundation model',
+         'deep learning', 'AI system', 'AI research'),
+        ('artificial intelligence research', 'machine learning technology', 'AI innovation')),
+    'Quantum technologies': (
+        ('quantum computing', 'quantum communication', 'quantum technology',
+         'quantum sensing', 'quantum cryptography', 'quantum processor', 'quantum network'),
+        ('quantum technology research', 'quantum computing', 'quantum sensing')),
+    'Biotechnologies': (
+        ('biotechnology', 'biotechnologies', 'synthetic biology', 'gene editing',
+         'genome editing', 'biomanufacturing', 'biopharmaceutical', 'bioprocessing', 'CRISPR'),
+        ('biotechnology innovation', 'synthetic biology', 'gene editing research')),
+    'Advanced connectivity, navigation and digital technologies': (
+        ('advanced connectivity', '5G', '6G', 'wireless networks', 'telecommunications',
+         'satellite navigation', 'GNSS', 'digital infrastructure', 'edge computing',
+         'secure digital communication', 'navigation technology'),
+        ('advanced connectivity 6G', 'satellite navigation technologies', 'digital infrastructure research')),
+    'Advanced sensing technologies': (
+        ('advanced sensing', 'sensor technology', 'sensing technology', 'biosensors',
+         'hyperspectral imaging', 'lidar', 'remote sensing', 'optical sensors',
+         'radar sensing', 'environmental sensors'),
+        ('advanced sensing technologies', 'sensor research', 'remote sensing innovation')),
+    'Space and propulsion technologies': (
+        ('space propulsion', 'spacecraft', 'space technology', 'space systems',
+         'satellite technology', 'launch vehicle', 'rocket propulsion',
+         'electric propulsion', 'space exploration'),
+        ('space propulsion technology', 'spacecraft technology', 'satellite technology research')),
+    'Energy technologies': (
+        ('energy technology', 'renewable energy', 'energy storage', 'battery technology',
+         'hydrogen technology', 'smart grid', 'fusion energy', 'solar technology',
+         'wind energy technology', 'electrolysis'),
+        ('renewable energy technologies', 'energy storage technology', 'hydrogen energy research')),
+    'Robotics and autonomous systems': (
+        ('robotics', 'robotic systems', 'autonomous systems', 'autonomous vehicles',
+         'industrial robots', 'unmanned vehicles', 'autonomous navigation',
+         'robotic manipulation'),
+        ('robotics autonomous systems', 'autonomous robotics research', 'industrial robotics')),
+    'Advanced materials, manufacturing and recycling technologies': (
+        ('advanced materials', 'additive manufacturing', 'nanomaterials',
+         'composite materials', 'advanced manufacturing', 'precision manufacturing',
+         'industrial recycling', 'materials recycling', 'circular manufacturing',
+         'recycling technologies'),
+        ('advanced materials manufacturing', 'additive manufacturing', 'industrial recycling technology')),
+}
+# Each entry has (source-meaning patterns, rotating discovery query phrases).
+# Regional priorities qualify IN THEIR OWN region; they do not need to coincide
+# with a critical technology.  Conversely the technologies qualify anywhere in
+# the existing external-country aboutness geography.
+REGIONAL_PRIORITIES = {
+    'CELAC': {
+        'Climate change, environmental sustainability and energy transition': (
+            ('climate change', 'climate adaptation', 'climate resilience',
+             'environmental sustainability', 'energy transition', 'green transition',
+             'decarbonisation', 'decarbonization', 'renewable energy'),
+            ('climate adaptation research', 'environmental sustainability science',
+             'energy transition research')),
+        'AI in Science': (
+            ('AI for science', 'AI in science', 'artificial intelligence for science',
+             'machine learning for science', 'scientific machine learning',
+             'AI-driven scientific discovery', 'AI-enabled research',
+             'machine learning for scientific discovery'),
+            ('AI for science', 'scientific machine learning',
+             'artificial intelligence scientific research')),
+        'Health': (
+            ('health research', 'public health', 'clinical trials', 'biomedical research',
+             'health systems research', 'medical innovation', 'infectious disease research',
+             'medical technology'),
+            ('public health research', 'biomedical research', 'health systems innovation')),
+    },
+    'Union for the Mediterranean': {
+        'Climate change': (
+            ('climate change', 'climate adaptation', 'climate resilience',
+             'climate mitigation', 'climate risk', 'climate science'),
+            ('climate change research', 'climate adaptation science', 'climate resilience')),
+        'Renewable energies': (
+            ('renewable energy', 'solar energy', 'wind energy', 'clean energy',
+             'energy transition', 'solar photovoltaics', 'renewable electricity',
+             'green hydrogen'),
+            ('renewable energy research', 'solar energy technology', 'green hydrogen')),
+        'Health': (
+            ('health research', 'public health', 'health systems', 'epidemiology',
+             'biomedical research', 'medical innovation', 'infectious disease', 'healthcare'),
+            ('health research', 'public health innovation', 'biomedical science')),
+    },
+    'Africa': {
+        'Innovation and technology': (
+            ('innovation ecosystem', 'technology innovation', 'digital innovation',
+             'technology transfer', 'research commercialisation', 'research commercialization',
+             'scientific innovation', 'innovation capacity', 'technology development'),
+            ('technology innovation research', 'innovation ecosystems', 'technology transfer')),
+        'Green transition': (
+            ('green transition', 'green technology', 'renewable energy',
+             'energy transition', 'climate adaptation', 'sustainable technology',
+             'low-carbon', 'decarbonisation', 'decarbonization'),
+            ('green transition research', 'renewable energy innovation', 'climate adaptation')),
+        'Public health': (
+            ('public health', 'health systems research', 'disease surveillance',
+             'epidemiology', 'infectious disease', 'vaccination research',
+             'healthcare innovation', 'maternal health'),
+            ('public health research', 'health system innovation', 'disease surveillance')),
+        'Capacities for science and higher education': (
+            ('science capacity', 'research capacity', 'higher education',
+             'university research infrastructure', 'scientific training',
+             'research infrastructure', 'research skills', 'university capacity',
+             'scientific workforce', 'research institutions'),
+            ('science capacity building', 'higher education research',
+             'research infrastructure universities')),
+    },
+    'ASEAN': {
+        'Green technologies': (
+            ('green technology', 'green technologies', 'clean technology',
+             'renewable energy technology', 'energy efficiency technology',
+             'low-carbon technology', 'circular technology', 'green innovation'),
+            ('green technology innovation', 'clean energy technologies',
+             'circular technology research')),
+        'Space cooperation': (
+            ('space cooperation', 'space collaboration', 'space partnership',
+             'satellite cooperation', 'satellite collaboration',
+             'space science cooperation', 'space research collaboration',
+             'space technology partnership'),
+            ('space science cooperation', 'satellite research collaboration',
+             'space technology partnership')),
+        'Marine science': (
+            ('marine science', 'oceanography', 'oceanographic research',
+             'marine biodiversity', 'coastal ecosystem research',
+             'marine technology', 'ocean research', 'marine ecology'),
+            ('marine science research', 'oceanographic research', 'marine biodiversity')),
+        'Mobility': (
+            ('sustainable mobility', 'electric mobility', 'urban mobility',
+             'mobility innovation', 'smart mobility', 'transport research',
+             'transportation technology', 'intelligent transport', 'electric vehicles'),
+            ('sustainable mobility research', 'transport innovation', 'electric mobility')),
+    },
+}
+# Only used for thematic targeting, not for rewriting historical country tags.
+# The scanner's pre-existing EU/UK exclusion remains in force.
+MEDITERRANEAN_PRIORITY_PLACES = {
+    # The sixteen non-EU UfM member countries. Libya is an observer, not a member.
+    'Morocco', 'Algeria', 'Tunisia', 'Egypt', 'Israel', 'Palestine',
+    'Lebanon', 'Jordan', 'Türkiye', 'Albania', 'Montenegro',
+    'Bosnia and Herzegovina', 'North Macedonia', 'Mauritania', 'Monaco', 'Syria',
+}
+ASEAN_PRIORITY_PLACES = {
+    'ASEAN', 'Indonesia', 'Malaysia', 'Singapore', 'Thailand', 'Viet Nam',
+    'Philippines', 'Cambodia', 'Lao PDR', 'Myanmar', 'Brunei', 'Timor-Leste',
+}
+FOCUS_PATTERNS = {}
+FOCUS_QUERIES = {}
+FOCUS_TRACK = {}
+for _area, (_patterns, _queries) in CRITICAL_TECHNOLOGIES.items():
+    _label = 'Critical technology: ' + _area
+    FOCUS_PATTERNS[_label] = _patterns
+    FOCUS_QUERIES[_label] = _queries
+    FOCUS_TRACK[_label] = 'critical_technology'
+for _region, _topics in REGIONAL_PRIORITIES.items():
+    for _area, (_patterns, _queries) in _topics.items():
+        _label = _region + ': ' + _area
+        FOCUS_PATTERNS[_label] = _patterns
+        FOCUS_QUERIES[_label] = _queries
+        FOCUS_TRACK[_label] = _region
+
+
+def priority_region_match(label, group, place):
+    """Scope regional priorities to their real constituent countries/regions."""
+    track = FOCUS_TRACK.get(label)
+    if track == 'critical_technology' or track is None:
+        return group != 'EU / UK'
+    if track == 'CELAC':
+        return group == 'Americas' and place not in {'United States', 'Canada'}
+    if track == 'Union for the Mediterranean':
+        return place in MEDITERRANEAN_PRIORITY_PLACES
+    if track == 'Africa':
+        return group in {'Africa', 'Additional Africa'}
+    if track == 'ASEAN':
+        return place in ASEAN_PRIORITY_PLACES
+    return False
+
 # Hard selection guard, not a claim that the scholarship has been peer reviewed.
-# Source reliability and study validity are STILL assessed by normal Radar and
-# authoritative Deep Scan, not inferred from Crossref/OpenAlex registration.
+# Source reliability and study validity are assessed by the independent
+# Relevance Focus Deep Scan, not inferred from Crossref/OpenAlex registration.
 ACCEPTED_OPENALEX_TYPES = {'article', 'review', 'book', 'book-chapter', 'report'}
 ACCEPTED_CROSSREF_TYPES = {'journal-article', 'book', 'book-chapter', 'report', 'proceedings-article'}
 MIN_PUBLICATION_DATE = date(2025, 1, 1)  # All new leads and backfilled workbook rows
@@ -159,6 +346,10 @@ FUTURES_MECHANISMS = {
     'Semiconductors': ('chip research, fabrication capacity, specialist talent or supply-chain resilience',
                        'Could this develop into an important semiconductor research, skills, production or supply-chain capability?'),
 }
+for _topic in FOCUS_PATTERNS:
+    FUTURES_MECHANISMS.setdefault(_topic, (
+        'research capability, technology maturity, innovation adoption, investment, collaboration or public policy',
+        'What evidence could show whether this priority changes scientific capacity, innovation, or future research collaboration?'))
 FUTURES_SIGNAL = re.compile(r'\b(?:capacity|capabilit\w*|invest\w*|infrastructur\w*|fund\w*|'
                             r'partnership\w*|collaborat\w*|research|innov\w*|govern\w*|'
                             r'polic\w*|strateg\w*|technolog\w*|monitor\w*|manufactur\w*|'
@@ -183,6 +374,99 @@ CLAIM_CONTEXT = re.compile(r'\b(?:study|studies|research|investigat\w*|assess\w*
 
 
 
+
+# Additional member locations exist only for NEW policy-scope discovery; keeping
+# GEOGRAPHY and RI unchanged preserves historic Radar/backfill interpretation.
+FOCUS_ONLY_LOCATIONS = {
+    'Americas': {
+        'Colombia': r'\bcolombi(?:a|an)\b', 'Peru': r'\bperu(?:vian)?\b',
+        'Uruguay': r'\burugua(?:y|yan)\b', 'Costa Rica': r'\bcosta\s+rica(?:n)?\b',
+        'Antigua and Barbuda': r'\bantigua\s+(?:and|&)\s+barbuda\b',
+        'Bahamas': r'\bbahamas\b', 'Barbados': r'\bbarbados\b',
+        'Belize': r'\bbeliz(?:e|ean)\b|\bbelice\b',
+        'Bolivia': r'\bbolivi(?:a|an)\b', 'Cuba': r'\bcub(?:a|an)\b',
+        'Dominica': r'\bdominica\b',
+        'Dominican Republic': r'\bdominican\s+republic\b',
+        'Ecuador': r'\becuador(?:ian)?\b', 'El Salvador': r'\bel\s+salvador\b',
+        'Grenada': r'\bgrenada\b', 'Guatemala': r'\bguatemal(?:a|an)\b',
+        'Guyana': r'\bguyan(?:a|ese)\b', 'Haiti': r'\bhaiti(?:an)?\b',
+        'Honduras': r'\bhondur(?:as|an)\b', 'Jamaica': r'\bjamai(?:ca|can)\b',
+        'Nicaragua': r'\bnicaragu(?:a|an)\b', 'Panama': r'\bpanam(?:a|anian)\b',
+        'Paraguay': r'\bparagua(?:y|yan)\b',
+        'Saint Kitts and Nevis': r'\b(?:saint|st\.?)\s+kitts\s+(?:and|&)\s+nevis\b',
+        'Saint Lucia': r'\b(?:saint|st\.?)\s+lucia\b',
+        'Saint Vincent and the Grenadines':
+            r'\b(?:saint|st\.?)\s+vincent\s+(?:and|&)\s+the\s+grenadines\b',
+        'Suriname': r'\bsurinam(?:e|ese)\b',
+        'Trinidad and Tobago': r'\btrinidad\s+(?:and|&)\s+tobago\b',
+        'Venezuela': r'\bvenezuel(?:a|an)\b',
+    },
+    'Africa': {
+        'Algeria': r'\balgeri(?:a|an)\b', 'Tunisia': r'\btunisi(?:a|an)\b',
+        'Libya': r'\bliby(?:a|an)\b',
+        'Mauritania': r'\bmauritani(?:a|an)\b',
+        'Angola': r'\bangol(?:a|an)\b', 'Benin': r'\bbenin(?:ese)?\b',
+        'Botswana': r'\bbotswan(?:a|an)\b',
+        'Burkina Faso': r'\bburkina\s+faso\b', 'Burundi': r'\bburund(?:i|ian)\b',
+        'Cameroon': r'\bcameroon(?:ian)?\b',
+        'Cabo Verde': r'\b(?:cabo|cape)\s+verde\b',
+        'Central African Republic': r'\bcentral\s+african\s+republic\b',
+        'Chad': r'\bchad(?:ian)?\b', 'Comoros': r'\bcomor(?:os|ian)\b',
+        'Republic of the Congo': r'\brepublic\s+of\s+(?:the\s+)?congo\b|\bcongo[- ]brazzaville\b',
+        'Democratic Republic of the Congo':
+            r'\bdemocratic\s+republic\s+of\s+(?:the\s+)?congo\b|\bDRC\b|\bcongo[- ]kinshasa\b',
+        'Côte d’Ivoire': r'\bc[ôo]te\s+d[’\u0027]ivoire\b|\bivory\s+coast\b',
+        'Djibouti': r'\bdjibout(?:i|ian)\b',
+        'Equatorial Guinea': r'\bequatorial\s+guinea\b',
+        'Eritrea': r'\beritre(?:a|an)\b',
+        'Eswatini': r'\beswatini\b|\bswaziland\b',
+        'Gabon': r'\bgabon(?:ese)?\b', 'Gambia': r'\b(?:the\s+)?gambia\b',
+        'Guinea': r'(?<!equatorial\s)\bguinea\b(?![-\s]?bissau)',
+        'Guinea-Bissau': r'\bguinea[-\s]bissau\b',
+        'Lesotho': r'\blesotho\b', 'Liberia': r'\bliberi(?:a|an)\b',
+        'Madagascar': r'\bmadagascar\b', 'Malawi': r'\bmalaw(?:i|ian)\b',
+        'Mali': r'\bmali(?:an)?\b', 'Mauritius': r'\bmauriti(?:us|an)\b',
+        'Mozambique': r'\bmozambi(?:que|can)\b',
+        'Namibia': r'\bnamibi(?:a|an)\b', 'Niger': r'\bniger\b',
+        'São Tomé and Príncipe': r'\bs[ãa]o\s+tom[eé]\s+(?:and|&)\s+pr[íi]ncipe\b',
+        'Seychelles': r'\bseychelles\b',
+        'Sierra Leone': r'\bsierra\s+leone\b',
+        'Somalia': r'\bsomali(?:a|an)\b',
+        'South Sudan': r'\bsouth\s+sudan(?:ese)?\b',
+        'Sudan': r'(?<!south\s)\bsudan(?:ese)?\b',
+        'Togo': r'\btogo(?:lese)?\b', 'Zambia': r'\bzambi(?:a|an)\b',
+        'Zimbabwe': r'\bzimbabw(?:e|ean)\b',
+    },
+    'Asia & Pacific': {
+        'Cambodia': r'\bcambodi(?:a|an)\b',
+        'Lao PDR': r'\blaos?\b|\blao\s+(?:pdr|people.s democratic republic)\b',
+        'Myanmar': r'\bmyanmar\b|\bburm(?:a|ese)\b',
+        'Brunei': r'\bbrunei\b',
+        'Timor-Leste': r'\btimor[ -]leste\b|\beast\s+timor\b',
+    },
+    'Middle East': {
+        'Lebanon': r'\bleban(?:on|ese)\b', 'Syria': r'\bsyri(?:a|an)\b',
+    },
+    'Other Europe': {'Monaco': r'\bmonaco\b'},
+}
+FOCUS_GEOGRAPHY = {
+    group: {**places, **FOCUS_ONLY_LOCATIONS.get(group, {})}
+    for group, places in GEOGRAPHY.items()
+}
+POLICY_RI = re.compile(
+    RI.pattern + r'|\bquantum\b|\bclimat\w*\b|\bhealth\b|\bmedical\b|'
+    r'\brenewable\b|\benergy\b|\brobot\w*\b|\bsensor\w*\b|'
+    r'\bsatellit\w*\b|\bspacecraft\b|\bmarine\b|\boceanograph\w*\b|'
+    r'\btransport\w*\b|\bmobility\b|\brecycl\w*\b|\bmanufactur\w*\b|'
+    r'\bmaterial\w*\b|\bhigher\s+education\b', re.I)
+POLICY_CLAIM_CONTEXT = re.compile(
+    CLAIM_CONTEXT.pattern[:-3] +
+    r'|climat\w*|health|energy|sensor\w*|recycl\w*|marine|mobility|packag\w*)\b', re.I)
+POLICY_FUTURES_SIGNAL = re.compile(
+    FUTURES_SIGNAL.pattern[:-3] +
+    r'|health|climat\w*|energy|marine|transport|spacecraft)\b', re.I)
+
+
 def topic_catalogue():
     """Established topic definitions; no topics generated from arbitrary search hits."""
     raw = load('topic_vocabulary.json', [])
@@ -197,6 +481,7 @@ def topic_catalogue():
         answer[label] = list(dict.fromkeys(pats))
     for label, pats in TOPIC_EXTRA_DEFINITIONS.items():
         answer[label] = list(dict.fromkeys(pats))
+    answer.update({label: list(pats) for label, pats in FOCUS_PATTERNS.items()})
     return answer
 
 
@@ -265,11 +550,12 @@ def identified_issues(*, raw=None, max_issues=10):
 
 
 def focus_areas(*, raw=None):
-    """Combined, corpus-grounded search priorities (topics + named issues)."""
-    topics = identified_topics(raw=raw)
-    issues = identified_issues(raw=raw)
-    return {label: TOPIC_SEARCH_TERMS.get(label, label.lower()) for label in topics} | {
-        label: ISSUE_SEARCH_TERMS[label] for label in issues}
+    """Permanent policy selection for NEW leads; independent of Main Radar.
+
+    `raw` is retained for caller/test compatibility, but deliberately does not
+    change the new 10-technology + four-region search priorities.
+    """
+    return {label: variants[0] for label, variants in FOCUS_QUERIES.items()}
 
 
 def location_hits(text):
@@ -296,7 +582,7 @@ LOCAL_CAPACITY_VERBS = re.compile(
     r'implement\w*|manufactur\w*|operat\w*)\b', re.I)
 
 
-def substantive_location_hits(sentence):
+def substantive_location_hits(sentence, *, policy=False):
     """Location hits except clear publisher/author-attribution modifiers.
 
     This is a conservative *discovery* heuristic, not source reading or
@@ -304,7 +590,7 @@ def substantive_location_hits(sentence):
     passed into this function.  Ambiguous cases remain for Deep Scan review.
     """
     places = []
-    for group, names in GEOGRAPHY.items():
+    for group, names in (FOCUS_GEOGRAPHY if policy else GEOGRAPHY).items():
         for place, pat in names.items():
             found = False
             for m in re.finditer(pat, sentence, re.I):
@@ -355,7 +641,7 @@ def publication_date_in_scope(value):
     return MIN_PUBLICATION_DATE <= published <= datetime.now(timezone.utc).date()
 
 
-def aboutness_locations(title, body='', *, limit=850):
+def aboutness_locations(title, body='', *, limit=850, policy=False):
     """Return places actually discussed, with a short traceable context.
 
     Source names, bibliographic metadata, and affiliations are deliberately
@@ -369,14 +655,17 @@ def aboutness_locations(title, body='', *, limit=850):
     # credit, reference, or background country list in a long Reader summary.
     sentences = re.split(r'(?<=[.!?])\s+|[;\n]+', body)
     about = {}
-    if RI.search(title) and CLAIM_CONTEXT.search(title):
-        for group, place in substantive_location_hits(title):
+    ri = POLICY_RI if policy else RI
+    context = POLICY_CLAIM_CONTEXT if policy else CLAIM_CONTEXT
+    future = POLICY_FUTURES_SIGNAL if policy else FUTURES_SIGNAL
+    if ri.search(title) and context.search(title):
+        for group, place in substantive_location_hits(title, policy=policy):
             about[(group, place)] = ('title', title[:240])
     for sentence in sentences:
-        if not (RI.search(sentence) and CLAIM_CONTEXT.search(sentence)
-                and FUTURES_SIGNAL.search(sentence)):
+        if not (ri.search(sentence) and context.search(sentence)
+                and future.search(sentence)):
             continue
-        for group, place in substantive_location_hits(sentence):
+        for group, place in substantive_location_hits(sentence, policy=policy):
             about.setdefault((group, place), ('substantive abstract / reader claim', sentence[:240]))
     return [(g, p, basis, excerpt) for (g, p), (basis, excerpt) in about.items()]
 
@@ -391,7 +680,7 @@ def future_ri_question(topic, place, evidence=''):
 
 def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
                       expected_topic=None):
-    """Match a Main Radar topic to the *substantive* place studied in a work.
+    """Match a selected policy focus to the *substantive* place studied in a work.
 
     Neither publisher location, EU relevance nor nationality of the author is
     evidence of regional aboutness. A specific searched place must be supported
@@ -399,12 +688,18 @@ def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
     """
     title, body = clean(title), clean(body)
     lead = title + '. ' + body[:900]
-    if not title or not RI.search(lead):
+    policy = expected_topic in FOCUS_TRACK
+    if not title or not (POLICY_RI if policy else RI).search(lead):
         return None
-    locations = aboutness_locations(title, body)
+    locations = aboutness_locations(title, body, policy=policy)
     if not locations:
         return None
     if expected_region and not any(p == expected_region for _, p, _, _ in locations):
+        return None
+    if expected_topic in FOCUS_TRACK and not any(
+            priority_region_match(expected_topic, group, place)
+            for group, place, _, _ in locations
+            if not expected_region or place == expected_region):
         return None
     catalogue = topic_catalogue()
     topics = allowed_topics if allowed_topics is not None else focus_areas()
@@ -452,7 +747,7 @@ def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
             'countries': '; '.join(dict.fromkeys(p for _, p, _, _ in locations)),
             'issues': '; '.join(matches),
             'stakeholders': '; '.join(hits(lead, STAKEHOLDERS)),
-            'match_reason': 'Main Radar topic: ' + ', '.join(matches[:4]) + '; substantive setting: ' +
+            'match_reason': 'Policy focus: ' + ', '.join(matches[:4]) + '; substantive setting: ' +
                             ', '.join(p for _, p, _, _ in locations[:4]),
             'aboutness_basis': chosen[2], 'geographic_evidence': chosen[3],
             'future_ri_question': future_ri_question(expected_topic or matches[0], chosen[1], chosen[3]),
@@ -905,12 +1200,13 @@ TEMPORAL_QUERIES = (
 )
 
 
-def regional_targets(slot):
+def regional_targets(slot, *, policy=False):
     """Rotate global investigation targets; EU and UK use the ordinary Radar."""
     targets = []
+    geography = FOCUS_GEOGRAPHY if policy else GEOGRAPHY
     for group, anchors in REGION_ANCHORS.items():
         targets.extend((group, place) for place in anchors)
-    for group, names in GEOGRAPHY.items():
+    for group, names in geography.items():
         available = [name for name in names if name not in REGION_ANCHORS.get(group, ())]
         if not available:
             continue
@@ -926,33 +1222,43 @@ def regional_targets(slot):
 
 
 def focused_search_plan(slot: int, focus=None):
-    """Each query connects an active Radar topic to an external world region.
+    """Rotate all ten technologies worldwide (outside EU/UK primary settings),
+    while regional themes are queried ONLY in their corresponding regions.
 
-    EU/UK are not target geographies, but their researchers, publishers and
-    partners may produce relevant work on external places.  No EU bridge needed.
+    The existing source-country-neutral aboutness and no-EU-bridge rules stay.
+    Explicit caller-supplied legacy topics remain supported for old test/cases.
     """
     focus = focus if focus is not None else focus_areas()
     if not focus:
         return
     items = list(focus.items())
     items = items[slot % len(items):] + items[:slot % len(items)]
-    targets = regional_targets(slot)
-    if not targets:
+    policy_mode = any(topic in FOCUS_TRACK for topic, _ in items)
+    global_targets = regional_targets(slot, policy=policy_mode)
+    if not global_targets:
         return
-    # Coprime stepping touches every target before repeating one, even if the
-    # number of currently selected Radar topics changes between runs.
-    stride = next(i for i in range(5, 5 + len(targets))
-                  if gcd(i, len(targets)) == 1)
-    wave_stride = next(i for i in range(7, 7 + len(targets))
-                       if gcd(i, len(targets)) == 1)
+    all_targets = [(group, place) for group, places in (FOCUS_GEOGRAPHY if policy_mode else GEOGRAPHY).items()
+                   if group != 'EU / UK' for place in places]
     seen = set()
     for wave in range(FOCUSED_PAGE_DEPTH):
         for idx, (topic, term) in enumerate(items):
+            targets = ([(g, p) for g, p in all_targets
+                        if priority_region_match(topic, g, p)]
+                       if topic in FOCUS_TRACK and FOCUS_TRACK[topic] != 'critical_technology'
+                       else global_targets)
+            if not targets:
+                continue
+            # Co-prime traversal gives many countries a chance in each track
+            # instead of silently pairing CELAC climate with Asian countries.
+            stride = next(i for i in range(5, 5 + len(targets))
+                          if gcd(i, len(targets)) == 1)
+            wave_stride = next(i for i in range(7, 7 + len(targets))
+                               if gcd(i, len(targets)) == 1)
             group, place = targets[(idx * stride + wave * wave_stride + slot) % len(targets)]
+            variants = FOCUS_QUERIES.get(topic, (term,))
+            query_term = variants[(wave + slot + idx) % len(variants)]
             lens_name, suffix = TEMPORAL_QUERIES[(idx + wave + slot) % len(TEMPORAL_QUERIES)]
-            query = f'{term} {SEARCH_GEOGRAPHY.get(place, place)} {suffix}'.strip()
-            # Alternate provider priority on each run and each topic-region pair.
-            # Both providers remain available; this does not privilege a publisher.
+            query = f'{query_term} {SEARCH_GEOGRAPHY.get(place, place)} {suffix}'.strip()
             providers = ('openalex', 'crossref') if (slot + idx + wave) % 2 == 0 else ('crossref', 'openalex')
             for provider in providers:
                 key = (provider, query)
@@ -1141,6 +1447,8 @@ def relevance_work(source, work, *, allowed_topics=None, expected_region=None,
         'temporal_lens': match['temporal_lens'],
         'focus_score': match['score'],
         'focus_issue': expected_topic or match['matched_topics'][0],
+        'focus_scope_id': FOCUS_SCOPE_ID if (expected_topic or match['matched_topics'][0]) in FOCUS_TRACK else '',
+        'focus_priority_track': FOCUS_TRACK.get(expected_topic or match['matched_topics'][0], 'legacy'),
         'aboutness_basis': match['aboutness_basis'],
         'geographic_evidence': match['geographic_evidence'],
         'future_ri_question': match['future_ri_question'],
@@ -1202,7 +1510,7 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                 seen_dois.add(doi_identity(row))
     active_focus = focus_areas()
     if not active_focus:
-        raise RuntimeError('No existing active Radar topics/issues to anchor relevance search')
+        raise RuntimeError('Relevance Focus policy selection is empty')
     picked = {}
     per_bucket = {}
     stats = Counter()
@@ -1215,7 +1523,7 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     # Iterable covers far more distinct queries/pages than one 25-minute window
     # can consume. Rotate region/issue focus and never reuse a completed search.
     plan = iter(focused_search_plan(slot, focus=active_focus))
-    stats['main_radar_topics_issues'] = len(active_focus)
+    stats['policy_focus_topics'] = len(active_focus)
     successful_requests = 0
     while (remaining := deadline - clock()) > 0:
         if len(blocked) == 2:
@@ -1340,12 +1648,13 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     stats['seconds_spent_discovering'] = round(clock()-start,2)
     stats['successful_requests'] = successful_requests
     stats['coverage_buckets'] = len(per_bucket)
-    out={'profile_version':'v4-global-aboutness-futures-25m',
+    out={'profile_version':'v5-critical-technologies-regional-priorities-25m',
          'batch_id':'relevance-'+now.strftime('%Y%m%dT%H%M%SZ'),
          'source_document':'OpenAlex and Crossref DOI-bearing, venue-identified publications; leads only',
          'compiled_at':datetime.now(timezone.utc).isoformat(),
          'policy':{'admission':'Separate global R&I Deep Scan must independently verify aboutness, source integrity and future R&I significance; indexed leads are never auto-admitted',
-                   'topic_anchor':'Each matched issue/topic is evidenced in active Main Radar; neither European geography nor EU relevance is required',
+                   'topic_anchor':'New discoveries use all 10 EU economic-security critical technology areas OR an explicit CELAC, UfM, Africa or ASEAN regional R&I priority; no Main Radar anchor or EU bridge required',
+                   'focus_scope_id':FOCUS_SCOPE_ID,
                    'outside_eu_uk_target_share':OUTSIDE_EU_UK_SHARE,
                    'earliest_publication_date':MIN_PUBLICATION_DATE.isoformat(),
                    'time_perspectives':['Current state / developments','Possible future / scenarios'],
