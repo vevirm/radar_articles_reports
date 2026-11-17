@@ -19,7 +19,8 @@ import shutil
 import zipfile
 
 from relevance_focus import (excluded_future_relevance_lead, FOCUS_SCOPE_ID,
-                             FOCUS_TRACK, priority_region_match)
+                             FOCUS_QUALITY_REVISION, FOCUS_TRACK,
+                             priority_region_match, substantive_policy_technology)
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'Relevance Stuff' / 'deep_scan'
@@ -69,6 +70,27 @@ must demonstrably fit at least ONE assigned track:
   Confirm both the substantive priority and the region/country setting. For
   space cooperation, verify cooperation rather than unrelated satellite mentions;
   for AI in Science, verify AI is used for science, not generic AI news.
+
+PRECISION CHECKS (also apply to existing unfinished new-focus packages):
+- Disambiguate the REAL subject location from place names. "Niger Delta",
+  "Niger State" and the "Niger River" are not evidence that research
+  studies the country Niger; they frequently refer to Nigeria. "Benin City"
+  and "Benin, Nigeria" are not the country Benin. Check the methods, sites,
+  and real study setting. A reviewer cannot KEEP a wrong manifest country tag,
+  even when the study is pertinent to a different country in the same region.
+- For critical technologies, verify substantive research, technical application,
+  deployment, enabling capacity, or technology-specific governance. Merely
+  surveying students' AI awareness/ethical attitudes does NOT establish AI
+  technological activity. Marketing, ESG, generic "green innovation" and
+  human-resource management do NOT establish ASEAN green technologies without
+  an identified technology. A title keyword alone is not enough.
+- Secondary priority tags are not automatic cross-regional evidence. A study
+  of Nigerian health does not also satisfy CELAC or UfM health; a study of
+  African energy policy does not thereby satisfy CELAC energy priorities.
+  Assess ONLY the exact manifest focus_issue for KEEP; do not silently relabel
+  an incorrect primary focus to another track.
+- Check the exact DOI against the primary publisher record; an apparent /pdf
+  suffix or landing-page URL is not proof of the article's canonical DOI.
 
 Technology and regional tracks are ALTERNATIVES, not an AND condition. Check the
 EXACT manifest `focus_issue` even when another track might also fit the paper.
@@ -230,6 +252,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
         # legacy unfinished reviews from blocking future policy-focused reviews.
         current_scope_outstanding = sorted((m for m in existing.values()
             if m.get('focus_scope_id') == FOCUS_SCOPE_ID
+            and m.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
             and any(row.get('candidate_id') not in finished for row in m.get('jobs', []))),
             key=lambda m: (m.get('generated_at') or '', m.get('package_id') or ''))
         if current_scope_outstanding:
@@ -240,6 +263,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
             return manifest
         new_scope_available = [x for x in archive.get('candidates', [])
             if isinstance(x, dict) and x.get('focus_scope_id') == FOCUS_SCOPE_ID
+            and x.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
             and valid_v4_lead(x) and x['candidate_id'] not in finished
             and x['candidate_id'] not in reserved]
         if new_scope_available:
@@ -251,6 +275,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False):
             manifest = {'format': RESULT_FORMAT, 'package_id': package_id,
                         'generated_at': datetime.now(timezone.utc).isoformat(),
                         'focus_scope_id': FOCUS_SCOPE_ID,
+                        'focus_quality_revision': FOCUS_QUALITY_REVISION,
                         'global_scope': 'All 10 critical technologies OR geographically targeted regional R&I priorities; no EU relevance required',
                         'jobs': jobs}
             atomic_write(PACKAGES / f'{package_id}.json', manifest)
@@ -327,6 +352,26 @@ def safe_url(value):
     return isinstance(value, str) and bool(re.fullmatch(r'https?://[^\s/]+/[^\s]+', value))
 
 
+def unambiguous_new_focus_geography(lead):
+    """Protect future KEEP decisions from *known* wrong-country assignments.
+
+    This is a deliberately narrow contradiction check, not an attempt to prove
+    all country aboutness from an abstract. Historical packages and imports are
+    preserved. Real source verification remains the independent reviewer's job.
+    """
+    if lead.get('focus_scope_id') != FOCUS_SCOPE_ID:
+        return True
+    place = lead.get('focus_region')
+    evidence = (str(lead.get('title') or '') + ' ' +
+                str(lead.get('geographic_evidence') or ''))
+    if place == 'Niger':
+        return not bool(re.search(r'\bniger\s+(?:delta|state)\b', evidence, re.I))
+    if place == 'Benin':
+        return not bool(re.search(r'\bbenin(?:\s+city|,\s*nigeria)\b', evidence, re.I))
+    return True
+
+
+
 def validate_result(result, lead):
     if not isinstance(result, dict) or result.get('candidate_id') != lead['candidate_id']:
         raise ValueError('Result identity does not match manifest candidate')
@@ -337,8 +382,17 @@ def validate_result(result, lead):
     # original schema and will not be reclassified or rewritten.
     policy_metadata = ({
         'focus_scope_id': lead['focus_scope_id'],
-        'focus_priority_track': lead['focus_priority_track']
+        'focus_priority_track': lead['focus_priority_track'],
+        **({'focus_quality_revision': lead['focus_quality_revision']}
+           if lead.get('focus_quality_revision') else {})
     } if lead.get('focus_scope_id') == FOCUS_SCOPE_ID else {})
+    if decision == 'keep' and not unambiguous_new_focus_geography(lead):
+        raise ValueError('KEEP uses a wrong country tag: Niger Delta/State or Benin City, Nigeria')
+    if (decision == 'keep' and lead.get('focus_scope_id') == FOCUS_SCOPE_ID
+            and not substantive_policy_technology(lead.get('focus_issue', ''),
+                                                   lead.get('title', ''),
+                                                   lead.get('geographic_evidence', ''))):
+        raise ValueError('KEEP lacks substantive technology engagement for the assigned policy priority')
     if decision != 'keep':
         # The Deep Scan template historically taught models to supply a detailed
         # decision_basis, while the importer only accepted review_reason. Accept

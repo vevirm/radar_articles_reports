@@ -144,6 +144,8 @@ TOPIC_SEARCH_TERMS = {
 # The ten technology areas come from Commission Recommendation (EU) 2023/2113.
 # Regional topics follow the supplied EU-CELAC, UfM, EU-Africa, ASEAN-EU priorities.
 FOCUS_SCOPE_ID = 'critical-technologies-regional-priorities-2026-v1'
+# Narrow quality revision for FUTURE leads; never amend earlier candidate IDs or reviews.
+FOCUS_QUALITY_REVISION = 'precision-aboutness-technology-v2'
 CRITICAL_TECHNOLOGIES = {
     'Advanced semiconductors': (
         ('semiconductor', 'microchip', 'microelectronics', 'chip fabrication',
@@ -261,7 +263,8 @@ REGIONAL_PRIORITIES = {
         'Green technologies': (
             ('green technology', 'green technologies', 'clean technology',
              'renewable energy technology', 'energy efficiency technology',
-             'low-carbon technology', 'circular technology', 'green innovation'),
+             'low-carbon technology', 'circular technology', 'clean energy technology',
+             'zero-emission technology', 'green hydrogen technology'),
             ('green technology innovation', 'clean energy technologies',
              'circular technology research')),
         'Space cooperation': (
@@ -405,7 +408,10 @@ FOCUS_ONLY_LOCATIONS = {
         'Algeria': r'\balgeri(?:a|an)\b', 'Tunisia': r'\btunisi(?:a|an)\b',
         'Libya': r'\bliby(?:a|an)\b',
         'Mauritania': r'\bmauritani(?:a|an)\b',
-        'Angola': r'\bangol(?:a|an)\b', 'Benin': r'\bbenin(?:ese)?\b',
+        'Angola': r'\bangol(?:a|an)\b',
+        # Benin City (including "Benin, Nigeria") is in Nigeria, not the
+        # Republic of Benin.  This disambiguation applies only to NEW scans.
+        'Benin': r'\bbenin(?:ese)?\b(?!\s+(?:city|state)\b|,\s*nigeria\b)',
         'Botswana': r'\bbotswan(?:a|an)\b',
         'Burkina Faso': r'\bburkina\s+faso\b', 'Burundi': r'\bburund(?:i|ian)\b',
         'Cameroon': r'\bcameroon(?:ian)?\b',
@@ -427,7 +433,9 @@ FOCUS_ONLY_LOCATIONS = {
         'Madagascar': r'\bmadagascar\b', 'Malawi': r'\bmalaw(?:i|ian)\b',
         'Mali': r'\bmali(?:an)?\b', 'Mauritius': r'\bmauriti(?:us|an)\b',
         'Mozambique': r'\bmozambi(?:que|can)\b',
-        'Namibia': r'\bnamibi(?:a|an)\b', 'Niger': r'\bniger\b',
+        'Namibia': r'\bnamibi(?:a|an)\b',
+        # Niger State and the Niger Delta/River are NOT the country Niger.
+        'Niger': r'\bniger\b(?!\s+(?:delta|state|river|basin|valley|bend)\b)',
         'São Tomé and Príncipe': r'\bs[ãa]o\s+tom[eé]\s+(?:and|&)\s+pr[íi]ncipe\b',
         'Seychelles': r'\bseychelles\b',
         'Sierra Leone': r'\bsierra\s+leone\b',
@@ -678,6 +686,50 @@ def future_ri_question(topic, place, evidence=''):
     return f'{place} × {topic}: {question} [Lens: {mechanism}; requires Deep Scan verification.]'
 
 
+# A generic survey about opinions of a technology is not itself evidence of
+# research, development, deployment or governance of that technology.  This
+# high-precision *new-candidate* check does not re-score old archive entries.
+NON_TECHNOLOGY_SURVEY = re.compile(
+    r'\b(?:perceptions?|awareness|attitudes?|opinions?|intention(?:s)?|'
+    r'citizen satisfaction|ethical implications|green human resource management|'
+    r'\bESG practices|financial performance)\b', re.I)
+TECHNOLOGY_ENGAGEMENT = re.compile(
+    r'\b(?:algorithms?|prototypes?|fabricat\w*|engineer\w*|computational models?|'
+    r'deep learning models?|machine learning models?|quantum processors?|'
+    r'semiconductor devices?|sensor networks?|robotic systems?|'
+    r'biomanufactur\w*|gene edit\w*|battery storage|electrolys\w*|'
+    r'solar photovoltaic\w*|wind turbines?|hybrid renewable energy systems?|'
+    r'technolog\w* (?:development|deployment|implementation|integration|transfer)|'
+    r'(?:develop\w*|implement\w*|deploy\w*|validat\w*|benchmark\w*|'
+    r'test\w*|optimis\w*|optimiz\w*|simulat\w*)\s+(?:a\s+|the\s+)?'
+    r'(?:system|model|device|technology|robot|algorithm|sensor|platform))\b', re.I)
+
+
+def substantive_policy_technology(label, title, body=''):
+    """Conservative new-lead guard for opinion/management-only technology hits.
+
+    It is a candidate filter, NOT a full-source quality judgment. Independent
+    Deep Scan still decides if a publication actually investigates the named
+    technology, including substantive deployment, technical governance or use.
+    """
+    if not (label.startswith('Critical technology: ') or label == 'ASEAN: Green technologies'):
+        return True
+    title = clean(title)
+    # Title defines the study's central object; an incidental technical term in
+    # a survey abstract must not turn perceptions into a technology finding.
+    if NON_TECHNOLOGY_SURVEY.search(title) and not TECHNOLOGY_ENGAGEMENT.search(title):
+        return False
+    if label == 'ASEAN: Green technologies':
+        # "Green innovation"/ESG without an identifiable technology is a
+        # firm-management subject, not the requested green technology track.
+        all_text = title + ' ' + clean(body)[:900]
+        strong = [p for p in FOCUS_PATTERNS[label]
+                  if p not in {'green innovation'}]
+        if not any(_phrase_occurs(all_text, p) for p in strong):
+            return False
+    return True
+
+
 def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
                       expected_topic=None):
     """Match a selected policy focus to the *substantive* place studied in a work.
@@ -710,6 +762,17 @@ def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
     matches = list(dict.fromkeys(topic_hits + issue_hits))
     if not matches or (expected_topic and expected_topic not in matches):
         return None
+    if policy:
+        # Tag each secondary regional priority only when it is actually valid
+        # in the same substantive country/paragraph. Never attach CELAC/UfM
+        # health to a Nigerian public-health paper or vice versa.
+        matches = [topic for topic in matches if topic not in FOCUS_TRACK or any(
+            priority_region_match(topic, group, place)
+            and any(_phrase_occurs(excerpt, phrase) for phrase in catalogue[topic])
+            for group, place, _basis, excerpt in locations)]
+        if expected_topic not in matches or not substantive_policy_technology(
+                expected_topic, title, body):
+            return None
     # A place can be important for microchips and irrelevant for biodiversity,
     # *within the very same abstract*. Do not transfer an unrelated country's
     # tag onto the query's topic merely because both appear somewhere.
@@ -1449,6 +1512,8 @@ def relevance_work(source, work, *, allowed_topics=None, expected_region=None,
         'focus_issue': expected_topic or match['matched_topics'][0],
         'focus_scope_id': FOCUS_SCOPE_ID if (expected_topic or match['matched_topics'][0]) in FOCUS_TRACK else '',
         'focus_priority_track': FOCUS_TRACK.get(expected_topic or match['matched_topics'][0], 'legacy'),
+        'focus_quality_revision': (FOCUS_QUALITY_REVISION
+            if (expected_topic or match['matched_topics'][0]) in FOCUS_TRACK else ''),
         'aboutness_basis': match['aboutness_basis'],
         'geographic_evidence': match['geographic_evidence'],
         'future_ri_question': match['future_ri_question'],
