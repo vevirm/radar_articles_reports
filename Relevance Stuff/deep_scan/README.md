@@ -22,7 +22,7 @@ Source discovery is bibliographic, **not** source validation. Candidate question
 - **Regional relevance:** secondary region-specific focus tags must be supported by the same relevant country and substantive context. An African public-health study is not automatically CELAC/UfM health; a non-ASEAN study cannot be tagged ASEAN purely from keywords.
 - **Bibliographic identity:** the Deep Scan reviewer checks the canonical DOI against a primary publisher record. A DOI-like URL with a trailing `/pdf` is not automatically a valid DOI; the scanner cannot prove canonical identity from an index alone.
 
-New discoveries carry the `focus_quality_revision: precision-aboutness-technology-v2` marker. It is used only to hand off fresh reviews independently of older *unfinished* packages, which remain available with their original IDs. Earlier results, candidate records, pending manifests, imported decisions and workbook data are **not rewritten** by this code update. The normal importer, JSON result format, schedule and source-integrity requirements remain unchanged.
+Future discoveries carry the `focus_quality_revision: precision-aboutness-technology-v3` marker, separating the tightened intake from previously issued v2 packages. New selection rejects incidental consumer-marketing ML, generic green technology/firm efficiency without an identified clean technology, and organizational morale mislabeled as R&I innovation. Future intake also skips identical publication title **and publishing venue** with a different DOI (without removing existing DOI records). A future precision-v3 KEEP now needs the independently checked `source_verification.verified_doi` and `source_verification.verified_title` fields, which must match the assigned identity; already-issued older packages retain their previous schema for backward compatibility. Earlier results, candidate records, pending manifests, imported decisions and workbook data are **not rewritten** by this code update.
 
 ## Automatic discovery → source-reviewed global Deep Scan
 
@@ -31,7 +31,7 @@ New discoveries carry the `focus_quality_revision: precision-aboutness-technolog
 3. Submit `relevance-focus-deep-scan-v1` JSON review results to `inbox/`. A push to `main` automatically runs `.github/workflows/relevance-focus-deep-scan-import.yml`. The importer checks assignment and structured verification before creating `verified_findings.json` or `review_archive.json`, archives the reviewed JSON to `processed_inbox/`, and rebuilds the workbook.
 4. The workbook's `Global verified futures` tab displays only actual KEEP results from this global evidence-review process. `R&I futures questions` contains **unverified investigative hypotheses**. Legacy EU Radar results remain separately labeled `Radar verified backfill`. The `Regional publication leads` sheet quarantines legacy publisher-related country tags that have no renewed evidence.
 
-If a **new-scope** Deep Scan package has not been fully reviewed, later automatic runs reuse its same package ID, while old historical packages remain importable with their own IDs. Neither selection path silently invalidates outstanding work. The manually triggered catch-up workflow still prioritizes older unfinished assignments under its pre-existing behavior.
+If a **current-revision** Deep Scan package has not been fully reviewed, later automatic runs reuse its same package ID. An earlier revision no longer prevents a fresh batch being offered. Old historical packages remain importable under their existing identifiers. The manual 60-case workflow now defaults to **unreserved candidates from the current 24-priority focus**, preferentially the latest revision; it can also pick still-qualified unassigned v2 leads, and has an explicit `legacy_backlog` option for the former historical catch-up behavior.
 
 ## Source integrity and uncertainty
 
@@ -55,16 +55,27 @@ A full online discovery normally runs for 1500 seconds and requires working Open
 ## Request additional packages without overwriting the original 30
 
 From **Actions → Relevance Focus — Prepare Next Deep Scan Package → Run workflow**,
-choose `package_size` (1–60). Download the run artifact named
+choose `package_size` (1–60), leaving `legacy_backlog` false for the current
+24 priorities. Download the run artifact named
 `relevance-focus-next-deep-scan-*`. Each click reserves the next batch from the
 existing discovery archive, excluding completed reviews and every candidate
-already reserved by the original package or any earlier additional package.
+already reserved by the original package or any earlier additional package;
+title-and-venue duplicates are also excluded from new packages. Older packages
+remain importable. Choose `legacy_backlog=true` only when intentionally preparing
+the former older-scope unfinished assignments (which may overlap reservations).
 The resulting manifest is saved in `packages/<package_id>.json`, so multiple
 independent packages may be imported through the same inbox without overwriting
 `pending_manifest.json`. Each reviewer must return their matching `package_id`.
 No new discovery is performed by this button; use the main Relevance Focus
 scanner for discovery. Packages can be generated until no eligible unassigned
 leads remain. An empty package means no additional eligible leads are available.
+
+Command-line equivalent for a current-focus 60-case package:
+
+```bash
+python scripts/relevance_focus_deep_scan.py prepare --additional --batch-size 60 \
+  --artifact /tmp/relevance_focus_next_review.zip
+```
 
 ## Policy sources
 
