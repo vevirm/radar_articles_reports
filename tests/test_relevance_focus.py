@@ -157,16 +157,19 @@ class RegionalDiscoveryTests(unittest.TestCase):
             'primary_location': {'source': {'display_name': 'International Health Policy Review'}},
         }
 
-    def test_topics_come_from_actual_main_radar_results(self):
+    def test_new_priorities_do_not_depend_on_main_radar_results(self):
         from relevance_focus import focus_areas
         raw = {'strand_a': [
             {'title': 'Biomedical research and clinical research priorities for Europe',
              'summary': 'Clinical research funding and health research capacity.'}
         ], 'strand_b': [], 'strand_c': []}
         areas = focus_areas(raw=raw)
-        self.assertIn('Health research', areas)
-        self.assertNotIn('Artificial intelligence', areas)
-        self.assertNotIn('Quantum', areas)
+        self.assertEqual(areas, focus_areas(raw={}))
+        self.assertEqual(len(areas), 24)
+        self.assertIn('Critical technology: Artificial intelligence', areas)
+        self.assertIn('Critical technology: Quantum technologies', areas)
+        self.assertIn('CELAC: Health', areas)
+        self.assertNotIn('Health research', areas)  # old Radar-derived label
 
     def test_india_only_article_qualifies_through_existing_eu_relevant_issue(self):
         from relevance_focus import relevance_work

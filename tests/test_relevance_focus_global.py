@@ -141,12 +141,14 @@ class AboutnessTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'NOT pass through ordinary EU Radar'):
             focus.scan(Path('/tmp/any-global-batch.json'))
 
-    def test_biodiversity_topic_activated_only_from_main_radar(self):
+    def test_new_focus_replaces_radar_derived_topic_selection_only_for_future_scan(self):
         found = focus.focus_areas(raw={'strand_a': [{'title':
             'Biodiversity observation research and innovation science policy',
             'summary':'Conservation science governance for future ecosystem monitoring.'}]})
-        self.assertIn('Biodiversity', found)
-        self.assertNotIn('Semiconductors', found)
+        self.assertNotIn('Biodiversity', found)
+        self.assertIn('Critical technology: Advanced semiconductors', found)
+        # Historical matching support remains for old already-assigned packages.
+        self.assertIn('Biodiversity', focus.topic_catalogue())
 
     def test_old_publisher_based_archive_never_gets_country_tag(self):
         from unittest.mock import patch
