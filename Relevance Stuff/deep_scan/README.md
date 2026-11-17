@@ -15,6 +15,15 @@ New candidate records have `focus_scope_id: critical-technologies-regional-prior
 
 Source discovery is bibliographic, **not** source validation. Candidate questions are hypothetical; even a strong match is not yet a verified forecast or a scientific claim.
 
+### Surgical precision checks for future scans and associated Deep Scan
+
+- **Geographic aboutness, not a shared place name:** `Niger Delta` and `Niger State` designate locations in **Nigeria**, not the country Niger; `Benin City` and `Benin, Nigeria` do not designate the Republic of Benin. These country-name collisions are excluded from *new* scan assignments. For existing pending new-policy packages the independent Deep Scan also explicitly checks these collisions before accepting KEEP. A reviewer should report REVIEW or DROP with an explanation when the assigned country is incorrect; do not silently rewrite older manifests.
+- **Actual critical-technology engagement:** for technology tracks, seek identifiable technical research, deployment, technological capacity or technology-specific governance. A survey of student perceptions of AI ethics alone is not sufficient. For ASEAN green technologies, generic ESG, green human-resource management or `green innovation` alone is not proof of a green technology. Social or regulatory analyses can still qualify when they substantively investigate an identifiable technology.
+- **Regional relevance:** secondary region-specific focus tags must be supported by the same relevant country and substantive context. An African public-health study is not automatically CELAC/UfM health; a non-ASEAN study cannot be tagged ASEAN purely from keywords.
+- **Bibliographic identity:** the Deep Scan reviewer checks the canonical DOI against a primary publisher record. A DOI-like URL with a trailing `/pdf` is not automatically a valid DOI; the scanner cannot prove canonical identity from an index alone.
+
+New discoveries carry the `focus_quality_revision: precision-aboutness-technology-v2` marker. It is used only to hand off fresh reviews independently of older *unfinished* packages, which remain available with their original IDs. Earlier results, candidate records, pending manifests, imported decisions and workbook data are **not rewritten** by this code update. The normal importer, JSON result format, schedule and source-integrity requirements remain unchanged.
+
 ## Automatic discovery → source-reviewed global Deep Scan
 
 1. `.github/workflows/relevance-focus-scan.yml` automatically runs a dedicated 25-minute OpenAlex/Crossref discovery (six times a day). It updates `../regional_discoveries.json` and `../relevance_stuff.xlsx`, **without** submitting those leads through the ordinary EU Radar admission gate.
