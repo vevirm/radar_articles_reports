@@ -225,6 +225,39 @@ class PrecisionRegressionTests(unittest.TestCase):
             'Critical technology: Advanced materials, manufacturing and recycling technologies',
             'Policy governance for advanced manufacturing in China'))
 
+    def test_new_discovery_filters_low_substance_but_not_real_eu_relevance(self):
+        f = focus.discovery_research_signal
+        for label, title in [
+            ('Africa: Capacities for science and higher education',
+             'Students Perceptions and Expectations of Higher Education in Burundi'),
+            ('Africa: Capacities for science and higher education',
+             'Promoting Inclusive Education for Students with Disabilities in Higher Education'),
+            ('CELAC: Climate change, environmental sustainability and energy transition',
+             'Voices of the Caribbean: Media Discourses on Climate Change in Jamaica News Coverage'),
+            ('CELAC: Health',
+             'From the Editor-in-Chief: Biomedical Research and Biopharmaceutical Advances in Cuba'),
+            ('Critical technology: Advanced materials, manufacturing and recycling technologies',
+             'Additive Manufacturing Awareness for Engineering Education in France'),
+        ]:
+            with self.subTest(title=title):
+                self.assertFalse(f(label, title)[0])
+        for label, title in [
+            ('Critical technology: Quantum technologies',
+             'Quantum error correction architecture demonstrated for qubits'),
+            ('Critical technology: Advanced semiconductors',
+             'Semiconductor investment and manufacturing supply chains in Mexico'),
+            ('Africa: Capacities for science and higher education',
+             'Research infrastructure and research capacity in Ethiopian universities'),
+            ('CELAC: Health',
+             'Brazil health industrial policy and biomedical technology transfer'),
+        ]:
+            with self.subTest(title=title):
+                self.assertTrue(f(label, title)[0])
+        self.assertGreater(f('Critical technology: Advanced semiconductors',
+            'Semiconductor fabrication prototype for power electronics')[1],
+            f('Critical technology: Advanced semiconductors',
+            'General review of semiconductor industry history')[1])
+
     def test_candidate_title_and_publisher_identity_does_not_change_doi_archive(self):
         title = 'Higher education-industry research partnership: engaging with South Africa forms'
         first = {'title':title, 'source':'Human Science Research Council SA',
