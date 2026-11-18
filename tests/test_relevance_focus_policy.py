@@ -48,7 +48,12 @@ class NewFocusSelectionTests(unittest.TestCase):
         for group, place, label, _lens, query, *_ in queries:
             self.assertTrue(focus.priority_region_match(label, group, place))
             if label.startswith('Critical technology: '):
-                self.assertEqual((group, place), ('Global', 'Global / unspecified'))
+                self.assertIn(group, {'Global', 'EU / UK'})
+                if group == 'Global':
+                    self.assertEqual(place, 'Global / unspecified')
+                else:
+                    self.assertIn(place, focus.EU_TECHNOLOGY_TARGETS)
+                    self.assertIn(place, query)
                 self.assertNotIn('Global / unspecified', query)
             else:
                 self.assertNotEqual(group, 'Global')
@@ -133,6 +138,36 @@ class NewFocusSelectionTests(unittest.TestCase):
         self.assertIsNotNone(rec)
         self.assertEqual(rec[2]['focus_region'],'Global / unspecified')
         self.assertTrue(deep.valid_v4_lead(rec[2]))
+
+    def test_every_technology_has_global_and_eu_evidence_query(self):
+        plan = list(focus.focused_search_plan(3))
+        for area in focus.CRITICAL_TECHNOLOGIES:
+            label = 'Critical technology: ' + area
+            lanes = {group for group, _, topic, *_ in plan if topic == label}
+            self.assertEqual(lanes, {'Global', 'EU / UK'})
+        self.assertFalse(any(group == 'EU / UK' for group, place, topic, *_ in plan
+                             if not topic.startswith('Critical technology: ')))
+
+    def test_eu_query_needs_source_aboutness_and_global_remains_eligible(self):
+        label = 'Critical technology: Advanced semiconductors'
+        # No European subject in the publication: a European search query does
+        # not make this a study of Europe's technical capabilities.
+        title = 'Semiconductor chip fabrication process optimization'
+        abstract = 'We validate a manufacturing process for advanced microelectronics.'
+        self.assertIsNone(focus.regional_matching(title, abstract,
+            expected_topic=label, expected_region='Germany'))
+        self.assertIsNotNone(focus.regional_matching(title, abstract,
+            expected_topic=label))
+        source = {'type': 'report', 'title': ['Semiconductor chip fabrication research in Germany'],
+                  'abstract': 'German research laboratories test semiconductor manufacturing.',
+                  'published': {'date-parts': [[2026, 11, 5]]},
+                  'DOI': '10.2345/european-semiconductor-manufacturing-2026',
+                  'publisher': 'Scientific research publisher'}
+        rec = focus.relevance_work('crossref', source, expected_topic=label,
+                                   expected_region='Germany')
+        self.assertIsNotNone(rec)
+        self.assertEqual(rec[2]['eu_evidence_track'], 'source_mentions_eu_subject_unverified')
+        self.assertEqual(rec[2]['focus_group'], 'EU / UK')
 
     def test_eu_primary_study_qualifies_for_global_technology(self):
         m=focus.regional_matching('Semiconductor chip fabrication research in Germany',
