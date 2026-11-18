@@ -258,6 +258,46 @@ class PrecisionRegressionTests(unittest.TestCase):
             f('Critical technology: Advanced semiconductors',
             'General review of semiconductor industry history')[1])
 
+    def test_regional_social_exposure_weak_matches_not_selected(self):
+        f = focus.discovery_research_signal
+        cases = [
+            ('Africa: Public health',
+             'Public Health Risks Associated with Almajiri Migration: The Role of Social Workers in Northern Nigeria'),
+            ('CELAC: Climate change, environmental sustainability and energy transition',
+             'How climate change is shaping young people’s health: a participatory, youth co-led study from Bangladesh, Guatemala and Nigeria'),
+            ('Africa: Green transition',
+             'Crop vulnerability and climate adaptation to moisture stress in the semi-arid zones of Senegal'),
+        ]
+        for label, title in cases:
+            with self.subTest(title=title):
+                self.assertFalse(f(label, title, 'Generic research findings reported.')[0])
+
+    def test_legitimate_ri_and_reviews_outlooks_survive(self):
+        f = focus.discovery_research_signal
+        cases = [
+            ('Africa: Green transition',
+             'Crop vulnerability forecasting with a new remote sensing model in Senegal'),
+            ('Africa: Green transition',
+             'Modelling climate adaptation infrastructure investments in Senegal: future scenarios'),
+            ('Africa: Public health',
+             'Implementation of a disease surveillance platform for mobile populations in Nigeria'),
+            ('CELAC: Health',
+             'Participatory design of a new public health surveillance system in Guatemala'),
+            ('Critical technology: Advanced semiconductors',
+             'Development of Photolithography for Semiconductor Manufacturing – A Review'),
+            ('Critical technology: Advanced connectivity, navigation and digital technologies',
+             'From 5G to 6G: A Survey on Security, Privacy, and Standardization Pathways'),
+            ('Critical technology: Robotics and autonomous systems',
+             'Outlook for robotics-related clinical trials: current status and future directions'),
+            ('Africa: Green transition',
+             'A foresight outlook for green hydrogen investment in Namibia'),
+        ]
+        for label, title in cases:
+            with self.subTest(title=title):
+                self.assertTrue(f(label, title)[0])
+        self.assertGreaterEqual(f('Critical technology: Advanced semiconductors',
+            'A review of future semiconductor manufacturing pathways')[1], 0)
+
     def test_candidate_title_and_publisher_identity_does_not_change_doi_archive(self):
         title = 'Higher education-industry research partnership: engaging with South Africa forms'
         first = {'title':title, 'source':'Human Science Research Council SA',
