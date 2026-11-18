@@ -575,6 +575,32 @@ class FocusPackageContinuityTests(unittest.TestCase):
                                  & {r['candidate_id'] for r in auto['jobs']})
                 self.assertEqual(deep.prepare(batch_size=30)['package_id'],auto['package_id'])
 
+    def test_60_selection_reranks_old_candidates_and_preserves_reviews(self):
+        # A formerly high-scoring routine-service publication must not
+        # outrank evidence of a substantive technology development.
+        weak = {**self.new_lead(), 'candidate_id':'REL-weak',
+                'title':'Public health management of COVID-19 in Morocco',
+                'focus_score':99, 'focus_quality_revision':'precision-aboutness-technology-v2'}
+        strong = {**self.new_lead(), 'candidate_id':'REL-strong',
+                  'title':'Photolithography manufacturing process for advanced semiconductors',
+                  'focus_score':68, 'focus_quality_revision':focus.FOCUS_QUALITY_REVISION}
+        outlook = {**self.new_lead(), 'candidate_id':'REL-outlook',
+                   'title':'Quantum sensing technology roadmap and future outlook',
+                   'focus_score':65}
+        ranked=deep.balanced_review_jobs([weak, strong, outlook], 2)
+        self.assertEqual([x['candidate_id'] for x in ranked], ['REL-strong','REL-outlook'])
+        self.assertEqual(weak['focus_quality_revision'], 'precision-aboutness-technology-v2')
+
+    def test_current_discovery_does_not_penalize_valuable_outlooks(self):
+        label='Critical technology: Quantum technologies'
+        allowed, modifier, _ = focus.discovery_research_signal(
+            label, 'Quantum sensing technology roadmap and future outlook')
+        self.assertTrue(allowed)
+        self.assertGreaterEqual(modifier, 0)
+        allowed, _, _ = focus.discovery_research_signal(
+            'Africa: Public health', 'Social workers and Almajiri migration in Nigeria')
+        self.assertFalse(allowed)
+
 
 if __name__ == '__main__':
     unittest.main()
