@@ -40,9 +40,10 @@ RISKS = {'none_identified', 'suspected', 'confirmed'}
 INSTRUCTIONS = '''# Relevance Focus: Global R&I Futures Deep Scan
 
 MISSION: Independently verify a publication's **aboutness**, source integrity,
-the assigned policy PRIORITY connection, and *possible* future R&I significance for its own
-country/region. This is NOT the EU-centered Radar Deep Scan: **no European/EU
-relevance, European comparison, or EU impact is required or preferred**.
+the assigned policy PRIORITY connection, and potential EU-facing research,
+innovation, economic-security and futures implications. This is separate from
+ordinary Radar Deep Scan. EU significance is assessed analytically, NOT by
+requiring the source to mention Europe or assert an EU impact.
 
 Use MANIFEST.json. Research EACH listed DOI and source yourself, using publicly
 accessible publisher/repository full text or substantive primary material (or
@@ -63,8 +64,11 @@ A candidate with `focus_scope_id: critical-technologies-regional-priorities-2026
 must demonstrably fit at least ONE assigned track:
 - `Critical technology: ...`: the publication must actually concern the named
   technology area from the TEN EU economic-security critical-technology areas.
-  The research subject can be any substantive external country/region already
-  covered by this Relevance Focus scanner; an EU impact claim is NOT required.
+  For NEW `eu-perspective-global-technology-v4` cases, all countries including
+  EU/UK and works without a named country qualify if the TECHNOLOGY is central.
+  Do not reject a real technological development for missing geography or an EU
+  mention. Infer EU significance cautiously and distinguish from source claims.
+  Older issued cases retain the rules under which their manifests were created.
 - `CELAC: ...`, `Union for the Mediterranean: ...`, `Africa: ...`, or `ASEAN: ...`:
   the work must actually concern the named R&I priority IN the assigned region.
   A publication on an ASEAN country and an unrelated CELAC priority is NOT a match.
@@ -96,7 +100,7 @@ PRECISION CHECKS (also apply to existing unfinished new-focus packages):
   an incorrect primary focus to another track.
 - Check the exact DOI against the primary publisher record; an apparent /pdf
   suffix or landing-page URL is not proof of the article's canonical DOI.
-  For new precision-v3 jobs, provide source_verification.verified_doi and
+  For new precision-v3 and EU-perspective-v4 jobs, provide source_verification.verified_doi and
   source_verification.verified_title as independently checked publisher metadata;
   KEEP cannot rely solely on an identity_verified checkbox. If the displayed
   DOI/title differs from the manifest or cannot be confirmed, choose REVIEW.
@@ -131,7 +135,7 @@ source_type (scholarly_article, academic_book, institutional_report,
 official_announcement or other), source_integrity (independent_credible,
 credible_primary_claim_only, unverified, unreliable), propaganda_or_influence_risk
 (none_identified, suspected, confirmed), basis (specific accessible evidence),
-and independent_corrob_urls (array, possibly empty). New precision-v3 jobs also
+and independent_corrob_urls (array, possibly empty). New precision-v3 and EU-perspective-v4 jobs also
 require verified_doi (the exact canonical DOI from primary publisher metadata)
 and verified_title (the publisher's actual article title). For older issued
 packages these fields are optional for backward compatibility, but if supplied
@@ -139,11 +143,27 @@ they must agree with the assigned publication.
 aboutness: place (EXACT manifest focus_region), is_substantive boolean,
 publisher_country_only boolean, basis (substantive research object, NOT outlet),
 verified_excerpt (short verifiable paraphrase/quote, NOT fabricated).
+For NEW EU-perspective-v4 critical technologies, `place: Global / unspecified`
+means the work need not identify a country; `is_substantive` then certifies the
+TECHNOLOGY is genuinely the subject, not geographical aboutness. For a named
+place, verify any geographic claim rather than relying on author affiliations.
 topic: label (EXACT manifest focus_issue), is_relevant boolean, basis.
 futures: classification (observed / possible / mixed), mechanism (which R&I
 system or science/technology development is at stake), why_could_matter
 (conditional, not a predicted outcome), uncertainty (what is not known),
 research_question (one investigable question, preferably ending '?').
+For NEW EU-perspective-v4 cases, also include `eu_perspective` with `relevance`
+(`direct`, `plausible`, or `uncertain`), `implications` (specific EU-facing R&I,
+economic-security, capability, partnership or dependency mechanism), and
+`evidence_limits` (separate observed source facts from your EU interpretation).
+Do not require explicit EU mentions in the underlying publication. An EU-facing connection is required for a NEW KEEP: it may be direct or
+plausible, but must identify a concrete channel (EU research capabilities,
+economic security, strategic dependency, competitiveness, standards, or
+cooperation opportunities) supported by the actual development. Merely belonging
+to one of the ten EU-defined technology categories is not itself proof of that
+connection. If EU significance remains uncertain or cannot be credibly
+articulated, choose REVIEW rather than inventing an impact. Regional cooperation priorities must STILL have substantiated
+geographical aboutness in the assigned partner region.
 
 IMPORTANT OUTPUT REQUIREMENT: For every REVIEW or DROP, include a detailed
 "review_reason" (at least 20 characters). You may also include "decision_basis"
@@ -151,8 +171,9 @@ as a more general explanation; the importer accepts decision_basis as a fallback
 if review_reason is missing, but review_reason is preferred. Every KEEP still
 requires all four substantive evidence sections.
 
-KEEP only when ALL identity, credible source, assigned priority, geography and evidence
-conditions pass. If only a state-controlled press statement is available,
+KEEP only when ALL identity, credible source, assigned priority and evidence
+conditions pass. Geographic aboutness is mandatory for region-specific priorities,
+not for NEW EU-perspective-v4 critical technology works. If only a state-controlled press statement is available,
 DO NOT treat that as independent confirmation of a claimed technological
 breakthrough. REVIEW unresolved source access/conflicts/identity and explicitly
 explain why; DROP demonstrable false relevance, source manipulation or
@@ -182,10 +203,14 @@ def valid_v4_lead(row):
     if not (isinstance(row, dict) and not excluded_future_relevance_lead(row)
             and isinstance(row.get('candidate_id'), str)
             and row['candidate_id'].startswith('REL-') and row.get('aboutness_basis')
-            in {'title', 'substantive abstract / reader claim'} and row.get('geographic_evidence')
+            in ({'title', 'substantive abstract / reader claim', 'technology subject'}
+                if row.get('focus_quality_revision') == FOCUS_QUALITY_REVISION else
+                {'title', 'substantive abstract / reader claim'}) and row.get('geographic_evidence')
             and row.get('focus_region') and row.get('focus_issue')
-            # Preserve the existing non-EU/UK primary research setting.
-            and row.get('focus_group') != 'EU / UK'
+            # Older issued discoveries retain their original exclusion; new v4
+            # critical technologies are allowed globally, including EU/UK.
+            and (row.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
+                 or row.get('focus_group') != 'EU / UK')
             and re.fullmatch(r'https://doi\.org/10\.\d{4,9}/\S+', str(row.get('url') or ''), re.I)):
         return False
     if row.get('focus_scope_id') == FOCUS_SCOPE_ID:
@@ -205,7 +230,8 @@ def current_focus_reviewable(row):
     """
     return (valid_v4_lead(row) and row.get('focus_scope_id') == FOCUS_SCOPE_ID
             and row.get('focus_quality_revision') in {
-                'precision-aboutness-technology-v2', FOCUS_QUALITY_REVISION}
+                'precision-aboutness-technology-v2', 'precision-aboutness-technology-v3',
+                FOCUS_QUALITY_REVISION}
             and substantive_policy_technology(row['focus_issue'],
                                               row['title'], row.get('geographic_evidence', '')))
 
@@ -241,7 +267,7 @@ def write_review_artifact(manifest, artifact):
                           'provide review_reason (20+ chars); decision_basis is '
                           'also accepted as a fallback. Keep requires complete '
                           'source_verification, aboutness, topic and futures. '
-                          'For precision-v3 leads, independently confirm '
+                          'For precision-v3 and EU-perspective-v4 leads, independently confirm '
                           'source_verification.verified_doi and verified_title.')}, indent=2))
 
 
@@ -319,7 +345,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False, legacy_backlog=Fa
                         'focus_scope_id': FOCUS_SCOPE_ID,
                         'focus_quality_revision': FOCUS_QUALITY_REVISION,
                         'package_purpose': 'automatic_scan',
-                        'global_scope': 'All 10 critical technologies OR geographically targeted regional R&I priorities; no EU relevance required',
+                        'global_scope': 'EU economic-security perspective: ten globally searched critical technologies OR targeted regional cooperation priorities',
                         'jobs': jobs}
             atomic_write(PACKAGES / f'{package_id}.json', manifest)
             write_review_artifact(manifest, artifact)
@@ -363,6 +389,16 @@ def prepare(*, batch_size=30, artifact=None, additional=False, legacy_backlog=Fa
                     int(unique[key].get('focus_score') or 0), unique[key]['candidate_id']):
                 unique[key] = row
         available = list(unique.values())
+        # Re-screen older unassigned leads under current EU-perspective rules.
+        # This modifies ONLY the newly emitted assignment copies, never archive,
+        # earlier package manifests, reviews or KEEP/REVIEW/DROP findings.
+        available = [{**row, 'focus_quality_revision': FOCUS_QUALITY_REVISION,
+                      'future_ri_question': ('Which EU research, innovation, economic-security '
+                          'or international-cooperation implications could follow from '
+                          'this documented development, and what remains uncertain?'),
+                      'scope': 'EU-perspective policy-priority reassessment'}
+                     if row.get('focus_quality_revision') != FOCUS_QUALITY_REVISION
+                     else row for row in available]
         # Fill with the latest revision first; only then use still-useful
         # unassigned v2 discoveries to reach a requested batch of up to 60.
         latest = [r for r in available if r.get('focus_quality_revision') == FOCUS_QUALITY_REVISION]
@@ -406,13 +442,13 @@ def prepare(*, batch_size=30, artifact=None, additional=False, legacy_backlog=Fa
     manifest = {'format': RESULT_FORMAT, 'package_id': package_id,
                 'generated_at': (prior_manifest.get('generated_at') if not additional and outstanding and pending_ids - finished
                                  else datetime.now(timezone.utc).isoformat()),
-                'global_scope': 'No EU relevance required; topical aboutness and R&I futures only',
+                'global_scope': 'EU strategic R&I perspective; critical technology globally, cooperation priorities by region',
                 'jobs': jobs}
     if additional and not legacy_backlog:
         manifest.update(focus_scope_id=FOCUS_SCOPE_ID,
                         focus_quality_revision=FOCUS_QUALITY_REVISION,
                         package_purpose='manual_current_focus',
-                        global_scope='Current 24 critical-technology OR regional R&I priorities; source verification required')
+                        global_scope='EU perspective; 10 globally selected critical technologies OR 14 region-specific priorities; independent verification required')
     if additional:
         # Do not overwrite an active original package or other extra package.
         # An empty queue is reported to the caller without creating a reservation.
@@ -477,7 +513,8 @@ def validate_result(result, lead):
         **({'focus_quality_revision': lead['focus_quality_revision']}
            if lead.get('focus_quality_revision') else {})
     } if lead.get('focus_scope_id') == FOCUS_SCOPE_ID else {})
-    if decision == 'keep' and not unambiguous_new_focus_geography(lead):
+    if (decision == 'keep' and lead.get('focus_quality_revision') != FOCUS_QUALITY_REVISION
+            and not unambiguous_new_focus_geography(lead)):
         raise ValueError('KEEP uses a wrong country tag: Niger Delta/State or Benin City, Nigeria')
     if (decision == 'keep' and lead.get('focus_scope_id') == FOCUS_SCOPE_ID
             and not substantive_policy_technology(lead.get('focus_issue', ''),
@@ -510,7 +547,8 @@ def validate_result(result, lead):
     if lead.get('focus_scope_id') == FOCUS_SCOPE_ID:
         # Machine-check consistency with the manifest. Actual primary-record
         # verification still belongs to the independent source reviewer.
-        needs_explicit_identity = lead.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
+        needs_explicit_identity = lead.get('focus_quality_revision') in {
+            'precision-aboutness-technology-v3', FOCUS_QUALITY_REVISION}
         verified_doi = src.get('verified_doi')
         verified_title = src.get('verified_title')
         if needs_explicit_identity and (not verified_doi or not verified_title):
@@ -526,7 +564,10 @@ def validate_result(result, lead):
         raise ValueError('Corroboration links must be a list of genuine URLs')
     if (geo.get('is_substantive') is not True or geo.get('publisher_country_only') is not False
             or geo.get('place') != lead['focus_region']):
-        raise ValueError('KEEP must establish the substantive manifest geography, not publisher nationality')
+        raise ValueError('KEEP must verify manifest subject; country aboutness is mandatory only for regional priorities')
+    # In v4, is_substantive attests to technology engagement when no location
+    # is identified; the primary source need not establish an invented country.
+
     text_field(geo.get('basis'), 'aboutness.basis')
     text_field(geo.get('verified_excerpt'), 'aboutness.verified_excerpt')
     if topic.get('is_relevant') is not True or topic.get('label') != lead['focus_issue']:
@@ -534,6 +575,12 @@ def validate_result(result, lead):
     if lead.get('focus_scope_id') == FOCUS_SCOPE_ID and not valid_v4_lead(lead):
         raise ValueError('KEEP cannot admit a new-policy theme outside its technology/region scope')
     text_field(topic.get('basis'), 'topic.basis')
+    if lead.get('focus_quality_revision') == FOCUS_QUALITY_REVISION:
+        eu = result.get('eu_perspective')
+        if not isinstance(eu, dict) or eu.get('relevance') not in {'direct', 'plausible'}:
+            raise ValueError('New-policy KEEP requires a defensible direct or plausible EU connection; uncertain belongs in REVIEW')
+        text_field(eu.get('implications'), 'eu_perspective.implications')
+        text_field(eu.get('evidence_limits'), 'eu_perspective.evidence_limits')
     if fut.get('classification') not in {'observed', 'possible', 'mixed'}:
         raise ValueError('Future status must separate observed from possible')
     for name in ('mechanism','why_could_matter','uncertainty','research_question'):

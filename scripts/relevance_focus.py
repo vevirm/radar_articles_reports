@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Policy-focused global R&I discovery, separate from the EU-focused Radar.
+"""EU-policy-focused R&I discovery, independent of ordinary Radar.
 
-New searches target 10 critical technology areas OR the relevant CELAC, UfM,
-Africa and ASEAN R&I priorities. The existing non-EU/UK subject-region and
-source-neutral aboutness rules remain. Old discoveries are not reclassified;
-independent Relevance Deep Scan verifies new bibliographic leads.
+The ten critical technologies are searched worldwide with no country gate;
+CELAC, UfM, Africa and ASEAN priorities are geographically targeted.
+Deep Scan independently tests the source and plausible EU strategic implications.
+Existing archives, issued packages and verified decisions are never rewritten.
 """
 from __future__ import annotations
 
@@ -146,7 +146,7 @@ TOPIC_SEARCH_TERMS = {
 # Regional topics follow the supplied EU-CELAC, UfM, EU-Africa, ASEAN-EU priorities.
 FOCUS_SCOPE_ID = 'critical-technologies-regional-priorities-2026-v1'
 # Narrow quality revision for FUTURE leads; never amend earlier candidate IDs or reviews.
-FOCUS_QUALITY_REVISION = 'precision-aboutness-technology-v3'
+FOCUS_QUALITY_REVISION = 'eu-perspective-global-technology-v4'
 CRITICAL_TECHNOLOGIES = {
     'Advanced semiconductors': (
         ('semiconductor', 'microchip', 'microelectronics', 'chip fabrication',
@@ -288,7 +288,7 @@ REGIONAL_PRIORITIES = {
     },
 }
 # Only used for thematic targeting, not for rewriting historical country tags.
-# The scanner's pre-existing EU/UK exclusion remains in force.
+# Regional cooperation selection remains tied to constituent regions.
 MEDITERRANEAN_PRIORITY_PLACES = {
     # The sixteen non-EU UfM member countries. Libya is an observer, not a member.
     'Morocco', 'Algeria', 'Tunisia', 'Egypt', 'Israel', 'Palestine',
@@ -318,8 +318,10 @@ for _region, _topics in REGIONAL_PRIORITIES.items():
 def priority_region_match(label, group, place):
     """Scope regional priorities to their real constituent countries/regions."""
     track = FOCUS_TRACK.get(label)
-    if track == 'critical_technology' or track is None:
-        return group != 'EU / UK'
+    if track == 'critical_technology':
+        return True  # Global including EU/UK; topic, not location, determines eligibility.
+    if track is None:
+        return group != 'EU / UK'  # Historical path unchanged.
     if track == 'CELAC':
         return group == 'Americas' and place not in {'United States', 'Canada'}
     if track == 'Union for the Mediterranean':
@@ -336,7 +338,7 @@ def priority_region_match(label, group, place):
 ACCEPTED_OPENALEX_TYPES = {'article', 'review', 'book', 'book-chapter', 'report'}
 ACCEPTED_CROSSREF_TYPES = {'journal-article', 'book', 'book-chapter', 'report', 'proceedings-article'}
 MIN_PUBLICATION_DATE = date(2025, 1, 1)  # All new leads and backfilled workbook rows
-OUTSIDE_EU_UK_SHARE = 1.0  # EU/UK are ordinary Radar territory, not a global discovery allocation
+OUTSIDE_EU_UK_SHARE = 1.0  # Historical reporting metric; v4 selection is geography-neutral.
 TOPIC_EXTRA_DEFINITIONS = {
     # Only activated when corresponding evidence exists in the current Main Radar.
     'Biodiversity': ['biodiversity', 'ecosystem monitoring', 'conservation science',
@@ -781,6 +783,39 @@ def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
     if not title or not (POLICY_RI if policy else RI).search(lead):
         return None
     locations = aboutness_locations(title, body, policy=policy)
+    # Critical technologies are globally relevant to EU economic security: a
+    # technology paper need not name ANY country (or mention Europe).  The
+    # geographical aboutness gate applies only to regional cooperation topics.
+    global_technology = policy and FOCUS_TRACK[expected_topic] == 'critical_technology'
+    if global_technology:
+        if expected_region and not any(loc[1] == expected_region for loc in locations):
+            return None  # Explicit country assertions must still be supported.
+        catalogue = topic_catalogue()
+        phrases = catalogue.get(expected_topic, ())
+        if not any(_phrase_occurs(lead, phrase) for phrase in phrases):
+            return None
+        if not substantive_policy_technology(expected_topic, title, body):
+            return None
+        title_hit = any(_phrase_occurs(title, phrase) for phrase in phrases)
+        if not title_hit and not any(_phrase_occurs(body[:900], phrase) for phrase in phrases):
+            return None
+        chosen = next((loc for loc in locations if loc[1] == expected_region), None)
+        if chosen is None and locations:
+            chosen = locations[0]
+        place = chosen[1] if chosen else 'Global / unspecified'
+        group = chosen[0] if chosen else 'Global'
+        evidence = chosen[3] if chosen else title + ('. ' + body[:450] if body else '')
+        return {'score': min(99, 64 + 12 * title_hit + 5 * bool(POLICY.search(lead))),
+                'regions': group, 'countries': place, 'issues': expected_topic,
+                'stakeholders': '; '.join(hits(lead, STAKEHOLDERS)),
+                'match_reason': 'EU economic-security critical technology: ' + expected_topic +
+                                '; geographical location is contextual, not a requirement',
+                'aboutness_basis': chosen[2] if chosen else 'technology subject',
+                'geographic_evidence': evidence,
+                'future_ri_question': future_ri_question(expected_topic, 'the EU', evidence),
+                'temporal_lens': temporal_lens(title, body),
+                'matched_topics': [expected_topic], 'matched_locations': [place],
+                'primary_group': group}
     if not locations:
         return None
     if expected_region and not any(p == expected_region for _, p, _, _ in locations):
@@ -851,7 +886,8 @@ def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
             'match_reason': 'Policy focus: ' + ', '.join(matches[:4]) + '; substantive setting: ' +
                             ', '.join(p for _, p, _, _ in locations[:4]),
             'aboutness_basis': chosen[2], 'geographic_evidence': chosen[3],
-            'future_ri_question': future_ri_question(expected_topic or matches[0], chosen[1], chosen[3]),
+            'future_ri_question': future_ri_question(expected_topic or matches[0],
+                'the EU' if policy else chosen[1], chosen[3]),
             'temporal_lens': temporal_lens(title, body),
             'matched_topics': matches,
             'matched_locations': [p for _, p, _, _ in locations],
@@ -1240,7 +1276,9 @@ def compile_records():
     for lead in latest_leads:
         if not isinstance(lead, dict) or not lead.get('title') or not publication_date_in_scope(lead.get('date')):
             continue
-        if lead.get('focus_group') == 'EU / UK':
+        if lead.get('focus_group') == 'EU / UK' and not (
+                lead.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
+                and lead.get('focus_priority_track') == 'critical_technology'):
             stats['eu_uk_legacy_leads_excluded_from_global_view'] += 1
             continue
         status = test_results.get(clean(lead.get('candidate_id')))
@@ -1285,7 +1323,7 @@ def compile_records():
         'catalogue': {'countries': list(dict.fromkeys(k for group in GEOGRAPHY.values() for k in group)),
                       'regions': list(GEOGRAPHY), 'issues': list(ISSUES) + [COUNTRY_POLICY_ISSUE],
                       'stakeholders': list(STAKEHOLDERS)},
-        'policy': 'Relevance Focus is a global aboutness and R&I futures lane outside the EU/UK as primary study setting: no European relevance needed. Only publications dated 2025-01-01 onward: audited active and inactive Main Radar and retained Deep Scan/Reader records (not historical archive). '
+        'policy': 'Relevance Focus separately tracks ten EU strategic critical technologies globally (including EU/UK and studies without named countries), OR regional R&I cooperation priorities within CELAC, UfM, Africa and ASEAN. Deep Scan assesses potential EU R&I and futures significance without requiring explicit EU mentions. Only publications dated 2025-01-01 onward: audited active and inactive Main Radar and retained Deep Scan/Reader records (not historical archive). '
                   'Verified requires Deep Scan identity verification and KEEP admission. '
                   'A geography+explicit R&I-policy focus may also qualify without a named emerging issue. '
                   'Archived records are labelled; this workbook never readmits dropped works.'
@@ -1340,7 +1378,7 @@ def regional_targets(slot, *, policy=False):
 
 
 def focused_search_plan(slot: int, focus=None):
-    """Rotate all ten technologies worldwide (outside EU/UK primary settings),
+    """Rotate all ten technologies globally without geographical eligibility,
     while regional themes are queried ONLY in their corresponding regions.
 
     The existing source-country-neutral aboutness and no-EU-bridge rules stay.
@@ -1356,14 +1394,14 @@ def focused_search_plan(slot: int, focus=None):
     if not global_targets:
         return
     all_targets = [(group, place) for group, places in (FOCUS_GEOGRAPHY if policy_mode else GEOGRAPHY).items()
-                   if group != 'EU / UK' for place in places]
+                   for place in places]
     seen = set()
     for wave in range(FOCUSED_PAGE_DEPTH):
         for idx, (topic, term) in enumerate(items):
-            targets = ([(g, p) for g, p in all_targets
-                        if priority_region_match(topic, g, p)]
-                       if topic in FOCUS_TRACK and FOCUS_TRACK[topic] != 'critical_technology'
-                       else global_targets)
+            is_global_tech = topic in FOCUS_TRACK and FOCUS_TRACK[topic] == 'critical_technology'
+            targets = ([('Global', 'Global / unspecified')] if is_global_tech else
+                       [(g, p) for g, p in all_targets if priority_region_match(topic, g, p)]
+                       if topic in FOCUS_TRACK else global_targets)
             if not targets:
                 continue
             # Co-prime traversal gives many countries a chance in each track
@@ -1376,7 +1414,8 @@ def focused_search_plan(slot: int, focus=None):
             variants = FOCUS_QUERIES.get(topic, (term,))
             query_term = variants[(wave + slot + idx) % len(variants)]
             lens_name, suffix = TEMPORAL_QUERIES[(idx + wave + slot) % len(TEMPORAL_QUERIES)]
-            query = f'{query_term} {SEARCH_GEOGRAPHY.get(place, place)} {suffix}'.strip()
+            query = (f'{query_term} {suffix}' if is_global_tech else
+                     f'{query_term} {SEARCH_GEOGRAPHY.get(place, place)} {suffix}').strip()
             providers = ('openalex', 'crossref') if (slot + idx + wave) % 2 == 0 else ('crossref', 'openalex')
             for provider in providers:
                 key = (provider, query)
@@ -1427,7 +1466,7 @@ def previous_publication_venues(existing, older_snapshots=()):
 
 
 def balanced_candidates(picked, max_candidates, *, venue_history=None):
-    """Region/topic balance and soft journal/publisher diversity across runs.
+    """Topic/place balance and soft journal/publisher diversity across runs.
 
     Prefer less-used publishing venues among similarly scored candidates, while
     still accepting the only eligible journal if that is what the evidence has.
@@ -1474,20 +1513,21 @@ def balanced_candidates(picked, max_candidates, *, venue_history=None):
 
     core = diverse_order(core)
     external = diverse_order(external)
-    # A dedicated GLOBAL scanner does not reserve 15% of its batch for EU/UK.
-    # Choose external subjects first, regardless of publisher nationality.
-    # EU-only rows are ignored by default in online discovery (no EU targets).
-    preferred_external = min(len(external), ceil(max_candidates * OUTSIDE_EU_UK_SHARE))
-    selected = external[:preferred_external]
-    external = external[preferred_external:]
-    n_core = max(0, max_candidates-len(selected))
-    selected.extend(core[:n_core])
-    core = core[n_core:]
-    if len(selected) < max_candidates:
-        selected.extend(external[:max_candidates-len(selected)])
-    if len(selected) < max_candidates:
-        selected.extend(core[:max_candidates-len(selected)])
-    return selected[:max_candidates]
+    # Preserve venue/topic diversity while treating EU and external discoveries
+    # equally; critical-technology relevance is established by subject matter.
+    if not any(row.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
+               for row in [*core, *external]):
+        selected = external[:max_candidates]
+        selected.extend(core[:max(0, max_candidates - len(selected))])
+        return selected
+    selected = []
+    while len(selected) < max_candidates and (core or external):
+        # Neither EU/UK nor external subjects are mandatory or disqualifying.
+        for pool in (external, core):
+            if pool and len(selected) < max_candidates:
+                selected.append(pool.pop(0))
+    return selected
+
 
 
 def crossref_date(item):
@@ -1572,9 +1612,14 @@ def relevance_work(source, work, *, allowed_topics=None, expected_region=None,
         'aboutness_basis': match['aboutness_basis'],
         'geographic_evidence': match['geographic_evidence'],
         'future_ri_question': match['future_ri_question'],
-        'scope': 'global-topic-place; no EU relevance required',
+        'scope': ('global-topic-place; no EU relevance required'
+                  if expected_topic not in FOCUS_TRACK
+                  else 'EU-perspective global critical technology'
+                  if FOCUS_TRACK.get(expected_topic) == 'critical_technology'
+                  else 'EU-perspective regional cooperation priority'),
         'source_integrity_status': 'unverified — mandatory independent Deep Scan',
-        'curator_note': 'Global R&I futures question: ' + match['future_ri_question'] +
+        'curator_note': ('EU-oriented R&I futures question: ' if expected_topic in FOCUS_TRACK
+                         else 'Global R&I futures question: ') + match['future_ri_question'] +
                         ' Evidence to test: ' + match['geographic_evidence'] +
                         '. Indexed bibliographic lead, not independent verification or evidence of a forecast.',
     }
@@ -1722,7 +1767,9 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                     continue
                 try:
                     rec = relevance_work(provider, work, allowed_topics=active_focus,
-                                         expected_region=place, expected_topic=topic)
+                                         expected_region=(None if topic in FOCUS_TRACK and
+                                             FOCUS_TRACK[topic] == 'critical_technology' else place),
+                                         expected_topic=topic)
                 except (ValueError, TypeError, AttributeError):
                     stats['malformed_work'] += 1
                     continue
