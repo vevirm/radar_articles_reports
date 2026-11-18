@@ -146,7 +146,7 @@ TOPIC_SEARCH_TERMS = {
 # Regional topics follow the supplied EU-CELAC, UfM, EU-Africa, ASEAN-EU priorities.
 FOCUS_SCOPE_ID = 'critical-technologies-regional-priorities-2026-v1'
 # Narrow quality revision for FUTURE leads; never amend earlier candidate IDs or reviews.
-FOCUS_QUALITY_REVISION = 'eu-perspective-substantive-discovery-v6'
+FOCUS_QUALITY_REVISION = 'eu-perspective-substantive-discovery-v7'
 CRITICAL_TECHNOLOGIES = {
     'Advanced semiconductors': (
         ('semiconductor', 'microchip', 'microelectronics', 'chip fabrication',
@@ -785,7 +785,8 @@ LOW_SIGNAL_TITLE = re.compile(
     r'educational perceptions?|consumer behavio[u]?r|purchase intentions?)\b', re.I)
 DEVELOPMENT_EVIDENCE = re.compile(
     r'\b(?:demonstrat\w*|prototype\w*|experiment\w*|validat\w*|'
-    r'benchmark\w*|fabricat\w*|synthesi[sz]\w*|develop\w*|'
+    r'benchmark\w*|fabricat\w*|synthesi[sz]\w*|'
+    r'develop(?:ed|ing|ment) (?:of |a |an |new |novel |technolog|system|method|platform|device|material|process)|'
     r'engineer(?:ed|ing) (?:material|system|device|process|protein|cell)\w*|characteri[sz]\w*|clinical trials?|'
     r'pilot (?:study|deployment|project)|field trials?|'
     r'performance evaluat\w*|systematic assess\w*|'
@@ -820,6 +821,14 @@ REGIONAL_RI_TITLE_ANCHOR = re.compile(
     r'drought.resistant (?:variet\w*|crop\w*)|'
     r'field trials?|clinical trials?|vaccin\w* (?:strateg\w*|platform)|'
     r'implementation of (?:a |an )?(?:new |novel )?(?:system|platform|technology))\b', re.I)
+# Be selective about *ordinary* social/education/service descriptions, not
+# technology, substantive innovation systems, or forward-looking syntheses.
+# These are soft ranking signals unless the regional subject is clearly off-R&I.
+ROUTINE_SERVICE_TITLE = re.compile(
+    r'\b(?:lecturers?.? experiences?|integration in lecturing|'
+    r'work.study integration|dual.assurance framework|'
+    r'facility capacity to provide|national security and climate adaptation governance)\b', re.I)
+
 REVIEW_OR_FORESIGHT_TITLE = re.compile(
     r'\b(?:review|survey|outlook|future directions?|future prospects?|'
     r'roadmap|foresight|horizon scanning|research progress|'
@@ -896,6 +905,8 @@ def discovery_research_signal(label, title, abstract=''):
     adjustment = (12 if title_signal else 5 if abstract_signal else
                   0 if review_or_foresight else -9)
     adjustment += 7 if eu_mechanism else 0
+    if ROUTINE_SERVICE_TITLE.search(title) and not title_signal and not review_or_foresight:
+        adjustment -= 10  # rank lower, but preserve borderline research for review
     return True, adjustment, ('substantive R&I signal in title' if title_signal else
                               'R&I signal in abstract' if abstract_signal else
                               'topic-only candidate; EU implications unverified')

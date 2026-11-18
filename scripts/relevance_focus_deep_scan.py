@@ -21,7 +21,8 @@ import zipfile
 from relevance_focus import (excluded_future_relevance_lead, FOCUS_SCOPE_ID,
                              FOCUS_QUALITY_REVISION, FOCUS_TRACK,
                              priority_region_match, substantive_policy_technology,
-                             publication_title_venue_identity, doi_identity)
+                             publication_title_venue_identity, doi_identity,
+                             discovery_research_signal, is_regional_non_ri_subject)
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / 'Relevance Stuff' / 'deep_scan'
@@ -33,6 +34,8 @@ REVIEW = BASE / 'review_archive.json'
 INBOX = BASE / 'inbox'
 PROCESSED = BASE / 'processed_inbox'
 RESULT_FORMAT = 'relevance-focus-deep-scan-v1'
+PREVIOUS_CURRENT_REVISIONS = {'eu-perspective-global-technology-v4',
+                              'eu-perspective-substantive-discovery-v6'}
 DECISIONS = {'keep', 'review', 'drop'}
 INTEGRITIES = {'independent_credible', 'credible_primary_claim_only', 'unverified', 'unreliable'}
 RISKS = {'none_identified', 'suspected', 'confirmed'}
@@ -165,6 +168,21 @@ connection. If EU significance remains uncertain or cannot be credibly
 articulated, choose REVIEW rather than inventing an impact. Regional cooperation priorities must STILL have substantiated
 geographical aboutness in the assigned partner region.
 
+SIGNIFICANCE GATE FOR NEWLY ISSUED CASES: Confirm an actual scientific,
+technological, R&I-system, infrastructure, standards, policy or cooperation
+finding. Do not KEEP a paper solely because its title matches a named EU
+priority. Ordinary teaching experiences, generic social-service narratives,
+climate exposure mapping and routine clinical-service capacity descriptions
+need an identifiable R&I advance, research-system implication, or specific
+strategic cooperation mechanism; otherwise REVIEW or DROP as justified.
+Reviews, technology roadmaps, outlooks, systematic syntheses and foresight
+studies can be excellent KEEP candidates when they establish a credible
+emerging trajectory, research gap, capability shift or strategic question.
+Never exclude them merely because they do not present a new laboratory result.
+Explain both the specific EU-facing pathway and its evidence limits; do not
+invent a European impact or conflate general topic importance with an observed
+EU consequence.
+
 IMPORTANT OUTPUT REQUIREMENT: For every REVIEW or DROP, include a detailed
 "review_reason" (at least 20 characters). You may also include "decision_basis"
 as a more general explanation; the importer accepts decision_basis as a fallback
@@ -204,12 +222,12 @@ def valid_v4_lead(row):
             and isinstance(row.get('candidate_id'), str)
             and row['candidate_id'].startswith('REL-') and row.get('aboutness_basis')
             in ({'title', 'substantive abstract / reader claim', 'technology subject'}
-                if row.get('focus_quality_revision') == FOCUS_QUALITY_REVISION else
+                if row.get('focus_quality_revision') in PREVIOUS_CURRENT_REVISIONS | {FOCUS_QUALITY_REVISION} else
                 {'title', 'substantive abstract / reader claim'}) and row.get('geographic_evidence')
             and row.get('focus_region') and row.get('focus_issue')
             # Older issued discoveries retain their original exclusion; new v4
             # critical technologies are allowed globally, including EU/UK.
-            and (row.get('focus_quality_revision') == FOCUS_QUALITY_REVISION
+            and (row.get('focus_quality_revision') in PREVIOUS_CURRENT_REVISIONS | {FOCUS_QUALITY_REVISION}
                  or row.get('focus_group') != 'EU / UK')
             and re.fullmatch(r'https://doi\.org/10\.\d{4,9}/\S+', str(row.get('url') or ''), re.I)):
         return False
@@ -231,7 +249,7 @@ def current_focus_reviewable(row):
     return (valid_v4_lead(row) and row.get('focus_scope_id') == FOCUS_SCOPE_ID
             and row.get('focus_quality_revision') in {
                 'precision-aboutness-technology-v2', 'precision-aboutness-technology-v3',
-                FOCUS_QUALITY_REVISION}
+                *PREVIOUS_CURRENT_REVISIONS, FOCUS_QUALITY_REVISION}
             and substantive_policy_technology(row['focus_issue'],
                                               row['title'], row.get('geographic_evidence', '')))
 
@@ -271,17 +289,60 @@ def write_review_artifact(manifest, artifact):
                           'source_verification.verified_doi and verified_title.')}, indent=2))
 
 
+def _current_interest(row):
+    """Re-evaluate all unassigned leads; never trust old focus_score alone.
+
+    The manuscript title/record is NOT independently reviewed here. Reviews
+    and outlooks stay eligible and receive a synthesis signal; regional social
+    topics with no R&I object are strongly downranked rather than deleted.
+    """
+    title = str(row.get('title') or '')
+    topic = str(row.get('focus_issue') or '')
+    evidence = str(row.get('geographic_evidence') or '')
+    eligible, adjustment, _ = discovery_research_signal(topic, title, evidence)
+    if not eligible:
+        adjustment = -24   # retain historical leads as candidates, not top picks
+    # The old numeric score is weak supporting evidence only (0..10 points).
+    legacy = max(0, min(100, int(row.get('focus_score') or 0))) / 20
+    # Strong title-level objects are more dependable than abstract snippets or
+    # inherited theme-score metadata. Do not exclude reviews or foresight.
+    technical = bool(re.search(
+        r'\b(?:semiconductor|quantum|6g|5g|chip|robot|autonomous|'
+        r'biotechnolog|gene.edit|crispr|additive manufacturing|'
+        r'advanced material|hydrogen|battery|sensor|photolithograph|'
+        r'prototype|clinical trial|technology transfer|research infrastructure|'
+        r'innovation ecosystem|standardization|standardisation|'
+        r'research commerciali[sz]ation|technology roadmap)\b', title, re.I))
+    routine = bool(re.search(
+        r'\b(?:public health management of|surveillance of (?:the )?covid|'
+        r'consumption and social development|lecturers?.? experiences?|'
+        r'work.study integration|facility capacity to provide)\b', title, re.I))
+    review = bool(re.search(
+        r'\b(?:systematic review|scoping review|roadmap|outlook|'
+        r'future directions?|foresight|state.of.the.art)\b', title, re.I))
+    return round(40 + adjustment + legacy + (7 if technical else 0)
+                 + (3 if review else 0) - (9 if routine and not technical else 0), 2)
+
+
 def balanced_review_jobs(available, size):
-    """Balance priority areas and places without changing old assignments."""
-    available.sort(key=lambda x: (-int(x.get('focus_score') or 0), x['candidate_id']))
-    buckets = {}
-    for row in available:
-        buckets.setdefault((row['focus_issue'], row['focus_region']), []).append(row)
-    jobs = []
-    while len(jobs) < size and any(buckets.values()):
-        for key in sorted(buckets):
-            if buckets[key] and len(jobs) < size:
-                jobs.append(buckets[key].pop(0))
+    """Choose strongest research candidates with modest priority diversity.
+
+    Re-score old and new candidates identically on current R&I signals. A
+    selection penalty for repetitive categories prevents domination without
+    forcing weak regional categories into the shortlist. No archive mutation.
+    """
+    pool = sorted(available, key=lambda r: (-_current_interest(r), r['candidate_id']))
+    jobs, counts = [], {}
+    while pool and len(jobs) < size:
+        def ordering(row):
+            group = row.get('focus_issue') or ''
+            return (-(_current_interest(row) - 2.5 * counts.get(group, 0)),
+                    -_current_interest(row), row['candidate_id'])
+        best = min(pool, key=ordering)
+        pool.remove(best)
+        jobs.append(best)
+        topic = best.get('focus_issue') or ''
+        counts[topic] = counts.get(topic, 0) + 1
     return jobs
 
 def prepare(*, batch_size=30, artifact=None, additional=False, legacy_backlog=False):
@@ -377,34 +438,33 @@ def prepare(*, batch_size=30, artifact=None, additional=False, legacy_backlog=Fa
                      and row['candidate_id'] not in finished
                      and row['candidate_id'] not in reserved
                      and publication_title_venue_identity(row) not in reserved_titles]
-        # Preserve the highest-score/most recent revision for duplicate
-        # title+venue entries without modifying the discovery archive.
+        # Select the most interesting eligible unassigned works across the
+        # entire archive under today's R&I selection criteria. Do NOT first
+        # exhaust newly discovered leads or copy historical focus_score ranks.
+        # Exact prior jobs and archive rows remain unchanged on disk.
         unique = {}
         for row in available:
             key = publication_title_venue_identity(row) or 'id:' + row['candidate_id']
-            if key not in unique or (
-                    row.get('focus_quality_revision') == FOCUS_QUALITY_REVISION,
-                    int(row.get('focus_score') or 0), row['candidate_id']) > (
-                    unique[key].get('focus_quality_revision') == FOCUS_QUALITY_REVISION,
-                    int(unique[key].get('focus_score') or 0), unique[key]['candidate_id']):
+            old = unique.get(key)
+            if old is None or (_current_interest(row),
+                               row.get('focus_quality_revision') == FOCUS_QUALITY_REVISION,
+                               row['candidate_id']) > (
+                               _current_interest(old),
+                               old.get('focus_quality_revision') == FOCUS_QUALITY_REVISION,
+                               old['candidate_id']):
                 unique[key] = row
-        available = list(unique.values())
-        # Re-screen older unassigned leads under current EU-perspective rules.
-        # This modifies ONLY the newly emitted assignment copies, never archive,
-        # earlier package manifests, reviews or KEEP/REVIEW/DROP findings.
-        available = [{**row, 'focus_quality_revision': FOCUS_QUALITY_REVISION,
-                      'future_ri_question': ('Which EU research, innovation, economic-security '
-                          'or international-cooperation implications could follow from '
-                          'this documented development, and what remains uncertain?'),
-                      'scope': 'EU-perspective policy-priority reassessment'}
-                     if row.get('focus_quality_revision') != FOCUS_QUALITY_REVISION
-                     else row for row in available]
-        # Fill with the latest revision first; only then use still-useful
-        # unassigned v2 discoveries to reach a requested batch of up to 60.
-        latest = [r for r in available if r.get('focus_quality_revision') == FOCUS_QUALITY_REVISION]
-        older = [r for r in available if r.get('focus_quality_revision') != FOCUS_QUALITY_REVISION]
-        jobs = balanced_review_jobs(latest, batch_size)
-        jobs.extend(balanced_review_jobs(older, batch_size-len(jobs)))
+        chosen = balanced_review_jobs(list(unique.values()), batch_size)
+        # Historical candidates keep their original identity and policy tag;
+        # these are fresh assignment copies only, never a rewrite of archives.
+        # v7 review guidance and EU-perspective validation apply to newly
+        # generated packages, regardless of the item's original discovery date.
+        jobs = [{**row, 'focus_quality_revision': FOCUS_QUALITY_REVISION,
+                 'future_ri_question': ('What evidenced development, synthesis or '
+                     'R&I system change makes this relevant to EU research, '
+                     'innovation, economic security or partnership futures, '
+                     'and what remains uncertain?'),
+                 'scope': 'EU-perspective current-policy reassessment'}
+                for row in chosen]
     elif additional:
         # Catch-up mode for Relevance Focus ONLY: an assignment is not a scan.
         # Explicit opt-in legacy catch-up: old manifests are still importable,
@@ -548,7 +608,7 @@ def validate_result(result, lead):
         # Machine-check consistency with the manifest. Actual primary-record
         # verification still belongs to the independent source reviewer.
         needs_explicit_identity = lead.get('focus_quality_revision') in {
-            'precision-aboutness-technology-v3', FOCUS_QUALITY_REVISION}
+            'precision-aboutness-technology-v3', *PREVIOUS_CURRENT_REVISIONS, FOCUS_QUALITY_REVISION}
         verified_doi = src.get('verified_doi')
         verified_title = src.get('verified_title')
         if needs_explicit_identity and (not verified_doi or not verified_title):
@@ -575,7 +635,7 @@ def validate_result(result, lead):
     if lead.get('focus_scope_id') == FOCUS_SCOPE_ID and not valid_v4_lead(lead):
         raise ValueError('KEEP cannot admit a new-policy theme outside its technology/region scope')
     text_field(topic.get('basis'), 'topic.basis')
-    if lead.get('focus_quality_revision') == FOCUS_QUALITY_REVISION:
+    if lead.get('focus_quality_revision') in PREVIOUS_CURRENT_REVISIONS | {FOCUS_QUALITY_REVISION}:
         eu = result.get('eu_perspective')
         if not isinstance(eu, dict) or eu.get('relevance') not in {'direct', 'plausible'}:
             raise ValueError('New-policy KEEP requires a defensible direct or plausible EU connection; uncertain belongs in REVIEW')
