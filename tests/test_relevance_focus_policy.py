@@ -45,12 +45,16 @@ class NewFocusSelectionTests(unittest.TestCase):
         self.assertTrue(queries)
         self.assertEqual({x[2] for x in queries}, set(focus.focus_areas()))
         self.assertEqual({x[5] for x in queries}, {'openalex', 'crossref'})
-        self.assertTrue(all(group != 'EU / UK' for group, *_ in queries))
-        self.assertTrue(all(focus.priority_region_match(label, group, place)
-                            for group, place, label, *_ in queries))
+        for group, place, label, _lens, query, *_ in queries:
+            self.assertTrue(focus.priority_region_match(label, group, place))
+            if label.startswith('Critical technology: '):
+                self.assertEqual((group, place), ('Global', 'Global / unspecified'))
+                self.assertNotIn('Global / unspecified', query)
+            else:
+                self.assertNotEqual(group, 'Global')
         for area in focus.CRITICAL_TECHNOLOGIES:
             label = 'Critical technology: ' + area
-            self.assertGreaterEqual(len({place for _, place, topic, *_ in queries if topic == label}), 8)
+            self.assertTrue(any(topic == label for _, _, topic, *_ in queries))
 
     def test_required_regions_not_confused_with_continent_tags(self):
         for label, good, bad in [
@@ -110,6 +114,33 @@ class NewFocusSelectionTests(unittest.TestCase):
         self.assertTrue(deep.valid_v4_lead(candidate))
         wrong = {**candidate, 'focus_region': 'India', 'focus_group': 'Asia & Pacific'}
         self.assertFalse(deep.valid_v4_lead(wrong))
+
+
+    def test_critical_technologies_need_no_country_or_eu_mentions(self):
+        topic = 'Critical technology: Quantum technologies'
+        title = 'Quantum computing error correction architecture for robust qubits'
+        abstract = 'Researchers demonstrate a quantum computing correction method for qubit systems.'
+        m = focus.regional_matching(title, abstract, expected_topic=topic)
+        self.assertIsNotNone(m)
+        self.assertEqual(m['matched_locations'], ['Global / unspecified'])
+        self.assertIsNone(focus.regional_matching(title, abstract,
+            expected_topic='ASEAN: Marine science'))
+        entry = {'type':'report','title':[title],'abstract':abstract,
+            'published':{'date-parts':[[2026,11,4]]},
+            'DOI':'10.2345/quantum-error-correction-2026',
+            'publisher':'University research centre'}
+        rec = focus.relevance_work('crossref',entry, expected_topic=topic)
+        self.assertIsNotNone(rec)
+        self.assertEqual(rec[2]['focus_region'],'Global / unspecified')
+        self.assertTrue(deep.valid_v4_lead(rec[2]))
+
+    def test_eu_primary_study_qualifies_for_global_technology(self):
+        m=focus.regional_matching('Semiconductor chip fabrication research in Germany',
+            'German research laboratories test semiconductor manufacturing.',
+            expected_topic='Critical technology: Advanced semiconductors')
+        self.assertIsNotNone(m)
+        self.assertEqual(m['primary_group'], 'EU / UK')
+
 
 
 class PrecisionRegressionTests(unittest.TestCase):
@@ -425,7 +456,15 @@ class FocusPackageContinuityTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'verified_doi and verified_title'):
             deep.validate_result(result,lead)
         result['source_verification'].update(verified_doi=lead['doi'], verified_title=lead['title'])
+        result['eu_perspective'] = {
+            'relevance': 'plausible',
+            'implications': 'EU quantum research capability may be affected by new scientific methods.',
+            'evidence_limits': 'The publication provides no direct evidence of a resulting EU impact.'}
         self.assertEqual(deep.validate_result(result,lead)['decision'],'keep')
+        result['eu_perspective']['relevance'] = 'uncertain'
+        with self.assertRaisesRegex(ValueError, 'uncertain belongs in REVIEW'):
+            deep.validate_result(result, lead)
+        result['eu_perspective']['relevance'] = 'plausible'
         result['source_verification']['verified_doi']=lead['doi']+'/pdf'
         with self.assertRaisesRegex(ValueError,'DOI differs'):
             deep.validate_result(result,lead)
