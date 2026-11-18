@@ -146,7 +146,7 @@ TOPIC_SEARCH_TERMS = {
 # Regional topics follow the supplied EU-CELAC, UfM, EU-Africa, ASEAN-EU priorities.
 FOCUS_SCOPE_ID = 'critical-technologies-regional-priorities-2026-v1'
 # Narrow quality revision for FUTURE leads; never amend earlier candidate IDs or reviews.
-FOCUS_QUALITY_REVISION = 'eu-perspective-substantive-discovery-v5'
+FOCUS_QUALITY_REVISION = 'eu-perspective-substantive-discovery-v6'
 CRITICAL_TECHNOLOGIES = {
     'Advanced semiconductors': (
         ('semiconductor', 'microchip', 'microelectronics', 'chip fabrication',
@@ -796,6 +796,57 @@ DEVELOPMENT_EVIDENCE = re.compile(
     r'health system\w*|disease surveillance|supply chain\w*|'
     r'standardi[sz]ation|regulatory framework|technology governance|'
     r'industrial policy|manufacturing process\w*|energy storage)\b', re.I)
+# Broad regional priorities cover climate, health and education, but the
+# relevance scanner is looking for RESEARCH AND INNOVATION developments within
+# them, not every publication about climate exposure or public health.  These
+# narrow thematic tests do not exclude technical, experimental, policy,
+# infrastructure or foresight studies in the same subject areas.
+REGIONAL_NON_RI_SOCIAL = re.compile(
+    r'\b(?:social workers?|social work|migration|migrant\w*|displacement)\b', re.I)
+REGIONAL_NON_RI_PARTICIPATION = re.compile(
+    r'\b(?:participatory|co-led|lived experiences?|community perceptions?|'
+    r'young people.s health|youth health)\b', re.I)
+REGIONAL_NON_RI_EXPOSURE = re.compile(
+    r'\b(?:crop vulnerabilit\w*|agricultural vulnerabilit\w*|'
+    r'moisture stress|climate exposure|health risks? associated with)\b', re.I)
+REGIONAL_RI_TITLE_ANCHOR = re.compile(
+    r'\b(?:technolog\w*|innovati\w*|engineering|prototype\w*|'
+    r'(?:new|novel) (?:model|method|platform|system|technology)|'
+    r'forecast\w*|simulat\w*|optimis\w*|optimiz\w*|'
+    r'research (?:infrastructure|capacity|ecosystem)|'
+    r'surveillance (?:system|platform|technolog\w*)|'
+    r'(?:systematic|scoping) review|outlook|foresight|'
+    r'technology transfer|industrial polic\w*|'
+    r'drought.resistant (?:variet\w*|crop\w*)|'
+    r'field trials?|clinical trials?|vaccin\w* (?:strateg\w*|platform)|'
+    r'implementation of (?:a |an )?(?:new |novel )?(?:system|platform|technology))\b', re.I)
+REVIEW_OR_FORESIGHT_TITLE = re.compile(
+    r'\b(?:review|survey|outlook|future directions?|future prospects?|'
+    r'roadmap|foresight|horizon scanning|research progress|'
+    r'state.of.the.art|technology assessment|scenarios?)\b', re.I)
+
+
+def is_regional_non_ri_subject(label, title):
+    """Flag clearly non-R&I regional social/exposure studies, not the field.
+
+    A technical or foresight R&I object stated in the title overrides this
+    narrow check.  Broad titles without such negative clues stay eligible.
+    """
+    if label.startswith('Critical technology: ') or not any(
+            label.startswith(region + ': ') for region in
+            ('Africa', 'CELAC', 'Union for the Mediterranean', 'ASEAN')):
+        return False
+    if REGIONAL_RI_TITLE_ANCHOR.search(title):
+        return False
+    return bool(
+        (REGIONAL_NON_RI_SOCIAL.search(title) and
+         re.search(r'\b(?:health risks?|role of|social workers?|migration|migrant\w*)\b', title, re.I))
+        or (REGIONAL_NON_RI_PARTICIPATION.search(title) and
+            re.search(r'\b(?:health|climate change|climate impacts?|wellbeing)\b', title, re.I))
+        or REGIONAL_NON_RI_EXPOSURE.search(title)
+    )
+
+
 STRATEGIC_EU_MECHANISM = re.compile(
     r'\b(?:supply chain\w*|critical raw materials?|strategic autonom\w*|'
     r'technological sovereignt\w*|research security|industrial polic\w*|'
@@ -818,6 +869,8 @@ def discovery_research_signal(label, title, abstract=''):
     title, abstract = clean(title), clean(abstract)[:1800]
     if NON_RESEARCH_FORMAT.search(title):
         return False, 0, 'editorial or non-research front matter'
+    if is_regional_non_ri_subject(label, title):
+        return False, 0, 'regional social/exposure study without a substantive R&I object'
     title_signal = bool(DEVELOPMENT_EVIDENCE.search(title))
     abstract_signal = bool(DEVELOPMENT_EVIDENCE.search(abstract))
     eu_mechanism = bool(STRATEGIC_EU_MECHANISM.search(title + ' ' + abstract))
@@ -835,7 +888,13 @@ def discovery_research_signal(label, title, abstract=''):
         return False, 0, 'general higher education, not science or R&I capacity'
     # Mechanism and substantive evidence improve rank. Ordinary topic matching
     # contributes no such bonus, even if it produces a high legacy score.
-    adjustment = (12 if title_signal else 5 if abstract_signal else -9)
+    # Reviews, roadmaps and future outlooks can synthesize weak signals that an
+    # experimental-paper filter would miss.  Keep them fully eligible and avoid
+    # applying the generic topic-only penalty, while leaving original advances
+    # and concrete strategic mechanisms above them in the ranking.
+    review_or_foresight = bool(REVIEW_OR_FORESIGHT_TITLE.search(title))
+    adjustment = (12 if title_signal else 5 if abstract_signal else
+                  0 if review_or_foresight else -9)
     adjustment += 7 if eu_mechanism else 0
     return True, adjustment, ('substantive R&I signal in title' if title_signal else
                               'R&I signal in abstract' if abstract_signal else
