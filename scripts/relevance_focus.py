@@ -146,7 +146,7 @@ TOPIC_SEARCH_TERMS = {
 # Regional topics follow the supplied EU-CELAC, UfM, EU-Africa, ASEAN-EU priorities.
 FOCUS_SCOPE_ID = 'critical-technologies-regional-priorities-2026-v1'
 # Narrow quality revision for FUTURE leads; never amend earlier candidate IDs or reviews.
-FOCUS_QUALITY_REVISION = 'eu-perspective-global-technology-v4'
+FOCUS_QUALITY_REVISION = 'eu-perspective-substantive-discovery-v5'
 CRITICAL_TECHNOLOGIES = {
     'Advanced semiconductors': (
         ('semiconductor', 'microchip', 'microelectronics', 'chip fabrication',
@@ -767,6 +767,79 @@ def substantive_policy_technology(label, title, body=''):
         if not GREEN_TECH_SPECIFIC.search(title + ' ' + body):
             return False
     return True
+
+
+
+# New discovery only: favor actual R&I developments or credible analysis of
+# research/technology systems, not the mere presence of EU-priority vocabulary.
+# Neither an explicit EU mention nor a named location is required for the ten
+# critical technologies. This never reclassifies archived leads.
+NON_RESEARCH_FORMAT = re.compile(
+    r'^(?:from the editor(?:-in-chief)?|editorial\b|preface\b|foreword\b|'
+    r'book review\b|conference welcome\b|call for papers\b|'
+    r'correction\b|erratum\b|letter to the editor\b)', re.I)
+LOW_SIGNAL_TITLE = re.compile(
+    r'\b(?:perceptions?|awareness|attitudes?|opinions?|intentions?|'
+    r'expectations?|readiness|acceptance|willingness|media discourses?|'
+    r'news coverage|social media sentiment|students? perspectives?|'
+    r'educational perceptions?|consumer behavio[u]?r|purchase intentions?)\b', re.I)
+DEVELOPMENT_EVIDENCE = re.compile(
+    r'\b(?:demonstrat\w*|prototype\w*|experiment\w*|validat\w*|'
+    r'benchmark\w*|fabricat\w*|synthesi[sz]\w*|develop\w*|'
+    r'engineer(?:ed|ing) (?:material|system|device|process|protein|cell)\w*|characteri[sz]\w*|clinical trials?|'
+    r'pilot (?:study|deployment|project)|field trials?|'
+    r'performance evaluat\w*|systematic assess\w*|'
+    r'new (?:method|material|device|process|technology|architecture)|'
+    r'novel (?:method|material|device|process|technology|architecture)|'
+    r'commerciali[sz]ation|technology transfer|research infrastructure|'
+    r'research capacity|scientific capacity|research ecosystem|'
+    r'health system\w*|disease surveillance|supply chain\w*|'
+    r'standardi[sz]ation|regulatory framework|technology governance|'
+    r'industrial policy|manufacturing process\w*|energy storage)\b', re.I)
+STRATEGIC_EU_MECHANISM = re.compile(
+    r'\b(?:supply chain\w*|critical raw materials?|strategic autonom\w*|'
+    r'technological sovereignt\w*|research security|industrial polic\w*|'
+    r'competitiv\w*|technolog\w* dependenc\w*|'
+    r'standardi[sz]ation|interoperab\w*|technology transfer|'
+    r'commerciali[sz]ation|scale-up|research infrastructure|'
+    r'clinical trials?|manufacturing|grid integration|'
+    r'research collaboration|research capacit\w*|'
+    r'health system\w*|public health surveillance|'
+    r'energy securit\w*|industrial ecosystem\w*)\b', re.I)
+
+
+def discovery_research_signal(label, title, abstract=''):
+    """Return (eligible, additive rank, explanation) for *new* policy leads.
+
+    A broad priority match is never alone sufficient evidence of significance.
+    Borderline substantial papers remain admissible for later manual checking;
+    this is deliberately not a claim of independent EU-impact verification.
+    """
+    title, abstract = clean(title), clean(abstract)[:1800]
+    if NON_RESEARCH_FORMAT.search(title):
+        return False, 0, 'editorial or non-research front matter'
+    title_signal = bool(DEVELOPMENT_EVIDENCE.search(title))
+    abstract_signal = bool(DEVELOPMENT_EVIDENCE.search(abstract))
+    eu_mechanism = bool(STRATEGIC_EU_MECHANISM.search(title + ' ' + abstract))
+    # Opinion/awareness coverage alone does not demonstrate a new development.
+    # Real experiments, policies, implementation or R&I system analysis can
+    # override the weak-title warning when clearly expressed in the TITLE.
+    if LOW_SIGNAL_TITLE.search(title) and not title_signal:
+        return False, 0, 'attitudes, media or awareness without substantive R&I object in title'
+    # Education policy and partnership capacity *can* be substantive, but
+    # generic student experiences are not themselves capacity-building research.
+    if label == 'Africa: Capacities for science and higher education' and not re.search(
+            r'\b(?:research|science|scientific|R&D|laborator\w*|university.industry|'
+            r'technolog\w*|innovation|academic workforce|researcher\w*|'
+            r'university infrastructure)\b', title + ' ' + abstract, re.I):
+        return False, 0, 'general higher education, not science or R&I capacity'
+    # Mechanism and substantive evidence improve rank. Ordinary topic matching
+    # contributes no such bonus, even if it produces a high legacy score.
+    adjustment = (12 if title_signal else 5 if abstract_signal else -9)
+    adjustment += 7 if eu_mechanism else 0
+    return True, adjustment, ('substantive R&I signal in title' if title_signal else
+                              'R&I signal in abstract' if abstract_signal else
+                              'topic-only candidate; EU implications unverified')
 
 
 def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
@@ -1587,10 +1660,20 @@ def relevance_work(source, work, *, allowed_topics=None, expected_region=None,
     if (BIBLIOMETRIC_STUDY_TITLE.search(title)
             or (expected_topic or '').casefold() in EXCLUDED_FUTURE_TOPICS):
         return None
+    discovery_adjustment = 0
+    discovery_basis = ''
+    if expected_topic in FOCUS_TRACK:
+        eligible, discovery_adjustment, discovery_basis = discovery_research_signal(
+            expected_topic, title, abstract)
+        if not eligible:
+            return None
     match = regional_matching(title, abstract, allowed_topics=allowed_topics,
                               expected_region=expected_region, expected_topic=expected_topic)
     if not match:
         return None
+    # Discovery ranks content significance before geographic/topic diversity;
+    # it does not assert an EU outcome without reading the actual publication.
+    match['score'] = max(1, min(99, round(0.7 * match['score'] + 14 + discovery_adjustment)))
     canonical = doi.casefold()
     link = 'https://doi.org/' + doi
     candidate = {
@@ -1604,6 +1687,7 @@ def relevance_work(source, work, *, allowed_topics=None, expected_region=None,
         'focus_topics': match['matched_topics'],
         'temporal_lens': match['temporal_lens'],
         'focus_score': match['score'],
+        'discovery_research_signal': discovery_basis,
         'focus_issue': expected_topic or match['matched_topics'][0],
         'focus_scope_id': FOCUS_SCOPE_ID if (expected_topic or match['matched_topics'][0]) in FOCUS_TRACK else '',
         'focus_priority_track': FOCUS_TRACK.get(expected_topic or match['matched_topics'][0], 'legacy'),
@@ -1838,7 +1922,7 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
          'source_document':'OpenAlex and Crossref DOI-bearing, venue-identified publications; leads only',
          'compiled_at':datetime.now(timezone.utc).isoformat(),
          'policy':{'admission':'Separate global R&I Deep Scan must independently verify aboutness, source integrity and future R&I significance; indexed leads are never auto-admitted',
-                   'topic_anchor':'New discoveries use all 10 EU economic-security critical technology areas OR an explicit CELAC, UfM, Africa or ASEAN regional R&I priority; no Main Radar anchor or EU bridge required',
+                   'topic_anchor':'New discoveries use all 10 EU economic-security critical technology areas OR an explicit CELAC, UfM, Africa or ASEAN regional R&I priority; no explicit EU mention required; substantive R&I evidence and plausible EU mechanism prioritized',
                    'focus_scope_id':FOCUS_SCOPE_ID,
                    'outside_eu_uk_target_share':OUTSIDE_EU_UK_SHARE,
                    'earliest_publication_date':MIN_PUBLICATION_DATE.isoformat(),
