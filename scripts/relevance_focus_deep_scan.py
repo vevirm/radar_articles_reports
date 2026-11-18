@@ -35,12 +35,31 @@ INBOX = BASE / 'inbox'
 PROCESSED = BASE / 'processed_inbox'
 RESULT_FORMAT = 'relevance-focus-deep-scan-v1'
 PREVIOUS_CURRENT_REVISIONS = {'eu-perspective-global-technology-v4',
-                              'eu-perspective-substantive-discovery-v6'}
+                              'eu-perspective-substantive-discovery-v6',
+                              'eu-perspective-substantive-discovery-v7'}
 DECISIONS = {'keep', 'review', 'drop'}
 INTEGRITIES = {'independent_credible', 'credible_primary_claim_only', 'unverified', 'unreliable'}
 RISKS = {'none_identified', 'suspected', 'confirmed'}
 
 INSTRUCTIONS = '''# Relevance Focus: Global R&I Futures Deep Scan
+
+DISCOVERY EVIDENCE LANES (new candidates only):
+- `eu_evidence_track: source_mentions_eu_subject_unverified`: the discovery
+  record contains an EU/Member State subject reference, NOT yet verified.
+  Independently establish whether the work ACTUALLY studies European scientific
+  activity, capability, industry, infrastructure, standards or technology.
+  Publisher and author location, institution address and a European query term
+  are NOT evidence. If the European subject is unsupported, do not describe
+  the publication as evidence of EU technological progress. REVIEW or DROP an
+  incorrect asserted country tag rather than fabricating its basis.
+- `eu_evidence_track: global_development_eu_implications_to_assess`: a global
+  technology study can still KEEP. Explain a concrete potential EU mechanism,
+  explicitly stating that the EU implication is analyst interpretation and
+  not an EU-specific empirical result in the paper.
+- Compare EU-centred discoveries with global developments without treating
+  one lane as proof of the other. Seek original source evidence, distinguish
+  observed European capabilities from possible downstream effects, and do not
+  manufacture EU-specific results to fill a category.
 
 MISSION: Independently verify a publication's **aboutness**, source integrity,
 the assigned policy PRIORITY connection, and potential EU-facing research,

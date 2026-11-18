@@ -146,7 +146,7 @@ TOPIC_SEARCH_TERMS = {
 # Regional topics follow the supplied EU-CELAC, UfM, EU-Africa, ASEAN-EU priorities.
 FOCUS_SCOPE_ID = 'critical-technologies-regional-priorities-2026-v1'
 # Narrow quality revision for FUTURE leads; never amend earlier candidate IDs or reviews.
-FOCUS_QUALITY_REVISION = 'eu-perspective-substantive-discovery-v7'
+FOCUS_QUALITY_REVISION = 'eu-centred-plus-global-technology-v8'
 CRITICAL_TECHNOLOGIES = {
     'Advanced semiconductors': (
         ('semiconductor', 'microchip', 'microelectronics', 'chip fabrication',
@@ -459,6 +459,18 @@ FOCUS_ONLY_LOCATIONS = {
         'Lebanon': r'\bleban(?:on|ese)\b', 'Syria': r'\bsyri(?:a|an)\b',
     },
     'Other Europe': {'Monaco': r'\bmonaco\b'},
+}
+# Extend policy-only recognition to all 27 EU Member States without
+# changing the legacy Radar's geography or stored classifications.
+FOCUS_ONLY_LOCATIONS['EU / UK'] = {
+    'Bulgaria': r'\bbulgari(?:a|an)\b',
+    'Croatia': r'\bcroati(?:a|an)\b',
+    'Cyprus': r'\bcypr(?:us|iot)\b',
+    'Hungary': r'\bhungar(?:y|ian)\b',
+    'Luxembourg': r'\bluxembourg(?:ish)?\b',
+    'Malta': r'\bmalt(?:a|ese)\b',
+    'Slovakia': r'\bslovak(?:ia|ian)?\b',
+    'Slovenia': r'\bsloveni(?:a|an)\b',
 }
 FOCUS_GEOGRAPHY = {
     group: {**places, **FOCUS_ONLY_LOCATIONS.get(group, {})}
@@ -1493,6 +1505,18 @@ SEARCH_GEOGRAPHY = {
     'United States': 'United States',
     'United Kingdom': 'United Kingdom',
 }
+# Dedicated source-subject searches for evidence of EU research and technology.
+# UK is not an EU Member State: UK research remains eligible in the global lane.
+# Searches rotate across EU-wide phrases and named Member States; published
+# source content (not search text, author addresses or venue) determines tags.
+EU_TECHNOLOGY_TARGETS = (
+    'European Union', 'Germany', 'France', 'Italy', 'Spain', 'Poland',
+    'Netherlands', 'Sweden', 'Finland', 'Denmark', 'Ireland', 'Portugal',
+    'Romania', 'Czechia', 'Belgium', 'Austria', 'Greece', 'Estonia',
+    'Lithuania', 'Latvia', 'Bulgaria', 'Croatia', 'Cyprus',
+    'Hungary', 'Luxembourg', 'Malta', 'Slovakia', 'Slovenia',
+)
+
 TEMPORAL_QUERIES = (
     ('Current state / developments', ''),
     ('Possible future / scenarios', 'future outlook scenarios'),
@@ -1521,11 +1545,13 @@ def regional_targets(slot, *, policy=False):
 
 
 def focused_search_plan(slot: int, focus=None):
-    """Rotate all ten technologies globally without geographical eligibility,
-    while regional themes are queried ONLY in their corresponding regions.
+    """Discover both global technology developments AND EU-centred evidence.
 
-    The existing source-country-neutral aboutness and no-EU-bridge rules stay.
-    Explicit caller-supplied legacy topics remain supported for old test/cases.
+    Every critical technology gets a global search without a geographical
+    filter and a separate EU subject search. Country-specific EU searches
+    rotate among Member States, alongside an EU-wide query. Region-specific
+    partnership themes keep their existing geographical eligibility rules.
+    Never equate a query's location with a verified publication subject.
     """
     focus = focus if focus is not None else focus_areas()
     if not focus:
@@ -1540,32 +1566,42 @@ def focused_search_plan(slot: int, focus=None):
                    for place in places]
     seen = set()
     for wave in range(FOCUSED_PAGE_DEPTH):
+        # A complete first wave exposes all ten technologies to BOTH lanes
+        # before the search window can expire; subsequent waves rotate terms.
         for idx, (topic, term) in enumerate(items):
-            is_global_tech = topic in FOCUS_TRACK and FOCUS_TRACK[topic] == 'critical_technology'
-            targets = ([('Global', 'Global / unspecified')] if is_global_tech else
-                       [(g, p) for g, p in all_targets if priority_region_match(topic, g, p)]
-                       if topic in FOCUS_TRACK else global_targets)
-            if not targets:
-                continue
-            # Co-prime traversal gives many countries a chance in each track
-            # instead of silently pairing CELAC climate with Asian countries.
-            stride = next(i for i in range(5, 5 + len(targets))
-                          if gcd(i, len(targets)) == 1)
-            wave_stride = next(i for i in range(7, 7 + len(targets))
-                               if gcd(i, len(targets)) == 1)
-            group, place = targets[(idx * stride + wave * wave_stride + slot) % len(targets)]
+            is_global_tech = (topic in FOCUS_TRACK and
+                              FOCUS_TRACK[topic] == 'critical_technology')
+            if is_global_tech:
+                eu_target = EU_TECHNOLOGY_TARGETS[(slot + wave * 10 + idx) % len(EU_TECHNOLOGY_TARGETS)]
+                # The two lanes are deliberately distinct, not alternative
+                # geographic eligibility gates on the same global query.
+                targets = [('Global', 'Global / unspecified'), ('EU / UK', eu_target)]
+            else:
+                eligible = ([(g, p) for g, p in all_targets if priority_region_match(topic, g, p)]
+                            if topic in FOCUS_TRACK else global_targets)
+                if not eligible:
+                    continue
+                stride = next(i for i in range(5, 5 + len(eligible))
+                              if gcd(i, len(eligible)) == 1)
+                wave_stride = next(i for i in range(7, 7 + len(eligible))
+                                   if gcd(i, len(eligible)) == 1)
+                targets = [eligible[(idx * stride + wave * wave_stride + slot) % len(eligible)]]
             variants = FOCUS_QUERIES.get(topic, (term,))
             query_term = variants[(wave + slot + idx) % len(variants)]
             lens_name, suffix = TEMPORAL_QUERIES[(idx + wave + slot) % len(TEMPORAL_QUERIES)]
-            query = (f'{query_term} {suffix}' if is_global_tech else
-                     f'{query_term} {SEARCH_GEOGRAPHY.get(place, place)} {suffix}').strip()
-            providers = ('openalex', 'crossref') if (slot + idx + wave) % 2 == 0 else ('crossref', 'openalex')
-            for provider in providers:
-                key = (provider, query)
-                if key in seen:
-                    continue
-                seen.add(key)
-                yield group, place, topic, lens_name, query, provider, 1
+            for group, place in targets:
+                if is_global_tech and group == 'Global':
+                    query = f'{query_term} {suffix}'.strip()
+                else:
+                    query = f'{query_term} {SEARCH_GEOGRAPHY.get(place, place)} {suffix}'.strip()
+                providers = (('openalex', 'crossref') if (slot + idx + wave) % 2 == 0
+                             else ('crossref', 'openalex'))
+                for provider in providers:
+                    key = (provider, query)
+                    if key in seen:
+                        continue
+                    seen.add(key)
+                    yield group, place, topic, lens_name, query, provider, 1
 
 
 def openalex_abstract(index):
@@ -1757,6 +1793,13 @@ def relevance_work(source, work, *, allowed_topics=None, expected_region=None,
         'focus_topics': match['matched_topics'],
         'temporal_lens': match['temporal_lens'],
         'focus_score': match['score'],
+        'eu_evidence_track': ('source_mentions_eu_subject_unverified'
+            if match['primary_group'] == 'EU / UK'
+            and match['matched_locations'][0] != 'United Kingdom'
+            else 'global_development_eu_implications_to_assess'),
+        'eu_evidence_basis': (match['geographic_evidence']
+            if match['primary_group'] == 'EU / UK'
+            and match['matched_locations'][0] != 'United Kingdom' else ''),
         'discovery_research_signal': discovery_basis,
         'focus_issue': expected_topic or match['matched_topics'][0],
         'focus_scope_id': FOCUS_SCOPE_ID if (expected_topic or match['matched_topics'][0]) in FOCUS_TRACK else '',
@@ -1922,7 +1965,8 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                 try:
                     rec = relevance_work(provider, work, allowed_topics=active_focus,
                                          expected_region=(None if topic in FOCUS_TRACK and
-                                             FOCUS_TRACK[topic] == 'critical_technology' else place),
+                                             FOCUS_TRACK[topic] == 'critical_technology'
+                                             and bucket == 'Global' else place),
                                          expected_topic=topic)
                 except (ValueError, TypeError, AttributeError):
                     stats['malformed_work'] += 1
@@ -1982,6 +2026,13 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     stats['outside_eu_uk_candidates'] = sum(
         row['focus_group'] != 'EU / UK' for row in candidates)
     stats['eu_uk_candidates'] = len(candidates) - stats['outside_eu_uk_candidates']
+    stats['eu_subject_evidence_candidates'] = sum(
+        row.get('eu_evidence_track') == 'source_mentions_eu_subject_unverified'
+        for row in candidates)
+    stats['global_technology_eu_implications_to_assess'] = sum(
+        row.get('focus_priority_track') == 'critical_technology'
+        and row.get('eu_evidence_track') == 'global_development_eu_implications_to_assess'
+        for row in candidates)
     stats['unique_focus_topics'] = len({row['focus_issue'] for row in candidates})
     stats['unique_focus_places'] = len({row['focus_region'] for row in candidates})
     stats['seconds_spent_discovering'] = round(clock()-start,2)
@@ -1992,7 +2043,7 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
          'source_document':'OpenAlex and Crossref DOI-bearing, venue-identified publications; leads only',
          'compiled_at':datetime.now(timezone.utc).isoformat(),
          'policy':{'admission':'Separate global R&I Deep Scan must independently verify aboutness, source integrity and future R&I significance; indexed leads are never auto-admitted',
-                   'topic_anchor':'New discoveries use all 10 EU economic-security critical technology areas OR an explicit CELAC, UfM, Africa or ASEAN regional R&I priority; no explicit EU mention required; substantive R&I evidence and plausible EU mechanism prioritized',
+                   'topic_anchor':'Every critical technology gets BOTH EU-centred source-subject and geography-neutral global discovery queries; CELAC, UfM, Africa and ASEAN keep scoped priorities. EU source evidence is unverified until independent Deep Scan; global studies can qualify through substantiated potential EU significance.',
                    'focus_scope_id':FOCUS_SCOPE_ID,
                    'outside_eu_uk_target_share':OUTSIDE_EU_UK_SHARE,
                    'earliest_publication_date':MIN_PUBLICATION_DATE.isoformat(),
