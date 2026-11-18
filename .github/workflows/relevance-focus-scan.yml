@@ -55,7 +55,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependency required by relevance unit tests
         run: python -m pip install 'requests>=2.32,<3'
-      - name: Validate global topic–place aboutness and Deep Scan regression fixtures
+      - name: Validate EU-perspective technology, regional priorities and Deep Scan regression tests
         run: python -m unittest discover -s tests -p 'test_relevance_focus*.py' -q
       - name: Discover relevance-specific candidate works (25 minutes minimum and maximum)
         if: github.event_name != 'workflow_dispatch' || inputs.mode == 'scan'
@@ -68,8 +68,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Deliberately DO NOT run ordinary EU Radar admission here: a study
-          # about biodiversity in Kenya or chips in Taiwan needs NO EU bridge.
+          # Relevance Focus is separate from ordinary Radar admission.
+          # EU significance is assessed in Deep Scan, not by EU keyword matching.
           python scripts/relevance_focus_deep_scan.py prepare --batch-size 30 \
             --artifact "$RUNNER_TEMP/relevance_focus_global_review.zip"
       - name: Generate focused Excel from authoritative and pending source material
@@ -90,8 +90,10 @@ jobs:
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
           ## Relevance Focus — new critical technologies and regional priorities
           Discovery targets all 10 EU critical technology areas or CELAC/UfM/Africa/ASEAN
-          priorities, in substantive regions **outside the EU and UK**; publishers
-          from anywhere are eligible. Download the **relevance-focus-global-deep-scan-review**
+          priorities. Critical technologies are searched worldwide, including EU/UK
+          and works without explicit country mentions; partner-region priorities
+          retain their regional eligibility. The review assesses EU strategic
+          significance without requiring source text to mention Europe. Download the **relevance-focus-global-deep-scan-review**
           artifact and have its `MANIFEST.json` independently checked against
           accessible source documents following `INSTRUCTIONS.md`. Submit the
           reviewed JSON under `Relevance Stuff/deep_scan/inbox/`; the independent

@@ -88,8 +88,9 @@ jobs:
           ## Relevance Focus catch-up Deep Scan package
           Download the `relevance-focus-next-deep-scan-*` artifact and review its
           `MANIFEST.json` using `INSTRUCTIONS.md`. By default it contains up to 60
-          unassigned cases following the **current 24-priority focus**, without
-          overlapping older reserved packages. Set `legacy_backlog=true` only if
+          unassigned cases following the **EU-perspective 24-priority focus**,
+          including eligible older leads reassessed under current instructions,
+          without overlapping older reserved packages. Set `legacy_backlog=true` only if
           deliberately preparing an older unfinished catch-up package.
           Submit results JSON to `Relevance Stuff/deep_scan/inbox/` for verified import.
           The package is a research assignment, **not** a completed Deep Scan.
