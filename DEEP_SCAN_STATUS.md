@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4041** (Main **2115** + Historical **1926**)
-- Automatic queue still needing V2 verification: **105** (Main **50** + Historical **55**)
-- Currently assigned to workers: **105** (Main **50** + Historical **55**)
+- Authoritative V2 verified: **4067** (Main **2141** + Historical **1926**)
+- Automatic queue still needing V2 verification: **79** (Main **24** + Historical **55**)
+- Currently assigned to workers: **79** (Main **24** + Historical **55**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,30 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261119T062742Z-2c7bc6a64d08`
-- Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxNMXp0aU5JWmI0MVZ0WkpUTFFXUTdFOVNXS1RPOWpvLVBkMTJXSWdtUG42ekcxSmJfUHhLazdyTm9Hbl9qekdLVWhzazZ1UE9vejlyQ2lhVHY3bkt2VkEzYzgwd1NzY1hGaC0xRWNuSDQ3dFhZZUo5TU9HSkNCVGJ1dkhIZlhNd0trQ2dJeWVPTFV0UVRrTkdjTF9FS2R5aUl3VUIxaHV0ZWVERjU1WGRBcGg4cw?oc=5` — EU’s strategic autonomy in a resource-constrained world
-  2. `link:https://news.google.com/rss/articles/CBMimwFBVV95cUxQRHdHUXluSzdlREtHUlFUbHJtd3VTQjZQNFhuWm1sb2hjeldsWHJpRGdPOVdfUnM5ajZoVmU4R2lxby0yVDEzWDZ5UHlkUm5iNDZ4emtkTnItd1RqUm1HZ1R5a2xyVUVDSDBjcWRiOUNSd0RJcy1PcWJYMWV1RWgzT2pQT0gzNllyTjhia2JfeFA0aUY5TjAwN3dubw?oc=5` — EU Commission accused of withholding emails on killing patent law
-  3. `link:https://www.euronews.com/2026/11/18/europe-tonight-eu-proposes-45bn-ukraine-loan-as-trump-xi-and-putin-meet` — EU proposes €45bn Ukraine loan as Trump, Xi and Putin meet
-  4. `link:https://www.euronews.com/2026/11/18/germanys-digitalisation-minister-wildberger-discusses-europes-ai-race-with-the-us-and-chin` — Wildberger discusses Europe's AI race with the US and China
-  5. `historical:id:6559671ef6586538` — European AI Competitiveness Beyond Frontier Models
-  6. `historical:id:b288b71dd5ba12ad` — Geopolitics and International Higher Education: Concepts, knowledge diplomacy and security policies, and future agenda
-  7. `historical:id:8beac9f7830a3b41` — Women in Science Diplomacy Association
-  8. `historical:id:0bb0869d8e1417ab` — City Science Labs as Platforms for Science Diplomacy
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261119T064530Z-ff8e4e423fd3`
+- Assigned unresolved records: **32**
+  1. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies — recovery attempt 2/3
+  2. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions — recovery attempt 2/3
+  3. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall? — recovery attempt 2/3
+  4. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors — recovery attempt 2/3
+  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNdlhCQ3pvUjhsRzZzdDJTckhTM1NiVUtWcmVlSkVUOU9jLWQwdlVSLVBOUy1zY05oZ0EyUXpZOFVreXU3YWFQbm9Qd1B1OFYzZDBNZ1pzRmJlT3hGcGhscUM3OHJMdXQxUkRhWnhJaThGQllXSXdMeUxjTFJ4cXA4RWRfYTdSR1dia0JmSzhKMzRJam9TdGhQeHc2cnVlN2o1YVZEbkp6UVQtM1ZzQ0E?oc=5` — France to spearhead new AI defence resilience centre with partner nations
+  6. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system — recovery attempt 2/3
+  7. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQb0dGaE5ETF80SXdTQlVXU0M4Sm9wRXZvWjkwREFIbHhPOTg5Skw3Y1hwREFHcG9yM2NTMnRJamxGSGxsczVoRmV3MDVkOGxjbjNSVm9TbmVZRkh2eGhrY2Q1OVlpNUJkTnJVcDBmX2NIMU5UOVRwV2Juay1Hb2dxencySEk?oc=5` — EU renews push for global AI rules after midterms weaken Donald Trump — recovery attempt 2/3
+  8. `link:https://doi.org/10.1080/09654313.2026.2759879` — Regional innovation systems beyond innovation: configurational evidence from European regions — recovery attempt 2/3
+  - … plus 24 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261119T062756Z-687d66f08d73`
-- Assigned unresolved records: **34**
-  1. `link:https://news.google.com/rss/articles/CBMia0FVX3lxTE1nU20wQjBhdW5TOVhIMFZNdml0bmdGc2pIS2haNkkwSnpzanNjdWNrbXhRd3FXMDdqX19lbGRQVm1LUEtPRDhRZlIyZFVPeG5YX3Y2dXdLOXp4UXNWR3VsZnpROGpNTktXLVhz?oc=5` — The EU has always found a way through. On AI, it’s struggling to see it.
-  2. `link:https://era.gv.at/news-items/cesaer-input-note-makes-recommendations-on-research-security-in-fp10/` — CESAER input note makes recommendations on research security in FP10
-  3. `link:https://era.gv.at/news-items/ec-holds-implementation-dialogue-on-research-security/` — EC holds Implementation Dialogue on Research Security
-  4. `link:https://era.gv.at/news-items/ceps-publishes-foresight-report-on-science-in-2050/` — CEPS publishes foresight report on science in 2050
-  5. `link:https://era.gv.at/news-items/eua-welcomes-itre-report-on-horizon-europe-2028-2034/` — EUA welcomes ITRE report on Horizon Europe (2028-2034)
-  6. `link:https://era.gv.at/news-items/yerun-welcomes-horizon-europe-itre-reports/` — YERUN welcomes Horizon Europe ITRE reports
-  7. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOZk50cjJpWWdEZ3pRcVlUVkxnc2ZMblN6VWowOHZpeHZSLXVFOFZHUHdsREVJTGNVNmFkTHctYnl0MFdHY0JhNm13M0pjdF94VElzdzd1YmpQVVdKZTZ5MFRsRlh6WUhaN2NxeXJEd2x2MGdXWC0yNjRXZXVBXzl1Y0JQSEhFM0NJM0NweGI4dzk4c3B2aVh4ZnRaOG9FcElpZkdRRjU4aVhVMVQtNDVNRUgyUG9fUHVSX1JGM3pfRG53MWNfOEE?oc=5` — Viewpoint: Give Europe a readiness scale for dual-use research
-  8. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPc3MtM3BHSTQwdmxhY1JOMEI2SHJkSUtzNUNpQWgwaEx0MEd5VGdrMTBmSmRHWFUwdF83ZXV3X25TS2tQaGxmNXZUQklibXFEUi1tOW9rTHdocjNSejcxQjdydGtJd3JiZ29YbE94bVhMa3JsbF8tR0dJTmFXUzBaT0J0UUc2aWxSVk1RUUZWd29xRjg2Nl9KLTNFUUdLUmFKN0E1djNmNk5pZFZaWjMwa1Fodw?oc=5` — Four takeaways on the future of European research from this year’s R&I Days
-  - … plus 26 more in the package manifest
+- Current package: `worker-b-20261119T064542Z-8e2dda2f0c26`
+- Assigned unresolved records: **12**
+  1. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWkh2U0ZTM0NsazdmeVItUEF5R2JXS0VkeHFZLV9IdFZxNEpfdmhZSmNpQzRsbWE2bDJZU25LV25WZ3l5S2xibUgzMzhsdU9RR29kQ1FMbW5xN1lFcFVFU2ZveElib09TUG55VjFDVU41Vl83M1V3R0pyUnYzSFRFbzVBS3JnbVllQktRdDZKN0t3N3RWWHB6R1d5ZE9BdGFUSl9GN29GY2VSNTlyUlM0M09CTTdmbG5GUEpz?oc=5` — Funding Radar: Horizon Europe’s latest €111M funding call for AI
+  2. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQS21MX1FsMEVTQWhZVEJkZFZVeXlBVDJpNTBWSWdoNWFUNF96enh3Mi1pRTZacU9OLU15M1NPZXljU3A3cGhTdGd2VkpnSEZIYjJBZlFSeWNUMlBtRFJzcll1THVNcUtsX0lsdVZZTkxyVE1JdUZzcVlkWTJIb0hyLXhRbDIwcWN5WE9zdS1SdDBwc3NIWE1fZEpxV0FveEZDeGY4WWd1bnpCU2VqUU5VN1NhQ1NjckI3?oc=5` — Should Europe triple or freeze its data centre capacity?
+  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQbnJickJXdlY1WlM3ZVQzQm5BNG0yVFNxNmdNQU1wZjQ0Y3Vybk9rUE0wWXZUZ3NHVW9OQ3dHQlBaOTFqdGJzNmtqMkZfcWhIQjVrSjJDZ19iWDN4T1RtOEZtRXdTWm1DVTV6STctRVdfcjJ5SWVTVXdjaWJiZWw2MmNXNFZLYlIzM2hsLXE3S0cwTkNINTd6WU1USzNnSncxR3B2VTJMdUNUd1pKNENlNy1CbWdaelRTMTl5QlhfR0dUQQ?oc=5` — ‘Time for action’: Germany and 10 other EU countries urge new copyright rules in the AI age
+  4. `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxNbVZaUFM3aEo1MTdYSW4yTXpMM3lpcnZZUm51M2xQakJ6OHVsUE5OM2trSDNybG9kdUMxSFY5NjhvVmlfeE82UzJXdGxhMWhBUzZ3eUdjaVNPWkZQTzZZWGJLNmhnd1RGWmZPTkZzYnEwVjFhMU8zbFZaOWVGTC1oZlFxOXdpdDhJemdSSkhvMnlSTmY4WURKekp3?oc=5` — Irish regulator stops X training AI with data gathered by agents
+  5. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGp1VWlXU1NQV3JJSjMxemNocEtLUGtwVy1RM1U1TzJoUUZQaXRtejBjU0hHUnYtT2VmSjVZTi1EWjFUdk4yYkl2M1hpbW5yMW8xdVJDc1VWbTNSVGljU2RuejNoOVM1aUtnMlNScnpKRlVyRWt5Y0ZmaGVqaHYzTGdlVXFSMFBiTjhnUURERzhBTE9WZ1FhMDFYYk5hTXBDUVVVaDY2eF91MVY2NlpmQnNmY2Q?oc=5` — Malaysia Inks Deal With France to Develop Critical Minerals
+  6. `link:https://data.consilium.europa.eu/doc/document/WK-14980-2026-INIT/en/pdf` — Handling and further distribution are under the sole responsibility of community members.
+  7. `link:https://news.google.com/rss/articles/CBMiggJBVV95cUxQcGtNR3BZdnFENmVPWGtDTlNUQTBxemVQczVpbTljdG5hRnFhaGpyU3U2aGdhaWg2Y3BnLWdfTl83dkhTZDhLRVJtZ3BHTTloNVdBS2xrcVFvSWVSbEhpN1pQQVkxeXBtaVlweTFJeTBaZWhNUzNjSHBrai1pTGN4eDhLWWd2dG1TSjNuNVZkTU5maEc3R2hJZ1A5ejMyTnRqWE0zU3A5ajRiOWxHN0FMVndHUEk0QWZfVFZTUHRDSjV5Y1lCRnc2MjNYRVRFZS1tRTc3UjhYeTU1Z2x0LU9ORGo5QXBCb1N2TGxqbkV4VHlQdnBsNjFlUzIyUWJ2TzZBTVE?oc=5` — Grids package: Council and Parliament agree to streamline permitting for a faster clean energy transition - Council, European Union
+  8. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxQNTlPazBvWjF0VU43TU0xV3QxX3JhVVN5U3BoQW0wRTZNVnVpMm9LbEM0bFppYlhKc1NKNFVLcXg4U3V0cXZJU0hIMWloWjBCSVlfakdSV1V2b2ZMUWxSOWVXNzhQZTRlWmNMenU5MUJPWmhLY2RMRENDcmU0UlJTcjlIcU95NVlvakN6VjVpSGg4SjFnU19JTTNCcncyZkJxUVNsYnkwdUZnaks0U2hwSg?oc=5` — Dutch resist ‘unacceptable’ US bid to tighten semiconductor export controls
+  - … plus 4 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`

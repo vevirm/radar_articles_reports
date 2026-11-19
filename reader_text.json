@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-11-19T06:16:07Z",
+  "generated_at": "2026-11-19T06:35:54Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -336617,8 +336617,2100 @@
       "deep_scan_package_id": "worker-b-20261119T052559Z-3b7d28fa5385",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1017/sus.2026.10094": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "3b013bc1",
+      "identity_hash": "dcb98a4d46d0f84f",
+      "reader_title": "Competencies for European science diplomacy",
+      "reader_what": "Jungmann proposes mission, digital/AI, and diplomacy competencies for researchers in EU-linked science diplomacy.",
+      "reader_why": "The framework connects researcher training to credible evidence transfer and international scientific collaboration.",
+      "reader_more": "The 2026 open-access conceptual article synthesises EU GreenComp, DigComp and science-diplomacy policies into three interacting competence layers. It specifies possible mechanisms rather than measured outcomes. The COP example is illustrative, not empirical validation.",
+      "deep_analysis": {
+        "work_kind": "conceptual scholarly article",
+        "research_question": "What competencies support researchers operating across EU science, policy and diplomacy?",
+        "main_finding": "Three-layer researcher competency model connected by transformation capacity.",
+        "method_or_basis": "Conceptual synthesis of EU policy instruments and science-policy boundary-spanning research.",
+        "qualification": "Researcher science-diplomacy competencies are conceptual and not empirically validated.",
+        "radar_relevance": "European researcher training, EU science diplomacy and collaboration governance are central, not an incidental EU mention.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1017/sus.2026.10094 resolves to the Cambridge Global Sustainability first-party article; publisher HTML and package Cambridge PDF excerpt inspected."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Cambridge journal entry confirms DOI, Jungmann, 6 November 2026 and the paper text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/global-sustainability/article/from-policy-to-practice-green-and-digital-competencies-for-researchers-in-european-science-diplomacy/8A2595A22744FCD6C79D04252BED05F2",
+            "title": "From policy to practice: green and digital competencies for researchers in European science diplomacy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity verified against Cambridge DOI, author, date, article body and cached publisher PDF. Conceptual, no causal validation."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: scholarly framework addresses competency-building for researchers carrying out EU-linked science diplomacy, a European research-system workforce and collaboration mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:45Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "research.workforce_quality",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Maximilian Jungmann",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-11-06",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Researcher science-diplomacy competencies are conceptual and not empirically validated.",
+          "text": "A three-layer competency model is proposed for researchers engaging in European science diplomacy.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1017/sus.2026.10094",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:dcb98a4d46d0f84f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1093/oxrep/grag017": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "00c29800",
+      "identity_hash": "16500f88cbbd650b",
+      "reader_title": "Mapping critical-mineral supply-chain exposure",
+      "reader_what": "The study builds a trade-network criticality index and EU, US and China supply-and-demand counterfactuals.",
+      "reader_why": "It provides European industrial-policy diagnostics for supply concentration and interconnected technological value chains.",
+      "reader_more": "Fetzer and Lambert combine international product-level trade flows, production links and mineral lists. They test what happens to network exposure if the EU, US or China is removed as buyer or seller. The results inform policy choices but are simulation-based, not observed disruption effects.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed empirical modelling study",
+        "research_question": "Which tradable products pose network-based systemic risk in global production?",
+        "main_finding": "Network criticality combines trade value, concentration and upstream/downstream position, with explicit EU scenarios.",
+        "method_or_basis": "Product-trade networks, official mineral classifications and counterfactual removal of large trading hubs.",
+        "qualification": "The network criticality index measures trade-network exposure, not physical scarcity or proven welfare loss.",
+        "radar_relevance": "EU-specific strategic-material supply-chain sensitivity meets the European technology-dependency route.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1093/oxrep/grag017 matches OUP journal article and LSE institutional repository version supplied as cached PDF in package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Oxford Review of Economic Policy volume 42(1), pages 193–211 and DOI matched in full LSE PDF and OUP journal record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://researchonline.lse.ac.uk/id/eprint/140668/",
+            "title": "Critical minerals and industrial policy: a network-based approach to supply chain risk",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/oxrep/article/42/1/193/8750860",
+            "title": "Critical minerals and industrial policy: a network-based approach to supply chain risk",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "LSE hosted PDF in package includes article header, methods, European removal counterfactuals and references; corroborated with OUP indexed journal metadata."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 1 and 2: network model and EU-specific removal counterfactuals assess European critical-materials supply-chain exposure and strategic technology dependence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:46Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Thiemo Fetzer and Peter John Lambert",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The network criticality index measures trade-network exposure, not physical scarcity or proven welfare loss.",
+          "text": "The network index and EU trade-removal scenarios quantify patterns of material-supply exposure.",
+          "confidence": "high",
+          "attributes": {
+            "source_type": "peer_reviewed"
+          },
+          "status_date_precision": "year",
+          "record_key": "link:https://doi.org/10.1093/oxrep/grag017",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:16500f88cbbd650b:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1017/dap.2026.10089": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "846d6422",
+      "identity_hash": "8fe983ef55c7bd74",
+      "reader_title": "From data sovereignty to data agency",
+      "reader_what": "Bernal argues EU data governance must consider actual functional capabilities, not only formal control over data.",
+      "reader_why": "The analysis relates EU–US digital dependencies to European regulatory and technology-governance capacity.",
+      "reader_more": "This 2026 conceptual paper examines EU efforts to govern transatlantic data flows. It proposes “data agency” to capture control, infrastructure capability and distributed participation. It supplies a policy interpretation rather than empirical impact evaluation.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed conceptual policy paper",
+        "research_question": "How can transatlantic data governance be assessed beyond territorial data sovereignty?",
+        "main_finding": "Data agency reframes EU digital sovereignty around capabilities, bargaining power and distributed governance.",
+        "method_or_basis": "Conceptual policy analysis using EU–US data-transfer cases and governance literature.",
+        "qualification": "Conceptual reinterpretation illustrated with EU–US transfers; it does not measure causal policy impacts.",
+        "radar_relevance": "The EU technological-dependency/governance relationship is a central analytical case, beyond an incidental comparator.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1017/dap.2026.10089 matches open-access Cambridge Data & Policy primary full-text HTML and package PDF excerpt."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Cambridge journal metadata confirms Jaime Bernal, Data & Policy 8:e44, published 14 September 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/data-and-policy/article/advancing-data-agency-a-conceptual-framework-to-support-data-sovereignty/E8C20AF67C03496D01C6ABB96B5D5986",
+            "title": "Advancing data agency: A conceptual framework to support data sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified Cambridge article author/date/DOI and full HTML exposition. Europe is studied as a substantive policy case, but it remains conceptual."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: EU–US data governance asymmetry and European institutional capacity in the data economy are substantive technology-dependency and governance subjects."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:46Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Jaime Bernal",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09-14",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Conceptual reinterpretation illustrated with EU–US transfers; it does not measure causal policy impacts.",
+          "text": "EU data sovereignty is analysed as contingent on functional governance capabilities and transatlantic data dependencies.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1017/dap.2026.10089",
+          "merit": 83,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:8fe983ef55c7bd74:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1093/nar/gkag1151": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "a82626ba",
+      "identity_hash": "84abec115374f40b",
+      "reader_title": "PDBe expands structure data and AI access",
+      "reader_what": "Europe’s protein-structure database integrated broader literature annotations, dynamics links and three AI-tool interface servers.",
+      "reader_why": "The changes support reuse and automation of a European-hosted research infrastructure.",
+      "reader_more": "The PDBe team documents structural biology data service upgrades in 2026, including added MDposit connections and MCP servers. It reports data coverage and new access paths for researchers and computational tools. Those are service outputs, not proven improvements in research productivity.",
+      "deep_analysis": {
+        "work_kind": "research infrastructure service update",
+        "research_question": "What data integrations and access mechanisms changed in PDBe?",
+        "main_finding": "PDBe expanded annotations, linked molecular-dynamics data and enabled machine-tool access.",
+        "method_or_basis": "Service-development report with documented features, coverage and API integration.",
+        "qualification": "The update reports infrastructure features and coverage as of manuscript preparation, not downstream research impact.",
+        "radar_relevance": "A substantive operational update on Europe-based open research infrastructure central to researchers.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Nucleic Acids Research DOI 10.1093/nar/gkag1151 and journal full HTML present matching PDBe 2027 update."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "OUP Nucleic Acids Research article title and authors match 2026 PDBe source excerpt and EMBL-EBI PDBe publication catalogue."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkag1151/9051874",
+            "title": "PDBe in 2027: integrating literature annotations, molecular dynamics data, and AI-ready access",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher full text details data integration and current coverage (October 2026) and EMBL-EBI lists the publication."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 2 and 3: completed technical report on the functioning and accessibility of the European PDBe/EMBL-EBI research data infrastructure."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:47Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "research.infrastructure_access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Protein Data Bank in Europe (EMBL-EBI)",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-11-14",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The update reports infrastructure features and coverage as of manuscript preparation, not downstream research impact.",
+          "text": "PDBe expanded literature and dynamics annotations and introduced machine-tool access to its research data services.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1093/nar/gkag1151",
+          "merit": 68,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:84abec115374f40b:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.net.2026.104831": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "5cd962ed",
+      "identity_hash": "d5110ef08ea2a2a9",
+      "reader_title": "Fusion readiness framework with decision gates",
+      "reader_what": "Alwafi models six fusion-RDI readiness dimensions and sets conditional 2026–2035 national-development pathways.",
+      "reader_why": "The transferable maturity framework could support prospective research-capacity planning beyond the Saudi case.",
+      "reader_more": "Pre-proof article draws on innovation-systems, IAEA milestone and TRL frameworks. It applies them comparatively to Korea, Japan, US, UK, China and Russia, with Europe as an external comparator. Three Saudi pathways require future documented milestones; it is neither a validated causal prediction nor a European fusion policy study.",
+      "deep_analysis": {
+        "work_kind": "journal framework and conditional scenario roadmap",
+        "research_question": "Can a structured fusion RDI readiness framework guide national engagement choices to 2035?",
+        "main_finding": "Six assessment dimensions and a staged, conditional national roadmap.",
+        "method_or_basis": "Synthesis of existing research/technology readiness frameworks, national policy comparisons and scenario gates.",
+        "qualification": "Saudi fusion readiness and its conditional scenarios are not a measured European fusion-system result; the novel six-dimensional frame has not been externally validated.",
+        "radar_relevance": "A route fails Europe primary scope, but innovative futures capability-assessment method might qualify as B.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.net.2026.104831 matches the original 2026 Nuclear Engineering and Technology journal pre-proof, provided as 16.4 KB full-text extract in package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Journal pre-proof original PDF states original author Anas Mohammed Alwafi, received 26 April 2026, accepted 26 October and six-dimensional framework."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_primary_via_package",
+            "url": "https://doi.org/10.1016/j.net.2026.104831",
+            "title": "Assessing Saudi Arabia’s readiness for fusion RDI: A comparative framework and roadmap to 2035",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary early-view PDF supplied by scanner was inspected; method contribution partly recycles existing frameworks. Reclassify from European Evidence A to borderline Methods B."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "B_BORDERLINE_TRANSFERABLE_METHOD",
+        "reason": "A fails Europe-specific Routes 1–3: the central case is Saudi Arabia, with Europe only supranational comparator; however the article formulates a transferable six-dimension fusion RDI readiness and conditional 2035 roadmap, a borderline Strand B methods contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:47Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "methods.roadmapping",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Anas Mohammed Alwafi",
+            "class": "university_group"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-11-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Saudi fusion readiness and its conditional scenarios are not a measured European fusion-system result; the novel six-dimensional frame has not been externally validated.",
+          "text": "A six-dimensional fusion RDI assessment and milestone-conditioned 2035 roadmap is proposed for national programme readiness.",
+          "confidence": "medium",
+          "record_key": "link:https://doi.org/10.1016/j.net.2026.104831",
+          "merit": 68,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d5110ef08ea2a2a9:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/cesaer-input-note-makes-recommendations-on-research-security-in-fp10/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "afde356f",
+      "identity_hash": "05470b6b8f5edb98",
+      "reader_title": "CESAER proposes targeted FP10 research security",
+      "reader_what": "European technical universities recommend risk-based project screening and shared due-diligence support under FP10.",
+      "reader_why": "New policy input explicitly shapes EU research participation rules and institutional compliance capacity.",
+      "reader_more": "The original CESAER note opposes blanket screening, calls for short risk-based checks, clear responsibilities, stronger university capacity resources and a European support platform/centre. These are requests to EU institutions, not enacted obligations.",
+      "deep_analysis": {
+        "work_kind": "stakeholder input note and policy advocacy",
+        "research_question": "How should FP10 security checks balance openness and risks?",
+        "main_finding": "Risk-targeted screening plus a European due-diligence platform and centre of expertise.",
+        "method_or_basis": "Signed first-party CESAER input note to Commission and EU institutions.",
+        "qualification": "CESAER proposals are stakeholder recommendations only, not adopted EU conditions or funded infrastructure.",
+        "radar_relevance": "Proposed changes directly concern future EU research programme eligibility and institutional security governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ERA Austria 16 November 2026 item correctly identifies CESAER FP10 input note and 10 November event."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "CESAER first-party article dated 12 Nov and original PDF input note dated 10 Nov; recommendations screened from PDF itself."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cesaer.org/content/5-operations/2026/20261110-cesaer-input-note-research-security-in-fp10.pdf",
+            "title": "Managing risks, enabling openness: strengthening research security across Europe",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_announcement",
+            "url": "https://www.cesaer.org/news/managing-risks-enabling-openness-cesaer-shares-recommendations-on-research-security-in-fp10-with-eu-institutions-2344/",
+            "title": "CESAER submits research security input note to EU institutions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Stakeholder primary PDF inspected and cover page visually checked; this is a policy proposal rather than outcome."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_NEW_EU_RI_ADVOCACY",
+        "reason": "The original is a specific 10 November stakeholder input to FP10 design, not a completed independent evidence-led A study. Reclassify A→C: new concrete proposals for proportionate screening, a due-diligence platform and European expertise centre."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:48Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "research_security.screening",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CESAER",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-11-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "CESAER proposals are stakeholder recommendations only, not adopted EU conditions or funded infrastructure.",
+          "text": "CESAER asks FP10 to screen security risks proportionately instead of performing universal in-depth checks.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/cesaer-input-note-makes-recommendations-on-research-security-in-fp10/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:05470b6b8f5edb98:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/ec-holds-implementation-dialogue-on-research-security/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e57a9fb6",
+      "identity_hash": "698308f5277867e7",
+      "reader_title": "Commission holds research-security implementation dialogue",
+      "reader_what": "Commission and researchers discussed research security support and institutional implementation bottlenecks.",
+      "reader_more": "The official 11 November Commission post describes a 10 November dialogue, practitioner viewpoints and ongoing efforts. It announces no newly adopted FP10 safeguards or original study.",
+      "deep_analysis": {
+        "work_kind": "official institutional meeting account",
+        "research_question": "Did the dialogue itself decide a new FP10 security rule?",
+        "main_finding": "It collected views and reviewed implementation challenges; no rule adopted.",
+        "method_or_basis": "Commission meeting update and the matching ERA Austria portal synopsis.",
+        "qualification": "An implementation dialogue records consultation, not a new binding EU instrument, programme or evidence-led study.",
+        "radar_relevance": "European research security is the topic, but a routine dialogue alone fails the A research-product and C change gates.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News cached article token could not supply the publisher article text; title matched by direct source query."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title checked against https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/european-commission-explores-implementation-challenges-and-reflects-state-eu-level-support-research-2026-11-11_en; original source identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original issuing publication recovered and read at https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/european-commission-explores-implementation-challenges-and-reflects-state-eu-level-support-research-2026-11-11_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/european-commission-explores-implementation-challenges-and-reflects-state-eu-level-support-research-2026-11-11_en",
+            "title": "Commission research security implementation dialogue",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_RI_EVIDENCE",
+        "reason": "European Commission research-security implementation dialogue is a meeting synopsis; A Routes 1–3 checked: no completed analytical evidence product, and C check found no concrete new decision or rule."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:48Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/ceps-publishes-foresight-report-on-science-in-2050/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "1798128c",
+      "identity_hash": "4af749cbb90da0d2",
+      "reader_title": "Four scenarios for European science in 2050",
+      "reader_what": "CEPS explores alternative European science futures and actionable choices for current research governance.",
+      "reader_why": "The scenarios expose policy trade-offs in European research autonomy, capacity and funding design.",
+      "reader_more": "The study builds four contrasted science-system pathways to 2050 covering research organisation, openness and strategic pressures. They offer conditional foresight rather than forecasts or measured outcomes; report itself is a completed evidence-led analytical product.",
+      "deep_analysis": {
+        "work_kind": "policy foresight report",
+        "research_question": "How could choices and disruptions reshape European science by 2050?",
+        "main_finding": "Contrasting futures imply different resilience and governance priorities for European R&I.",
+        "method_or_basis": "Scenario-based foresight and EU research-policy analysis.",
+        "qualification": "The 2050 scenarios are exploratory narratives and depend on contingent assumptions; they are not predictions.",
+        "radar_relevance": "EU research funding and research-system institutions are central to the report, meeting the study route.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ERA Austria 16 November account identifies CEPS 2050 foresight report and summarises alternative European science futures."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original CEPS report landing page describes four alternative futures and strategic implications for research governance, and links full published PDF."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.ceps.eu/ceps-publications/science-in-2050-alternative-futures-and-lessons-for-today/",
+            "title": "Science in 2050: alternative futures and lessons for today",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_primary_pdf",
+            "url": "https://cdn.ceps.eu/2026/11/FP10-Alternative-futures-of-science-2050_formatted.pdf",
+            "title": "Science in 2050 alternative futures report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original CEPS report landing and source identity established; interpretation distinguishes illustrative scenarios from official EU policy."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 2 and 3: CEPS report examines long-run futures of European science, funding institutions, governance autonomy and research capacity through alternative scenarios."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:48Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CEPS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The 2050 scenarios are exploratory narratives and depend on contingent assumptions; they are not predictions.",
+          "text": "CEPS maps alternative science-governance trajectories for Europe through 2050.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "link:https://era.gv.at/news-items/ceps-publishes-foresight-report-on-science-in-2050/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:4af749cbb90da0d2:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/eua-welcomes-itre-report-on-horizon-europe-2028-2034/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "fda7f89e",
+      "identity_hash": "053db57ba2405222",
+      "reader_title": "ITRE backs standalone next Horizon Europe",
+      "reader_what": "European Parliament research committee approved its negotiating reports on FP10 and the Specific Programme on 10 November.",
+      "reader_why": "An important intermediate EU research-programme decision may affect programme autonomy and funding.",
+      "reader_more": "EUA supports increased protections for ERC autonomy, excellent research and global partners. The committee position is not the final 2028–34 budget; inter-institutional talks remain. This response points to the underlying substantive committee decision.",
+      "deep_analysis": {
+        "work_kind": "stakeholder response to legislative committee vote",
+        "research_question": "What did the 10 November ITRE votes advance?",
+        "main_finding": "A committee negotiating mandate to maintain separate FP10 programme and seek higher allocation.",
+        "method_or_basis": "EUA original publication with cross-check against Parliament committee action.",
+        "qualification": "ITRE committee adoption of negotiating reports is not full Parliament/Council approval or an enacted Horizon Europe budget.",
+        "radar_relevance": "Dateable material institutional step in designing future EU R&I funding architecture.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ERA Austria 16 November portal entry summarises EUA response to 10 November Horizon Europe ITRE vote."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "European University Association original 13 November response and Parliament committee vote original 10 November verified."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_announcement",
+            "url": "https://www.eua.eu/news/eua-news/european-parliament-committee-votes-for-an-ambitious-independent-and-research-driven-horizon-europe.html",
+            "title": "European Parliament committee votes for an ambitious, independent and research-driven Horizon Europe",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_reporting",
+            "url": "https://sciencebusiness.net/news/votes-parliament-research-committee-push-horizon-europe-and-ecf-forward",
+            "title": "Parliament research committee advances Horizon Europe and ECF positions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "EUA primary response confirms committee approval; proposes are not final legislative enactments."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_NEW_EU_RI_POLICY_PROPOSAL",
+        "reason": "A article is stakeholder reaction, not completed evidence report; C event is real: ITRE approved negotiating texts for Horizon Europe FP10, preserving a standalone programme and backing higher funding."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:49Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament ITRE committee",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "in_negotiation",
+          "status_date": "2026-11-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "ITRE committee adoption of negotiating reports is not full Parliament/Council approval or an enacted Horizon Europe budget.",
+          "text": "The ITRE committee backed a €200 billion Horizon Europe budget in its 2028–34 negotiating position.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/eua-welcomes-itre-report-on-horizon-europe-2028-2034/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:053db57ba2405222:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/yerun-welcomes-horizon-europe-itre-reports/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "90ecd22d",
+      "identity_hash": "867a5a5404200137",
+      "reader_title": "European research universities respond to ITRE FP10 vote",
+      "reader_what": "YERUN welcomes ITRE-approved FP10 negotiating texts and a proposed Fast Track to Excellence mechanism.",
+      "reader_why": "This documents a concrete committee-stage change to planned European R&I programme design.",
+      "reader_more": "ITRE voted on the next research Framework and Specific Programme on 10 November. YERUN calls for €200 billion, stronger ERC/MSCA and more collaborative grants; the proposed Fast Track route would support smaller projects. Negotiations still pending.",
+      "deep_analysis": {
+        "work_kind": "YERUN first-party stakeholder response",
+        "research_question": "Which proposed programme design features did the ITRE mandate support?",
+        "main_finding": "Standalone FP10, autonomy safeguards and a suggested smaller-project track.",
+        "method_or_basis": "YERUN official 10 November post interpreting adopted committee report.",
+        "qualification": "ITRE mandate is not a final Horizon regulation or confirmed €200 billion appropriation.",
+        "radar_relevance": "Substantive provisional EU funding architecture and participation mechanism proposed; same underlying event as A12.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ERA Austria 16 November bulletin relays YERUN reaction."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "YERUN original “ITRE Committee Vote: A Key Step Closer to the Trilogues and the Future of FP10” dated 10 November 2026, full text read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_announcement",
+            "url": "https://yerun.eu/2026/11/itre-committee-vote-a-key-step-closer-to-the-trilogues-and-the-future-of-fp10/",
+            "title": "ITRE Committee Vote: A Key Step Closer to the Trilogues and the Future of FP10",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Distinct specific participation proposal from general budget story, but shares underlying ITRE vote with A12; could be editorially merged."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_NEW_EU_RI_POLICY_PROPOSAL",
+        "reason": "A-to-C reclassification: reporting a newly adopted ITRE negotiating text on FP10 autonomy, ERC/MSCA protection and proposed Fast Track to Excellence is a specific EU R&I programme development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:49Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "horizon.access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament ITRE committee",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "in_negotiation",
+          "status_date": "2026-11-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "ITRE mandate is not a final Horizon regulation or confirmed €200 billion appropriation.",
+          "text": "ITRE committee supported a proposed Fast Track to Excellence mechanism for smaller collaborative research projects.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/yerun-welcomes-horizon-europe-itre-reports/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:867a5a5404200137:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://cinea.ec.europa.eu/publications/digital-publications/review-study-atlantic-maritime-strategy-and-its-action-plan_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "f9f91f34",
+      "identity_hash": "3f8dd63f79582af6",
+      "reader_title": "Atlantic maritime strategy evaluation",
+      "reader_what": "CINEA evaluates Atlantic maritime cooperation, stakeholder participation and implementation challenges.",
+      "reader_more": "Ramboll final evaluation, published by CINEA November 2026, tests effectiveness, efficiency, relevance, coherence and EU added value across blue-economy actions. Science diplomacy, marine skills and innovation appear as related themes rather than a substantial measured R&I programme assessment.",
+      "deep_analysis": {
+        "work_kind": "EU policy implementation evaluation",
+        "research_question": "Has Atlantic maritime action plan delivered cooperative blue-economy governance?",
+        "main_finding": "Partial gains in stakeholder coordination, with uneven geographic participation and resource-constrained implementation.",
+        "method_or_basis": "EU-commissioned 2026 Ramboll evaluation using strategic review criteria.",
+        "qualification": "This is an evaluation of maritime-sector governance, not a study chiefly about European research, innovation or science systems.",
+        "radar_relevance": "R&I references are incidental to a broad maritime-governance evaluation.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original Ramboll/CINEA September 2026 final PDF provided, with title page, DOI 10.2926/1687107, executive summary and governance recommendations."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Commission CINEA publication page dated 16 November 2026 confirms final report and matching DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://cinea.ec.europa.eu/publications/digital-publications/review-study-atlantic-maritime-strategy-and-its-action-plan_en",
+            "title": "CINEA Atlantic Maritime Strategy review",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_RI_EVIDENCE",
+        "reason": "A Routes 1, 2 and 3 were tested: the authoritative final report evaluates Atlantic Maritime Strategy and blue-economy cooperation governance. Science diplomacy and innovation appear as secondary cross-cutting themes, but no substantive European R&I-system finding or forward technology-dependency analysis is central."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:50Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://cdn.ceps.eu/2026/11/The-financial-fault-lines-of-the-AI-boom-formatted-final-v2.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "d652c446",
+      "identity_hash": "70efc2d16c5747b0",
+      "reader_title": "European exposure to AI financial concentration",
+      "reader_what": "CEPS models AI investment-financing networks and European exposure to US technology valuations.",
+      "reader_why": "It identifies funding interdependencies around strategically important computing infrastructure.",
+      "reader_more": "The CEPS/European Capital Markets Institute study identifies circular supplier/customer financing, concentration, leases, special vehicles and private credit. Europe participates through US technology debt/equity holdings and cross-border transactions. The study recommends international disclosure and stress testing; it does not assert present AI systemic collapse or evaluate EU research outcomes.",
+      "deep_analysis": {
+        "work_kind": "analytical European capital-market study",
+        "research_question": "Could intertwined AI financing transmit stress into European portfolios?",
+        "main_finding": "A correction could propagate through opaque AI-related financial structures; risk sizes remain uncertain.",
+        "method_or_basis": "Full-text November 2026 CEPS ECMI financial network diagnosis and policy analysis.",
+        "qualification": "Modelled contagion pathways are plausible financial-stability exposures; no AI valuation correction or European technology-capacity loss is observed.",
+        "radar_relevance": "European dependency on US AI capital and infrastructure financing could qualify strategic technology-environment evidence, but R&I transmission is indirect.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ECMI in-depth analysis PDF November 2026 with Judith Arnal, Apostolos Thomadakis, title and 22,856 extracted characters available in package; summary and recommendations inspected."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "CEPS original publisher page confirms matching full study title and authors."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://cdn.ceps.eu/2026/11/The-financial-fault-lines-of-the-AI-boom-formatted-final-v2.pdf",
+            "title": "CEPS/ECMI The financial fault lines of the AI boom",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_BORDERLINE_RI_STRATEGIC_ENVIRONMENT",
+        "reason": "A Route 1 may admit the CEPS study as evidence of European strategic exposure to US AI investment and computing infrastructure; however it is principally an EU financial-supervision analysis, without direct measured effects on R&I financing. Human judgement required on European R&I strategic environment threshold."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:50Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "finance.us_hyperscaler_debt_exposure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CEPS / ECMI",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-11-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Modelled contagion pathways are plausible financial-stability exposures; no AI valuation correction or European technology-capacity loss is observed.",
+          "text": "CEPS / ECMI measures an EU R&I-relevant development involving a correction could propagate through opaque ai-related financial structures; risk sizes remain uncertain.",
+          "confidence": "medium",
+          "record_key": "link:https://cdn.ceps.eu/2026/11/The-financial-fault-lines-of-the-AI-boom-formatted-final-v2.pdf",
+          "merit": 87,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:70efc2d16c5747b0:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMioAFBVV95cUxPZEZ6UFlaeHFta2xJS2ZSUkhrc0xhU21CUDVOSndvc09ZNnhRNXV5bzJfUTFyYUNWOGJHYnBRU0ZEWVN1TzdUWkN2UkRsV0ZzdGllYjl6ak9LMGt2anRrWDBVUE85OHpwMHdXYWtmd1JGSjFRdWZLdFM2VEh4aGY5LS1OVU0wRjN6Qy10cDVVSGZpc2tkWjY3OVFOU1N2blk0?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "dea64c76",
+      "identity_hash": "9cee0902cf3ef872",
+      "reader_title": "Sponsored appeal for European health research",
+      "reader_what": "Sponsors encourage continued investment in European and global health R&D.",
+      "reader_more": "The signed editorial-style piece argues health research supports competitiveness, vaccine discoveries and global networks. Its original Politico disclaimer identifies it as a political advertisement funded by Europe’s Health Dividend; no new R&I policy or measured study is delivered.",
+      "deep_analysis": {
+        "work_kind": "sponsored political research advocacy",
+        "research_question": "Was a new EU health R&I policy enacted or an empirical study published?",
+        "main_finding": "No; it is a funded public appeal for health-research priority.",
+        "method_or_basis": "Full matching syndicated text with original Politico sponsor disclaimer and foundation funders.",
+        "qualification": "This is a sponsor-funded political advertisement urging health research support; it announces no new allocation, call or policy adoption.",
+        "radar_relevance": "Relevant subject, but not a verified change or independent R&I evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News original RSS item not full text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching Politico 16 Nov 2026 political advertisement reproduced at doacweb.com with identical headline and sponsor disclaimer."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original POLITICO political-advertisement source and named sponsoring initiative identified in reproduced original disclaimer."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "sponsored_full_text",
+            "url": "https://doacweb.com/europes-moment-to-lead-backing-research-in-a-global-race",
+            "title": "Politico political advertisement mirrored verbatim",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_NEW_EU_RI_ACTION",
+        "reason": "C change test fails after reclassification: Politico political advertisement funded by Europe’s Health Dividend / Gates Foundation and Coefficient Giving advocates global-health R&D. It links to signing a declaration, but documents no formal new EU funding decision or concrete policy-instrument change. A Routes 1–3 also fail because the advert is advocacy, not substantive evidence analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:52Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMia0FVX3lxTE1nU20wQjBhdW5TOVhIMFZNdml0bmdGc2pIS2haNkkwSnpzanNjdWNrbXhRd3FXMDdqX19lbGRQVm1LUEtPRDhRZlIyZFVPeG5YX3Y2dXdLOXp4UXNWR3VsZnpROGpNTktXLVhz?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "bdd0b716",
+      "identity_hash": "9b9d4b967d9b33e3",
+      "reader_title": "EU AI political coordination faces challenges",
+      "reader_what": "Politico analyses the EU’s difficulty reconciling AI competitiveness and regulatory aims.",
+      "reader_more": "Opinion-focused coverage discusses Brussels decision-making and friction over AI legislation. Statements about institutional uncertainty do not amount to a dated new EU R&I decision, and the article is not peer-reviewed or institutionally commissioned analysis.",
+      "deep_analysis": {
+        "work_kind": "European politics and AI commentary",
+        "research_question": "Did the commentary establish a new policy decision?",
+        "main_finding": "No discrete new adopted AI R&I measure is demonstrated.",
+        "method_or_basis": "Politico original headline, publication and legitimate indexed text mirrors.",
+        "qualification": "The article is retrospective political analysis of EU AI governance, not a new legal action or scientific evidence product.",
+        "radar_relevance": "AI policy context exists but a new R&I event is not substantiated.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News cached article token could not supply the publisher article text; title matched by direct source query."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title checked against https://soz6.com/news/the-eu-has-always-found-a-way-through-on-ai-it-s-struggling-to-see-it; original source identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original issuing publication recovered and read at https://soz6.com/news/the-eu-has-always-found-a-way-through-on-ai-it-s-struggling-to-see-it."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://soz6.com/news/the-eu-has-always-found-a-way-through-on-ai-it-s-struggling-to-see-it",
+            "title": "Syndicated Politico EU AI commentary",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C route fails: the Politico article evaluates the EU’s difficulty producing a shared AI strategy; it does not establish a specific enacted, funded or institutionally launched research/technology action. A Route 3 fails because this is journalistic commentary, not an analytical R&I study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:52Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOZk50cjJpWWdEZ3pRcVlUVkxnc2ZMblN6VWowOHZpeHZSLXVFOFZHUHdsREVJTGNVNmFkTHctYnl0MFdHY0JhNm13M0pjdF94VElzdzd1YmpQVVdKZTZ5MFRsRlh6WUhaN2NxeXJEd2x2MGdXWC0yNjRXZXVBXzl1Y0JQSEhFM0NJM0NweGI4dzk4c3B2aVh4ZnRaOG9FcElpZkdRRjU4aVhVMVQtNDVNRUgyUG9fUHVSX1JGM3pfRG53MWNfOEE?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "a8603515",
+      "identity_hash": "927239035761ccfa",
+      "reader_title": "Researchers propose dual-use readiness scale",
+      "reader_what": "Four researchers propose a common readiness label for Europe’s civil–defence research boundary.",
+      "reader_why": "If adopted, it could affect research assessment, collaboration screening and dual-use funding practice.",
+      "reader_more": "Science|Business first-party accessible opening names Szlachetko, Słowikowska, Kola and Dubaniowski and describes the proposed Dual-Use Readiness Level. The remainder is subscription-only, preventing assessment of scale design, novelty and intended governance. A new proposal is identified, not actual EU implementation.",
+      "deep_analysis": {
+        "work_kind": "four-author stakeholder viewpoint",
+        "research_question": "How might EU universities classify dual-use research readiness?",
+        "main_finding": "Authors propose a common Dual-Use Readiness Level but implementation details are inaccessible.",
+        "method_or_basis": "First-party headline, author list, public substantive introduction and publication date.",
+        "qualification": "Dual-Use Readiness Level is a proposed stakeholder classification, not a recognised EU standard or funding eligibility rule; methodological details are partly paywalled.",
+        "radar_relevance": "European civilian/defence research governance directly relevant, though full proposal unverified.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News reader link failed; publisher Science|Business /viewpoint/ article first section accessible."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Science|Business 17 November 2026 bylined viewpoint original title and proposal paragraph read."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "blocked",
+            "note": "Publisher permits opening 3 substantive introduction paragraphs; subsequent methodological content requires a subscription."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/viewpoint/r-d-funding/european-defence-fund/viewpoint-give-europe-readiness-scale-dual-use-research",
+            "title": "Science|Business dual-use readiness opinion",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "C",
+        "reason_code": "C_BORDERLINE_PROPOSED_DUAL_USE_GOVERNANCE",
+        "reason": "New four-author 17 November viewpoint explicitly calls for a Dual-Use Readiness Level for European funders and researchers. It is real stakeholder advocacy for R&I classification, but full methodology is paywalled and originality/operational detail cannot be determined from free lead paragraphs."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:52Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Jakub Szlachetko and coauthors",
+            "class": "university_group"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-11-17",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Dual-Use Readiness Level is a proposed stakeholder classification, not a recognised EU standard or funding eligibility rule; methodological details are partly paywalled.",
+          "text": "Jakub Szlachetko and coauthors proposes an EU R&I-relevant development involving authors propose a common dual-use readiness level but implementation details are inaccessible.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOZk50cjJpWWdEZ3pRcVlUVkxnc2ZMblN6VWowOHZpeHZSLXVFOFZHUHdsREVJTGNVNmFkTHctYnl0MFdHY0JhNm13M0pjdF94VElzdzd1YmpQVVdKZTZ5MFRsRlh6WUhaN2NxeXJEd2x2MGdXWC0yNjRXZXVBXzl1Y0JQSEhFM0NJM0NweGI4dzk4c3B2aVh4ZnRaOG9FcElpZkdRRjU4aVhVMVQtNDVNRUgyUG9fUHVSX1JGM3pfRG53MWNfOEE?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:927239035761ccfa:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPc3MtM3BHSTQwdmxhY1JOMEI2SHJkSUtzNUNpQWgwaEx0MEd5VGdrMTBmSmRHWFUwdF83ZXV3X25TS2tQaGxmNXZUQklibXFEUi1tOW9rTHdocjNSejcxQjdydGtJd3JiZ29YbE94bVhMa3JsbF8tR0dJTmFXUzBaT0J0UUc2aWxSVk1RUUZWd29xRjg2Nl9KLTNFUUdLUmFKN0E1djNmNk5pZFZaWjMwa1Fodw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "3c96618f",
+      "identity_hash": "d7ce23ae7510af4c",
+      "reader_title": "European R&I Days policy takeaways",
+      "reader_what": "A conference recap discusses future EU research-planning priorities.",
+      "reader_more": "Published as four takeaways from R&I Days; accessible first-party index describes a government desire to align policy before Horizon Europe programme writing. Conference discussion and a desire to coordinate do not by themselves specify enacted decisions or a new funded action.",
+      "deep_analysis": {
+        "work_kind": "R&I policy event summary",
+        "research_question": "Did an identified EU research measure become operative at R&I Days?",
+        "main_finding": "This item summarises future-position discussions and planning rather than a concrete new instrument.",
+        "method_or_basis": "Science|Business publisher title/lead and EU R&I Days description.",
+        "qualification": "News roundup of the R&I Days describes expectations and policy talking points, not a separate adopted programme provision.",
+        "radar_relevance": "Policy context, not verified independent R&I change.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News link and original Science|Business page blocked 403."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Science|Business indexed title and 17 Nov 2026 article description identified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "Science|Business publisher snippet and EU Agenda syndicated abstract repeat four-takeaways framing, not substantive new legislative text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/horizon-europe/four-takeaways-future-european-research-years-ri-days",
+            "title": "Science|Business R&I Days summary",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C route fails: Science|Business conference takeaways on research planning and Horizon priorities are a journalistic recap, rather than a newly enacted EU R&I measure. A Routes 1–3 checked and this is no stand-alone substantial evidence study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:52Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxQMWVoMWxIdjk5RFJMTGpyeV9DTTQwbnhzQV91c1RYa3dPYlQ1SGN2b1BEbV8tYlZZbVlGREhaMjBzMlBOMmNwTmRMNWlQOGhWdEpIRlN1UTlrMXBOSzQxVXpKTnpRVGxjSXpFWWFPTlViMzJzNUVRTlRYZ0paUFFRWUVJUDNRcHVUTFNMX2tlUXBZaUJRVDU3eTd6NGN6Vm95OFY5UmNIZVRSTG9SLUcybmFIZkZXZDY3MmVWbkpkTTk?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "63bfa54d",
+      "identity_hash": "69227320a36f9717",
+      "reader_title": "Duplicate dual-use readiness-scale viewpoint",
+      "reader_what": "A second link repeats the same European Dual-Use Readiness Level viewpoint already assessed.",
+      "reader_more": "Both URLs point to Science|Business 17 November 2026 readiness-scale viewpoints with equivalent headline, European Defence Fund section and same novel proposal. The older original /viewpoint/ URL was handled in A23; no distinct work or decision is identified here.",
+      "deep_analysis": {
+        "work_kind": "cross-indexed same original opinion",
+        "research_question": "Is this a separate contribution from the readiness-scale viewpoint?",
+        "main_finding": "No distinct claim beyond the same dual-use readiness proposal.",
+        "method_or_basis": "Original Science|Business editorial metadata and parallel URLs.",
+        "qualification": "Same dual-use research readiness viewpoint and author proposal already verified in A23; no second distinct development is established.",
+        "radar_relevance": "Second news record adds no distinct European R&I development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News RSS token and Science|Business /news/ variant page unavailable HTTP 403."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact variant title indexed at second Science|Business URL and in the 17 Nov publisher listing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Science|Business /viewpoint/ article has same date, funder section and central Dual-Use Readiness Level description as this /news/ story."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/european-defence-fund/viewpoint-europe-needs-readiness-scale-dual-use-research",
+            "title": "Science|Business second URL same viewpoint",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C uniqueness gate fails: alternative Science|Business /news/URL has a slight headline variation on the same 17 November Dual-Use Readiness Level viewpoint already indexed by A23. No independent action or method emerges. Canonical duplicate candidate absent from the supplied possible_duplicates field."
+      },
+      "duplicate": {
+        "status": "review",
+        "duplicate_of": "",
+        "reason": "A26 appears to recatalogue A23; package provides no possible_duplicates record_key permitting machine canonical linkage."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:52Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPeFk0eTBSVXlYMHdkOHBpa0R2NXFNWVVkdS1rdEZQX2hib1F6bVliUXZ6Zlk1NEdyR0pDanBWb2t6WmJFNENxcnhUTFJvbjRIWnc2QjNmSHI4NlhGWHFzajR2cTdYeWI2RTFaTWlHc0RnT1NpT0MwZjdackxyU0FscHk5cnlQYnVpbDJPc1BTSlZPLTNQSHFiVVRnUUlTalJlU001RTFEY1E1N2ZRSkxmUWtXRmRtTEs1VWJ4X1JNZDVGczRib0E0?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "d938f19d",
+      "identity_hash": "cff044de0f1a5da1",
+      "reader_title": "Commentary on European R&D stagnation",
+      "reader_what": "An expert argues for drastic European R&D policy reforms.",
+      "reader_more": "Publisher’s original “Insider’s View” format and reported interview framing establish a policy argument, not a new action. Without a newly verified statutory instrument or underlying primary research report this is not a dated European R&I change.",
+      "deep_analysis": {
+        "work_kind": "policy interview",
+        "research_question": "Did the interview enact European R&I reform?",
+        "main_finding": "No; it advocates reform in response to long-standing investment concerns.",
+        "method_or_basis": "Science|Business indexed interview identity and its political-analysis framing.",
+        "qualification": "Interview advocacy for stronger investment is not a new research-funding decision or an independent evidence study.",
+        "radar_relevance": "Opinion about R&D investment rather than verified new change.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News article redirect unhelpful; Science|Business article page 403."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Publisher original heading and interview format indexed for 17 Nov."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "Publisher indexes Frederik Erixon comments, without a new formal EU programme document."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/eu-budget/insiders-view-europe-needs-shock-therapy-reverse-stagnating-rd-investment",
+            "title": "Science|Business Frederik Erixon interview",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C gate fails: the Frederik Erixon interview argues Europe should apply “shock therapy” to stagnant R&D but offers no newly adopted programme, funded initiative or policy rule. A evidence criteria fail as interview opinion, not substantive independent completed study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:52Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxNekpVLTBfYzBwS2ZTdWNMNGhjTmtUaGlBeWxSWktfaUkxcUJmR29kUDVfeUp1M0NTZWtrR0xSTkYxOTZBS19GNjNmZWFNRFNWR25ZcjFkTzcxdEV6TGg0UExKV2c0bnkzRE9aMWhWUndKZkFRelpnY1ViOE9lcngxWV8tLW9GRTByUmROZ0ZQenh4YTZIdlZlQlVKdU5penE0amJ5SWpWd05KZlZ5Y3NLR2xQMlhlc1hJQXVrUFV1STgtbUE?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "7b5352c5",
+      "identity_hash": "ac0d78690db3df8c",
+      "reader_title": "Regional science-workforce gender balance",
+      "reader_what": "A data column reports regional gender parity patterns among scientists and engineers.",
+      "reader_more": "The original 17 November publisher introduction reports gender parity only in several southern European regions. This is a descriptive Eurostat-style geographic workforce snapshot, not a new R&I policy change or substantial systematic explanatory study.",
+      "deep_analysis": {
+        "work_kind": "data-news workforce digest",
+        "research_question": "Where has science/engineering workforce gender parity been reached?",
+        "main_finding": "Selected southern European regions reach parity; EU differences remain.",
+        "method_or_basis": "Science|Business publisher headline and first-party indexed synopsis.",
+        "qualification": "Regional Eurostat workforce parity is descriptive analysis; the story does not identify a new R&I policy or programme change.",
+        "radar_relevance": "Sector workforce statistics alone are not a new C change.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News cache unavailable; Science|Business article page HTTP 403."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "First-party indexed 17 November 2026 Data Corner title and introduction retrieved."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "Publisher listings independently establish article framing and no reported legislative event."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/careers/data-corner-southern-europe-leads-gender-balance-science-and-engineering",
+            "title": "Science|Business Data Corner gender workforce",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C fails: Science|Business Data Corner describes regional gender distribution of science and engineering workers and no newly introduced research/innovation programme. A Routes 2 and 3 also checked: short data-news digest lacks a substantial analytical research-system study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:52Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxQaGJ1dVFHVmN5em9oVnViaWVfYU1MT0VIVGpWQzB6M21VaGx3ZS1fRTNWYmZCNGp1TzNmTTJPZjRLRTZTMEdvSFR5Qnc5OGYzYVYwZHlJT2NmYk1hZ3VCUmNhSUh4WjNQVDhUekZWLVA5RlVfVWJ2eHVXT29vZWdWbVVSZklxYlVGdzhZTG1rUU1KSnE2OTlDZ1VHOHlHZlQ3a1JpTlNrcmN3XzB2T0t3cUJsdHd5dVJfcXZjX0NtQQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "ae0ddbfd",
+      "identity_hash": "61bb65e1bad6314a",
+      "reader_title": "Cross-border chip startup launchpad agreement",
+      "reader_what": "TU Eindhoven, TUM Venture Labs and boOst signed an agreement to establish a chip startup network.",
+      "reader_why": "The consortium connects research, manufacturing expertise and investors across European semiconductor ecosystems.",
+      "reader_more": "Partners signed a memorandum at SEMICON Europa on 11 November, publicised 12 November 2026. The planned network spans Eindhoven, Munich and Dresden, offers cross-border lab/industry/mentorship pathways, and expects an operational model by Q1 2027 and two-year pilot during 2027 subject to co-funding. Do not report planned pilot as running.",
+      "deep_analysis": {
+        "work_kind": "first-party university venture-builder partnership release",
+        "research_question": "What did semiconductor ecosystems agree to launch?",
+        "main_finding": "European Future Chips Launchpad formalised through MoU, with pilot plans for 2027.",
+        "method_or_basis": "Original UnternehmerTUM/TUM Venture Labs public announcement plus national industry organisation corroboration.",
+        "qualification": "The new launchpad is formalised by an MoU, but a 2027 pilot and its co-funding are future intentions.",
+        "radar_relevance": "Direct deep-tech venture acceleration from semiconductor, photonics and quantum research.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News RSS instead of publisher original article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Science|Business partnership news indexed for 16 Nov 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "UnternehmerTUM original 12 Nov first-party press release identifies signed MOU, proposed network and planned 2027 pilot."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_announcement",
+            "url": "https://www.unternehmertum.de/presse/europaeische-chip-oekosysteme-buendeln-ihre-kraefte-muenchen-eindhoven-und-dresden-starten-das-european-future-chips-launchpad/",
+            "title": "UnternehmerTUM first-party semiconductor launchpad",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_NEW_EU_CHIP_STARTUP_NETWORK",
+        "reason": "Signed 12 November three-country technology-transfer consortium MoU launches European Future Chips Launchpad to commercialise semiconductor, photonics and quantum research; directly strengthens EU deep-tech startups."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:53Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "innovation.deep_tech_startups",
+          "secondary_objects": [],
+          "actor": {
+            "name": "TU/e, TUM Venture Labs and boOst",
+            "class": "university_group"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The new launchpad is formalised by an MoU, but a 2027 pilot and its co-funding are future intentions.",
+          "text": "TU/e, TUM Venture Labs and boOst launches an EU R&I-relevant development involving european future chips launchpad formalised through mou, with pilot plans for 2027.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxQaGJ1dVFHVmN5em9oVnViaWVfYU1MT0VIVGpWQzB6M21VaGx3ZS1fRTNWYmZCNGp1TzNmTTJPZjRLRTZTMEdvSFR5Qnc5OGYzYVYwZHlJT2NmYk1hZ3VCUmNhSUh4WjNQVDhUekZWLVA5RlVfVWJ2eHVXT29vZWdWbVVSZklxYlVGdzhZTG1rUU1KSnE2OTlDZ1VHOHlHZlQ3a1JpTlNrcmN3XzB2T0t3cUJsdHd5dVJfcXZjX0NtQQ?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:61bb65e1bad6314a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMingJBVV95cUxOYTUxMFFuZ19pZlNyajhteWsxTElmdC1XSlpMTjJGWU00QVluN19DazVJNWlULUd2Qk1lMUVnRkxpb29zQ0FsSk9MLVo0dUltZnpqbFV1R2xWYmlSSzl5WTJLUF9LTGk2dDJ2blR5R2VvWDlLT2dtaEFpdlZTcWptckpQNC1xMzVJNTN2aDZiUzQ4VXY5Y3pycnFxZy1HUnBVbXdjZ3ZHRm8yX0Z0ZTJaamRvVk9DcVBuYnBaRC1SS2hnQk1vbVFocEFGUS1Tc2lrTG5LOU9rUjVfOUNENjhjTWZUbHpVM2NxUmdoeTNvQ1JWUUxmZFZuZXJYUHFOeGI5UmdNS1FmeW14em5BZ3EzSFFKY0FWcXoxTDJ3Nkx3?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "0ee051c2",
+      "identity_hash": "c073f1087f563ad4",
+      "reader_title": "EU scientific advisers call for AI evaluation safeguards",
+      "reader_what": "Commission advisers recommend EU independent AI evaluation capacity and safety governance that evolves with capabilities.",
+      "reader_why": "Recommendations bear directly on European AI model research, evaluation institutions and technology governance.",
+      "reader_more": "The EU Group of Chief Scientific Advisors and European Group on Ethics issued a joint statement calling for safety/security safeguards, human agency, development paced to danger, independent evaluation capacity and continuous learning. The statement is unusual cross-group advice, not new AI Act text or adopted budget.",
+      "deep_analysis": {
+        "work_kind": "independent EU science-policy advice",
+        "research_question": "What AI safeguards do Commission scientific advisers jointly recommend?",
+        "main_finding": "Strong AI safeguards and European independent model-evaluation capacity.",
+        "method_or_basis": "Original official DG RTD announcement and linked joint scientific-adviser statement.",
+        "qualification": "These are scientific-adviser recommendations published 16 November, not European Commission-adopted legislative requirements.",
+        "radar_relevance": "EU AI research/evaluation capacity and governance are explicitly addressed.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News RSS did not resolve to original content."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "European Commission 16 Nov 2026 official announcement identified and read."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "DG Research and Innovation first-party news links original joint ethics/scientific advisers publication."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_announcement",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/ai-requires-rigorous-safeguards-and-rules-keep-pace-technological-advances-experts-tell-european-2026-11-16_en",
+            "title": "European Commission independent AI advisers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_NEW_EU_RI_ADVICE",
+        "reason": "Commission research chief scientific advisers and EGE published a new joint formal statement recommending independent model evaluation capacity and safety/human-agency safeguards; direct European AI research governance advice, not adopted policy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:54Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [
+        {
+          "object": "ai.research_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission scientific advisory groups",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-11-16",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "These are scientific-adviser recommendations published 16 November, not European Commission-adopted legislative requirements.",
+          "text": "European Commission scientific advisory groups advocates an EU R&I-relevant development involving strong ai safeguards and european independent model-evaluation capacity.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMingJBVV95cUxOYTUxMFFuZ19pZlNyajhteWsxTElmdC1XSlpMTjJGWU00QVluN19DazVJNWlULUd2Qk1lMUVnRkxpb29zQ0FsSk9MLVo0dUltZnpqbFV1R2xWYmlSSzl5WTJLUF9LTGk2dDJ2blR5R2VvWDlLT2dtaEFpdlZTcWptckpQNC1xMzVJNTN2aDZiUzQ4VXY5Y3pycnFxZy1HUnBVbXdjZ3ZHRm8yX0Z0ZTJaamRvVk9DcVBuYnBaRC1SS2hnQk1vbVFocEFGUS1Tc2lrTG5LOU9rUjVfOUNENjhjTWZUbHpVM2NxUmdoeTNvQ1JWUUxmZFZuZXJYUHFOeGI5UmdNS1FmeW14em5BZ3EzSFFKY0FWcXoxTDJ3Nkx3?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c073f1087f563ad4:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxObWFoZFR4X2o4SUJNLU50OGtzSVRldEUyQURySlJaZ2d4MGpHT18zVE50aXYwMndEZkYzVFBCazZkTHkxZzl4RDRYbktHTmY4MDI5Z0ptTF8yeVBnRzEtcVhLRDdud0h2d29ubHhvMG43WjVDcjNnWVNFZEdWZTNHZGFlMm8zLVlBR29iSHB1aEsxWjVKQ2VmRlRrMTJaM18yRlZvdWtoX3E3aXZEamZydUVMSURMdHl2?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "04f9bc21",
+      "identity_hash": "40c847b5412ed176",
+      "reader_title": "Commission previews Apply AI Summit",
+      "reader_what": "Commission advertised a Brussels summit on European AI innovation and uptake.",
+      "reader_more": "The 16 November DG CNECT notice lists event attendance, ministers, industry and startup representatives and forthcoming discussion. The event preview is not evidence of a new programme rule or implemented R&I investment.",
+      "deep_analysis": {
+        "work_kind": "official conference preview",
+        "research_question": "Did the summit preview itself open a new research instrument?",
+        "main_finding": "No; it described an upcoming meeting and anticipated exchanges.",
+        "method_or_basis": "Original Commission conference news dated 16 November 2026.",
+        "qualification": "The 16 November announcement previews the 17 November summit; attendance and award programmes do not create a separate R&I measure.",
+        "radar_relevance": "Event logistics and goals, rather than a substantive R&I development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News reader redirect unavailable."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original DG CNECT 16 November 2026 summit preview found."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original Commission event text confirms 17 Nov summit and programme, no new rule adopted."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_announcement",
+            "url": "https://digital-strategy.ec.europa.eu/en/news/commission-hosts-apply-ai-summit-boost-europes-ai-innovation-and-uptake",
+            "title": "Commission Apply AI Summit announcement",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C route fails: Commission summit preview mentions Apply AI uptake, event speakers and awards but makes no concrete new funding or policy action; the separate 17 November EDIH call is independently assessed as B34."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:54Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPOERqNHoxSEpId0c1cU1YNy1pNWNTSWdyUzRBTS0xU0lBb0YwT2NiNXdHLVpXS0FNcnd6T3MzTEhsMUZxUkRCbGNZVU9HUEVvc2Rkb0NNMFJmZWxhV2NTamNaM2x0SGFHMjlPc3pVU3pwVVFWQzh3N2ZPOXFnN29raWZHaVJZVTQyUkRkRWd5RlFmNXNfVFBhc2VhRU9QalhMZEN0b0FsdVAtNUN2NzFjVWh1NA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "97ce3d62",
+      "identity_hash": "8b274738ab90cfff",
+      "reader_title": "Individual research vacancy: Postdoctoral Researcher in University-Scale HPC and",
+      "reader_what": "University of Luxembourg advertises a postdoctoral researcher in university-scale hpc and ai systems position.",
+      "reader_more": "This is a personal academic employment vacancy and provides no evidence of a newly founded institute, additional research-capacity funding or newly operational research facility. Job number in scanner matches the job listing headline, not a policy action.",
+      "deep_analysis": {
+        "work_kind": "individual university job listing",
+        "research_question": "Is the recruitment a new R&I programme or capability change?",
+        "main_finding": "An individual advertised position; no systemic new capacity claim is established.",
+        "method_or_basis": "Job-vacancy announcement identity and employment description from original index metadata.",
+        "qualification": "Individual appointment may later be filled; this advertisement does not establish an expansion.",
+        "radar_relevance": "European institutional address alone insufficient for C or A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Original Google News RSS job token did not provide the vacancy body."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Original University of Luxembourg vacancy title and listing id 12866463 matched the indexed job listing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "University of Luxembourg recruitment origin and higher-education jobs-board listing class identified; no institutional launch or capacity expansion in item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "job_listing",
+            "url": "https://www.timeshighereducation.com/unijobs/listing/12866463/",
+            "title": "University of Luxembourg job listing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C fails the substantive-development gate: an ordinary single postdoctoral recruitment advert is an open vacancy, not demonstrated creation of new institutional research infrastructure, programme, technology or systemic workforce capacity. A Route 3 not applicable: job advertisement is not an R&I evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:54Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMimwFBVV95cUxPU29kbGVMcDg1U2piSTllS2ZpMk1tdU5USTNaa0IzM0xSNnNSWDB5WkpMTjFoZV9NQVlBNWVYVGk0U2Z2OXlfWm00eUNNa1pkZjluVzQ1RWwzaE5oOXNlVVFOMXlaMFlmQjk2b0xnQk1zNVdIWDM1cFpFeWplWTY3eG40VFYteXV5REtwRElhWk55eVNpbmVzRjFkcw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "253d405a",
+      "identity_hash": "53c58fa3cac83765",
+      "reader_title": "Individual research vacancy: Postdoctoral researcher in computer science",
+      "reader_what": "University of Luxembourg advertises a postdoctoral researcher in computer science position.",
+      "reader_more": "This is a personal academic employment vacancy and provides no evidence of a newly founded institute, additional research-capacity funding or newly operational research facility. Job number in scanner matches the job listing headline, not a policy action.",
+      "deep_analysis": {
+        "work_kind": "individual university job listing",
+        "research_question": "Is the recruitment a new R&I programme or capability change?",
+        "main_finding": "An individual advertised position; no systemic new capacity claim is established.",
+        "method_or_basis": "Job-vacancy announcement identity and employment description from original index metadata.",
+        "qualification": "Individual appointment may later be filled; this advertisement does not establish an expansion.",
+        "radar_relevance": "European institutional address alone insufficient for C or A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Original Google News RSS job token did not provide the vacancy body."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Original University of Luxembourg vacancy title and listing id 12866145 matched the indexed job listing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "University of Luxembourg recruitment origin and higher-education jobs-board listing class identified; no institutional launch or capacity expansion in item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "job_listing",
+            "url": "https://www.timeshighereducation.com/unijobs/listing/12866145/",
+            "title": "University of Luxembourg job listing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C fails the substantive-development gate: an ordinary single postdoctoral recruitment advert is an open vacancy, not demonstrated creation of new institutional research infrastructure, programme, technology or systemic workforce capacity. A Route 3 not applicable: job advertisement is not an R&I evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:54Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMihwFBVV95cUxQeGVvS1JfM19oN1Z6MGpDNGJobk9CdkwtY1lFdHZKcGxuLUIzaHcwWkpBS0x2NVE4dlV5aHUwSGdfbUwxR1NsWWlfN2E5QjVXWnFxRzlrYzhEdGJmaGExNVdHclplSVlpM3lySmtNVUhTcFJSdWplYkxtVFlkMFU3XzVja1ZySFU?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "8ce280b6",
+      "identity_hash": "e325f952bb41ddad",
+      "reader_title": "Individual research vacancy: Postdoctoral Researcher in 6G",
+      "reader_what": "University of Luxembourg advertises a postdoctoral researcher in 6g position.",
+      "reader_more": "This is a personal academic employment vacancy and provides no evidence of a newly founded institute, additional research-capacity funding or newly operational research facility. Job number in scanner matches the job listing headline, not a policy action.",
+      "deep_analysis": {
+        "work_kind": "individual university job listing",
+        "research_question": "Is the recruitment a new R&I programme or capability change?",
+        "main_finding": "An individual advertised position; no systemic new capacity claim is established.",
+        "method_or_basis": "Job-vacancy announcement identity and employment description from original index metadata.",
+        "qualification": "Individual appointment may later be filled; this advertisement does not establish an expansion.",
+        "radar_relevance": "European institutional address alone insufficient for C or A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Original Google News RSS job token did not provide the vacancy body."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Original University of Luxembourg vacancy title and listing id 12865898 matched the indexed job listing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "University of Luxembourg recruitment origin and higher-education jobs-board listing class identified; no institutional launch or capacity expansion in item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "job_listing",
+            "url": "https://www.timeshighereducation.com/unijobs/listing/12865898/",
+            "title": "University of Luxembourg job listing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C fails the substantive-development gate: an ordinary single postdoctoral recruitment advert is an open vacancy, not demonstrated creation of new institutional research infrastructure, programme, technology or systemic workforce capacity. A Route 3 not applicable: job advertisement is not an R&I evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:54Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMisAFBVV95cUxPUllDMDkyT0podnhta0hONGxnaGVqMGhDWmh1bi05SkFNMWJianA5NzNLdzdlY21aRHUxRVpvcWEtQkpXU3c2VlhZanJmM2R5LXhBemUwWGRTLTFUZlliSlNzUXdQUEZYdGVrbFR3RUVib1dEZlgxbXNISFVmNkIwMkNDQ2dUcUdpS2tsaDRxRjdZbkZIOU5ObU13Y0Vsdl9KcmJ2VnFpZHVnYkFCM3BxOQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b17f69fb",
+      "identity_hash": "2590d47a46086d1b",
+      "reader_title": "Individual research vacancy: Postdoctoral Researcher in Non-Target Screening - PA",
+      "reader_what": "University of Luxembourg advertises a postdoctoral researcher in non-target screening - parc project position.",
+      "reader_more": "This is a personal academic employment vacancy and provides no evidence of a newly founded institute, additional research-capacity funding or newly operational research facility. Job number in scanner matches the job listing headline, not a policy action.",
+      "deep_analysis": {
+        "work_kind": "individual university job listing",
+        "research_question": "Is the recruitment a new R&I programme or capability change?",
+        "main_finding": "An individual advertised position; no systemic new capacity claim is established.",
+        "method_or_basis": "Job-vacancy announcement identity and employment description from original index metadata.",
+        "qualification": "Individual appointment may later be filled; this advertisement does not establish an expansion.",
+        "radar_relevance": "European institutional address alone insufficient for C or A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Original Google News RSS job token did not provide the vacancy body."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Original University of Luxembourg vacancy title and listing id 12866732 matched the indexed job listing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "University of Luxembourg recruitment origin and higher-education jobs-board listing class identified; no institutional launch or capacity expansion in item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "job_listing",
+            "url": "https://www.timeshighereducation.com/unijobs/listing/12866732/",
+            "title": "University of Luxembourg job listing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity cross-checked with original credited publisher; original claim and reported date distinguished from unrelated follow-on commentary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C fails the substantive-development gate: an ordinary single postdoctoral recruitment advert is an open vacancy, not demonstrated creation of new institutional research infrastructure, programme, technology or systemic workforce capacity. A Route 3 not applicable: job advertisement is not an R&I evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-19T06:35:54Z",
+      "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-11-19T06:16:07Z"
+  "claims_updated_at": "2026-11-19T06:35:54Z"
 }
