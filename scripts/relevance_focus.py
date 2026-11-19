@@ -287,30 +287,54 @@ REGIONAL_PRIORITIES = {
             ('sustainable mobility research', 'transport innovation', 'electric mobility')),
     },
 }
-# Discovery-only vocabulary for sparse policy subjects. It changes query
-# specificity, not the priority order, query budget, geographical/aboutness gates,
-# accepted-lead thresholds, or independent Deep Scan decisions.
-SPARSE_DISCOVERY_TOPICS = (
-    'Critical technology: Advanced semiconductors',
-    'Critical technology: Space and propulsion technologies',
-    'Critical technology: Energy technologies',
-    'CELAC: AI in Science',
-    'Union for the Mediterranean: Climate change',
-    'Union for the Mediterranean: Renewable energies',
-    'Union for the Mediterranean: Health',
-    'ASEAN: Green technologies',
-    'ASEAN: Space cooperation',
-    'ASEAN: Marine science',
-    'ASEAN: Mobility',
-)
-# Broad regional search strings must still be verified against the specific
-# aboutness geography found in a publication's title/abstract. The replacement
-# query cannot classify its own text as evidence of regional subject matter.
-SPARSE_REGION_ANCHORS = {
-    'CELAC': ('Americas', 'Latin America and Caribbean'),
-    'ASEAN': ('Asia & Pacific', 'ASEAN'),
+# Extra discovery expressions are synonyms within the same 24 policy priorities,
+# not a second catalogue of topics or a separate search lane. They never decide
+# whether a finding is eligible: source aboutness and Deep Scan do that.
+# Queries are discovery prompts only, never substitute for evidence in a source.
+REGIONAL_DISCOVERY_SYNONYMS = {
+    'CELAC: AI in Science': (
+        'deep learning climate modelling', 'machine learning biodiversity',
+        'artificial intelligence scientific discovery', 'AI materials discovery'),
+    'ASEAN: Space cooperation': (
+        'satellite research cooperation', 'earth observation collaboration',
+        'space agency research partnership', 'joint satellite mission'),
+    'ASEAN: Marine science': (
+        'coral reef monitoring', 'coastal oceanography',
+        'marine ecosystem research', 'ocean observation'),
+    'ASEAN: Mobility': (
+        'electric mobility', 'urban transport technology',
+        'smart transportation systems', 'electric bus research'),
+    'ASEAN: Green technologies': (
+        'solar photovoltaics', 'battery energy storage',
+        'clean energy innovation', 'green hydrogen'),
+    'Union for the Mediterranean: Climate change': (
+        'Mediterranean climate adaptation', 'drought resilience',
+        'climate risk modelling'),
+    'Union for the Mediterranean: Renewable energies': (
+        'Mediterranean solar photovoltaics', 'wind power research',
+        'renewable hydrogen'),
+    'Union for the Mediterranean: Health': (
+        'Mediterranean health research', 'infectious disease surveillance',
+        'biomedical innovation'),
+    'Africa: Innovation and technology': (
+        'technology transfer', 'research commercialization',
+        'innovation ecosystem'),
+    'Africa: Green transition': (
+        'clean energy technology', 'climate adaptation innovation',
+        'renewable electricity'),
+    'Africa: Public health': (
+        'disease surveillance', 'health systems research',
+        'medical technology'),
+    'Africa: Capacities for science and higher education': (
+        'research infrastructure', 'scientific workforce',
+        'research capacity building'),
+    'CELAC: Health': (
+        'biomedical research', 'health systems innovation', 'clinical trials'),
+    'CELAC: Climate change, environmental sustainability and energy transition': (
+        'climate adaptation', 'renewable energy innovation', 'environmental research'),
 }
-SPARSE_QUERY_VARIANTS = {
+
+TECHNOLOGY_AND_REGIONAL_DISCOVERY_SYNONYMS = {
     'Critical technology: Advanced semiconductors': (
         'semiconductor fabrication', 'advanced chip packaging',
         'compound semiconductor devices', 'microelectronics technology'),
@@ -363,6 +387,70 @@ for _region, _topics in REGIONAL_PRIORITIES.items():
         FOCUS_PATTERNS[_label] = _patterns
         FOCUS_QUERIES[_label] = _queries
         FOCUS_TRACK[_label] = _region
+
+
+def combined_discovery_vocabulary(primary, additions):
+    """One deduplicated vocabulary, mixed so short runs sample all terms.
+
+    The order does not privilege either source list: the terms are all synonyms
+    for one policy priority. Rotating the starting term between runs lets the
+    25-minute time limit cover the full vocabulary over successive runs.
+    """
+    groups = [iter(primary), iter(additions)]
+    mixed = []
+    while groups:
+        remaining = []
+        for group in groups:
+            term = next(group, None)
+            if term is not None:
+                mixed.append(term)
+                remaining.append(group)
+        groups = remaining
+    return tuple(dict.fromkeys(term.strip() for term in mixed if term.strip()))
+
+
+# Single search vocabulary per authoritative priority. Every priority gets the
+# same discovery rotation; optional synonyms improve query quality, not quota.
+FOCUS_DISCOVERY_VOCABULARY = {
+    topic: combined_discovery_vocabulary(
+        FOCUS_QUERIES[topic],
+        REGIONAL_DISCOVERY_SYNONYMS.get(topic, ()) +
+        TECHNOLOGY_AND_REGIONAL_DISCOVERY_SYNONYMS.get(topic, ()))
+    for topic in FOCUS_TRACK
+}
+
+
+# Explicit scientific/technical subject synonyms. These are source-text
+# matching signals, not proof; independent Deep Scan still checks each claim.
+POLICY_SOURCE_SYNONYMS = {
+    'CELAC: AI in Science': (
+        'deep learning for scientific', 'machine learning for scientific',
+        'AI-assisted scientific', 'AI driven research', 'AI-driven research',
+        'machine learning climate modelling', 'AI for scientific discovery'),
+    'ASEAN: Space cooperation': (
+        'earth observation collaboration', 'joint satellite mission',
+        'space agency partnership', 'satellite research cooperation'),
+    'ASEAN: Marine science': (
+        'coral reef monitoring', 'coastal oceanography',
+        'ocean observation', 'marine ecosystem research',
+        'coral reef research'),
+    'ASEAN: Mobility': (
+        'electric bus', 'smart transportation',
+        'urban transport technology', 'electric vehicle research'),
+    'ASEAN: Green technologies': (
+        'solar photovoltaic', 'battery energy storage',
+        'clean energy technology', 'green hydrogen'),
+    'Union for the Mediterranean: Climate change': (
+        'drought resilience', 'climate risk modelling',
+        'climate hazard', 'heatwave adaptation'),
+    'Union for the Mediterranean: Renewable energies': (
+        'wind power', 'solar photovoltaics', 'renewable hydrogen'),
+    'Union for the Mediterranean: Health': (
+        'disease surveillance', 'medical innovation'),
+}
+for _label, _extra in POLICY_SOURCE_SYNONYMS.items():
+    FOCUS_PATTERNS[_label] = tuple(dict.fromkeys(FOCUS_PATTERNS[_label] + _extra))
+
 
 
 def priority_region_match(label, group, place):
@@ -1025,11 +1113,14 @@ def regional_matching(title, body, *, allowed_topics=None, expected_region=None,
         return None
     if expected_region and not any(p == expected_region for _, p, _, _ in locations):
         return None
-    if expected_topic in FOCUS_TRACK and not any(
-            priority_region_match(expected_topic, group, place)
-            for group, place, _, _ in locations
-            if not expected_region or place == expected_region):
-        return None
+    if expected_topic in FOCUS_TRACK and FOCUS_TRACK[expected_topic] != 'critical_technology':
+        # A regional search query is a retrieval hint, not evidence that the
+        # publication studies that exact country. Keep only locations that the
+        # SOURCE itself identifies as belonging to the assigned region.
+        locations = [loc for loc in locations
+                     if priority_region_match(expected_topic, loc[0], loc[1])]
+        if not locations:
+            return None
     catalogue = topic_catalogue()
     topics = allowed_topics if allowed_topics is not None else focus_areas()
     topic_hits = [topic for topic in topics if topic in catalogue
@@ -1639,19 +1730,28 @@ def focused_search_plan(slot: int, focus=None):
                 wave_stride = next(i for i in range(7, 7 + len(eligible))
                                    if gcd(i, len(eligible)) == 1)
                 targets = [eligible[(idx * stride + wave * wave_stride + slot) % len(eligible)]]
-                # Replace (do not add) an occasional narrow country search
-                # with a region-wide query for historically sparse CELAC/ASEAN
-                # themes. This preserves the same request budget per priority.
+                # Occasionally replace a single-country search with a region
+                # anchor for ALL regional priorities. The source must still
+                # establish an eligible country/region independently of query.
                 region = FOCUS_TRACK.get(topic)
-                if (topic in SPARSE_DISCOVERY_TOPICS
-                        and region in SPARSE_REGION_ANCHORS
-                        and (slot + wave) % 3 == 0):
-                    targets = [SPARSE_REGION_ANCHORS[region]]
-            variants = FOCUS_QUERIES.get(topic, (term,))
-            if topic in SPARSE_QUERY_VARIANTS:
-                variants = variants + SPARSE_QUERY_VARIANTS[topic]
-            query_term = variants[(wave + slot + idx) % len(variants)]
+                region_anchors = {
+                    'CELAC': ('Americas', 'Latin America and Caribbean'),
+                    'ASEAN': ('Asia & Pacific', 'ASEAN'),
+                    'Africa': ('Africa', 'Africa (region)'),
+                }
+                if region in region_anchors and (slot + wave + idx) % 3 == 0:
+                    targets = [region_anchors[region]]
+            # One authoritative topic -> one combined vocabulary. Every wave
+            # advances one term; the run's rotation slot shifts the starting
+            # position, so all synonyms can appear over successive runs.
+            variants = FOCUS_DISCOVERY_VOCABULARY.get(topic, (term,))
+            query_term = variants[(slot + idx + wave) % len(variants)]
             lens_name, suffix = TEMPORAL_QUERIES[(idx + wave + slot) % len(TEMPORAL_QUERIES)]
+            if FOCUS_TRACK.get(topic) in REGIONAL_PRIORITIES:
+                # Requiring the words 'future outlook scenarios' in a search
+                # hides current breakthroughs, which Deep Scan can assess for
+                # future implications. Do not force a future-word filter.
+                suffix = '' 
             for group, place in targets:
                 if is_global_tech and group == 'Global':
                     query = f'{query_term} {suffix}'.strip()
@@ -1763,6 +1863,22 @@ def balanced_candidates(picked, max_candidates, *, venue_history=None):
         selected.extend(core[:max(0, max_candidates - len(selected))])
         return selected
     selected = []
+    # When the output limit binds, do not lose an otherwise eligible rare topic
+    # simply because numerous high-volume topics were encountered first.
+    # No invented candidates, quality-gate bypass or acceptance quota.
+    all_rows = external + core
+    best_by_topic = {}
+    for row in all_rows:
+        topic = row.get('focus_issue')
+        if topic and topic not in best_by_topic:
+            best_by_topic[topic] = row
+    for row in best_by_topic.values():
+        if len(selected) >= max_candidates:
+            break
+        selected.append(row)
+    chosen_ids = {row['candidate_id'] for row in selected}
+    external = [row for row in external if row['candidate_id'] not in chosen_ids]
+    core = [row for row in core if row['candidate_id'] not in chosen_ids]
     while len(selected) < max_candidates and (core or external):
         # Neither EU/UK nor external subjects are mandatory or disqualifying.
         for pool in (external, core):
@@ -1954,6 +2070,10 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     plan = iter(focused_search_plan(slot, focus=active_focus))
     stats['policy_focus_topics'] = len(active_focus)
     successful_requests = 0
+    searches_by_topic = Counter()
+    returned_by_topic = Counter()
+    matched_by_topic = Counter()
+    fresh_by_topic = Counter()
     while (remaining := deadline - clock()) > 0:
         if len(blocked) == 2:
             raise RuntimeError('Both focused discovery providers unavailable: '+str(dict(stats)))
@@ -2017,6 +2137,8 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
             results = (resp.json().get('results',[]) if provider=='openalex'
                        else resp.json().get('message',{}).get('items',[]))
             successful_requests += 1
+            searches_by_topic[topic] += 1
+            returned_by_topic[topic] += len(results)
             stats[provider+'_queries_completed'] += 1
             failures[provider] = 0
             if not results:
@@ -2027,12 +2149,10 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                     continue
                 try:
                     rec = relevance_work(provider, work, allowed_topics=active_focus,
-                                         expected_region=(None if (
+                                         expected_region=(place if (
                                              topic in FOCUS_TRACK and
-                                             FOCUS_TRACK[topic] == 'critical_technology' and bucket == 'Global'
-                                         ) or (topic in SPARSE_DISCOVERY_TOPICS and
-                                               (bucket, place) == SPARSE_REGION_ANCHORS.get(
-                                                   FOCUS_TRACK.get(topic))) else place),
+                                             FOCUS_TRACK[topic] == 'critical_technology' and bucket != 'Global'
+                                         ) else None),
                                          expected_topic=topic)
                 except (ValueError, TypeError, AttributeError):
                     stats['malformed_work'] += 1
@@ -2040,6 +2160,7 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                 if rec is None:
                     continue
                 canonical, score, candidate = rec
+                matched_by_topic[topic] += 1
                 if candidate['url'].lower().rstrip('/') in known or canonical in seen_dois:
                     stats['already_seen_doi_or_radar_work'] += 1
                     continue
@@ -2050,6 +2171,7 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                     continue
                 if canonical not in picked:
                     stats['candidate_matches'] += 1
+                    fresh_by_topic[topic] += 1
                     per_bucket[bucket] = per_bucket.get(bucket, 0) + 1
                 picked[canonical] = (score, bucket, candidate)
         except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError) as exc:
@@ -2104,6 +2226,17 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     stats['seconds_spent_discovering'] = round(clock()-start,2)
     stats['successful_requests'] = successful_requests
     stats['coverage_buckets'] = len(per_bucket)
+    # Provide a per-priority funnel so subsequent fixes target the actual loss
+    # (search execution, retrieval, source matching or already-seen works).
+    stats['priority_funnel'] = {
+        topic: {
+            'successful_requests': searches_by_topic[topic],
+            'retrieved_works': returned_by_topic[topic],
+            'matching_works_before_deduplication': matched_by_topic[topic],
+            'fresh_matches_before_selection': fresh_by_topic[topic],
+            'selected_new_candidates': sum(row['focus_issue'] == topic for row in candidates),
+        } for topic in active_focus
+    }
     out={'profile_version':'v5-critical-technologies-regional-priorities-25m',
          'batch_id':'relevance-'+now.strftime('%Y%m%dT%H%M%SZ'),
          'source_document':'OpenAlex and Crossref DOI-bearing, venue-identified publications; leads only',
