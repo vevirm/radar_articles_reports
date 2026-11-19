@@ -371,6 +371,56 @@ def balanced_review_jobs(available, size):
         counts[topic] = counts.get(topic, 0) + 1
     return jobs
 
+def select_sixty_review_jobs(available, size):
+    """Rank manual 60-case packages: strong evidence signals, less repetition.
+
+    Only used by the additional/current-focus 60-case workflow. No hard topic
+    quotas and no source-acceptance changes: similarity is a title-level signal
+    for *review order*, not a claim of bibliographic duplication.
+    """
+    common = {'the', 'and', 'for', 'from', 'with', 'into', 'using', 'based',
+              'towards', 'toward', 'study', 'review', 'analysis', 'research',
+              'approach', 'advances', 'applications', 'future', 'recent',
+              'technologies', 'technology', 'systems', 'system'}
+
+    def title_terms(row):
+        return {word for word in re.findall(r'[a-z0-9]+',
+                str(row.get('title') or '').lower())
+                if len(word) > 3 and word not in common}
+
+    pool = [(row, _current_interest(row), title_terms(row)) for row in available]
+    pool.sort(key=lambda item: (-item[1], item[0]['candidate_id']))
+    selected, topic_counts, selected_terms = [], {}, []
+    while pool and len(selected) < size:
+        best_index, best_key = None, None
+        for i, (row, merit, terms) in enumerate(pool):
+            topic = row.get('focus_issue') or ''
+            count = topic_counts.get(topic, 0)
+            # Soft diminishing returns, capped at ten points. Never require a
+            # minimum or maximum number from any particular policy priority.
+            topic_penalty = min(10.0, 2.0 * count)
+            # Near-parallel titles within a topic are often less useful to
+            # verify in the same batch. This is a soft penalty, not exclusion.
+            similarity = 0.0
+            if terms:
+                for old_topic, old_terms in selected_terms:
+                    if old_topic != topic or not old_terms:
+                        continue
+                    overlap = len(terms & old_terms) / len(terms | old_terms)
+                    similarity = max(similarity, overlap)
+            repetition_penalty = 5.0 if similarity >= 0.75 else (2.5 if similarity >= 0.55 else 0.0)
+            key = (-(merit - topic_penalty - repetition_penalty),
+                   -merit, row['candidate_id'])
+            if best_key is None or key < best_key:
+                best_index, best_key = i, key
+        row, _merit, terms = pool.pop(best_index)
+        selected.append(row)
+        topic = row.get('focus_issue') or ''
+        topic_counts[topic] = topic_counts.get(topic, 0) + 1
+        selected_terms.append((topic, terms))
+    return selected
+
+
 def prepare(*, batch_size=30, artifact=None, additional=False, legacy_backlog=False):
     if legacy_backlog and not additional:
         raise ValueError('legacy_backlog requires additional=True')
@@ -479,7 +529,7 @@ def prepare(*, batch_size=30, artifact=None, additional=False, legacy_backlog=Fa
                                old.get('focus_quality_revision') == FOCUS_QUALITY_REVISION,
                                old['candidate_id']):
                 unique[key] = row
-        chosen = balanced_review_jobs(list(unique.values()), batch_size)
+        chosen = select_sixty_review_jobs(list(unique.values()), batch_size)
         # Historical candidates keep their original identity and policy tag;
         # these are fresh assignment copies only, never a rewrite of archives.
         # v7 review guidance and EU-perspective validation apply to newly
