@@ -46,6 +46,16 @@ class TestSixtySelectionOnly(unittest.TestCase):
                          [r['candidate_id'] for r in second])
         self.assertEqual(len(first), 8)
 
+    def test_distinct_strong_works_can_still_dominate(self):
+        energy = [lead(i, 'Critical technology: Energy technologies',
+                       f'Hydrogen battery prototype {i}', 90) for i in range(65)]
+        weak = [lead(i+100, 'Africa: Public health',
+                     f'Public health management of COVID-19 {i}', 40) for i in range(20)]
+        chosen = deep.select_sixty_review_jobs(energy + weak, 60)
+        self.assertEqual(len(chosen), 60)
+        self.assertTrue(all(r['focus_issue'] == 'Critical technology: Energy technologies'
+                            for r in chosen))
+
     def test_automatic_selection_function_unmodified(self):
         self.assertIsNot(deep.select_sixty_review_jobs, deep.balanced_review_jobs)
 
