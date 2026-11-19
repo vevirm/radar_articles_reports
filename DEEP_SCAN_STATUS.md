@@ -7,23 +7,39 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **4013** (Main **2087** + Historical **1926**)
-- Automatic queue still needing V2 verification: **37** (Main **2** + Historical **35**)
-- Currently assigned to workers: **37** (Main **2** + Historical **35**)
+- Automatic queue still needing V2 verification: **133** (Main **78** + Historical **55**)
+- Currently assigned to workers: **107** (Main **72** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **26**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261115T132832Z-88addcaf7d79`
-- Assigned unresolved records: **2**
-  1. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies — recovery attempt 2/3
-  2. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions — recovery attempt 2/3
+- Current package: `worker-a-20261119T052550Z-242bf1005dd3`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1017/sus.2026.10094` — From policy to practice: green and digital competencies for researchers in European science diplomacy
+  2. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall?
+  3. `link:https://doi.org/10.1093/oxrep/grag017` — Critical minerals and industrial policy: a network-based approach to supply chain risk
+  4. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors
+  5. `link:https://doi.org/10.1017/dap.2026.10089` — Advancing data agency: A conceptual framework to support data sovereignty
+  6. `link:https://doi.org/10.1093/nar/gkag1151` — PDBe in 2027: integrating literature annotations, molecular dynamics data, and AI-ready access
+  7. `link:https://doi.org/10.1016/j.net.2026.104831` — Assessing Saudi Arabia’s readiness for fusion RDI: A comparative framework and roadmap to 2035
+  8. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261113T091126Z-171c68a80881`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261119T052559Z-3b7d28fa5385`
+- Assigned unresolved records: **36**
+  1. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxOUGNrNTV6cGVzWXNyckJfa3FucGp6M2VSaXVLYWdQSGxrcjFkYXhsajNRUWItMmpwQTNWWEFXYXMwVHFleklQMHF1VmwxUUlrSG5UUDlUMW5DU3hILUh3aUIxUG5IMndSdjFjdE1HMjdjM3RKVzRVSnJZOURwOVV1WjRyNTcxZi03ZW9rbXVRelpIOVZIajE1TERQRXlNa0gtLUR0M2x1R1VTY2FnTEFlejR4WVMzQXdXMXh3MTVfOHBjZHVKMlNCUTJIUWs0MkhtbFE?oc=5` — Commission seeks feedback on draft template for the fundamental rights impact assessment under the AI Act - Shaping Europe’s digital future
+  2. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxNTGNRaHluN1BpUm90cVZrVG9QaUtJZkhtdHF3UEtvZUxudnR5LWFJQ0Zsem16dHdydVllVEpOU3JWVXFxcVJoSy1rRTd4cmxfZjJrNzFrUl9WWjg1TVMtV29BTHBOenZrVE1PdmpIMmtiRHlwYTlfQnRFZm9haWViOGMtV2JPZEpDV0tCMXo2NzNXekticWVkR0dBcmtUMjYxM3JwUFZ0Y2k3VUoxLWlCOTMzMnhIZEZwekVGaGs1OURsNTA?oc=5` — Denmark Is Showing the World How to Deal With AI Job Disruption
+  3. `link:https://www.euronews.com/2026/11/16/ecb-warns-ai-share-boom-could-end-in-abrupt-repricing` — ECB warns AI share boom could end in 'abrupt repricing'
+  4. `link:https://www.unesco.org/en/articles/germany-announces-intention-donate-eur2-million-global-fund-information-integrity-climate-change` — Germany announces the intention to donate €2 million to the Global
+  5. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxOVnhWREYwMXZyTm5VNlRIeVdGS1VLaEpWVzZmNnJMWll6UlZ6UTFpRy15UGR3c2FNR1k3V0N6TlgtSDhOMUhodnNzTk4zWWxzcWxkU2c4UkM2UTg0U3lOTUg4alpySkJaTUg0WWtoNmt6d09KTkpMYlpBYS1vaWdPUTJXaFBWOWljcVVjYzZ1aWRvd3UwOU9nQ1lBOVBBa0c3RWtncWR2ZXhaSmFNcE91VXFR?oc=5` — Over 80 Nobel laureates call on EU leaders to increase research budget
+  6. `link:https://news.google.com/rss/articles/CBMidEFVX3lxTE12WUUycWlmY3dkTmVOLXlVZm9VeU9nRWY2ZGpzUDBFczVURG5sWkowQnhVTERSa0g4XzFGUGw4SDVEelBRaUdwaGlSUnRzaWpaMzM0b3dWX1JQMjNka3hveVhZc01oNjZicWxEckR5cmxMVzJS?oc=5` — Scaling up Europe’s hydrogen industry
+  7. `link:https://news.google.com/rss/articles/CBMiowFBVV95cUxNaG9JMFJiT0syakttVFFhY3V1UWpXTzJpeENMMF9HYXpYZUl1TXNTVkNuWHBXMkl4NEJyTjJJX0ZnaXh4TGtYbEVGeEU3M3EwYkRqMTI3TXlVUV9zSFBDSENONk10aVpWb2ViMmUzdGlrM3JSRzBFRG5Wd3Z2dVBqeVozM2JzbGs4aWE1REtOVTN1N2Y2MWlRVTZPbG4tVkdlMXNR?oc=5` — Europe must embrace AI's 'creative destruction', Nobel economist says
+  8. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQS21MX1FsMEVTQWhZVEJkZFZVeXlBVDJpNTBWSWdoNWFUNF96enh3Mi1pRTZacU9OLU15M1NPZXljU3A3cGhTdGd2VkpnSEZIYjJBZlFSeWNUMlBtRFJzcll1THVNcUtsX0lsdVZZTkxyVE1JdUZzcVlkWTJIb0hyLXhRbDIwcWN5WE9zdS1SdDBwc3NIWE1fZEpxV0FveEZDeGY4WWd1bnpCU2VqUU5VN1NhQ1NjckI3?oc=5` — Should Europe triple or freeze its data centre capacity?
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
