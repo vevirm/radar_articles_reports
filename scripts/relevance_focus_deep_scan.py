@@ -396,9 +396,9 @@ def select_sixty_review_jobs(available, size):
         for i, (row, merit, terms) in enumerate(pool):
             topic = row.get('focus_issue') or ''
             count = topic_counts.get(topic, 0)
-            # Soft diminishing returns, capped at ten points. Never require a
+            # Soft diminishing returns, capped at twelve points. Never require a
             # minimum or maximum number from any particular policy priority.
-            topic_penalty = min(10.0, 2.0 * count)
+            topic_penalty = min(12.0, 2.5 * count)
             # Near-parallel titles within a topic are often less useful to
             # verify in the same batch. This is a soft penalty, not exclusion.
             similarity = 0.0
@@ -408,7 +408,7 @@ def select_sixty_review_jobs(available, size):
                         continue
                     overlap = len(terms & old_terms) / len(terms | old_terms)
                     similarity = max(similarity, overlap)
-            repetition_penalty = 5.0 if similarity >= 0.75 else (2.5 if similarity >= 0.55 else 0.0)
+            repetition_penalty = 6.0 if similarity >= 0.75 else (3.0 if similarity >= 0.50 else 0.0)
             key = (-(merit - topic_penalty - repetition_penalty),
                    -merit, row['candidate_id'])
             if best_key is None or key < best_key:
