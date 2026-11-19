@@ -287,6 +287,56 @@ REGIONAL_PRIORITIES = {
             ('sustainable mobility research', 'transport innovation', 'electric mobility')),
     },
 }
+# Discovery-only vocabulary for sparse policy subjects. It changes query
+# specificity, not the priority order, query budget, geographical/aboutness gates,
+# accepted-lead thresholds, or independent Deep Scan decisions.
+SPARSE_DISCOVERY_TOPICS = (
+    'Critical technology: Advanced semiconductors',
+    'Critical technology: Space and propulsion technologies',
+    'Critical technology: Energy technologies',
+    'CELAC: AI in Science',
+    'Union for the Mediterranean: Climate change',
+    'Union for the Mediterranean: Renewable energies',
+    'Union for the Mediterranean: Health',
+    'ASEAN: Green technologies',
+    'ASEAN: Space cooperation',
+    'ASEAN: Marine science',
+    'ASEAN: Mobility',
+)
+# Broad regional search strings must still be verified against the specific
+# aboutness geography found in a publication's title/abstract. The replacement
+# query cannot classify its own text as evidence of regional subject matter.
+SPARSE_REGION_ANCHORS = {
+    'CELAC': ('Americas', 'Latin America and Caribbean'),
+    'ASEAN': ('Asia & Pacific', 'ASEAN'),
+}
+SPARSE_QUERY_VARIANTS = {
+    'Critical technology: Advanced semiconductors': (
+        'semiconductor fabrication', 'advanced chip packaging',
+        'compound semiconductor devices', 'microelectronics technology'),
+    'Critical technology: Space and propulsion technologies': (
+        'electric spacecraft propulsion', 'satellite propulsion systems',
+        'spacecraft engineering', 'launch vehicle technology'),
+    'Critical technology: Energy technologies': (
+        'battery storage technology', 'electrolyser technology',
+        'fusion energy research', 'electricity grid technology'),
+    'CELAC: AI in Science': (
+        'machine learning scientific discovery', 'artificial intelligence for scientific research',
+        'AI driven scientific discovery', 'scientific machine learning'),
+    'ASEAN: Space cooperation': (
+        'satellite technology collaboration', 'space research partnership',
+        'earth observation satellite cooperation', 'space science collaboration'),
+    'ASEAN: Marine science': (
+        'oceanographic research', 'marine biodiversity research',
+        'coastal ecosystems research', 'marine science'),
+    'ASEAN: Mobility': (
+        'electric vehicle research', 'intelligent transportation systems',
+        'sustainable urban mobility', 'transport technology research'),
+    'ASEAN: Green technologies': (
+        'solar photovoltaic technology', 'battery energy storage technology',
+        'low carbon technology', 'green hydrogen technology'),
+}
+
 # Only used for thematic targeting, not for rewriting historical country tags.
 # Regional cooperation selection remains tied to constituent regions.
 MEDITERRANEAN_PRIORITY_PLACES = {
@@ -1557,6 +1607,9 @@ def focused_search_plan(slot: int, focus=None):
     if not focus:
         return
     items = list(focus.items())
+    # Rotate the FULL policy catalogue, not a sparse-topic-first subset.
+    # Each priority receives one turn per wave. Sparse areas are helped by
+    # better query wording, never by deprioritising other policy priorities.
     items = items[slot % len(items):] + items[:slot % len(items)]
     policy_mode = any(topic in FOCUS_TRACK for topic, _ in items)
     global_targets = regional_targets(slot, policy=policy_mode)
@@ -1586,7 +1639,17 @@ def focused_search_plan(slot: int, focus=None):
                 wave_stride = next(i for i in range(7, 7 + len(eligible))
                                    if gcd(i, len(eligible)) == 1)
                 targets = [eligible[(idx * stride + wave * wave_stride + slot) % len(eligible)]]
+                # Replace (do not add) an occasional narrow country search
+                # with a region-wide query for historically sparse CELAC/ASEAN
+                # themes. This preserves the same request budget per priority.
+                region = FOCUS_TRACK.get(topic)
+                if (topic in SPARSE_DISCOVERY_TOPICS
+                        and region in SPARSE_REGION_ANCHORS
+                        and (slot + wave) % 3 == 0):
+                    targets = [SPARSE_REGION_ANCHORS[region]]
             variants = FOCUS_QUERIES.get(topic, (term,))
+            if topic in SPARSE_QUERY_VARIANTS:
+                variants = variants + SPARSE_QUERY_VARIANTS[topic]
             query_term = variants[(wave + slot + idx) % len(variants)]
             lens_name, suffix = TEMPORAL_QUERIES[(idx + wave + slot) % len(TEMPORAL_QUERIES)]
             for group, place in targets:
@@ -1964,9 +2027,12 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
                     continue
                 try:
                     rec = relevance_work(provider, work, allowed_topics=active_focus,
-                                         expected_region=(None if topic in FOCUS_TRACK and
-                                             FOCUS_TRACK[topic] == 'critical_technology'
-                                             and bucket == 'Global' else place),
+                                         expected_region=(None if (
+                                             topic in FOCUS_TRACK and
+                                             FOCUS_TRACK[topic] == 'critical_technology' and bucket == 'Global'
+                                         ) or (topic in SPARSE_DISCOVERY_TOPICS and
+                                               (bucket, place) == SPARSE_REGION_ANCHORS.get(
+                                                   FOCUS_TRACK.get(topic))) else place),
                                          expected_topic=topic)
                 except (ValueError, TypeError, AttributeError):
                     stats['malformed_work'] += 1
