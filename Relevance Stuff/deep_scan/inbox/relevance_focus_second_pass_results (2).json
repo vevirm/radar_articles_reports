@@ -1,0 +1,2441 @@
+{
+  "format": "relevance-focus-deep-scan-v1",
+  "package_id": "rfds-29236cb0368ce22378",
+  "pass": "re-review-2026-11-19",
+  "supersedes": "relevance_focus_deep_scan_results.json",
+  "reviewed_candidate_ids": [
+    "REL-4be9286eb11785",
+    "REL-8db64f7b84e2f8",
+    "REL-07ae63fb9d5ccf",
+    "REL-22cd0cc7d6cf3d",
+    "REL-718b2db087e3c6",
+    "REL-7a3e29d4c3546f",
+    "REL-0ef5e406d8bdda",
+    "REL-e1c84e82003c60",
+    "REL-2e52b89faf7b58",
+    "REL-e528acbeb0f12d",
+    "REL-7e30164793fa7e",
+    "REL-23443cb9e29540",
+    "REL-2042be264d9622",
+    "REL-8e7439e092776b",
+    "REL-5f8ebca1bfbcab",
+    "REL-47de9f3f68f355",
+    "REL-b95a7657ab4187",
+    "REL-40a27a9050d80c",
+    "REL-8a4880b72f607e",
+    "REL-4bf8a5c9c4c44d"
+  ],
+  "changes": {
+    "review_to_keep": [
+      "REL-07ae63fb9d5ccf",
+      "REL-718b2db087e3c6",
+      "REL-2e52b89faf7b58",
+      "REL-2042be264d9622",
+      "REL-b95a7657ab4187",
+      "REL-40a27a9050d80c"
+    ],
+    "review_to_drop": [],
+    "review_remaining": [
+      "REL-4be9286eb11785",
+      "REL-8db64f7b84e2f8",
+      "REL-22cd0cc7d6cf3d",
+      "REL-7a3e29d4c3546f",
+      "REL-0ef5e406d8bdda",
+      "REL-e1c84e82003c60",
+      "REL-e528acbeb0f12d",
+      "REL-7e30164793fa7e",
+      "REL-23443cb9e29540",
+      "REL-8e7439e092776b",
+      "REL-5f8ebca1bfbcab",
+      "REL-47de9f3f68f355",
+      "REL-8a4880b72f607e",
+      "REL-4bf8a5c9c4c44d"
+    ]
+  },
+  "counts": {
+    "drop": 6,
+    "keep": 40,
+    "review": 14
+  },
+  "results": [
+    {
+      "candidate_id": "REL-9ce02ed1755759",
+      "decision": "drop",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "",
+        "source_type": "academic_book",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "US references are ASTM/SME definitions of additive manufacturing, not evidence of a US-specific study. A chapter text and publisher DOI record were not established. This is not sufficient to certify the listed publisher DOI and title unless separately stated.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "United States",
+        "is_substantive": false,
+        "publisher_country_only": true,
+        "basis": "US ASTM/SME standards cited as definitions, but this does not show the research is about the United States. US references are ASTM/SME definitions of additive manufacturing, not evidence of a US-specific study. A chapter text and publisher DOI record were not established.",
+        "verified_excerpt": "No verified primary-source excerpt available; original report/chapter was not obtained."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Manufacturing-process terminology and introduction, with no demonstrated new technical or deployment finding."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Manufacturing-process terminology and introduction, with no demonstrated new technical or deployment finding.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU additive-manufacturing standards and training would be a conceivable but unsupported channel.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether manufacturing-process terminology and introduction, with no demonstrated new technical or deployment finding affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU additive-manufacturing standards and training would be a conceivable but unsupported channel.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "US aboutness is inferred from a US standards body; the chapter identity and material significance remain unverified."
+    },
+    {
+      "candidate_id": "REL-1243a8fab0cdf3",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.mdpi.com/2076-3417/15/4/1744",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "The journal review assesses hybrid renewable electricity systems combining sources such as wind and solar and optimization under economic and reliability trade-offs. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3390/app15041744",
+        "verified_title": "Hybrid Renewable Energy Systems—A Review of Optimization Approaches and Future Challenges"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. The journal review assesses hybrid renewable electricity systems combining sources such as wind and solar and optimization under economic and reliability trade-offs.",
+        "verified_excerpt": "The journal review assesses hybrid renewable electricity systems combining sources such as wind and solar and optimization under economic and reliability trade-offs."
+      },
+      "topic": {
+        "label": "Critical technology: Energy technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Energy-system optimization, sizing and integration strategies for variable renewables."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Energy-system optimization, sizing and integration strategies for variable renewables.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU distributed-grid resilience and renewable integration could use validated multi-objective design methods.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether energy-system optimization, sizing and integration strategies for variable renewables affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU distributed-grid resilience and renewable integration could use validated multi-objective design methods.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-4be9286eb11785",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "https://app.swapcard.com/event/weftec-2026/planning/UGxhbm5pbmdfNDU1MTU2Mw%3D%3D",
+        "source_type": "other",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "WEFTEC presentation abstract is substantive about PFAS in semiconductor photolithography, water and waste streams; the submitted DOI could not be verified against a published proceedings paper.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. A WEFTEC meeting programme identifies a PFAS-in-semiconductor-manufacturing talk; an independently verifiable proceedings article under the listed DOI was not established.",
+        "verified_excerpt": "Accessible primary-source content: A WEFTEC meeting programme identifies a PFAS-in-semiconductor-manufacturing talk; an independently verifiable proceedings article under the listed DOI was not established."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced semiconductors",
+        "is_relevant": true,
+        "basis": "Substantive connection: Potential process-chemical substitution, water treatment and PFAS emissions control in semiconductor fabs."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Potential process-chemical substitution, water treatment and PFAS emissions control in semiconductor fabs.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU chip-fab water-management standards and hazardous-substance governance are possible links.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether potential process-chemical substitution, water treatment and pfas emissions control in semiconductor fabs affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU chip-fab water-management standards and hazardous-substance governance are possible links.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Obtain WEFTEC/Water Environment Federation proceedings text for DOI 10.2175/193864718825160486. WEFTEC presentation abstract is substantive about PFAS in semiconductor photolithography, water and waste streams; the submitted DOI could not be verified against a published proceedings paper."
+    },
+    {
+      "candidate_id": "REL-5271cb405ea71a",
+      "decision": "drop",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://jurnal.untirta.ac.id/index.php/JPPI/article/view/23075",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "The subject is use of AI for teaching and learning biology rather than development or substantive deployment of an AI capability. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.30870/jppi.v11i1.23075",
+        "verified_title": "Artificial Intelligence Research in Biology Learning: A Systematic Review"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": false,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. The subject is use of AI for teaching and learning biology rather than development or substantive deployment of an AI capability.",
+        "verified_excerpt": "The subject is use of AI for teaching and learning biology rather than development or substantive deployment of an AI capability."
+      },
+      "topic": {
+        "label": "Critical technology: Artificial intelligence",
+        "is_relevant": false,
+        "basis": "Insufficient assigned-priority connection: Education literature review, not a demonstrated AI scientific or infrastructure advance."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Education literature review, not a demonstrated AI scientific or infrastructure advance.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, general education relevance does not establish the necessary critical-AI R&I mechanism.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether education literature review, not a demonstrated ai scientific or infrastructure advance affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "General education relevance does not establish the necessary critical-AI R&I mechanism.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Surveying AI-assisted biology instruction does not make artificial intelligence the substantive technological research object in this case."
+    },
+    {
+      "candidate_id": "REL-c01bab605d99da",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.mdpi.com/2071-1050/17/3/1249",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Exploratory evidence relates specifically to adoption of additive manufacturing by manufacturing SMEs in Saudi Arabia. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3390/su17031249",
+        "verified_title": "Implementation of Additive Manufacturing Technologies for the Growth and Sustainability of Manufacturing SMEs in Saudi Arabia: An Exploratory Study"
+      },
+      "aboutness": {
+        "place": "Saudi Arabia",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Named country Saudi Arabia is assessed from study content rather than publisher or author affiliation. Exploratory evidence relates specifically to adoption of additive manufacturing by manufacturing SMEs in Saudi Arabia.",
+        "verified_excerpt": "Exploratory evidence relates specifically to adoption of additive manufacturing by manufacturing SMEs in Saudi Arabia."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Manufacturing SME absorptive capacity, technology adoption and equipment/skills bottlenecks."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Manufacturing SME absorptive capacity, technology adoption and equipment/skills bottlenecks.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Saudi industrial partnerships and EU machine-tool exporters could examine adoption barriers.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether manufacturing sme absorptive capacity, technology adoption and equipment/skills bottlenecks affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU-Saudi industrial partnerships and EU machine-tool exporters could examine adoption barriers.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-decf5472b460d6",
+      "decision": "drop",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.mdpi.com/1424-8220/26/3/882",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "The review is principally precision-agriculture smart sensors and monitoring; robots are one adjacent application rather than the examined autonomous-system capability. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3390/s26030882",
+        "verified_title": "Precision Farming with Smart Sensors: Current State, Challenges and Future Outlook"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": false,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. The review is principally precision-agriculture smart sensors and monitoring; robots are one adjacent application rather than the examined autonomous-system capability.",
+        "verified_excerpt": "The review is principally precision-agriculture smart sensors and monitoring; robots are one adjacent application rather than the examined autonomous-system capability."
+      },
+      "topic": {
+        "label": "Critical technology: Robotics and autonomous systems",
+        "is_relevant": false,
+        "basis": "Insufficient assigned-priority connection: Sensor networks and field-data acquisition, not autonomous robotics development."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Sensor networks and field-data acquisition, not autonomous robotics development.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU precision farming is relevant to sensing, but the fixed assigned robotics priority is not established.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether sensor networks and field-data acquisition, not autonomous robotics development affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU precision farming is relevant to sensing, but the fixed assigned robotics priority is not established.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "The assigned robotics/autonomy track is incidental to a smart-sensor review; an alternative sensing tag cannot be silently substituted."
+    },
+    {
+      "candidate_id": "REL-33475ca88e5a0b",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.mdpi.com/2079-9292/14/6/1159",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "A technical synthesis examines grid modernization as renewable sources interface with advanced power electronics and intelligent controls. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3390/electronics14061159",
+        "verified_title": "Advancing Power Systems with Renewable Energy and Intelligent Technologies: A Comprehensive Review on Grid Transformation and Integration"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. A technical synthesis examines grid modernization as renewable sources interface with advanced power electronics and intelligent controls.",
+        "verified_excerpt": "A technical synthesis examines grid modernization as renewable sources interface with advanced power electronics and intelligent controls."
+      },
+      "topic": {
+        "label": "Critical technology: Energy technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Smart grids, bidirectional control, grid stability and renewable-power integration."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Smart grids, bidirectional control, grid stability and renewable-power integration.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU power-grid interoperability and grid-forming/inverter R&D may draw on its integration research gaps.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether smart grids, bidirectional control, grid stability and renewable-power integration affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU power-grid interoperability and grid-forming/inverter R&D may draw on its integration research gaps.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-8db64f7b84e2f8",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "https://kyushu-u.elsevierpure.com/en/publications/plasma-dynamics-and-future-of-lpp-euv-source-for-semiconductor-ma/",
+        "source_type": "scholarly_article",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Institutional publication metadata lists a similarly named EUV plasma source paper with a different DOI (10.1117/12.3072223), and the roman numeral/version differs from the manifest.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. An SPIE-related record covers laser-produced plasma EUV lithography, but the proceedings title appears without the manifest’s trailing “III”; publisher-level DOI/title identity was not resolved.",
+        "verified_excerpt": "Accessible primary-source content: An SPIE-related record covers laser-produced plasma EUV lithography, but the proceedings title appears without the manifest’s trailing “III”; publisher-level DOI/title identity was not resolved."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced semiconductors",
+        "is_relevant": true,
+        "basis": "Substantive connection: Source-plasma stability and EUV conversion efficiency for leading-edge chip lithography."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Source-plasma stability and EUV conversion efficiency for leading-edge chip lithography.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU EUV-source physics and chip-production equipment supply chains are plausible.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether source-plasma stability and euv conversion efficiency for leading-edge chip lithography affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU EUV-source physics and chip-production equipment supply chains are plausible.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Find the exact SPIE publisher proceedings record for DOI 10.1117/12.3049877 and verify title III. Institutional publication metadata lists a similarly named EUV plasma source paper with a different DOI (10.1117/12.3072223), and the roman numeral/version differs from the manifest."
+    },
+    {
+      "candidate_id": "REL-71715600703f27",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://research.ajman.ac.ae/en/publications/generative-ai-for-semantic-communication-architecture-challenges-/",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "IEEE journal paper examines generative-model architectures that can encode/reconstruct meaning rather than only raw symbols in communications. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1109/mwc.003.2300351",
+        "verified_title": "Generative AI for Semantic Communication: Architecture, Challenges, and Outlook"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. IEEE journal paper examines generative-model architectures that can encode/reconstruct meaning rather than only raw symbols in communications.",
+        "verified_excerpt": "IEEE journal paper examines generative-model architectures that can encode/reconstruct meaning rather than only raw symbols in communications."
+      },
+      "topic": {
+        "label": "Critical technology: Artificial intelligence",
+        "is_relevant": true,
+        "basis": "Substantive connection: Generative semantic-communication architecture, robustness and bandwidth-efficiency challenges."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Generative semantic-communication architecture, robustness and bandwidth-efficiency challenges.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU AI-enabled radio/network research and trustworthy-communications standards could investigate its security/efficiency trade-offs.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether generative semantic-communication architecture, robustness and bandwidth-efficiency challenges affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU AI-enabled radio/network research and trustworthy-communications standards could investigate its security/efficiency trade-offs.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-07ae63fb9d5ccf",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://esaformosapublisher.org/index.php/marcopolo/article/view/98",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Publisher article and complete PDF verify DOI/title and an explicitly referenced narrative technical review of hyperspectral/multispectral sensing, SAR, CubeSats and machine-learning-assisted environmental monitoring. No new field performance result is demonstrated.",
+        "independent_corrob_urls": [
+          "https://journals.indexcopernicus.com/api/file/viewByFileId/2409957"
+        ],
+        "verified_doi": "10.55927/marcopolo.v3i7.98",
+        "verified_title": "Satellite Technology for Environmental Monitoring: A Review of Current Applications"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global review examines satellite sensor types and monitoring applications rather than the author/publisher location.",
+        "verified_excerpt": "Reviews multispectral/hyperspectral sensing, SAR, nanosatellite monitoring and machine-learning interpretation for climate, pollution and ecosystem observation."
+      },
+      "topic": {
+        "label": "Critical technology: Space and propulsion technologies",
+        "is_relevant": true,
+        "basis": "Space technology and Earth-observation instruments/data are the paper’s central engineering subject; includes specific satellite sensor modalities and miniaturization."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Synthesis identifies a trajectory toward combined optical/SAR observation, smaller satellite platforms and AI-derived environmental products.",
+        "why_could_matter": "Could guide design priorities for low-cost Earth-observation payloads and machine-readable downstream monitoring services.",
+        "uncertainty": "Narrative technology review; it does not report a new demonstrated satellite system, algorithm improvement or comparative validation.",
+        "research_question": "Which combinations of CubeSat, hyperspectral/SAR observation and validated AI analytics improve environmental-monitoring quality at verifiable lifecycle cost?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "Potential comparability and validation requirements for European Copernicus downstream services and satellite environmental-data interoperability.",
+        "evidence_limits": "EU relevance is an external analytical connection; the source does not measure Copernicus performance or European deployment outcomes."
+      }
+    },
+    {
+      "candidate_id": "REL-421d819694aa38",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S2666964125000128",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "South African case report describes a titanium additive-manufactured neo-sternum used for clinical reconstruction. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [
+          "https://usaf.ac.za/wp-content/uploads/USAf-Changing-Faces-Changing-Lives-17-Oct-2025_re-submit.pdf"
+        ],
+        "verified_doi": "10.1016/j.stlm.2025.100197",
+        "verified_title": "A neo-sternal reconstruction using titanium additive manufacturing; a South African case report"
+      },
+      "aboutness": {
+        "place": "Africa (region)",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Named country Africa (region) is assessed from study content rather than publisher or author affiliation. South African case report describes a titanium additive-manufactured neo-sternum used for clinical reconstruction.",
+        "verified_excerpt": "South African case report describes a titanium additive-manufactured neo-sternum used for clinical reconstruction."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Patient-specific metal printing and coordination between surgery, imaging and manufacturing."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Patient-specific metal printing and coordination between surgery, imaging and manufacturing.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU medical additive-manufacturing biocompatibility, device certification and collaboration may benefit from comparable case evidence.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether patient-specific metal printing and coordination between surgery, imaging and manufacturing affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU medical additive-manufacturing biocompatibility, device certification and collaboration may benefit from comparable case evidence.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-2d13878b1bfbd4",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S0196890426003766",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Comparative modelling explicitly contrasts a Danish offshore-wind-to-hydrogen pathway with Spanish solar-photovoltaic supply. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [
+          "https://vbn.aau.dk/en/publications/complementary-spanish-photovoltaic-and-danish-offshore-wind-pathw/"
+        ],
+        "verified_doi": "10.1016/j.enconman.2026.121407",
+        "verified_title": "Complementary Spanish photovoltaic and Danish offshore wind pathways to cost-competitive renewable hydrogen"
+      },
+      "aboutness": {
+        "place": "Denmark",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Named country Denmark is assessed from study content rather than publisher or author affiliation. Comparative modelling explicitly contrasts a Danish offshore-wind-to-hydrogen pathway with Spanish solar-photovoltaic supply.",
+        "verified_excerpt": "Comparative modelling explicitly contrasts a Danish offshore-wind-to-hydrogen pathway with Spanish solar-photovoltaic supply."
+      },
+      "topic": {
+        "label": "Critical technology: Energy technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Comparative electrolytic hydrogen production, renewable generation profiles and cost competitiveness."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Comparative electrolytic hydrogen production, renewable generation profiles and cost competitiveness.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, direct EU implication: Danish and Spanish hydrogen industrial policy, siting and cross-border electricity systems.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether comparative electrolytic hydrogen production, renewable generation profiles and cost competitiveness affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "direct",
+        "implications": "Direct EU implication: Danish and Spanish hydrogen industrial policy, siting and cross-border electricity systems.",
+        "evidence_limits": "The source studies EU Member State activity directly, but downstream EU-wide effects are not established."
+      }
+    },
+    {
+      "candidate_id": "REL-636f3b6314348d",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.mdpi.com/2072-4292/17/12/2086",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Review compares optical imagery and LiDAR techniques for shallow-water mapping and their deployment limits. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3390/rs17122086",
+        "verified_title": "A Review of Image- and LiDAR-Based Mapping of Shallow Water Scenarios"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Review compares optical imagery and LiDAR techniques for shallow-water mapping and their deployment limits.",
+        "verified_excerpt": "Review compares optical imagery and LiDAR techniques for shallow-water mapping and their deployment limits."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced sensing technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Bathymetric measurement, remote-sensing fusion and aquatic geospatial uncertainty."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Bathymetric measurement, remote-sensing fusion and aquatic geospatial uncertainty.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU coastal research, navigation safety and marine monitoring could test joint mapping workflows.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether bathymetric measurement, remote-sensing fusion and aquatic geospatial uncertainty affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU coastal research, navigation safety and marine monitoring could test joint mapping workflows.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-22cd0cc7d6cf3d",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://journals.ardascience.com/index.php/bes/article/download/321/204",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Publisher PDF verifies bibliographic identity. Broad general synthetic-biology overview, but sweeping unsupported future predictions and insufficient specific methodological novelty reduce evidentiary strength.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.37868/bes.v6i1.id321",
+        "verified_title": "Synthetic biology - a review"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Primary journal PDF is a broad synthetic-biology review rather than an independently corroborated laboratory or standard-setting finding.",
+        "verified_excerpt": "Primary journal PDF is a broad synthetic-biology review rather than an independently corroborated laboratory or standard-setting finding."
+      },
+      "topic": {
+        "label": "Critical technology: Biotechnologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Genetic-circuit and engineered-organism toolchains, presented as a general synthesis."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Genetic-circuit and engineered-organism toolchains, presented as a general synthesis.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU biofoundry research and biosafety governance are potential paths, but article-specific contribution is uncertain.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether genetic-circuit and engineered-organism toolchains, presented as a general synthesis affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU biofoundry research and biosafety governance are potential paths, but article-specific contribution is uncertain.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Verify the references and quantitative projections and find a defensible specific engineering contribution. Publisher PDF verifies bibliographic identity. Broad general synthetic-biology overview, but sweeping unsupported future predictions and insufficient specific methodological novelty reduce evidentiary strength."
+    },
+    {
+      "candidate_id": "REL-718b2db087e3c6",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://iaeme.com/MasterAdmin/Journal_uploads/JITI/VOLUME_1_ISSUE_2/JITI_01_02_001.pdf",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "29-page original IAEME journal PDF gives exact DOI/title and detailed CHIPS-era US fab thermal-management synthesis. Outlines nested mini-environments, source capture, recirculation, FFU, heat recovery, distributed sensing and constraint-aware digital-twin controls. New journal; findings are comparative recommendations, not independent fab experiments.",
+        "independent_corrob_urls": [
+          "https://iaeme.com/Home/article_id/JITI_01_02_001"
+        ],
+        "verified_doi": "10.34218/jiti_01_02_001",
+        "verified_title": "INTELLIGENT THERMAL MANAGEMENT FOR ADVANCED SEMICONDUCTOR MANUFACTURING UNDER CHIPS ERA"
+      },
+      "aboutness": {
+        "place": "United States",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "US CHIPS-era fab construction and infrastructure control is the explicit subject, not merely an American author’s location.",
+        "verified_excerpt": "US CHIPS programme motivates fab cleanroom design that jointly constrains contamination, particle control, thermal stability, water and energy use."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced semiconductors",
+        "is_relevant": true,
+        "basis": "Semiconductor-specific fab cleanroom and process-utility optimization explicitly linked to yield and contamination-control envelopes."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Risk-based fab environmental control uses small-scale protected zones, smart ventilation, heat recovery and fault-tolerant predictive control.",
+        "why_could_matter": "Energy and water intensive advanced fabs may require integrated process-utility design to scale without compromising yield or safety.",
+        "uncertainty": "Review-level proposal in a young outlet; no causal fab-scale savings, yield gains or validated control system established.",
+        "research_question": "Can digital-twin cleanroom controls reduce energy/water use while meeting independently verified yield, contamination and recovery constraints?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU Chips Act fabs and pilot lines could test corresponding cooling, particle control and wastewater/heat reuse design standards.",
+        "evidence_limits": "Source studies the US CHIPS context and engineering literature, not observed European plant results."
+      }
+    },
+    {
+      "candidate_id": "REL-7a3e29d4c3546f",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "https://www.ids.ac.uk/projects/africa-technology-and-innovation-partnerships-atip/",
+        "source_type": "institutional_report",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "IDS/ATIP related output exists, but no authoritative exact publisher record for 10.19088/atip.2026.019 and the manifest Ethiopia title could be found.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Ethiopia",
+        "is_substantive": false,
+        "publisher_country_only": false,
+        "basis": "The exact report and geographic case cannot be verified without its authoritative original text. Searches did not locate the exact IDS/ATIP Ethiopia deep-dive title or DOI; similarly named reports are different works and cannot verify it.",
+        "verified_excerpt": "No verified primary-source excerpt available; original report/chapter was not obtained."
+      },
+      "topic": {
+        "label": "Africa: Innovation and technology",
+        "is_relevant": true,
+        "basis": "Substantive connection: Potential national R&I collaboration, innovation-system institutions and research funding in Ethiopia."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Potential national R&I collaboration, innovation-system institutions and research funding in Ethiopia.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Africa R&I partnerships might apply but cannot be anchored in this unidentified report.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether potential national r&i collaboration, innovation-system institutions and research funding in ethiopia creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU-Africa R&I partnerships might apply but cannot be anchored in this unidentified report.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Obtain exact IDS repository report text and DOI. IDS/ATIP related output exists, but no authoritative exact publisher record for 10.19088/atip.2026.019 and the manifest Ethiopia title could be found."
+    },
+    {
+      "candidate_id": "REL-0ef5e406d8bdda",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "",
+        "source_type": "academic_book",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Official book catalogue and chapter metadata point to a longer chapter title (Quantum Computing: Necessary Applications for the Future) than the manifest Quantum Computing.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. The publisher-level chapter for the supplied Auerbach/CRC DOI was not retrievable, although a related book description appears in bibliographic catalogues.",
+        "verified_excerpt": "No verified primary-source excerpt available; original report/chapter was not obtained."
+      },
+      "topic": {
+        "label": "Critical technology: Quantum technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Quantum algorithms and computing systems are only a potential subject pending chapter access."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Quantum algorithms and computing systems are only a potential subject pending chapter access.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU quantum computing laboratories, software stacks and skills are plausible but unsupported by chapter-specific findings.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether quantum algorithms and computing systems are only a potential subject pending chapter access affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU quantum computing laboratories, software stacks and skills are plausible but unsupported by chapter-specific findings.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Check canonical Routledge/CRC DOI and exact chapter title before changing supplied identity. Official book catalogue and chapter metadata point to a longer chapter title (Quantum Computing: Necessary Applications for the Future) than the manifest Quantum Computing."
+    },
+    {
+      "candidate_id": "REL-a77ac2248dd412",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://afenet-journal.org/implementation-of-one-health-frontline-field-epidemiology-and-laboratory-training-program-to-strengthen-gambia-public-health-surveillance-system-2024/",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "A conference abstract reports a Gambia 2024 One Health field-epidemiology and laboratory-training programme for public-health surveillance. Publisher-level publication identity and DOI/title were cross-checked. This is a short conference abstract: training outcomes are not independently corroborated.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.37432/jieph-confpro5-00305",
+        "verified_title": "Field Epidemiology and Laboratory Training Program to strengthen Gambia public health surveillance system, 2024"
+      },
+      "aboutness": {
+        "place": "Gambia",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Gambia One Health training and surveillance system, not general African author affiliation. A conference abstract reports a Gambia 2024 One Health field-epidemiology and laboratory-training programme for public-health surveillance.",
+        "verified_excerpt": "A conference abstract reports a Gambia 2024 One Health field-epidemiology and laboratory-training programme for public-health surveillance."
+      },
+      "topic": {
+        "label": "Africa: Public health",
+        "is_relevant": true,
+        "basis": "Substantive connection: Regional public-health laboratory and epidemiology workforce capacity, multisector surveillance and outbreak-response skills."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Regional public-health laboratory and epidemiology workforce capacity, multisector surveillance and outbreak-response skills.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Africa preparedness partnerships and joint field-epidemiology training could evaluate institutional transferability.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether regional public-health laboratory and epidemiology workforce capacity, multisector surveillance and outbr creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU-Africa preparedness partnerships and joint field-epidemiology training could evaluate institutional transferability.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-cc8b8be4946eaa",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://reference-global.com/article/10.2478/ajbals-2026-0015?tab=article",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Journal article examines Albanian solar energy and its role in national energy security rather than an author-location proxy. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.2478/ajbals-2026-0015",
+        "verified_title": "The Role of Solar Energy in Strengthening National Energy Security in Albania"
+      },
+      "aboutness": {
+        "place": "Albania",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Substantive setting for Albania requires country/case evidence in the study. Journal article examines Albanian solar energy and its role in national energy security rather than an author-location proxy.",
+        "verified_excerpt": "Journal article examines Albanian solar energy and its role in national energy security rather than an author-location proxy."
+      },
+      "topic": {
+        "label": "Union for the Mediterranean: Renewable energies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Solar uptake, national deployment policy and electricity-system diversification."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Solar uptake, national deployment policy and electricity-system diversification.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Albania power-market integration and UfM solar financing/energy-security collaboration could be affected.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether solar uptake, national deployment policy and electricity-system diversification creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU-Albania power-market integration and UfM solar financing/energy-security collaboration could be affected.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-79d146eec2ff85",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://journal.hep.com.cn/fop/EN/2026/21/7",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Published AI-for-science survey discusses AI-enabled scientific methods and research applications rather than generic consumer AI. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.15302/frontphys.2026.071401",
+        "verified_title": "Artificial Intelligence for Science: A critical survey and outlook"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Published AI-for-science survey discusses AI-enabled scientific methods and research applications rather than generic consumer AI.",
+        "verified_excerpt": "Published AI-for-science survey discusses AI-enabled scientific methods and research applications rather than generic consumer AI."
+      },
+      "topic": {
+        "label": "Critical technology: Artificial intelligence",
+        "is_relevant": true,
+        "basis": "Substantive connection: AI models to accelerate research in physics/materials and new scientific workflows."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "AI models to accelerate research in physics/materials and new scientific workflows.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU scientific AI infrastructure, reproducibility standards and research-computing facilities could benefit from the identified gaps.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether ai models to accelerate research in physics/materials and new scientific workflows affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU scientific AI infrastructure, reproducibility standards and research-computing facilities could benefit from the identified gaps.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-3db95719689169",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://publications.eai.eu/index.php/IoT/article/view/5114",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Article directly addresses 6G V2X/V2V communication technologies in intelligent transportation. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.4108/eetiot.5114",
+        "verified_title": "Navigating the Future of Intelligent Transportation: Challenges and Solutions in 6G V2X and V2V Networks"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Article directly addresses 6G V2X/V2V communication technologies in intelligent transportation.",
+        "verified_excerpt": "Article directly addresses 6G V2X/V2V communication technologies in intelligent transportation."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced connectivity, navigation and digital technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: 6G vehicle-to-everything architectures, latency, security and infrastructure interaction."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "6G vehicle-to-everything architectures, latency, security and infrastructure interaction.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU connected-road standards, spectrum coordination and vehicle networking testbeds are plausible validation channels.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether 6g vehicle-to-everything architectures, latency, security and infrastructure interaction affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU connected-road standards, spectrum coordination and vehicle networking testbeds are plausible validation channels.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-937248d89db27e",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://atbuscienceforum.com.ng/index.php/jpas/article/view/645",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Paper’s governance and policy analysis explicitly targets Nigeria’s green hydrogen transition. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.70882/jehh8r91",
+        "verified_title": "Policy and Governance Gaps in Green Hydrogen Development: Implications for Nigeria's Low-Carbon Energy Transition"
+      },
+      "aboutness": {
+        "place": "Nigeria",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Substantive setting for Nigeria requires country/case evidence in the study. Paper’s governance and policy analysis explicitly targets Nigeria’s green hydrogen transition.",
+        "verified_excerpt": "Paper’s governance and policy analysis explicitly targets Nigeria’s green hydrogen transition."
+      },
+      "topic": {
+        "label": "Africa: Green transition",
+        "is_relevant": true,
+        "basis": "Substantive connection: Hydrogen-development regulation, governance readiness and prospective low-carbon investment."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Hydrogen-development regulation, governance readiness and prospective low-carbon investment.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Nigeria hydrogen cooperation and due-diligence/standards alignment could test identified governance gaps.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether hydrogen-development regulation, governance readiness and prospective low-carbon investment creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU-Nigeria hydrogen cooperation and due-diligence/standards alignment could test identified governance gaps.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-465a68a08bde19",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.mdpi.com/2227-7080/14/5/285",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Technical review assesses liquid-injector designs relevant to rocket engines and propellant combustion. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3390/technologies14050285",
+        "verified_title": "A Comprehensive Review of Liquid-Injector Technologies for Space Propulsion"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Technical review assesses liquid-injector designs relevant to rocket engines and propellant combustion.",
+        "verified_excerpt": "Technical review assesses liquid-injector designs relevant to rocket engines and propellant combustion."
+      },
+      "topic": {
+        "label": "Critical technology: Space and propulsion technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Fuel/oxidizer injector geometry, mixing and combustion stability in launch propulsion systems."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Fuel/oxidizer injector geometry, mixing and combustion stability in launch propulsion systems.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, european launch-engine test facilities and propulsion component qualification may evaluate these design trade-offs.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether fuel/oxidizer injector geometry, mixing and combustion stability in launch propulsion systems affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "European launch-engine test facilities and propulsion component qualification may evaluate these design trade-offs.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-e1c84e82003c60",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "",
+        "source_type": "other",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "No exact Zenodo DOI deposit or identifiable original Africa additive-manufacturing market study established; similar market research is not the same publication.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Africa (region)",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Africa market scope is asserted in the metadata but the underlying deposited report is unverified. A purported Zenodo Africa additive-manufacturing market overview with a 2023–2030 outlook could not be verified as a substantive deposited research work.",
+        "verified_excerpt": "No verified primary-source excerpt available; original report/chapter was not obtained."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Potential additive-manufacturing industrial diffusion and Africa manufacturing-market metrics."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Potential additive-manufacturing industrial diffusion and Africa manufacturing-market metrics.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Africa AM equipment collaborations are possible, but underlying market figures and provenance are unverified.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether potential additive-manufacturing industrial diffusion and africa manufacturing-market metrics affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU-Africa AM equipment collaborations are possible, but underlying market figures and provenance are unverified.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Retrieve the exact Zenodo record/report, methods, sources and publisher provenance. No exact Zenodo DOI deposit or identifiable original Africa additive-manufacturing market study established; similar market research is not the same publication."
+    },
+    {
+      "candidate_id": "REL-f0044288b64132",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S036031992502556X",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Study models electricity-price and hedging risk for a Denmark power-to-methanol project. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.ijhydene.2025.05.271",
+        "verified_title": "Evaluation of hedging strategies for electricity procurement risks of a power-to-methanol plant with stochastic modeling: A case study of Denmark"
+      },
+      "aboutness": {
+        "place": "Denmark",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Named country Denmark is assessed from study content rather than publisher or author affiliation. Study models electricity-price and hedging risk for a Denmark power-to-methanol project.",
+        "verified_excerpt": "Study models electricity-price and hedging risk for a Denmark power-to-methanol project."
+      },
+      "topic": {
+        "label": "Critical technology: Energy technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Power-to-X cost exposure, stochastic electricity procurement and offtake hedging."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Power-to-X cost exposure, stochastic electricity procurement and offtake hedging.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, direct Danish/EU e-fuels projects could examine tariff design and financing risk; modelled results are not market forecasts.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether power-to-x cost exposure, stochastic electricity procurement and offtake hedging affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "direct",
+        "implications": "Direct Danish/EU e-fuels projects could examine tariff design and financing risk; modelled results are not market forecasts.",
+        "evidence_limits": "The source studies EU Member State activity directly, but downstream EU-wide effects are not established."
+      }
+    },
+    {
+      "candidate_id": "REL-9a7a817c856c79",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.mdpi.com/2072-4292/18/4/600",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Remote-sensing review surveys geostatistical integration of spatial data, methods and their uncertainties. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3390/rs18040600",
+        "verified_title": "The Remote Sensing Geostatistical Paradigm: A Review of Key Technologies and Applications"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Remote-sensing review surveys geostatistical integration of spatial data, methods and their uncertainties.",
+        "verified_excerpt": "Remote-sensing review surveys geostatistical integration of spatial data, methods and their uncertainties."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced sensing technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Spatial inference and geostatistical data fusion for sensing and environmental measurement."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Spatial inference and geostatistical data fusion for sensing and environmental measurement.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU Earth-observation science and Copernicus quality-assurance workflows could compare these methods.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether spatial inference and geostatistical data fusion for sensing and environmental measurement affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU Earth-observation science and Copernicus quality-assurance workflows could compare these methods.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-da4ee06cb1609d",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S073658452500167X",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Paper reviews integration of natural-language models with industrial robotics and limits of instruction-grounded control. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.rcim.2025.103113",
+        "verified_title": "Transformation of industrial robotics with natural language models: Recent progress and future prospects"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Paper reviews integration of natural-language models with industrial robotics and limits of instruction-grounded control.",
+        "verified_excerpt": "Paper reviews integration of natural-language models with industrial robotics and limits of instruction-grounded control."
+      },
+      "topic": {
+        "label": "Critical technology: Robotics and autonomous systems",
+        "is_relevant": true,
+        "basis": "Substantive connection: Industrial robot task specification and embodied language-model planning."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Industrial robot task specification and embodied language-model planning.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU manufacturing automation and safety validation could test reliability of language-mediated robot commands.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether industrial robot task specification and embodied language-model planning affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU manufacturing automation and safety validation could test reliability of language-mediated robot commands.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-cc201fa029b4f3",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.jstage.jst.go.jp/article/jjspe/91/7/91_746/_article/-char/en",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Technical Japanese publisher article treats wet processing steps in advanced semiconductor fabrication. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.2493/jjspe.91.746",
+        "verified_title": "Wet Processing for Advanced Semiconductor Manufacturing"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Technical Japanese publisher article treats wet processing steps in advanced semiconductor fabrication.",
+        "verified_excerpt": "Technical Japanese publisher article treats wet processing steps in advanced semiconductor fabrication."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced semiconductors",
+        "is_relevant": true,
+        "basis": "Substantive connection: Chip wafer wet cleans/processing and yield-relevant materials chemistry."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Chip wafer wet cleans/processing and yield-relevant materials chemistry.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU semiconductor fabrication/process R&D could benchmark water, chemical and defect-control requirements.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether chip wafer wet cleans/processing and yield-relevant materials chemistry affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU semiconductor fabrication/process R&D could benchmark water, chemical and defect-control requirements.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-2e52b89faf7b58",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13677227/",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Lancet Regional Health – Southeast Asia primary open-access commentary/PMC full text verifies exact bibliographic identity, BIRSA 101 programme announcement, CSIR-IGIB-to-Serum Institute technology transfer, potential ex vivo delivery, and clinical/ethical/financial implementation barriers. Explicitly states BIRSA 101 has no own efficacy trial yet.",
+        "independent_corrob_urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/42894775/",
+          "https://www.igib.res.in/Gene_therapy"
+        ],
+        "verified_doi": "10.1016/j.lansea.2026.100883",
+        "verified_title": "India's indigenous CRISPR-based gene-editing therapy for sickle cell disease: innovation to equitable implementation"
+      },
+      "aboutness": {
+        "place": "India",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Substantive Indian CRISPR programme, India-specific health infrastructure, scheduled future trials and tribal-community access challenges.",
+        "verified_excerpt": "BIRSA 101 was announced in 2025, is in clinical development and its own Phase I trial is expected in 2027; safety and efficacy remain unestablished."
+      },
+      "topic": {
+        "label": "Critical technology: Biotechnologies",
+        "is_relevant": true,
+        "basis": "Specific technology-transfer and implementation agenda for indigenous human CRISPR gene editing and its clinical oversight."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Indigenous therapeutic genome-editing development and manufacturing transfer, conditional on regulatory trials and specialist autologous cell-processing infrastructure.",
+        "why_could_matter": "Could inform regional clinical capacity, equitable access, registry and long-term gene-therapy surveillance system design.",
+        "uncertainty": "This is a commentary on a research programme; clinical benefit, safety, actual manufacturing scale and patient costs are not established.",
+        "research_question": "Will BIRSA 101 meet controlled-trial safety/efficacy benchmarks, and what financing/referral model makes delivery equitable in India?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU-India biotechnology dialogue could compare trial data standards, long-term gene therapy surveillance, cell-processing infrastructure and equitable access models.",
+        "evidence_limits": "No clinical outcome for BIRSA 101 or EU collaboration is demonstrated. Efficacy data for other CRISPR products are not evidence of BIRSA 101 efficacy."
+      }
+    },
+    {
+      "candidate_id": "REL-e528acbeb0f12d",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "https://www.ids.ac.uk/projects/africa-technology-and-innovation-partnerships-atip/",
+        "source_type": "institutional_report",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "IDS/ATIP adjacent reports do not verify the precise Ghana RISA report and DOI 10.19088/atip.2026.022.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Ghana",
+        "is_substantive": false,
+        "publisher_country_only": false,
+        "basis": "The exact report and geographic case cannot be verified without its authoritative original text. The exact Ghana RISA Fund / IDS Deep Dive title and DOI could not be confirmed from an authoritative repository, despite locating related ATIP programme material.",
+        "verified_excerpt": "No verified primary-source excerpt available; original report/chapter was not obtained."
+      },
+      "topic": {
+        "label": "Africa: Innovation and technology",
+        "is_relevant": true,
+        "basis": "Substantive connection: Possible public innovation-system strengthening and research partnership governance in Ghana."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Possible public innovation-system strengthening and research partnership governance in Ghana.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Ghana institutional R&I cooperation is a plausible but not source-verified channel.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether possible public innovation-system strengthening and research partnership governance in ghana creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU-Ghana institutional R&I cooperation is a plausible but not source-verified channel.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Locate the exact institutional report from publisher repository. IDS/ATIP adjacent reports do not verify the precise Ghana RISA report and DOI 10.19088/atip.2026.022."
+    },
+    {
+      "candidate_id": "REL-884924e9af8e55",
+      "decision": "drop",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.macrothink.org/journal/index.php/bms/article/view/23455",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Business-model innovation review concerns organizational strategy and AI business adoption rather than advancement of AI technology or research infrastructure. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.5296/bms.v17i1.23455",
+        "verified_title": "Artificial Intelligence-Enabled Business Model Innovation: A Literature Review and Future Outlook"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": false,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Business-model innovation review concerns organizational strategy and AI business adoption rather than advancement of AI technology or research infrastructure.",
+        "verified_excerpt": "Business-model innovation review concerns organizational strategy and AI business adoption rather than advancement of AI technology or research infrastructure."
+      },
+      "topic": {
+        "label": "Critical technology: Artificial intelligence",
+        "is_relevant": false,
+        "basis": "Insufficient assigned-priority connection: Management literature on revenue models and adoption."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Management literature on revenue models and adoption.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, general EU business competitiveness does not by itself meet the assigned AI critical-technology research gate.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether management literature on revenue models and adoption affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "General EU business competitiveness does not by itself meet the assigned AI critical-technology research gate.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Main result is business-model literature, not a meaningful artificial-intelligence technological development, deployment evidence or technology-specific governance finding."
+    },
+    {
+      "candidate_id": "REL-22a2998e4aa9df",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://onlinelibrary.wiley.com/doi/10.1002/9781394339006.ch14",
+        "source_type": "academic_book",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Wiley book chapter specifically examines quantum sensing techniques as applied to metabolomic measurements. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1002/9781394339006.ch14",
+        "verified_title": "Quantum Sensing in Metabolomics"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Wiley book chapter specifically examines quantum sensing techniques as applied to metabolomic measurements.",
+        "verified_excerpt": "Wiley book chapter specifically examines quantum sensing techniques as applied to metabolomic measurements."
+      },
+      "topic": {
+        "label": "Critical technology: Quantum technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Quantum sensors and high-sensitivity biomedical molecular detection."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Quantum sensors and high-sensitivity biomedical molecular detection.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU quantum-sensing platforms and analytical-biology partnerships could explore instrument sensitivity and reproducibility.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether quantum sensors and high-sensitivity biomedical molecular detection affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU quantum-sensing platforms and analytical-biology partnerships could explore instrument sensitivity and reproducibility.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-b194483a6f38d6",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.nowpublishers.com/article/DownloadSummary/NET-072",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Academic record confirms a tutorial on 6G non-terrestrial networks including satellite-based communications architectures. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1561/1300000072",
+        "verified_title": "A Tutorial on Non-Terrestrial Networks: Towards Global and Ubiquitous 6G Connectivity"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Academic record confirms a tutorial on 6G non-terrestrial networks including satellite-based communications architectures.",
+        "verified_excerpt": "Academic record confirms a tutorial on 6G non-terrestrial networks including satellite-based communications architectures."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced connectivity, navigation and digital technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: NTN architecture, satellite-to-ground networking and standards issues."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "NTN architecture, satellite-to-ground networking and standards issues.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU secure connectivity initiatives, radio interoperability and satellite 6G standards could test its architectures.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether ntn architecture, satellite-to-ground networking and standards issues affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU secure connectivity initiatives, radio interoperability and satellite 6G standards could test its architectures.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-8c685bcb61799b",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S2590123026035127",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Engineering paper explicitly uses a Morocco case study for a green-hydrogen-integrated multi-energy microgrid. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.rineng.2026.112495",
+        "verified_title": "Optimal design and energy management of a green hydrogen-driven multi-energy microgrid: A Morocco case study"
+      },
+      "aboutness": {
+        "place": "Morocco",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Substantive setting for Morocco requires country/case evidence in the study. Engineering paper explicitly uses a Morocco case study for a green-hydrogen-integrated multi-energy microgrid.",
+        "verified_excerpt": "Engineering paper explicitly uses a Morocco case study for a green-hydrogen-integrated multi-energy microgrid."
+      },
+      "topic": {
+        "label": "Union for the Mediterranean: Renewable energies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Electrolyser dispatch, hydrogen storage and multi-energy microgrid optimization."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Electrolyser dispatch, hydrogen storage and multi-energy microgrid optimization.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Morocco renewable-energy engineering partnerships may test real-world load and water constraints before deployment.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether electrolyser dispatch, hydrogen storage and multi-energy microgrid optimization creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU-Morocco renewable-energy engineering partnerships may test real-world load and water constraints before deployment.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-7e30164793fa7e",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.acceleron.org.in/index.php/aaj/article/view/378",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Publisher confirms exact DOI/title, a November 12 2026 8-page internship literature report on Hall thrusters, ion engines, nuclear/solar sails and fusion trajectories; limited methodology and independent maturity assessment.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.61359/11.2106-2635",
+        "verified_title": "Advancements and Future Perspectives in Space Propulsion Technologies: A Comprehensive Review"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Publisher hosts a broad space-propulsion future-perspectives review, but substantive synthesis, source independence and evidence quality were not corroborated.",
+        "verified_excerpt": "Publisher hosts a broad space-propulsion future-perspectives review, but substantive synthesis, source independence and evidence quality were not corroborated."
+      },
+      "topic": {
+        "label": "Critical technology: Space and propulsion technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Possible electric, chemical and other propulsion technology roadmaps."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Possible electric, chemical and other propulsion technology roadmaps.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU propulsion R&D portfolios could be informed if the technical roadmap has traceable evidence.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether possible electric, chemical and other propulsion technology roadmaps affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU propulsion R&D portfolios could be informed if the technical roadmap has traceable evidence.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Need stronger referenced synthesis or independently supported engineering readiness/performance claims. Publisher confirms exact DOI/title, a November 12 2026 8-page internship literature report on Hall thrusters, ion engines, nuclear/solar sails and fusion trajectories; limited methodology and independent maturity assessment."
+    },
+    {
+      "candidate_id": "REL-d207d1cffda0d2",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://link.springer.com/article/10.1007/s44378-025-00082-z",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Review synthesizes geostatistics, machine learning and remote sensing for soil mapping and management. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1007/s44378-025-00082-z",
+        "verified_title": "Advancing soil mapping and management using geostatistics and integrated machine learning and remote sensing techniques: a synoptic review"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Review synthesizes geostatistics, machine learning and remote sensing for soil mapping and management.",
+        "verified_excerpt": "Review synthesizes geostatistics, machine learning and remote sensing for soil mapping and management."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced sensing technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Methods for sensor-data fusion, spatial uncertainty and environmental monitoring."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Methods for sensor-data fusion, spatial uncertainty and environmental monitoring.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU agriculture, soil observatories and Earth-observation modelling may evaluate transferable mapping methods.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether methods for sensor-data fusion, spatial uncertainty and environmental monitoring affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU agriculture, soil observatories and Earth-observation modelling may evaluate transferable mapping methods.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-dae79f77c461a7",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://link.springer.com/chapter/10.1007/978-3-032-10584-4_5",
+        "source_type": "academic_book",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Springer chapter examines swarm robot capabilities, skills and multi-agent scenarios. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1007/978-3-032-10584-4_5",
+        "verified_title": "Skills and Scenarios of Swarm Robotics"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Springer chapter examines swarm robot capabilities, skills and multi-agent scenarios.",
+        "verified_excerpt": "Springer chapter examines swarm robot capabilities, skills and multi-agent scenarios."
+      },
+      "topic": {
+        "label": "Critical technology: Robotics and autonomous systems",
+        "is_relevant": true,
+        "basis": "Substantive connection: Swarm coordination and distributed robotic behaviours."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Swarm coordination and distributed robotic behaviours.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU autonomous-systems testbeds could validate robustness, safety and interoperability under real conditions.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether swarm coordination and distributed robotic behaviours affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU autonomous-systems testbeds could validate robustness, safety and interoperability under real conditions.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-23443cb9e29540",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "https://www.sciencedirect.com/science/chapter/edited-volume/pii/B9780443288203000184",
+        "source_type": "academic_book",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Metadata for an Elsevier edited-volume chapter supports title/DOI linkage, but primary chapter content not accessible to verify its actual technical finding. Distinguish from a similarly titled DIFFERENT book with ISBN 9780443295942.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. A bibliographic index attributes a chapter on shape-memory additive manufacturing to an Elsevier book, but an authoritative publisher chapter DOI/title landing page was not accessed.",
+        "verified_excerpt": "No verified primary-source excerpt available; original report/chapter was not obtained."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Metal shape-memory alloy printability and processing-structure-performance trade-offs."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Metal shape-memory alloy printability and processing-structure-performance trade-offs.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU smart-material and implant/aerospace component R&D could study process repeatability.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether metal shape-memory alloy printability and processing-structure-performance trade-offs affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU smart-material and implant/aerospace component R&D could study process repeatability.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Acquire chapter text/abstract and publisher-level DOI record rather than substituting the separate book. Metadata for an Elsevier edited-volume chapter supports title/DOI linkage, but primary chapter content not accessible to verify its actual technical finding. Distinguish from a similarly titled DIFFERENT book with ISBN 9780443295942."
+    },
+    {
+      "candidate_id": "REL-2042be264d9622",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.scirp.net/journal/paperinformation?paperid=152843",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Original 26-page journal article and publisher HTML verify exact title and DOI and describe integrated hourly solar-PV, electrolyser and storage sizing to minimize LCOH in Burkina Faso, including financing assumptions and sensitivity. Modelling conclusions are author claims, not measured hydrogen plant results.",
+        "independent_corrob_urls": [
+          "https://www.oalib.com/articles/6890937"
+        ],
+        "verified_doi": "10.4236/oalib.1115052",
+        "verified_title": "Techno-Economic Optimization of Solar-Based Green Hydrogen Production in Burkina Faso"
+      },
+      "aboutness": {
+        "place": "Burkina Faso",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Burkina Faso is the named solar resource, infrastructure and financing scenario used as model input and evaluated output setting.",
+        "verified_excerpt": "PV oversizing versus electrolyser capacity, storage and financing assumptions are co-optimized for hypothetical Burkina Faso solar-hydrogen production."
+      },
+      "topic": {
+        "label": "Africa: Green transition",
+        "is_relevant": true,
+        "basis": "Explicit PV-to-electrolysis and hydrogen-storage optimisation for the African green transition; a specific renewable-to-fuel technology."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Model-based comparison of PV/electrolyser/storage sizing and finance conditions for lower projected levelized hydrogen costs.",
+        "why_could_matter": "Could guide prospective technical-scoping and bankability research for solar hydrogen in constrained energy systems.",
+        "uncertainty": "Model outcome depends strongly on assumed equipment costs, discount rates, resource and water supply; no existing Burkina Faso plant viability is shown.",
+        "research_question": "How do site-measured irradiance, water availability, actual electrolyser utilization and locally available finance change optimized hydrogen costs?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "Potential input for EU-West Africa research cooperation on hydrogen project design, water safeguards, engineering standards and financing sensitivity.",
+        "evidence_limits": "EU project impacts are hypothetical and author model outputs are not evidence of commercial deployment or cross-border supply."
+      }
+    },
+    {
+      "candidate_id": "REL-af486fddae1d48",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S3050475925006049",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Comparative renewable-energy article explicitly includes Uganda alongside Ethiopia, Kenya and Botswana as studied national systems. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.nexres.2025.100737",
+        "verified_title": "The development and future direction of renewable energy in Ethiopia, Kenya, Uganda, and Botswana"
+      },
+      "aboutness": {
+        "place": "Uganda",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Named country Uganda is assessed from study content rather than publisher or author affiliation. Comparative renewable-energy article explicitly includes Uganda alongside Ethiopia, Kenya and Botswana as studied national systems.",
+        "verified_excerpt": "Comparative renewable-energy article explicitly includes Uganda alongside Ethiopia, Kenya and Botswana as studied national systems."
+      },
+      "topic": {
+        "label": "Critical technology: Energy technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: African renewable-energy development strategies, technical and institutional barriers."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "African renewable-energy development strategies, technical and institutional barriers.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-East Africa energy-research partnerships and project-finance learning could use the Uganda comparison.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether african renewable-energy development strategies, technical and institutional barriers affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU-East Africa energy-research partnerships and project-finance learning could use the Uganda comparison.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-8e7439e092776b",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sci-open.net/index.php/JBER/article/download/4532/5701/14086",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Original publisher full text surveys forecasting approaches (trees, neural networks, explainable and causal AI), but does not establish original algorithmic progress or a reliably systematic evaluation.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.63887/jber.2025.1.7.17",
+        "verified_title": "The Impact of Artificial Intelligence on Economic Forecasting Current Status and Future Outlook"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. A journal review discusses machine-learning models including RF and LSTM for economic forecasting, but it offers uncertain empirical novelty or methodological comparison.",
+        "verified_excerpt": "A journal review discusses machine-learning models including RF and LSTM for economic forecasting, but it offers uncertain empirical novelty or methodological comparison."
+      },
+      "topic": {
+        "label": "Critical technology: Artificial intelligence",
+        "is_relevant": true,
+        "basis": "Substantive connection: AI-assisted economic time-series forecasting and model deployment risk."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "AI-assisted economic time-series forecasting and model deployment risk.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU economic-model research teams could test calibration/interpretability if methodology is sound.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether ai-assisted economic time-series forecasting and model deployment risk affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU economic-model research teams could test calibration/interpretability if methodology is sound.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Identify original validated comparison, reproducible benchmark or specific new AI methodology. Original publisher full text surveys forecasting approaches (trees, neural networks, explainable and causal AI), but does not establish original algorithmic progress or a reliably systematic evaluation."
+    },
+    {
+      "candidate_id": "REL-835c571de36be2",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://pubs.aip.org/aip/apr/article-abstract/13/1/011307/3377103/Quantum-sensing-with-cavity-optomechanics?redirectedFrom=PDF",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Applied Physics Reviews analysis covers cavity-optomechanical methods for quantum-limited measurements. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1063/5.0237048",
+        "verified_title": "Quantum sensing with cavity optomechanics"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Applied Physics Reviews analysis covers cavity-optomechanical methods for quantum-limited measurements.",
+        "verified_excerpt": "Applied Physics Reviews analysis covers cavity-optomechanical methods for quantum-limited measurements."
+      },
+      "topic": {
+        "label": "Critical technology: Quantum technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Optomechanical sensing, noise limits and quantum-enhanced detection."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Optomechanical sensing, noise limits and quantum-enhanced detection.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU precision-measurement instruments and quantum metrology programmes could test device practicality.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether optomechanical sensing, noise limits and quantum-enhanced detection affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU precision-measurement instruments and quantum metrology programmes could test device practicality.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-cbadcf2dbfda2d",
+      "decision": "drop",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://irjiet.com/article/6G-and-Beyond-Future-of-7G-8G-Internet/2989",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Article speculates about not-yet-standardized 7G/8G futures but does not demonstrate credible 6G research, standards or deployable engineering advance. Publisher-level publication identity and DOI/title were cross-checked. Outlet or methodology limitations warrant caution; this is not a finding of coordinated influence.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.47001/irjiet/2025.911026",
+        "verified_title": "6G and Beyond: Future of 7G & 8G Internet"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": false,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Article speculates about not-yet-standardized 7G/8G futures but does not demonstrate credible 6G research, standards or deployable engineering advance.",
+        "verified_excerpt": "Article speculates about not-yet-standardized 7G/8G futures but does not demonstrate credible 6G research, standards or deployable engineering advance."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced connectivity, navigation and digital technologies",
+        "is_relevant": false,
+        "basis": "Insufficient assigned-priority connection: Speculative networking projections without verifiable engineering milestones."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Speculative networking projections without verifiable engineering milestones.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, no concrete EU standards, infrastructure or R&I mechanism follows from the unvalidated future-generation claims.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether speculative networking projections without verifiable engineering milestones affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "No concrete EU standards, infrastructure or R&I mechanism follows from the unvalidated future-generation claims.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Unsupported 7G/8G forecasts are insufficient technical evidence for the assigned critical connectivity priority."
+    },
+    {
+      "candidate_id": "REL-5f8ebca1bfbcab",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "https://ijsra.net/sites/default/files/fulltext_pdf/IJSRA-2025-2699.pdf",
+        "source_type": "scholarly_article",
+        "source_integrity": "unreliable",
+        "propaganda_or_influence_risk": "suspected",
+        "basis": "Canonical journal DOI is 10.30574/ijsra.2025.17.1.2699 rather than manifest Zenodo DOI. More seriously section 6 is explicitly titled Findings (Projected) while subsequently asserting 18% revenue and 62%/38% five-year survival figures as if established; no auditable data found.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.30574/ijsra.2025.17.1.2699",
+        "verified_title": "From Hubs to Economies: Rethinking Innovation Ecosystem Models for U.S.-Africa Collaboration"
+      },
+      "aboutness": {
+        "place": "Africa (region)",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Reported innovation hub/economy case analysis spans African settings; U.S. appears as a partner rather than the research location. Publisher journal record documents Africa-focused innovation ecosystem and U.S.-Africa collaboration analysis; its canonical publisher DOI differs from the Zenodo DOI in the manifest.",
+        "verified_excerpt": "Accessible primary-source content: Publisher journal record documents Africa-focused innovation ecosystem and U.S.-Africa collaboration analysis; its canonical publisher DOI differs from the Zenodo DOI in the manifest."
+      },
+      "topic": {
+        "label": "Africa: Innovation and technology",
+        "is_relevant": true,
+        "basis": "Substantive connection: African technology hub-to-economy linkages, local R&I ecosystem financing and international partnership design."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "African technology hub-to-economy linkages, local R&I ecosystem financing and international partnership design.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Africa R&I funding and locally led innovation partnerships may learn from the institutional comparison.",
+        "uncertainty": "Reported quantitative findings explicitly labelled projected in the article; neither their empirical status nor underpinning data are verified. Do not propagate numerical impacts.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether african technology hub-to-economy linkages, local r&i ecosystem financing and international partnership d creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU-Africa R&I funding and locally led innovation partnerships may learn from the institutional comparison.",
+        "evidence_limits": "EU/Africa innovation-policy interpretations are possible hypotheses only; the paper’s projected figures must not be treated as evidence."
+      },
+      "review_reason": "Correct DOI provenance with user authority, obtain data and verify whether numerical findings are predictions or observations; DO NOT treat projections as observed results. Canonical journal DOI is 10.30574/ijsra.2025.17.1.2699 rather than manifest Zenodo DOI. More seriously section 6 is explicitly titled Findings (Projected) while subsequently asserting 18% revenue and 62%/38% five-year survival figures as if established; no auditable data found."
+    },
+    {
+      "candidate_id": "REL-47de9f3f68f355",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "",
+        "source_type": "other",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Oxford Analytica/Emerald briefing DOI is indexed, but original report is paywalled and exact policy/electrolysis infrastructure analysis unavailable; Jordan national policy alone cannot stand in for the specific brief.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Jordan",
+        "is_substantive": false,
+        "publisher_country_only": false,
+        "basis": "Jordan is in the briefing title; accessible content did not independently establish the country evidence. An Emerald/Oxford Analytica expert briefing on Jordan hydrogen plans is cited in bibliographic listings, but its original accessible text and DOI metadata were not confirmed.",
+        "verified_excerpt": "No verified primary-source excerpt available; original report/chapter was not obtained."
+      },
+      "topic": {
+        "label": "Union for the Mediterranean: Renewable energies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Jordan green hydrogen policy and implementation constraints, if the briefing is genuine."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Jordan green hydrogen policy and implementation constraints, if the briefing is genuine.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-Jordan renewable-hydrogen trade and technical cooperation could be the substantive channel.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether jordan green hydrogen policy and implementation constraints, if the briefing is genuine creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU-Jordan renewable-hydrogen trade and technical cooperation could be the substantive channel.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Obtain permitted publisher text or reliable original briefing excerpt showing specific technical or policy bottlenecks. Oxford Analytica/Emerald briefing DOI is indexed, but original report is paywalled and exact policy/electrolysis infrastructure analysis unavailable; Jordan national policy alone cannot stand in for the specific brief."
+    },
+    {
+      "candidate_id": "REL-b95a7657ab4187",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://r6.ieee.org/scv-eps/wp-content/uploads/sites/58/2026/03/26-Mar-26-Lau.pdf",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "ASME Journal of Electronic Packaging original article PDF visibly carries canonical 10.1115/1.4070106/title (reposted copy), independently cited in peer-reviewed semiconductor papers and confirmed by article author John H. Lau in an IEEE Electronics Packaging Society technical lecture. Direct ASME hosting denied automated access; original authorship/DOI and technical contents corroborated.",
+        "independent_corrob_urls": [
+          "https://www.mendeley.com/catalogue/2dcd511f-78b6-3390-84a1-5f821b12090a/",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC13413784/",
+          "https://www.scribd.com/document/1077756000/ep-25-1096"
+        ],
+        "verified_doi": "10.1115/1.4070106",
+        "verified_title": "Current Advances and Outlook of Advanced Packaging"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Technical review surveys internationally used heterogeneous semiconductor packaging architectures, without asserting any single study country.",
+        "verified_excerpt": "Examines multi-die 2D-3.5D integration, chiplet interconnects, Cu-Cu bonding, HBM, glass substrates, and photonic-electronic co-packaging."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced semiconductors",
+        "is_relevant": true,
+        "basis": "Technical packaging architectures enabling high-performance advanced semiconductor systems and AI-memory integration are central."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Heterogeneous chiplet packaging and higher-bandwidth integration based on hybrid bonds, HBM, glass interposers and co-packaged photonic interfaces.",
+        "why_could_matter": "Packaging may determine AI accelerator bandwidth, power/heat envelopes and semiconductor systems capability beyond front-end node scaling.",
+        "uncertainty": "Strong state-of-the-art author review, not a single new process qualification, reliability trial or independently measured mass-production breakthrough.",
+        "research_question": "Which European pilot-line packaging methods can demonstrate yield, thermal reliability and cost-effectiveness for HBM, glass interposers and co-packaged optics?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU advanced-packaging R&D, pilot lines and chiplet interoperability standards may benefit from benchmarking Cu-Cu hybrid bonding, HBM integration and photonics packaging.",
+        "evidence_limits": "No EU deployment, fab yield, or new experimentally demonstrated advantage is established by this review."
+      }
+    },
+    {
+      "candidate_id": "REL-40a27a9050d80c",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.scientific.net/book/advanced-materials-additive-manufacturing-and-chemical-engineering/978-3-0364-1888-9",
+        "source_type": "academic_book",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Publisher Scientific.Net lists exact book-title DOI 10.4028/b-MVYKj5, year 2025, 164 pages, and says invited peer-reviewed papers. Publisher ToC lists concrete process-property experimental studies: tungsten powder particle size in laser powder bed fusion (p103), 3D print layer thickness/post-curing tensile strength (p123), injection-molding dimensional error (p29). Book identity verified at volume level.",
+        "independent_corrob_urls": [
+          "https://www.scientific.net/book/advanced-materials-additive-manufacturing-and-chemical-engineering/978-3-0364-1888-9_toc.pdf"
+        ],
+        "verified_doi": "10.4028/b-mvykj5",
+        "verified_title": "Advanced Materials, Additive Manufacturing and Chemical Engineering"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Multinational/unspecified applied materials and manufacturing topics of the articles; no geographic technical-result attribution required.",
+        "verified_excerpt": "Edited volume contains studies of powder printability in tungsten LPBF and of resin 3D-printing layer/post-cure parameters affecting tensile strength."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Peer-reviewed papers explicitly study additive-manufacturing feedstocks and process parameters and material mechanical properties."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Process-parameter and powder-feedstock research could improve additive-manufacturing quality and repeatability for specialist materials.",
+        "why_could_matter": "Experimental process/property research could inform advanced industrial printing, inspection and materials qualification.",
+        "uncertainty": "The DOI is for the entire mixed-topic edited volume; only chapter topics and publisher status were visible, not independently measured effect sizes.",
+        "research_question": "What independently replicated LPBF powder-size and resin post-curing process windows are transferable to European industrial printing qualification?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "Potential relevance for European additive manufacturing materials certification, AM standardization and design-of-experiments priorities.",
+        "evidence_limits": "EU relevance is analytic; source does not evaluate a European factory or single volume-wide treatment effect."
+      }
+    },
+    {
+      "candidate_id": "REL-6fc21ac258ec4d",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S2214860425004063",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Additive Manufacturing article examines real-time monitoring and feedback during powder-bed fusion. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.addma.2025.105041",
+        "verified_title": "Toward real-time feedback control for powder bed fusion additive manufacturing"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Additive Manufacturing article examines real-time monitoring and feedback during powder-bed fusion.",
+        "verified_excerpt": "Additive Manufacturing article examines real-time monitoring and feedback during powder-bed fusion."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Closed-loop laser/process control for additive build consistency and defect reduction."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Closed-loop laser/process control for additive build consistency and defect reduction.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU metal AM production lines and qualification standards could evaluate control robustness at scale.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether closed-loop laser/process control for additive build consistency and defect reduction affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU metal AM production lines and qualification standards could evaluate control robustness at scale.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-846b0db31825ef",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S2772369026000022",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Additive Manufacturing Letters paper studies agentic evaluation of alloys for additive manufacturing. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.addlet.2026.100355",
+        "verified_title": "Agentic additive manufacturing alloy evaluation"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Additive Manufacturing Letters paper studies agentic evaluation of alloys for additive manufacturing.",
+        "verified_excerpt": "Additive Manufacturing Letters paper studies agentic evaluation of alloys for additive manufacturing."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: AI agents applied to alloy candidate evaluation and design-process acceleration."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "AI agents applied to alloy candidate evaluation and design-process acceleration.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU materials discovery facilities and digital manufacturing infrastructure could test reproducibility and IP/validation controls.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether ai agents applied to alloy candidate evaluation and design-process acceleration affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU materials discovery facilities and digital manufacturing infrastructure could test reproducibility and IP/validation controls.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-8a4880b72f607e",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "",
+        "source_type": "scholarly_article",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "A recent RSS aggregation mentions the prospective Additive Manufacturing journal article, but the exact Elsevier page/DOI and original experimental microstructure evidence were not verified.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": ""
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. A journal-feed listing mentions twin-mediated dynamic recrystallization in freshly solidified additive-manufactured material, but an exact publisher DOI/title record was not located.",
+        "verified_excerpt": "No verified primary-source excerpt available; original report/chapter was not obtained."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Microstructure evolution and potential mechanical-performance control in printed metals."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Microstructure evolution and potential mechanical-performance control in printed metals.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU metal AM materials-science laboratories could investigate proposed mechanisms experimentally.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether microstructure evolution and potential mechanical-performance control in printed metals affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU metal AM materials-science laboratories could investigate proposed mechanisms experimentally.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Check Elsevier/Crossref DOI resolution and obtain actual article before assuming the reported discovery. A recent RSS aggregation mentions the prospective Additive Manufacturing journal article, but the exact Elsevier page/DOI and original experimental microstructure evidence were not verified."
+    },
+    {
+      "candidate_id": "REL-8dac00793ac10d",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/abs/pii/S2214860425002684",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Journal paper assesses temperature measurement with emissivity separation in metal additive manufacturing. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.addma.2025.104904",
+        "verified_title": "Radiometric temperature measurement for metal additive manufacturing via temperature emissivity separation"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Journal paper assesses temperature measurement with emissivity separation in metal additive manufacturing.",
+        "verified_excerpt": "Journal paper assesses temperature measurement with emissivity separation in metal additive manufacturing."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Thermal measurement uncertainty and in-situ process metrology."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Thermal measurement uncertainty and in-situ process metrology.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU additive-manufacturing process qualification and measurement standardization could test sensor calibration.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether thermal measurement uncertainty and in-situ process metrology affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU additive-manufacturing process qualification and measurement standardization could test sensor calibration.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-eb8948a1a74031",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S2214860426003192",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Paper investigates corner mechanics in material-extrusion additive manufacturing. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.addma.2026.105393",
+        "verified_title": "Mechanics of corners in material extrusion additive manufacturing"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Paper investigates corner mechanics in material-extrusion additive manufacturing.",
+        "verified_excerpt": "Paper investigates corner mechanics in material-extrusion additive manufacturing."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Geometry-dependent stress, material deposition and mechanical response of printed corners."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Geometry-dependent stress, material deposition and mechanical response of printed corners.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU polymer AM component design guides and process standards could incorporate validated geometric effects.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether geometry-dependent stress, material deposition and mechanical response of printed corners affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU polymer AM component design guides and process standards could incorporate validated geometric effects.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-f782e00a44efad",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S277236902500026X",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Additive Manufacturing Letters paper tests large language models for predicting metal AM defect classes. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.addlet.2025.100292",
+        "verified_title": "AdditiveLLM: Large language models predict defects in metals additive manufacturing"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Additive Manufacturing Letters paper tests large language models for predicting metal AM defect classes.",
+        "verified_excerpt": "Additive Manufacturing Letters paper tests large language models for predicting metal AM defect classes."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Data-driven recognition/prediction of lack of fusion, keyhole and balling defects."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Data-driven recognition/prediction of lack of fusion, keyhole and balling defects.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU industrial AM quality-control testing can benchmark models across alloys and printer types.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether data-driven recognition/prediction of lack of fusion, keyhole and balling defects affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU industrial AM quality-control testing can benchmark models across alloys and printer types.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-fda7f3dd005359",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/abs/pii/S2214860426002940",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Study uses EBSD misorientation metrics to quantify plastic strain in laser additive-manufactured alloys. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.addma.2026.105368",
+        "verified_title": "EBSD-based misorientation metrics for plastic strain quantification in laser additive manufacturing alloys"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Study uses EBSD misorientation metrics to quantify plastic strain in laser additive-manufactured alloys.",
+        "verified_excerpt": "Study uses EBSD misorientation metrics to quantify plastic strain in laser additive-manufactured alloys."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Post-process metallographic validation of deformation and defects."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Post-process metallographic validation of deformation and defects.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU critical metal-component qualification may compare EBSD strain proxies against mechanical testing.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether post-process metallographic validation of deformation and defects affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU critical metal-component qualification may compare EBSD strain proxies against mechanical testing.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-4bf8a5c9c4c44d",
+      "decision": "review",
+      "source_verification": {
+        "identity_verified": false,
+        "primary_url": "https://www.sciencedirect.com/book/9780443440793/intelligent-gene-editing-in-plants",
+        "source_type": "academic_book",
+        "source_integrity": "unverified",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Elsevier publisher book catalogue confirms Chapter 26 title, author Oseias R. Feitosa-Junior and pages 657-684, with detailed context for CRISPR/AI plant gene editing. However only secondary indexing shows the exact chapter DOI and chapter text/abstract could not be directly inspected.",
+        "independent_corrob_urls": [],
+        "verified_doi": "",
+        "verified_title": "Future landscape of CRISPR and AI in plant gene editing"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Elsevier book table of contents lists the CRISPR/AI plant-editing chapter, and a secondary index gives its DOI; the specific publisher chapter DOI page was not confirmed.",
+        "verified_excerpt": "Accessible primary-source content: Elsevier book table of contents lists the CRISPR/AI plant-editing chapter, and a secondary index gives its DOI; the specific publisher chapter DOI page was not confirmed."
+      },
+      "topic": {
+        "label": "Critical technology: Biotechnologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Computational guide RNA selection and AI-assisted plant editing research agenda."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "Computational guide RNA selection and AI-assisted plant editing research agenda.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU crop-breeding research and plant genome-editing regulatory frameworks could test methodological value.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether computational guide rna selection and ai-assisted plant editing research agenda affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "EU crop-breeding research and plant genome-editing regulatory frameworks could test methodological value.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "Confirm chapter DOI 10.1016/B978-0-443-44079-3.00007-3 in original Elsevier chapter metadata and inspect findings. Elsevier publisher book catalogue confirms Chapter 26 title, author Oseias R. Feitosa-Junior and pages 657-684, with detailed context for CRISPR/AI plant gene editing. However only secondary indexing shows the exact chapter DOI and chapter text/abstract could not be directly inspected."
+    },
+    {
+      "candidate_id": "REL-1c92bf96033d2b",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.mdpi.com/1424-8220/25/8/2345",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Review explicitly compares remote sensing strategies for measuring plant chlorophyll and discusses performance limits. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3390/s25082345",
+        "verified_title": "A Comprehensive Review of Crop Chlorophyll Mapping Using Remote Sensing Approaches: Achievements, Limitations, and Future Perspectives"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Review explicitly compares remote sensing strategies for measuring plant chlorophyll and discusses performance limits.",
+        "verified_excerpt": "Review explicitly compares remote sensing strategies for measuring plant chlorophyll and discusses performance limits."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced sensing technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Spectral crop sensing, calibration and remote measurement of plant physiology."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Spectral crop sensing, calibration and remote measurement of plant physiology.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU agricultural sensor networks and digital crop monitoring could test cross-field transferability.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether spectral crop sensing, calibration and remote measurement of plant physiology affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU agricultural sensor networks and digital crop monitoring could test cross-field transferability.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-cf84ef1344f593",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S100093612500086X",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Chinese Journal of Aeronautics review studies intelligent spacecraft orbital game technologies and computational frameworks. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.cja.2025.103480",
+        "verified_title": "Spacecraft intelligent orbital game technology: A review"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Chinese Journal of Aeronautics review studies intelligent spacecraft orbital game technologies and computational frameworks.",
+        "verified_excerpt": "Chinese Journal of Aeronautics review studies intelligent spacecraft orbital game technologies and computational frameworks."
+      },
+      "topic": {
+        "label": "Critical technology: Space and propulsion technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Orbital decision-making, spacecraft autonomy and modelling; detailed defensive/military applications are not inferred."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Orbital decision-making, spacecraft autonomy and modelling; detailed defensive/military applications are not inferred.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU space-domain-awareness research and autonomous satellite safety governance are possible evaluation channels.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether orbital decision-making, spacecraft autonomy and modelling; detailed defensive/military applications are not inferr affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU space-domain-awareness research and autonomous satellite safety governance are possible evaluation channels.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-020fa1349ebbbd",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.frontiersin.org/journals/bioengineering-and-biotechnology/articles/10.3389/fbioe.2025.1542179/full",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Review studies orthopedic applications of 3D printing, implant biomaterials and manufacturing constraints. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.3389/fbioe.2025.1542179",
+        "verified_title": "Innovative 3D printing technologies and advanced materials revolutionizing orthopedic surgery: current applications and future directions"
+      },
+      "aboutness": {
+        "place": "Global / unspecified",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Global/unspecified refers to the central technology subject; no national research result is inferred. Review studies orthopedic applications of 3D printing, implant biomaterials and manufacturing constraints.",
+        "verified_excerpt": "Review studies orthopedic applications of 3D printing, implant biomaterials and manufacturing constraints."
+      },
+      "topic": {
+        "label": "Critical technology: Advanced materials, manufacturing and recycling technologies",
+        "is_relevant": true,
+        "basis": "Substantive connection: Advanced material printability and patient-specific medical component development."
+      },
+      "futures": {
+        "classification": "observed",
+        "mechanism": "Advanced material printability and patient-specific medical component development.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU medical-device AM testing, implants qualification and biocompatibility research may compare approaches.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What independent evidence, replicated results or policy evaluation would test whether advanced material printability and patient-specific medical component development affects European R&I capabilities, cooperation or economic security?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU medical-device AM testing, implants qualification and biocompatibility research may compare approaches.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    },
+    {
+      "candidate_id": "REL-6c55784a8be328",
+      "decision": "drop",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.ijsrisjournal.com/index.php/ojsfiles/article/view/460",
+        "source_type": "scholarly_article",
+        "source_integrity": "credible_primary_claim_only",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Article addresses general Morocco public-health and economic resilience, without an identifiable biomedical innovation, health research capacity change or R&I cooperation mechanism. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.63883/ijsrisjournal.v4i1.460",
+        "verified_title": "Public Health and Economic Resilience in Morocco: Towards a Sustainable Healthcare Model"
+      },
+      "aboutness": {
+        "place": "Morocco",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Morocco is the substantive setting for national health-policy analysis, but the exact R&I health priority lacks a specific research or innovation result. Article addresses general Morocco public-health and economic resilience, without an identifiable biomedical innovation, health research capacity change or R&I cooperation mechanism.",
+        "verified_excerpt": "Article addresses general Morocco public-health and economic resilience, without an identifiable biomedical innovation, health research capacity change or R&I cooperation mechanism."
+      },
+      "topic": {
+        "label": "Union for the Mediterranean: Health",
+        "is_relevant": false,
+        "basis": "Insufficient assigned-priority connection: General health services/macroeconomic policy rather than research-system development."
+      },
+      "futures": {
+        "classification": "possible",
+        "mechanism": "General health services/macroeconomic policy rather than research-system development.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, an EU–Morocco health relationship cannot be inferred merely from a health-policy paper.",
+        "uncertainty": "The source-identity, relevance or evidence gap described in review_reason remains unresolved. No downstream outcome can be treated as observed.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether general health services/macroeconomic policy rather than research-system development creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "uncertain",
+        "implications": "An EU–Morocco health relationship cannot be inferred merely from a health-policy paper.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      },
+      "review_reason": "No substantive R&I advance or concrete research cooperation mechanism for the exact Union for the Mediterranean health priority is evidenced."
+    },
+    {
+      "candidate_id": "REL-729cdb93843dc5",
+      "decision": "keep",
+      "source_verification": {
+        "identity_verified": true,
+        "primary_url": "https://www.sciencedirect.com/science/article/pii/S0962629825001210",
+        "source_type": "scholarly_article",
+        "source_integrity": "independent_credible",
+        "propaganda_or_influence_risk": "none_identified",
+        "basis": "Political Geography article studies violence/contestation associated with low-carbon transition in Costa Rica and Papua New Guinea. Publisher-level publication identity and DOI/title were cross-checked.",
+        "independent_corrob_urls": [],
+        "verified_doi": "10.1016/j.polgeo.2025.103389",
+        "verified_title": "Violent environments and the low-carbon energy transition: Cautionary tales from Costa Rica and Papua New Guinea"
+      },
+      "aboutness": {
+        "place": "Costa Rica",
+        "is_substantive": true,
+        "publisher_country_only": false,
+        "basis": "Substantive setting for Costa Rica requires country/case evidence in the study. Political Geography article studies violence/contestation associated with low-carbon transition in Costa Rica and Papua New Guinea.",
+        "verified_excerpt": "Political Geography article studies violence/contestation associated with low-carbon transition in Costa Rica and Papua New Guinea."
+      },
+      "topic": {
+        "label": "CELAC: Climate change, environmental sustainability and energy transition",
+        "is_relevant": true,
+        "basis": "Substantive connection: Research on social and territorial governance of transition projects; Costa Rica is substantive geographic case."
+      },
+      "futures": {
+        "classification": "mixed",
+        "mechanism": "Research on social and territorial governance of transition projects; Costa Rica is substantive geographic case.",
+        "why_could_matter": "If the methods, evidence and boundary conditions hold, eU-CELAC energy-transition safeguards, research ethics and project-governance cooperation could examine comparable risks.",
+        "uncertainty": "Source reports do not establish EU-specific outcomes; effectiveness, geographic transferability and/or real-world scaling require independent testing.",
+        "research_question": "What field evidence or bilateral research evaluation would establish whether research on social and territorial governance of transition projects; costa rica is substantive geographi creates transferable learning for EU partnerships?"
+      },
+      "eu_perspective": {
+        "relevance": "plausible",
+        "implications": "EU-CELAC energy-transition safeguards, research ethics and project-governance cooperation could examine comparable risks.",
+        "evidence_limits": "EU consequences are analyst-derived possibilities, not measured European outcomes in this source; country/sector evidence must be independently tested."
+      }
+    }
+  ]
+}
