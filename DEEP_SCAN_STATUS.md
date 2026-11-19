@@ -6,40 +6,40 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4013** (Main **2087** + Historical **1926**)
-- Automatic queue still needing V2 verification: **133** (Main **78** + Historical **55**)
-- Currently assigned to workers: **107** (Main **72** + Historical **35**)
+- Authoritative V2 verified: **4041** (Main **2115** + Historical **1926**)
+- Automatic queue still needing V2 verification: **105** (Main **50** + Historical **55**)
+- Currently assigned to workers: **105** (Main **50** + Historical **55**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
-- Automatic queue pending and not yet assigned: **26**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261119T052550Z-242bf1005dd3`
+- Current package: `worker-a-20261119T062742Z-2c7bc6a64d08`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1017/sus.2026.10094` — From policy to practice: green and digital competencies for researchers in European science diplomacy
-  2. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall?
-  3. `link:https://doi.org/10.1093/oxrep/grag017` — Critical minerals and industrial policy: a network-based approach to supply chain risk
-  4. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors
-  5. `link:https://doi.org/10.1017/dap.2026.10089` — Advancing data agency: A conceptual framework to support data sovereignty
-  6. `link:https://doi.org/10.1093/nar/gkag1151` — PDBe in 2027: integrating literature annotations, molecular dynamics data, and AI-ready access
-  7. `link:https://doi.org/10.1016/j.net.2026.104831` — Assessing Saudi Arabia’s readiness for fusion RDI: A comparative framework and roadmap to 2035
-  8. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system
+  1. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxNMXp0aU5JWmI0MVZ0WkpUTFFXUTdFOVNXS1RPOWpvLVBkMTJXSWdtUG42ekcxSmJfUHhLazdyTm9Hbl9qekdLVWhzazZ1UE9vejlyQ2lhVHY3bkt2VkEzYzgwd1NzY1hGaC0xRWNuSDQ3dFhZZUo5TU9HSkNCVGJ1dkhIZlhNd0trQ2dJeWVPTFV0UVRrTkdjTF9FS2R5aUl3VUIxaHV0ZWVERjU1WGRBcGg4cw?oc=5` — EU’s strategic autonomy in a resource-constrained world
+  2. `link:https://news.google.com/rss/articles/CBMimwFBVV95cUxQRHdHUXluSzdlREtHUlFUbHJtd3VTQjZQNFhuWm1sb2hjeldsWHJpRGdPOVdfUnM5ajZoVmU4R2lxby0yVDEzWDZ5UHlkUm5iNDZ4emtkTnItd1RqUm1HZ1R5a2xyVUVDSDBjcWRiOUNSd0RJcy1PcWJYMWV1RWgzT2pQT0gzNllyTjhia2JfeFA0aUY5TjAwN3dubw?oc=5` — EU Commission accused of withholding emails on killing patent law
+  3. `link:https://www.euronews.com/2026/11/18/europe-tonight-eu-proposes-45bn-ukraine-loan-as-trump-xi-and-putin-meet` — EU proposes €45bn Ukraine loan as Trump, Xi and Putin meet
+  4. `link:https://www.euronews.com/2026/11/18/germanys-digitalisation-minister-wildberger-discusses-europes-ai-race-with-the-us-and-chin` — Wildberger discusses Europe's AI race with the US and China
+  5. `historical:id:6559671ef6586538` — European AI Competitiveness Beyond Frontier Models
+  6. `historical:id:b288b71dd5ba12ad` — Geopolitics and International Higher Education: Concepts, knowledge diplomacy and security policies, and future agenda
+  7. `historical:id:8beac9f7830a3b41` — Women in Science Diplomacy Association
+  8. `historical:id:0bb0869d8e1417ab` — City Science Labs as Platforms for Science Diplomacy
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261119T052559Z-3b7d28fa5385`
-- Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxOUGNrNTV6cGVzWXNyckJfa3FucGp6M2VSaXVLYWdQSGxrcjFkYXhsajNRUWItMmpwQTNWWEFXYXMwVHFleklQMHF1VmwxUUlrSG5UUDlUMW5DU3hILUh3aUIxUG5IMndSdjFjdE1HMjdjM3RKVzRVSnJZOURwOVV1WjRyNTcxZi03ZW9rbXVRelpIOVZIajE1TERQRXlNa0gtLUR0M2x1R1VTY2FnTEFlejR4WVMzQXdXMXh3MTVfOHBjZHVKMlNCUTJIUWs0MkhtbFE?oc=5` — Commission seeks feedback on draft template for the fundamental rights impact assessment under the AI Act - Shaping Europe’s digital future
-  2. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxNTGNRaHluN1BpUm90cVZrVG9QaUtJZkhtdHF3UEtvZUxudnR5LWFJQ0Zsem16dHdydVllVEpOU3JWVXFxcVJoSy1rRTd4cmxfZjJrNzFrUl9WWjg1TVMtV29BTHBOenZrVE1PdmpIMmtiRHlwYTlfQnRFZm9haWViOGMtV2JPZEpDV0tCMXo2NzNXekticWVkR0dBcmtUMjYxM3JwUFZ0Y2k3VUoxLWlCOTMzMnhIZEZwekVGaGs1OURsNTA?oc=5` — Denmark Is Showing the World How to Deal With AI Job Disruption
-  3. `link:https://www.euronews.com/2026/11/16/ecb-warns-ai-share-boom-could-end-in-abrupt-repricing` — ECB warns AI share boom could end in 'abrupt repricing'
-  4. `link:https://www.unesco.org/en/articles/germany-announces-intention-donate-eur2-million-global-fund-information-integrity-climate-change` — Germany announces the intention to donate €2 million to the Global
-  5. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxOVnhWREYwMXZyTm5VNlRIeVdGS1VLaEpWVzZmNnJMWll6UlZ6UTFpRy15UGR3c2FNR1k3V0N6TlgtSDhOMUhodnNzTk4zWWxzcWxkU2c4UkM2UTg0U3lOTUg4alpySkJaTUg0WWtoNmt6d09KTkpMYlpBYS1vaWdPUTJXaFBWOWljcVVjYzZ1aWRvd3UwOU9nQ1lBOVBBa0c3RWtncWR2ZXhaSmFNcE91VXFR?oc=5` — Over 80 Nobel laureates call on EU leaders to increase research budget
-  6. `link:https://news.google.com/rss/articles/CBMidEFVX3lxTE12WUUycWlmY3dkTmVOLXlVZm9VeU9nRWY2ZGpzUDBFczVURG5sWkowQnhVTERSa0g4XzFGUGw4SDVEelBRaUdwaGlSUnRzaWpaMzM0b3dWX1JQMjNka3hveVhZc01oNjZicWxEckR5cmxMVzJS?oc=5` — Scaling up Europe’s hydrogen industry
-  7. `link:https://news.google.com/rss/articles/CBMiowFBVV95cUxNaG9JMFJiT0syakttVFFhY3V1UWpXTzJpeENMMF9HYXpYZUl1TXNTVkNuWHBXMkl4NEJyTjJJX0ZnaXh4TGtYbEVGeEU3M3EwYkRqMTI3TXlVUV9zSFBDSENONk10aVpWb2ViMmUzdGlrM3JSRzBFRG5Wd3Z2dVBqeVozM2JzbGs4aWE1REtOVTN1N2Y2MWlRVTZPbG4tVkdlMXNR?oc=5` — Europe must embrace AI's 'creative destruction', Nobel economist says
-  8. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQS21MX1FsMEVTQWhZVEJkZFZVeXlBVDJpNTBWSWdoNWFUNF96enh3Mi1pRTZacU9OLU15M1NPZXljU3A3cGhTdGd2VkpnSEZIYjJBZlFSeWNUMlBtRFJzcll1THVNcUtsX0lsdVZZTkxyVE1JdUZzcVlkWTJIb0hyLXhRbDIwcWN5WE9zdS1SdDBwc3NIWE1fZEpxV0FveEZDeGY4WWd1bnpCU2VqUU5VN1NhQ1NjckI3?oc=5` — Should Europe triple or freeze its data centre capacity?
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20261119T062756Z-687d66f08d73`
+- Assigned unresolved records: **34**
+  1. `link:https://news.google.com/rss/articles/CBMia0FVX3lxTE1nU20wQjBhdW5TOVhIMFZNdml0bmdGc2pIS2haNkkwSnpzanNjdWNrbXhRd3FXMDdqX19lbGRQVm1LUEtPRDhRZlIyZFVPeG5YX3Y2dXdLOXp4UXNWR3VsZnpROGpNTktXLVhz?oc=5` — The EU has always found a way through. On AI, it’s struggling to see it.
+  2. `link:https://era.gv.at/news-items/cesaer-input-note-makes-recommendations-on-research-security-in-fp10/` — CESAER input note makes recommendations on research security in FP10
+  3. `link:https://era.gv.at/news-items/ec-holds-implementation-dialogue-on-research-security/` — EC holds Implementation Dialogue on Research Security
+  4. `link:https://era.gv.at/news-items/ceps-publishes-foresight-report-on-science-in-2050/` — CEPS publishes foresight report on science in 2050
+  5. `link:https://era.gv.at/news-items/eua-welcomes-itre-report-on-horizon-europe-2028-2034/` — EUA welcomes ITRE report on Horizon Europe (2028-2034)
+  6. `link:https://era.gv.at/news-items/yerun-welcomes-horizon-europe-itre-reports/` — YERUN welcomes Horizon Europe ITRE reports
+  7. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOZk50cjJpWWdEZ3pRcVlUVkxnc2ZMblN6VWowOHZpeHZSLXVFOFZHUHdsREVJTGNVNmFkTHctYnl0MFdHY0JhNm13M0pjdF94VElzdzd1YmpQVVdKZTZ5MFRsRlh6WUhaN2NxeXJEd2x2MGdXWC0yNjRXZXVBXzl1Y0JQSEhFM0NJM0NweGI4dzk4c3B2aVh4ZnRaOG9FcElpZkdRRjU4aVhVMVQtNDVNRUgyUG9fUHVSX1JGM3pfRG53MWNfOEE?oc=5` — Viewpoint: Give Europe a readiness scale for dual-use research
+  8. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPc3MtM3BHSTQwdmxhY1JOMEI2SHJkSUtzNUNpQWgwaEx0MEd5VGdrMTBmSmRHWFUwdF83ZXV3X25TS2tQaGxmNXZUQklibXFEUi1tOW9rTHdocjNSejcxQjdydGtJd3JiZ29YbE94bVhMa3JsbF8tR0dJTmFXUzBaT0J0UUc2aWxSVk1RUUZWd29xRjg2Nl9KLTNFUUdLUmFKN0E1djNmNk5pZFZaWjMwa1Fodw?oc=5` — Four takeaways on the future of European research from this year’s R&I Days
+  - … plus 26 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
