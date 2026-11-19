@@ -347,15 +347,22 @@ def balanced_review_jobs(available, size):
     """Choose strongest research candidates with modest priority diversity.
 
     Re-score old and new candidates identically on current R&I signals. A
-    selection penalty for repetitive categories prevents domination without
-    forcing weak regional categories into the shortlist. No archive mutation.
+    small, capped selection penalty for repetitive categories breaks near-ties
+    without pushing materially weaker research ahead of stronger work. Returned
+    order is the actual review order (most promising candidates first).
+    No archive mutation.
     """
     pool = sorted(available, key=lambda r: (-_current_interest(r), r['candidate_id']))
     jobs, counts = [], {}
     while pool and len(jobs) < size:
         def ordering(row):
             group = row.get('focus_issue') or ''
-            return (-(_current_interest(row) - 2.5 * counts.get(group, 0)),
+            # Do not allow the diversity penalty to grow without bound: a
+            # 60-item package should prioritize research merit, not quotas.
+            # At most five ranking points of diversity adjustment; substantially
+            # stronger leads always remain ahead of weaker topics.
+            diversity_penalty = 2.5 * min(counts.get(group, 0), 2)
+            return (-(_current_interest(row) - diversity_penalty),
                     -_current_interest(row), row['candidate_id'])
         best = min(pool, key=ordering)
         pool.remove(best)
