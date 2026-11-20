@@ -1,0 +1,483 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261120T082305Z-2e5b9abb462e",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1016/j.biotechadv.2026.109031",
+      "source_hash": "e3cac5b1",
+      "identity_hash": "a981c3c47bc0eeff",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "access_limited",
+            "note": "Supplied https://doi.org/10.1016/j.biotechadv.2026.109031 was a syndicated redirect, paywall or inaccessible link; matching substantive work checked using the cited alternate source."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Read matching substantive primary material: https://content.openalex.org/works/W7214064769.pdf; title and organisation matched assignment, with body evidence rather than headline alone."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_pdf_excerpt",
+            "url": "https://content.openalex.org/works/W7214064769.pdf",
+            "title": "Metcalfe et al., IBISBA: Digitalisation to empower biotechnology and drive biomanufacturing, Biotechnology Advances (2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. PDF excerpt was supplied with the package."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route A3: peer-reviewed analysis of the European IBISBA biotechnology research infrastructure and its cross-institutional digital data/protocol needs."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "IBISBA biotechnology infrastructure needs interoperable data",
+      "reader_what": "A biotechnology infrastructure analysis maps why harmonised digital data and workflows matter for European biomanufacturing.",
+      "reader_why": "Direct evidence about European research-infrastructure governance, collaboration and digital research capacity.",
+      "reader_more": "The paper examines IBISBA, a distributed European biotechnology research infrastructure, and its digitalisation strategy. It highlights interoperability, integrated data, and research workflows as enabling conditions. The article is an analysis of infrastructure requirements, not evidence that industrial performance already improved.",
+      "deep_analysis": {
+        "work_kind": "research study / analytical report",
+        "research_question": "A biotechnology infrastructure analysis maps why harmonised digital data and workflows matter for European biomanufacturing.",
+        "main_finding": "IBISBA researchers identify harmonised interoperable digital services as a prerequisite for scalable collaboration and biomanufacturing research.",
+        "method_or_basis": "Accepted journal manuscript; conceptual infrastructure analysis of IBISBA digital workstreams, partner organisations and data services.",
+        "qualification": "The paper proposes and explains enabling architecture; it does not establish that proposed competitiveness benefits were achieved.",
+        "radar_relevance": "Direct evidence about European research-infrastructure governance, collaboration and digital research capacity.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "IBISBA research-infrastructure authors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09-23",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The paper proposes and explains enabling architecture; it does not establish that proposed competitiveness benefits were achieved.",
+          "text": "IBISBA researchers identify harmonised interoperable digital services as a prerequisite for scalable collaboration and biomanufacturing research.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC149071",
+      "source_hash": "dfd8a21f",
+      "identity_hash": "4a584b2573377806",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matched original work at https://publications.jrc.ec.europa.eu/repository/handle/JRC149071"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_excerpt",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC149071",
+            "title": "European Commission Joint Research Centre, Advanced materials to reduce critical raw material dependencies in European industry (2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. Verified against the linked source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route A1 and A3: official comparative JRC evidence about EU materials R&I capabilities and strategic industrial dependence, including manufacturing gaps."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU materials substitution faces manufacturing bottlenecks",
+      "reader_what": "JRC finds mature material substitutes do not automatically remove EU supply dependence without local production and testing.",
+      "reader_why": "Direct official EU strategic R&I evidence connecting materials research strengths to deployment and industrial capacity gaps.",
+      "reader_more": "The JRC assesses substitute materials across electronics, vehicles, construction and clean-energy applications. In electronics it reports strong EU research capability for 69 of 74 mapped options but EU manufacturing capability for only three. Adoption can need certification and process R&I even at high technology readiness; substitute inputs may introduce new dependencies.",
+      "deep_analysis": {
+        "work_kind": "research study / analytical report",
+        "research_question": "JRC finds mature material substitutes do not automatically remove EU supply dependence without local production and testing.",
+        "main_finding": "EU materials alternatives can lower critical raw-material use, but resilience depends on substitute inputs and European manufacturing capacity, not maturity alone.",
+        "method_or_basis": "Joint Research Centre science-for-policy brief summarising four sectoral technology option reviews and maturity/industrial base mapping.",
+        "qualification": "Options and technology-readiness assessments are application-specific; lower CRM intensity does not by itself imply reduced import dependency.",
+        "radar_relevance": "Direct official EU strategic R&I evidence connecting materials research strengths to deployment and industrial capacity gaps.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Options and technology-readiness assessments are application-specific; lower CRM intensity does not by itself imply reduced import dependency.",
+          "text": "EU materials alternatives can lower critical raw-material use, but resilience depends on substitute inputs and European manufacturing capacity, not maturity alone.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/09662839.2026.2750174",
+      "source_hash": "e6af9436",
+      "identity_hash": "da031e43164f6523",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Tried https://doi.org/10.1080/09662839.2026.2750174; direct DOI browser route not accessible."
+          },
+          {
+            "step": "doi",
+            "outcome": "found",
+            "note": "DOI 10.1080/09662839.2026.2750174 matched the title and authors in publisher indexing; manuscript inaccessible."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Small states, big tech: exploring small states' role in enacting European digital sovereignty\"; matching publisher record/abstract found, but no usable full paper."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "found",
+            "note": "Searched author(s) Tobias Liebetrau, Linda Monsees, Jan Švec with title and publication date 2026-11-17; matched metadata without complete document."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "blocked",
+            "note": "Taylor & Francis European Security article route displayed bibliographic details; no substantive open article body obtained."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "inconclusive",
+            "note": "Located SSRN abstract_id=6028875, an earlier related preprint by Monsees, Švec, Liebetrau with changed title; cannot substitute without confirming same study content."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Bibliographic identity corroborated by European Security DOI/publisher metadata (https://doi.org/10.1080/09662839.2026.2750174), but original work not substantively accessible. No content claims made."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Verified identity; full/substantive original text inaccessible after recovery routes; leave provisional rather than infer from title or abstract."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.cost.eu/uploads/2026/11/COST-Targeted-impact-assessment-on-skill-development-among-young-researchers-October-2026.pdf",
+      "source_hash": "f5c31fc6",
+      "identity_hash": "68da268f5590c42f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matched original work at https://www.cost.eu/uploads/2026/11/COST-Targeted-impact-assessment-on-skill-development-among-young-researchers-October-2026.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_excerpt",
+            "url": "https://www.cost.eu/uploads/2026/11/COST-Targeted-impact-assessment-on-skill-development-among-young-researchers-October-2026.pdf",
+            "title": "Technopolis Group for COST Association, Targeted impact assessment on skill development among young researchers (October 2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. Verified against the linked source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route A3: commissioned multi-country empirical evaluation of European collaborative researcher training, skills and career effects."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "COST training assessment links researcher skills and networks",
+      "reader_what": "A commissioned survey evaluates skills, professional networks and career relevance of COST Training Schools for young researchers.",
+      "reader_why": "European researcher workforce and transnational scientific collaboration are central R&I-system variables.",
+      "reader_more": "Technopolis examined survey-reported training outcomes from COST Training School participants, including skill development, application and networking. The analysis addresses European researcher training system effectiveness rather than individual course advertising. Its observational design cannot establish causal employment gains.",
+      "deep_analysis": {
+        "work_kind": "research study / analytical report",
+        "research_question": "A commissioned survey evaluates skills, professional networks and career relevance of COST Training Schools for young researchers.",
+        "main_finding": "The evaluation documents perceived skills development and collaboration-network outcomes among COST Training School participants.",
+        "method_or_basis": "Technopolis commissioned impact-assessment report for COST Association, with participant survey, group comparisons and analyses of reported skills/careers.",
+        "qualification": "Survey-based retrospective outcomes are self-reported and should not be interpreted as experimentally identified causal impacts.",
+        "radar_relevance": "European researcher workforce and transnational scientific collaboration are central R&I-system variables.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.workforce_quality",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Technopolis Group for COST Association",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Survey-based retrospective outcomes are self-reported and should not be interpreted as experimentally identified causal impacts.",
+          "text": "The evaluation documents perceived skills development and collaboration-network outcomes among COST Training School participants.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/ene.70804",
+      "source_hash": "c9000032",
+      "identity_hash": "a559e6a2e23d7bbb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "access_limited",
+            "note": "Supplied https://doi.org/10.1111/ene.70804 was a syndicated redirect, paywall or inaccessible link; matching substantive work checked using the cited alternate source."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Read matching substantive primary material: https://pmc.ncbi.nlm.nih.gov/articles/PMC13757343/; title and organisation matched assignment, with body evidence rather than headline alone."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13757343/",
+            "title": "Corrias et al., The CoMPaSS-NMD Atlas Platform, European Journal of Neurology (2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. PDF excerpt was supplied with the package."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Potential Route A3: documented cross-border multimodal research data infrastructure; connection is to sector-specific health R&I rather than the EU research system broadly."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CoMPaSS-NMD harmonises cross-border clinical research data",
+      "reader_what": "An EU-linked consortium describes a governed multimodal data platform for hereditary neuromuscular disease research.",
+      "reader_why": "Potential transferable European health research data infrastructure and research collaboration; narrower than system-wide infrastructure evidence.",
+      "reader_more": "The article details secure governance, harmonised prospective data entry, traceability and multimodal data integration. It supports research collaboration and future AI-based patient stratification. Clinical validity and interoperability at scale remain under evaluation, making its cross-sector Radar value borderline.",
+      "deep_analysis": {
+        "work_kind": "research study / analytical report",
+        "research_question": "An EU-linked consortium describes a governed multimodal data platform for hereditary neuromuscular disease research.",
+        "main_finding": "The CoMPaSS-NMD Atlas has created a harmonised research data platform that could support future AI-based stratification in hereditary neuromuscular disorders.",
+        "method_or_basis": "Open-access original research article reporting the Atlas data architecture, governance design and technical validation.",
+        "qualification": "The platform is a research infrastructure for a specific disease field; clinical stratification benefits are prospective, with validation ongoing.",
+        "radar_relevance": "Potential transferable European health research data infrastructure and research collaboration; narrower than system-wide infrastructure evidence.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "health.data_infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CoMPaSS-NMD research consortium",
+            "class": "university_group"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The platform is a research infrastructure for a specific disease field; clinical stratification benefits are prospective, with validation ongoing.",
+          "text": "The CoMPaSS-NMD Atlas has created a harmonised research data platform that could support future AI-based stratification in hereditary neuromuscular disorders.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMimgFBVV95cUxOcnV6Z1NtSzlGTWp0ZnVxTjBKbUF3U011RmtiMDRFcmNNbFU2LTltRmViZHUtbjFjSWJVdGw0ckpmWUZ3WVNfbWFEUi13NkVoVC1TaXNFVkdDRnNPZGh3S0NsaEt2WU95RnRrOXZvbFRtTTk2Y2JtVFVpbHFMOVhheE9fWVZrSWZuUV9FUkYyNm5WR3pCWm9VdEZn?oc=5",
+      "source_hash": "0e5d9cb7",
+      "identity_hash": "b6d65a9a226a266b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied https://news.google.com/rss/articles/CBMimgFBVV95cUxOcnV6Z1NtSzlGTWp0ZnVxTjBKbUF3U011RmtiMDRFcmNNbFU2LTltRmViZHUtbjFjSWJVdGw0ckpmWUZ3WVNfbWFEUi13NkVoVC1TaXNFVkdDRnNPZGh3S0NsaEt2WU95RnRrOXZvbFRtTTk2Y2JtVFVpbHFMOVhheE9fWVZrSWZuUV9FUkYyNm5WR3pCWm9VdEZn?oc=5 was a syndicated redirect, paywall or inaccessible link; matching substantive work checked using the cited alternate source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read matching substantive primary material: https://live.euronext.com/en/financial-news/frances-ovhcloud-launches-ai-cloud-products-hosted-europe; title and organisation matched assignment, with body evidence rather than headline alone."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "trusted_press_reporting",
+            "url": "https://live.euronext.com/en/financial-news/frances-ovhcloud-launches-ai-cloud-products-hosted-europe",
+            "title": "Reuters syndication: France’s OVHcloud launches AI cloud products hosted in Europe (19 November 2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. Verified against the linked source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "Route C: dateable launch of EU-hosted AI cloud offerings with direct European AI service-infrastructure and supply-diversification implications."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "OVHcloud launches Europe-hosted AI services",
+      "reader_what": "France-based OVHcloud announced a new portfolio of AI cloud products hosted in Europe.",
+      "reader_why": "Direct EU digital infrastructure and AI industry capability development.",
+      "reader_more": "The company introduced European-hosted AI cloud offerings as an alternative to major foreign cloud providers. The news concerns actual commercial service availability, not a measured increase in Europe’s own chip or data-centre capacity. Competitive gains are not demonstrated.",
+      "deep_analysis": {
+        "work_kind": "current policy or technology development",
+        "research_question": "France-based OVHcloud announced a new portfolio of AI cloud products hosted in Europe.",
+        "main_finding": "OVHcloud launched an expanded AI cloud product portfolio hosted in Europe on 19 November 2026.",
+        "method_or_basis": "Reuters reporting on OVHcloud announcement, corroborated by distributed news syndication.",
+        "qualification": "Vendor announced product availability; no independent evidence of market-share gains or physical compute capacity expansion.",
+        "radar_relevance": "Direct EU digital infrastructure and AI industry capability development.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "OVHcloud",
+            "class": "company"
+          },
+          "mechanism": "sells",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-19",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Vendor announced product availability; no independent evidence of market-share gains or physical compute capacity expansion.",
+          "text": "OVHcloud launched an expanded AI cloud product portfolio hosted in Europe on 19 November 2026.",
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}
