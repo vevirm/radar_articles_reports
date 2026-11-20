@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-11-19T06:35:54Z",
+  "generated_at": "2026-11-20T09:50:04Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -338709,8 +338709,192 @@
       "deep_scan_package_id": "worker-a-20261119T052550Z-242bf1005dd3",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.biotechadv.2026.109031": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e3cac5b1",
+      "identity_hash": "a981c3c47bc0eeff",
+      "reader_title": "IBISBA biotechnology infrastructure needs interoperable data",
+      "reader_what": "A biotechnology infrastructure analysis maps why harmonised digital data and workflows matter for European biomanufacturing.",
+      "reader_why": "Direct evidence about European research-infrastructure governance, collaboration and digital research capacity.",
+      "reader_more": "The paper examines IBISBA, a distributed European biotechnology research infrastructure, and its digitalisation strategy. It highlights interoperability, integrated data, and research workflows as enabling conditions. The article is an analysis of infrastructure requirements, not evidence that industrial performance already improved.",
+      "deep_analysis": {
+        "work_kind": "research study / analytical report",
+        "research_question": "A biotechnology infrastructure analysis maps why harmonised digital data and workflows matter for European biomanufacturing.",
+        "main_finding": "IBISBA researchers identify harmonised interoperable digital services as a prerequisite for scalable collaboration and biomanufacturing research.",
+        "method_or_basis": "Accepted journal manuscript; conceptual infrastructure analysis of IBISBA digital workstreams, partner organisations and data services.",
+        "qualification": "The paper proposes and explains enabling architecture; it does not establish that proposed competitiveness benefits were achieved.",
+        "radar_relevance": "Direct evidence about European research-infrastructure governance, collaboration and digital research capacity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "access_limited",
+            "note": "Supplied https://doi.org/10.1016/j.biotechadv.2026.109031 was a syndicated redirect, paywall or inaccessible link; matching substantive work checked using the cited alternate source."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Read matching substantive primary material: https://content.openalex.org/works/W7214064769.pdf; title and organisation matched assignment, with body evidence rather than headline alone."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_pdf_excerpt",
+            "url": "https://content.openalex.org/works/W7214064769.pdf",
+            "title": "Metcalfe et al., IBISBA: Digitalisation to empower biotechnology and drive biomanufacturing, Biotechnology Advances (2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. PDF excerpt was supplied with the package."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route A3: peer-reviewed analysis of the European IBISBA biotechnology research infrastructure and its cross-institutional digital data/protocol needs."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-20T09:50:02Z",
+      "deep_scan_package_id": "worker-a-20261120T082305Z-2e5b9abb462e",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "IBISBA research-infrastructure authors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09-23",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The paper proposes and explains enabling architecture; it does not establish that proposed competitiveness benefits were achieved.",
+          "text": "IBISBA researchers identify harmonised interoperable digital services as a prerequisite for scalable collaboration and biomanufacturing research.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1016/j.biotechadv.2026.109031",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:a981c3c47bc0eeff:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMimgFBVV95cUxOcnV6Z1NtSzlGTWp0ZnVxTjBKbUF3U011RmtiMDRFcmNNbFU2LTltRmViZHUtbjFjSWJVdGw0ckpmWUZ3WVNfbWFEUi13NkVoVC1TaXNFVkdDRnNPZGh3S0NsaEt2WU95RnRrOXZvbFRtTTk2Y2JtVFVpbHFMOVhheE9fWVZrSWZuUV9FUkYyNm5WR3pCWm9VdEZn?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "0e5d9cb7",
+      "identity_hash": "b6d65a9a226a266b",
+      "reader_title": "OVHcloud launches Europe-hosted AI services",
+      "reader_what": "France-based OVHcloud announced a new portfolio of AI cloud products hosted in Europe.",
+      "reader_why": "Direct EU digital infrastructure and AI industry capability development.",
+      "reader_more": "The company introduced European-hosted AI cloud offerings as an alternative to major foreign cloud providers. The news concerns actual commercial service availability, not a measured increase in Europe’s own chip or data-centre capacity. Competitive gains are not demonstrated.",
+      "deep_analysis": {
+        "work_kind": "current policy or technology development",
+        "research_question": "France-based OVHcloud announced a new portfolio of AI cloud products hosted in Europe.",
+        "main_finding": "OVHcloud launched an expanded AI cloud product portfolio hosted in Europe on 19 November 2026.",
+        "method_or_basis": "Reuters reporting on OVHcloud announcement, corroborated by distributed news syndication.",
+        "qualification": "Vendor announced product availability; no independent evidence of market-share gains or physical compute capacity expansion.",
+        "radar_relevance": "Direct EU digital infrastructure and AI industry capability development.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied https://news.google.com/rss/articles/CBMimgFBVV95cUxOcnV6Z1NtSzlGTWp0ZnVxTjBKbUF3U011RmtiMDRFcmNNbFU2LTltRmViZHUtbjFjSWJVdGw0ckpmWUZ3WVNfbWFEUi13NkVoVC1TaXNFVkdDRnNPZGh3S0NsaEt2WU95RnRrOXZvbFRtTTk2Y2JtVFVpbHFMOVhheE9fWVZrSWZuUV9FUkYyNm5WR3pCWm9VdEZn?oc=5 was a syndicated redirect, paywall or inaccessible link; matching substantive work checked using the cited alternate source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read matching substantive primary material: https://live.euronext.com/en/financial-news/frances-ovhcloud-launches-ai-cloud-products-hosted-europe; title and organisation matched assignment, with body evidence rather than headline alone."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "trusted_press_reporting",
+            "url": "https://live.euronext.com/en/financial-news/frances-ovhcloud-launches-ai-cloud-products-hosted-europe",
+            "title": "Reuters syndication: France’s OVHcloud launches AI cloud products hosted in Europe (19 November 2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. Verified against the linked source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "Route C: dateable launch of EU-hosted AI cloud offerings with direct European AI service-infrastructure and supply-diversification implications."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-20T09:50:04Z",
+      "deep_scan_package_id": "worker-a-20261120T082305Z-2e5b9abb462e",
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "OVHcloud",
+            "class": "company"
+          },
+          "mechanism": "sells",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-19",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Vendor announced product availability; no independent evidence of market-share gains or physical compute capacity expansion.",
+          "text": "OVHcloud launched an expanded AI cloud product portfolio hosted in Europe on 19 November 2026.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMimgFBVV95cUxOcnV6Z1NtSzlGTWp0ZnVxTjBKbUF3U011RmtiMDRFcmNNbFU2LTltRmViZHUtbjFjSWJVdGw0ckpmWUZ3WVNfbWFEUi13NkVoVC1TaXNFVkdDRnNPZGh3S0NsaEt2WU95RnRrOXZvbFRtTTk2Y2JtVFVpbHFMOVhheE9fWVZrSWZuUV9FUkYyNm5WR3pCWm9VdEZn?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:b6d65a9a226a266b:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-11-19T06:35:54Z"
+  "claims_updated_at": "2026-11-20T09:50:04Z"
 }
