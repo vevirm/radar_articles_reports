@@ -7,39 +7,39 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **4067** (Main **2141** + Historical **1926**)
-- Automatic queue still needing V2 verification: **79** (Main **24** + Historical **55**)
-- Currently assigned to workers: **79** (Main **24** + Historical **55**)
+- Automatic queue still needing V2 verification: **116** (Main **56** + Historical **60**)
+- Currently assigned to workers: **107** (Main **56** + Historical **51**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **9**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261119T064530Z-ff8e4e423fd3`
-- Assigned unresolved records: **32**
-  1. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies — recovery attempt 2/3
-  2. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions — recovery attempt 2/3
-  3. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall? — recovery attempt 2/3
-  4. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors — recovery attempt 2/3
-  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNdlhCQ3pvUjhsRzZzdDJTckhTM1NiVUtWcmVlSkVUOU9jLWQwdlVSLVBOUy1zY05oZ0EyUXpZOFVreXU3YWFQbm9Qd1B1OFYzZDBNZ1pzRmJlT3hGcGhscUM3OHJMdXQxUkRhWnhJaThGQllXSXdMeUxjTFJ4cXA4RWRfYTdSR1dia0JmSzhKMzRJam9TdGhQeHc2cnVlN2o1YVZEbkp6UVQtM1ZzQ0E?oc=5` — France to spearhead new AI defence resilience centre with partner nations
-  6. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system — recovery attempt 2/3
-  7. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQb0dGaE5ETF80SXdTQlVXU0M4Sm9wRXZvWjkwREFIbHhPOTg5Skw3Y1hwREFHcG9yM2NTMnRJamxGSGxsczVoRmV3MDVkOGxjbjNSVm9TbmVZRkh2eGhrY2Q1OVlpNUJkTnJVcDBmX2NIMU5UOVRwV2Juay1Hb2dxencySEk?oc=5` — EU renews push for global AI rules after midterms weaken Donald Trump — recovery attempt 2/3
-  8. `link:https://doi.org/10.1080/09654313.2026.2759879` — Regional innovation systems beyond innovation: configurational evidence from European regions — recovery attempt 2/3
-  - … plus 24 more in the package manifest
+- Current package: `worker-a-20261120T082305Z-2e5b9abb462e`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1016/j.biotechadv.2026.109031` — IBISBA: Digitalisation to empower biotechnology and drive biomanufacturing
+  2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC149071` — Advanced materials to reduce critical raw material dependencies in European industry
+  3. `link:https://doi.org/10.1080/09662839.2026.2750174` — Small states, big tech: exploring small states' role in enacting European digital sovereignty
+  4. `link:https://www.cost.eu/uploads/2026/11/COST-Targeted-impact-assessment-on-skill-development-among-young-researchers-October-2026.pdf` — Targeted impact assessment on skill development among young researchers
+  5. `link:https://doi.org/10.1111/ene.70804` — The CoMPaSS ‐ NMD Atlas Platform: A Secure Multimodal Infrastructure for Harmonized Data Collection, Exploration, and Future Artificial Intelligence–Driven Stratification in Hereditary Neuromuscular Disorders
+  6. `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxOcnV6Z1NtSzlGTWp0ZnVxTjBKbUF3U011RmtiMDRFcmNNbFU2LTltRmViZHUtbjFjSWJVdGw0ckpmWUZ3WVNfbWFEUi13NkVoVC1TaXNFVkdDRnNPZGh3S0NsaEt2WU95RnRrOXZvbFRtTTk2Y2JtVFVpbHFMOVhheE9fWVZrSWZuUV9FUkYyNm5WR3pCWm9VdEZn?oc=5` — France's OVHcloud launches AI cloud products hosted in Europe
+  7. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNNXh1Y0lMNWVuTFphdlBpbTFhLWIyb2VDN0k2Z1NXVWYxTXZQc3lxWjYyQ2xpZHI4anh2VkxpQndQbjdvUDJkMl8xU2ZKMUk2OHRnaU5kN3c5R05JeVZZVHRWWlRGQlh5WkNmR1pjLUhBX2x2Qm9sRERhckxiLWhYLTU2VFl5ZlRwejUyM2VhV3BtNERuaFIxWGF1aHpTX2k4b2dDWFJjQXFoRjVZWHpkUGxzMVl4SlZwbkhHcS1tYnUtbWxKUmc?oc=5` — MEPs back new rules to encourage EU competitiveness in space
+  8. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNaEFiaE96LWhURTRLa1dLS1FpZThfVjNfNmRhUk5mTkl3RXJUd1J5bWpmc0xUeVhDMy1NbldqUFJHRmtEQldhTFU3VXJmNXVCM0l6cnkzanR2T19GMGkzV0FxWE52bHNCdEpnS29WSloxQ1RudVc1d0ZfRjZISTcwdDFuazZ1MmttZERibVRoUzJLUlh5RUdEMFZ5blFsazBOdG5IaTVCVklzWHBuNGw4UVZMdnJsc244Mm4wRUlzRTJZSUo1bWc?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Spravodajstvo | Európsky parlament
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261119T064542Z-8e2dda2f0c26`
-- Assigned unresolved records: **12**
-  1. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWkh2U0ZTM0NsazdmeVItUEF5R2JXS0VkeHFZLV9IdFZxNEpfdmhZSmNpQzRsbWE2bDJZU25LV25WZ3l5S2xibUgzMzhsdU9RR29kQ1FMbW5xN1lFcFVFU2ZveElib09TUG55VjFDVU41Vl83M1V3R0pyUnYzSFRFbzVBS3JnbVllQktRdDZKN0t3N3RWWHB6R1d5ZE9BdGFUSl9GN29GY2VSNTlyUlM0M09CTTdmbG5GUEpz?oc=5` — Funding Radar: Horizon Europe’s latest €111M funding call for AI
-  2. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQS21MX1FsMEVTQWhZVEJkZFZVeXlBVDJpNTBWSWdoNWFUNF96enh3Mi1pRTZacU9OLU15M1NPZXljU3A3cGhTdGd2VkpnSEZIYjJBZlFSeWNUMlBtRFJzcll1THVNcUtsX0lsdVZZTkxyVE1JdUZzcVlkWTJIb0hyLXhRbDIwcWN5WE9zdS1SdDBwc3NIWE1fZEpxV0FveEZDeGY4WWd1bnpCU2VqUU5VN1NhQ1NjckI3?oc=5` — Should Europe triple or freeze its data centre capacity?
-  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQbnJickJXdlY1WlM3ZVQzQm5BNG0yVFNxNmdNQU1wZjQ0Y3Vybk9rUE0wWXZUZ3NHVW9OQ3dHQlBaOTFqdGJzNmtqMkZfcWhIQjVrSjJDZ19iWDN4T1RtOEZtRXdTWm1DVTV6STctRVdfcjJ5SWVTVXdjaWJiZWw2MmNXNFZLYlIzM2hsLXE3S0cwTkNINTd6WU1USzNnSncxR3B2VTJMdUNUd1pKNENlNy1CbWdaelRTMTl5QlhfR0dUQQ?oc=5` — ‘Time for action’: Germany and 10 other EU countries urge new copyright rules in the AI age
-  4. `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxNbVZaUFM3aEo1MTdYSW4yTXpMM3lpcnZZUm51M2xQakJ6OHVsUE5OM2trSDNybG9kdUMxSFY5NjhvVmlfeE82UzJXdGxhMWhBUzZ3eUdjaVNPWkZQTzZZWGJLNmhnd1RGWmZPTkZzYnEwVjFhMU8zbFZaOWVGTC1oZlFxOXdpdDhJemdSSkhvMnlSTmY4WURKekp3?oc=5` — Irish regulator stops X training AI with data gathered by agents
-  5. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGp1VWlXU1NQV3JJSjMxemNocEtLUGtwVy1RM1U1TzJoUUZQaXRtejBjU0hHUnYtT2VmSjVZTi1EWjFUdk4yYkl2M1hpbW5yMW8xdVJDc1VWbTNSVGljU2RuejNoOVM1aUtnMlNScnpKRlVyRWt5Y0ZmaGVqaHYzTGdlVXFSMFBiTjhnUURERzhBTE9WZ1FhMDFYYk5hTXBDUVVVaDY2eF91MVY2NlpmQnNmY2Q?oc=5` — Malaysia Inks Deal With France to Develop Critical Minerals
-  6. `link:https://data.consilium.europa.eu/doc/document/WK-14980-2026-INIT/en/pdf` — Handling and further distribution are under the sole responsibility of community members.
-  7. `link:https://news.google.com/rss/articles/CBMiggJBVV95cUxQcGtNR3BZdnFENmVPWGtDTlNUQTBxemVQczVpbTljdG5hRnFhaGpyU3U2aGdhaWg2Y3BnLWdfTl83dkhTZDhLRVJtZ3BHTTloNVdBS2xrcVFvSWVSbEhpN1pQQVkxeXBtaVlweTFJeTBaZWhNUzNjSHBrai1pTGN4eDhLWWd2dG1TSjNuNVZkTU5maEc3R2hJZ1A5ejMyTnRqWE0zU3A5ajRiOWxHN0FMVndHUEk0QWZfVFZTUHRDSjV5Y1lCRnc2MjNYRVRFZS1tRTc3UjhYeTU1Z2x0LU9ORGo5QXBCb1N2TGxqbkV4VHlQdnBsNjFlUzIyUWJ2TzZBTVE?oc=5` — Grids package: Council and Parliament agree to streamline permitting for a faster clean energy transition - Council, European Union
-  8. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxQNTlPazBvWjF0VU43TU0xV3QxX3JhVVN5U3BoQW0wRTZNVnVpMm9LbEM0bFppYlhKc1NKNFVLcXg4U3V0cXZJU0hIMWloWjBCSVlfakdSV1V2b2ZMUWxSOWVXNzhQZTRlWmNMenU5MUJPWmhLY2RMRENDcmU0UlJTcjlIcU95NVlvakN6VjVpSGg4SjFnU19JTTNCcncyZkJxUVNsYnkwdUZnaks0U2hwSg?oc=5` — Dutch resist ‘unacceptable’ US bid to tighten semiconductor export controls
-  - … plus 4 more in the package manifest
+- Current package: `worker-b-20261120T082312Z-aa0f96fad0cf`
+- Assigned unresolved records: **36**
+  1. `historical:id:1e89470623979201` — European SMEs’ engagement in open innovation When the important thing is to win and not just to participate, what should innovation policy do?
+  2. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies — recovery attempt 2/3
+  3. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions — recovery attempt 2/3
+  4. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall? — recovery attempt 2/3
+  5. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors — recovery attempt 2/3
+  6. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNdlhCQ3pvUjhsRzZzdDJTckhTM1NiVUtWcmVlSkVUOU9jLWQwdlVSLVBOUy1zY05oZ0EyUXpZOFVreXU3YWFQbm9Qd1B1OFYzZDBNZ1pzRmJlT3hGcGhscUM3OHJMdXQxUkRhWnhJaThGQllXSXdMeUxjTFJ4cXA4RWRfYTdSR1dia0JmSzhKMzRJam9TdGhQeHc2cnVlN2o1YVZEbkp6UVQtM1ZzQ0E?oc=5` — France to spearhead new AI defence resilience centre with partner nations
+  7. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system — recovery attempt 2/3
+  8. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWkh2U0ZTM0NsazdmeVItUEF5R2JXS0VkeHFZLV9IdFZxNEpfdmhZSmNpQzRsbWE2bDJZU25LV25WZ3l5S2xibUgzMzhsdU9RR29kQ1FMbW5xN1lFcFVFU2ZveElib09TUG55VjFDVU41Vl83M1V3R0pyUnYzSFRFbzVBS3JnbVllQktRdDZKN0t3N3RWWHB6R1d5ZE9BdGFUSl9GN29GY2VSNTlyUlM0M09CTTdmbG5GUEpz?oc=5` — Funding Radar: Horizon Europe’s latest €111M funding call for AI
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
