@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4069** (Main **2143** + Historical **1926**)
-- Automatic queue still needing V2 verification: **114** (Main **54** + Historical **60**)
-- Currently assigned to workers: **107** (Main **54** + Historical **53**)
+- Authoritative V2 verified: **4071** (Main **2144** + Historical **1927**)
+- Automatic queue still needing V2 verification: **116** (Main **53** + Historical **63**)
+- Currently assigned to workers: **107** (Main **53** + Historical **54**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
-- Automatic queue pending and not yet assigned: **7**
+- Automatic queue pending and not yet assigned: **9**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261120T095945Z-b0f65712180e`
+- Current package: `worker-a-20261120T110635Z-f38fd9da432a`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNNXh1Y0lMNWVuTFphdlBpbTFhLWIyb2VDN0k2Z1NXVWYxTXZQc3lxWjYyQ2xpZHI4anh2VkxpQndQbjdvUDJkMl8xU2ZKMUk2OHRnaU5kN3c5R05JeVZZVHRWWlRGQlh5WkNmR1pjLUhBX2x2Qm9sRERhckxiLWhYLTU2VFl5ZlRwejUyM2VhV3BtNERuaFIxWGF1aHpTX2k4b2dDWFJjQXFoRjVZWHpkUGxzMVl4SlZwbkhHcS1tYnUtbWxKUmc?oc=5` — MEPs back new rules to encourage EU competitiveness in space
-  2. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNaEFiaE96LWhURTRLa1dLS1FpZThfVjNfNmRhUk5mTkl3RXJUd1J5bWpmc0xUeVhDMy1NbldqUFJHRmtEQldhTFU3VXJmNXVCM0l6cnkzanR2T19GMGkzV0FxWE52bHNCdEpnS29WSloxQ1RudVc1d0ZfRjZISTcwdDFuazZ1MmttZERibVRoUzJLUlh5RUdEMFZ5blFsazBOdG5IaTVCVklzWHBuNGw4UVZMdnJsc244Mm4wRUlzRTJZSUo1bWc?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Spravodajstvo | Európsky parlament
-  3. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxQaDR0X2tXd3dxZDk5NVowNTU4QTVmbEdjNFhOSzNPbGwxeWlhWEM1bFNicnNOU18weWYyUmZJdVphSFZsUHJyTEJnbk1feFFqMXJiLThiNndSeklQdnhRRUMwOWlWUHNlNG92TXVETVczY2NpLVhMVVo2TEpwSDdKdzVSVE9ZWW5hV1BoU2thM1lPMkpwOWhmMUg2d29KREVkc1BQX2VpbmowU0o1RldkNWpKUVUwRjBlcG9LQklWa0F1ckUwM1E?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Hírek | Európai Parlament
-  4. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxQTFQwVDdMeXZnS0ZfWU44MHRHbGkyTVdhNkUxRnZhRVdENWFFU0VjZC1zZTE0NEY5SU5IS2E1bzIydWljS0kwRDc4WEZDNUdUMUVmazJOT1Z4a3k5aVRhWUZnTzlCRDJtaHlteDNBNFFqVXhfXzAyMWNKM3VJX3RRVlJqQVBnTkUyMnR2amhyd2E3ck1uTnVmMXpKbG1GdHdrNXE1TEpjckV0c3pVZVFIVThER1VxbjBIaVBxS0ZvNXU5c25hMGc?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Vijesti | Europski parlament
-  5. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOUlBrTEl6cjJiS1BnZC1NUlFzZ1paTnJmR0htckxrTXJFeUMtLXFaMVJvNERzeVJ2RUs0WG84R2pTa1F6UEhhSDdWR3l4R0U4UWs4SDlBbXl0MDNiNk96YndwTjI5T013NnZheHFFWUM2bGlweEFvTEJTcTJ6SnU2UGpZd3VHS29DdVZwT1NhX3RHNnhyLTU1cVdlZFNPYmVvMWhvMDhQLUxMNjg2RlJHdEs1XzU4NmdyTVp1NVVIZUE1bndYNkE?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Zpravodajství | Evropský parlament
-  6. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNNnBQM25XQkJrbm1fMlR4ODhmWENpczBWb1dvRjVWdnlkdlVFbTdlUy1UaS11QVhvTmZLX3ZuU0thMEd4OGZDZ3ZEbW9iazJncjdFU3hRN3hkMnRMLWxoNEU2dGpQOGZTaXRRTlVueUg4UzRYNkpUYXVaSmYyaDNVazNHd3owN2dBYzZ1R0dXVHc3dDJmVDVfakhwXy1MeXAyZmdoSHhxUjZXRXpiM18zOTVOVmp3akFNREVnYUsxbXJkaFllUHc?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Aktualności | Parlament Europejski
-  7. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxPNnlGTkZXcEQ3d2gwR0E5OHpJMXl6eDdvZlJyQllMZTJRT2l6TTNqR3RZcXhXZUFTOC1vdm41Z0VCOU9fblV0dVZscjlKNjRpZ1FQOXZjNHRnd240ejM4SWFrUWl4Q1hra0NZOGljbjJ2YXZIaHZ5b2FCT2d4ODdZMHJRam1kTEFJR0JFM3poTzZITE52Yy1VR1NZSkNobmx4MDBqOHpwcmJJdjVQNmVUNlIwVTRydW51NURLN3Rxd0ZsUUJNVUE?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Atualidade | Parlamento Europeu
-  8. `link:https://news.google.com/rss/articles/CBMipwFBVV95cUxNQ2FuVDFlVnk2V2ZQX1cwZDZTVVgtNGcyVkRjdWVPa0dWMnFUVWkxVjU0MmJCZEhqZTNURWtRUlpWTFpHYTJDUS1TckpwbDFOYWl3WjR5Z0hyR0xMRVNQbXNZOWw1dHUtWDMwUl9VTVJRSUVfOWh6cjd1eVBpY3hySU9zbnlvZ2V1UFpBSlFraWZIMTAxTGtXQnVYaGhNLWRkRVhmaE96UQ?oc=5` — EU Commission confirms it was targeted in cyberattack through use of AI tools
+  1. `historical:id:aacd22ccdce7fbfa` — Navigating industrial policy | Bank for International Settlements
+  2. `historical:id:667c5c4d16bf5695` — Research on bibliometrics and the World’s leading universities
+  3. `historical:id:0f5efd7598fb9dce` — An alternative planetary future? Digital sovereignty frameworks and the decolonial option
+  4. `historical:id:11645886cd54286d` — How Discriminative Artificial Intelligence Drives Scenario Planning: A Systematic Literature Review and Research Agenda
+  5. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies — recovery attempt 3/3
+  6. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions — recovery attempt 3/3
+  7. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall? — recovery attempt 3/3
+  8. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors — recovery attempt 3/3
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261120T095952Z-a8baea4e1a2a`
+- Current package: `worker-b-20261120T110643Z-dd564bbb07a1`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies — recovery attempt 2/3
-  2. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions — recovery attempt 2/3
-  3. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall? — recovery attempt 2/3
-  4. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors — recovery attempt 2/3
-  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNdlhCQ3pvUjhsRzZzdDJTckhTM1NiVUtWcmVlSkVUOU9jLWQwdlVSLVBOUy1zY05oZ0EyUXpZOFVreXU3YWFQbm9Qd1B1OFYzZDBNZ1pzRmJlT3hGcGhscUM3OHJMdXQxUkRhWnhJaThGQllXSXdMeUxjTFJ4cXA4RWRfYTdSR1dia0JmSzhKMzRJam9TdGhQeHc2cnVlN2o1YVZEbkp6UVQtM1ZzQ0E?oc=5` — France to spearhead new AI defence resilience centre with partner nations
-  6. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system — recovery attempt 2/3
-  7. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWkh2U0ZTM0NsazdmeVItUEF5R2JXS0VkeHFZLV9IdFZxNEpfdmhZSmNpQzRsbWE2bDJZU25LV25WZ3l5S2xibUgzMzhsdU9RR29kQ1FMbW5xN1lFcFVFU2ZveElib09TUG55VjFDVU41Vl83M1V3R0pyUnYzSFRFbzVBS3JnbVllQktRdDZKN0t3N3RWWHB6R1d5ZE9BdGFUSl9GN29GY2VSNTlyUlM0M09CTTdmbG5GUEpz?oc=5` — Funding Radar: Horizon Europe’s latest €111M funding call for AI
-  8. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQb0dGaE5ETF80SXdTQlVXU0M4Sm9wRXZvWjkwREFIbHhPOTg5Skw3Y1hwREFHcG9yM2NTMnRJamxGSGxsczVoRmV3MDVkOGxjbjNSVm9TbmVZRkh2eGhrY2Q1OVlpNUJkTnJVcDBmX2NIMU5UOVRwV2Juay1Hb2dxencySEk?oc=5` — EU renews push for global AI rules after midterms weaken Donald Trump — recovery attempt 2/3
+  1. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system — recovery attempt 2/3
+  2. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWkh2U0ZTM0NsazdmeVItUEF5R2JXS0VkeHFZLV9IdFZxNEpfdmhZSmNpQzRsbWE2bDJZU25LV25WZ3l5S2xibUgzMzhsdU9RR29kQ1FMbW5xN1lFcFVFU2ZveElib09TUG55VjFDVU41Vl83M1V3R0pyUnYzSFRFbzVBS3JnbVllQktRdDZKN0t3N3RWWHB6R1d5ZE9BdGFUSl9GN29GY2VSNTlyUlM0M09CTTdmbG5GUEpz?oc=5` — Funding Radar: Horizon Europe’s latest €111M funding call for AI
+  3. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQb0dGaE5ETF80SXdTQlVXU0M4Sm9wRXZvWjkwREFIbHhPOTg5Skw3Y1hwREFHcG9yM2NTMnRJamxGSGxsczVoRmV3MDVkOGxjbjNSVm9TbmVZRkh2eGhrY2Q1OVlpNUJkTnJVcDBmX2NIMU5UOVRwV2Juay1Hb2dxencySEk?oc=5` — EU renews push for global AI rules after midterms weaken Donald Trump — recovery attempt 2/3
+  4. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQS21MX1FsMEVTQWhZVEJkZFZVeXlBVDJpNTBWSWdoNWFUNF96enh3Mi1pRTZacU9OLU15M1NPZXljU3A3cGhTdGd2VkpnSEZIYjJBZlFSeWNUMlBtRFJzcll1THVNcUtsX0lsdVZZTkxyVE1JdUZzcVlkWTJIb0hyLXhRbDIwcWN5WE9zdS1SdDBwc3NIWE1fZEpxV0FveEZDeGY4WWd1bnpCU2VqUU5VN1NhQ1NjckI3?oc=5` — Should Europe triple or freeze its data centre capacity?
+  5. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQbnJickJXdlY1WlM3ZVQzQm5BNG0yVFNxNmdNQU1wZjQ0Y3Vybk9rUE0wWXZUZ3NHVW9OQ3dHQlBaOTFqdGJzNmtqMkZfcWhIQjVrSjJDZ19iWDN4T1RtOEZtRXdTWm1DVTV6STctRVdfcjJ5SWVTVXdjaWJiZWw2MmNXNFZLYlIzM2hsLXE3S0cwTkNINTd6WU1USzNnSncxR3B2VTJMdUNUd1pKNENlNy1CbWdaelRTMTl5QlhfR0dUQQ?oc=5` — ‘Time for action’: Germany and 10 other EU countries urge new copyright rules in the AI age
+  6. `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxNbVZaUFM3aEo1MTdYSW4yTXpMM3lpcnZZUm51M2xQakJ6OHVsUE5OM2trSDNybG9kdUMxSFY5NjhvVmlfeE82UzJXdGxhMWhBUzZ3eUdjaVNPWkZQTzZZWGJLNmhnd1RGWmZPTkZzYnEwVjFhMU8zbFZaOWVGTC1oZlFxOXdpdDhJemdSSkhvMnlSTmY4WURKekp3?oc=5` — Irish regulator stops X training AI with data gathered by agents
+  7. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGp1VWlXU1NQV3JJSjMxemNocEtLUGtwVy1RM1U1TzJoUUZQaXRtejBjU0hHUnYtT2VmSjVZTi1EWjFUdk4yYkl2M1hpbW5yMW8xdVJDc1VWbTNSVGljU2RuejNoOVM1aUtnMlNScnpKRlVyRWt5Y0ZmaGVqaHYzTGdlVXFSMFBiTjhnUURERzhBTE9WZ1FhMDFYYk5hTXBDUVVVaDY2eF91MVY2NlpmQnNmY2Q?oc=5` — Malaysia Inks Deal With France to Develop Critical Minerals
+  8. `link:https://data.consilium.europa.eu/doc/document/WK-14980-2026-INIT/en/pdf` — Handling and further distribution are under the sole responsibility of community members.
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE

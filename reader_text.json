@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-11-20T09:50:04Z",
+  "generated_at": "2026-11-20T10:53:52Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -338893,8 +338893,192 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:1e89470623979201": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "2bea24ae",
+      "identity_hash": "636bc0c7ad9b31cb",
+      "reader_title": "EU SME grants may miss open-innovation leaders",
+      "reader_what": "A study finds selected EU SME Instrument grantees displayed less demanding open innovation than unfunded high-scoring peers.",
+      "reader_why": "Direct historical EU research/innovation funding effectiveness and programme selection system evidence.",
+      "reader_more": "The authors construct open-innovation engagement measures and compare funded SME Instrument applicants with Seal of Excellence firms in a selected digital SME sample. They report lower engagement on difficult open-innovation dimensions among awardees, contrary to the intended policy emphasis. Sample and operationalisation limitations prevent generalising to every EU grant cohort.",
+      "deep_analysis": {
+        "work_kind": "research study / analytical report",
+        "research_question": "A study finds selected EU SME Instrument grantees displayed less demanding open innovation than unfunded high-scoring peers.",
+        "main_finding": "In the study sample, funded SME Instrument awardees were less engaged in challenging open-innovation activities than similarly evaluated unfunded SMEs.",
+        "method_or_basis": "Original measure of difficult open-innovation dimensions; comparative analysis of European digital-sector SME Instrument grant recipients and Seal of Excellence companies.",
+        "qualification": "Exploratory selected digital SME sample; observational findings cannot establish that grant funding caused lower open-innovation engagement.",
+        "radar_relevance": "Direct historical EU research/innovation funding effectiveness and programme selection system evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "access_limited",
+            "note": "Supplied https://doi.org/10.1016/j.techfore.2019.119843 was a syndicated redirect, paywall or inaccessible link; matching substantive work checked using the cited alternate source."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Read matching substantive primary material: https://content.openalex.org/works/W2996170163.pdf; title and organisation matched assignment, with body evidence rather than headline alone."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_pdf_excerpt",
+            "url": "https://content.openalex.org/works/W2996170163.pdf",
+            "title": "De Marco, Martelli & Di Minin, European SMEs’ engagement in open innovation, Technological Forecasting and Social Change 152 (2020)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. PDF excerpt was supplied with the package."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route A3: peer-reviewed empirical study assessing targeting and selection outcomes of an EU SME research and innovation funding instrument."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-20T10:53:51Z",
+      "deep_scan_package_id": "worker-b-20261120T082312Z-aa0f96fad0cf",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "De Marco, Martelli and Di Minin",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2019-12-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Exploratory selected digital SME sample; observational findings cannot establish that grant funding caused lower open-innovation engagement.",
+          "text": "In the study sample, funded SME Instrument awardees were less engaged in challenging open-innovation activities than similarly evaluated unfunded SMEs.",
+          "confidence": "high",
+          "record_key": "historical:id:1e89470623979201",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:636bc0c7ad9b31cb:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNdlhCQ3pvUjhsRzZzdDJTckhTM1NiVUtWcmVlSkVUOU9jLWQwdlVSLVBOUy1zY05oZ0EyUXpZOFVreXU3YWFQbm9Qd1B1OFYzZDBNZ1pzRmJlT3hGcGhscUM3OHJMdXQxUkRhWnhJaThGQllXSXdMeUxjTFJ4cXA4RWRfYTdSR1dia0JmSzhKMzRJam9TdGhQeHc2cnVlN2o1YVZEbkp6UVQtM1ZzQ0E?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "2cac31aa",
+      "identity_hash": "bf6fa605d38152f9",
+      "reader_title": "France announces joint AI defence resilience centre",
+      "reader_what": "France announced a multinational defence AI resilience centre intended to develop testing and security collaboration.",
+      "reader_why": "Direct cross-border European advanced-AI governance, research security and dual-use technology collaboration.",
+      "reader_more": "The initiative brings partner governments together around safeguarding military AI, responding to risks and sharing technical expertise. It is a new announced centre rather than a completed operational institution. Claims about eventual impact or participant contributions remain prospective.",
+      "deep_analysis": {
+        "work_kind": "current policy or technology development",
+        "research_question": "France announced a multinational defence AI resilience centre intended to develop testing and security collaboration.",
+        "main_finding": "France announced plans to spearhead an AI defence resilience centre with international partners.",
+        "method_or_basis": "Contemporaneous Euronews reporting of France-led defence AI initiative and government statements.",
+        "qualification": "The centre was announced, not yet proven operational or effective; partner commitments and launch timelines remain subject to implementation.",
+        "radar_relevance": "Direct cross-border European advanced-AI governance, research security and dual-use technology collaboration.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied https://news.google.com/rss/articles/CBMirgFBVV95cUxNdlhCQ3pvUjhsRzZzdDJTckhTM1NiVUtWcmVlSkVUOU9jLWQwdlVSLVBOUy1zY05oZ0EyUXpZOFVreXU3YWFQbm9Qd1B1OFYzZDBNZ1pzRmJlT3hGcGhscUM3OHJMdXQxUkRhWnhJaThGQllXSXdMeUxjTFJ4cXA4RWRfYTdSR1dia0JmSzhKMzRJam9TdGhQeHc2cnVlN2o1YVZEbkp6UVQtM1ZzQ0E?oc=5 was a syndicated redirect, paywall or inaccessible link; matching substantive work checked using the cited alternate source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read matching substantive primary material: https://www.euronews.com/2026/11/12/france-to-spearhead-new-ai-defence-resilience-centre-with-partner-nations; title and organisation matched assignment, with body evidence rather than headline alone."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "trusted_press_reporting",
+            "url": "https://www.euronews.com/2026/11/12/france-to-spearhead-new-ai-defence-resilience-centre-with-partner-nations",
+            "title": "Euronews, France to spearhead new AI defence resilience centre with partner nations (12 November 2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed title and authors/issuing organisation and read substantive source body. Verified against the linked source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "Route C: France announced cross-country institutional collaboration on defence AI safety/resilience, a new research-and-technology governance capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-20T10:53:52Z",
+      "deep_scan_package_id": "worker-b-20261120T082312Z-aa0f96fad0cf",
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "French government and partner nations",
+            "class": "member_state"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-12",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The centre was announced, not yet proven operational or effective; partner commitments and launch timelines remain subject to implementation.",
+          "text": "France announced plans to spearhead an AI defence resilience centre with international partners.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNdlhCQ3pvUjhsRzZzdDJTckhTM1NiVUtWcmVlSkVUOU9jLWQwdlVSLVBOUy1zY05oZ0EyUXpZOFVreXU3YWFQbm9Qd1B1OFYzZDBNZ1pzRmJlT3hGcGhscUM3OHJMdXQxUkRhWnhJaThGQllXSXdMeUxjTFJ4cXA4RWRfYTdSR1dia0JmSzhKMzRJam9TdGhQeHc2cnVlN2o1YVZEbkp6UVQtM1ZzQ0E?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:bf6fa605d38152f9:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-11-20T09:50:04Z"
+  "claims_updated_at": "2026-11-20T10:53:52Z"
 }
