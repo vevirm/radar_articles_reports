@@ -1,0 +1,2595 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261121T090318Z-8f537e1869c1",
+  "results": [
+    {
+      "record_key": "link:https://www.institutmontaigne.org/en/publications/eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031",
+      "source_hash": "5237312a",
+      "identity_hash": "bcf043e45cbaef6e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied link https://www.institutmontaigne.org/en/publications/eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031 opened and matched the claimed work."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_document_and_summary",
+            "url": "https://www.institutmontaigne.org/en/publications/eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031",
+            "title": "Institut Montaigne | EU Semiconductor Geopolitical Risk Survey",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher page confirms title, July 2026 report, both authors and 55 respondents; matched source-owned PDF excerpt spanning summary/methodology read from supplied ZIP."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route 1: substantive survey of specific threats to European semiconductor supply and industrial innovation capability, including export controls and Taiwan disruption."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Joris Teer; Pierre Sel"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Europe’s semiconductor supply risks mapped",
+      "reader_what": "A 55-person expert survey flags export controls and Taiwan conflict among Europe’s leading semiconductor risks.",
+      "reader_why": "Chip disruptions could constrain European advanced manufacturing and technology-dependent sectors.",
+      "reader_more": "The report assesses 20 possible risks to supply security and competitiveness through 2031. The ratings represent surveyed expert perceptions rather than incident probabilities. It recommends recurring risk monitoring and crisis exercises.",
+      "deep_analysis": {
+        "work_kind": "policy survey report",
+        "research_question": "",
+        "main_finding": "Fifty-five respondents ranked threats to European chip security and competitiveness; export curbs and Taiwan conflict were considered especially serious.",
+        "method_or_basis": "Anonymous survey of 55 industry, research/technology-organisation and expert respondents assessing 20 risks using 0–10 threat scales.",
+        "qualification": "Perceptions from a small expert survey, not independently measured probabilities or a representative forecast.",
+        "radar_relevance": "Direct Europe-focused semiconductor technology dependency and industrial R&I capability evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "export_control.regulation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Institut Montaigne / CHIPDIPLO",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-07",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Perceptions from a small expert survey, not independently measured probabilities or a representative forecast.",
+          "text": "An expert survey identifies export controls and a Taiwan military conflict as major risks to European semiconductor supply.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.82135/tno-2026-18698",
+      "source_hash": "97c64654",
+      "identity_hash": "413d954ecaa3735d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://doi.org/10.82135/tno-2026-18698 was not the substantive source used; instead recovered and read https://vector.tno.nl/en/articles/insights/high-tech-innovation-defence-capability/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://vector.tno.nl/en/articles/insights/high-tech-innovation-defence-capability/; checked against scanner title/issuer/date and package evidence."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://content.openalex.org/works/W7235123862.pdf, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_publisher_plus_whitepaper_excerpt",
+            "url": "https://vector.tno.nl/en/articles/insights/high-tech-innovation-defence-capability/",
+            "title": "TNO Vector | From high-tech innovation to defence capability",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "TNO publisher page identifies all three authors and links the named November 2026 whitepaper; matching 11-page TNO-2026-18698 text read from package."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route 1 and 2: analysis of Dutch and European defence innovation, high-technology industrial capacity, strategic supply chains and dual-use R&D translation."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "institutional white paper",
+          "authors": "Hanne Österberg; Wieger Voskens; Joris Vierhout"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "From high-tech innovation to defence capability",
+      "reader_what": "Dutch defence capabilities need production scale, systems integration and supply resilience alongside new technologies.",
+      "reader_why": "Coordinated industrial procurement and innovation policy can improve translation of research into deployable systems.",
+      "reader_more": "TNO examines how the Netherlands can mobilise its high-tech industrial base for defence. It highlights supply-chain dependencies and the importance of sustained procurement and production capacity. Its recommendations are proposed pathways, not demonstrated outcomes.",
+      "deep_analysis": {
+        "work_kind": "TNO technical policy white paper",
+        "research_question": "",
+        "main_finding": "TNO argues that Dutch defence innovation needs scale-up production, systems integration and resilient industrial suppliers, not technology development alone.",
+        "method_or_basis": "Policy/technology ecosystem analysis covering high-tech capabilities, dual-use industries, sensors, procurement and innovation policy.",
+        "qualification": "Argumentative policy white paper, not a peer-reviewed empirical article and not measured effects of proposed measures.",
+        "radar_relevance": "European defence innovation, R&D-to-capability conversion and dual-use industrial capacity.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "TNO Vector",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11",
+          "scope": {
+            "level": "member_state",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Argumentative policy white paper, not a peer-reviewed empirical article and not measured effects of proposed measures.",
+          "text": "TNO advocates connecting Dutch high-tech innovation to defence procurement, manufacturing scale and resilient supply chains.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148990",
+      "source_hash": "1cd7bd12",
+      "identity_hash": "d4c531b0f4129a32",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied link https://publications.jrc.ec.europa.eu/repository/handle/JRC148990 opened and matched the claimed work."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://publications.jrc.ec.europa.eu/repository/bitstream/JRC148990/JRC148990_01.pdf, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_JRC_report_and_extracted_document",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148990",
+            "title": "European Commission JRC | Leveraging European values to strengthen technological sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "JRC record verifies authors, 20 November date and ID JRC148990; matched substantive eight-page science-for-policy brief excerpt in archive."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route 1/2: official JRC policy analysis of EU technological dependencies, network lock-in, interoperable digital architecture, standards and innovation capabilities."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission Joint Research Centre"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "European digital sovereignty needs architectural influence",
+      "reader_what": "JRC argues that technology ownership alone cannot break Europe’s dependency on entrenched digital architectures.",
+      "reader_why": "Open standards, interoperable systems and procurement could strengthen Europe’s ability to shape technical ecosystems.",
+      "reader_more": "The brief traces how network effects lock users and firms into incumbent technologies. It recommends open ecosystems, standards participation and coordinated investment. These are policy opportunities, not verified impacts.",
+      "deep_analysis": {
+        "work_kind": "Joint Research Centre science-for-policy brief",
+        "research_question": "",
+        "main_finding": "Ownership and local data hosting cannot alone secure EU technological sovereignty if network effects and technology architectures preserve vendor lock-in.",
+        "method_or_basis": "Conceptual and policy analysis across cloud, applications, standards, hardware and spectrum architecture.",
+        "qualification": "Policy diagnosis and proposed design choices; effects of value-based procurement and open architectures are not quantified.",
+        "radar_relevance": "European R&I technology architecture, interoperability, dependencies and strategic digital capacity.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Policy diagnosis and proposed design choices; effects of value-based procurement and open architectures are not quantified.",
+          "text": "JRC finds that controlling digital infrastructure need not remove dependencies created by proprietary architectures and network effects.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=df5d5884-e510-11f1-b745-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "68219e69",
+      "identity_hash": "bb5632600aa8c02e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://op.europa.eu/o/opportal-service/download-handler?identifier=df5d5884-e510-11f1-b745-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part= was not the substantive source used; instead recovered and read https://www.parlament.gv.at/gegenstand/XXVIII/EU/105051."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.parlament.gv.at/gegenstand/XXVIII/EU/105051; checked against scanner title/issuer/date and package evidence."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://op.europa.eu/o/opportal-service/download-handler?identifier=df5d5884-e510-11f1-b745-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_Council_document_verified_with_Parliament_registry",
+            "url": "https://www.parlament.gv.at/gegenstand/XXVIII/EU/105051",
+            "title": "Austrian Parliament official Council document registry | 16000/26",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Council 16000/26 dated 20 November confirmed by Austrian parliament registry; source-owned seven-page Council PDF excerpt in archive read in detail; Council remains at progress-report/negotiation stage."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Strand C: dated official Council presidency progress report records two compromise texts and negotiations on European Innovation Act measures governing R&D procurement and innovation scale-up; not an adopted act."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "General Secretariat of the Council of the European Union",
+          "source": "Council of the European Union",
+          "type": "Council legislative progress report"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "European Innovation Act negotiations advance",
+      "reader_what": "The Council presidency documented draft revisions to European Innovation Act provisions affecting research procurement and scale-up.",
+      "reader_why": "EU innovation-system rules could change if negotiated provisions are later adopted.",
+      "reader_more": "The 20 November Council report describes a first examination and two compromise texts. It addresses issues including procurement, intellectual property and innovation financing. The proposal was not adopted at the time of the report.",
+      "deep_analysis": {
+        "work_kind": "Council legislative progress report",
+        "research_question": "",
+        "main_finding": "Council presidency reports negotiations and draft revisions to the proposed European Innovation Act, including R&D procurement and IP provisions.",
+        "method_or_basis": "Dated General Secretariat progress report 16000/26 with Council working-party discussion and two presidency compromise texts.",
+        "qualification": "A presidency progress report, not final legislation; R&D provisions and parts of the innovation act remain under negotiation.",
+        "radar_relevance": "New substantive EU research and innovation policy negotiations and framework design.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council of the European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "in_negotiation",
+          "status_date": "2026-11-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "A presidency progress report, not final legislation; R&D provisions and parts of the innovation act remain under negotiation.",
+          "text": "The Council presidency reported compromise texts for the proposed European Innovation Act affecting R&D procurement and innovation policy.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1177/14773708261504363",
+      "source_hash": "4b444e99",
+      "identity_hash": "b4f6afb3293c08bc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://doi.org/10.1177/14773708261504363 was not the substantive source used; instead recovered and read https://journals.sagepub.com/doi/10.1177/14773708261504363."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://journals.sagepub.com/doi/10.1177/14773708261504363; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "peer_reviewed_publisher_substantive_abstract",
+            "url": "https://journals.sagepub.com/doi/10.1177/14773708261504363",
+            "title": "European Journal of Criminology | Open science and classified EU-funded research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher article page directly accessible via journal index confirms title, three authors, DOI and 17 November 2026; publisher substantive abstract provides method, four scenarios and limitations; full article restricted."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route 3: peer-reviewed, evidence-informed scenarios directly examine governance of openness and classified research data in EU-funded criminological research under Horizon Europe."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Open science meets research-security constraints",
+      "reader_what": "A foresight study maps four ways EU criminology research openness could conflict with classification and access controls.",
+      "reader_why": "Proportionate governance and protected data access may help reconcile openness with security needs.",
+      "reader_more": "The authors identify convergence, transparency disputes, security-first responses and informational disorder as possible configurations. They point to risks from expanding classifications and weak procedural safeguards. The study supports a research-governance debate, not a prediction that one scenario will occur.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed policy/scenario study",
+        "research_question": "",
+        "main_finding": "Four scenarios identify barriers to implementing EU open science obligations where research data may be security-sensitive.",
+        "method_or_basis": "Expert-literature-informed PESTLE analysis and scenario construction grounded in open criminology literature.",
+        "qualification": "Scenario configurations are plausible futures, not observations or verified predictions of policy change; full text restricted.",
+        "radar_relevance": "Research-system governance and open science obligations in EU-funded research; Route 3 qualifies even without geopolitics.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.openness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Castro-Toledo, Gómez-Bellvis and Perea-García",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11-17",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Scenario configurations are plausible futures, not observations or verified predictions of policy change; full text restricted.",
+          "text": "The study describes four scenarios of tension between EU-funded criminology open-science requirements and classified sensitive research outputs.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMihwJBVV95cUxQR2RhbXFabTJPcTdabGlEbGZEc0NUczltRk1kdGRFRURZMHNRVmluZ2c5c0MwYUNvTDdJYUw1QnpEN3U4Q1RVNjBJWFAwWm5uQlRIMGpib2RqQkJMX1JfRlpMam5WRjBPTGhNcnhLQ1FRdjFiTkpsZU1xSTE3NEYyWkZjWTFyak1kM1Z3WXc1SEtvRmxoLXlGY19ZdlpZOEtmMDZqd1N4VHEzcXNRY0JQQW1UR0NFY1BPOWJ5U1dBak9BSHpDVEc3bERRSHpXSEJqNi1leTNIRUtjVVZ4WXdObUlpVmdrencyZlZJWjhrQzVFY3diTXhfZ09BSS1nYkZ4ZWl0M2N5cw?oc=5",
+      "source_hash": "a4641fe3",
+      "identity_hash": "0648fa47f90e419e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMihwJBVV95cUxQR2RhbXFabTJPcTdabGlEbGZEc0NUczltRk1kdGRFRURZMHNRVmluZ2c5c0MwYUNvTDdJYUw1QnpEN3U4Q1RVNjBJWFAwWm5uQlRIMGpib2RqQkJMX1JfRlpMam5WRjBPTGhNcnhLQ1FRdjFiTkpsZU1xSTE3NEYyWkZjWTFyak1kM1Z3WXc1SE was not the substantive source used; instead recovered and read https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fifth-eu-armenia-horizon-europe-joint-research-and-innovation-committee-meeting-2026-11-20_en."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fifth-eu-armenia-horizon-europe-joint-research-and-innovation-committee-meeting-2026-11-20_en; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_Commission_substantive_news",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fifth-eu-armenia-horizon-europe-joint-research-and-innovation-committee-meeting-2026-11-20_en",
+            "title": "European Commission DG R&I | EU–Armenia Horizon Europe committee",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission article dated 20 November gives meeting as 5th in title/photo but 6th in first body paragraph; source verified as one record despite internal numbering inconsistency; 19 November meeting substantive cooperation report."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Official Commission report documents specific EU–Armenia Horizon Europe cooperation developments, threefold increase in accumulated EU contribution and Armenia’s 2026–2030 science programme, beyond a generic meeting."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "EU–Armenia research cooperation expands",
+      "reader_what": "EU and Armenia reviewed growing Horizon Europe participation and a newly adopted Armenian science development programme.",
+      "reader_why": "Cross-border collaboration links Armenian research institutions to the European Research Area.",
+      "reader_more": "The Commission says cumulative Horizon Europe EU funding for Armenian participants has reached about €10.78 million. It also notes Armenia’s science strategy for 2026–2030 and a planned EIT hub in Yerevan. The page conflicts on whether this was the fifth or sixth committee meeting.",
+      "deep_analysis": {
+        "work_kind": "official EU R&I cooperation development",
+        "research_question": "",
+        "main_finding": "Commission reports expanded Armenian Horizon Europe participation, new Armenian science strategy and planned EIT Community Hub.",
+        "method_or_basis": "Primary Commission account of 19 November joint R&I committee, Horizon Europe contribution and cooperation agenda.",
+        "qualification": "Article internally contradicts itself on meeting number (headline fifth, body sixth); EIT hub is planned, not yet operating.",
+        "radar_relevance": "Direct European Research Area, Horizon Europe association and international research cooperation.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Article internally contradicts itself on meeting number (headline fifth, body sixth); EIT hub is planned, not yet operating.",
+          "text": "The Commission reported that cumulative Horizon Europe net contributions to Armenian participants had tripled to around €10.78 million.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi3AFBVV95cUxQX25QLVRNX0lmZlU3UHctSGcwRWpkX1NsVFYyWXozN1pSeWpWMm4tY0s4bHRJdDdDRkVkSnBLWHhNNzdHMktjeUNCbWpJZjk2MjZHb2ZxampKakpJcXJVbFIzTTFRYkM0RThmeFFmdXZwb0llRFlPckxUcEpSRmIwZTMzWUZNY2xJR3JxcWVaSTg5VXlsRTdYLXF1Ukx0V2MxVVRrNVdZdFRYbklteUh2QVJzSmlRUmFybExzVU82OEVIdkJHWHI2TzJXT2Y4MmxoT1AtMGxJM0tTZFo2?oc=5",
+      "source_hash": "2a56e277",
+      "identity_hash": "01140931b5023615",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMi3AFBVV95cUxQX25QLVRNX0lmZlU3UHctSGcwRWpkX1NsVFYyWXozN1pSeWpWMm4tY0s4bHRJdDdDRkVkSnBLWHhNNzdHMktjeUNCbWpJZjk2MjZHb2ZxampKakpJcXJVbFIzTTFRYkM0RThmeFFmdXZwb0llRFlPckxUcEpSRmIwZTMzWUZNY2xJR3JxcWVaST was not the substantive source used; instead recovered and read https://digital-strategy.ec.europa.eu/en/news/european-digital-infrastructure-consortium-launches-today-strengthen-digital-sovereignty-education."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://digital-strategy.ec.europa.eu/en/news/european-digital-infrastructure-consortium-launches-today-strengthen-digital-sovereignty-education; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_Commission_press_release",
+            "url": "https://digital-strategy.ec.europa.eu/en/news/european-digital-infrastructure-consortium-launches-today-strengthen-digital-sovereignty-education",
+            "title": "European Commission DG CONNECT | Education EDIC launch",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Commission press release 20 November 2026 verifies participating states, launch and infrastructure objectives; source states launch, not measured performance."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Real launch of eight-state EU shared digital infrastructure consortium with sovereign, interoperable cloud and AI technology development and EdTech capability; more than a generic education press notice."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Eight countries launch sovereign education infrastructure consortium",
+      "reader_what": "Eight EU states launched EDU-EDIC to develop trusted shared digital infrastructure, including cloud, AI and data exchange.",
+      "reader_why": "Joint infrastructure could reduce reliance on fragmented or proprietary technology platforms in public education.",
+      "reader_more": "The Commission identifies the Netherlands as host and seven other participating states. Its launch plans include interoperable services, cloud and AI tools for the education ecosystem. Future outcomes remain intentions rather than measured deployment results.",
+      "deep_analysis": {
+        "work_kind": "official European digital-technology consortium launch",
+        "research_question": "",
+        "main_finding": "Commission and eight EU states launched EDU-EDIC to develop shared, secure, interoperable infrastructure and education technology.",
+        "method_or_basis": "Official Commission launch statement naming EU member participants and proposed cloud, AI and data-exchange priorities.",
+        "qualification": "Launch and stated technology objectives are verified; actual infrastructure deployment and claimed educational or sovereignty benefits are not proven.",
+        "radar_relevance": "EU technology infrastructure, cross-border digital capability and interoperability, with education as application domain.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission and eight EU Member States",
+            "class": "eu_body"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Launch and stated technology objectives are verified; actual infrastructure deployment and claimed educational or sovereignty benefits are not proven.",
+          "text": "The Commission and eight EU states launched EDU-EDIC to coordinate shared interoperable digital infrastructure and education technologies.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMizwFBVV95cUxNdGNHQWp4YmRjSTJPd2lBeU9iZDk3Vno0a0N3aThBZWVzT2hIQ1h4WEFyNGpyUjlSMkhBaTZ2OVVaZGhHbUxBT1BoRmlrOXBoUzREMjk1SEhjU25iZ01TU3NzYjQtT1BxUDFiUG95bm5YMDZaYS13RGRuMmstMTBKRFRNYldpM2tTSl9PRGFxMS1qNE42RjhtbFB5UnNVWWRRMXNBXzVQX3RTWnZza2pGTWRVaGZaN3Q4enE3bTJXTHFmTk9yVHZVOFdfRTJnSW8?oc=5",
+      "source_hash": "50dcce43",
+      "identity_hash": "45f6fd8f44e0ac55",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMizwFBVV95cUxNdGNHQWp4YmRjSTJPd2lBeU9iZDk3Vno0a0N3aThBZWVzT2hIQ1h4WEFyNGpyUjlSMkhBaTZ2OVVaZGhHbUxBT1BoRmlrOXBoUzREMjk1SEhjU25iZ01TU3NzYjQtT1BxUDFiUG95bm5YMDZaYS13RGRuMmstMTBKRFRNYldpM2tTSl9PRGFxMS was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/cop31-meps-urge-all-parties-to-implement-climate-change-commitments/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/cop31-meps-urge-all-parties-to-implement-climate-change-commitments/; checked against scanner title/issuer/date and package evidence."
+          },
+          {
+            "step": "supplied_url_redirects",
+            "outcome": "blocked",
+            "note": "Original europarl.europa.eu press-room release displayed anti-bot challenge; PubAffairs reproduces substantive original statement."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "trusted_verbatim_press_statement_republication",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/cop31-meps-urge-all-parties-to-implement-climate-change-commitments/",
+            "title": "European Parliament statement syndicated by PubAffairs, 20 Nov 2026",
+            "evidence_used": true
+          },
+          {
+            "kind": "original_European_Parliament_identification",
+            "url": "https://www.europarl.europa.eu/news/en/press-room/20261116IPR48908/cop31-meps-urge-all-parties-to-implement-climate-change-commitments",
+            "title": "European Parliament original press release (anti-bot access)",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "European Parliament original press page prompted anti-bot verification; substantive text reproduced with explicit European Parliament provenance in a press-republication page. Original canonical EP link confirmed via indexed result."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "Verified European Parliament COP31 delegation appeal is an environmental/diplomatic statement, not a new R&I funding, research, technology capability or industrial-technology policy measure. C development plus EU R&I bridge fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "European Parliament urges climate implementation",
+      "reader_what": "Parliamentary delegates called for stronger implementation of existing COP31 climate commitments.",
+      "reader_why": "",
+      "reader_more": "Delegation representatives focused on electrification, climate targets and international negotiations. Their statements announce no new research instrument, technological capability investment or R&I policy decision. This fails the programme’s Strand C research-and-innovation gate.",
+      "deep_analysis": {
+        "work_kind": "parliamentary delegation statement",
+        "research_question": "",
+        "main_finding": "MEPs urged COP31 parties to implement existing climate commitments and strengthen decarbonisation efforts.",
+        "method_or_basis": "Republished European Parliament statements from delegation chair and vice-chair at COP31 in Antalya.",
+        "qualification": "Political advocacy rather than an enacted policy or technical/R&I intervention.",
+        "radar_relevance": "No verified central EU research/innovation development or concrete R&I impact mechanism.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPand6WXl4NmpONmlVSzN4ZEJyT1RvYnVJY21WNGFwQlFRam1HMXFRa3h4bW1ucG9fcHVQZlpaclVwaE1odUZTeHFQa3U5VjRETkJham9OZWNsd3Y1ZElSeUE2MEdLa0lGaTF6Um9wdjg5VGNzQklHWFFuSm1sZ0RYNXAxSFprNkxSZ0ZrYjdKd0tzdjQ1V2tMRzdBV1hzV19ZeC1yQ3lDY2t1aElXeEhqbC1lVQ?oc=5",
+      "source_hash": "bc487f8e",
+      "identity_hash": "ab146c10e830a9c8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMiswFBVV95cUxPand6WXl4NmpONmlVSzN4ZEJyT1RvYnVJY21WNGFwQlFRam1HMXFRa3h4bW1ucG9fcHVQZlpaclVwaE1odUZTeHFQa3U5VjRETkJham9OZWNsd3Y1ZElSeUE2MEdLa0lGaTF6Um9wdjg5VGNzQklHWFFuSm1sZ0RYNXAxSFprNkxSZ0ZrYjdKd0 was not the substantive source used; instead recovered and read https://www.bloomberg.com/news/articles/2026-11-20/bond-sales-hit-2-trillion-europe-record-as-ai-surge-takes-hold."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.bloomberg.com/news/articles/2026-11-20/bond-sales-hit-2-trillion-europe-record-as-ai-surge-takes-hold; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "attributed_Bloomberg_article_lead",
+            "url": "https://www.bloomberg.com/news/articles/2026-11-20/bond-sales-hit-2-trillion-europe-record-as-ai-surge-takes-hold",
+            "title": "Bloomberg | European bond sales top €2 trillion",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Bloomberg publisher original identified; exact lead reproduced by attributed publisher syndication on affiliatedpress.org and Yahoo Finance listing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: Original Bloomberg reporting confirms record European bond issuance and broad AI-related borrowing, but this macro-financial statistic identifies no EU research programme, innovation investment instrument or technology-capability change. Business borrowing exposure alone is not a verified European R&I bridge."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Record European bonds are not an R&I policy change",
+      "reader_what": "Europe-wide bond issuance reached a reported record amid government and AI-related borrowing.",
+      "reader_why": "",
+      "reader_more": "This is a financing-market story, not an announced European research or technology investment instrument. It has no verified link to EU R&I programmes or capabilities.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Bloomberg reported European bond issuance above €2 trillion in 2026, citing public borrowing and AI capital demand.",
+        "method_or_basis": "Bloomberg publisher original identified; exact lead reproduced by attributed publisher syndication on affiliatedpress.org and Yahoo Finance listing.",
+        "qualification": "Aggregate borrowing and market narrative do not identify concrete EU science/innovation measures; premium article full text not accessible.",
+        "radar_relevance": "No specific, source-supported European R&I-system change established.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C%2F2026%2F06156",
+      "source_hash": "192ebb0a",
+      "identity_hash": "bb060b1c7a46cbed",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:C%2F2026%2F06156 was not the substantive source used; instead recovered and read https://eur-lex.europa.eu/eli/C/2026/6156/oj/eng/pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://eur-lex.europa.eu/eli/C/2026/6156/oj/eng/pdf; checked against scanner title/issuer/date and package evidence."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://eur-lex.europa.eu/eli/C/2026/6156/oj/eng/pdf, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_Union_Journal_full_one_page",
+            "url": "https://eur-lex.europa.eu/eli/C/2026/6156/oj/eng/pdf",
+            "title": "European Commission OJ C/2026/6156 | DEFIS director vacancy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Full one-page official Journal document was embedded in supplied ZIP and identifies CELEX C/2026/6156 and vacancy COM/2026/10491."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: Verifiable Commission Directorate-General for Defence Industry and Space AD14 Director vacancy listing does not announce substantive change to technology capability, research funding, R&I policy or an infrastructure programme; routine staffing advertisement excluded."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "DG DEFIS advertises director vacancy",
+      "reader_what": "The Commission published a recruitment notice for a director at DG Defence Industry and Space.",
+      "reader_why": "",
+      "reader_more": "The official Journal notice gives a post title and application information. It does not establish any policy decision, technology initiative or research funding change.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Commission advertised an AD14 Director for General Affairs and Resources vacancy at DG DEFIS.",
+        "method_or_basis": "Full one-page official Journal document was embedded in supplied ZIP and identifies CELEX C/2026/6156 and vacancy COM/2026/10491.",
+        "qualification": "A published vacancy, not the filling of the post or a change in European defence R&I instruments.",
+        "radar_relevance": "Fails the new substantive European R&I change criterion.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNVDhQclJUWDQtazdlb2lzRWZNWmxNVUpNZHlKdmhwNkVWR0g3bkZQQzE4UURzdjNrTW94S25iX2dMT3phelIxN0I3bjU0aTFZUGVXWEJtYnJrS2Fqcno4bkJYX05YcjdadmlXOTlvMWtTVl9Td0pHNUlqTXVKSlY0X3NadG5KYk1YcmZzaUhiRk5DTVRjYmxjWlFZeHhGUUdlUEtLVW5acFFuNFdmcUVaWFdyWnJ3d01ZRHFEbkk1d25sRzh1amc?oc=5",
+      "source_hash": "708d76ef",
+      "identity_hash": "bf97cb4a5f981f6f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxNVDhQclJUWDQtazdlb2lzRWZNWmxNVUpNZHlKdmhwNkVWR0g3bkZQQzE4UURzdjNrTW94S25iX2dMT3phelIxN0I3bjU0aTFZUGVXWEJtYnJrS2Fqcno4bkJYX05YcjdadmlXOTlvMWtTVl9Td0pHNUlqTXVKSlY0X3NadG5KYk1YcmZzaUhiRk was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "attributed_verbatim_EP_official_statement",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament official press statement | ITRE Committee EU Space Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Complete attributed Parliament press release reproduced by PubAffairs, with legislative scope, proposals, vote and next procedural step."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C: The European Parliament ITRE committee adopted its negotiating report on the proposed EU Space Act on 19 November; its approach affects EU space operators and research institutions, space resilience and market conditions. Committee support is not final adoption."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Parliament committee advances proposed EU Space Act",
+      "reader_what": "MEPs backed proposed rules covering orbital safety, resilience and competitive conditions for European space providers.",
+      "reader_why": "A harmonised space market could affect European space R&I operators and launch capability.",
+      "reader_more": "The ITRE committee approved its report on 19 November, proposing a resilience network, measures for smaller companies and tighter third-country launch equivalence. Council negotiations and eventual adoption remain outstanding.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "ITRE MEPs adopted a negotiating report (72 votes to 1; two abstentions) on the proposed Space Act, including space resilience, SME proportionality and launch dependencies.",
+        "method_or_basis": "Complete attributed Parliament press release reproduced by PubAffairs, with legislative scope, proposals, vote and next procedural step.",
+        "qualification": "An ITRE committee vote and negotiation mandate, not legislation in force; original EP page may present anti-bot protection.",
+        "radar_relevance": "Proposed European space technology and industrial operating rules with explicit research institution implications.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament ITRE Committee",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "in_negotiation",
+          "status_date": "2026-11-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "An ITRE committee vote and negotiation mandate, not legislation in force; original EP page may present anti-bot protection.",
+          "text": "ITRE committee backed proposed EU Space Act provisions on resilience, fair market access and smaller space technology operators.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxQTzVjc0d1MzduS09uVUZJQUdYd08tdkNUNlZhSC1SZnktcDFCTGlTV2dva0M3ZzVsWVEwaDJwWF81ODdoUUswY3A1clJOOWJORGkxNGtMU3g1elhTa2twa05RZmQxcnhYWEc2ZlZEeTVTRGZQXzJ6ajc1U0xzWklZV29SVDJUS2JpSVVpclRQMkFKZHR6WURFVjRiLV9Zcnp1NGktV1dQVHM?oc=5",
+      "source_hash": "29790c0d",
+      "identity_hash": "d73b3d63e3c698e5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMiqAFBVV95cUxQTzVjc0d1MzduS09uVUZJQUdYd08tdkNUNlZhSC1SZnktcDFCTGlTV2dva0M3ZzVsWVEwaDJwWF81ODdoUUswY3A1clJOOWJORGkxNGtMU3g1elhTa2twa05RZmQxcnhYWEc2ZlZEeTVTRGZQXzJ6ajc1U0xzWklZV29SVDJUS2JpSVVpclRQMk was not the substantive source used; instead recovered and read https://www.euronews.com/2026/11/20/deepening-eucanada-ties-from-critical-minerals-and-defence-to-erasmus."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.euronews.com/2026/11/20/deepening-eucanada-ties-from-critical-minerals-and-defence-to-erasmus; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_publisher_full_opinion",
+            "url": "https://www.euronews.com/2026/11/20/deepening-eucanada-ties-from-critical-minerals-and-defence-to-erasmus",
+            "title": "Euronews | Euroviews on EU–Canada partnership",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Read original Euronews Euroviews article and distinguished prior Canada-EU summit agreements from proposals in the column."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: This is an authored Euronews opinion proposing deeper EU–Canada collaboration and citing existing critical minerals, defence and Erasmus+ ties. It announces no distinct new R&I measure on its own. A Route 3 also fails: not original analysis of the European R&I system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Euronews opinion calls for closer EU–Canada ties",
+      "reader_what": "A commentary advocates stronger cooperation on minerals, defence and Erasmus+.",
+      "reader_why": "",
+      "reader_more": "The commentary cites past trade growth and existing cooperation while arguing for further links. It is not an announcement of a newly implemented research or technology instrument.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "An opinion article makes the case for closer EU–Canada relations through critical minerals, defence, trade and education.",
+        "method_or_basis": "Read original Euronews Euroviews article and distinguished prior Canada-EU summit agreements from proposals in the column.",
+        "qualification": "Opinion/advocacy and prior developments; no newly completed EU research, innovation or technology action is reported.",
+        "radar_relevance": "Does not satisfy a new change or an evidence-article admission route.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNSkhGdWpsOWx1dllRWHVYN0xKMXB5ZGhqR2xzVzNkMkd6YkRFd0JQajBuUzUwUGhEa2JtcFJVaFhCcmE5RG4xS05XM09IbFgyMXAwN3h4OTNhNVBqaGloNVFlNDRZZkgzdXdEZjg0SS1ENEgwVFVLU1V6WnNnWmYtU3dobndVNk1YNXpzYmllR2VrVWkwNGk1VzlfU2s1YjU1cHF1YzBCUzZXQXJVeWV0Z2dDQzJQSGRiUlM0?oc=5",
+      "source_hash": "2027cf2d",
+      "identity_hash": "65faa966249b87e2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMiuwFBVV95cUxNSkhGdWpsOWx1dllRWHVYN0xKMXB5ZGhqR2xzVzNkMkd6YkRFd0JQajBuUzUwUGhEa2JtcFJVaFhCcmE5RG4xS05XM09IbFgyMXAwN3h4OTNhNVBqaGloNVFlNDRZZkgzdXdEZjg0SS1ENEgwVFVLU1V6WnNnWmYtU3dobndVNk1YNXpzYmllR2 was not the substantive source used; instead recovered and read https://www.reuters.com/business/aerospace-defense/uk-pm-burnham-condemns-russian-violation-polish-airspace-2026-11-20/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.reuters.com/business/aerospace-defense/uk-pm-burnham-condemns-russian-violation-polish-airspace-2026-11-20/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "Reuters_publisher_and_attributed_syndication",
+            "url": "https://www.reuters.com/business/aerospace-defense/uk-pm-burnham-condemns-russian-violation-polish-airspace-2026-11-20/",
+            "title": "Reuters | UK prime minister on Polish airspace breach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Matched Reuters original by headline, date and reported statements; independently available Reuters text via AOL syndication."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: The Reuters report documents a British prime ministerial reaction to an alleged Russian airspace breach over Poland. Neither the statement nor reported incident establishes a specific research/innovation change, technological capability decision or EU research-security instrument."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "UK prime minister condemns Polish airspace breach",
+      "reader_what": "The British prime minister condemned a reported Russian incursion into Polish airspace.",
+      "reader_why": "",
+      "reader_more": "Reuters reported a diplomatic response after missiles and a drone reportedly entered Polish airspace. The remarks do not disclose a European research programme or technology capability change.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "British Prime Minister Andy Burnham condemned Russian objects entering Polish airspace on 20 November.",
+        "method_or_basis": "Matched Reuters original by headline, date and reported statements; independently available Reuters text via AOL syndication.",
+        "qualification": "Geopolitical security statement, with no concrete R&I technology action or new research-security policy.",
+        "radar_relevance": "No verified European R&I bridge.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMinAJBVV95cUxNQ2NpZ2loMWpZbmgyLUxQYWc5LWl3S29walY1QjlwOG9tUGJyTnBIN3U4dld6REpkeUp6VTNyV05PRjUwLVNLbERIdWdkcUg4bnFhREh5bW1paHM2Vl9JRWloWGdkUTRaNWNITkdhRjd4YVF2cFREcDJqN2MwR3NwclRzczJtS2ZIb3dUZUdSWEVOUkppUlpOLWZhc3FYYU9DdzlwMXFEeU9jeEk4ZjJ1T3JQNkZxN0RNOXFVZlFwUWtuS2dBOVN5UEl3Mi14bUw3NEh2X0J6NGhOVXB2WkJEZ254SG1mZ2xBQWNrOFo2SUJPY3hBSEhDZlZhY01KRk1OZ1RnMjBfaThTcWozUGp0Qi1obzl5dC0xbGp3Rg?oc=5",
+      "source_hash": "af9cec2f",
+      "identity_hash": "d61270c590d96f7a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMinAJBVV95cUxNQ2NpZ2loMWpZbmgyLUxQYWc5LWl3S29walY1QjlwOG9tUGJyTnBIN3U4dld6REpkeUp6VTNyV05PRjUwLVNLbERIdWdkcUg4bnFhREh5bW1paHM2Vl9JRWloWGdkUTRaNWNITkdhRjd4YVF2cFREcDJqN2MwR3NwclRzczJtS2ZIb3dUZUdSWE was not the substantive source used; instead recovered and read https://www.consilium.europa.eu/en/press/press-releases/2026/11/20/mff-2028-2034-council-agrees-negotiating-position-on-stronger-civil-protection-mechanism-and-support-for-health-preparedness/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.consilium.europa.eu/en/press/press-releases/2026/11/20/mff-2028-2034-council-agrees-negotiating-position-on-stronger-civil-protection-mechanism-and-support-for-health-preparedness/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "Council_official_full_press_statement",
+            "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/11/20/mff-2028-2034-council-agrees-negotiating-position-on-stronger-civil-protection-mechanism-and-support-for-health-preparedness/",
+            "title": "Council of the EU | UCPM and health preparedness partial mandate",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Read complete 20 November Council statement; financial provisions remain open as part of future MFF bargaining."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: The Council agreed a real partial negotiating mandate on emergency preparedness and medical stockpiles, but the official measure governs civil protection and crisis health response, not the conduct, funding or technological development of European R&I. An imagined innovation spillover does not establish its R&I bridge."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Council sets health emergency negotiating position",
+      "reader_what": "Ministers agreed to negotiate combined EU civil-protection and health-emergency preparedness rules.",
+      "reader_why": "",
+      "reader_more": "The proposed instrument would support emergency stockpiles, coordination and crisis response. It does not specify a new EU R&I programme or scientific capability development. Financial allocations remain unsettled.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Council adopted a partial negotiation position on the civil-protection and health-preparedness budget regulation, proposing medical stockpiling and a crisis analysis cell.",
+        "method_or_basis": "Read complete 20 November Council statement; financial provisions remain open as part of future MFF bargaining.",
+        "qualification": "It is a negotiation mandate, not law; official text describes preparedness procurement and response, not specific research and innovation instruments.",
+        "radar_relevance": "Healthcare crisis preparedness is relevant to public policy but R&I link not evidenced centrally.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxNSUhEZmNJZ1Q0UTdnbUNqYlBiUDVEM1ZZbWtzMGZ3VmJoR05EUlVWeFpLcUZoVHZ2c0dSWE9tZktwWDdnQ1ZaTjF3eTYtV3Y1X2ZtekphejZSaDQxcFB1SDFQV3ppNmZpR1pkSGdHNmZKRG9qSzlQOGNKSllOX3hYdW9lR1JGV1gwbzlmbWM2TW5Dc1Y5ZEp1VXQ0QXhwelhpcnFyYnJUbG9vekg4ZkRUcjN6YVByb2F5SkpuV09wQjA?oc=5",
+      "source_hash": "1bdbee4f",
+      "identity_hash": "b8d26a1f6bea6ce6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMiwAFBVV95cUxNSUhEZmNJZ1Q0UTdnbUNqYlBiUDVEM1ZZbWtzMGZ3VmJoR05EUlVWeFpLcUZoVHZ2c0dSWE9tZktwWDdnQ1ZaTjF3eTYtV3Y1X2ZtekphejZSaDQxcFB1SDFQV3ppNmZpR1pkSGdHNmZKRG9qSzlQOGNKSllOX3hYdW9lR1JGV1gwbzlmbWM2TW was not the substantive source used; instead recovered and read https://erc.europa.eu/news-events/news/three-new-erc-scientific-council-members-and-two-new-vice-presidents."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://erc.europa.eu/news-events/news/three-new-erc-scientific-council-members-and-two-new-vice-presidents; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_ERC_institutional_announcement",
+            "url": "https://erc.europa.eu/news-events/news/three-new-erc-scientific-council-members-and-two-new-vice-presidents",
+            "title": "European Research Council | New Scientific Council members",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; ERC primary institutional announcement of 13 November names all three appointees and the term start date."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: Appointment of one academic to an existing ERC Scientific Council is verified but is a routine change of governance personnel, not a new funding rule, programme, research infrastructure or substantive R&I-system policy development."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-11-13 (ERC appointment press release); effective 2027-01-01"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Estonian researcher appointed to ERC council",
+      "reader_what": "Professor Maris Laan was appointed among three new European Research Council Scientific Council members.",
+      "reader_why": "",
+      "reader_more": "The ERC confirms the appointment and expected January 2027 start. The story concerns representation on an existing council, not a new research policy or funding instrument.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "ERC reports the Commission appointed three incoming Scientific Council members including Tartu professor Maris Laan, who begins on 1 January 2027.",
+        "method_or_basis": "ERC primary institutional announcement of 13 November names all three appointees and the term start date.",
+        "qualification": "Personnel appointment is real and first for Estonia, but no governance policy or research funding change is announced.",
+        "radar_relevance": "Routine research institution staffing news below Strand C substantive threshold.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiygFBVV95cUxOTzhta2hHaGdVYy1NVmxPRkMtTXY1VzJnVWFKcERTSmRYYWJZMDFHV0JXQzB4YmZ4U1k0TW1DX1BkZC1EMXBfb1hMVXk4UDFEeGhLNTdYcDNDY3U5OEEzeTI2YWJUXzZCeENFYkoyZ1UxTjNzMDVQV01YbDdNOWNFRXRRUVU5V2E0Q1RSNWk2cXF5MlcxSFF6a29FTVRQQjlHMmlyM3p6UDlzM3k3YjUySk9OYTlKRWJadE1Canc4UFZRUU5TZllNTmxn?oc=5",
+      "source_hash": "aa9cc2b7",
+      "identity_hash": "b3f0993184b84379",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMiygFBVV95cUxOTzhta2hHaGdVYy1NVmxPRkMtTXY1VzJnVWFKcERTSmRYYWJZMDFHV0JXQzB4YmZ4U1k0TW1DX1BkZC1EMXBfb1hMVXk4UDFEeGhLNTdYcDNDY3U5OEEzeTI2YWJUXzZCeENFYkoyZ1UxTjNzMDVQV01YbDdNOWNFRXRRUVU5V2E0Q1RSNWk2cX was not the substantive source used; instead recovered and read https://irish-presidency.consilium.europa.eu/en/news/eu-health-ministers-focus-on-turning-innovation-into-better-patient-outcomes/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://irish-presidency.consilium.europa.eu/en/news/eu-health-ministers-focus-on-turning-innovation-into-better-patient-outcomes/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "Council_Presidency_first_party_meeting_report",
+            "url": "https://irish-presidency.consilium.europa.eu/en/news/eu-health-ministers-focus-on-turning-innovation-into-better-patient-outcomes/",
+            "title": "Irish Council Presidency | Health Ministers on innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Full presidency page identifies informal Dublin meeting of 30 September–1 October 2026, describing discussion sessions only."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: Irish Council presidency report covers discussion at the 1 October informal Health Ministers meeting. Ministers considered clinical trials, health data, access and biomanufacturing, but the text reports no adopted decision, opened call, new programme or technical capability action."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Health ministers discuss clinical innovation",
+      "reader_what": "EU health ministers discussed clinical trials, biomanufacturing and access to new therapies.",
+      "reader_why": "",
+      "reader_more": "At an informal October meeting, ministers considered research-to-patient links, health data and technologies. The source records discussion themes rather than any enacted or financed new R&I measure.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Ministers discussed translating clinical research and advanced therapies into better patient outcomes, data exchange and manufacturing scale.",
+        "method_or_basis": "Full presidency page identifies informal Dublin meeting of 30 September–1 October 2026, describing discussion sessions only.",
+        "qualification": "Source reports deliberation, not a new legislative decision or research funding/technology action.",
+        "radar_relevance": "Relevant R&I topics were discussed but a Strand C development is not proven.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:46adf07a196dd883",
+      "source_hash": "7a0b37ab",
+      "identity_hash": "9672abac31a2b342",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link  was not the substantive source used; instead recovered and read https://www.bruegel.org/sites/default/files/2025-11/PB%2031%202025_0.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.bruegel.org/sites/default/files/2025-11/PB%2031%202025_0.pdf; checked against scanner title/issuer/date and package evidence."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://www.bruegel.org/sites/default/files/2025-11/PB%2031%202025_0.pdf, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_included_policy_brief_full_excerpt",
+            "url": "https://www.bruegel.org/sites/default/files/2025-11/PB%2031%202025_0.pdf",
+            "title": "Bruegel Policy Brief 31/2025 | Mariniello, EU digital deregulation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Matched 2025 Bruegel policy brief title, author and original 20-plus-page PDF substantive text in ZIP."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: original Bruegel EU digital-policy research directly evaluates efficiency, innovative capacity and societal distribution from changing the EU digital regulatory system; Route 1 also assesses EU-versus-US competitive strategy. Strong analysis of an EU innovation-system rule, not mere topical digital news."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "EU digital deregulation has trade-offs",
+      "reader_what": "Bruegel warns digital-rule simplification needs evidence about economic efficiency and who bears its costs.",
+      "reader_why": "Deregulation could alter both European digital innovation conditions and citizen protections.",
+      "reader_more": "The paper proposes assessing productivity effects separately from changes in the distribution of benefits. It critiques the Commission’s technology deregulation framing and calls for transparency before loosening requirements.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Mariniello argues EU digital-rule simplification must evaluate productivity gains alongside distributional losses, using a framework distinguishing efficiency and redistribution.",
+        "method_or_basis": "Matched 2025 Bruegel policy brief title, author and original 20-plus-page PDF substantive text in ZIP.",
+        "qualification": "Policy analysis and analytical framework, not ex post empirical measurement of deregulatory reforms or actual reform effects.",
+        "radar_relevance": "Detailed EU innovation regulation and technology competitiveness assessment.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bruegel",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2025-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Policy analysis and analytical framework, not ex post empirical measurement of deregulatory reforms or actual reform effects.",
+          "text": "Bruegel’s analysis finds the EU digital deregulation agenda inadequately assesses efficiency and distributional trade-offs.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:877965829c3e1487",
+      "source_hash": "39785e11",
+      "identity_hash": "77fda01c7a794152",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link  was not the substantive source used; instead recovered and read https://www.securityscience.edu.rs/index.php/journal-security-science/article/view/155."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.securityscience.edu.rs/index.php/journal-security-science/article/view/155; checked against scanner title/issuer/date and package evidence."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://hrcak.srce.hr/file/504606, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "peer_reviewed_journal_plus_matching_pdf",
+            "url": "https://www.securityscience.edu.rs/index.php/journal-security-science/article/view/155",
+            "title": "Security Science Journal (2024) | Dai and Song on EU military AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Original journal article and 2024 publisher metadata with DOI 10.37458/ssj.5.3.1; PDF of substantive article in archive."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: peer-reviewed EU-focused analysis of military AI, technological security, dual-use governance, strategic autonomy and European defence R&D rules. Distinguishes security objectives from regulation and capabilities."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Shuting Dai; Lilei Song",
+          "date": "2024"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "EU faces military AI governance trade-offs",
+      "reader_what": "A 2024 paper analyses how EU dual-use AI strategy must balance military innovation with rules and security safeguards.",
+      "reader_why": "Governance choices shape pathways for European military AI R&D.",
+      "reader_more": "The authors evaluate institutional design, funding and international engagement in military AI. Their analysis identifies conflicting imperatives, not a proven optimal policy or measured success.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Dai and Song examine EU military-AI governance dilemmas as the Union balances defence innovation ambitions, risk regulation and security needs.",
+        "method_or_basis": "Original journal article and 2024 publisher metadata with DOI 10.37458/ssj.5.3.1; PDF of substantive article in archive.",
+        "qualification": "Qualitative theoretical/institutional argument; no quantitative measurement of EU autonomous systems capability or regulation outcomes.",
+        "radar_relevance": "Direct evidence about EU military AI governance and strategic technology security.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Shuting Dai and Lilei Song",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2024",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Qualitative theoretical/institutional argument; no quantitative measurement of EU autonomous systems capability or regulation outcomes.",
+          "text": "A journal article analyses EU tensions between facilitating military-AI innovation and regulating security risks.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:4e5f6b624562c60a",
+      "source_hash": "5d357366",
+      "identity_hash": "f5fdfe7c88ea4c29",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link  was not the substantive source used; instead recovered and read https://www.eurocontrol.int/initiative/dual-use-communication-navigation-and-surveillance-approach."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.eurocontrol.int/initiative/dual-use-communication-navigation-and-surveillance-approach; checked against scanner title/issuer/date and package evidence."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked substantial_web_text excerpt from https://www.eurocontrol.int/initiative/dual-use-communication-navigation-and-surveillance-approach, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_EUROCONTROL_full_initiative_page",
+            "url": "https://www.eurocontrol.int/initiative/dual-use-communication-navigation-and-surveillance-approach",
+            "title": "EUROCONTROL | Dual-use CNS initiative overview",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Read first-party 5,865-character institutional initiative page, including historical reference to SESAR and a linked 2018 technical leaflet."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: no distinct tested European strategic threat analysis; Route 2: no new EU R&I trajectory or investment measured; Route 3: this is an evergreen explanatory initiative page on established EUROCONTROL dual-use avionics options and past SESAR studies, rather than a substantive independently assessed R&I-system research product. B transferable foresight method absent; C no new change."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "EUROCONTROL explains dual-use avionics approach",
+      "reader_what": "An initiative page describes reusing military avionics to meet civilian air-traffic requirements.",
+      "reader_why": "",
+      "reader_more": "The page outlines technical options and potential benefits and refers readers to historical research. As a standing initiative description, it does not establish a new research finding or policy change.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "EUROCONTROL describes ways for military aircraft to satisfy civil air traffic communication, navigation and surveillance requirements using dual-use avionics.",
+        "method_or_basis": "Read first-party 5,865-character institutional initiative page, including historical reference to SESAR and a linked 2018 technical leaflet.",
+        "qualification": "Describes a concept and expected savings; does not present original new quantified study methods or results on the page.",
+        "radar_relevance": "Technology relevant to aviation R&D but not substantial evidence research on European R&I systems itself.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:ad0544eeef18fdf8",
+      "source_hash": "1c6291b5",
+      "identity_hash": "880ce794268ddaa0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link  was not the substantive source used; instead recovered and read https://www.eurocontrol.int/sites/default/files/2019-06/20180531-cmac-cns-technical-leaflet.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.eurocontrol.int/sites/default/files/2019-06/20180531-cmac-cns-technical-leaflet.pdf; checked against scanner title/issuer/date and package evidence."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://www.eurocontrol.int/sites/default/files/2019-06/20180531-cmac-cns-technical-leaflet.pdf, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_EUROCONTROL_technical_document",
+            "url": "https://www.eurocontrol.int/sites/default/files/2019-06/20180531-cmac-cns-technical-leaflet.pdf",
+            "title": "EUROCONTROL CMAC CNS Technical Leaflet #11 (31 May 2018)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Complete 2018 11,946-character extracted technical leaflet in package, including reported 2014 flight trial prototypes and research findings."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 1 and 3: an authoritative EUROCONTROL technical R&I leaflet evaluates European SESAR civil-military communication/navigation/surveillance interoperability approaches and documents validated research trials with technology and adoption implications."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2018-05-31",
+          "type": "EUROCONTROL technical leaflet"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Dual-use avionics can reduce aircraft retrofit demands",
+      "reader_what": "EUROCONTROL details research showing military avionics can be adapted for some civil air-traffic requirements.",
+      "reader_why": "Reusing military systems may lower European civil-military aviation technology integration costs.",
+      "reader_more": "The 2018 technical leaflet documents SESAR interoperability work and flight demonstrations. It identifies potential cost and interoperability advantages, contingent on specific aircraft systems.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "EUROCONTROL synthesises studies and flight trials that found military identification/transponder equipment can meet civil ADS-B interoperability goals using adaptation rather than full avionics replacement.",
+        "method_or_basis": "Complete 2018 11,946-character extracted technical leaflet in package, including reported 2014 flight trial prototypes and research findings.",
+        "qualification": "Older research synthesis, not a newly validated 2026 solution or a cost estimate across every military platform.",
+        "radar_relevance": "Explicit European ATM/SESAR technology development and civil-defence dual-use research pathways.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EUROCONTROL",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2018-05-31",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Older research synthesis, not a newly validated 2026 solution or a cost estimate across every military platform.",
+          "text": "EUROCONTROL summarises SESAR validation of dual-use aviation communication and surveillance solutions.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.enpol.2026.115692",
+      "source_hash": "2082f848",
+      "identity_hash": "7b277004554c40fd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://doi.org/10.1016/j.enpol.2026.115692 was not the substantive source used; instead recovered and read https://www.sciencedirect.com/science/article/pii/S0301421526006269."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.sciencedirect.com/science/article/pii/S0301421526006269; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identified_substantive_article_evidence",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0301421526006269",
+            "title": "Energy Policy | Geopolitics of sustainable aviation fuel",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Matched DOI 10.1016/j.enpol.2026.115692, publisher title and substantive primary article abstract plus substantial indexed article text; paywalled original full fetch blocked."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1 and Route 2: comparative peer-reviewed Energy Policy article explicitly analyses EU sustainable aviation fuel supply-chain structures, certification regimes and strategic dependencies across major jurisdictions; demonstrates European industrial/clean technology policy vulnerabilities."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Sustainable aviation fuel policies create EU dependencies",
+      "reader_what": "A cross-country study compares aviation fuel incentives, certification and supply-security exposures, focusing on the EU.",
+      "reader_why": "Mismatched incentives and weak certification could complicate Europe’s sustainable aviation fuel scale-up.",
+      "reader_more": "The paper contrasts EU mandates with US producer incentives and other national models. It describes book-and-claim certification as a possible governance instrument, conditional on trustworthy registries and interoperability.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The paper compares EU, UK, US, Japan, Singapore and Brazil fuel support and governance models, arguing EU mandated SAF demand creates exposure to international certification and supply dependencies.",
+        "method_or_basis": "Matched DOI 10.1016/j.enpol.2026.115692, publisher title and substantive primary article abstract plus substantial indexed article text; paywalled original full fetch blocked.",
+        "qualification": "Comparative policy analysis and conditional future risks, not measured prospective import shortages or proven causal policy effects.",
+        "radar_relevance": "EU clean aviation innovation and critical technology supply-chain governance.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Energy Policy study authors",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Comparative policy analysis and conditional future risks, not measured prospective import shortages or proven causal policy effects.",
+          "text": "Comparative aviation-fuel policy research identifies conditional European dependency risks in sustainable fuel supply and certification.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s12061-026-10062-7",
+      "source_hash": "9834e38a",
+      "identity_hash": "526b1f0f4318e718",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://doi.org/10.1007/s12061-026-10062-7 was not the substantive source used; instead recovered and read https://link.springer.com/article/10.1007/s12061-026-10062-7."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://link.springer.com/article/10.1007/s12061-026-10062-7; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "Springer_publisher_substantive_extended_abstract",
+            "url": "https://link.springer.com/article/10.1007/s12061-026-10062-7",
+            "title": "Springer Applied Spatial Analysis and Policy | Raychev (2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Original publisher abstract describes bounded-uncertainty grey relational analysis and clustering, with cited dataset and charts; paywalled full article inaccessible."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: original Eurostat-based empirical regional study maps EU labour vulnerability against digital readiness, innovation capacity and human capital at NUTS-2 level, producing European regional innovation-capability evidence. Route B is not used: grey relational analysis is applied to labour profiling, not novel transferable futures intelligence."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Stefan Raychev",
+          "date": "2026-10-31"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "EU regions differ in digital readiness and labour vulnerability",
+      "reader_what": "A statistical study links regional digital and human-capital readiness to different unemployment-vulnerability profiles.",
+      "reader_why": "Innovation and digital capacity co-vary with labour-market resilience across Europe.",
+      "reader_more": "Using 2015–2021 Eurostat data, the study identifies two broad regional groupings while retaining missing-data uncertainty. The weak cluster separation and sensitivity limit fine-grained policy inference.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Raychev finds two broad EU regional profiles in 2015–2021 Eurostat data: stronger digital/human capital correlates with lower labour vulnerability; the two-cluster silhouette is modest (0.317).",
+        "method_or_basis": "Original publisher abstract describes bounded-uncertainty grey relational analysis and clustering, with cited dataset and charts; paywalled full article inaccessible.",
+        "qualification": "Associations, not causal effects; cluster separation modest and individual regional assignments sensitive to processing choices.",
+        "radar_relevance": "EU territorial technology skills and innovation readiness as determinants/indicators of labour-market resilience.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Stefan Raychev",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-31",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Associations, not causal effects; cluster separation modest and individual regional assignments sensitive to processing choices.",
+          "text": "Grey-informed Eurostat analysis finds heterogeneous EU regional digital and human-capital profiles linked to labour vulnerability.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf",
+      "source_hash": "51cdc99b",
+      "identity_hash": "aa242489db362526",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied link https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf opened and matched the claimed work."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "Bruegel_full_matching_policy_brief",
+            "url": "https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf",
+            "title": "Bruegel Policy Brief 18/2026 | Martens and Schenk AI compute shortfall",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Publisher-owned report in package with 24,000 characters of substantive analysis, methodology, policy recommendations and sources."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 1, 2 and 3: detailed Bruegel analysis quantifies EU AI compute capacity and models policy constraints on European technology autonomy, finding permitting and electricity grid access more limiting than capital investment alone."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Bruegel maps Europe’s AI compute bottlenecks",
+      "reader_what": "A report estimates Europe holds around five percent of AI computing capacity and identifies grid connections and permits as key barriers.",
+      "reader_why": "Compute access and permitting shape Europe’s ability to develop and host advanced AI.",
+      "reader_more": "The brief argues that investment capital alone cannot secure EU AI infrastructure. It suggests quicker siting decisions, grid upgrades and smarter subsidy designs, while treating impacts as prospective.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Bruegel estimates EU hosts around two gigawatts, about 5% of global AI compute, and recommends faster permitting, anticipatory grid investment and demand-side tools over unconditional subsidies.",
+        "method_or_basis": "Publisher-owned report in package with 24,000 characters of substantive analysis, methodology, policy recommendations and sources.",
+        "qualification": "Capacity estimates depend on data definitions; proposed actions are not demonstrated to increase future EU compute shares.",
+        "radar_relevance": "Direct systemic EU AI research compute infrastructure capacity and investment-policy analysis.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "compute.capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bruegel",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Capacity estimates depend on data definitions; proposed actions are not demonstrated to increase future EU compute shares.",
+          "text": "Bruegel estimates roughly 2 GW of EU AI compute capacity and identifies grid and permitting bottlenecks.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf",
+      "source_hash": "eef0779d",
+      "identity_hash": "a2502fb4bfb05cd4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied link https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf opened and matched the claimed work."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked pdf_excerpt excerpt from https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "Bruegel_full_matching_working_paper",
+            "url": "https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf",
+            "title": "Bruegel Working Paper 21/2026 | WTO agreement on semiconductors",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Substantial 24,000-character primary working paper in ZIP with multilateral governance mechanism and supporting economic analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: authored Bruegel working paper examines European and global semiconductor trade dependence, national-security restrictions and potential multilateral sectoral rules. A detailed European strategic technology policy proposal qualifies as evidence, not a newly adopted WTO agreement."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Bruegel proposes semiconductor trade security bargain",
+      "reader_what": "A policy paper proposes a WTO arrangement to balance chip supply-chain security with less discriminatory global trade.",
+      "reader_why": "Common trade rules could reduce disruptive supply-chain fragmentation for European chip R&D.",
+      "reader_more": "The authors examine national restrictions and why existing WTO rules poorly accommodate strategic supply security. Their recommendations have not been adopted by WTO members.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Bruegel proposes a WTO semiconductor sectoral bargain addressing economic-security exceptions, transparency and coordination of export restrictions to reduce vulnerability and fragmentation.",
+        "method_or_basis": "Substantial 24,000-character primary working paper in ZIP with multilateral governance mechanism and supporting economic analysis.",
+        "qualification": "Conceptual negotiated agreement proposal, not existing WTO rule or evidence participating governments will sign.",
+        "radar_relevance": "European semiconductor technology dependencies, supply security and rules-based trade policy.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "export_control.regulation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bruegel",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-07",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Conceptual negotiated agreement proposal, not existing WTO rule or evidence participating governments will sign.",
+          "text": "A Bruegel working paper advocates WTO semiconductor rules that recognise security interests while discouraging discriminatory trade restrictions.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNNXh1Y0lMNWVuTFphdlBpbTFhLWIyb2VDN0k2Z1NXVWYxTXZQc3lxWjYyQ2xpZHI4anh2VkxpQndQbjdvUDJkMl8xU2ZKMUk2OHRnaU5kN3c5R05JeVZZVHRWWlRGQlh5WkNmR1pjLUhBX2x2Qm9sRERhckxiLWhYLTU2VFl5ZlRwejUyM2VhV3BtNERuaFIxWGF1aHpTX2k4b2dDWFJjQXFoRjVZWHpkUGxzMVl4SlZwbkhHcS1tYnUtbWxKUmc?oc=5",
+      "source_hash": "d036fa97",
+      "identity_hash": "450fb4ff05db6013",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxNNXh1Y0lMNWVuTFphdlBpbTFhLWIyb2VDN0k2Z1NXVWYxTXZQc3lxWjYyQ2xpZHI4anh2VkxpQndQbjdvUDJkMl8xU2ZKMUk2OHRnaU5kN3c5R05JeVZZVHRWWlRGQlh5WkNmR1pjLUhBX2x2Qm9sRERhckxiLWhYLTU2VFl5ZlRwejUyM2VhV3 was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized English secondary edition); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act report passed in committee",
+      "reader_what": "A language edition repeats the Parliament committee vote on the proposed Space Act.",
+      "reader_why": "A proposed single-market framework may affect European space technology firms.",
+      "reader_more": "ITRE backed new rules, but the EU Space Act still requires legislative negotiations and adoption. The content duplicates record A11.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Parliament committee endorsed its EU Space Act report by 72 votes to one with two abstentions.",
+        "method_or_basis": "The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "Space policy may affect EU technology firms and research operators.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNaEFiaE96LWhURTRLa1dLS1FpZThfVjNfNmRhUk5mTkl3RXJUd1J5bWpmc0xUeVhDMy1NbldqUFJHRmtEQldhTFU3VXJmNXVCM0l6cnkzanR2T19GMGkzV0FxWE52bHNCdEpnS29WSloxQ1RudVc1d0ZfRjZISTcwdDFuazZ1MmttZERibVRoUzJLUlh5RUdEMFZ5blFsazBOdG5IaTVCVklzWHBuNGw4UVZMdnJsc244Mm4wRUlzRTJZSUo1bWc?oc=5",
+      "source_hash": "8944620f",
+      "identity_hash": "cba28fe8c0e68e1d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxNaEFiaE96LWhURTRLa1dLS1FpZThfVjNfNmRhUk5mTkl3RXJUd1J5bWpmc0xUeVhDMy1NbldqUFJHRmtEQldhTFU3VXJmNXVCM0l6cnkzanR2T19GMGkzV0FxWE52bHNCdEpnS29WSloxQ1RudVc1d0ZfRjZISTcwdDFuazZ1MmttZERibVRoUz was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized Slovak); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act report passed in committee",
+      "reader_what": "A language edition repeats the Parliament committee vote on the proposed Space Act.",
+      "reader_why": "A proposed single-market framework may affect European space technology firms.",
+      "reader_more": "ITRE backed new rules, but the EU Space Act still requires legislative negotiations and adoption. The content duplicates record A11.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Parliament committee endorsed its EU Space Act report by 72 votes to one with two abstentions.",
+        "method_or_basis": "The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "Space policy may affect EU technology firms and research operators.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxQaDR0X2tXd3dxZDk5NVowNTU4QTVmbEdjNFhOSzNPbGwxeWlhWEM1bFNicnNOU18weWYyUmZJdVphSFZsUHJyTEJnbk1feFFqMXJiLThiNndSeklQdnhRRUMwOWlWUHNlNG92TXVETVczY2NpLVhMVVo2TEpwSDdKdzVSVE9ZWW5hV1BoU2thM1lPMkpwOWhmMUg2d29KREVkc1BQX2VpbmowU0o1RldkNWpKUVUwRjBlcG9LQklWa0F1ckUwM1E?oc=5",
+      "source_hash": "c7de1b87",
+      "identity_hash": "9ae1eb7a1cf8f174",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxQaDR0X2tXd3dxZDk5NVowNTU4QTVmbEdjNFhOSzNPbGwxeWlhWEM1bFNicnNOU18weWYyUmZJdVphSFZsUHJyTEJnbk1feFFqMXJiLThiNndSeklQdnhRRUMwOWlWUHNlNG92TXVETVczY2NpLVhMVVo2TEpwSDdKdzVSVE9ZWW5hV1BoU2thM1 was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized Hungarian); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act report passed in committee",
+      "reader_what": "A language edition repeats the Parliament committee vote on the proposed Space Act.",
+      "reader_why": "A proposed single-market framework may affect European space technology firms.",
+      "reader_more": "ITRE backed new rules, but the EU Space Act still requires legislative negotiations and adoption. The content duplicates record A11.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Parliament committee endorsed its EU Space Act report by 72 votes to one with two abstentions.",
+        "method_or_basis": "The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "Space policy may affect EU technology firms and research operators.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxQTFQwVDdMeXZnS0ZfWU44MHRHbGkyTVdhNkUxRnZhRVdENWFFU0VjZC1zZTE0NEY5SU5IS2E1bzIydWljS0kwRDc4WEZDNUdUMUVmazJOT1Z4a3k5aVRhWUZnTzlCRDJtaHlteDNBNFFqVXhfXzAyMWNKM3VJX3RRVlJqQVBnTkUyMnR2amhyd2E3ck1uTnVmMXpKbG1GdHdrNXE1TEpjckV0c3pVZVFIVThER1VxbjBIaVBxS0ZvNXU5c25hMGc?oc=5",
+      "source_hash": "33770a3f",
+      "identity_hash": "499a2aa3529105bf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxQTFQwVDdMeXZnS0ZfWU44MHRHbGkyTVdhNkUxRnZhRVdENWFFU0VjZC1zZTE0NEY5SU5IS2E1bzIydWljS0kwRDc4WEZDNUdUMUVmazJOT1Z4a3k5aVRhWUZnTzlCRDJtaHlteDNBNFFqVXhfXzAyMWNKM3VJX3RRVlJqQVBnTkUyMnR2amhyd2 was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized Croatian); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act report passed in committee",
+      "reader_what": "A language edition repeats the Parliament committee vote on the proposed Space Act.",
+      "reader_why": "A proposed single-market framework may affect European space technology firms.",
+      "reader_more": "ITRE backed new rules, but the EU Space Act still requires legislative negotiations and adoption. The content duplicates record A11.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Parliament committee endorsed its EU Space Act report by 72 votes to one with two abstentions.",
+        "method_or_basis": "The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "Space policy may affect EU technology firms and research operators.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOUlBrTEl6cjJiS1BnZC1NUlFzZ1paTnJmR0htckxrTXJFeUMtLXFaMVJvNERzeVJ2RUs0WG84R2pTa1F6UEhhSDdWR3l4R0U4UWs4SDlBbXl0MDNiNk96YndwTjI5T013NnZheHFFWUM2bGlweEFvTEJTcTJ6SnU2UGpZd3VHS29DdVZwT1NhX3RHNnhyLTU1cVdlZFNPYmVvMWhvMDhQLUxMNjg2RlJHdEs1XzU4NmdyTVp1NVVIZUE1bndYNkE?oc=5",
+      "source_hash": "b81e1cdb",
+      "identity_hash": "eb8ffedbf227b12f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxOUlBrTEl6cjJiS1BnZC1NUlFzZ1paTnJmR0htckxrTXJFeUMtLXFaMVJvNERzeVJ2RUs0WG84R2pTa1F6UEhhSDdWR3l4R0U4UWs4SDlBbXl0MDNiNk96YndwTjI5T013NnZheHFFWUM2bGlweEFvTEJTcTJ6SnU2UGpZd3VHS29DdVZwT1NhX3 was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized Czech); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act report passed in committee",
+      "reader_what": "A language edition repeats the Parliament committee vote on the proposed Space Act.",
+      "reader_why": "A proposed single-market framework may affect European space technology firms.",
+      "reader_more": "ITRE backed new rules, but the EU Space Act still requires legislative negotiations and adoption. The content duplicates record A11.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Parliament committee endorsed its EU Space Act report by 72 votes to one with two abstentions.",
+        "method_or_basis": "The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "Space policy may affect EU technology firms and research operators.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNNnBQM25XQkJrbm1fMlR4ODhmWENpczBWb1dvRjVWdnlkdlVFbTdlUy1UaS11QVhvTmZLX3ZuU0thMEd4OGZDZ3ZEbW9iazJncjdFU3hRN3hkMnRMLWxoNEU2dGpQOGZTaXRRTlVueUg4UzRYNkpUYXVaSmYyaDNVazNHd3owN2dBYzZ1R0dXVHc3dDJmVDVfakhwXy1MeXAyZmdoSHhxUjZXRXpiM18zOTVOVmp3akFNREVnYUsxbXJkaFllUHc?oc=5",
+      "source_hash": "9c9dc201",
+      "identity_hash": "912f5743d5ed90c3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxNNnBQM25XQkJrbm1fMlR4ODhmWENpczBWb1dvRjVWdnlkdlVFbTdlUy1UaS11QVhvTmZLX3ZuU0thMEd4OGZDZ3ZEbW9iazJncjdFU3hRN3hkMnRMLWxoNEU2dGpQOGZTaXRRTlVueUg4UzRYNkpUYXVaSmYyaDNVazNHd3owN2dBYzZ1R0dXVH was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized Polish); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act report passed in committee",
+      "reader_what": "A language edition repeats the Parliament committee vote on the proposed Space Act.",
+      "reader_why": "A proposed single-market framework may affect European space technology firms.",
+      "reader_more": "ITRE backed new rules, but the EU Space Act still requires legislative negotiations and adoption. The content duplicates record A11.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Parliament committee endorsed its EU Space Act report by 72 votes to one with two abstentions.",
+        "method_or_basis": "The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "Space policy may affect EU technology firms and research operators.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxPNnlGTkZXcEQ3d2gwR0E5OHpJMXl6eDdvZlJyQllMZTJRT2l6TTNqR3RZcXhXZUFTOC1vdm41Z0VCOU9fblV0dVZscjlKNjRpZ1FQOXZjNHRnd240ejM4SWFrUWl4Q1hra0NZOGljbjJ2YXZIaHZ5b2FCT2d4ODdZMHJRam1kTEFJR0JFM3poTzZITE52Yy1VR1NZSkNobmx4MDBqOHpwcmJJdjVQNmVUNlIwVTRydW51NURLN3Rxd0ZsUUJNVUE?oc=5",
+      "source_hash": "dc753b5b",
+      "identity_hash": "db56e5058d46e820",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxPNnlGTkZXcEQ3d2gwR0E5OHpJMXl6eDdvZlJyQllMZTJRT2l6TTNqR3RZcXhXZUFTOC1vdm41Z0VCOU9fblV0dVZscjlKNjRpZ1FQOXZjNHRnd240ejM4SWFrUWl4Q1hra0NZOGljbjJ2YXZIaHZ5b2FCT2d4ODdZMHJRam1kTEFJR0JFM3poTz was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized Portuguese); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act report passed in committee",
+      "reader_what": "A language edition repeats the Parliament committee vote on the proposed Space Act.",
+      "reader_why": "A proposed single-market framework may affect European space technology firms.",
+      "reader_more": "ITRE backed new rules, but the EU Space Act still requires legislative negotiations and adoption. The content duplicates record A11.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The Parliament committee endorsed its EU Space Act report by 72 votes to one with two abstentions.",
+        "method_or_basis": "The supplied Google News headline is a localized edition of the attributed original EP press release; compared event, date, title and Parliament newsroom attribution with A11.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "Space policy may affect EU technology firms and research operators.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMipwFBVV95cUxNQ2FuVDFlVnk2V2ZQX1cwZDZTVVgtNGcyVkRjdWVPa0dWMnFUVWkxVjU0MmJCZEhqZTNURWtRUlpWTFpHYTJDUS1TckpwbDFOYWl3WjR5Z0hyR0xMRVNQbXNZOWw1dHUtWDMwUl9VTVJRSUVfOWh6cjd1eVBpY3hySU9zbnlvZ2V1UFpBSlFraWZIMTAxTGtXQnVYaGhNLWRkRVhmaE96UQ?oc=5",
+      "source_hash": "90fe948b",
+      "identity_hash": "5bd8159aefde9dce",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMipwFBVV95cUxNQ2FuVDFlVnk2V2ZQX1cwZDZTVVgtNGcyVkRjdWVPa0dWMnFUVWkxVjU0MmJCZEhqZTNURWtRUlpWTFpHYTJDUS1TckpwbDFOYWl3WjR5Z0hyR0xMRVNQbXNZOWw1dHUtWDMwUl9VTVJRSUVfOWh6cjd1eVBpY3hySU9zbnlvZ2V1UFpBSlFraW was not the substantive source used; instead recovered and read https://www.reuters.com/legal/litigation/eu-commission-targeted-cyberattack-politico-reports-2026-11-19/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.reuters.com/legal/litigation/eu-commission-targeted-cyberattack-politico-reports-2026-11-19/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "Reuters_accountable_report_plus_Commission_briefing",
+            "url": "https://www.reuters.com/legal/litigation/eu-commission-targeted-cyberattack-politico-reports-2026-11-19/",
+            "title": "Reuters | European Commission cyberattack confirmation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Reuters report matched to original European Commission audiovisual press briefing of 19 November and substantive syndicated Reuters report; details of data loss were not established."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: Commission confirmed an attempted cyberattack on an internal HR-related system and use of an AI tool in the operation, but the Reuters report documents a security incident rather than a research policy, research infrastructure, science funding, or concrete European R&I technology-capability change. No speculative R&I bridge is admitted."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Commission reports attempted cyberattack",
+      "reader_what": "The Commission confirmed it had been targeted, with the scope and exposure still being assessed.",
+      "reader_why": "",
+      "reader_more": "This news records an administrative cybersecurity incident, rather than a change to European research, innovation funding, or scientific infrastructure.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Commission officials acknowledged a cyberattack, and public accounts mention the attacker’s use of AI tools.",
+        "method_or_basis": "Reuters report matched to original European Commission audiovisual press briefing of 19 November and substantive syndicated Reuters report; details of data loss were not established.",
+        "qualification": "Incident and its scope under investigation; AI-assisted technique is reported, not proven systemic capability shift or EU research programme change.",
+        "radar_relevance": "No direct R&I system link in article.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNc2VPUkZGS05iOFpFMG1IdVJkRUdHQlM0Yk1jb3FZS18wMktoMG9aWTFvdjZVR09JOU5JNVUtS2Q0ZFZtNzByVU9mZ0lkODBOeXhmdnpNQnhSSVJtUHVtejY4djhCWXQyajJ1OEsxMVd3czB4YkFla0YxeDB6Z040cGNfcndFWEFMM3cxb3U2TlZJUlNZM3c0TzYyOEdBREg1T3Y3dWNzaVR2c196M1RvbHM4M0VRNGRLSzliUVVWUm82cVFHOGc?oc=5",
+      "source_hash": "bceb542b",
+      "identity_hash": "56a021a8a928bab9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxNc2VPUkZGS05iOFpFMG1IdVJkRUdHQlM0Yk1jb3FZS18wMktoMG9aWTFvdjZVR09JOU5JNVUtS2Q0ZFZtNzByVU9mZ0lkODBOeXhmdnpNQnhSSVJtUHVtejY4djhCWXQyajJ1OEsxMVd3czB4YkFla0YxeDB6Z040cGNfcndFWEFMM3cxb3U2Tl was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Identified multilingual official Parliament news-release headline and verified content against the attributed English Parliament statement."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized Dutch); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act proposal advances in ITRE",
+      "reader_what": "The Parliament committee approved its report on proposed rules for space providers.",
+      "reader_why": "The proposal may reshape EU space innovation conditions.",
+      "reader_more": "This is another language edition of A11, not another legislative decision. The proposal is not yet law.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The ITRE report on the proposed EU Space Act was approved by 72 votes to one, with two abstentions.",
+        "method_or_basis": "Identified multilingual official Parliament news-release headline and verified content against the attributed English Parliament statement.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "European space technology operators face prospective regulatory conditions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxQM3ROSHpGZ2JFVkhnUlNoZF8yWXpINEFKLWM3eTBnUVp1aHVQRldCM1hjOHVQYUpyUUpPdG9haXl3UVpCdkVQQXBYckRFSmd5VG5POWk1Zk02TThvWVdmQVE3YjhfNUM2cFV2U1hrdEhCTnozSGtNZHdPUkZaOHlRWVpBOUZ5SUFTa0p3OXVKSGRjR3duTzFiVjBKcFRKNXd6bFZDcW9Dc2d3SHFRV3ZFMGFyTmw1ckwxaFNEOG8wLUxud2tfN0E?oc=5",
+      "source_hash": "2728d231",
+      "identity_hash": "790f7e0facf519e7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMixgFBVV95cUxQM3ROSHpGZ2JFVkhnUlNoZF8yWXpINEFKLWM3eTBnUVp1aHVQRldCM1hjOHVQYUpyUUpPdG9haXl3UVpCdkVQQXBYckRFSmd5VG5POWk1Zk02TThvWVdmQVE3YjhfNUM2cFV2U1hrdEhCTnozSGtNZHdPUkZaOHlRWVpBOUZ5SUFTa0p3OXVKSG was not the substantive source used; instead recovered and read https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "European_Parliament_news_release_localization",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "European Parliament ITRE Committee | multilingual news release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Identified multilingual official Parliament news-release headline and verified content against the attributed English Parliament statement."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_DISTINCT_RI_DEVELOPMENT",
+        "reason": "C: Same 19 November European Parliament ITRE committee press-release content (localized Romanian); the same 72–1 space-act committee report decision was already verified as A11. No distinct additional European R&I event, technology policy decision or legislative step is evidenced. This queue has no authorised canonical duplicate reference."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "The queue supplies no possible_duplicates link. Content repeats A11, but cannot encode a canonical duplicate under this package schema."
+      },
+      "reader_title": "EU Space Act proposal advances in ITRE",
+      "reader_what": "The Parliament committee approved its report on proposed rules for space providers.",
+      "reader_why": "The proposal may reshape EU space innovation conditions.",
+      "reader_more": "This is another language edition of A11, not another legislative decision. The proposal is not yet law.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "The ITRE report on the proposed EU Space Act was approved by 72 votes to one, with two abstentions.",
+        "method_or_basis": "Identified multilingual official Parliament news-release headline and verified content against the attributed English Parliament statement.",
+        "qualification": "This is a repeated edition of the same European Parliament release; no second committee decision or final law adoption.",
+        "radar_relevance": "European space technology operators face prospective regulatory conditions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMirAFBVV95cUxOX3ZVSnNQcDliVUZHcFRpT3BKaWhsUVNHV2lNNHNnT0VwdnlneGZYNTFxdl9WVnhYVWwtQ3VLYmZCYVEzZFV6Q0Rla3JVc0JPTDZmTmVuMmo1TVVmem5PNFF3Tm1LWVcwSHJwdlhvdVM2OHk2SVliemFDQVlFMmhxZXJ1U2VFVVB1amEzaTEtU2ZjcEdWSVctd21pUHFzYWotOUFtcDh5OVJKZ2RU?oc=5",
+      "source_hash": "d3b4ba09",
+      "identity_hash": "176196159b3975b2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Supplied link https://news.google.com/rss/articles/CBMirAFBVV95cUxOX3ZVSnNQcDliVUZHcFRpT3BKaWhsUVNHV2lNNHNnT0VwdnlneGZYNTFxdl9WVnhYVWwtQ3VLYmZCYVEzZFV6Q0Rla3JVc0JPTDZmTmVuMmo1TVVmem5PNFF3Tm1LWVcwSHJwdlhvdVM2OHk2SVliemFDQVlFMmhxZXJ1U2VFVVB1amEzaTEtU2 was not the substantive source used; instead recovered and read https://www.euronews.com/2026/11/19/the-dark-side-of-ai-us-data-centres-emit-more-carbon-than-all-of-denmark."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching content from https://www.euronews.com/2026/11/19/the-dark-side-of-ai-us-data-centres-emit-more-carbon-than-all-of-denmark; checked against scanner title/issuer/date and package evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_original_Euronews_article_plus_Harvard_study_attribution",
+            "url": "https://www.euronews.com/2026/11/19/the-dark-side-of-ai-us-data-centres-emit-more-carbon-than-all-of-denmark",
+            "title": "Euronews | US hyperscale data-centre emissions and European expansion",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Read full 19 November Euronews article; it cites the US-centred Nature Sustainability study, IEA EU power projections and an earlier September EU efficiency-label proposal."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: Euronews article is a comparative climate/data-centre explainer. Its primary Harvard Nature Sustainability measurement concerns 403 US hyperscale data centres, not European data-centre emissions. European expansion estimates, existing reporting requirements and protests are context, not a newly announced or implemented EU R&I measure. A Routes 1–3 also fail for this news article, which is not original Europe-focused analytical research."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "The dark side of AI: US data centres emit more carbon than all of Denmark"
+        },
+        "unset": [],
+        "reason": "Corrected against named issuing-body and substantive source records."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "US data-centre emissions study is not an EU finding",
+      "reader_what": "A Harvard study assessed emissions from large US facilities; Euronews considers implications for Europe.",
+      "reader_why": "",
+      "reader_more": "The comparison with Denmark refers to US emissions. Europe’s data-centre expansion, electricity constraints and previously proposed efficiency rules are contextual, not a new policy decision in this article.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Euronews juxtaposes a US Harvard data-centre carbon-emissions study with planned EU data-centre growth and infrastructure concerns.",
+        "method_or_basis": "Read full 19 November Euronews article; it cites the US-centred Nature Sustainability study, IEA EU power projections and an earlier September EU efficiency-label proposal.",
+        "qualification": "The Denmark-equivalent 25.7 Mt CO2 figure was estimated for US, not European, data centres; EU expansion projections are not observed carbon outcomes.",
+        "radar_relevance": "Broad context for EU compute infrastructure but no distinct new Europe-specific R&I change.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.euronews.com/2026/11/19/eu-commission-hit-by-large-scale-cyberattack-with-data-leakage-unknown",
+      "source_hash": "43f8b77d",
+      "identity_hash": "4deb139a7895a2d3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied link https://www.euronews.com/2026/11/19/eu-commission-hit-by-large-scale-cyberattack-with-data-leakage-unknown opened and matched the claimed work."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Checked substantial_web_text excerpt from https://www.euronews.com/2026/11/19/eu-commission-hit-by-large-scale-cyberattack-with-data-leakage-unknown, including its title, substantive argument and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_full_Euronews_story_plus_Commission_acknowledgement",
+            "url": "https://www.euronews.com/2026/11/19/eu-commission-hit-by-large-scale-cyberattack-with-data-leakage-unknown",
+            "title": "Euronews | European Commission cyberattack investigation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected identified original/source material; Read full 4,359-character original article included in package and corroborating Commission acknowledgement; compared with Reuters coverage of the same incident in A32."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_EU_RI_CHANGE",
+        "reason": "C: Verified Euronews coverage concerns an ongoing Commission internal IT-system cyberattack investigation, not a European science programme, R&I infrastructure, industrial technology funding or formal innovation-policy change. Unconfirmed leakage must not be stated as established."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate identified within assignment candidates."
+      },
+      "reader_title": "Commission investigates internal cyberattack",
+      "reader_what": "EU officials were assessing a reported attack; whether data had leaked was not known.",
+      "reader_why": "",
+      "reader_more": "The story does not document a new research-policy decision or research-infrastructure impact and is therefore excluded from the R&I changes queue.",
+      "deep_analysis": {
+        "work_kind": "verified source document, policy analysis or current event",
+        "research_question": "",
+        "main_finding": "Euronews reports the Commission was investigating a large-scale cyberattack, with information exposure undetermined at the time of publication.",
+        "method_or_basis": "Read full 4,359-character original article included in package and corroborating Commission acknowledgement; compared with Reuters coverage of the same incident in A32.",
+        "qualification": "Scope and any data leak were unknown; same incident as A32 but distinct independently authored report.",
+        "radar_relevance": "The cyberattack is not evidenced to have affected EU R&I programmes.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
