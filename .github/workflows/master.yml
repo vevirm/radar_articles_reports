@@ -68,10 +68,16 @@ jobs:
           target = Path(os.environ['REPORT'])
           if not target.is_file():
               raise SystemExit('Expected DOCX was not generated: ' + str(target))
-          headings = {p.text for p in Document(target).paragraphs if p.style.name.startswith('Heading')}
-          for expected in ('1. Trends', '2. Disruptions', '3. Risks', '4. Opportunities', '5. Scenarios'):
-              if not any(h.startswith(expected) for h in headings):
-                  raise SystemExit('DOCX missing section: ' + expected)
+          import re
+          headings = {p.text.strip() for p in Document(target).paragraphs
+                      if p.style.name.startswith('Heading')}
+          for number, section in ((1, 'trends'), (2, 'disruptions'), (3, 'risks'),
+                                  (4, 'opportunities'), (5, 'scenarios')):
+              # Allow descriptive heading variants, e.g. "5. Eight scenarios".
+              if not any(re.match(rf'^{number}\.\s+', h)
+                         and re.search(rf'\b{section}\b', h, re.IGNORECASE)
+                         for h in headings):
+                  raise SystemExit(f'DOCX missing section {number}: {section}')
           print('Validated internal DOCX: ' + str(target))
           PY
 
