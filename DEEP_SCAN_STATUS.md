@@ -7,29 +7,29 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **4071** (Main **2144** + Historical **1927**)
-- Automatic queue still needing V2 verification: **116** (Main **53** + Historical **63**)
-- Currently assigned to workers: **107** (Main **53** + Historical **54**)
+- Automatic queue still needing V2 verification: **135** (Main **68** + Historical **67**)
+- Currently assigned to workers: **107** (Main **68** + Historical **39**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
-- Automatic queue pending and not yet assigned: **9**
+- Automatic queue pending and not yet assigned: **28**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261120T110635Z-f38fd9da432a`
+- Current package: `worker-a-20261121T090318Z-8f537e1869c1`
 - Assigned unresolved records: **36**
-  1. `historical:id:aacd22ccdce7fbfa` — Navigating industrial policy | Bank for International Settlements
-  2. `historical:id:667c5c4d16bf5695` — Research on bibliometrics and the World’s leading universities
-  3. `historical:id:0f5efd7598fb9dce` — An alternative planetary future? Digital sovereignty frameworks and the decolonial option
-  4. `historical:id:11645886cd54286d` — How Discriminative Artificial Intelligence Drives Scenario Planning: A Systematic Literature Review and Research Agenda
-  5. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies — recovery attempt 3/3
-  6. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions — recovery attempt 3/3
-  7. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall? — recovery attempt 3/3
-  8. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors — recovery attempt 3/3
+  1. `link:https://www.institutmontaigne.org/en/publications/eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031` — The EU Semiconductor Geopolitical Risk Survey: Outlook for 2026–2031
+  2. `link:https://doi.org/10.82135/tno-2026-18698` — Why High-tech matters for Defence transformation
+  3. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148990` — Leveraging European values to strengthen technological sovereignty
+  4. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=df5d5884-e510-11f1-b745-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Preparation of the Council (Competitiveness (Internal Market, Industry, Research and Space)) on 3-4 December 2026 Regulation establishing a framework of measures for strengthening the Union innovation ecosystem (European Innovation Act) - Progress report - Publications Office of the EU
+  5. `link:https://doi.org/10.1177/14773708261504363` — ‘As open as possible, as closed as necessary’: Tensions between Open Science practices and the classification of contents in EU-funded criminological research
+  6. `link:https://news.google.com/rss/articles/CBMihwJBVV95cUxQR2RhbXFabTJPcTdabGlEbGZEc0NUczltRk1kdGRFRURZMHNRVmluZ2c5c0MwYUNvTDdJYUw1QnpEN3U4Q1RVNjBJWFAwWm5uQlRIMGpib2RqQkJMX1JfRlpMam5WRjBPTGhNcnhLQ1FRdjFiTkpsZU1xSTE3NEYyWkZjWTFyak1kM1Z3WXc1SEtvRmxoLXlGY19ZdlpZOEtmMDZqd1N4VHEzcXNRY0JQQW1UR0NFY1BPOWJ5U1dBak9BSHpDVEc3bERRSHpXSEJqNi1leTNIRUtjVVZ4WXdObUlpVmdrencyZlZJWjhrQzVFY3diTXhfZ09BSS1nYkZ4ZWl0M2N5cw?oc=5` — Fifth EU-Armenia Horizon Europe Joint Research and Innovation Committee meeting - European Commission
+  7. `link:https://news.google.com/rss/articles/CBMi3AFBVV95cUxQX25QLVRNX0lmZlU3UHctSGcwRWpkX1NsVFYyWXozN1pSeWpWMm4tY0s4bHRJdDdDRkVkSnBLWHhNNzdHMktjeUNCbWpJZjk2MjZHb2ZxampKakpJcXJVbFIzTTFRYkM0RThmeFFmdXZwb0llRFlPckxUcEpSRmIwZTMzWUZNY2xJR3JxcWVaSTg5VXlsRTdYLXF1Ukx0V2MxVVRrNVdZdFRYbklteUh2QVJzSmlRUmFybExzVU82OEVIdkJHWHI2TzJXT2Y4MmxoT1AtMGxJM0tTZFo2?oc=5` — European Digital Infrastructure Consortium launches today to strengthen digital sovereignty in education - Shaping Europe’s digital future
+  8. `link:https://news.google.com/rss/articles/CBMizwFBVV95cUxNdGNHQWp4YmRjSTJPd2lBeU9iZDk3Vno0a0N3aThBZWVzT2hIQ1h4WEFyNGpyUjlSMkhBaTZ2OVVaZGhHbUxBT1BoRmlrOXBoUzREMjk1SEhjU25iZ01TU3NzYjQtT1BxUDFiUG95bm5YMDZaYS13RGRuMmstMTBKRFRNYldpM2tTSl9PRGFxMS1qNE42RjhtbFB5UnNVWWRRMXNBXzVQX3RTWnZza2pGTWRVaGZaN3Q4enE3bTJXTHFmTk9yVHZVOFdfRTJnSW8?oc=5` — COP31: MEPs urge all parties to implement climate change commitments | Actualitate | Parlamentul European
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261120T110643Z-dd564bbb07a1`
+- Current package: `worker-b-20261121T090324Z-e09fdc6f9473`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system — recovery attempt 2/3
   2. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWkh2U0ZTM0NsazdmeVItUEF5R2JXS0VkeHFZLV9IdFZxNEpfdmhZSmNpQzRsbWE2bDJZU25LV25WZ3l5S2xibUgzMzhsdU9RR29kQ1FMbW5xN1lFcFVFU2ZveElib09TUG55VjFDVU41Vl83M1V3R0pyUnYzSFRFbzVBS3JnbVllQktRdDZKN0t3N3RWWHB6R1d5ZE9BdGFUSl9GN29GY2VSNTlyUlM0M09CTTdmbG5GUEpz?oc=5` — Funding Radar: Horizon Europe’s latest €111M funding call for AI
