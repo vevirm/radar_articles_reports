@@ -1,0 +1,58 @@
+MASTER — UPDATE ONLY THE ISOLATED MASTER FILES
+====================================
+
+This package is a NEW, isolated manual workflow. It never replaces the scanner,
+workbooks, Pages, or any existing workflow.
+
+1. EXTRACT this ZIP on your computer. Do not upload the ZIP unchanged.
+2. In your existing GitHub repository, upload the extracted files/folders while
+   preserving the complete paths (especially .github/workflows/master.yml).
+   These paths belong only to the master workflow. If you installed a previous master package, replace only its master-specific files; do not replace any other workflow or repository content.
+3. Commit them to your chosen branch.
+4. Click Actions > master > Run workflow. Default maximum: 28 per section.
+5. The run re-reads:
+      stuff/source_merit_ranking.xlsx
+      Relevance Stuff/relevance_stuff.xlsx
+   and generates / updates ONE Word document:
+      reasoning outcomes as planned/Master_Foresight_Reasoning.docx
+
+Only the DOCX is committed by the workflow. No publishing, scheduling,
+external AI calls or changes to the Excel files.
+
+For the detailed premises, formal causal/topological rules and exceptions,
+read master_reasoning/docs/RULEBOOK.md. For controls and setup,
+read master_reasoning/README.md.
+
+IMPORTANT PRIVACY LIMIT: If your existing GitHub repository is PUBLIC,
+the committed DOCX is publicly accessible directly on GitHub even though
+it is NOT sent to GitHub Pages. Keep the repository PRIVATE if you truly
+need private-use reasoning outcomes.
+
+SEPARATE RULES GUIDE (not included inside the outcomes report):
+master_reasoning/docs/GENERAL_RULES_PLAIN_LANGUAGE.docx
+master_reasoning/docs/GENERAL_RULES_PLAIN_LANGUAGE.md
+The output DOCX now uses a reading-first analytical style; the underlying inference gates remain unchanged.
+
+UPDATED EDITION — GRAPHICS AND COUNTERFORCES
+---------------------------------------------
+The trend chapter now shows independently inferred counter-directions and
+braking conditions. Drawn diagrams and the two scenario matrices update as
+part of each manual run. This package includes two new isolated modules:
+  master_reasoning/counterforces.py
+  master_reasoning/graphics.py
+The workflow installs Pillow in addition to python-docx. Images are embedded
+inside the same ONE generated DOCX and never written as separate repo files.
+The general explanation of the new rules is in
+  master_reasoning/docs/GENERAL_RULES_PLAIN_LANGUAGE.docx
+The formal versioned admission conditions are in docs/RULEBOOK.md.
+
+v7 note: This edition adds the isolated modules master_reasoning/frontier.py,
+master_reasoning/hyperedges.py and master_reasoning/config/hyperedges.json.
+These introduce broader exploratory, cross-domain AND-gated reasoning. The GitHub
+trigger remains manual; the only generated file is the same outcomes DOCX.
+
+V8 COLLECTIVE DYNAMICS LAYER
+- New: master_reasoning/collective.py and tests/test_collective.py.
+- The general rule explanation is in master_reasoning/docs/COLLECTIVE_DYNAMICS_RULES.md.
+- The output DOCX still contains the five original categories, not a new technical section.
+- Only the existing manually dispatched master action writes the output DOCX.
