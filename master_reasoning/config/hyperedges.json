@@ -1,0 +1,345 @@
+{
+  "version": "master.v7.experimental-interaction-atlas",
+  "description": "Conjunctive expert hypotheses. The verified workbooks must separately anchor all prerequisites. Mechanisms are conditional—not source-verified causal effects.",
+  "hyperedges": [
+    {
+      "id": "H01",
+      "inputs": [
+        "finance.strategic_investment",
+        "ai.adoption",
+        "green.innovation",
+        "industrial.competitiveness"
+      ],
+      "title": "Competitiveness may become an allocation problem, not a technology race",
+      "mechanism": "AI diffusion, green transition investment and strategic finance all attempt to raise competitiveness, but they must share managerial attention, scarce specialist capability and implementation capacity.",
+      "emergence": "Individual programmes can register success while the combination produces a new competition for integration capacity. The actor that allocates complementary resources becomes strategically more important than the actor that supplies any single technology.",
+      "counter": "Sectoral gains can remain independent if programmes use separate teams, budgets and capital goods; the shared bottleneck must be demonstrated.",
+      "test": "Compare incremental sectoral investment with cross-programme adoption delays, project switching and shortage of overlapping specialist teams.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H02",
+      "inputs": [
+        "research.infrastructure_access",
+        "talent.retention",
+        "funding.route",
+        "research.system_capacity"
+      ],
+      "title": "Research strength may migrate from laboratories to access brokers",
+      "mechanism": "Access to infrastructure, continuity of specialist staff and financing must combine before nominal research capacity becomes usable.",
+      "emergence": "A larger stock of funding, facilities and positions can create scarcity at their interfaces. Whoever brokers shared access, time allocation and interdisciplinary teams gains power over the direction of research, without owning any underlying asset.",
+      "counter": "Distributed access arrangements and transparent allocation can prevent new brokerage dependencies.",
+      "test": "Measure wait times for platforms, staff mobility and grant-to-use conversion across institutions rather than aggregate expenditure.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H03",
+      "inputs": [
+        "datacentre.energy_supply",
+        "compute.capacity",
+        "ai.adoption"
+      ],
+      "title": "AI sovereignty may relocate from computing hardware to energy scheduling",
+      "mechanism": "Computing capacity depends on reliable datacentre energy; AI adoption depends on computing access and utilization.",
+      "emergence": "Once computing facilities exist, control over interruptible power, load scheduling and access priority can become more decisive than the number of installed accelerators. An apparent hardware strategy can become an electricity allocation strategy.",
+      "counter": "Dedicated generation, unconstrained grids and flexible workloads can sever this dependency.",
+      "test": "Test whether power curtailments, grid contracts and queue priorities alter realized workload throughput.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H04",
+      "inputs": [
+        "research_security.screening",
+        "horizon.association",
+        "research.collaboration"
+      ],
+      "title": "Research openness could split into protected cooperation corridors",
+      "mechanism": "Association and research access widen the field of possible cooperation, while security screening changes the transactions and partners eligible to use it.",
+      "emergence": "Rather than a simple movement toward openness or closure, science networks can bifurcate: secured institutions preserve high-value cross-border routes while smaller actors exit because they cannot bear the verification cost. Network centrality shifts toward organizations capable of administering trust.",
+      "counter": "Proportionate and portable screening can avoid concentration; restrictions may not affect actual joint projects.",
+      "test": "Track approved consortia, refusals, legal/administrative costs and institution size in comparable calls.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H05",
+      "inputs": [
+        "compute.capacity",
+        "finance.venture_capital",
+        "innovation.deep_tech_startups"
+      ],
+      "title": "The scarce asset in deep tech may become privileged access, not money",
+      "mechanism": "Follow-on capital and compute supply must converge on firms at the right maturity and cost before deep-tech development scales.",
+      "emergence": "If computing is rationed, investors with preferential infrastructure relationships gain a nonfinancial advantage; technology competition starts to resemble an access-rights market. More venture capital alone can raise valuations without widening entry.",
+      "counter": "Open compute allocation and effective low-cost alternatives can preserve competitive access.",
+      "test": "Compare financing terms, usable compute hours, waiting time and survival rates for firms with and without preferred access.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H06",
+      "inputs": [
+        "digital.public_procurement",
+        "digital.infrastructure",
+        "digital.sovereignty"
+      ],
+      "title": "Public buying power could become the real architect of digital sovereignty",
+      "mechanism": "Infrastructure investment does not produce portability unless procurement converts compatibility requirements into operating deployments.",
+      "emergence": "Sovereignty becomes a contract-design outcome: the public buyer able to insist on migration, data rights and interfaces can weaken lock-in more effectively than another isolated platform build. Conversely, nominally sovereign infrastructure can reproduce dependence behind new procurement labels.",
+      "counter": "Interoperability may be available without procurement reform if open implementations emerge organically.",
+      "test": "Test observed vendor switching, portable workloads and enforceable interface rights after public procurement changes.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H07",
+      "inputs": [
+        "materials.advanced",
+        "materials.critical_raw",
+        "green.circular_economy"
+      ],
+      "title": "Material independence may replace mining dependence with qualification dependence",
+      "mechanism": "Substitutes and circular sourcing can both reduce raw-material exposure, but industrial users must qualify them through testing, warranty and process certification.",
+      "emergence": "A region could become less dependent on a particular mineral while becoming more dependent on the laboratories, testing standards and approval authorities that make substitutes bankable. The strategic bottleneck moves from geology to qualification.",
+      "counter": "Standardized performance tests and interoperable certification can prevent a new approval oligopoly.",
+      "test": "Check share of qualified substitutes in actual product lines, test capacity and accreditation concentration.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H08",
+      "inputs": [
+        "research.open_access",
+        "research.knowledge_transfer",
+        "innovation.system_performance"
+      ],
+      "title": "More open knowledge could strengthen the few actors best able to absorb it",
+      "mechanism": "Open dissemination broadens access to ideas but their conversion into innovation still requires organizations capable of adoption, financing and deployment.",
+      "emergence": "The paradox is that universal access can increase concentration: as informational barriers fall, scarce translational capacity and implementation infrastructure matter more. A very open research system can therefore coexist with highly unequal appropriation of its value.",
+      "counter": "If broad training and cheap deployment tools spread absorptive capacity, openness can instead democratize gains.",
+      "test": "Compare uptake across organization size, access to translational services, and concentration of commercial outcomes.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H09",
+      "inputs": [
+        "finance.venture_capital",
+        "innovation.regional_capacity",
+        "innovation.system_performance"
+      ],
+      "title": "Successful innovation policy could intensify regional divergence",
+      "mechanism": "Regional absorptive capability and financing availability jointly determine whether research and new technology turn into sustained innovation.",
+      "emergence": "Even nationally successful scale-up spending can polarize regional systems if investors follow already capable hubs. Peripheral areas may generate talent and ideas but lose the market and ownership layer to dense financial networks.",
+      "counter": "Place-based investing, local demand and dispersed technical infrastructure can reverse the centripetal effect.",
+      "test": "Track geographic flows of follow-on capital, start-up migration and realized regional value capture.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H10",
+      "inputs": [
+        "defence.innovation_funding",
+        "innovation.dual_use",
+        "industrial.competitiveness"
+      ],
+      "title": "The defence innovation boom could reorganise civilian industrial competition",
+      "mechanism": "Defence R&D creates dual-use technological routes while industrial capability depends on how those routes transmit to broader markets.",
+      "emergence": "A sector once treated as a specialist customer can become a dominant early buyer and setter of technical specifications; this changes what firms optimize, how talent is allocated and which technologies become commercially legible.",
+      "counter": "Export limitations, classified supply chains or distinct markets can block civilian transfer.",
+      "test": "Compare procurement-derived standards with civilian adoption, workforce mobility and cross-market company revenues.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H11",
+      "inputs": [
+        "export_control.regulation",
+        "innovation.dual_use",
+        "industrial.competitiveness"
+      ],
+      "title": "Controls designed for security could select the winners of industrial transition",
+      "mechanism": "Export controls shape reachable markets for dual-use technology while industrial competitiveness depends on scale, partnerships and capability transmission.",
+      "emergence": "Compliance becomes an industrial input. Large firms with legal and licensing systems can preserve routes that smaller innovators abandon; restrictions could concentrate capability within a few approved networks even when aggregate industrial spending rises.",
+      "counter": "Clear licenses and common support services can preserve smaller firms’ participation; effects must be measured, not presumed.",
+      "test": "Compare license delays, partner exits, export market substitutions and company size among affected innovators.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H12",
+      "inputs": [
+        "health.data_infrastructure",
+        "ai.research_governance",
+        "ai.research_use"
+      ],
+      "title": "The most valuable AI research infrastructure may be a permission architecture",
+      "mechanism": "Research-grade health data and AI governance must both become usable to create reproducible and lawful AI research capability.",
+      "emergence": "The decisive innovation asset may be the institutional mechanism granting trustworthy analysis rights, not the data store or algorithm itself. Countries with modest compute but efficient consent and governance arrangements could outperform larger infrastructure builders.",
+      "counter": "If data access is effectively open or unusable despite governance, that institutional premium disappears.",
+      "test": "Track time-to-approved analysis, dataset re-use, secure-enclave throughput and reproducibility of studies.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H13",
+      "inputs": [
+        "quantum.testing_infrastructure",
+        "quantum.equipment",
+        "quantum.machine"
+      ],
+      "title": "Quantum leadership could shift from devices to test intermediation",
+      "mechanism": "Equipment innovation and accessible testing infrastructure must combine for quantum prototypes to become comparable and usable.",
+      "emergence": "Early quantum advantage could accrue to institutions that define benchmarks, verification procedures and test access, creating a market-making role that survives even when specific device architectures lose.",
+      "counter": "Industry-wide open benchmarks can prevent gatekeeping or make proprietary testing unimportant.",
+      "test": "Test cross-device benchmarking adoption, third-party certification demand and access to test facilities.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H14",
+      "inputs": [
+        "quantum.standards",
+        "quantum.communication_infrastructure",
+        "digital.infrastructure"
+      ],
+      "title": "Quantum-secure links could reproduce the interoperability problem they promise to solve",
+      "mechanism": "Quantum communication standards must operate through existing digital infrastructure to deliver interoperable security.",
+      "emergence": "A security upgrade can create a new dependency on compatibility layers, certification and trusted intermediaries. Protecting transmission may redistribute power toward whoever controls the transition rules.",
+      "counter": "Open protocols and vendor-independent certification can avoid proprietary intermediaries.",
+      "test": "Check portability of secure links across vendors, switching costs and standard-setting representation.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H15",
+      "inputs": [
+        "cybersecurity.sme_resilience",
+        "ai.governance",
+        "ai.adoption"
+      ],
+      "title": "AI adoption could turn cyber resilience into a market-access threshold",
+      "mechanism": "Governance and cyber capability are complementary requirements for firms that want to deploy AI at scale.",
+      "emergence": "If assurance costs rise faster than low-cost compliance tools spread, small firms may be excluded from the productive AI frontier even as national AI adoption rises. The policy’s measured success and market structure can move in opposite directions.",
+      "counter": "Shared assurance tooling or pooled cyber services can prevent a size-based access divide.",
+      "test": "Measure AI uptake, audit cost and breach-adjusted performance by firm size.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H16",
+      "inputs": [
+        "research.assessment",
+        "talent.career_structure",
+        "talent.retention"
+      ],
+      "title": "Research assessment reform could reorganise the geography of scientific careers",
+      "mechanism": "Assessment incentives and career structures jointly determine mobility and long-term retention of skilled researchers.",
+      "emergence": "A change in what counts as valuable research can shift talent flows even without changing total science budgets. Places that recognize interdisciplinary and applied work may pull talent away from prestigious but rigid systems.",
+      "counter": "Mobility costs, pay differences and immigration constraints may dominate evaluation rules.",
+      "test": "Track career moves after evaluation changes, rejected offers and cross-discipline appointment success.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H17",
+      "inputs": [
+        "ai.public_sector_capacity",
+        "ai.governance",
+        "ai.adoption"
+      ],
+      "title": "The public sector could become the unexpected infrastructure owner in AI markets",
+      "mechanism": "Public implementation capacity and governance determine whether AI is procured, evaluated and deployed across society.",
+      "emergence": "As rules become operational, the ability to test, authorize and procure AI becomes shared infrastructure. Public organizations may influence market design more through approval and evaluation pipelines than by inventing models.",
+      "counter": "Private standards and decentralized procurement can reduce this role.",
+      "test": "Test adoption rates relative to evaluation infrastructure, public procurement specifications and provider diversity.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H18",
+      "inputs": [
+        "green.circular_economy",
+        "funding.route",
+        "green.innovation"
+      ],
+      "title": "Circular innovation could be limited by market plumbing rather than technology",
+      "mechanism": "Financial incentives and circular production technology must align with downstream demand, collection and procurement markets.",
+      "emergence": "The system could accumulate viable circular technologies without a circular economy if sorting, reverse logistics and product demand lag. The next wave of firms may be infrastructure coordinators rather than inventors of materials.",
+      "counter": "High-value closed-loop supply chains may solve the coordination problem without shared infrastructure.",
+      "test": "Track repeat procurement of circular products, waste recovery volumes and certified material re-entry.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H19",
+      "inputs": [
+        "research.system_governance",
+        "research.system_capacity",
+        "innovation.system_performance"
+      ],
+      "title": "More research funding could create an adaptive-governance gap",
+      "mechanism": "Governance capability must synchronize organizational coordination with expanded research capacity for the wider innovation system to absorb results.",
+      "emergence": "A state can become more scientifically endowed while becoming less agile in combining institutions. The rare capability is not conducting more research but continuously redirecting interfaces as priorities change.",
+      "counter": "Autonomous institutions and effective industry intermediaries may coordinate without centralized governance.",
+      "test": "Measure lag from priority change to collaboration formation, deployment and reallocation of shared infrastructure.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H20",
+      "inputs": [
+        "digital.international_partnerships",
+        "horizon.association",
+        "research.collaboration"
+      ],
+      "title": "The scarce resource in international science may become reciprocal access rights",
+      "mechanism": "Digital partnerships and programme association provide distinct cooperative routes, which become useful only through actual shared projects and access arrangements.",
+      "emergence": "When political cooperation expands but technology regimes diverge, the tradable asset becomes the right to interoperate under trusted rules. Institutions controlling reciprocal access can gain leverage greater than their own research scale.",
+      "counter": "Automatic programme eligibility and open technical standards can limit brokerage costs.",
+      "test": "Compare permitted joint facilities, access delays, digital interoperability and real consortium formation.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H21",
+      "inputs": [
+        "horizon.budget_2028_34",
+        "funding.route",
+        "talent.retention",
+        "research.system_capacity"
+      ],
+      "title": "Large research budgets could create a staffing trap",
+      "mechanism": "Future budget commitments, accessible funding routes and retained talent jointly condition usable system capacity.",
+      "emergence": "A rapid expansion of committed money without matching specialist labour can inflate salaries, increase grant-writing competition and move people among institutions rather than increase total research throughput.",
+      "counter": "A broad talent supply response and administrative simplification may absorb expansion.",
+      "test": "Measure researcher hours available for science, vacancy duration, salary pressure and output per deployed grant.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H22",
+      "inputs": [
+        "research.infrastructure_access",
+        "finance.venture_capital",
+        "innovation.system_performance"
+      ],
+      "title": "Access institutions could become the next class of innovation investors",
+      "mechanism": "Commercial finance and research facilities converge when growth firms need scarce experimental or testing infrastructure.",
+      "emergence": "Infrastructure operators may acquire venture-like power without providing equity: allocating a scarce test slot can determine which firms achieve certification or commercialization milestones first.",
+      "counter": "Abundant testing capacity and transparent priority allocation can prevent such asymmetry.",
+      "test": "Compare commercialization rates against equipment access priority and financing advantages.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H23",
+      "inputs": [
+        "finance.strategic_investment",
+        "green.innovation",
+        "industrial.competitiveness"
+      ],
+      "title": "Green industrial strategy could reward interoperability over subsidies",
+      "mechanism": "Strategic capital and green technology only deliver competitiveness if firms can integrate the new systems into production networks.",
+      "emergence": "The profitable layer may move away from individual subsidized installations toward firms that connect production, measurement and switching interfaces across existing industries.",
+      "counter": "Highly modular technologies and competitive service providers can spread this value rather than concentrate it.",
+      "test": "Measure cross-firm use of common technical interfaces, switching costs and operational productivity.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    },
+    {
+      "id": "H24",
+      "inputs": [
+        "research_security.screening",
+        "research.knowledge_transfer",
+        "innovation.system_performance"
+      ],
+      "title": "Protecting scientific assets could alter what counts as an innovation intermediary",
+      "mechanism": "Security screening can limit some research transfers even as innovation performance relies on moving knowledge into industry.",
+      "emergence": "Value may shift from open brokers of expertise to institutions that can create lawful, auditable channels between restricted knowledge and approved users. A system could become simultaneously more secure and less discoverable to outsiders.",
+      "counter": "Clear safe-harbour rules and technical safeguards may enable broad transfer without concentration.",
+      "test": "Track transfer agreements, licensing delay, collaboration networks and size distribution of approved intermediaries.",
+      "status": "analyst-authored conjectural conjunctive mechanism; not an empirically measured higher-order interaction"
+    }
+  ]
+}

@@ -1,0 +1,646 @@
+{
+  "version": "master.2026-11-21.1",
+  "status": "analyst-specified, conditional model assumptions; NOT empirical causal findings",
+  "bridges": [
+    {
+      "id": "B01",
+      "from": "digital.infrastructure",
+      "to": "digital.sovereignty",
+      "relation": "enables",
+      "condition": "infrastructure is interoperable, portable, deployed and demonstrably reduces vendor lock-in",
+      "risk_if_absent": "Shared infrastructure could coexist with continuing dependence on proprietary digital architectures.",
+      "indicator": "Measured cross-provider portability and standards adoption; actual workloads migrated"
+    },
+    {
+      "id": "B02",
+      "from": "compute.capacity",
+      "to": "ai.adoption",
+      "relation": "enables",
+      "condition": "accessible computing is affordable, utilized and complemented by data and staff skills",
+      "risk_if_absent": "Announced computing supply does not imply usable AI capability or productivity.",
+      "indicator": "Utilisation, access wait-times, realised firm uptake and skill availability"
+    },
+    {
+      "id": "B03",
+      "from": "compute.gigafactory",
+      "to": "compute.access_time",
+      "relation": "enables",
+      "condition": "announced facilities become operational and actually improve allocation/wait times",
+      "risk_if_absent": "AI infrastructure programmes could expand headline capacity without equitable access.",
+      "indicator": "Operational facilities and independent allocation/wait-time statistics"
+    },
+    {
+      "id": "B04",
+      "from": "funding.route",
+      "to": "innovation.deep_tech_startups",
+      "relation": "enables",
+      "condition": "awards reach firms and translate into sustained scaling finance",
+      "risk_if_absent": "More calls for funding may not close scale-up gaps.",
+      "indicator": "Executed awards, follow-on rounds and verified firm growth"
+    },
+    {
+      "id": "B05",
+      "from": "finance.venture_capital",
+      "to": "innovation.deep_tech_startups",
+      "relation": "enables",
+      "condition": "financing reaches underfunded firms on durable terms",
+      "risk_if_absent": "Investment headlines can hide sector concentration and uneven access.",
+      "indicator": "Distribution of investment by stage and survival/scale-up outcomes"
+    },
+    {
+      "id": "B06",
+      "from": "materials.advanced",
+      "to": "materials.critical_raw",
+      "relation": "substitutes",
+      "condition": "substitutes pass performance, production-scale, lifecycle and cost validation",
+      "risk_if_absent": "Promising substitutes could fail to reduce actual supply vulnerability.",
+      "indicator": "Qualified materials in commercial use and verified import dependence"
+    },
+    {
+      "id": "B07",
+      "from": "research_security.screening",
+      "to": "research.openness",
+      "relation": "constrains",
+      "condition": "new controls affect real joint projects, data, staff or equipment access",
+      "risk_if_absent": "Administrative compliance may raise transaction costs even without formal bans.",
+      "indicator": "Application refusals, delays and partner withdrawals, compared with prevented incidents"
+    },
+    {
+      "id": "B08",
+      "from": "export_control.regulation",
+      "to": "research.collaboration",
+      "relation": "constrains",
+      "condition": "restrictions apply to research-relevant partners, goods or knowledge transfers",
+      "risk_if_absent": "International joint work may be rerouted or delayed.",
+      "indicator": "Permit decisions, joint-project cancellations and replacement partners"
+    },
+    {
+      "id": "B09",
+      "from": "horizon.association",
+      "to": "research.collaboration",
+      "relation": "enables",
+      "condition": "association results in eligible participation and awarded research cooperation",
+      "risk_if_absent": "Signed association need not translate into participation gains.",
+      "indicator": "Award data and new consortia with associated partners"
+    },
+    {
+      "id": "B10",
+      "from": "research.infrastructure_access",
+      "to": "research.system_capacity",
+      "relation": "enables",
+      "condition": "increased access is sustained and benefits additional users and institutions",
+      "risk_if_absent": "Infrastructure access announcements may not yield research capacity gains.",
+      "indicator": "User-days, waitlists and independently assessed scientific output"
+    },
+    {
+      "id": "B11",
+      "from": "digital.public_procurement",
+      "to": "digital.sovereignty",
+      "relation": "enables",
+      "condition": "procurement is implemented with open, contestable interoperability requirements",
+      "risk_if_absent": "Preferential procurement may replace one supplier dependency with another.",
+      "indicator": "Contract awards, vendor portability and competitive supplier base"
+    },
+    {
+      "id": "B12",
+      "from": "research_security.screening",
+      "to": "research.collaboration",
+      "relation": "constrains",
+      "condition": "screening changes eligible partners or approved research activities",
+      "risk_if_absent": "Security responses could unintentionally reduce otherwise beneficial collaboration.",
+      "indicator": "Screening outcomes, material collaboration losses and security gains"
+    },
+    {
+      "id": "B13",
+      "from": "finance.strategic_investment",
+      "to": "industrial.competitiveness",
+      "relation": "enables",
+      "condition": "committed investment results in operational productive capacity",
+      "risk_if_absent": "Capital commitments may not generate productive competitiveness.",
+      "indicator": "Capacity commissioned, exports or other independent competitiveness measures"
+    },
+    {
+      "id": "B14",
+      "from": "research.open_access",
+      "to": "research.knowledge_transfer",
+      "relation": "enables",
+      "condition": "usable reuse rights and dissemination translate into actual uptake",
+      "risk_if_absent": "Wider access may not by itself improve transfer or industrial adoption.",
+      "indicator": "Documented reuse, licensing and knowledge-transfer outcomes"
+    },
+    {
+      "id": "EX015",
+      "from": "ai.governance",
+      "to": "ai.adoption",
+      "relation": "enables",
+      "condition": "Conformity obligations are clear and affordable for adopters",
+      "risk_if_absent": "Expansion in ai governance may fail to deliver improvements in ai adoption without the specified conditions.",
+      "indicator": "Measured adoption by firm size and compliance burden"
+    },
+    {
+      "id": "EX016",
+      "from": "digital.governance",
+      "to": "digital.sovereignty",
+      "relation": "enables",
+      "condition": "Rules are enforceable and reduce proprietary concentration",
+      "risk_if_absent": "Expansion in digital governance may fail to deliver improvements in digital sovereignty without the specified conditions.",
+      "indicator": "Enforcement outcomes, switching costs and market concentration"
+    },
+    {
+      "id": "EX017",
+      "from": "digital.infrastructure",
+      "to": "ai.adoption",
+      "relation": "enables",
+      "condition": "Infrastructure is accessible to firms rather than merely commissioned",
+      "risk_if_absent": "Expansion in digital infrastructure may fail to deliver improvements in ai adoption without the specified conditions.",
+      "indicator": "AI usage by firms and infrastructure utilization"
+    },
+    {
+      "id": "EX018",
+      "from": "compute.capacity",
+      "to": "innovation.deep_tech_startups",
+      "relation": "enables",
+      "condition": "Compute access reaches scale-ups on commercially viable terms",
+      "risk_if_absent": "Expansion in compute capacity may fail to deliver improvements in innovation deep_tech_startups without the specified conditions.",
+      "indicator": "Scale-up compute uptake and company growth"
+    },
+    {
+      "id": "EX019",
+      "from": "ai.public_sector_capacity",
+      "to": "ai.adoption",
+      "relation": "enables",
+      "condition": "Government procurement expands supplier competition and evaluated performance",
+      "risk_if_absent": "Expansion in ai public_sector_capacity may fail to deliver improvements in ai adoption without the specified conditions.",
+      "indicator": "Procurement awards, service outcomes and supplier diversity"
+    },
+    {
+      "id": "EX020",
+      "from": "chips.fab",
+      "to": "industrial.competitiveness",
+      "relation": "enables",
+      "condition": "Fabrication capacity is operational at viable yields and competitive costs",
+      "risk_if_absent": "Expansion in chips fab may fail to deliver improvements in industrial competitiveness without the specified conditions.",
+      "indicator": "Production yields, cost per wafer, downstream demand"
+    },
+    {
+      "id": "EX021",
+      "from": "chips.pilot_line",
+      "to": "industrial.technology_complexity",
+      "relation": "enables",
+      "condition": "Pilots enable production-grade transfer rather than isolated demonstrations",
+      "risk_if_absent": "Expansion in chips pilot_line may fail to deliver improvements in industrial technology_complexity without the specified conditions.",
+      "indicator": "Transfer contracts, qualified processes and export performance"
+    },
+    {
+      "id": "EX022",
+      "from": "chips.international_cooperation",
+      "to": "industrial.competitiveness",
+      "relation": "enables",
+      "condition": "International arrangements result in secure supply and practical transfer",
+      "risk_if_absent": "Expansion in chips international_cooperation may fail to deliver improvements in industrial competitiveness without the specified conditions.",
+      "indicator": "Effective supply diversification and verified technology transfer"
+    },
+    {
+      "id": "EX023",
+      "from": "research.infrastructure",
+      "to": "research.system_capacity",
+      "relation": "enables",
+      "condition": "Infrastructure is accessible and used by additional researchers",
+      "risk_if_absent": "Expansion in research infrastructure may fail to deliver improvements in research system_capacity without the specified conditions.",
+      "indicator": "Cross-institutional user-days and published outputs"
+    },
+    {
+      "id": "EX024",
+      "from": "funding.route",
+      "to": "research.system_capacity",
+      "relation": "enables",
+      "condition": "Awards reach institutions and permit sustained research operations",
+      "risk_if_absent": "Expansion in funding route may fail to deliver improvements in research system_capacity without the specified conditions.",
+      "indicator": "Executed awards and verified research capacity gains"
+    },
+    {
+      "id": "EX025",
+      "from": "funding.route",
+      "to": "innovation.regional_capacity",
+      "relation": "enables",
+      "condition": "Awards reach peripheral regions with complementary capabilities",
+      "risk_if_absent": "Expansion in funding route may fail to deliver improvements in innovation regional_capacity without the specified conditions.",
+      "indicator": "Regional distribution, retention and sustained follow-on investment"
+    },
+    {
+      "id": "EX026",
+      "from": "funding.route",
+      "to": "green.innovation",
+      "relation": "enables",
+      "condition": "Funded projects lead to validated production and demand",
+      "risk_if_absent": "Expansion in funding route may fail to deliver improvements in green innovation without the specified conditions.",
+      "indicator": "Commercial deployment, verified emissions reductions and market share"
+    },
+    {
+      "id": "EX027",
+      "from": "research.open_access",
+      "to": "research.collaboration",
+      "relation": "enables",
+      "condition": "Reuse rights and data quality make international collaboration practical",
+      "risk_if_absent": "Expansion in research open_access may fail to deliver improvements in research collaboration without the specified conditions.",
+      "indicator": "Cross-institutional reproducibility and new joint projects"
+    },
+    {
+      "id": "EX028",
+      "from": "research.assessment",
+      "to": "talent.retention",
+      "relation": "enables",
+      "condition": "Reform rewards reproducibility and nontraditional career paths in practice",
+      "risk_if_absent": "Expansion in research assessment may fail to deliver improvements in talent retention without the specified conditions.",
+      "indicator": "Career transitions, retention and implemented assessment reforms"
+    },
+    {
+      "id": "EX029",
+      "from": "talent.career_structure",
+      "to": "talent.retention",
+      "relation": "enables",
+      "condition": "Employment protections and career pathways are actually adopted",
+      "risk_if_absent": "Expansion in talent career_structure may fail to deliver improvements in talent retention without the specified conditions.",
+      "indicator": "Longitudinal researcher retention and contract stability"
+    },
+    {
+      "id": "EX030",
+      "from": "talent.recruitment_abroad",
+      "to": "talent.retention",
+      "relation": "enables",
+      "condition": "Recruitment converts into durable employment and career development",
+      "risk_if_absent": "Expansion in talent recruitment_abroad may fail to deliver improvements in talent retention without the specified conditions.",
+      "indicator": "Researcher retention after two to five years"
+    },
+    {
+      "id": "EX031",
+      "from": "research.system_governance",
+      "to": "research.system_capacity",
+      "relation": "enables",
+      "condition": "Governance reforms are enacted and reduce administrative frictions",
+      "risk_if_absent": "Expansion in research system_governance may fail to deliver improvements in research system_capacity without the specified conditions.",
+      "indicator": "Time-to-award, research outputs and adoption of new procedures"
+    },
+    {
+      "id": "EX032",
+      "from": "research.infrastructure_access",
+      "to": "innovation.system_performance",
+      "relation": "enables",
+      "condition": "User access enables meaningful technology validation and transfer",
+      "risk_if_absent": "Expansion in research infrastructure_access may fail to deliver improvements in innovation system_performance without the specified conditions.",
+      "indicator": "New industry users, knowledge transfer and commercialization metrics"
+    },
+    {
+      "id": "EX033",
+      "from": "finance.strategic_investment",
+      "to": "green.innovation",
+      "relation": "enables",
+      "condition": "Capital is released and funds operational deployment",
+      "risk_if_absent": "Expansion in finance strategic_investment may fail to deliver improvements in green innovation without the specified conditions.",
+      "indicator": "Commissioned green assets and verified adoption measures"
+    },
+    {
+      "id": "EX034",
+      "from": "green.circular_economy",
+      "to": "materials.critical_raw",
+      "relation": "enables",
+      "condition": "Recovery and reuse deliver commercial-quality material at scale",
+      "risk_if_absent": "Expansion in green circular_economy may fail to deliver improvements in materials critical_raw without the specified conditions.",
+      "indicator": "Secondary-material share and reduced supply exposure"
+    },
+    {
+      "id": "EX035",
+      "from": "materials.advanced",
+      "to": "industrial.competitiveness",
+      "relation": "enables",
+      "condition": "New materials pass cost, safety and industrial qualification",
+      "risk_if_absent": "Expansion in materials advanced may fail to deliver improvements in industrial competitiveness without the specified conditions.",
+      "indicator": "Qualified components at volume and production competitiveness"
+    },
+    {
+      "id": "EX036",
+      "from": "critical_infrastructure.resilience",
+      "to": "industrial.competitiveness",
+      "relation": "enables",
+      "condition": "Resilience investment improves continuity instead of adding costs only",
+      "risk_if_absent": "Expansion in critical_infrastructure resilience may fail to deliver improvements in industrial competitiveness without the specified conditions.",
+      "indicator": "Downtime, supplier concentration and production metrics"
+    },
+    {
+      "id": "EX037",
+      "from": "datacentre.energy_supply",
+      "to": "compute.capacity",
+      "relation": "enables",
+      "condition": "Power supply is timely, reliable and economically compatible with capacity expansion",
+      "risk_if_absent": "Expansion in datacentre energy_supply may fail to deliver improvements in compute capacity without the specified conditions.",
+      "indicator": "Connected megawatts, utilization, electricity costs"
+    },
+    {
+      "id": "EX038",
+      "from": "datacentre.permitting",
+      "to": "compute.capacity",
+      "relation": "enables",
+      "condition": "Permit throughput enables timely operation without environmental failure",
+      "risk_if_absent": "Expansion in datacentre permitting may fail to deliver improvements in compute capacity without the specified conditions.",
+      "indicator": "Actual commissioning delays and permit completion rates"
+    },
+    {
+      "id": "EX039",
+      "from": "cybersecurity.sme_resilience",
+      "to": "ai.adoption",
+      "relation": "enables",
+      "condition": "Risk mitigation makes AI deployment dependable for small firms",
+      "risk_if_absent": "Expansion in cybersecurity sme_resilience may fail to deliver improvements in ai adoption without the specified conditions.",
+      "indicator": "Incidents, insurance terms and sustained SME usage"
+    },
+    {
+      "id": "EX040",
+      "from": "health.data_infrastructure",
+      "to": "ai.research_use",
+      "relation": "enables",
+      "condition": "Consent, interoperability and access controls permit valid reuse",
+      "risk_if_absent": "Expansion in health data_infrastructure may fail to deliver improvements in ai research_use without the specified conditions.",
+      "indicator": "Approved research uses and independent reproducibility"
+    },
+    {
+      "id": "EX041",
+      "from": "ai.research_governance",
+      "to": "ai.research_use",
+      "relation": "enables",
+      "condition": "Safeguards reduce integrity problems without blocking legitimate uptake",
+      "risk_if_absent": "Expansion in ai research_governance may fail to deliver improvements in ai research_use without the specified conditions.",
+      "indicator": "Validated AI-assisted research and reported integrity incidents"
+    },
+    {
+      "id": "EX042",
+      "from": "quantum.testing_infrastructure",
+      "to": "quantum.machine",
+      "relation": "enables",
+      "condition": "Testing infrastructure becomes repeatable and accessible to suppliers",
+      "risk_if_absent": "Expansion in quantum testing_infrastructure may fail to deliver improvements in quantum machine without the specified conditions.",
+      "indicator": "Benchmark repeatability and externally validated prototypes"
+    },
+    {
+      "id": "EX043",
+      "from": "quantum.standards",
+      "to": "quantum.communication_infrastructure",
+      "relation": "enables",
+      "condition": "Standards converge and implementation interoperability is demonstrated",
+      "risk_if_absent": "Expansion in quantum standards may fail to deliver improvements in quantum communication_infrastructure without the specified conditions.",
+      "indicator": "Independent cross-vendor interoperability tests"
+    },
+    {
+      "id": "EX044",
+      "from": "quantum.equipment",
+      "to": "quantum.machine",
+      "relation": "enables",
+      "condition": "Equipment reliability supports repeatable operation",
+      "risk_if_absent": "Expansion in quantum equipment may fail to deliver improvements in quantum machine without the specified conditions.",
+      "indicator": "Benchmark stability and qualified operational systems"
+    },
+    {
+      "id": "EX045",
+      "from": "digital.international_partnerships",
+      "to": "research.collaboration",
+      "relation": "enables",
+      "condition": "Agreements translate into funded and legally feasible research projects",
+      "risk_if_absent": "Expansion in digital international_partnerships may fail to deliver improvements in research collaboration without the specified conditions.",
+      "indicator": "Joint awards, permits and completed projects"
+    },
+    {
+      "id": "EX046",
+      "from": "innovation.dual_use",
+      "to": "industrial.competitiveness",
+      "relation": "enables",
+      "condition": "Dual-use funding translates into civilian-compatible industrial capacity",
+      "risk_if_absent": "Expansion in innovation dual_use may fail to deliver improvements in industrial competitiveness without the specified conditions.",
+      "indicator": "Commercialization, certification and civilian spillovers"
+    },
+    {
+      "id": "EX047",
+      "from": "defence.innovation_funding",
+      "to": "innovation.dual_use",
+      "relation": "enables",
+      "condition": "Funding supports procurement-tested dual-use companies",
+      "risk_if_absent": "Expansion in defence innovation_funding may fail to deliver improvements in innovation dual_use without the specified conditions.",
+      "indicator": "Delivered procurements and independent spin-off uptake"
+    },
+    {
+      "id": "EX048",
+      "from": "defence.drone_research",
+      "to": "defence.drone_capability",
+      "relation": "enables",
+      "condition": "Demonstrations translate into validated field capabilities",
+      "risk_if_absent": "Expansion in defence drone_research may fail to deliver improvements in defence drone_capability without the specified conditions.",
+      "indicator": "Independent operational trials and deployment outcomes"
+    },
+    {
+      "id": "EX049",
+      "from": "horizon.budget_2028_34",
+      "to": "research.system_capacity",
+      "relation": "enables",
+      "condition": "Proposed budget is adopted and converted into accessible programmes",
+      "risk_if_absent": "Expansion in horizon budget_2028_34 may fail to deliver improvements in research system_capacity without the specified conditions.",
+      "indicator": "Adopted budget, awarded grants and output measures"
+    },
+    {
+      "id": "EX050",
+      "from": "research.public_support",
+      "to": "research.system_governance",
+      "relation": "enables",
+      "condition": "Public legitimacy improves implementation rather than slogans alone",
+      "risk_if_absent": "Expansion in research public_support may fail to deliver improvements in research system_governance without the specified conditions.",
+      "indicator": "Survey trends and enacted governance decisions"
+    },
+    {
+      "id": "EX051",
+      "from": "research.system_capacity",
+      "to": "innovation.system_performance",
+      "relation": "enables",
+      "condition": "Research capacity is translated into usable knowledge and technology",
+      "risk_if_absent": "Expansion in research system_capacity may fail to deliver improvements in innovation system_performance without the specified conditions.",
+      "indicator": "Industry collaboration and audited commercialization results"
+    },
+    {
+      "id": "EX052",
+      "from": "green.innovation",
+      "to": "industrial.competitiveness",
+      "relation": "enables",
+      "condition": "Green technologies attain demand and manufacturing scale",
+      "risk_if_absent": "Expansion in green innovation may fail to deliver improvements in industrial competitiveness without the specified conditions.",
+      "indicator": "Verified exports, industrial deployment and productivity"
+    },
+    {
+      "id": "EX053",
+      "from": "research.knowledge_transfer",
+      "to": "innovation.system_performance",
+      "relation": "enables",
+      "condition": "Knowledge transfer generates documented industry uptake",
+      "risk_if_absent": "Expansion in research knowledge_transfer may fail to deliver improvements in innovation system_performance without the specified conditions.",
+      "indicator": "Licenses, spinouts and productivity impacts"
+    },
+    {
+      "id": "EX054",
+      "from": "innovation.regional_capacity",
+      "to": "innovation.system_performance",
+      "relation": "enables",
+      "condition": "Regional capabilities connect to firms and supply chains",
+      "risk_if_absent": "Expansion in innovation regional_capacity may fail to deliver improvements in innovation system_performance without the specified conditions.",
+      "indicator": "Regional scaling and firm innovation outcomes"
+    },
+    {
+      "id": "EX055",
+      "from": "ai.adoption",
+      "to": "industrial.competitiveness",
+      "relation": "enables",
+      "condition": "Adoption improves productive processes rather than only reported activity",
+      "risk_if_absent": "Expansion in ai adoption may fail to deliver improvements in industrial competitiveness without the specified conditions.",
+      "indicator": "Firm-level productivity and performance outcomes"
+    },
+    {
+      "id": "EX056",
+      "from": "ai.research_use",
+      "to": "research.system_efficiency",
+      "relation": "enables",
+      "condition": "AI results are valid, reproducible and cost-efficient",
+      "risk_if_absent": "Expansion in ai research_use may fail to deliver improvements in research system_efficiency without the specified conditions.",
+      "indicator": "Reproduction studies and measured researcher time saving"
+    },
+    {
+      "id": "EX057",
+      "from": "research.openness",
+      "to": "research.knowledge_transfer",
+      "relation": "enables",
+      "condition": "Open research output reaches downstream organizations",
+      "risk_if_absent": "Expansion in research openness may fail to deliver improvements in research knowledge_transfer without the specified conditions.",
+      "indicator": "Independent reuse or transfer metrics"
+    },
+    {
+      "id": "EX058",
+      "from": "methods.foresight",
+      "to": "research.system_governance",
+      "relation": "enables",
+      "condition": "Foresight inputs shape actual policy decisions",
+      "risk_if_absent": "Expansion in methods foresight may fail to deliver improvements in research system_governance without the specified conditions.",
+      "indicator": "Decisions linked to scanning findings and later outcomes"
+    },
+    {
+      "id": "EX059",
+      "from": "methods.scenario",
+      "to": "research.system_governance",
+      "relation": "enables",
+      "condition": "Scenario exercises lead to explicit robust contingent decisions",
+      "risk_if_absent": "Expansion in methods scenario may fail to deliver improvements in research system_governance without the specified conditions.",
+      "indicator": "Policy choices and measured performance under shocks"
+    },
+    {
+      "id": "EX060",
+      "from": "methods.horizon_scanning",
+      "to": "methods.anticipatory_governance",
+      "relation": "enables",
+      "condition": "Signal monitoring is built into decision routines",
+      "risk_if_absent": "Expansion in methods horizon_scanning may fail to deliver improvements in methods anticipatory_governance without the specified conditions.",
+      "indicator": "Documented responses to early warnings"
+    },
+    {
+      "id": "EX061",
+      "from": "green.circular_economy",
+      "to": "green.innovation",
+      "relation": "enables",
+      "condition": "Circularity lowers verified resource and waste costs",
+      "risk_if_absent": "Expansion in green circular_economy may fail to deliver improvements in green innovation without the specified conditions.",
+      "indicator": "Commercial recovery and lifecycle assessment"
+    },
+    {
+      "id": "EX062",
+      "from": "horizon.association",
+      "to": "horizon.access",
+      "relation": "enables",
+      "condition": "Association improves eligible participation in practice",
+      "risk_if_absent": "Expansion in horizon association may fail to deliver improvements in horizon access without the specified conditions.",
+      "indicator": "Awards and eligibility by partner country"
+    },
+    {
+      "id": "EX063",
+      "from": "horizon.access",
+      "to": "research.collaboration",
+      "relation": "enables",
+      "condition": "Eligible partners receive funded opportunities with workable conditions",
+      "risk_if_absent": "Expansion in horizon access may fail to deliver improvements in research collaboration without the specified conditions.",
+      "indicator": "New awards and jointly delivered research"
+    },
+    {
+      "id": "EX064",
+      "from": "finance.venture_capital",
+      "to": "innovation.system_performance",
+      "relation": "enables",
+      "condition": "Risk capital reaches additional R&D firms and scales productive technology",
+      "risk_if_absent": "Expansion in finance venture_capital may fail to deliver improvements in innovation system_performance without the specified conditions.",
+      "indicator": "Follow-on funding and measured firm growth"
+    },
+    {
+      "id": "EX065",
+      "from": "talent.retention",
+      "to": "research.system_capacity",
+      "relation": "enables",
+      "condition": "Retained researchers are able to support sustained programmes",
+      "risk_if_absent": "Expansion in talent retention may fail to deliver improvements in research system_capacity without the specified conditions.",
+      "indicator": "Staff retention and completed research projects"
+    },
+    {
+      "id": "EX066",
+      "from": "research.system_capacity",
+      "to": "green.innovation",
+      "relation": "enables",
+      "condition": "Research capacity translates into validated green prototypes and adoption",
+      "risk_if_absent": "Expansion in research system_capacity may fail to deliver improvements in green innovation without the specified conditions.",
+      "indicator": "Pilots commercialized and lifecycle impacts"
+    },
+    {
+      "id": "EX067",
+      "from": "export_control.regulation",
+      "to": "innovation.dual_use",
+      "relation": "constrains",
+      "condition": "Transfer controls cover inputs or partners required for industrial dual-use innovation",
+      "risk_if_absent": "The restriction may not materially affect the relevant activity, or adaptation may offset exposure.",
+      "indicator": "Documented licensing delays and downstream research changes"
+    },
+    {
+      "id": "EX068",
+      "from": "research_security.screening",
+      "to": "research.knowledge_transfer",
+      "relation": "constrains",
+      "condition": "Screening affects legitimate industry collaboration and staff exchange",
+      "risk_if_absent": "The restriction may not materially affect the relevant activity, or adaptation may offset exposure.",
+      "indicator": "Screened projects, delays and avoided security incidents"
+    },
+    {
+      "id": "EX069",
+      "from": "research_security.screening",
+      "to": "talent.retention",
+      "relation": "constrains",
+      "condition": "Security controls impede international research recruitment or careers",
+      "risk_if_absent": "The restriction may not materially affect the relevant activity, or adaptation may offset exposure.",
+      "indicator": "Recruitment and retention after policy changes"
+    },
+    {
+      "id": "EX070",
+      "from": "export_control.regulation",
+      "to": "industrial.technology_complexity",
+      "relation": "constrains",
+      "condition": "Export controls actually affect research-grade technology flows",
+      "risk_if_absent": "The restriction may not materially affect the relevant activity, or adaptation may offset exposure.",
+      "indicator": "Permits, supplier substitutions and R&D progress"
+    },
+    {
+      "id": "EX071",
+      "from": "horizon.exclusion",
+      "to": "research.collaboration",
+      "relation": "constrains",
+      "condition": "Eligibility exclusions affect material research consortia",
+      "risk_if_absent": "The restriction may not materially affect the relevant activity, or adaptation may offset exposure.",
+      "indicator": "Excluded bids and alternative funding pathways"
+    }
+  ],
+  "note": "Curated MODEL HYPOTHESES, not verified cause-and-effect. Requires verified role-specific inputs, tests and disconfirmation."
+}

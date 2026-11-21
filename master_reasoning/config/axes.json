@@ -1,0 +1,149 @@
+{
+  "version": "2026.11.21.1",
+  "note": "Three analyst-specified uncertainties; no demonstrated empirical independence. Proxies are indicators, NOT proof a scenario state has occurred. No probabilities.",
+  "axes": [
+    {
+      "id": "ARCH",
+      "name": "Digital architecture",
+      "high": "Portable, interoperable infrastructure becomes broadly usable",
+      "low": "Proprietary lock-in persists despite new public and private infrastructure",
+      "high_implication": "EU digital infrastructure supports contestability and genuine options",
+      "low_implication": "new infrastructure layers coexist with persistent dependencies",
+      "object_tags": [
+        "digital.infrastructure",
+        "digital.sovereignty",
+        "digital.public_procurement"
+      ],
+      "high_test": "Independent portability and migration measures rise",
+      "low_test": "Proprietary concentration and switching costs remain high",
+      "proxy_rules": {
+        "high": [
+          {
+            "object": "digital.infrastructure",
+            "kind": "action",
+            "direction": "expands",
+            "status": [
+              "operating",
+              "in_force"
+            ]
+          },
+          {
+            "object": "digital.sovereignty",
+            "kind": "diagnosis",
+            "direction": "expands"
+          }
+        ],
+        "low": [
+          {
+            "object": "digital.sovereignty",
+            "kind": "diagnosis",
+            "direction": [
+              "becomes_contested",
+              "contracts",
+              "becomes_conditional"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "OPEN",
+      "name": "Research-security balance",
+      "high": "Risk-proportionate safeguards preserve valuable research access",
+      "low": "Security restrictions and screening increasingly impede cooperation",
+      "high_implication": "collaboration and controlled openness remain compatible",
+      "low_implication": "research networks fragment or acquire significant compliance friction",
+      "object_tags": [
+        "research_security.screening",
+        "research.openness",
+        "export_control.regulation",
+        "research.collaboration"
+      ],
+      "high_test": "Low measured project disruption with verified risk mitigation",
+      "low_test": "Rising delays, exclusions or cooperation withdrawals",
+      "proxy_rules": {
+        "high": [
+          {
+            "object": "research.collaboration",
+            "kind": "diagnosis",
+            "direction": "expands"
+          },
+          {
+            "object": "research.openness",
+            "kind": "diagnosis",
+            "direction": "expands"
+          }
+        ],
+        "low": [
+          {
+            "object": "research_security.screening",
+            "kind": "action",
+            "direction": [
+              "contracts",
+              "becomes_conditional"
+            ]
+          },
+          {
+            "object": "research.collaboration",
+            "kind": "diagnosis",
+            "direction": "contracts"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SCALE",
+      "name": "Investment-to-capability conversion",
+      "high": "Funding commitments become accessible, durable operating capabilities",
+      "low": "Announced commitments remain fragmented or underused",
+      "high_implication": "new technology and research capacity scales beyond pilots",
+      "low_implication": "persistent commercialization, utilisation and scale-up bottlenecks",
+      "object_tags": [
+        "funding.route",
+        "compute.capacity",
+        "finance.venture_capital",
+        "innovation.deep_tech_startups"
+      ],
+      "high_test": "Measured uptake, utilization and follow-on growth",
+      "low_test": "Pilot accumulation without independent outcomes",
+      "proxy_rules": {
+        "high": [
+          {
+            "object": "compute.capacity",
+            "kind": "action",
+            "direction": "expands",
+            "status": [
+              "operating",
+              "in_force"
+            ]
+          },
+          {
+            "object": "innovation.deep_tech_startups",
+            "kind": "diagnosis",
+            "direction": "expands"
+          }
+        ],
+        "low": [
+          {
+            "object": "innovation.deep_tech_startups",
+            "kind": "diagnosis",
+            "direction": [
+              "contracts",
+              "becomes_contested",
+              "becomes_conditional"
+            ]
+          },
+          {
+            "object": "compute.access_time",
+            "kind": "diagnosis",
+            "direction": [
+              "contracts",
+              "becomes_contested",
+              "becomes_conditional"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
