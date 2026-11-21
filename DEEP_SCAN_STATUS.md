@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4071** (Main **2144** + Historical **1927**)
-- Automatic queue still needing V2 verification: **135** (Main **68** + Historical **67**)
-- Currently assigned to workers: **107** (Main **68** + Historical **39**)
+- Authoritative V2 verified: **4097** (Main **2170** + Historical **1927**)
+- Automatic queue still needing V2 verification: **109** (Main **42** + Historical **67**)
+- Currently assigned to workers: **107** (Main **42** + Historical **65**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
-- Automatic queue pending and not yet assigned: **28**
+- Automatic queue pending and not yet assigned: **2**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261121T090318Z-8f537e1869c1`
+- Current package: `worker-a-20261121T093947Z-bf2394195c42`
 - Assigned unresolved records: **36**
   1. `link:https://www.institutmontaigne.org/en/publications/eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031` — The EU Semiconductor Geopolitical Risk Survey: Outlook for 2026–2031
-  2. `link:https://doi.org/10.82135/tno-2026-18698` — Why High-tech matters for Defence transformation
-  3. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148990` — Leveraging European values to strengthen technological sovereignty
-  4. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=df5d5884-e510-11f1-b745-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Preparation of the Council (Competitiveness (Internal Market, Industry, Research and Space)) on 3-4 December 2026 Regulation establishing a framework of measures for strengthening the Union innovation ecosystem (European Innovation Act) - Progress report - Publications Office of the EU
-  5. `link:https://doi.org/10.1177/14773708261504363` — ‘As open as possible, as closed as necessary’: Tensions between Open Science practices and the classification of contents in EU-funded criminological research
-  6. `link:https://news.google.com/rss/articles/CBMihwJBVV95cUxQR2RhbXFabTJPcTdabGlEbGZEc0NUczltRk1kdGRFRURZMHNRVmluZ2c5c0MwYUNvTDdJYUw1QnpEN3U4Q1RVNjBJWFAwWm5uQlRIMGpib2RqQkJMX1JfRlpMam5WRjBPTGhNcnhLQ1FRdjFiTkpsZU1xSTE3NEYyWkZjWTFyak1kM1Z3WXc1SEtvRmxoLXlGY19ZdlpZOEtmMDZqd1N4VHEzcXNRY0JQQW1UR0NFY1BPOWJ5U1dBak9BSHpDVEc3bERRSHpXSEJqNi1leTNIRUtjVVZ4WXdObUlpVmdrencyZlZJWjhrQzVFY3diTXhfZ09BSS1nYkZ4ZWl0M2N5cw?oc=5` — Fifth EU-Armenia Horizon Europe Joint Research and Innovation Committee meeting - European Commission
-  7. `link:https://news.google.com/rss/articles/CBMi3AFBVV95cUxQX25QLVRNX0lmZlU3UHctSGcwRWpkX1NsVFYyWXozN1pSeWpWMm4tY0s4bHRJdDdDRkVkSnBLWHhNNzdHMktjeUNCbWpJZjk2MjZHb2ZxampKakpJcXJVbFIzTTFRYkM0RThmeFFmdXZwb0llRFlPckxUcEpSRmIwZTMzWUZNY2xJR3JxcWVaSTg5VXlsRTdYLXF1Ukx0V2MxVVRrNVdZdFRYbklteUh2QVJzSmlRUmFybExzVU82OEVIdkJHWHI2TzJXT2Y4MmxoT1AtMGxJM0tTZFo2?oc=5` — European Digital Infrastructure Consortium launches today to strengthen digital sovereignty in education - Shaping Europe’s digital future
-  8. `link:https://news.google.com/rss/articles/CBMizwFBVV95cUxNdGNHQWp4YmRjSTJPd2lBeU9iZDk3Vno0a0N3aThBZWVzT2hIQ1h4WEFyNGpyUjlSMkhBaTZ2OVVaZGhHbUxBT1BoRmlrOXBoUzREMjk1SEhjU25iZ01TU3NzYjQtT1BxUDFiUG95bm5YMDZaYS13RGRuMmstMTBKRFRNYldpM2tTSl9PRGFxMS1qNE42RjhtbFB5UnNVWWRRMXNBXzVQX3RTWnZza2pGTWRVaGZaN3Q4enE3bTJXTHFmTk9yVHZVOFdfRTJnSW8?oc=5` — COP31: MEPs urge all parties to implement climate change commitments | Actualitate | Parlamentul European
+  2. `link:https://doi.org/10.1016/j.enpol.2026.115692` — The emerging geopolitics of sustainable aviation fuel: Policy architectures, book-and-claim and european strategic dependencies — recovery attempt 3/3
+  3. `link:https://doi.org/10.1007/s12061-026-10062-7` — Regional Adaptation Capacity and Labour-market Vulnerability: A Grey-informed Typology of EU Regions — recovery attempt 3/3
+  4. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall? — recovery attempt 3/3
+  5. `link:https://www.bruegel.org/sites/default/files/2026-07/WP%2021%202026_0.pdf` — A plan for a World Trade Organization sectoral agreement on semiconductors — recovery attempt 3/3
+  6. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNNXh1Y0lMNWVuTFphdlBpbTFhLWIyb2VDN0k2Z1NXVWYxTXZQc3lxWjYyQ2xpZHI4anh2VkxpQndQbjdvUDJkMl8xU2ZKMUk2OHRnaU5kN3c5R05JeVZZVHRWWlRGQlh5WkNmR1pjLUhBX2x2Qm9sRERhckxiLWhYLTU2VFl5ZlRwejUyM2VhV3BtNERuaFIxWGF1aHpTX2k4b2dDWFJjQXFoRjVZWHpkUGxzMVl4SlZwbkhHcS1tYnUtbWxKUmc?oc=5` — MEPs back new rules to encourage EU competitiveness in space
+  7. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNaEFiaE96LWhURTRLa1dLS1FpZThfVjNfNmRhUk5mTkl3RXJUd1J5bWpmc0xUeVhDMy1NbldqUFJHRmtEQldhTFU3VXJmNXVCM0l6cnkzanR2T19GMGkzV0FxWE52bHNCdEpnS29WSloxQ1RudVc1d0ZfRjZISTcwdDFuazZ1MmttZERibVRoUzJLUlh5RUdEMFZ5blFsazBOdG5IaTVCVklzWHBuNGw4UVZMdnJsc244Mm4wRUlzRTJZSUo1bWc?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Spravodajstvo | Európsky parlament
+  8. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxQaDR0X2tXd3dxZDk5NVowNTU4QTVmbEdjNFhOSzNPbGwxeWlhWEM1bFNicnNOU18weWYyUmZJdVphSFZsUHJyTEJnbk1feFFqMXJiLThiNndSeklQdnhRRUMwOWlWUHNlNG92TXVETVczY2NpLVhMVVo2TEpwSDdKdzVSVE9ZWW5hV1BoU2thM1lPMkpwOWhmMUg2d29KREVkc1BQX2VpbmowU0o1RldkNWpKUVUwRjBlcG9LQklWa0F1ckUwM1E?oc=5` — MEPs back new rules to encourage EU competitiveness in space | Hírek | Európai Parlament
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261121T090324Z-e09fdc6f9473`
+- Current package: `worker-b-20261121T094002Z-72012b35ec55`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1016/j.resglo.2026.100408` — Sustaining science as a global public good: living knowledge, fair credit, and equitable access in a globalised research system — recovery attempt 2/3
-  2. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWkh2U0ZTM0NsazdmeVItUEF5R2JXS0VkeHFZLV9IdFZxNEpfdmhZSmNpQzRsbWE2bDJZU25LV25WZ3l5S2xibUgzMzhsdU9RR29kQ1FMbW5xN1lFcFVFU2ZveElib09TUG55VjFDVU41Vl83M1V3R0pyUnYzSFRFbzVBS3JnbVllQktRdDZKN0t3N3RWWHB6R1d5ZE9BdGFUSl9GN29GY2VSNTlyUlM0M09CTTdmbG5GUEpz?oc=5` — Funding Radar: Horizon Europe’s latest €111M funding call for AI
-  3. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQb0dGaE5ETF80SXdTQlVXU0M4Sm9wRXZvWjkwREFIbHhPOTg5Skw3Y1hwREFHcG9yM2NTMnRJamxGSGxsczVoRmV3MDVkOGxjbjNSVm9TbmVZRkh2eGhrY2Q1OVlpNUJkTnJVcDBmX2NIMU5UOVRwV2Juay1Hb2dxencySEk?oc=5` — EU renews push for global AI rules after midterms weaken Donald Trump — recovery attempt 2/3
-  4. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQS21MX1FsMEVTQWhZVEJkZFZVeXlBVDJpNTBWSWdoNWFUNF96enh3Mi1pRTZacU9OLU15M1NPZXljU3A3cGhTdGd2VkpnSEZIYjJBZlFSeWNUMlBtRFJzcll1THVNcUtsX0lsdVZZTkxyVE1JdUZzcVlkWTJIb0hyLXhRbDIwcWN5WE9zdS1SdDBwc3NIWE1fZEpxV0FveEZDeGY4WWd1bnpCU2VqUU5VN1NhQ1NjckI3?oc=5` — Should Europe triple or freeze its data centre capacity?
-  5. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQbnJickJXdlY1WlM3ZVQzQm5BNG0yVFNxNmdNQU1wZjQ0Y3Vybk9rUE0wWXZUZ3NHVW9OQ3dHQlBaOTFqdGJzNmtqMkZfcWhIQjVrSjJDZ19iWDN4T1RtOEZtRXdTWm1DVTV6STctRVdfcjJ5SWVTVXdjaWJiZWw2MmNXNFZLYlIzM2hsLXE3S0cwTkNINTd6WU1USzNnSncxR3B2VTJMdUNUd1pKNENlNy1CbWdaelRTMTl5QlhfR0dUQQ?oc=5` — ‘Time for action’: Germany and 10 other EU countries urge new copyright rules in the AI age
-  6. `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxNbVZaUFM3aEo1MTdYSW4yTXpMM3lpcnZZUm51M2xQakJ6OHVsUE5OM2trSDNybG9kdUMxSFY5NjhvVmlfeE82UzJXdGxhMWhBUzZ3eUdjaVNPWkZQTzZZWGJLNmhnd1RGWmZPTkZzYnEwVjFhMU8zbFZaOWVGTC1oZlFxOXdpdDhJemdSSkhvMnlSTmY4WURKekp3?oc=5` — Irish regulator stops X training AI with data gathered by agents
-  7. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGp1VWlXU1NQV3JJSjMxemNocEtLUGtwVy1RM1U1TzJoUUZQaXRtejBjU0hHUnYtT2VmSjVZTi1EWjFUdk4yYkl2M1hpbW5yMW8xdVJDc1VWbTNSVGljU2RuejNoOVM1aUtnMlNScnpKRlVyRWt5Y0ZmaGVqaHYzTGdlVXFSMFBiTjhnUURERzhBTE9WZ1FhMDFYYk5hTXBDUVVVaDY2eF91MVY2NlpmQnNmY2Q?oc=5` — Malaysia Inks Deal With France to Develop Critical Minerals
-  8. `link:https://data.consilium.europa.eu/doc/document/WK-14980-2026-INIT/en/pdf` — Handling and further distribution are under the sole responsibility of community members.
+  1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGp1VWlXU1NQV3JJSjMxemNocEtLUGtwVy1RM1U1TzJoUUZQaXRtejBjU0hHUnYtT2VmSjVZTi1EWjFUdk4yYkl2M1hpbW5yMW8xdVJDc1VWbTNSVGljU2RuejNoOVM1aUtnMlNScnpKRlVyRWt5Y0ZmaGVqaHYzTGdlVXFSMFBiTjhnUURERzhBTE9WZ1FhMDFYYk5hTXBDUVVVaDY2eF91MVY2NlpmQnNmY2Q?oc=5` — Malaysia Inks Deal With France to Develop Critical Minerals
+  2. `link:https://data.consilium.europa.eu/doc/document/WK-14980-2026-INIT/en/pdf` — Handling and further distribution are under the sole responsibility of community members.
+  3. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxQNTlPazBvWjF0VU43TU0xV3QxX3JhVVN5U3BoQW0wRTZNVnVpMm9LbEM0bFppYlhKc1NKNFVLcXg4U3V0cXZJU0hIMWloWjBCSVlfakdSV1V2b2ZMUWxSOWVXNzhQZTRlWmNMenU5MUJPWmhLY2RMRENDcmU0UlJTcjlIcU95NVlvakN6VjVpSGg4SjFnU19JTTNCcncyZkJxUVNsYnkwdUZnaks0U2hwSg?oc=5` — Dutch resist ‘unacceptable’ US bid to tighten semiconductor export controls
+  4. `link:https://www.ellisinstitute.fi/samuel-kaskis-remarks-at-ai-summit-2026` — Samuel Kaski's remarks at AI Summit 2026 | ELLIS Institute Finland
+  5. `link:https://news.google.com/rss/articles/CBMijAFBVV95cUxPTWZNNmdqakZlSC03RGRaRWxGcnVWWTVmMDNFQTlGVF90dmtzdllCNDJKbXlHVG9aVFVKemV2bTk4a3FpRDBwQ01OZm5BeTN1b09WT1hILUpFXzdOS0ZaVlBFOThaaWctQUtxOXA4LUxoNk1JZW84VWRfb0M2S3hOdl9acVRtWG5HWndYUg?oc=5` — Czech scientists call for ERC near-miss grants to continue
+  6. `link:https://data.consilium.europa.eu/doc/document/ST-13817-2026-INIT/en/pdf` — On 16 July 2025, the Commission transmitted its proposal for a Regulation on establishing the European Competitiveness Fund (ECF)1 to the European Parliament and to the Council.
+  7. `link:https://doi.org/10.1080/09662839.2026.2750174` — Small states, big tech: exploring small states' role in enacting European digital sovereignty — recovery attempt 2/3
+  8. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPWmhZVzRWeUgxUXA3SFB5TS14ek9aazQ3Ujkwb2hfSXhqc0dwak1wczcxQmRTYkJoZDJQV19KQVg1enREbmp3UDd4eWRVRVdUWjV6RHlFTHFMLVpzWU5yaHRGazVNbERTdzVjU2FPQTNLdGNtRXRuRnlQbGlYalJ0UE9lNWk?oc=5` — Germany hit by AI-driven surge in cyber attacks
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
