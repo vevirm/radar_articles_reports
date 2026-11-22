@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4149** (Main **2213** + Historical **1936**)
-- Automatic queue still needing V2 verification: **68** (Main **9** + Historical **59**)
-- Currently assigned to workers: **68** (Main **9** + Historical **59**)
+- Authoritative V2 verified: **4179** (Main **2221** + Historical **1958**)
+- Automatic queue still needing V2 verification: **38** (Main **1** + Historical **37**)
+- Currently assigned to workers: **38** (Main **1** + Historical **37**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **47**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,21 +16,15 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261122T080353Z-c4940734da5d`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261122T095108Z-49c2c9addf11`
+- Assigned unresolved records: **3**
+  1. `link:https://doi.org/10.1080/09662839.2026.2750174` — Small states, big tech: exploring small states' role in enacting European digital sovereignty — recovery attempt 3/3
+  2. `historical:id:e7435b110d84890a` — The intangible technological innovation system: The role and influence of voluntary and compliance carbon markets on carbon dioxide removal in the European Union — recovery attempt 2/3
+  3. `historical:id:667c5c4d16bf5695` — Research on bibliometrics and the World’s leading universities — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20261122T090908Z-a1a6708088ec`
-- Assigned unresolved records: **33**
-  1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGp1VWlXU1NQV3JJSjMxemNocEtLUGtwVy1RM1U1TzJoUUZQaXRtejBjU0hHUnYtT2VmSjVZTi1EWjFUdk4yYkl2M1hpbW5yMW8xdVJDc1VWbTNSVGljU2RuejNoOVM1aUtnMlNScnpKRlVyRWt5Y0ZmaGVqaHYzTGdlVXFSMFBiTjhnUURERzhBTE9WZ1FhMDFYYk5hTXBDUVVVaDY2eF91MVY2NlpmQnNmY2Q?oc=5` — Malaysia Inks Deal With France to Develop Critical Minerals
-  2. `link:https://data.consilium.europa.eu/doc/document/WK-14980-2026-INIT/en/pdf` — Handling and further distribution are under the sole responsibility of community members.
-  3. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxQNTlPazBvWjF0VU43TU0xV3QxX3JhVVN5U3BoQW0wRTZNVnVpMm9LbEM0bFppYlhKc1NKNFVLcXg4U3V0cXZJU0hIMWloWjBCSVlfakdSV1V2b2ZMUWxSOWVXNzhQZTRlWmNMenU5MUJPWmhLY2RMRENDcmU0UlJTcjlIcU95NVlvakN6VjVpSGg4SjFnU19JTTNCcncyZkJxUVNsYnkwdUZnaks0U2hwSg?oc=5` — Dutch resist ‘unacceptable’ US bid to tighten semiconductor export controls
-  4. `link:https://www.ellisinstitute.fi/samuel-kaskis-remarks-at-ai-summit-2026` — Samuel Kaski's remarks at AI Summit 2026 | ELLIS Institute Finland
-  5. `link:https://news.google.com/rss/articles/CBMijAFBVV95cUxPTWZNNmdqakZlSC03RGRaRWxGcnVWWTVmMDNFQTlGVF90dmtzdllCNDJKbXlHVG9aVFVKemV2bTk4a3FpRDBwQ01OZm5BeTN1b09WT1hILUpFXzdOS0ZaVlBFOThaaWctQUtxOXA4LUxoNk1JZW84VWRfb0M2S3hOdl9acVRtWG5HWndYUg?oc=5` — Czech scientists call for ERC near-miss grants to continue
-  6. `link:https://data.consilium.europa.eu/doc/document/ST-13817-2026-INIT/en/pdf` — On 16 July 2025, the Commission transmitted its proposal for a Regulation on establishing the European Competitiveness Fund (ECF)1 to the European Parliament and to the Council.
-  7. `link:https://doi.org/10.1080/09662839.2026.2750174` — Small states, big tech: exploring small states' role in enacting European digital sovereignty — recovery attempt 2/3
-  8. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPWmhZVzRWeUgxUXA3SFB5TS14ek9aazQ3Ujkwb2hfSXhqc0dwak1wczcxQmRTYkJoZDJQV19KQVg1enREbmp3UDd4eWRVRVdUWjV6RHlFTHFMLVpzWU5yaHRGazVNbERTdzVjU2FPQTNLdGNtRXRuRnlQbGlYalJ0UE9lNWk?oc=5` — Germany hit by AI-driven surge in cyber attacks
-  - … plus 25 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
