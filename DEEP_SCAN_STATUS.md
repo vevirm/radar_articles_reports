@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **4131** (Main **2200** + Historical **1931**)
-- Automatic queue still needing V2 verification: **75** (Main **12** + Historical **63**)
-- Currently assigned to workers: **75** (Main **12** + Historical **63**)
+- Automatic queue still needing V2 verification: **87** (Main **23** + Historical **64**)
+- Currently assigned to workers: **87** (Main **23** + Historical **64**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **46**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,18 +16,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261121T100444Z-a873407dbc78`
-- Assigned unresolved records: **7**
-  1. `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — How can Europe address its pressing AI compute infrastructure shortfall? — recovery attempt 3/3
-  2. `link:https://news.google.com/rss/articles/CBMi1gFBVV95cUxNOUUxVnlMT0t5QmllNmxzbEVhWF9MTzJ2azY5ZEQzUmRSNEVaZGZ3NjFBU3dmOGxiTXVWdWhsV0R6RU9Kalk5R3RVdjdJNzBpWk1GWksxa2tJUWpGdThJcE9scWZGX0F3VWpmWHNTN3F3NWlWcU93aFJQTUF3QmJnZU0wdjV4a2JkWTNnbGNNbkpYRzZqVnF4dm5wYXJ0NjFRWERaUkMwTE1NeExUcU9SYmJIQUtXUG8tRmJmZkJlLWFmZmdTeUp0QU5MSzZfUndEeFBMODNB?oc=5` — EU tech initiative shows way forward for competitiveness fund — recovery attempt 2/3
-  3. `link:https://doi.org/10.82135/tno-2026-18698` — Why High-tech matters for Defence transformation
-  4. `historical:id:6f0e2e3ee60171fa` — New report | Building Europe's alternative fuels industry for military resilience - HCSS
-  5. `historical:id:6559671ef6586538` — European AI Competitiveness Beyond Frontier Models
-  6. `historical:id:b288b71dd5ba12ad` — Geopolitics and International Higher Education: Concepts, knowledge diplomacy and security policies, and future agenda
-  7. `historical:id:97072f3bbe0a4f73` — Stock option taxation: a missing piece in European innovation policy?
+- Current package: `worker-a-20261122T080353Z-c4940734da5d`
+- Assigned unresolved records: **19**
+  1. `link:https://doi.org/10.1007/s43681-026-01546-w` — Governing Agentic AI: An Onto-Relational-Sophic (ORS) Framework for Deployment-Sensitive Governance
+  2. `link:https://doi.org/10.1080/22243534.2026.2727232` — The emergence of blockchain technology in the tourism industry: a bibliometric analysis of research trends
+  3. `link:https://news.google.com/rss/articles/CBMixAFBVV95cUxOTERnQUdjSWZLQWd4cEpURlQ2OVdGZ0hfQVpXUkRFa2RzWDljcTdnUDQ2ajdabEdEVkdwXzF4clNQYXpta05ReVBINEtCRXRvVkZmVDBMeW1EdEdHWG16YkhfU2Z2WTZtakFCNWFNeXQySDBNbGd4TDBQZDhTYXh1VnVjbE9UaVFYSjc2NzEya2ZraFNDaWV1UlFZa1g1VlZWWkxqejVxN1hIQ3djdmJ5SlZVaWw0aE1vNFNqb01HdHYtbklZ?oc=5` — Multiannual Financial Framework - President Costa’s proposal - Council, European Union
+  4. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNLWhId1J5X0FXWXp1Rzc5RTEwaUZzVFpLeUhXaEx3enp5b3ZMRElOSkk3XzNXMEYyOTMwbkdNRmtiYVJvWEdhMWdLNzBxZ0MzM3hOMkdzcEplQVJ1aHplOXFDZmJnV09GdW85aU8xRlB6MkNxRng2cnZ0cUEtbXhNX1lzSUx5aUVmS0ZTUWVDY2ZFYmt0dXNKQ1hTRWk?oc=5` — Latest Council budget proposal keeps €158B for next Horizon Europe
+  5. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQTDk4al9ocGV4aW9La2tMMDF6YW9fX00xd0ZqZmpJaWFUX0RPMHJMaXowRkhjU1Q3UGZ0Z2ZtTnBxRV9YU0lQazM1UkNUX1Z5V3Y0ektXUnFHQmJsMDlnTl9mVF81QjZlT25qY2tfSi1La1pWREtxY0dfYXNxTWhvcU1ZczE?oc=5` — The rift between the US and EU on banks is widening
+  6. `link:https://www.nature.com/articles/d41586-026-03812-7` — Mathematicians astounded by AI and human-written proofs of iconic Riemann hypothesis
+  7. `link:https://news.google.com/rss/articles/CBMivwFBVV95cUxPeVk4cEtiUUtRVjNKVHRtcnplM254MjdJMElELVNfcDRNU1haR1laOWhPYkZPYW16Y0VQZHU0bE9PNWMwTFROTk5KYjByYjEyTlpGX2VUX2NSdEZQMV84b2V0c0tONDlGU1NnclVfZ0tPOWxZWnUtUHNSc083U0Y2bXVyY3haNk5tOGdlRGpTLTc4cmU5WkR0eHN1SDQyLVdtaE5MYWcwdUZ6ejlXNVNIVHJpQU1IOVVLdmg5R0FfOA?oc=5` — Aalto University: Five Nordic universities join forces to scale deep tech startups
+  8. `link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxOMU4tN0lkenRDSjFTZ2JzT3pWSTB1aXQyc3JDbTNXUjIzQk1yTFI5ck5GbE82UGw5Wl92NE1rMklMTW9sMnhKYVlYODhTVDVhWHplU0J1R2M3aE13eFE3RlMyNGtBS2hXbVhpVDFDVjlaZThmdjJ2QVF0WG9CRTItZmo5S0Q2bzg4SjEtZ0lRakRPWUxDQWJEdVNBZU5uSXJzVjNsY3h2SHNJQXBHV0tBcDNRRVNrMkhpT29TVldTLUg?oc=5` — Spain's burgeoning data centres become election issue with new rules
+  - … plus 11 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261121T100456Z-a1a6708088ec`
+- Current package: `worker-b-20261122T080406Z-a1a6708088ec`
 - Assigned unresolved records: **33**
   1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGp1VWlXU1NQV3JJSjMxemNocEtLUGtwVy1RM1U1TzJoUUZQaXRtejBjU0hHUnYtT2VmSjVZTi1EWjFUdk4yYkl2M1hpbW5yMW8xdVJDc1VWbTNSVGljU2RuejNoOVM1aUtnMlNScnpKRlVyRWt5Y0ZmaGVqaHYzTGdlVXFSMFBiTjhnUURERzhBTE9WZ1FhMDFYYk5hTXBDUVVVaDY2eF91MVY2NlpmQnNmY2Q?oc=5` — Malaysia Inks Deal With France to Develop Critical Minerals
   2. `link:https://data.consilium.europa.eu/doc/document/WK-14980-2026-INIT/en/pdf` — Handling and further distribution are under the sole responsibility of community members.
