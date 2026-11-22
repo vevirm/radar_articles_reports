@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-11-21T09:51:39Z",
+  "generated_at": "2026-11-22T08:55:30Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -343703,8 +343703,1471 @@
       "deep_scan_package_id": "worker-a-20261121T090318Z-8f537e1869c1",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s43681-026-01546-w": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "97127b71",
+      "identity_hash": "b397d9e01904fede",
+      "reader_title": "Deployment-sensitive governance of agentic AI",
+      "reader_what": "The ORS framework suggests changing AI system obligations as deployment dependence grows.",
+      "reader_more": "The ORS framework suggests changing AI system obligations as deployment dependence grows. The source basis is conceptual AI ethics paper with a proposed autonomy, social-embedding and moral-relevance matrix. The EU AI Act is a regulatory reference, but there is no analysis of a specifically European research or innovation system.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed conceptual framework",
+        "research_question": "Does this source substantively qualify for the assigned Radar strand?",
+        "main_finding": "The ORS framework suggests changing AI system obligations as deployment dependence grows.",
+        "method_or_basis": "Conceptual AI ethics paper with a proposed autonomy, social-embedding and moral-relevance matrix",
+        "qualification": "The EU AI Act is a regulatory reference, but there is no analysis of a specifically European research or innovation system.",
+        "radar_relevance": "AI-governance concept without an EU research-system mechanism; European affiliation and AI Act citations do not establish Strand A fit.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package provides substantive, source-matched pdf_excerpt material extracted from https://content.openalex.org/works/W7236651762.pdf; inspected for scope and claims (length 24000 characters)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "Verified canonical publication or institutional supporting page at https://doi.org/10.1007/s43681-026-01546-w; cached excerpt is main substantive evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_substantive_primary",
+            "url": "https://content.openalex.org/works/W7236651762.pdf",
+            "title": "Deployment-sensitive governance of agentic AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; cached primary text plus bibliographic link used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_RI",
+        "reason": "AI-governance concept without an EU research-system mechanism; European affiliation and AI Act citations do not establish Strand A fit."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:23Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1080/22243534.2026.2727232": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b987f6dd",
+      "identity_hash": "71bbf2b38614c7dd",
+      "reader_title": "Blockchain research in tourism",
+      "reader_what": "A bibliometric analysis charts scholarly publications on blockchain applications in tourism.",
+      "reader_more": "A bibliometric analysis charts scholarly publications on blockchain applications in tourism. The source basis is bibliometric sample of 182 hospitality and tourism papers. The analysis is tourism-domain scholarship, not a study of the European R&I system or reusable futures methodology.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed bibliometric study",
+        "research_question": "Does this source substantively qualify for the assigned Radar strand?",
+        "main_finding": "A bibliometric analysis charts scholarly publications on blockchain applications in tourism.",
+        "method_or_basis": "Bibliometric sample of 182 hospitality and tourism papers",
+        "qualification": "The analysis is tourism-domain scholarship, not a study of the European R&I system or reusable futures methodology.",
+        "radar_relevance": "Tourism blockchain publication trends are not Europe-centered R&I system evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package provides substantive, source-matched pdf_excerpt material extracted from https://content.openalex.org/works/W7236681975.pdf; inspected for scope and claims (length 24000 characters)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "Verified canonical publication or institutional supporting page at https://doi.org/10.1080/22243534.2026.2727232; cached excerpt is main substantive evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_substantive_primary",
+            "url": "https://content.openalex.org/works/W7236681975.pdf",
+            "title": "Blockchain research in tourism",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; cached primary text plus bibliographic link used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_RI",
+        "reason": "Tourism blockchain publication trends are not Europe-centered R&I system evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:23Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixAFBVV95cUxOTERnQUdjSWZLQWd4cEpURlQ2OVdGZ0hfQVpXUkRFa2RzWDljcTdnUDQ2ajdabEdEVkdwXzF4clNQYXpta05ReVBINEtCRXRvVkZmVDBMeW1EdEdHWG16YkhfU2Z2WTZtakFCNWFNeXQySDBNbGd4TDBQZDhTYXh1VnVjbE9UaVFYSjc2NzEya2ZraFNDaWV1UlFZa1g1VlZWWkxqejVxN1hIQ3djdmJ5SlZVaWw0aE1vNFNqb01HdHYtbklZ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "098b2e15",
+      "identity_hash": "3aa150e2b35ac42e",
+      "reader_title": "Costa’s revised long-term EU budget proposal",
+      "reader_what": "The European Council president put forward a revised negotiating proposal for the EU 2028–2034 multiannual budget.",
+      "reader_why": "The proposed seven-year budget framework conditions future EU research-programme resources.",
+      "reader_more": "The European Council president put forward a revised negotiating proposal for the EU 2028–2034 multiannual budget. The source basis is council budget negotiations and the Council president’s revised negotiating text. A Presidency negotiating proposal is not an adopted EU budget; research appropriations remain contested.",
+      "deep_analysis": {
+        "work_kind": "EU budget negotiation",
+        "research_question": "What does the source establish about costa’s revised long-term eu budget proposal?",
+        "main_finding": "The European Council president put forward a revised negotiating proposal for the EU 2028–2034 multiannual budget.",
+        "method_or_basis": "Council budget negotiations and the Council president’s revised negotiating text",
+        "qualification": "A Presidency negotiating proposal is not an adopted EU budget; research appropriations remain contested.",
+        "radar_relevance": "Material live EU budget negotiation affecting next Framework Programme.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://www.consilium.europa.eu/en/policies/the-eu-s-long-term-budget-2028-2034/. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://www.consilium.europa.eu/en/policies/the-eu-s-long-term-budget-2028-2034/",
+            "title": "Council: EU long-term budget 2028–2034",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_EU_RI_CHANGE",
+        "reason": "Material live EU budget negotiation affecting next Framework Programme."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:23Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "President of the European Council",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_contested",
+          "status": "proposed",
+          "status_date": "2026-11-21",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "A Presidency negotiating proposal is not an adopted EU budget; research appropriations remain contested.",
+          "text": "The European Council president put forward a revised negotiating proposal for the EU 2028–2034 multiannual budget.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMixAFBVV95cUxOTERnQUdjSWZLQWd4cEpURlQ2OVdGZ0hfQVpXUkRFa2RzWDljcTdnUDQ2ajdabEdEVkdwXzF4clNQYXpta05ReVBINEtCRXRvVkZmVDBMeW1EdEdHWG16YkhfU2Z2WTZtakFCNWFNeXQySDBNbGd4TDBQZDhTYXh1VnVjbE9UaVFYSjc2NzEya2ZraFNDaWV1UlFZa1g1VlZWWkxqejVxN1hIQ3djdmJ5SlZVaWw0aE1vNFNqb01HdHYtbklZ?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3aa150e2b35ac42e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNLWhId1J5X0FXWXp1Rzc5RTEwaUZzVFpLeUhXaEx3enp5b3ZMRElOSkk3XzNXMEYyOTMwbkdNRmtiYVJvWEdhMWdLNzBxZ0MzM3hOMkdzcEplQVJ1aHplOXFDZmJnV09GdW85aU8xRlB6MkNxRng2cnZ0cUEtbXhNX1lzSUx5aUVmS0ZTUWVDY2ZFYmt0dXNKQ1hTRWk?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "470049cf",
+      "identity_hash": "85e4a38f18a197c5",
+      "reader_title": "Council budget text retains €158 billion for Horizon Europe",
+      "reader_what": "A revised Council negotiating proposal preserves a reported €158 billion figure for the next Horizon Europe programme.",
+      "reader_why": "It identifies a concrete research-budget figure under negotiation for 2028–2034.",
+      "reader_more": "A revised Council negotiating proposal preserves a reported €158 billion figure for the next Horizon Europe programme. The source basis is science|Business analysis of the live Council MFF text, checked against the Council budget process. The €158 billion is a negotiating amount, not an enacted appropriation or guaranteed final allocation.",
+      "deep_analysis": {
+        "work_kind": "current research-budget report",
+        "research_question": "What does the source establish about council budget text retains €158 billion for horizon europe?",
+        "main_finding": "A revised Council negotiating proposal preserves a reported €158 billion figure for the next Horizon Europe programme.",
+        "method_or_basis": "Science|Business analysis of the live Council MFF text, checked against the Council budget process",
+        "qualification": "The €158 billion is a negotiating amount, not an enacted appropriation or guaranteed final allocation.",
+        "radar_relevance": "It identifies a concrete research-budget figure under negotiation for 2028–2034.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://sciencebusiness.net/news/latest-council-budget-proposal-keeps-eu158b-next-horizon-europe. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://sciencebusiness.net/news/latest-council-budget-proposal-keeps-eu158b-next-horizon-europe",
+            "title": "Latest Council budget proposal keeps €158B for next Horizon Europe",
+            "evidence_used": true
+          },
+          {
+            "kind": "supporting_primary_or_secondary",
+            "url": "https://www.consilium.europa.eu/en/policies/the-eu-s-long-term-budget-2028-2034/",
+            "title": "Corroborating primary report or institutional source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_EU_RI_CHANGE",
+        "reason": "Substantive primary evidence supports a C-strand research/innovation signal: A revised Council negotiating proposal preserves a reported €158 billion figure for the next Horizon Europe programme."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:24Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council of the European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_contested",
+          "status": "in_negotiation",
+          "status_date": "2026-11-21",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The €158 billion is a negotiating amount, not an enacted appropriation or guaranteed final allocation.",
+          "text": "A revised Council negotiating proposal preserves a reported €158 billion figure for the next Horizon Europe programme.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNLWhId1J5X0FXWXp1Rzc5RTEwaUZzVFpLeUhXaEx3enp5b3ZMRElOSkk3XzNXMEYyOTMwbkdNRmtiYVJvWEdhMWdLNzBxZ0MzM3hOMkdzcEplQVJ1aHplOXFDZmJnV09GdW85aU8xRlB6MkNxRng2cnZ0cUEtbXhNX1lzSUx5aUVmS0ZTUWVDY2ZFYmt0dXNKQ1hTRWk?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:85e4a38f18a197c5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQTDk4al9ocGV4aW9La2tMMDF6YW9fX00xd0ZqZmpJaWFUX0RPMHJMaXowRkhjU1Q3UGZ0Z2ZtTnBxRV9YU0lQazM1UkNUX1Z5V3Y0ektXUnFHQmJsMDlnTl9mVF81QjZlT25qY2tfSi1La1pWREtxY0dfYXNxTWhvcU1ZczE?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1354b6c3",
+      "identity_hash": "5f4c2ec2d38f57c0",
+      "reader_title": "US–EU banking supervision divergence",
+      "reader_what": "Financial Times commentary describes diverging US and euro-area bank supervision and urges ECB supervisory reform.",
+      "reader_more": "Financial Times commentary describes diverging US and euro-area bank supervision and urges ECB supervisory reform. The source basis is financial Times opinion article discussing regulatory capital and supervision. References to AI investment are financial context, not substantiated EU R&I institutional or funding change.",
+      "deep_analysis": {
+        "work_kind": "financial-sector opinion",
+        "research_question": "Does this source substantively qualify for the assigned Radar strand?",
+        "main_finding": "Financial Times commentary describes diverging US and euro-area bank supervision and urges ECB supervisory reform.",
+        "method_or_basis": "Financial Times opinion article discussing regulatory capital and supervision",
+        "qualification": "References to AI investment are financial context, not substantiated EU R&I institutional or funding change.",
+        "radar_relevance": "Banking-supervision opinion does not describe a direct research/innovation-system development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://www.ft.com/content/cf6e81b6-e3aa-4475-8d5b-04eb8809d5ce. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://www.ft.com/content/cf6e81b6-e3aa-4475-8d5b-04eb8809d5ce",
+            "title": "US–EU banking supervision divergence",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_VERIFIED_EU_RI_CHANGE",
+        "reason": "Banking-supervision opinion does not describe a direct research/innovation-system development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:24Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.nature.com/articles/d41586-026-03812-7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "265f7fb1",
+      "identity_hash": "e09027321c450202",
+      "reader_title": "Disputed Riemann hypothesis proof claims",
+      "reader_what": "Mathematicians are assessing competing claims involving AI and human-written proofs of the Riemann hypothesis.",
+      "reader_more": "Mathematicians are assessing competing claims involving AI and human-written proofs of the Riemann hypothesis. The source basis is substantive Nature reporting on claim announcements and independent mathematical skepticism. The article does not validate any proof and does not establish a Europe-specific research-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "science news analysis",
+        "research_question": "Does this source substantively qualify for the assigned Radar strand?",
+        "main_finding": "Mathematicians are assessing competing claims involving AI and human-written proofs of the Riemann hypothesis.",
+        "method_or_basis": "Substantive Nature reporting on claim announcements and independent mathematical skepticism",
+        "qualification": "The article does not validate any proof and does not establish a Europe-specific research-system mechanism.",
+        "radar_relevance": "Scientific discovery/proof controversy is not, on its own, a European research/innovation-system development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package provides substantive, source-matched substantial_web_text material extracted from https://www.nature.com/articles/d41586-026-03812-7; inspected for scope and claims (length 8891 characters)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_substantive_primary",
+            "url": "https://www.nature.com/articles/d41586-026-03812-7",
+            "title": "Disputed Riemann hypothesis proof claims",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; cached primary text plus bibliographic link used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_VERIFIED_EU_RI_CHANGE",
+        "reason": "Scientific discovery/proof controversy is not, on its own, a European research/innovation-system development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:24Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxPeVk4cEtiUUtRVjNKVHRtcnplM254MjdJMElELVNfcDRNU1haR1laOWhPYkZPYW16Y0VQZHU0bE9PNWMwTFROTk5KYjByYjEyTlpGX2VUX2NSdEZQMV84b2V0c0tONDlGU1NnclVfZ0tPOWxZWnUtUHNSc083U0Y2bXVyY3haNk5tOGdlRGpTLTc4cmU5WkR0eHN1SDQyLVdtaE5MYWcwdUZ6ejlXNVNIVHJpQU1IOVVLdmg5R0FfOA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1332f746",
+      "identity_hash": "cf08d3c8e0a3c135",
+      "reader_title": "Five Nordic universities launch deep-tech scaling effort",
+      "reader_what": "Five Nordic technical universities formed a two-year effort to help research-based deep-tech startups scale.",
+      "reader_why": "It creates a cross-border route for university research spinouts to obtain commercialization support.",
+      "reader_more": "Five Nordic technical universities formed a two-year effort to help research-based deep-tech startups scale. The source basis is aalto University institutional announcement identifying five universities and Nordic Innovation support. A planned collaboration and pilot are not evidence that a measurable scale-up impact has already occurred.",
+      "deep_analysis": {
+        "work_kind": "university consortium announcement",
+        "research_question": "What does the source establish about five nordic universities launch deep-tech scaling effort?",
+        "main_finding": "Five Nordic technical universities formed a two-year effort to help research-based deep-tech startups scale.",
+        "method_or_basis": "Aalto University institutional announcement identifying five universities and Nordic Innovation support",
+        "qualification": "A planned collaboration and pilot are not evidence that a measurable scale-up impact has already occurred.",
+        "radar_relevance": "It creates a cross-border route for university research spinouts to obtain commercialization support.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://www.aalto.fi/en/news/five-top-nordic-universities-join-forces-to-scale-deep-tech-startups. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://www.aalto.fi/en/news/five-top-nordic-universities-join-forces-to-scale-deep-tech-startups",
+            "title": "Five Nordic universities launch deep-tech scaling effort",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_EU_RI_CHANGE",
+        "reason": "Substantive primary evidence supports a C-strand research/innovation signal: Five Nordic technical universities formed a two-year effort to help research-based deep-tech startups scale."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:25Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "innovation.deep_tech_startups",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Aalto University and Nordic university partners",
+            "class": "university_group"
+          },
+          "mechanism": "collaborates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-19",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "FI",
+              "SE",
+              "DK",
+              "NO"
+            ]
+          },
+          "kind": "action",
+          "qualification": "A planned collaboration and pilot are not evidence that a measurable scale-up impact has already occurred.",
+          "text": "Five Nordic technical universities formed a two-year effort to help research-based deep-tech startups scale.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxPeVk4cEtiUUtRVjNKVHRtcnplM254MjdJMElELVNfcDRNU1haR1laOWhPYkZPYW16Y0VQZHU0bE9PNWMwTFROTk5KYjByYjEyTlpGX2VUX2NSdEZQMV84b2V0c0tONDlGU1NnclVfZ0tPOWxZWnUtUHNSc083U0Y2bXVyY3haNk5tOGdlRGpTLTc4cmU5WkR0eHN1SDQyLVdtaE5MYWcwdUZ6ejlXNVNIVHJpQU1IOVVLdmg5R0FfOA?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:cf08d3c8e0a3c135:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxOMU4tN0lkenRDSjFTZ2JzT3pWSTB1aXQyc3JDbTNXUjIzQk1yTFI5ck5GbE82UGw5Wl92NE1rMklMTW9sMnhKYVlYODhTVDVhWHplU0J1R2M3aE13eFE3RlMyNGtBS2hXbVhpVDFDVjlaZThmdjJ2QVF0WG9CRTItZmo5S0Q2bzg4SjEtZ0lRakRPWUxDQWJEdVNBZU5uSXJzVjNsY3h2SHNJQXBHV0tBcDNRRVNrMkhpT29TVldTLUg?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "e68db51d",
+      "identity_hash": "147a469782736347",
+      "reader_title": "Spain sets environmental rules for data centres",
+      "reader_what": "Spain approved environmental and operational standards covering data-centre water use, energy demand and cybersecurity.",
+      "reader_why": "The rules alter conditions for the location and expansion of AI and digital-compute infrastructure.",
+      "reader_more": "Spain approved environmental and operational standards covering data-centre water use, energy demand and cybersecurity. The source basis is reuters report of Spain’s newly approved rules and industry response. Specific compliance costs and innovation effects are prospective; criticism is not evidence that the rules are repealed.",
+      "deep_analysis": {
+        "work_kind": "national regulation development",
+        "research_question": "What does the source establish about spain sets environmental rules for data centres?",
+        "main_finding": "Spain approved environmental and operational standards covering data-centre water use, energy demand and cybersecurity.",
+        "method_or_basis": "Reuters report of Spain’s newly approved rules and industry response",
+        "qualification": "Specific compliance costs and innovation effects are prospective; criticism is not evidence that the rules are repealed.",
+        "radar_relevance": "The rules alter conditions for the location and expansion of AI and digital-compute infrastructure.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://www.reuters.com/business/environment/spain-sets-green-standards-data-centres-despite-industry-criticism-2026-11-20/. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://www.reuters.com/business/environment/spain-sets-green-standards-data-centres-despite-industry-criticism-2026-11-20/",
+            "title": "Spain sets green standards for data centres despite industry criticism",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_EU_RI_CHANGE",
+        "reason": "Substantive primary evidence supports a C-strand research/innovation signal: Spain approved environmental and operational standards covering data-centre water use, energy demand and cybersecurity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:25Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "datacentre.permitting",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Government of Spain",
+            "class": "member_state"
+          },
+          "mechanism": "regulates",
+          "direction": "becomes_conditional",
+          "status": "adopted",
+          "status_date": "2026-11-20",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "ES"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Specific compliance costs and innovation effects are prospective; criticism is not evidence that the rules are repealed.",
+          "text": "Spain approved environmental and operational standards covering data-centre water use, energy demand and cybersecurity.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxOMU4tN0lkenRDSjFTZ2JzT3pWSTB1aXQyc3JDbTNXUjIzQk1yTFI5ck5GbE82UGw5Wl92NE1rMklMTW9sMnhKYVlYODhTVDVhWHplU0J1R2M3aE13eFE3RlMyNGtBS2hXbVhpVDFDVjlaZThmdjJ2QVF0WG9CRTItZmo5S0Q2bzg4SjEtZ0lRakRPWUxDQWJEdVNBZU5uSXJzVjNsY3h2SHNJQXBHV0tBcDNRRVNrMkhpT29TVldTLUg?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:147a469782736347:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMitgFBVV95cUxOc3hrR3FsNmpQYlVac3VVeGphWWV1dVhucmkyT290U0FLRjZEcXpRYnhhR2NiRlEtekRadzFZWjh3dnprb20xOGExSGdndFpBRkV6RUhZVGJtMkdoamtGbjlteXlEaWU5QzZEQXdfSWxJMmM0eGd6bkN2Z3hTMFA3eTJnUWdpQi1BZUY4X3JadGs3VURzVHdWLUZHZ0U5dFNMdm1KRmc4ekMySEdqNDNJcVpEY25Ydw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "0b70cb82",
+      "identity_hash": "fb047aedbe614bcc",
+      "reader_title": "Russian strikes on Ukraine and Polish airspace alert",
+      "reader_what": "Reporting describes Russian strikes on Ukrainian transport infrastructure and airspace alerts near Poland.",
+      "reader_more": "Reporting describes Russian strikes on Ukrainian transport infrastructure and airspace alerts near Poland. The source basis is pOLITICO contemporaneous military reporting. No research-infrastructure damage, specific R&D policy measure or EU innovation investment is substantiated by this report.",
+      "deep_analysis": {
+        "work_kind": "security news",
+        "research_question": "Does this source substantively qualify for the assigned Radar strand?",
+        "main_finding": "Reporting describes Russian strikes on Ukrainian transport infrastructure and airspace alerts near Poland.",
+        "method_or_basis": "POLITICO contemporaneous military reporting",
+        "qualification": "No research-infrastructure damage, specific R&D policy measure or EU innovation investment is substantiated by this report.",
+        "radar_relevance": "War/defence news lacks an identified European R&I mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://www.internationly.com/news/russia-hits-3-kyiv-bridges-in-major-attack-while-poland-reports-airspace-violation. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "verified_article_syndication",
+            "url": "https://www.internationly.com/news/russia-hits-3-kyiv-bridges-in-major-attack-while-poland-reports-airspace-violation",
+            "title": "Russian strikes on Ukraine and Polish airspace alert",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_VERIFIED_EU_RI_CHANGE",
+        "reason": "War/defence news lacks an identified European R&I mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:25Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMingFBVV95cUxQUnlkX29hRHdFWXQzbEZ2MjYxMGF1OXNRVkpjRHN3THM4cG5FV1BIazFUeWxEYnFTTVRaOGlUZFVWS29La2FoV3VvQUt1cnJtN2hnX1V3eHZIWEk5c0hfVDNoaHk4NWY2UVBnT0lpZjhaX2lEbXF3RXA2M2pPMDJ4NzBsSXd0aUE3YVotaEs0RXRjTElMbWFPZ2pIcVlCQQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "efbed32c",
+      "identity_hash": "a16a08a4b2402610",
+      "reader_title": "Specialist AI strategy commentary",
+      "reader_what": "An Accenture executive advocates a specialist, depth-first approach to Europe’s AI competitiveness.",
+      "reader_more": "An Accenture executive advocates a specialist, depth-first approach to Europe’s AI competitiveness. The source basis is sponsored POLITICO summit commentary attributed to a corporate speaker. The source is advocacy, not an independent study or a reported new EU R&I policy implementation.",
+      "deep_analysis": {
+        "work_kind": "sponsored corporate opinion",
+        "research_question": "Does this source substantively qualify for the assigned Radar strand?",
+        "main_finding": "An Accenture executive advocates a specialist, depth-first approach to Europe’s AI competitiveness.",
+        "method_or_basis": "Sponsored POLITICO summit commentary attributed to a corporate speaker",
+        "qualification": "The source is advocacy, not an independent study or a reported new EU R&I policy implementation.",
+        "radar_relevance": "Sponsored corporate strategic opinion without verifiable new policy or research-system action.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://allnira.online/en-us/news/why-depth-beats-breadth-in-europe-s-hunt-for-an-ai-edge-ab6cadf0050ef86d13af9122127ca987858e2314cbd06431911e6a7247b106c6. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "verified_full_article_syndication",
+            "url": "https://allnira.online/en-us/news/why-depth-beats-breadth-in-europe-s-hunt-for-an-ai-edge-ab6cadf0050ef86d13af9122127ca987858e2314cbd06431911e6a7247b106c6",
+            "title": "Specialist AI strategy commentary",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_VERIFIED_EU_RI_CHANGE",
+        "reason": "Sponsored corporate strategic opinion without verifiable new policy or research-system action."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:25Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9377fa2c294b582b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "bf267488",
+      "identity_hash": "a3351ae2e513af0a",
+      "reader_title": "Europe’s space and security policy coordination",
+      "reader_what": "The EUISS report examines fragmented European space capabilities and civil–security policy cooperation.",
+      "reader_why": "It records early European space research and technology-capability coordination challenges.",
+      "reader_more": "The EUISS report examines fragmented European space capabilities and civil–security policy cooperation. The source basis is december 2003 EUISS Occasional Paper 48 with policy options on EU–ESA and national space systems. A 2003 policy assessment is historical context, not evidence of 2026 space policies or funded programmes.",
+      "deep_analysis": {
+        "work_kind": "historical EUISS policy report",
+        "research_question": "What does the source establish about europe’s space and security policy coordination?",
+        "main_finding": "The EUISS report examines fragmented European space capabilities and civil–security policy cooperation.",
+        "method_or_basis": "December 2003 EUISS Occasional Paper 48 with policy options on EU–ESA and national space systems",
+        "qualification": "A 2003 policy assessment is historical context, not evidence of 2026 space policies or funded programmes.",
+        "radar_relevance": "Cross-European space technology governance, institutional coordination and capability analysis.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package provides substantive, source-matched pdf_excerpt material extracted from https://www.iss.europa.eu/sites/default/files/EUISSFiles/occ48.pdf; inspected for scope and claims (length 16381 characters)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_substantive_primary",
+            "url": "https://www.iss.europa.eu/sites/default/files/EUISSFiles/occ48.pdf",
+            "title": "Europe’s space and security policy coordination",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; cached primary text plus bibliographic link used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Cross-European space technology governance, institutional coordination and capability analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:26Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union Institute for Security Studies",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2003-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "A 2003 policy assessment is historical context, not evidence of 2026 space policies or funded programmes.",
+          "text": "The EUISS report examines fragmented European space capabilities and civil–security policy cooperation.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:9377fa2c294b582b",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:a3351ae2e513af0a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMi1gFBVV95cUxNOUUxVnlMT0t5QmllNmxzbEVhWF9MTzJ2azY5ZEQzUmRSNEVaZGZ3NjFBU3dmOGxiTXVWdWhsV0R6RU9Kalk5R3RVdjdJNzBpWk1GWksxa2tJUWpGdThJcE9scWZGX0F3VWpmWHNTN3F3NWlWcU93aFJQTUF3QmJnZU0wdjV4a2JkWTNnbGNNbkpYRzZqVnF4dm5wYXJ0NjFRWERaUkMwTE1NeExUcU9SYmJIQUtXUG8tRmJmZkJlLWFmZmdTeUp0QU5MSzZfUndEeFBMODNB?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "0432efa0",
+      "identity_hash": "0f9761cee1a05edd",
+      "reader_title": "STEP progress informs future EU competitiveness funding",
+      "reader_what": "A new Commission report says STEP has mobilized €23.9 billion and awarded 614 STEP seals for strategic technologies.",
+      "reader_why": "The report documents the scale and funding architecture of strategic technology investments feeding future EU competitiveness policy.",
+      "reader_more": "A new Commission report says STEP has mobilized €23.9 billion and awarded 614 STEP seals for strategic technologies. The source basis is commission’s official report update and November 2026 publication materials. STEP seals are recognition mechanisms; mobilized funds should not be confused with the future ECF budget or cash disbursed.",
+      "deep_analysis": {
+        "work_kind": "official EU implementation update",
+        "research_question": "What does the source establish about step progress informs future eu competitiveness funding?",
+        "main_finding": "A new Commission report says STEP has mobilized €23.9 billion and awarded 614 STEP seals for strategic technologies.",
+        "method_or_basis": "Commission’s official report update and November 2026 publication materials",
+        "qualification": "STEP seals are recognition mechanisms; mobilized funds should not be confused with the future ECF budget or cash disbursed.",
+        "radar_relevance": "The report documents the scale and funding architecture of strategic technology investments feeding future EU competitiveness policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://ec.europa.eu/commission/presscorner/api/files/document/print/en/mex_26_2516/MEX_26_2516_EN.pdf. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://ec.europa.eu/commission/presscorner/api/files/document/print/en/mex_26_2516/MEX_26_2516_EN.pdf",
+            "title": "STEP progress informs future EU competitiveness funding",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_EU_RI_CHANGE",
+        "reason": "Substantive primary evidence supports a C-strand research/innovation signal: A new Commission report says STEP has mobilized €23.9 billion and awarded 614 STEP seals for strategic technologies."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:27Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "STEP seals are recognition mechanisms; mobilized funds should not be confused with the future ECF budget or cash disbursed.",
+          "text": "A new Commission report says STEP has mobilized €23.9 billion and awarded 614 STEP seals for strategic technologies.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMi1gFBVV95cUxNOUUxVnlMT0t5QmllNmxzbEVhWF9MTzJ2azY5ZEQzUmRSNEVaZGZ3NjFBU3dmOGxiTXVWdWhsV0R6RU9Kalk5R3RVdjdJNzBpWk1GWksxa2tJUWpGdThJcE9scWZGX0F3VWpmWHNTN3F3NWlWcU93aFJQTUF3QmJnZU0wdjV4a2JkWTNnbGNNbkpYRzZqVnF4dm5wYXJ0NjFRWERaUkMwTE1NeExUcU9SYmJIQUtXUG8tRmJmZkJlLWFmZmdTeUp0QU5MSzZfUndEeFBMODNB?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:0f9761cee1a05edd:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.82135/tno-2026-18698": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "97c64654",
+      "identity_hash": "413d954ecaa3735d",
+      "reader_title": "Dutch high-tech capability and defence transformation",
+      "reader_what": "TNO argues Dutch advanced sensing and system-integration industries require sustained dual-use research and long-term procurement.",
+      "reader_why": "Shows a Dutch research-to-defence industrial capacity mechanism and bottlenecks.",
+      "reader_more": "TNO argues Dutch advanced sensing and system-integration industries require sustained dual-use research and long-term procurement. The source basis is november 2026 TNO white paper on Dutch industry, smart sensors and defence innovation. This is a national applied-research institute’s strategic argument, not an independent causal evaluation of programme outcomes.",
+      "deep_analysis": {
+        "work_kind": "applied-research institute white paper",
+        "research_question": "What does the source establish about dutch high-tech capability and defence transformation?",
+        "main_finding": "TNO argues Dutch advanced sensing and system-integration industries require sustained dual-use research and long-term procurement.",
+        "method_or_basis": "November 2026 TNO white paper on Dutch industry, smart sensors and defence innovation",
+        "qualification": "This is a national applied-research institute’s strategic argument, not an independent causal evaluation of programme outcomes.",
+        "radar_relevance": "European defence-research production and high-tech technology-transfer analysis.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package provides substantive, source-matched pdf_excerpt material extracted from https://content.openalex.org/works/W7235123862.pdf; inspected for scope and claims (length 17130 characters)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_substantive_primary",
+            "url": "https://content.openalex.org/works/W7235123862.pdf",
+            "title": "Dutch high-tech capability and defence transformation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; cached primary text plus bibliographic link used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European defence-research production and high-tech technology-transfer analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:27Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "TNO",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "This is a national applied-research institute’s strategic argument, not an independent causal evaluation of programme outcomes.",
+          "text": "TNO argues Dutch advanced sensing and system-integration industries require sustained dual-use research and long-term procurement.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "link:https://doi.org/10.82135/tno-2026-18698",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:413d954ecaa3735d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxQbXZtdFJBdVNqM3F4a0JlSlhUS2JrX2h4UER1Z2ZTcnYyVVdZM0xQODNRQmpncWw4eC1icHpEZS10eGxRb01hM2VBX2k4SXdlOXl4WU5UTXJfa0l5T2tNb0VWbXcxNWlTM0VCRUxmWFFkN0hZczNIQWFxalFXblcwVEVyaS1fbklNcnMxOTRKakNTWUxIUGJQUjhPNHNtR3hYbkMwall2S3NBNHozN3AwUk9LQmJwR3Mwa2ZidGVFdENIYlg3U0E?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "2809e6cf",
+      "identity_hash": "217682259f1c8539",
+      "reader_title": "EU Parliament committee supports draft space rules",
+      "reader_what": "MEPs in the relevant parliamentary committee backed a position on an EU space regulatory framework designed to support competitiveness.",
+      "reader_why": "Would shape EU satellite, space R&D and space-industry compliance and market access.",
+      "reader_more": "MEPs in the relevant parliamentary committee backed a position on an EU space regulatory framework designed to support competitiveness. The source basis is european Parliament committee announcement with draft legislative position. Committee support is not final Parliament approval or an enacted EU Space Act.",
+      "deep_analysis": {
+        "work_kind": "EU legislative committee vote",
+        "research_question": "What does the source establish about eu parliament committee supports draft space rules?",
+        "main_finding": "MEPs in the relevant parliamentary committee backed a position on an EU space regulatory framework designed to support competitiveness.",
+        "method_or_basis": "European Parliament committee announcement with draft legislative position",
+        "qualification": "Committee support is not final Parliament approval or an enacted EU Space Act.",
+        "radar_relevance": "Would shape EU satellite, space R&D and space-industry compliance and market access.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://www.pubaffairsbruxelles.eu/eu-institution-news/meps-back-new-rules-to-encourage-eu-competitiveness-in-space/",
+            "title": "EU Parliament committee supports draft space rules",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_EU_RI_CHANGE",
+        "reason": "Substantive primary evidence supports a C-strand research/innovation signal: MEPs in the relevant parliamentary committee backed a position on an EU space regulatory framework designed to support competitiveness."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:28Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament committee",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "in_negotiation",
+          "status_date": "2026-11-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Committee support is not final Parliament approval or an enacted EU Space Act.",
+          "text": "MEPs in the relevant parliamentary committee backed a position on an EU space regulatory framework designed to support competitiveness.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxQbXZtdFJBdVNqM3F4a0JlSlhUS2JrX2h4UER1Z2ZTcnYyVVdZM0xQODNRQmpncWw4eC1icHpEZS10eGxRb01hM2VBX2k4SXdlOXl4WU5UTXJfa0l5T2tNb0VWbXcxNWlTM0VCRUxmWFFkN0hZczNIQWFxalFXblcwVEVyaS1fbklNcnMxOTRKakNTWUxIUGJQUjhPNHNtR3hYbkMwall2S3NBNHozN3AwUk9LQmJwR3Mwa2ZidGVFdENIYlg3U0E?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:217682259f1c8539:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6f0e2e3ee60171fa": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8eca5d66",
+      "identity_hash": "a6512832175f10fc",
+      "reader_title": "Alternative military fuels and European industrial resilience",
+      "reader_what": "HCSS identifies European alternative-fuel production, investment and supply-chain requirements relevant to military resilience.",
+      "reader_why": "European industrial R&D and manufacturing capabilities constrain military fuel substitution.",
+      "reader_more": "HCSS identifies European alternative-fuel production, investment and supply-chain requirements relevant to military resilience. The source basis is may 2026 HCSS commissioned report with technology and industrial-policy analysis. The report was commissioned by Topsoe; proposed industrial pathways and resilience benefits are not yet demonstrated outcomes.",
+      "deep_analysis": {
+        "work_kind": "commissioned European industrial-capacity report",
+        "research_question": "What does the source establish about alternative military fuels and european industrial resilience?",
+        "main_finding": "HCSS identifies European alternative-fuel production, investment and supply-chain requirements relevant to military resilience.",
+        "method_or_basis": "May 2026 HCSS commissioned report with technology and industrial-policy analysis",
+        "qualification": "The report was commissioned by Topsoe; proposed industrial pathways and resilience benefits are not yet demonstrated outcomes.",
+        "radar_relevance": "Analytical report on Europe-based technology production and defence energy-industrial supply chains.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package provides substantive, source-matched pdf_excerpt material extracted from https://hcss.nl/wp-content/uploads/2026/05/Building-Europes-alternative-fuels-2026.pdf; inspected for scope and claims (length 20315 characters)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_substantive_primary",
+            "url": "https://hcss.nl/wp-content/uploads/2026/05/Building-Europes-alternative-fuels-2026.pdf",
+            "title": "Alternative military fuels and European industrial resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; cached primary text plus bibliographic link used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analytical report on Europe-based technology production and defence energy-industrial supply chains."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:28Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "industrial.technology_complexity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "The Hague Centre for Strategic Studies",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report was commissioned by Topsoe; proposed industrial pathways and resilience benefits are not yet demonstrated outcomes.",
+          "text": "HCSS identifies European alternative-fuel production, investment and supply-chain requirements relevant to military resilience.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:6f0e2e3ee60171fa",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:a6512832175f10fc:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6559671ef6586538": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "78ce5a9c",
+      "identity_hash": "14891e9012ab4def",
+      "reader_title": "European AI startup specialization beyond frontier models",
+      "reader_what": "Interface analyzes applied AI startup activity across five strategic markets and differences between European and US clusters.",
+      "reader_why": "This maps European AI innovation specialization and scale-up weaknesses.",
+      "reader_more": "Interface analyzes applied AI startup activity across five strategic markets and differences between European and US clusters. The source basis is may 2026 Interface Europe data brief, research sample and market/geographic analysis. Startup counts are ecosystem indicators, not proofs of productivity or future startup success.",
+      "deep_analysis": {
+        "work_kind": "quantitative European AI ecosystem study",
+        "research_question": "What does the source establish about european ai startup specialization beyond frontier models?",
+        "main_finding": "Interface analyzes applied AI startup activity across five strategic markets and differences between European and US clusters.",
+        "method_or_basis": "May 2026 Interface Europe data brief, research sample and market/geographic analysis",
+        "qualification": "Startup counts are ecosystem indicators, not proofs of productivity or future startup success.",
+        "radar_relevance": "Substantive comparative evidence on European AI startup and innovation capabilities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package provides substantive, source-matched pdf_excerpt material extracted from https://www.interface-eu.org/publications/download/european-ai-competitiveness-beyond-frontier-models; inspected for scope and claims (length 20088 characters)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "Verified canonical publication or institutional supporting page at https://www.interface-eu.org/publications/download/european-ai-competitiveness-beyond-frontier; cached excerpt is main substantive evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_substantive_primary",
+            "url": "https://www.interface-eu.org/publications/download/european-ai-competitiveness-beyond-frontier-models",
+            "title": "European AI startup specialization beyond frontier models",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; cached primary text plus bibliographic link used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive comparative evidence on European AI startup and innovation capabilities."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:29Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "innovation.deep_tech_startups",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-05-13",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Startup counts are ecosystem indicators, not proofs of productivity or future startup success.",
+          "text": "Interface analyzes applied AI startup activity across five strategic markets and differences between European and US clusters.",
+          "confidence": "high",
+          "record_key": "historical:id:6559671ef6586538",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:14891e9012ab4def:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b288b71dd5ba12ad": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "533ed8de",
+      "identity_hash": "eacc090f85e68585",
+      "reader_title": "Geopolitics reshapes international academic cooperation",
+      "reader_what": "Wang and de Wit analyze how geopolitical and research-security policy instruments alter academic mobility and cross-border knowledge flows.",
+      "reader_why": "The Europe-relevant discussion links research security and academic exchange governance to international R&I collaboration.",
+      "reader_more": "Wang and de Wit analyze how geopolitical and research-security policy instruments alter academic mobility and cross-border knowledge flows. The source basis is march 2026 Higher Education Forum article using comparative concepts and policy examples. This is a conceptual and illustrative comparison, not measured effects of each policy instrument on EU research performance.",
+      "deep_analysis": {
+        "work_kind": "comparative higher-education policy analysis",
+        "research_question": "What does the source establish about geopolitics reshapes international academic cooperation?",
+        "main_finding": "Wang and de Wit analyze how geopolitical and research-security policy instruments alter academic mobility and cross-border knowledge flows.",
+        "method_or_basis": "March 2026 Higher Education Forum article using comparative concepts and policy examples",
+        "qualification": "This is a conceptual and illustrative comparison, not measured effects of each policy instrument on EU research performance.",
+        "radar_relevance": "Research openness, security and international collaboration are part of European R&I system governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_directly_resolved",
+            "note": "Package supplied a news RSS wrapper, inaccessible direct document, or bibliographic-only record; a separately identified publisher/official page was researched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "source_page_read",
+            "note": "Independently identified substantive article, institutional release, or original technical content at https://hiroshima.repo.nii.ac.jp/record/2041836/files/HigherEducationForum_23_63.pdf. Evidence used is restricted to the specific findings recorded."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://hiroshima.repo.nii.ac.jp/record/2041836/files/HigherEducationForum_23_63.pdf",
+            "title": "Geopolitics reshapes international academic cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; recovered full/source-level article or institutional documentation used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Research openness, security and international collaboration are part of European R&I system governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:30Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Lizhou Wang and Hans de Wit",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a conceptual and illustrative comparison, not measured effects of each policy instrument on EU research performance.",
+          "text": "Wang and de Wit analyze how geopolitical and research-security policy instruments alter academic mobility and cross-border knowledge flows.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:b288b71dd5ba12ad",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:eacc090f85e68585:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:97072f3bbe0a4f73": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a2b9ba60",
+      "identity_hash": "7a031c0350702a06",
+      "reader_title": "Stock-option taxation and European startup finance",
+      "reader_what": "Henrekson and Sanandaji argue that European employee stock-option tax rules impede startup financing and growth compared with the United States.",
+      "reader_why": "Links European entrepreneurial innovation capacity to employee equity and VC incentives.",
+      "reader_more": "Henrekson and Sanandaji argue that European employee stock-option tax rules impede startup financing and growth compared with the United States. The source basis is peer-reviewed comparative institutional/tax analysis published in 2018. Tax-treatment explanation is an argument about incentives; the article does not establish a uniform causal effect across all European countries.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed European innovation policy study",
+        "research_question": "What does the source establish about stock-option taxation and european startup finance?",
+        "main_finding": "Henrekson and Sanandaji argue that European employee stock-option tax rules impede startup financing and growth compared with the United States.",
+        "method_or_basis": "Peer-reviewed comparative institutional/tax analysis published in 2018",
+        "qualification": "Tax-treatment explanation is an argument about incentives; the article does not establish a uniform causal effect across all European countries.",
+        "radar_relevance": "European startup and innovation finance institutions are the central object.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package provides substantive, source-matched pdf_excerpt material extracted from https://content.openalex.org/works/W2615035905.pdf; inspected for scope and claims (length 24000 characters)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "found",
+            "note": "Verified canonical publication or institutional supporting page at https://doi.org/10.1007/s11187-018-0008-6; cached excerpt is main substantive evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_substantive_primary",
+            "url": "https://content.openalex.org/works/W2615035905.pdf",
+            "title": "Stock-option taxation and European startup finance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary identity and substantive source checked; cached primary text plus bibliographic link used. No source snippet alone is presented as a scientific finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European startup and innovation finance institutions are the central object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical work is established among supplied possible duplicates; similar subject matter alone is insufficient."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-22T08:55:30Z",
+      "deep_scan_package_id": "worker-a-20261122T080353Z-c4940734da5d",
+      "claims": [
+        {
+          "object": "finance.venture_capital",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Magnus Henrekson and Tino Sanandaji",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-03-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Tax-treatment explanation is an argument about incentives; the article does not establish a uniform causal effect across all European countries.",
+          "text": "Henrekson and Sanandaji argue that European employee stock-option tax rules impede startup financing and growth compared with the United States.",
+          "confidence": "high",
+          "record_key": "historical:id:97072f3bbe0a4f73",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:7a031c0350702a06:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-11-21T09:51:39Z"
+  "claims_updated_at": "2026-11-22T08:55:30Z"
 }

@@ -6,30 +6,21 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4131** (Main **2200** + Historical **1931**)
-- Automatic queue still needing V2 verification: **87** (Main **23** + Historical **64**)
-- Currently assigned to workers: **87** (Main **23** + Historical **64**)
+- Authoritative V2 verified: **4149** (Main **2213** + Historical **1936**)
+- Automatic queue still needing V2 verification: **68** (Main **9** + Historical **59**)
+- Currently assigned to workers: **68** (Main **9** + Historical **59**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **46**
+- Hands-on verification needed: **47**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261122T080353Z-c4940734da5d`
-- Assigned unresolved records: **19**
-  1. `link:https://doi.org/10.1007/s43681-026-01546-w` — Governing Agentic AI: An Onto-Relational-Sophic (ORS) Framework for Deployment-Sensitive Governance
-  2. `link:https://doi.org/10.1080/22243534.2026.2727232` — The emergence of blockchain technology in the tourism industry: a bibliometric analysis of research trends
-  3. `link:https://news.google.com/rss/articles/CBMixAFBVV95cUxOTERnQUdjSWZLQWd4cEpURlQ2OVdGZ0hfQVpXUkRFa2RzWDljcTdnUDQ2ajdabEdEVkdwXzF4clNQYXpta05ReVBINEtCRXRvVkZmVDBMeW1EdEdHWG16YkhfU2Z2WTZtakFCNWFNeXQySDBNbGd4TDBQZDhTYXh1VnVjbE9UaVFYSjc2NzEya2ZraFNDaWV1UlFZa1g1VlZWWkxqejVxN1hIQ3djdmJ5SlZVaWw0aE1vNFNqb01HdHYtbklZ?oc=5` — Multiannual Financial Framework - President Costa’s proposal - Council, European Union
-  4. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNLWhId1J5X0FXWXp1Rzc5RTEwaUZzVFpLeUhXaEx3enp5b3ZMRElOSkk3XzNXMEYyOTMwbkdNRmtiYVJvWEdhMWdLNzBxZ0MzM3hOMkdzcEplQVJ1aHplOXFDZmJnV09GdW85aU8xRlB6MkNxRng2cnZ0cUEtbXhNX1lzSUx5aUVmS0ZTUWVDY2ZFYmt0dXNKQ1hTRWk?oc=5` — Latest Council budget proposal keeps €158B for next Horizon Europe
-  5. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQTDk4al9ocGV4aW9La2tMMDF6YW9fX00xd0ZqZmpJaWFUX0RPMHJMaXowRkhjU1Q3UGZ0Z2ZtTnBxRV9YU0lQazM1UkNUX1Z5V3Y0ektXUnFHQmJsMDlnTl9mVF81QjZlT25qY2tfSi1La1pWREtxY0dfYXNxTWhvcU1ZczE?oc=5` — The rift between the US and EU on banks is widening
-  6. `link:https://www.nature.com/articles/d41586-026-03812-7` — Mathematicians astounded by AI and human-written proofs of iconic Riemann hypothesis
-  7. `link:https://news.google.com/rss/articles/CBMivwFBVV95cUxPeVk4cEtiUUtRVjNKVHRtcnplM254MjdJMElELVNfcDRNU1haR1laOWhPYkZPYW16Y0VQZHU0bE9PNWMwTFROTk5KYjByYjEyTlpGX2VUX2NSdEZQMV84b2V0c0tONDlGU1NnclVfZ0tPOWxZWnUtUHNSc083U0Y2bXVyY3haNk5tOGdlRGpTLTc4cmU5WkR0eHN1SDQyLVdtaE5MYWcwdUZ6ejlXNVNIVHJpQU1IOVVLdmg5R0FfOA?oc=5` — Aalto University: Five Nordic universities join forces to scale deep tech startups
-  8. `link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxOMU4tN0lkenRDSjFTZ2JzT3pWSTB1aXQyc3JDbTNXUjIzQk1yTFI5ck5GbE82UGw5Wl92NE1rMklMTW9sMnhKYVlYODhTVDVhWHplU0J1R2M3aE13eFE3RlMyNGtBS2hXbVhpVDFDVjlaZThmdjJ2QVF0WG9CRTItZmo5S0Q2bzg4SjEtZ0lRakRPWUxDQWJEdVNBZU5uSXJzVjNsY3h2SHNJQXBHV0tBcDNRRVNrMkhpT29TVldTLUg?oc=5` — Spain's burgeoning data centres become election issue with new rules
-  - … plus 11 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
-- Current package: `worker-b-20261122T080406Z-a1a6708088ec`
+- Current package: `worker-b-20261122T090908Z-a1a6708088ec`
 - Assigned unresolved records: **33**
   1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGp1VWlXU1NQV3JJSjMxemNocEtLUGtwVy1RM1U1TzJoUUZQaXRtejBjU0hHUnYtT2VmSjVZTi1EWjFUdk4yYkl2M1hpbW5yMW8xdVJDc1VWbTNSVGljU2RuejNoOVM1aUtnMlNScnpKRlVyRWt5Y0ZmaGVqaHYzTGdlVXFSMFBiTjhnUURERzhBTE9WZ1FhMDFYYk5hTXBDUVVVaDY2eF91MVY2NlpmQnNmY2Q?oc=5` — Malaysia Inks Deal With France to Develop Critical Minerals
   2. `link:https://data.consilium.europa.eu/doc/document/WK-14980-2026-INIT/en/pdf` — Handling and further distribution are under the sole responsibility of community members.
@@ -104,3 +95,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxQSmQwRDRsSWF2MlRVb01PdXB4ZE9MWUtNQnBJXzZzZTUySWFoS18xbXZXN18yMXlTU1pmTjIxRXlIa2kzZTd3MFhHZnI2T2NINEJ1MFN2YUxUSm03TkdUOE52TFdsbDMtSndtZ1hqUTRHb09ncUdQOFZUWWk4R1BCYW5tN3F6bEtjbWJKb29UX0pmdkVWcG5mUGp0RWtkU1hwQm5VLWZvaTJzWTNrb3B2NGh3bXdTUlc4UFJ1QnpSWjdlRkRIN0hDNEM0TDNUTUla?oc=5` — **Should Europe be more regional in its research and innovation?** — attempts: 3/3 — Research Professional News — 2026-10-22T12:04Z — Primary substantive evidence remained inaccessible after documented recovery. — https://news.google.com/rss/articles/CBMi0AFBVV95cUxQSmQwRDRsSWF2MlRVb01PdXB4ZE9MWUtNQnBJXzZzZTUySWFoS18xbXZXN18yMXlTU1pmTjIxRXlIa2kzZTd3MFhHZnI2T2NINEJ1MFN2YUxUSm03TkdUOE52TFdsbDMtSndtZ1hqUTRHb09ncUdQOFZUWWk4R1BCYW5tN3F6bEtjbWJKb29UX0pmdkVWcG5mUGp0RWtkU1hwQm5VLWZvaTJzWTNrb3B2NGh3bXdTUlc4UFJ1QnpSWjdlRkRIN0hDNEM0TDNUTUla?oc=5
 - `link:https://doi.org/10.1093/ejhf/xuag328` — **DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial** — attempts: 3/3 — European Journal of Heart Failure — 2026-10-30 — Substantive text of the exact October 30 European Journal of Heart Failure research letter remains inaccessible despite the required third-pass recovery. The source article is confirmed by Oxford Academic, but a different October 7 European Heart Journal paper on CURE-SHOCK cannot substitute for its content. — https://doi.org/10.1093/ejhf/xuag328
 - `link:https://doi.org/10.1080/08911916.2026.2743824` — **Beyond the European Chips Act: Mobilizing Public Banks to Solve Europe’s Semiconductor Supply Chain Paradox** — attempts: 3/3 — International Journal of Political Economy — 2026-11-04 — This third-attempt hard-final item has publisher-verified identity, but DOI/publisher text is blocked and an OpenAlex GROBID document is demonstrably a different MOSFET textbook chapter. — https://doi.org/10.1080/08911916.2026.2743824
+- `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — **How can Europe address its pressing AI compute infrastructure shortfall?** — attempts: 3/3 — Bruegel — 2026-10-27 — Primary Bruegel policy brief and PDF were access-restricted; independent metadata and third-party summaries do not substitute for substantive original full text. — https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf
