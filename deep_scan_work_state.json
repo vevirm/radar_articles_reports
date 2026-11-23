@@ -1,25 +1,11 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-11-23T07:49:36Z",
+  "updated_at": "2026-11-23T08:34:33Z",
   "lanes": {
     "A": {
       "target_size": 36,
-      "assigned": [
-        "link:https://doi.org/10.63544/jbii.v5i11.294",
-        "link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxQN2l6dEMzR0YzRjdQU19ZSVhibE5CNzhnd19YQTducGdpeTZFQ1loRVc3QzUzaVJHUjJSbUUwZnhpSzZITndyOGtzRkY4b1dCZWZCZlBleXZKaFVGeGFOcUNqUGUzcGMtTmpST2JXUmVUd3NEU3ZvS2gtLU9vM0R2eDRPTm14SzdnTmFFR0ozeGdNWFJETnZzNl9tNlR0eHdSNVB5cXQ0Mmp6QQ?oc=5",
-        "link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQZkI0SjRaOHVEZVJzX1pqNWFFYzdvb2NzMnlvb3J1c3BGQjctNVRzS2FsSWREX1RKcDZVNGxFd014TUl2STVSQ3B1bG9DSkRXcktNM3hQc3MzZ1dySDdjSHpodlVHTG5KblpGME1TYk8tYkZQLVJGTVMyWFBaVUVMMUdySDdJcVg4WUt2Vjl2YW5pNXhT?oc=5",
-        "link:https://news.google.com/rss/articles/CBMiigFBVV95cUxQdlBlUnlmWDRwaWdlT0I3UUpSU2x6Y3ZVZ1cxRGVfRDdYTjZjQlVGa1ZFb2ZtbTl1cHVBTFZ6bE1wVUtqYXA1ZkxNSTREc1BYczc4X3pUMHBFdkV3dzF4TGxyQmNFeGxXUEJDRU9tXy00WWFZQ3g5WHpONHk0V29sR2tQZ1d3WW9ScHc?oc=5",
-        "historical:id:9ac3315bd2ee2f87",
-        "historical:id:6548bbfec87dd49f",
-        "historical:id:4fadcb5314cdff5d",
-        "historical:id:ccab26b653662f25",
-        "historical:id:34be707287418ec2",
-        "historical:id:22d1b52c1408a483",
-        "link:https://doi.org/10.1080/09662839.2026.2750174",
-        "historical:id:e7435b110d84890a",
-        "historical:id:667c5c4d16bf5695"
-      ],
+      "assigned": [],
       "current_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "package_history": [
         "worker-a-20261030T093541Z-0dc1d16d9e57",
@@ -822,7 +808,7 @@
       "verified_package_id": "worker-a-20260913T222236Z-47330b640b29",
       "title": "As open as possible? Comparing Scandinavian approaches to research security",
       "source_name": "Science and Public Policy",
-      "date": "2026-05-29",
+      "date": "2026-06-08",
       "url": "https://doi.org/10.1093/scipol/scag056",
       "corpus_scope": "main",
       "queue_priority": "strand_a",
@@ -85620,7 +85606,7 @@
     },
     "id:edhec-genai-foresight-innovation-strategy-2026-10-20": {
       "status": "verified",
-      "verified_at": "2026-11-23T07:49:36Z",
+      "verified_at": "2026-11-23T08:34:33Z",
       "verified_package_id": "manual-edhec-pdf-20261102"
     },
     "link:https://doi.org/10.1080/13563467.2026.2751102": {
@@ -94950,7 +94936,7 @@
       "url": "https://doi.org/10.1016/j.erss.2024.103851",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-19T06:27:42Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
@@ -95043,7 +95029,9 @@
             "verification_note": "Identity verified from publication and bibliographic records. Primary material not substantively accessible. The publisher article is identified and its abstract indexed, but publisher full text could not be read substantively."
           }
         }
-      ]
+      ],
+      "verified_at": "2026-11-23T08:22:09Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "historical:id:14aeb5082656dc32": {
       "title": "Using foresight to anticipate emerging critical risks: Proposed methodology",
@@ -95499,53 +95487,53 @@
       "url": "https://doi.org/10.1080/09662839.2026.2750174",
       "corpus_scope": "main",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "A",
       "assigned_at": "2026-11-20T08:23:05Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 10,
       "last_scan_package_at": "2026-11-23T07:49:34Z",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-11-22T09:41:01Z",
-      "last_recovery_package_id": "worker-b-20261122T080406Z-a1a6708088ec",
-      "recovery_reason": "The DOI page and current publisher article were not substantively accessible; the similarly authored SSRN preprint has a different title and cannot be silently substituted.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-11-23T08:22:08Z",
+      "last_recovery_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
+      "recovery_reason": "The three named authors and current journal article are corroborated by an author’s public publication announcement and an earlier preprint, but the original DOI-linked journal full text was inaccessible and the accessible preprint abstract alone does not satisfy the substantive importer evidence standard. Third-attempt hard-final recovery exhausted available primary/publisher and legitimate preprint routes without identifying a readable matching full journal text.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "blocked_or_wrapper",
-            "note": "Direct original PDF/article access was blocked or yielded only bibliographic metadata; no full source was claimed."
+            "outcome": "failed",
+            "note": "Attempted the exact supplied DOI https://doi.org/10.1080/09662839.2026.2750174; the resolver was inaccessible and the Taylor & Francis full/abstract URLs returned HTTP 403."
           },
           {
             "step": "doi",
-            "outcome": "metadata_only",
-            "note": "DOI identity was identified, but publisher full text could not be opened or verified as substantively recovered."
+            "outcome": "failed",
+            "note": "The original DOI https://doi.org/10.1080/09662839.2026.2750174 did not resolve through available web access; Crossref DOI endpoint https://api.crossref.org/works/10.1080%2F09662839.2026.2750174 was also inaccessible."
           },
           {
             "step": "exact_title",
-            "outcome": "metadata_only",
-            "note": "Exact title lookup for 'Small states, big tech: exploring small states' role in enacting European digital sovereignty' located bibliographic or publisher indexing but not a substantively readable full article."
+            "outcome": "partial",
+            "note": "Exact-title searches for \"Small states, big tech: exploring small states' role in enacting European digital sovereignty\" did not yield an accessible full publisher article."
           },
           {
             "step": "title_author_year",
-            "outcome": "metadata_only",
-            "note": "Title, authors and publication year were cross-checked against accessible catalogue, institutional or secondary records without treating an abstract as the complete work."
+            "outcome": "success",
+            "note": "Searching \"Tobias Liebetrau\" \"Linda Monsees\" \"Jan Švec\" found the earlier same-author preprint https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6028875 and the researcher publication list https://www.jansvec.com/academic-research."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "blocked",
-            "note": "Inspected primary/repository access route https://doi.org/10.1080/09662839.2026.2750174; publisher PDF or complete article could not be substantively recovered."
+            "outcome": "failed",
+            "note": "Publisher https://www.tandfonline.com/doi/full/10.1080/09662839.2026.2750174 and /doi/abs returned HTTP 403; SSRN https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6028875 full-page access returned HTTP 403, though its indexed abstract was retrievable."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "summary_only",
-            "note": "Searched topic/title variants and institutional or repository citations for 'Small states, big tech: exploring small states' role in enacting European digita'; alternatives were only indexing, abstracts, third-party summaries, or different manuscript versions."
+            "outcome": "partial",
+            "note": "Two distinct searches used DOI fragment \"2750174\" plus journal and renamed title \"Small States, Big Tech: Exploring Danish and Czech Digital Sovereignty Discourse after Trump’s Reelection\" plus authors; found author-linked preprint abstract and author social publication note, but no matching accessible full journal manuscript."
           }
         ],
         "recovered_sources": [],
-        "verification_note": "Identity verified from publication and bibliographic records. Primary material not substantively accessible. The DOI page and current publisher article were not substantively accessible; the similarly authored SSRN preprint has a different title and cannot be silently substituted."
+        "verification_note": "Third-attempt hard-final pass completed: DOI/publisher direct, exact title, author/year, public SSRN preprint, author publication page, alternative title, DOI-fragment and metadata routes checked. Matching paper identity indicated by authors and journal announcement, but the exact issued full article cannot be read and the preprint abstract alone is too thin for an importer-backed judgement. No success asserted for inaccessible full text. DOI identity independently unresolved."
       },
       "recovery_history": [
         {
@@ -95635,8 +95623,54 @@
             "recovered_sources": [],
             "verification_note": "Identity verified from publication and bibliographic records. Primary material not substantively accessible. The DOI page and current publisher article were not substantively accessible; the similarly authored SSRN preprint has a different title and cannot be silently substituted."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
+          "at": "2026-11-23T08:22:08Z",
+          "reason": "The three named authors and current journal article are corroborated by an author’s public publication announcement and an earlier preprint, but the original DOI-linked journal full text was inaccessible and the accessible preprint abstract alone does not satisfy the substantive importer evidence standard. Third-attempt hard-final recovery exhausted available primary/publisher and legitimate preprint routes without identifying a readable matching full journal text.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "Attempted the exact supplied DOI https://doi.org/10.1080/09662839.2026.2750174; the resolver was inaccessible and the Taylor & Francis full/abstract URLs returned HTTP 403."
+              },
+              {
+                "step": "doi",
+                "outcome": "failed",
+                "note": "The original DOI https://doi.org/10.1080/09662839.2026.2750174 did not resolve through available web access; Crossref DOI endpoint https://api.crossref.org/works/10.1080%2F09662839.2026.2750174 was also inaccessible."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "partial",
+                "note": "Exact-title searches for \"Small states, big tech: exploring small states' role in enacting European digital sovereignty\" did not yield an accessible full publisher article."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "success",
+                "note": "Searching \"Tobias Liebetrau\" \"Linda Monsees\" \"Jan Švec\" found the earlier same-author preprint https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6028875 and the researcher publication list https://www.jansvec.com/academic-research."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Publisher https://www.tandfonline.com/doi/full/10.1080/09662839.2026.2750174 and /doi/abs returned HTTP 403; SSRN https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6028875 full-page access returned HTTP 403, though its indexed abstract was retrievable."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "partial",
+                "note": "Two distinct searches used DOI fragment \"2750174\" plus journal and renamed title \"Small States, Big Tech: Exploring Danish and Czech Digital Sovereignty Discourse after Trump’s Reelection\" plus authors; found author-linked preprint abstract and author social publication note, but no matching accessible full journal manuscript."
+              }
+            ],
+            "recovered_sources": [],
+            "verification_note": "Third-attempt hard-final pass completed: DOI/publisher direct, exact title, author/year, public SSRN preprint, author publication page, alternative title, DOI-fragment and metadata routes checked. Matching paper identity indicated by authors and journal announcement, but the exact issued full article cannot be read and the preprint abstract alone is too thin for an importer-backed judgement. No success asserted for inaccessible full text. DOI identity independently unresolved."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-11-23T08:22:08Z",
+      "manual_verification_reason": "The three named authors and current journal article are corroborated by an author’s public publication announcement and an earlier preprint, but the original DOI-linked journal full text was inaccessible and the accessible preprint abstract alone does not satisfy the substantive importer evidence standard. Third-attempt hard-final recovery exhausted available primary/publisher and legitimate preprint routes without identifying a readable matching full journal text."
     },
     "link:https://www.cost.eu/uploads/2026/11/COST-Targeted-impact-assessment-on-skill-development-among-young-researchers-October-2026.pdf": {
       "title": "Targeted impact assessment on skill development among young researchers",
@@ -96041,7 +96075,7 @@
       "url": "https://doi.org/10.1007/s11192-024-05141-w",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-20T11:06:35Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
@@ -96134,7 +96168,9 @@
             "verification_note": "Identity verified from publication and bibliographic records. Primary material not substantively accessible. The study’s bibliographic identity can be traced, but only abstract or index-level descriptions were located for this assignment."
           }
         }
-      ]
+      ],
+      "verified_at": "2026-11-23T08:22:09Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "historical:id:0f5efd7598fb9dce": {
       "title": "An alternative planetary future? Digital sovereignty frameworks and the decolonial option",
@@ -96636,12 +96672,14 @@
       "url": "https://doi.org/10.63544/jbii.v5i11.294",
       "corpus_scope": "main",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:05Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxQN2l6dEMzR0YzRjdQU19ZSVhibE5CNzhnd19YQTducGdpeTZFQ1loRVc3QzUzaVJHUjJSbUUwZnhpSzZITndyOGtzRkY4b1dCZWZCZlBleXZKaFVGeGFOcUNqUGUzcGMtTmpST2JXUmVUd3NEU3ZvS2gtLU9vM0R2eDRPTm14SzdnTmFFR0ozeGdNWFJETnZzNl9tNlR0eHdSNVB5cXQ0Mmp6QQ?oc=5": {
       "title": "Germany tests Kamikaze drones and AI targeting technology in Lithuania",
@@ -96649,12 +96687,14 @@
       "date": "2026-11-22T20:07Z",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQN2l6dEMzR0YzRjdQU19ZSVhibE5CNzhnd19YQTducGdpeTZFQ1loRVc3QzUzaVJHUjJSbUUwZnhpSzZITndyOGtzRkY4b1dCZWZCZlBleXZKaFVGeGFOcUNqUGUzcGMtTmpST2JXUmVUd3NEU3ZvS2gtLU9vM0R2eDRPTm14SzdnTmFFR0ozeGdNWFJETnZzNl9tNlR0eHdSNVB5cXQ0Mmp6QQ?oc=5",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:06Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQZkI0SjRaOHVEZVJzX1pqNWFFYzdvb2NzMnlvb3J1c3BGQjctNVRzS2FsSWREX1RKcDZVNGxFd014TUl2STVSQ3B1bG9DSkRXcktNM3hQc3MzZ1dySDdjSHpodlVHTG5KblpGME1TYk8tYkZQLVJGTVMyWFBaVUVMMUdySDdJcVg4WUt2Vjl2YW5pNXhT?oc=5": {
       "title": "Cyprus expels Russian diplomats on suspicion of espionage",
@@ -96662,12 +96702,14 @@
       "date": "2026-11-22T15:56Z",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQZkI0SjRaOHVEZVJzX1pqNWFFYzdvb2NzMnlvb3J1c3BGQjctNVRzS2FsSWREX1RKcDZVNGxFd014TUl2STVSQ3B1bG9DSkRXcktNM3hQc3MzZ1dySDdjSHpodlVHTG5KblpGME1TYk8tYkZQLVJGTVMyWFBaVUVMMUdySDdJcVg4WUt2Vjl2YW5pNXhT?oc=5",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:06Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "link:https://news.google.com/rss/articles/CBMiigFBVV95cUxQdlBlUnlmWDRwaWdlT0I3UUpSU2x6Y3ZVZ1cxRGVfRDdYTjZjQlVGa1ZFb2ZtbTl1cHVBTFZ6bE1wVUtqYXA1ZkxNSTREc1BYczc4X3pUMHBFdkV3dzF4TGxyQmNFeGxXUEJDRU9tXy00WWFZQ3g5WHpONHk0V29sR2tQZ1d3WW9ScHc?oc=5": {
       "title": "Working Party on Research, 9 March 2020 - Council, European Union",
@@ -96675,12 +96717,14 @@
       "date": "2026-11-21T21:31Z",
       "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQdlBlUnlmWDRwaWdlT0I3UUpSU2x6Y3ZVZ1cxRGVfRDdYTjZjQlVGa1ZFb2ZtbTl1cHVBTFZ6bE1wVUtqYXA1ZkxNSTREc1BYczc4X3pUMHBFdkV3dzF4TGxyQmNFeGxXUEJDRU9tXy00WWFZQ3g5WHpONHk0V29sR2tQZ1d3WW9ScHc?oc=5",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:06Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "historical:id:9ac3315bd2ee2f87": {
       "title": "Embodied AI: China’s ambitious path to transform its robotics industry",
@@ -96689,12 +96733,14 @@
       "url": "https://merics.org/sites/default/files/2026-04/MER-RZ-Report-Embodied-AI-260422-Web.pdf",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:07Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "historical:id:6548bbfec87dd49f": {
       "title": "GRIOS launches open call for evidence synthesis on Open Science - ESF",
@@ -96703,12 +96749,14 @@
       "url": "https://www.esf.org/grios-launches-open-call-for-evidence-synthesis-on-open-science/",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:07Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "historical:id:4fadcb5314cdff5d": {
       "title": "Open Public Consultation and Call for Evidence - Overall Evaluation of Regulation (EU) 2021/821",
@@ -96717,12 +96765,14 @@
       "url": "https://policy.trade.ec.europa.eu/consultations/open-public-consultation-and-call-evidence-overall-evaluation-regulation-eu-2021821_en",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:07Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "historical:id:ccab26b653662f25": {
       "title": "China’s AI development model in an era of technological deglobalization",
@@ -96731,12 +96781,14 @@
       "url": "https://merics.org/sites/default/files/2024-05/Arcesati-China%20AI%20Development-04.25.24.pdf",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:07Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "historical:id:22d1b52c1408a483": {
       "title": "Modeling a Scenario-Based Approach for Foresight Pharmaceuticals",
@@ -96744,12 +96796,14 @@
       "date": "2023-08-30",
       "url": "http://dx.doi.org/10.24018/compute.2023.3.3.113",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:08Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     },
     "historical:id:34be707287418ec2": {
       "title": "The Idiosyncratic Nature of Chinese Foreign Direct Investment in Europe",
@@ -96758,12 +96812,14 @@
       "url": "https://www.ifo.de/DocDL/CESifo-Forum-2018-4-knoerich-miedtank-chinese-FDI-december.pdf",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-11-23T07:49:25Z",
       "last_package_id": "worker-a-20261123T074925Z-7a627aaeefa6",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-11-23T07:49:34Z"
+      "last_scan_package_at": "2026-11-23T07:49:34Z",
+      "verified_at": "2026-11-23T08:22:08Z",
+      "verified_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     }
   },
   "packages": {

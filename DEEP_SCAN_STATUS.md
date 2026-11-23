@@ -6,27 +6,18 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4179** (Main **2221** + Historical **1958**)
-- Automatic queue still needing V2 verification: **48** (Main **5** + Historical **43**)
-- Currently assigned to workers: **48** (Main **5** + Historical **43**)
+- Authoritative V2 verified: **4191** (Main **2225** + Historical **1966**)
+- Automatic queue still needing V2 verification: **35** (Main **0** + Historical **35**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **47**
+- Hands-on verification needed: **48**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261123T074925Z-7a627aaeefa6`
-- Assigned unresolved records: **13**
-  1. `link:https://doi.org/10.63544/jbii.v5i11.294` — Institutional Accountability, Autonomy, and Policy Implementation in Public Universities of Khyber Pakhtunkhwa, Pakistan: A Conceptual Analysis
-  2. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxQN2l6dEMzR0YzRjdQU19ZSVhibE5CNzhnd19YQTducGdpeTZFQ1loRVc3QzUzaVJHUjJSbUUwZnhpSzZITndyOGtzRkY4b1dCZWZCZlBleXZKaFVGeGFOcUNqUGUzcGMtTmpST2JXUmVUd3NEU3ZvS2gtLU9vM0R2eDRPTm14SzdnTmFFR0ozeGdNWFJETnZzNl9tNlR0eHdSNVB5cXQ0Mmp6QQ?oc=5` — Germany tests Kamikaze drones and AI targeting technology in Lithuania
-  3. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQZkI0SjRaOHVEZVJzX1pqNWFFYzdvb2NzMnlvb3J1c3BGQjctNVRzS2FsSWREX1RKcDZVNGxFd014TUl2STVSQ3B1bG9DSkRXcktNM3hQc3MzZ1dySDdjSHpodlVHTG5KblpGME1TYk8tYkZQLVJGTVMyWFBaVUVMMUdySDdJcVg4WUt2Vjl2YW5pNXhT?oc=5` — Cyprus expels Russian diplomats on suspicion of espionage
-  4. `link:https://news.google.com/rss/articles/CBMiigFBVV95cUxQdlBlUnlmWDRwaWdlT0I3UUpSU2x6Y3ZVZ1cxRGVfRDdYTjZjQlVGa1ZFb2ZtbTl1cHVBTFZ6bE1wVUtqYXA1ZkxNSTREc1BYczc4X3pUMHBFdkV3dzF4TGxyQmNFeGxXUEJDRU9tXy00WWFZQ3g5WHpONHk0V29sR2tQZ1d3WW9ScHc?oc=5` — Working Party on Research, 9 March 2020 - Council, European Union
-  5. `historical:id:9ac3315bd2ee2f87` — Embodied AI: China’s ambitious path to transform its robotics industry
-  6. `historical:id:6548bbfec87dd49f` — GRIOS launches open call for evidence synthesis on Open Science - ESF
-  7. `historical:id:4fadcb5314cdff5d` — Open Public Consultation and Call for Evidence - Overall Evaluation of Regulation (EU) 2021/821
-  8. `historical:id:ccab26b653662f25` — China’s AI development model in an era of technological deglobalization
-  - … plus 5 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261122T090908Z-a1a6708088ec`
@@ -96,3 +87,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1093/ejhf/xuag328` — **DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial** — attempts: 3/3 — European Journal of Heart Failure — 2026-10-30 — Substantive text of the exact October 30 European Journal of Heart Failure research letter remains inaccessible despite the required third-pass recovery. The source article is confirmed by Oxford Academic, but a different October 7 European Heart Journal paper on CURE-SHOCK cannot substitute for its content. — https://doi.org/10.1093/ejhf/xuag328
 - `link:https://doi.org/10.1080/08911916.2026.2743824` — **Beyond the European Chips Act: Mobilizing Public Banks to Solve Europe’s Semiconductor Supply Chain Paradox** — attempts: 3/3 — International Journal of Political Economy — 2026-11-04 — This third-attempt hard-final item has publisher-verified identity, but DOI/publisher text is blocked and an OpenAlex GROBID document is demonstrably a different MOSFET textbook chapter. — https://doi.org/10.1080/08911916.2026.2743824
 - `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — **How can Europe address its pressing AI compute infrastructure shortfall?** — attempts: 3/3 — Bruegel — 2026-10-27 — Primary Bruegel policy brief and PDF were access-restricted; independent metadata and third-party summaries do not substitute for substantive original full text. — https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf
+- `link:https://doi.org/10.1080/09662839.2026.2750174` — **Small states, big tech: exploring small states' role in enacting European digital sovereignty** — attempts: 3/3 — European Security — 2026-11-17 — The three named authors and current journal article are corroborated by an author’s public publication announcement and an earlier preprint, but the original DOI-linked journal full text was inaccessible and the accessible preprint abstract alone does not satisfy the substantive importer evidence standard. Third-attempt hard-final recovery exhausted available primary/publisher and legitimate preprint routes without identifying a readable matching full journal text. — https://doi.org/10.1080/09662839.2026.2750174

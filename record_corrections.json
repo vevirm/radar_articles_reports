@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-11-22T09:41:07Z",
+  "updated_at": "2026-11-23T08:22:09Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -18796,6 +18796,85 @@
       ],
       "updated_at": "2026-11-22T09:41:01Z",
       "deep_scan_package_id": "worker-b-20261122T080406Z-a1a6708088ec"
+    },
+    "link:https://doi.org/10.63544/jbii.v5i11.294": {
+      "fields": {
+        "source": "Journal of Business Insight and Innovation"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The journal masthead, article landing page and DOI identify Journal of Business Insight and Innovation, not the World Bank.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://insightfuljournals.com/index.php/JBII/article/view/294"
+      ],
+      "updated_at": "2026-11-23T08:22:05Z",
+      "deep_scan_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
+    },
+    "link:https://news.google.com/rss/articles/CBMiigFBVV95cUxQdlBlUnlmWDRwaWdlT0I3UUpSU2x6Y3ZVZ1cxRGVfRDdYTjZjQlVGa1ZFb2ZtbTl1cHVBTFZ6bE1wVUtqYXA1ZkxNSTREc1BYczc4X3pUMHBFdkV3dzF4TGxyQmNFeGxXUEJDRU9tXy00WWFZQ3g5WHpONHk0V29sR2tQZ1d3WW9ScHc?oc=5": {
+      "fields": {
+        "date": "2020-03-09"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The issuing Council page identifies 9 March 2020 as the meeting date; the scanner date is a recrawl timestamp.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.consilium.europa.eu/en/meetings/mpo/2020/3/working-party-on-research-(288004)/"
+      ],
+      "updated_at": "2026-11-23T08:22:06Z",
+      "deep_scan_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
+    },
+    "historical:id:9ac3315bd2ee2f87": {
+      "fields": {
+        "authors": "Wendy Chang, Rebecca Arcesati, Altynay Junusova"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The original MERICS report cover names Wendy Chang, Rebecca Arcesati and Altynay Junusova.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://merics.org/en/report/embodied-ai-chinas-ambitious-path-transform-its-robotics-industry"
+      ],
+      "updated_at": "2026-11-23T08:22:07Z",
+      "deep_scan_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
+    },
+    "historical:id:ccab26b653662f25": {
+      "fields": {
+        "authors": "Rebecca Arcesati"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The MERICS/IGCC report cover and issuing-body page name Rebecca Arcesati as author.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://merics.org/en/report/chinas-ai-development-model-era-technological-deglobalization"
+      ],
+      "updated_at": "2026-11-23T08:22:07Z",
+      "deep_scan_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
+    },
+    "historical:id:22d1b52c1408a483": {
+      "fields": {
+        "source": "European Journal of Information Technologies and Computer Science"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The original article masthead and publisher landing page name European Journal of Information Technologies and Computer Science, not Science Europe.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.eu-opensci.org/index.php/compute/article/view/10113"
+      ],
+      "updated_at": "2026-11-23T08:22:08Z",
+      "deep_scan_package_id": "worker-a-20261123T074925Z-7a627aaeefa6"
     }
   }
 }
