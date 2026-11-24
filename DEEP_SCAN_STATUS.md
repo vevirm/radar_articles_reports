@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **4191** (Main **2225** + Historical **1966**)
-- Automatic queue still needing V2 verification: **35** (Main **0** + Historical **35**)
-- Currently assigned to workers: **35** (Main **0** + Historical **35**)
+- Automatic queue still needing V2 verification: **54** (Main **12** + Historical **42**)
+- Currently assigned to workers: **54** (Main **12** + Historical **42**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **48**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,8 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261123T074925Z-7a627aaeefa6`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261124T082907Z-0e005b2a84fa`
+- Assigned unresolved records: **19**
+  1. `link:https://doi.org/10.1111/jcms.70197` — From Transatlantic Crisis to European Adaptation? The European Union's Geopolitical Stress Test in 2025
+  2. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797050/EPRS_BRI(2026)797050_EN.pdf` — Integrating Ukraine's defence industry into the EU defence industrial base | Think Tank | European Parliament
+  3. `link:https://doi.org/10.1016/j.rspp.2026.100356` — The Ukrainian Readiness Index (URI): Designing a novel tool to evaluate local capacities for EU climate and recovery initiatives in Ukraine
+  4. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf` — Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament
+  5. `link:https://fusionforenergy.europa.eu/fusion-is-part-of-the-solution/` — Fusion is part of the solution - Fusion for Energy
+  6. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNdDFuaFRyaktlcVA5TVR0eXF2QlktZ3ZVU3JkbzZycU8zTU90WEhFSlhuVTc5RTRCdVctYVpuQzZhdUJnN1BlZWdOYkZEQXg5alR6d1BDVWEwMEszRTlRUFB1aG9ueFhHWmZmbkI1dmFSSmNZMVF6VzlhZFpBOG5BaVJ0QlprZnRVRmVIZ2djcXFzM3VrU2VQa3FQelVLU2Qzd2MwT19jTUdkRnVWYmc?oc=5` — Europe's STOXX 600 rises as tech shares rebound after AI-driven rout
+  7. `link:https://news.google.com/rss/articles/CBMipwFBVV95cUxObW10ejZvcDF5MGVjNTBpQUZ1NEpSVzVIVzhiNUhOaElDbHJCYmY4ZV9UXzRyR0p3UXRFTkdIMlluTmJzZk1FbXc2MWlnNmdORnc1TVZBTTB3enl2UExNQWlZUlJiSnBoTEVwNXBGUHpSZ0Nwa0RuMlBiZVA0RHc2NThCLXhTQTdpMHRWazNnSTI4ZVlWX0hhdGF5eXNuem0xM005SnBRQQ?oc=5` — Postdoctoral Researcher in Climate Law and Litigation job with University of Luxembourg | 12867085
+  8. `link:https://news.google.com/rss/articles/CBMi1wFBVV95cUxNQmRybDRhZzhaRkRlSHZUdWxTZVRPUEU1NDJfRFBwX3ItMDZsb0pSZWdFMlgwbDhzclBlaWwyTndXYUQxS0JrZFd5SjlNWC05YWYtYWZhREFHNE5VLXFEOGx3SkY5bWNrMWlYbVhEVklQN3YzMnZSNmVtcmNqdzlSQ21vZW1yWU4xN1UySDE1SHNCUXZfekUyQlRMQUFGMlBSWk5Hc0JFTjlsZGN6NS14M2E2eXk4a2tPUjZGd2Y4a09SX212UUlNY2lkVG1XQXZUMmhOMHRZMA?oc=5` — NATO believes Russia is ready to launch nuclear-armed satellite, German media say
+  - … plus 11 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261122T090908Z-a1a6708088ec`
