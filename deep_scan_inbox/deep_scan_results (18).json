@@ -1,0 +1,1481 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261124T082907Z-0e005b2a84fa",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1111/jcms.70197",
+      "source_hash": "4cc1b068",
+      "identity_hash": "eb975ff2af3d72ed",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://doi.org/10.1111/jcms.70197"
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected supplied source excerpt, not a new live retrieval: https://content.openalex.org/works/W7236811990.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_publisher_pdf",
+            "url": "https://content.openalex.org/works/W7236811990.pdf",
+            "title": "Matching Wiley editorial PDF excerpt",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_identity",
+            "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/jcms.70197",
+            "title": "Wiley identity page",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Inspected the matching Wiley PDF excerpt supplied in the package, including discussion of the annual review contributions. Editorial synthesis; not an independent empirical R&I study."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A: research and innovation is incidental; B: no operational foresight method; C: no discrete new R&I event."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "editorial"
+        },
+        "unset": [],
+        "reason": "Corrected against the matching substantive publication or original source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU geopolitical stress test editorial",
+      "reader_what": "The annual review editorial interprets European adaptation to geopolitical pressure.",
+      "reader_why": "",
+      "reader_more": "The editors organize the annual review around transatlantic disruption, China and internal political fragmentation. They synthesize contributions rather than present a dedicated study of the European research system.",
+      "deep_analysis": {
+        "work_kind": "editorial",
+        "research_question": "How did the EU adapt to geopolitical pressure in 2025?",
+        "main_finding": "Adaptation is constrained by fragmentation and political capacity.",
+        "method_or_basis": "Inspected the matching Wiley PDF excerpt supplied in the package, including discussion of the annual review contributions.",
+        "qualification": "Editorial synthesis; not an independent empirical R&I study.",
+        "radar_relevance": "A: research and innovation is incidental; B: no operational foresight method; C: no discrete new R&I event.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797050/EPRS_BRI(2026)797050_EN.pdf",
+      "source_hash": "1bf0a759",
+      "identity_hash": "5382f9c14cba7ebf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route did not expose the full text: https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797050/EPRS_BRI(2026)797050_EN.pdf"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "This briefing or news article uses a document or article identifier, not a DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Exact-title search identified Integrating Ukraine's defence industry into the EU defence industrial base | Think Tank | European Parliament; no sufficient body recovered."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "limited",
+            "note": "Search of exact title with 797050 and EPRS November 2026 recovered listing rather than body."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "https://research.europarl.europa.eu/search.html?nodeType=jnt%3Apage&policyArea=SECDEF — Official listing matches title and 20 November date; document 797050 body not accessible."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "Searches for 797050 and related official Parliament coverage found no exact substantive alternative; related reports cannot substitute."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "failed",
+            "note": "The supplied EP document and research/Think Tank alternatives returned access barriers; no supplied substantive excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity",
+            "url": "https://research.europarl.europa.eu/search.html?nodeType=jnt%3Apage&policyArea=SECDEF",
+            "title": "Integrating Ukraine's defence industry into the EU defence industrial base | Think Tank | European Parliament",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Official listing matches title and 20 November date; document 797050 body not accessible. Searches for 797050 and related official Parliament coverage found no exact substantive alternative; related reports cannot substitute."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Exact work identified; no sufficiently substantive matching source recovered. Retain for renewed access rather than infer an admission decision from scanner text."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.rspp.2026.100356",
+      "source_hash": "4725582b",
+      "identity_hash": "61b835f70f199afe",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://doi.org/10.1016/j.rspp.2026.100356"
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected supplied source excerpt, not a new live retrieval: https://content.openalex.org/works/W7223025225.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_publisher_pdf",
+            "url": "https://content.openalex.org/works/W7223025225.pdf",
+            "title": "Matching Ukrainian Readiness Index PDF excerpt",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_identity",
+            "url": "https://forschungsportal.hcu-hamburg.de/en/publications/the-ukrainian-readiness-index-uri-designing-a-novel-tool-to-evalu/",
+            "title": "University publication identity",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Inspected the supplied matched publisher PDF excerpt; cross-checked DOI and authors on the university publication portal. Small municipal pilot; self-assessment does not establish programme effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A: primarily municipal recovery and climate governance; B: readiness diagnostic rather than an operational forward-looking R&I method; no C event."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Ukrainian municipal readiness index",
+      "reader_what": "The authors design a readiness index for municipalities pursuing climate and recovery initiatives.",
+      "reader_why": "",
+      "reader_more": "The framework organizes 35 criteria into seven clusters. Six cities pilot the self-assessment with documentary support, exposing gaps in local planning and readiness.",
+      "deep_analysis": {
+        "work_kind": "research article",
+        "research_question": "How can municipalities assess preparedness for EU climate and recovery initiatives?",
+        "main_finding": "A structured readiness diagnostic was piloted across six Ukrainian cities.",
+        "method_or_basis": "Inspected the supplied matched publisher PDF excerpt; cross-checked DOI and authors on the university publication portal.",
+        "qualification": "Small municipal pilot; self-assessment does not establish programme effects.",
+        "radar_relevance": "A: primarily municipal recovery and climate governance; B: readiness diagnostic rather than an operational forward-looking R&I method; no C event.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf",
+      "source_hash": "e2fad6f1",
+      "identity_hash": "86317fd83bc78d6b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route did not expose the full text: https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "This briefing or news article uses a document or article identifier, not a DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Exact-title search identified Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament; no sufficient body recovered."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "limited",
+            "note": "Exact title with EPRS and November 2026 found listing but not briefing text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "https://research.europarl.europa.eu/search.html — Official listing matches Quantum act: Competitiveness and sovereignty, 20 November 2026; PDF 797052 inaccessible."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "Document-number and title searches plus related Quantum Act material did not recover the exact briefing body."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "failed",
+            "note": "EP PDF and research/Think Tank alternative routes remained blocked; no supplied full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity",
+            "url": "https://research.europarl.europa.eu/search.html",
+            "title": "Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Official listing matches Quantum act: Competitiveness and sovereignty, 20 November 2026; PDF 797052 inaccessible. Document-number and title searches plus related Quantum Act material did not recover the exact briefing body."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Exact work identified; no sufficiently substantive matching source recovered. Retain for renewed access rather than infer an admission decision from scanner text."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://fusionforenergy.europa.eu/fusion-is-part-of-the-solution/",
+      "source_hash": "5ce8b8b1",
+      "identity_hash": "a281da7c9f7ec7a9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://fusionforenergy.europa.eu/fusion-is-part-of-the-solution/"
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected supplied source excerpt, not a new live retrieval: https://fusionforenergy.europa.eu/fusion-is-part-of-the-solution/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://fusionforenergy.europa.eu/fusion-is-part-of-the-solution/",
+            "title": "Fusion is part of the solution - Fusion for Energy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the substantive first-party text excerpt delivered in the package; live URL did not yield the page. Advocacy and secondary discussion of earlier studies are not evidence of realized benefits."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A: no new analytical evidence product; B: no transferable method; C: no specific new action."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Fusion for Energy makes the case for fusion",
+      "reader_what": "Fusion for Energy advocates fusion as a contributor to energy security and decarbonisation.",
+      "reader_why": "",
+      "reader_more": "The commentary draws on previous analyses and contextual energy figures to make a case for fusion. It is not itself a new study, funding decision or demonstrable capacity change.",
+      "deep_analysis": {
+        "work_kind": "institutional commentary",
+        "research_question": "Why does Fusion for Energy see fusion as part of the energy solution?",
+        "main_finding": "The organization makes a strategic case for fusion.",
+        "method_or_basis": "Read the substantive first-party text excerpt delivered in the package; live URL did not yield the page.",
+        "qualification": "Advocacy and secondary discussion of earlier studies are not evidence of realized benefits.",
+        "radar_relevance": "A: no new analytical evidence product; B: no transferable method; C: no specific new action.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNdDFuaFRyaktlcVA5TVR0eXF2QlktZ3ZVU3JkbzZycU8zTU90WEhFSlhuVTc5RTRCdVctYVpuQzZhdUJnN1BlZWdOYkZEQXg5alR6d1BDVWEwMEszRTlRUFB1aG9ueFhHWmZmbkI1dmFSSmNZMVF6VzlhZFpBOG5BaVJ0QlprZnRVRmVIZ2djcXFzM3VrU2VQa3FQelVLU2Qzd2MwT19jTUdkRnVWYmc?oc=5",
+      "source_hash": "287d4e37",
+      "identity_hash": "f602c6f39c5abfbe",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://news.google.com/rss/articles/CBMirgFBVV95cUxNdDFuaFRyaktlcVA5TVR0eXF2QlktZ3ZVU3JkbzZycU8zTU90WEhFSlhuVTc5RTRCdVctYVpuQzZhdUJnN1BlZWdOYkZEQXg5alR6d1BDVWEwMEszRTlRUFB1aG9ueFhHWmZmbkI1dmFSSmNZMVF6VzlhZFpBOG5BaVJ0QlprZnRVRmVIZ2djcXFzM3VrU2VQa3FQelVLU2Qzd2MwT19jTUdkRnVWYmc?oc=5"
+          },
+          {
+            "step": "secondary_syndication_recovery",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://www.businesstimes.com.sg/companies-markets/capital-markets-currencies/europes-stoxx-600-rises-tech-shares-rebound-after-ai-driven-rout"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://www.businesstimes.com.sg/companies-markets/capital-markets-currencies/europes-stoxx-600-rises-tech-shares-rebound-after-ai-driven-rout",
+            "title": "Europe's STOXX 600 rises as tech shares rebound after AI-driven rout",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the same Reuters wire report syndicated by Business Times. Market price movement is not a measure of realized research investment."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: routine market movement lacks a concrete R&I change; no A or B evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European shares rebound after AI selloff",
+      "reader_what": "Reuters reports a daily rebound in European equities led by technology shares.",
+      "reader_why": "",
+      "reader_more": "The report describes stock-market moves and investor sentiment after a selloff. It does not establish a change in European research investment, infrastructure or institutional capacity.",
+      "deep_analysis": {
+        "work_kind": "wire news",
+        "research_question": "What drove the daily equity market move?",
+        "main_finding": "Tech shares rebounded amid AI-related investor concerns.",
+        "method_or_basis": "Read the same Reuters wire report syndicated by Business Times.",
+        "qualification": "Market price movement is not a measure of realized research investment.",
+        "radar_relevance": "C: routine market movement lacks a concrete R&I change; no A or B evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMipwFBVV95cUxObW10ejZvcDF5MGVjNTBpQUZ1NEpSVzVIVzhiNUhOaElDbHJCYmY4ZV9UXzRyR0p3UXRFTkdIMlluTmJzZk1FbXc2MWlnNmdORnc1TVZBTTB3enl2UExNQWlZUlJiSnBoTEVwNXBGUHpSZ0Nwa0RuMlBiZVA0RHc2NThCLXhTQTdpMHRWazNnSTI4ZVlWX0hhdGF5eXNuem0xM005SnBRQQ?oc=5",
+      "source_hash": "e765bc9a",
+      "identity_hash": "ea2feda603c0eb8c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://news.google.com/rss/articles/CBMipwFBVV95cUxObW10ejZvcDF5MGVjNTBpQUZ1NEpSVzVIVzhiNUhOaElDbHJCYmY4ZV9UXzRyR0p3UXRFTkdIMlluTmJzZk1FbXc2MWlnNmdORnc1TVZBTTB3enl2UExNQWlZUlJiSnBoTEVwNXBGUHpSZ0Nwa0RuMlBiZVA0RHc2NThCLXhTQTdpMHRWazNnSTI4ZVlWX0hhdGF5eXNuem0xM005SnBRQQ?oc=5"
+          },
+          {
+            "step": "secondary_syndication_recovery",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://www.lexgo.lu/en/jobs/23780-postdoctoral-researcher-in-climate-law-and-litigation"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://www.lexgo.lu/en/jobs/23780-postdoctoral-researcher-in-climate-law-and-litigation",
+            "title": "Postdoctoral Researcher in Climate Law and Litigation job with University of Luxembourg | 12867085",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the matching employer advertisement reproduced by LexGO; Nature listing was inaccessible. Matched title and employer; original Nature page not independently read."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: routine individual recruitment, not a demonstrated systemic change; no A or B evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "University of Luxembourg climate law vacancy",
+      "reader_what": "The University of Luxembourg advertises one postdoctoral climate law and litigation position.",
+      "reader_why": "",
+      "reader_more": "The employer advert describes the research role and applicant requirements. A single routine vacancy does not establish a systemic shift in European research talent or funding.",
+      "deep_analysis": {
+        "work_kind": "vacancy",
+        "research_question": "What position is being advertised?",
+        "main_finding": "One postdoctoral recruitment opportunity is described.",
+        "method_or_basis": "Read the matching employer advertisement reproduced by LexGO; Nature listing was inaccessible.",
+        "qualification": "Matched title and employer; original Nature page not independently read.",
+        "radar_relevance": "C: routine individual recruitment, not a demonstrated systemic change; no A or B evidence.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi1wFBVV95cUxNQmRybDRhZzhaRkRlSHZUdWxTZVRPUEU1NDJfRFBwX3ItMDZsb0pSZWdFMlgwbDhzclBlaWwyTndXYUQxS0JrZFd5SjlNWC05YWYtYWZhREFHNE5VLXFEOGx3SkY5bWNrMWlYbVhEVklQN3YzMnZSNmVtcmNqdzlSQ21vZW1yWU4xN1UySDE1SHNCUXZfekUyQlRMQUFGMlBSWk5Hc0JFTjlsZGN6NS14M2E2eXk4a2tPUjZGd2Y4a09SX212UUlNY2lkVG1XQXZUMmhOMHRZMA?oc=5",
+      "source_hash": "b067adc3",
+      "identity_hash": "eb2b9246ae493dba",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://news.google.com/rss/articles/CBMi1wFBVV95cUxNQmRybDRhZzhaRkRlSHZUdWxTZVRPUEU1NDJfRFBwX3ItMDZsb0pSZWdFMlgwbDhzclBlaWwyTndXYUQxS0JrZFd5SjlNWC05YWYtYWZhREFHNE5VLXFEOGx3SkY5bWNrMWlYbVhEVklQN3YzMnZSNmVtcmNqdzlSQ21vZW1yWU4xN1UySDE1SHNCUXZfekUyQlRMQUFGMlBSWk5Hc0JFTjlsZGN6NS14M2E2eXk4a2tPUjZGd2Y4a09SX212UUlNY2lkVG1XQXZUMmhOMHRZMA?oc=5"
+          },
+          {
+            "step": "secondary_syndication_recovery",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://uk.marketscreener.com/news/nato-believes-russia-is-ready-launch-nuclear-armed-satellite-german-media-say-ce7851dad981f22c"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://uk.marketscreener.com/news/nato-believes-russia-is-ready-launch-nuclear-armed-satellite-german-media-say-ce7851dad981f22c",
+            "title": "NATO believes Russia is ready to launch nuclear-armed satellite, German media say",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read matching Reuters wire syndication on MarketScreener. Attribution and reported assessment are not independent verification."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: no specific demonstrated European R&I change; no A or B evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Reuters reports an attributed security assessment",
+      "reader_what": "Reuters reports an attributed security assessment concerning Russian space capabilities.",
+      "reader_why": "",
+      "reader_more": "The wire story relays reporting attributed to German media. It does not establish an independently verified deployment or a specific change to European research infrastructure or funding.",
+      "deep_analysis": {
+        "work_kind": "wire news",
+        "research_question": "What security assessment is being reported?",
+        "main_finding": "The article reports an attributed assessment, not a confirmed outcome.",
+        "method_or_basis": "Read matching Reuters wire syndication on MarketScreener.",
+        "qualification": "Attribution and reported assessment are not independent verification.",
+        "radar_relevance": "C: no specific demonstrated European R&I change; no A or B evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf",
+      "source_hash": "fe02fe04",
+      "identity_hash": "329102cfcd9d21e9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route did not expose the full text: https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "This briefing or news article uses a document or article identifier, not a DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Exact-title search identified Public hearing with Christine Lagarde, Chair of the European Systemic Risk Board - November 2026 | Think Tank | European Parliament; no sufficient body recovered."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "limited",
+            "note": "Title with Raschieri and November 2026 recovered official identity/summary, not full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "https://research.europarl.europa.eu/ECTI_BRI%282026%29795836 — Official record confirms the hearing briefing identity and date, but provides only summary-level material; PDF access failed."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "Document 795836 and official-site searches did not recover the exact substantive text; other financial risk publications are not substitutes."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "failed",
+            "note": "The Parliament PDF and validation routes did not provide the substantive document."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity",
+            "url": "https://research.europarl.europa.eu/ECTI_BRI%282026%29795836",
+            "title": "Public hearing with Christine Lagarde, Chair of the European Systemic Risk Board - November 2026 | Think Tank | European Parliament",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Official record confirms the hearing briefing identity and date, but provides only summary-level material; PDF access failed. Document 795836 and official-site searches did not recover the exact substantive text; other financial risk publications are not substitutes."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Exact work identified; no sufficiently substantive matching source recovered. Retain for renewed access rather than infer an admission decision from scanner text."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMisAFBVV95cUxNQ2JFVzFycm84VXZScWRobWthTFNFdHF2dllMRnVmRm9vaXRlWDBubUhpcTNjYThCVUFScnZFcl82TVR1TWYyQ0pnQm01T0g4dXFLREh2VDNVeENTbFdoclRtYzZoRU1KMDAydkttbkNJQ1FnX0tkZllCYk0zdnhLaXZjUDBnUFBnb2hKOE81ZnhzRjJYZmw1NzdkdXdvcTlNWmlBb2dleGlHOHdfaklGaQ?oc=5",
+      "source_hash": "37c7f4db",
+      "identity_hash": "d4b4de27f29d9707",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://news.google.com/rss/articles/CBMisAFBVV95cUxNQ2JFVzFycm84VXZScWRobWthTFNFdHF2dllMRnVmRm9vaXRlWDBubUhpcTNjYThCVUFScnZFcl82TVR1TWYyQ0pnQm01T0g4dXFLREh2VDNVeENTbFdoclRtYzZoRU1KMDAydkttbkNJQ1FnX0tkZllCYk0zdnhLaXZjUDBnUFBnb2hKOE81ZnhzRjJYZmw1NzdkdXdvcTlNWmlBb2dleGlHOHdfaklGaQ?oc=5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20261120-referencia-rueda-de-consejo-ministros-ext.aspx"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official",
+            "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20261120-referencia-rueda-de-consejo-ministros-ext.aspx",
+            "title": "Spanish cabinet reference, 20 November 2026",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher",
+            "url": "https://www.euronews.com/2026/11/20/spain-requires-data-centres-to-draw-80-of-their-electricity-from-renewables",
+            "title": "Euronews original article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the original Euronews article and the Spanish government cabinet reference of 20 November. Adoption is verified, not commencement or realized impact; exceptions and alternative arrangements apply."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C: adopted energy-sourcing conditions directly affect the operation of strategic compute infrastructure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Spain adopts renewable power rules for data centres",
+      "reader_what": "Spain adopts an 80% renewable electricity requirement for data centres, subject to specified conditions.",
+      "reader_why": "Power procurement requirements affect the conditions under which Spanish compute infrastructure can operate.",
+      "reader_more": "The cabinet adopted a rule requiring hourly renewable matching and additionality until the national renewable threshold is reached. The official text also describes alternative arrangements for interruptible facilities and exceptions.",
+      "deep_analysis": {
+        "work_kind": "policy action",
+        "research_question": "What electricity supply requirements has Spain adopted?",
+        "main_finding": "The 80% renewable electricity rule changes conditions for data centre energy sourcing.",
+        "method_or_basis": "Read the original Euronews article and the Spanish government cabinet reference of 20 November.",
+        "qualification": "Adoption is verified, not commencement or realized impact; exceptions and alternative arrangements apply.",
+        "radar_relevance": "C: adopted energy-sourcing conditions directly affect the operation of strategic compute infrastructure.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "datacentre.energy_supply",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Government of Spain",
+            "class": "member_state"
+          },
+          "mechanism": "requires",
+          "direction": "becomes_conditional",
+          "status": "adopted",
+          "status_date": "2026-11-20",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "ES"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Adoption is verified, not commencement or realized impact; exceptions and alternative arrangements apply.",
+          "text": "Spain adopted an 80% renewable electricity sourcing requirement for data centres, with specified conditions and exceptions.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPa0gyOWNwT3BmU3hyZURMTHdvUHloTjdnOXhXQ1RLVFdRd3JkWjYzd0JOcEtnYU9XMmZMckFqbl9FYk9tb2ZPdGd1SEtoVVJ1Z2w4VjkzRjR2LXZvZDVMai1vOUNYeFdQcXlOaTFIWk9zblhQQWQxN3V5c3JvRkZyMjl3SGQ?oc=5",
+      "source_hash": "1c264888",
+      "identity_hash": "d59ad54e0b3220f2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route did not expose the full text: https://news.google.com/rss/articles/CBMihAFBVV95cUxPa0gyOWNwT3BmU3hyZURMTHdvUHloTjdnOXhXQ1RLVFdRd3JkWjYzd0JOcEtnYU9XMmZMckFqbl9FYk9tb2ZPdGd1SEtoVVJ1Z2w4VjkzRjR2LXZvZDVMai1vOUNYeFdQcXlOaTFIWk9zblhQQWQxN3V5c3JvRkZyMjl3SGQ?oc=5"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "This briefing or news article uses a document or article identifier, not a DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Exact-title search identified Russia poised to put nuclear weapon in space within 60 days, Germany warns; no sufficient body recovered."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "limited",
+            "note": "Exact FT headline and publication date 23 November 2026 searched; no sufficient accessible copy found."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "https://www.ft.com/content/dd00f616-1fef-4a26-a5f9-2b1bf83cc489 — FT article identity confirmed; full text remained paywalled."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "Article identifier and syndication searches recovered no authorized matching full text; related Reuters coverage is not the same article."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "failed",
+            "note": "RSS route and FT publisher route did not supply the substantive article; no substantive package text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity",
+            "url": "https://www.ft.com/content/dd00f616-1fef-4a26-a5f9-2b1bf83cc489",
+            "title": "Russia poised to put nuclear weapon in space within 60 days, Germany warns",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "FT article identity confirmed; full text remained paywalled. Article identifier and syndication searches recovered no authorized matching full text; related Reuters coverage is not the same article."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Exact work identified; no sufficiently substantive matching source recovered. Retain for renewed access rather than infer an admission decision from scanner text."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxNMFZiNUNuMDZsQ09fb29ZTkNJTlg4R0hoNmtxVFowSkMxX1R3aHVieFplNDdKdGc2SXAxUXgyQ2VpVlAzR0NOeXlkazNQek9FeV8tbEE0ZDh2NUgyc0pGNlJEQm5HRHFEbE1LR2UzUllPZFlrTmdQeUdNR0RXeUR1b0dRNV9VbkNkak1EYXlTMVpRdUliYjlZYnlGZnZVdjFZYUg1NE5JdERrcWFRcU5QS1ZPR1M3bWFQejFELVNZbw?oc=5",
+      "source_hash": "e34bd2bd",
+      "identity_hash": "ad66d0570e25f528",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://news.google.com/rss/articles/CBMivwFBVV95cUxNMFZiNUNuMDZsQ09fb29ZTkNJTlg4R0hoNmtxVFowSkMxX1R3aHVieFplNDdKdGc2SXAxUXgyQ2VpVlAzR0NOeXlkazNQek9FeV8tbEE0ZDh2NUgyc0pGNlJEQm5HRHFEbE1LR2UzUllPZFlrTmdQeUdNR0RXeUR1b0dRNV9VbkNkak1EYXlTMVpRdUliYjlZYnlGZnZVdjFZYUg1NE5JdERrcWFRcU5QS1ZPR1M3bWFQejFELVNZbw?oc=5"
+          },
+          {
+            "step": "secondary_syndication_recovery",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://live.euronext.com/en/financial-news/frances-macron-earmarks-eu350-million-civil-aviation-research"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://live.euronext.com/en/financial-news/frances-macron-earmarks-eu350-million-civil-aviation-research",
+            "title": "France's Macron earmarks €350 million for civil aviation research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read matching Reuters original wire syndicated by Euronext. Announcement only; disbursement and research outcomes are not verified."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C: specific announced national R&I funding for a strategic industrial technology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "France announces civil aviation research funding",
+      "reader_what": "France announces €350 million in support for civil aviation research.",
+      "reader_why": "The announcement identifies a national funding route for aviation research capability.",
+      "reader_more": "Reuters reports Macron earmarking €350 million for civil aviation research through CORAC. This establishes announced support, rather than disbursement or resulting research output.",
+      "deep_analysis": {
+        "work_kind": "funding announcement",
+        "research_question": "What aviation research support did France announce?",
+        "main_finding": "France earmarked €350 million for civil aviation research.",
+        "method_or_basis": "Read matching Reuters original wire syndicated by Euronext.",
+        "qualification": "Announcement only; disbursement and research outcomes are not verified.",
+        "radar_relevance": "C: specific announced national R&I funding for a strategic industrial technology.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "French government",
+            "class": "member_state"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-23",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Announcement only; disbursement and research outcomes are not verified.",
+          "text": "France announced €350 million in civil aviation research support through CORAC.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0b94ca24378f05b4",
+      "source_hash": "8484a11b",
+      "identity_hash": "87dc1dcf0db4683c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://doi.org/10.1007/s10734-026-01687-1"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://link.springer.com/article/10.1007/s10734-026-01687-1"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://link.springer.com/article/10.1007/s10734-026-01687-1",
+            "title": "Funding sources and university patenting: an analysis of European higher education institutions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the full Springer article and its institutional panel analysis. Observational association, not a causal estimate; historic pan-European sample includes non-EU countries."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A: direct empirical evidence on European university funding and knowledge transfer."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "University funding mix and European patenting",
+      "reader_what": "Higher third-party funding shares are associated with stronger university patenting outcomes, especially in wealthier regions.",
+      "reader_why": "The regional disparity matters when designing funding and knowledge-transfer policies.",
+      "reader_more": "The study analyzes around 2,900 higher education institutions in 31 countries and 295 regions from 2011 to 2019. Associations with patent quantity and quality are stronger in wealthy regions and negligible in the poorest regions.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "How does funding composition relate to university patenting?",
+        "main_finding": "Higher third-party funding shares correlate with patenting quantity and quality, unevenly across regions.",
+        "method_or_basis": "Read the full Springer article and its institutional panel analysis.",
+        "qualification": "Observational association, not a causal estimate; historic pan-European sample includes non-EU countries.",
+        "radar_relevance": "A: direct empirical evidence on European university funding and knowledge transfer.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European higher education institutions",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-05-23",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Observational association, not a causal estimate; historic pan-European sample includes non-EU countries.",
+          "text": "Higher third-party funding shares are associated with stronger patenting outcomes, particularly in wealthier European regions.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:73881bcf8479aac9",
+      "source_hash": "3f63273c",
+      "identity_hash": "371b2f75a907ecf6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Read source at https://www.eurocontrol.int/audio/easa-executive-director-florian-guillermet-aviation-safety-resilience-and-ai"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://www.eurocontrol.int/audio/easa-executive-director-florian-guillermet-aviation-safety-resilience-and-ai",
+            "title": "EASA Executive Director Florian Guillermet on aviation safety, resilience and AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the complete official episode description and supplied matching text. Episode description only, not a transcript; no conclusions about unexamined audio are asserted."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Historical A: the recovered description establishes a general interview, not a substantive research evidence product; no demonstrated B method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Aviation safety, resilience and AI podcast",
+      "reader_what": "EUROCONTROL hosts an interview with the EASA executive director about aviation safety and AI.",
+      "reader_why": "",
+      "reader_more": "The official episode description sets out the conversation topics. It does not supply a research study or a transferable foresight method; the audio itself was not independently transcribed.",
+      "deep_analysis": {
+        "work_kind": "podcast interview",
+        "research_question": "What themes are discussed in the episode?",
+        "main_finding": "Aviation safety, resilience and AI are the interview themes.",
+        "method_or_basis": "Read the complete official episode description and supplied matching text.",
+        "qualification": "Episode description only, not a transcript; no conclusions about unexamined audio are asserted.",
+        "radar_relevance": "Historical A: the recovered description establishes a general interview, not a substantive research evidence product; no demonstrated B method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a0af14b9d9db298c",
+      "source_hash": "ffe32b79",
+      "identity_hash": "2b4cdabd2166f768",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://doi.org/10.1007/s11024-024-09568-6"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://link.springer.com/article/10.1007/s11024-024-09568-6"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://link.springer.com/article/10.1007/s11024-024-09568-6",
+            "title": "“We Need a CERN for AI”: Organized Scientific Interests and Agenda-Setting in European Science, Technology, and Innovation Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the full Minerva article, using its interview and documentary triangulation. Single historical case; no claim about present implementation or present status."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A: direct evidence of European research infrastructure and research governance agenda-setting."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How a CERN for AI reached the European agenda",
+      "reader_what": "CLAIRE advocacy advanced a shared AI research infrastructure concept onto the informal European policy agenda.",
+      "reader_why": "The case reveals obstacles to collective European research infrastructure agenda-setting.",
+      "reader_more": "The case study traces lobbying, policy framing and institutional responses through interviews and documents. The concept reached the informal agenda but not the formal agenda, with fragmented policy structures, resources and timing presenting obstacles.",
+      "deep_analysis": {
+        "work_kind": "case study",
+        "research_question": "How do organized scientific interests influence EU STI agenda-setting?",
+        "main_finding": "CLAIRE gained informal agenda access for a CERN-like AI infrastructure concept, not formal adoption.",
+        "method_or_basis": "Read the full Minerva article, using its interview and documentary triangulation.",
+        "qualification": "Single historical case; no claim about present implementation or present status.",
+        "radar_relevance": "A: direct evidence of European research infrastructure and research governance agenda-setting.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CLAIRE",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2025-03-17",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Single historical case; no claim about present implementation or present status.",
+          "text": "The case study found that CLAIRE advanced the shared AI infrastructure idea onto the informal, but not formal, European policy agenda.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:068b52b71afd91fd",
+      "source_hash": "1f008e2f",
+      "identity_hash": "1740b23696d09699",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://doi.org/10.1162/qss_a_00350"
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected supplied source excerpt, not a new live retrieval: https://content.openalex.org/works/W4406721807.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_publisher_pdf",
+            "url": "https://content.openalex.org/works/W4406721807.pdf",
+            "title": "Matching Quantitative Science Studies publisher PDF excerpt",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_identity",
+            "url": "https://www.uia.no/english/about-uia/employees/marcos/index.html",
+            "title": "Author publication identity",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Inspected matching publisher PDF excerpt supplied in package and checked DOI and author identity through the University of Agder profile. Historical programme cohort; estimates do not establish present programme performance."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A: directly relevant to European research talent and funding policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Marie Curie grants and researcher retention",
+      "reader_what": "Career Integration Grant recipients had greater long-term retention at their host institutions and in host countries.",
+      "reader_why": "The study provides historical evidence relevant to researcher mobility and retention funding.",
+      "reader_more": "The study examines grants awarded in 2011–2013 and compares longer-term researcher relocation outcomes. Reported retention advantages are about 9.4% for host institutions and 8.2% for host countries.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "Does a public career integration grant affect long-term researcher relocation?",
+        "main_finding": "Grant recipients show greater host institution and host country retention.",
+        "method_or_basis": "Inspected matching publisher PDF excerpt supplied in package and checked DOI and author identity through the University of Agder profile.",
+        "qualification": "Historical programme cohort; estimates do not establish present programme performance.",
+        "radar_relevance": "A: directly relevant to European research talent and funding policy.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.retention",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Marie Curie Career Integration Grant",
+            "class": "eu_body"
+          },
+          "mechanism": "retains",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "Historical programme cohort; estimates do not establish present programme performance.",
+          "text": "The study finds higher long-term host institution and host country retention among Career Integration Grant recipients.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:6fb53dbfbfb16cd8",
+      "source_hash": "8e5d086a",
+      "identity_hash": "3eccbefe23286f47",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://publica.fraunhofer.de/handle/publica/513052"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://publica-rest.fraunhofer.de/server/api/core/bitstreams/0a076aaf-f3bc-4306-b26b-1ce8abc9b58c/content"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository",
+            "url": "https://publica-rest.fraunhofer.de/server/api/core/bitstreams/0a076aaf-f3bc-4306-b26b-1ce8abc9b58c/content",
+            "title": "Horizon Europe and the digital & industrial transition: Annexes to the final report",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_identity",
+            "url": "https://publica.fraunhofer.de/handle/publica/513052",
+            "title": "Matching repository record",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Recovered the matching Fraunhofer repository annexes, DOI 10.2777/489648, and read the Annex II executive summary. Early 2021–2022 calls and predecessor comparison are historical and not necessarily equivalent in composition."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A: substantive EU programme funding and access evaluation."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Horizon Europe and the digital & industrial transition: Annexes to the final report",
+          "source": "Publications Office of the European Union"
+        },
+        "unset": [],
+        "reason": "Corrected against the matching substantive publication or original source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe digital and industrial transition evaluation annexes",
+      "reader_what": "The evaluation reports a 19% Cluster 4 proposal success rate versus 15% in the predecessor comparison.",
+      "reader_why": "Historical programme access evidence helps assess funding design and geographic participation disparities.",
+      "reader_more": "The annexes report mixed-method evaluation findings, including lower success rates for some topics and EU13 participants. Time to grant increased relative to the cited Horizon 2020 comparison despite some administrative streamlining.",
+      "deep_analysis": {
+        "work_kind": "evaluation annexes",
+        "research_question": "How did early Horizon Europe digital and industrial transition activities perform?",
+        "main_finding": "Cluster 4 success rate was 19%, versus 15% in the Horizon 2020 LEIT comparison.",
+        "method_or_basis": "Recovered the matching Fraunhofer repository annexes, DOI 10.2777/489648, and read the Annex II executive summary.",
+        "qualification": "Early 2021–2022 calls and predecessor comparison are historical and not necessarily equivalent in composition.",
+        "radar_relevance": "A: substantive EU programme funding and access evaluation.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "horizon.success_rate",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Horizon Europe Cluster 4",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Early 2021–2022 calls and predecessor comparison are historical and not necessarily equivalent in composition.",
+          "text": "The evaluation reports a 19% success rate for early Cluster 4 calls compared with 15% in the Horizon 2020 LEIT comparison.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:06226e834506f28a",
+      "source_hash": "143406a1",
+      "identity_hash": "a1fabc3a09c83e3c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://doi.org/10.1007/s11192-020-03595-2"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive source: https://www.researchgate.net/publication/342900963_An_in-depth_analysis_of_government_funding_and_international_collaboration_in_scientific_research"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://www.researchgate.net/publication/342900963_An_in-depth_analysis_of_government_funding_and_international_collaboration_in_scientific_research",
+            "title": "An in-depth analysis of government funding and international collaboration in scientific research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the matched author-uploaded full journal article, checking the DOI. Bibliometric association; six-country study is not an EU-wide causal evaluation."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A: substantial German and Dutch country analysis but global scope makes admission borderline."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Government funding and international scientific collaboration",
+      "reader_what": "A six-country bibliometric study compares research funding and international collaboration, including Germany and the Netherlands.",
+      "reader_why": "Country-level funding comparisons provide a historical baseline for European research collaboration and performance.",
+      "reader_more": "The study uses Web of Science records for 2009–2016 and examines individual government funding agencies. Its Netherlands analysis reports higher citation impact for papers funded by NWO than by other agencies in the comparison.",
+      "deep_analysis": {
+        "work_kind": "bibliometric study",
+        "research_question": "How do government funding and international collaboration relate to scientific output and impact?",
+        "main_finding": "Funding patterns and citation impact differ across countries and agencies.",
+        "method_or_basis": "Read the matched author-uploaded full journal article, checking the DOI.",
+        "qualification": "Bibliometric association; six-country study is not an EU-wide causal evaluation.",
+        "radar_relevance": "A: substantial German and Dutch country analysis but global scope makes admission borderline.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_efficiency",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Netherlands Organisation for Scientific Research (NWO)",
+            "class": "national_funder"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-11",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Bibliometric association; six-country study is not an EU-wide causal evaluation.",
+          "text": "The study reports higher citation impact for NWO-funded papers than for other Dutch agency-funded papers in its comparison.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:cfb2c942e936e07e",
+      "source_hash": "3ef14705",
+      "identity_hash": "f50c89354da55cca",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct route did not yield substantive text: https://doi.org/10.15421/152551"
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected supplied source excerpt, not a new live retrieval: https://aspects.org.ua/index.php/journal/article/download/1156/1148"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher",
+            "url": "https://aspects.org.ua/index.php/journal/article/download/1156/1148",
+            "title": "Matching Applied Dramaturgy publisher PDF excerpt",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_identity",
+            "url": "https://aspects.org.ua/index.php/journal/article/view/1156",
+            "title": "Journal publication identity",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Read the matching supplied publisher PDF excerpt and checked author and DOI on the journal page. Conceptual synthesis, not a tested operational method; transfer to EU R&I foresight is unvalidated."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "B: potentially transferable scenario framework; review because methodological operationalization is limited."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Public Administration Aspects"
+        },
+        "unset": [],
+        "reason": "Corrected against the matching substantive publication or original source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Applied dramaturgy for governance scenarios",
+      "reader_what": "The article proposes using dramaturgical roles, conflicts and alternative trajectories to understand governance scenarios.",
+      "reader_why": "The conceptual approach could support scenario exploration, but needs operational testing for R&I foresight.",
+      "reader_more": "The article synthesizes applied dramaturgy and public governance concepts, linking roles and motivations to branching scenarios. It does not establish a validated empirical workflow or measured performance.",
+      "deep_analysis": {
+        "work_kind": "conceptual methods article",
+        "research_question": "How might applied dramaturgy inform public governance scenarios?",
+        "main_finding": "Dramaturgical framing is proposed as a way to explore alternative governance trajectories.",
+        "method_or_basis": "Read the matching supplied publisher PDF excerpt and checked author and DOI on the journal page.",
+        "qualification": "Conceptual synthesis, not a tested operational method; transfer to EU R&I foresight is unvalidated.",
+        "radar_relevance": "B: potentially transferable scenario framework; review because methodological operationalization is limited.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Svitlana Ivanova",
+            "class": "university_group"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Conceptual synthesis, not a tested operational method; transfer to EU R&I foresight is unvalidated.",
+          "text": "The article proposes applying dramaturgical roles, conflicts and alternative trajectories to public governance scenario exploration.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    }
+  ]
+}
