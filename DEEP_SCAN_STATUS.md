@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **4202** (Main **2233** + Historical **1969**)
-- Automatic queue still needing V2 verification: **43** (Main **4** + Historical **39**)
-- Currently assigned to workers: **43** (Main **4** + Historical **39**)
+- Automatic queue still needing V2 verification: **60** (Main **20** + Historical **40**)
+- Currently assigned to workers: **60** (Main **20** + Historical **40**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **48**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,16 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261124T085537Z-055e0816dff3`
-- Assigned unresolved records: **8**
-  1. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797050/EPRS_BRI(2026)797050_EN.pdf` — Integrating Ukraine's defence industry into the EU defence industrial base | Think Tank | European Parliament — recovery attempt 2/3
-  2. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf` — Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament — recovery attempt 2/3
-  3. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf` — Public hearing with Christine Lagarde, Chair of the European Systemic Risk Board - November 2026 | Think Tank | European Parliament — recovery attempt 2/3
-  4. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPa0gyOWNwT3BmU3hyZURMTHdvUHloTjdnOXhXQ1RLVFdRd3JkWjYzd0JOcEtnYU9XMmZMckFqbl9FYk9tb2ZPdGd1SEtoVVJ1Z2w4VjkzRjR2LXZvZDVMai1vOUNYeFdQcXlOaTFIWk9zblhQQWQxN3V5c3JvRkZyMjl3SGQ?oc=5` — Russia poised to put nuclear weapon in space within 60 days, Germany warns — recovery attempt 2/3
-  5. `historical:id:cfb2c942e936e07e` — Applied Dramaturgy as an Instrument of Public Governance: Values, Understanding, and Scenarios
-  6. `historical:id:068b52b71afd91fd` — The effect of public funding on long-term relocation of experienced researchers: An analysis of the Marie Curie Career Integration Grant
-  7. `historical:id:6fb53dbfbfb16cd8` — Horizon Europe and the digital & industrial transition
-  8. `historical:id:06226e834506f28a` — An in-depth analysis of government funding and international collaboration in scientific research
+- Current package: `worker-a-20261125T122135Z-d407db1d7b12`
+- Assigned unresolved records: **25**
+  1. `link:https://fusionforenergy.europa.eu/wp-content/uploads/2026/10/F4E_Supply_Chain_Report.pdf` — Fusion is part of the solution - Fusion for Energy
+  2. `link:https://doi.org/10.1177/27538796261502969` — Economic Security as the New Anchor of Critical Minerals Governance and Global Energy Transition
+  3. `link:https://doi.org/10.1002/rhc3.70071` — Exploring the Use of Strategic Foresight in Disaster Risk Management
+  4. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxObTdfdFBKaHQwMjJwOWFFM1FKN1FBUHRCSW03X2NVOXdyNnZSekw0UjFxclRkakUyNWZtM1d3NFFWelVfN1hwWTVLWnV0WHBtMjkyRUtOMmRwNW1DMGlLSmVjY01TMlFWNTJJZlNDTnZxOUlaenZrcFU1aXhLX2hPN1dweHdaMGFCTlVCY2dPWWw4ZHRMUGRtNDItZldsLTI2MmU2dlFaREVqN2tLYURIMw?oc=5` — Gerko’s XTX Opens Finnish Data Center, Warns on Permit Delays
+  5. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQMFVFWVdsaVFNbTNXTEJjemxBZm03WlZIX0NKdkhKVkhYNTZ3WVJPSm5zRHNuQTF6RHFQLTNLMVI1VEctOWF2T2JSYlloc0FaVktVTWVfVUlWZ0t4UEhmeE5XdnlqN0xwUldKdk01MHI2UG8ybm91WVV6NmVyN2F5Zkh3ekZDSHhxQXUteWRHVVdYVEZkdURqa2MtZmhzZnB6a3lwQ0FzeVFJQURMT1hXcDB4VQ?oc=5` — German Industry Proposes Trading House to Secure Critical Raw Materials
+  6. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxNQWFGOVk3VjlSbFZHWldZeDZKaEplQzRKY21NZUJfMl9LcXVDbG1DLU02cG1mRWtlQVVCdGdROTN1ZUxBOTR4UXBlSXdZM0tUZWVxdFpWblRMQlBva0h2WkwySVl0WGNxOG9zMG5jVWdhRmFmcTFLRUplTnpDRFViSjVEVFhQZXlmRlA3QnJHdTNLLWFu?oc=5` — What is the EU doing to regulate data centre expansion?
+  7. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxQV3NFS2xNMTBvMzRTQzgwYWduYktVWkgyTVl0ZFI3d2FqdTBMUFhhUkcwYUZtZ1h6Qk9rcTBFT0o1TzdJTUpIcWVPYjNJMzZhWGVCV05XQUExVzR0TTFTZjFhaENwVW9SLXB6Ync1X09KYmQ4VWJPQ09WV1lXOFhTWDFfaTlGMjZmemNIMXRFUTctQ2hrd0lGUVU4Xzh0a0JOd1NHNHpFdUR3UQ?oc=5` — Huang returns to Nvidia: What it means for Europe's AI stocks
+  8. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxQWGdFYmNLODFEME1ldllvdzU3Y2RMeGJBZ3p0ZmFEQThVZ2dQTEtvSTdSZlV6OWw2Z1ZpakRrejBEUHN5V1NoZG1xeFNHbmQtenFmWXhJRFBFQTl0RTV3ZnpsUGhGclQ3aW5ha2ZMdjhHUnVCQTlvQmxOMC03akFGMzZHOUx3T0w2UUNOXzlXTEw0RndHcUhETGttQU9UQW0yX2hMZEVUUU1DUUpnS3FEcVJ3?oc=5` — Here’s how the next set of Horizon Europe partnerships is shaping up
+  - … plus 17 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261122T090908Z-a1a6708088ec`
