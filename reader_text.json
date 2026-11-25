@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-11-24T08:42:33Z",
+  "generated_at": "2026-11-25T12:46:51Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -349154,8 +349154,2138 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://fusionforenergy.europa.eu/wp-content/uploads/2026/10/F4E_Supply_Chain_Report.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "c1e63092",
+      "identity_hash": "4030e8cb4c3acd4a",
+      "reader_title": "ITER procurement built a European fusion supply chain",
+      "reader_what": "F4E reports thousands of firms and research organisations participating in ITER procurement.",
+      "reader_why": "Long-term procurement builds supplier experience and specialised industrial capabilities.",
+      "reader_more": "The report documents about 2,700 companies and 75 research organisations involved in the supply chain, with approximately €7 billion in contracts. These figures describe cumulative participation and procurement, not commercial fusion readiness.",
+      "deep_analysis": {
+        "work_kind": "policy and industrial impact report",
+        "research_question": "How has ITER procurement affected European industrial capability?",
+        "main_finding": "F4E documents a large European supplier and research network created through ITER procurement.",
+        "method_or_basis": "Issuer report excerpt, official report catalogue and accompanying issuer explanation.",
+        "qualification": "Issuer-reported cumulative impact; procurement participation does not establish commercially viable fusion or causal net economic benefits.",
+        "radar_relevance": "A routes 2 and 3: direct evidence on strategic European research infrastructure and industrial supplier capacity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Live original PDF could not be fetched because of its size; package retrieved PDF excerpt, which was inspected."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://fusionforenergy.europa.eu/wp-content/uploads/2026/10/F4E_Supply_Chain_Report.pdf — Building the European Fusion Supply Chain"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://fusionforenergy.europa.eu/news/how-did-f4e-build-the-european-fusion-supply-chain/amp/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_pdf_excerpt",
+            "url": "https://fusionforenergy.europa.eu/wp-content/uploads/2026/10/F4E_Supply_Chain_Report.pdf",
+            "title": "Building the European Fusion Supply Chain",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_text",
+            "url": "https://fusionforenergy.europa.eu/news/how-did-f4e-build-the-european-fusion-supply-chain/amp/",
+            "title": "How did F4E build the European fusion supply chain?",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_text",
+            "url": "https://fusionforenergy.europa.eu/reports/",
+            "title": "F4E reports",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched supplied PDF excerpt with official catalogue and issuer explanation; live PDF was too large to retrieve."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A routes 2 and 3: direct evidence on strategic European research infrastructure and industrial supplier capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:40Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Fusion for Energy",
+            "class": "eu_body"
+          },
+          "mechanism": "procures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Issuer-reported cumulative impact; procurement participation does not establish commercially viable fusion or causal net economic benefits.",
+          "text": "F4E reports that ITER procurement mobilised around 2,700 companies and 75 research organisations in its supply chain.",
+          "confidence": "high",
+          "record_key": "link:https://fusionforenergy.europa.eu/wp-content/uploads/2026/10/F4E_Supply_Chain_Report.pdf",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:4030e8cb4c3acd4a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1177/27538796261502969": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "d5b0fcbf",
+      "identity_hash": "18ec22887d688dfb",
+      "reader_title": "Economic security reshapes critical minerals governance",
+      "reader_what": "EU critical minerals governance prioritises supply access amid competing economic-security strategies.",
+      "reader_why": "Divergent security strategies reshape upstream dependencies for European industrial transitions.",
+      "reader_more": "The authors compare the EU, United States and China, with attention to Sweden. The first author describes an access-oriented European approach rather than full domestic substitution. This is a researcher account of the study, not the final journal text.",
+      "deep_analysis": {
+        "work_kind": "comparative political economy research",
+        "research_question": "How does economic security reshape critical minerals governance?",
+        "main_finding": "The EU approach prioritises access to upstream minerals in a differentiated international governance landscape.",
+        "method_or_basis": "First author describes analysis of 15 policy documents and interviews, including Sweden.",
+        "qualification": "Author account explicitly identifies the same forthcoming work; final journal version and DOI publication date not independently accessible.",
+        "radar_relevance": "A route 1: comparative evidence explicitly analyses the EU strategic minerals dependency and governance mechanism.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: source retrieval failed: 403 Client Error: Forbidden for url: https://journals.sagepub.com/doi/10.1177/27538796261502969; OpenAlex authenticated DOI lookup matched W7239363150; no substantive OpenAlex-assisted source recovered"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://criticalrawmaterials.substack.com/p/economic-security-is-the-new-anchor — Economic security is the new anchor of critical minerals governance"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_primary_account",
+            "url": "https://criticalrawmaterials.substack.com/p/economic-security-is-the-new-anchor",
+            "title": "Economic security is the new anchor of critical minerals governance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "DOI and Sage access failed. First author’s dated account identifies title, coauthor and journal and provides research basis; final version not read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: comparative evidence explicitly analyses the EU strategic minerals dependency and governance mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:41Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "secures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Author account explicitly identifies the same forthcoming work; final journal version and DOI publication date not independently accessible.",
+          "text": "The study author describes EU critical minerals policy as prioritising secure access rather than domestic substitution.",
+          "confidence": "medium",
+          "record_key": "link:https://doi.org/10.1177/27538796261502969",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:18ec22887d688dfb:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1002/rhc3.70071": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "a40cbeb7",
+      "identity_hash": "ccba83d0f40ff88a",
+      "reader_title": "Strategic foresight complements disaster risk assessment",
+      "reader_what": "A conceptual framework distinguishes strategic foresight from conventional risk assessment and explains their complementary roles.",
+      "reader_why": "Foresight broadens the range of plausible changes considered in long-term planning.",
+      "reader_more": "Conventional risk assessment focuses on identifying and evaluating risks. Foresight instead explores alternative future conditions and can reveal assumptions or emerging vulnerabilities. Their combination is offered as a planning framework, not a validated intervention.",
+      "deep_analysis": {
+        "work_kind": "conceptual review",
+        "research_question": "How can strategic foresight complement risk assessment?",
+        "main_finding": "The authors clarify complementary roles of risk assessment and strategic foresight in long-term planning.",
+        "method_or_basis": "Matching journal PDF excerpt containing conceptual argument and method comparison.",
+        "qualification": "Conceptual contribution; no measured effect of implementation.",
+        "radar_relevance": "B: reusable distinction and integration framework for planning under uncertainty, applicable beyond the disaster domain.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: OpenAlex authenticated DOI lookup matched W7239420277; retrieved via OpenAlex cached full-text PDF; document excerpt contains distinctive scanner title terms; manual identity check required"
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://content.openalex.org/works/W7239420277.pdf — Exploring the Use of Strategic Foresight in Disaster Risk Management"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_pdf_excerpt",
+            "url": "https://content.openalex.org/works/W7239420277.pdf",
+            "title": "Exploring the Use of Strategic Foresight in Disaster Risk Management",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Wiley and DOI not accessible live; matching first-party journal PDF excerpt inspected in package."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "B: reusable distinction and integration framework for planning under uncertainty, applicable beyond the disaster domain."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:42Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Siimsen, Orru and Hansson",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Conceptual contribution; no measured effect of implementation.",
+          "text": "The review proposes complementary use of strategic foresight and conventional risk assessment for long-term planning.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.1002/rhc3.70071",
+          "merit": 70,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:ccba83d0f40ff88a:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMisAFBVV95cUxObTdfdFBKaHQwMjJwOWFFM1FKN1FBUHRCSW03X2NVOXdyNnZSekw0UjFxclRkakUyNWZtM1d3NFFWelVfN1hwWTVLWnV0WHBtMjkyRUtOMmRwNW1DMGlLSmVjY01TMlFWNTJJZlNDTnZxOUlaenZrcFU1aXhLX2hPN1dweHdaMGFCTlVCY2dPWWw4ZHRMUGRtNDItZldsLTI2MmU2dlFaREVqN2tLYURIMw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "607d431a",
+      "identity_hash": "b827e9b5342b0023",
+      "reader_title": "XTX opens Finnish private computing centre",
+      "reader_what": "XTX Markets opens its first Kajaani data centre for machine-learning research.",
+      "reader_why": "Private infrastructure increases installed compute capacity, although access remains proprietary.",
+      "reader_more": "The company reports 22.5 MW capacity and investment of about €400 million in construction. Its research supports its own trading business. Future expansion is not counted as delivered capacity.",
+      "deep_analysis": {
+        "work_kind": "corporate infrastructure milestone",
+        "research_question": "",
+        "main_finding": "A privately owned computing centre opened in Kajaani.",
+        "method_or_basis": "Direct company announcement corroborating the indexed Bloomberg event.",
+        "qualification": "Company figures; private finance research compute, not public or university access.",
+        "radar_relevance": "C: actual opening of substantial European machine-learning research compute infrastructure.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://about.xtxmarkets.com/news/2026-xtx-markets-opens-first-data-centre/ — XTX Markets opens first data centre"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://about.xtxmarkets.com/news/2026-xtx-markets-opens-first-data-centre/",
+            "title": "XTX Markets opens first data centre",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bloomberg headline identified; paywalled text unavailable; original company announcement establishes the exact event. Original publication was not read in full; admission is based on the specifically identified matching source evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: actual opening of substantial European machine-learning research compute infrastructure."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:42Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "compute.capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "XTX Markets",
+            "class": "company"
+          },
+          "mechanism": "adds_capacity",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-11-24",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": [
+              "FI"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Company figures; private finance research compute, not public or university access.",
+          "text": "XTX Markets opened its first 22.5 MW data centre in Kajaani for its machine-learning research.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMisAFBVV95cUxObTdfdFBKaHQwMjJwOWFFM1FKN1FBUHRCSW03X2NVOXdyNnZSekw0UjFxclRkakUyNWZtM1d3NFFWelVfN1hwWTVLWnV0WHBtMjkyRUtOMmRwNW1DMGlLSmVjY01TMlFWNTJJZlNDTnZxOUlaenZrcFU1aXhLX2hPN1dweHdaMGFCTlVCY2dPWWw4ZHRMUGRtNDItZldsLTI2MmU2dlFaREVqN2tLYURIMw?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:b827e9b5342b0023:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQMFVFWVdsaVFNbTNXTEJjemxBZm03WlZIX0NKdkhKVkhYNTZ3WVJPSm5zRHNuQTF6RHFQLTNLMVI1VEctOWF2T2JSYlloc0FaVktVTWVfVUlWZ0t4UEhmeE5XdnlqN0xwUldKdk01MHI2UG8ybm91WVV6NmVyN2F5Zkh3ekZDSHhxQXUteWRHVVdYVEZkdURqa2MtZmhzZnB6a3lwQ0FzeVFJQURMT1hXcDB4VQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "bd1651e1",
+      "identity_hash": "12050c981001f33c",
+      "reader_title": "German industry proposes joint raw materials procurement",
+      "reader_what": "German industrial associations and government advance a joint critical materials procurement framework.",
+      "reader_why": "Pooling procurement and diversifying supply may reduce exposure to concentrated sources.",
+      "reader_more": "The framework includes work towards a joint procurement vehicle. Preparatory work is planned before establishment; neither purchases nor stockpiles are confirmed as delivered.",
+      "deep_analysis": {
+        "work_kind": "industrial policy development",
+        "research_question": "",
+        "main_finding": "Industry and government agreed a framework for preparing coordinated critical raw material sourcing.",
+        "method_or_basis": "VDA announcement and Reuters reporting of the same proposal.",
+        "qualification": "Preparatory framework and proposal, not an operating trading house or realised diversification.",
+        "radar_relevance": "C: concrete preparatory arrangement affecting supply dependencies of German industrial technology capacity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://www.vda.de/en/press/press-releases/2026/261123_PM_Securing-Raw-Materials-Strengthening-Germanys-Industrial-Base-Industry-and-Government-Join-Forces-to-Implement-the-Framework-for-Raw-Material-Security — Securing raw materials, strengthening Germany’s industrial base"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://www.reuters.com/business/aerospace-defense/german-industry-groups-propose-setting-up-critical-raw-materials-trading-house-2026-11-24/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://www.vda.de/en/press/press-releases/2026/261123_PM_Securing-Raw-Materials-Strengthening-Germanys-Industrial-Base-Industry-and-Government-Join-Forces-to-Implement-the-Framework-for-Raw-Material-Security",
+            "title": "Securing raw materials, strengthening Germany’s industrial base",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_reporting",
+            "url": "https://www.reuters.com/business/aerospace-defense/german-industry-groups-propose-setting-up-critical-raw-materials-trading-house-2026-11-24/",
+            "title": "German industry groups propose setting up critical raw materials trading house",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Exact Bloomberg text paywalled; matching first-party framework announcement and independent report inspected. Original publication was not read in full; admission is based on the specifically identified matching source evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: concrete preparatory arrangement affecting supply dependencies of German industrial technology capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:43Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "German industry associations and federal government",
+            "class": "other"
+          },
+          "mechanism": "diversifies",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-11-24",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Preparatory framework and proposal, not an operating trading house or realised diversification.",
+          "text": "German industry groups proposed a joint critical raw materials sourcing vehicle under a government-industry framework.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQMFVFWVdsaVFNbTNXTEJjemxBZm03WlZIX0NKdkhKVkhYNTZ3WVJPSm5zRHNuQTF6RHFQLTNLMVI1VEctOWF2T2JSYlloc0FaVktVTWVfVUlWZ0t4UEhmeE5XdnlqN0xwUldKdk01MHI2UG8ybm91WVV6NmVyN2F5Zkh3ekZDSHhxQXUteWRHVVdYVEZkdURqa2MtZmhzZnB6a3lwQ0FzeVFJQURMT1hXcDB4VQ?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:12050c981001f33c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMilAFBVV95cUxNQWFGOVk3VjlSbFZHWldZeDZKaEplQzRKY21NZUJfMl9LcXVDbG1DLU02cG1mRWtlQVVCdGdROTN1ZUxBOTR4UXBlSXdZM0tUZWVxdFpWblRMQlBva0h2WkwySVl0WGNxOG9zMG5jVWdhRmFmcTFLRUplTnpDRFViSjVEVFhQZXlmRlA3QnJHdTNLLWFu?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "097021fe",
+      "identity_hash": "6f53ca6c5fd4e47c",
+      "reader_title": "Overview of European data centre regulation",
+      "reader_what": "The article summarises existing and previously proposed European data centre rules.",
+      "reader_more": "The explainer discusses efficiency reporting, sustainability ratings and expected capacity expansion. It does not establish a new decision or implementation milestone on its publication date.",
+      "deep_analysis": {
+        "work_kind": "news explainer",
+        "research_question": "",
+        "main_finding": "Existing rules and earlier proposals are summarised.",
+        "method_or_basis": "Full Euronews explainer.",
+        "qualification": "Projections are not installed capacity.",
+        "radar_relevance": "C gate fails: no new dateable R&I development beyond previous regulatory proposals; A evidence-product and B method gates also fail.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://www.euronews.com/2026/11/24/what-is-the-eu-doing-to-regulate-data-centre-expansion — What is the EU doing to regulate data centre expansion?"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/11/24/what-is-the-eu-doing-to-regulate-data-centre-expansion",
+            "title": "What is the EU doing to regulate data centre expansion?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate fails: no new dateable R&I development beyond previous regulatory proposals; A evidence-product and B method gates also fail."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:43Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxQV3NFS2xNMTBvMzRTQzgwYWduYktVWkgyTVl0ZFI3d2FqdTBMUFhhUkcwYUZtZ1h6Qk9rcTBFT0o1TzdJTUpIcWVPYjNJMzZhWGVCV05XQUExVzR0TTFTZjFhaENwVW9SLXB6Ync1X09KYmQ4VWJPQ09WV1lXOFhTWDFfaTlGMjZmemNIMXRFUTctQ2hrd0lGUVU4Xzh0a0JOd1NHNHpFdUR3UQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "3b6df6a5",
+      "identity_hash": "4e28574360fc41a4",
+      "reader_title": "Nvidia leadership and European stock reactions",
+      "reader_what": "The article describes stock reactions following Nvidia leadership news.",
+      "reader_more": "European chip companies appear through market and commercial links. The article establishes neither a new European research funding decision nor a change in industrial technology capacity.",
+      "deep_analysis": {
+        "work_kind": "market news",
+        "research_question": "",
+        "main_finding": "Leadership change and share-price reaction are the subject.",
+        "method_or_basis": "Euronews article recovered through publisher navigation.",
+        "qualification": "Share prices alone are not evidence of durable capability change.",
+        "radar_relevance": "C gate fails: no evidenced change in European R&I capacity, dependencies or funding beyond market reactions. A/B gates also fail.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://www.euronews.com/2026/11/24/jensen-huang-is-back-at-nvidia-what-does-it-mean-for-europes-ai-stocks — Jensen Huang is back at Nvidia: what does it mean for Europe’s AI stocks?"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/11/24/jensen-huang-is-back-at-nvidia-what-does-it-mean-for-europes-ai-stocks",
+            "title": "Jensen Huang is back at Nvidia: what does it mean for Europe’s AI stocks?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate fails: no evidenced change in European R&I capacity, dependencies or funding beyond market reactions. A/B gates also fail."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:43Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxQWGdFYmNLODFEME1ldllvdzU3Y2RMeGJBZ3p0ZmFEQThVZ2dQTEtvSTdSZlV6OWw2Z1ZpakRrejBEUHN5V1NoZG1xeFNHbmQtenFmWXhJRFBFQTl0RTV3ZnpsUGhGclQ3aW5ha2ZMdjhHUnVCQTlvQmxOMC03akFGMzZHOUx3T0w2UUNOXzlXTEw0RndHcUhETGttQU9UQW0yX2hMZEVUUU1DUUpnS3FEcVJ3?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "ec990faa",
+      "identity_hash": "26a133ea7db86a7f",
+      "reader_title": "Horizon Europe partnerships face competing legislative designs",
+      "reader_what": "Parliament’s research committee advances its position on partnerships in the next Horizon Europe framework.",
+      "reader_why": "Partnership selection and governance rules affect access to collaborative research funding.",
+      "reader_more": "The ITRE committee adopted its report on 10 November; the decision to open negotiations was announced on 23 November. ERA-LEARN compares the Commission, Council and committee positions, including a proposed limit on partnerships. Negotiations do not establish final law.",
+      "deep_analysis": {
+        "work_kind": "legislative development",
+        "research_question": "",
+        "main_finding": "ITRE advances a negotiating position for the next framework programme.",
+        "method_or_basis": "EP legislative procedure and ERA-LEARN comparison of institutional positions.",
+        "qualification": "Committee position, not final plenary adoption or enacted framework.",
+        "radar_relevance": "C: verified legislative milestone with direct consequences for design of European R&I partnerships.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2025/0543(COD) — Horizon Europe 2028–2034 legislative procedure"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://www.era-learn.eu/news-events/news/european-partnerships-in-horizon-europe-2028-2034-fp10-comparison-of-eu-institutions-positions"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2025/0543(COD)",
+            "title": "Horizon Europe 2028–2034 legislative procedure",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_text",
+            "url": "https://www.era-learn.eu/news-events/news/european-partnerships-in-horizon-europe-2028-2034-fp10-comparison-of-eu-institutions-positions",
+            "title": "European partnerships in Horizon Europe 2028–2034: comparison of EU institutions’ positions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Science|Business page blocked; legislative procedure and specialist partnership comparison verify the substance independently. Original publication was not read in full; admission is based on the specifically identified matching source evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: verified legislative milestone with direct consequences for design of European R&I partnerships."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:43Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament ITRE committee",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-11-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Committee position, not final plenary adoption or enacted framework.",
+          "text": "ITRE adopted its report proposing changes to the next Horizon Europe partnership framework.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxQWGdFYmNLODFEME1ldllvdzU3Y2RMeGJBZ3p0ZmFEQThVZ2dQTEtvSTdSZlV6OWw2Z1ZpakRrejBEUHN5V1NoZG1xeFNHbmQtenFmWXhJRFBFQTl0RTV3ZnpsUGhGclQ3aW5ha2ZMdjhHUnVCQTlvQmxOMC03akFGMzZHOUx3T0w2UUNOXzlXTEw0RndHcUhETGttQU9UQW0yX2hMZEVUUU1DUUpnS3FEcVJ3?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:26a133ea7db86a7f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQb0dkREtzZWJESEV4RWY4d1BXaUN3eWpIZk9JRUplTXZ6SDAzUnE0VzlISnN0N3NMd0d3b29WX0d1bEpLa1FfcmRubDBoOWNuWTgzajI2RnRWVUh0Q3JacXIzUWEyX1gyU0tjTFB3MmwxdWZfemFkQnBrMHdGam1MRUk4LV90djEyaHFtN0F4ejBlVTFzamhGbmd2QjZNbkQ2dW1HSDdGZDQybW56cTY0RG94enBvWFlSLUdob1hFbjhrX3c?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "70f34aad",
+      "identity_hash": "c6a17e5c55a64731",
+      "reader_title": "Swedish innovation procurement experiments with German collaboration",
+      "reader_what": "Vinnova opens a staged pre-commercial procurement challenge under its Språng model.",
+      "reader_why": "Purchasing competing R&D services offers an alternative to ordinary research grants.",
+      "reader_more": "The agency contracts development and testing in stages instead of funding a single solution upfront. Science|Business identifies collaboration with Germany’s SPRIND. The call is open; successful commercial delivery is not established.",
+      "deep_analysis": {
+        "work_kind": "innovation funding instrument",
+        "research_question": "",
+        "main_finding": "Vinnova opens staged innovation procurement to competing applicants.",
+        "method_or_basis": "Official Vinnova call and matching Science|Business reporting of German collaboration.",
+        "qualification": "Call opening, not proof of technical success or subsequent purchasing.",
+        "radar_relevance": "C: concrete innovation procurement instrument and European collaboration, rather than routine promotion.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: source retrieval failed: 429 Client Error: Too Many Requests for url: https://news.google.com/rss/articles/CBMiwwFBVV95cUxQb0dkREtzZWJESEV4RWY4d1BXaUN3eWpIZk9JRUplTXZ6SDAzUnE0VzlISnN0N3NMd0d3b29WX0d1bEpLa1"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://externwebb-prod.vinnova.se/en/calls-for-proposals/radikal-innovation/the-baltic-marine-watchdog-challenge/ — Språng Challenge: The Baltic Marine Watchdog"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://sciencebusiness.net/news/r-d-funding/start-ups/how-vinnova-and-sprind-opened-innovation-procurement-scheme-all-europe"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://externwebb-prod.vinnova.se/en/calls-for-proposals/radikal-innovation/the-baltic-marine-watchdog-challenge/",
+            "title": "Språng Challenge: The Baltic Marine Watchdog",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_indexed_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/start-ups/how-vinnova-and-sprind-opened-innovation-procurement-scheme-all-europe",
+            "title": "How Vinnova and Sprind opened an innovation procurement scheme for all of Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official call read; indexed original article corroborates model and German collaboration. No technical implementation details retained. Original publication was not read in full; admission is based on the specifically identified matching source evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: concrete innovation procurement instrument and European collaboration, rather than routine promotion."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:44Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Vinnova",
+            "class": "national_funder"
+          },
+          "mechanism": "procures",
+          "direction": "expands",
+          "status": "call_open",
+          "status_date": "2026-10-08",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "SE"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Call opening, not proof of technical success or subsequent purchasing.",
+          "text": "Vinnova opened a staged pre-commercial R&D procurement challenge under its Språng model.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQb0dkREtzZWJESEV4RWY4d1BXaUN3eWpIZk9JRUplTXZ6SDAzUnE0VzlISnN0N3NMd0d3b29WX0d1bEpLa1FfcmRubDBoOWNuWTgzajI2RnRWVUh0Q3JacXIzUWEyX1gyU0tjTFB3MmwxdWZfemFkQnBrMHdGam1MRUk4LV90djEyaHFtN0F4ejBlVTFzamhGbmd2QjZNbkQ2dW1HSDdGZDQybW56cTY0RG94enBvWFlSLUdob1hFbjhrX3c?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c6a17e5c55a64731:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPMkxKaWx6RmlBY0otSjJHa0ZWaGt1Vk1sVEh2RXJOU0RaVTJydXlLN3p5dDFMbU1pc0lxWkdaem1zeUtTR1oyeG9TT0pWeWdpckdjSFRReGFnMkhIa3Y1ZlI1YmJLcjZSUjk2RDE3M1hzSldRZ1NhMFJPa3lOc0tQa0lwTnFhT0xpcWc2LWdEeHo2ajI2S0UtdzlUYlNlX2lGa2tHZlduT1JhcEtOUXFMMGVrLUVxNnIteHJTVy1FM25ieEg4MjhJ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "4b9e1025",
+      "identity_hash": "3448e25305ee3c20",
+      "reader_title": "EEA and Norway grants open collaborative research calls",
+      "reader_what": "Norway’s research council lists newly open collaborative research funding calls in Poland and Portugal.",
+      "reader_why": "Donor-country partnership requirements create concrete cross-border research funding opportunities.",
+      "reader_more": "The official listing identifies POLNORIS and Blue research funding calls. LANGSPIL is separately scheduled to open in December according to the Polish funder. Open calls are opportunities, not grant awards.",
+      "deep_analysis": {
+        "work_kind": "funding call announcement",
+        "research_question": "",
+        "main_finding": "Specific cross-border research funding calls are open.",
+        "method_or_basis": "Research Council of Norway listing and Polish NCN announcement.",
+        "qualification": "Eligibility and opening dates vary by call; no award or collaboration outcome claimed.",
+        "radar_relevance": "C: actual new international research funding opportunities connecting European research systems.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: source retrieval failed: 429 Client Error: Too Many Requests for url: https://news.google.com/rss/articles/CBMixwFBVV95cUxPMkxKaWx6RmlBY0otSjJHa0ZWaGt1Vk1sVEh2RXJOU0RaVTJydXlLN3p5dDFMbU1pc0lxWkdaem1zeUtTR1"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://www.forskningsradet.no/en/financing/international-funding/eea-grants/ — EEA and Norway Grants"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://ncn.gov.pl/en/aktualnosci/2026-11-17-ogloszenie-konkursu-langspil-w-ramach-funduszy-eog"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://www.forskningsradet.no/en/financing/international-funding/eea-grants/",
+            "title": "EEA and Norway Grants",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_text",
+            "url": "https://ncn.gov.pl/en/aktualnosci/2026-11-17-ogloszenie-konkursu-langspil-w-ramach-funduszy-eog",
+            "title": "LANGSPIL call announcement",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Science|Business article blocked; official call listings recovered, and conflicting LANGSPIL timing separated. Original publication was not read in full; admission is based on the specifically identified matching source evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: actual new international research funding opportunities connecting European research systems."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:45Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Research Council of Norway",
+            "class": "national_funder"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "call_open",
+          "status_date": "2026-11-18",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "PL",
+              "PT"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Eligibility and opening dates vary by call; no award or collaboration outcome claimed.",
+          "text": "The Research Council of Norway listed open collaborative research calls in Poland and Portugal.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPMkxKaWx6RmlBY0otSjJHa0ZWaGt1Vk1sVEh2RXJOU0RaVTJydXlLN3p5dDFMbU1pc0lxWkdaem1zeUtTR1oyeG9TT0pWeWdpckdjSFRReGFnMkhIa3Y1ZlI1YmJLcjZSUjk2RDE3M1hzSldRZ1NhMFJPa3lOc0tQa0lwTnFhT0xpcWc2LWdEeHo2ajI2S0UtdzlUYlNlX2lGa2tHZlduT1JhcEtOUXFMMGVrLUVxNnIteHJTVy1FM25ieEg4MjhJ?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3448e25305ee3c20:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/en/publication-detail/-/publication/406e2fa5-e7d1-11f1-b745-01aa75ed71a1/language-en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "55f4a9e2",
+      "identity_hash": "080a8d7898b44654",
+      "reader_title": "Cybersecurity certification proposals emphasise sovereignty",
+      "reader_what": "A Parliament committee opinion proposes changes to European cybersecurity certification.",
+      "reader_why": "Certification requirements can affect technology suppliers’ eligibility and market access.",
+      "reader_more": "The opinion proposes changes to mandatory certification and treatment of sovereignty risks. It also discusses proportionate certification fees for smaller firms. These are amendments, not binding rules.",
+      "deep_analysis": {
+        "work_kind": "legislative committee opinion",
+        "research_question": "",
+        "main_finding": "IMCO adopted an opinion proposing changes to certification arrangements.",
+        "method_or_basis": "EP legislative file and reproduction of committee opinion PE796.192.",
+        "qualification": "Committee opinion only; amendments may change or fail.",
+        "radar_relevance": "C: dateable legislative opinion addressing strategic digital governance and certification requirements.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package retrieval audit: retrieved via reader-facing URL; strongest available package material was abstract_or_landing_page; publisher title substantially matches scanner title; NOT independently verified"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://epvotes.com/documents/imco-ad-796192 — IMCO opinion PE796.192"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2026/0011(COD)"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document_reproduction",
+            "url": "https://epvotes.com/documents/imco-ad-796192",
+            "title": "IMCO opinion PE796.192",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_text",
+            "url": "https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2026/0011(COD)",
+            "title": "European Parliament legislative procedure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: dateable legislative opinion addressing strategic digital governance and certification requirements."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:45Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "digital.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament IMCO committee",
+            "class": "eu_body"
+          },
+          "mechanism": "certifies",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-11-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Committee opinion only; amendments may change or fail.",
+          "text": "IMCO proposed changes to European cybersecurity certification, including mandatory certification and sovereignty considerations.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/en/publication-detail/-/publication/406e2fa5-e7d1-11f1-b745-01aa75ed71a1/language-en",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:080a8d7898b44654:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxOMTJWaFN2b01EdkU0NjY1ZjRvU0ZWcGZ0end5ekhSbGFjV3ZLQkc1cHpxVkdmakR0ZGk1cEFoemtQcElxb3cwWkJnc2Z1a3BEUHhHbWlONl9BM0Z6V1lCTzJYOE1vLWNabzFzaVlZRGFhYWxLcld0Z3hMTWJlOXJteHp5ZkI0SklCYkNCNnlYc19GUlppckRzOURNUEd4OVpoMWVqZ1pNTXNwY3lYODdPRVVjOXVvNlJ4dVMxdk9RRkZjUQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "d4bdc194",
+      "identity_hash": "787f51160ac3a0e8",
+      "reader_title": "Hospital AI report identifies deployment governance gaps",
+      "reader_what": "A newly released civil-liberties report documents informal AI adoption and institutional governance gaps in European healthcare.",
+      "reader_why": "Procurement and governance weaknesses complicate responsible deployment of AI technologies.",
+      "reader_more": "The underlying report draws on more than 50 interviews and information requests in nine countries. It describes informal use, uneven oversight and procurement problems. These are research findings, not a new regulation or verified system-wide adoption rate.",
+      "deep_analysis": {
+        "work_kind": "news on research-evidence release",
+        "research_question": "",
+        "main_finding": "New report identifies gaps in European hospital AI governance and procurement.",
+        "method_or_basis": "EUobserver reporting and issuing organisation’s substantive account of interview and information-request evidence.",
+        "qualification": "Qualitative research; cannot establish prevalence throughout the EU or causal effects.",
+        "radar_relevance": "C: publication of new evidence on European AI technology deployment and procurement; news record retained as evidence-release event, not a substitute A article.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://www.liberties.eu/en/stories/ai-health-hospitals-control/45850?cookie_settings=1 — AI in health: hospitals and control"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://euobserver.com/251126/stressed-doctors-and-swamped-hospitals-secretly-using-ai-amid-confusing-eu-rules-report-finds/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "issuer_research_summary",
+            "url": "https://www.liberties.eu/en/stories/ai-health-hospitals-control/45850?cookie_settings=1",
+            "title": "AI in health: hospitals and control",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_article",
+            "url": "https://euobserver.com/251126/stressed-doctors-and-swamped-hospitals-secretly-using-ai-amid-confusing-eu-rules-report-finds/",
+            "title": "Stressed doctors and swamped hospitals secretly using AI amid confusing EU rules, report finds",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence. Original publication was not read in full; admission is based on the specifically identified matching source evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: publication of new evidence on European AI technology deployment and procurement; news record retained as evidence-release event, not a substitute A article."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:46Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Civil Liberties Union for Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-11-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Qualitative research; cannot establish prevalence throughout the EU or causal effects.",
+          "text": "A report on European healthcare AI identifies informal adoption and weaknesses in procurement and governance.",
+          "confidence": "medium",
+          "attributes": {
+            "reasoning_role": "context",
+            "context_weight": 0.3
+          },
+          "record_key": "link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxOMTJWaFN2b01EdkU0NjY1ZjRvU0ZWcGZ0end5ekhSbGFjV3ZLQkc1cHpxVkdmakR0ZGk1cEFoemtQcElxb3cwWkJnc2Z1a3BEUHhHbWlONl9BM0Z6V1lCTzJYOE1vLWNabzFzaVlZRGFhYWxLcld0Z3hMTWJlOXJteHp5ZkI0SklCYkNCNnlYc19GUlppckRzOURNUEd4OVpoMWVqZ1pNTXNwY3lYODdPRVVjOXVvNlJ4dVMxdk9RRkZjUQ?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:787f51160ac3a0e8:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxOZHFtZTAtVUVFMjBaZFQxdGlJLV8xWUo5aGVQXzdFNUlRZTRZWWRUUGk2cXQxaTZDOVI4dENhOVYtMWRTR1RxQ1kzTmFvMkE2TWliZ0ZZTWFidFJ5Nm5IZFNjWVRnLVJiaUhsTFMwSXJfXzk2c2I4SmlGLVRvWVpYVnJ1ZUo1VHpOVUJXR1Y3cjgwYXdtT2ZDVkJ6NW0td2J2SXhoakFidFpjUGV5THlV?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "aa5797e7",
+      "identity_hash": "de46af859d660e40",
+      "reader_title": "France announces aeronautics research support",
+      "reader_what": "France announces €350 million for aeronautics research through CORAC.",
+      "reader_why": "Public research funding supports industrial technology development in aeronautics.",
+      "reader_more": "Macron announced the support in the context of French aeronautics research. The announcement identifies the amount and programme. It does not establish disbursement or resulting technological progress.",
+      "deep_analysis": {
+        "work_kind": "funding announcement",
+        "research_question": "",
+        "main_finding": "France announced €350 million in research aid.",
+        "method_or_basis": "Euronews full article quoting the announcement.",
+        "qualification": "Announced amount, not expenditure or measured impact.",
+        "radar_relevance": "C: concrete national industrial R&D funding announcement.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://www.euronews.com/2026/11/23/macron-announces-350-million-research-aid-for-frances-aeronautics-industry — Macron announces €350 million research aid for France’s aeronautics industry"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/11/23/macron-announces-350-million-research-aid-for-frances-aeronautics-industry",
+            "title": "Macron announces €350 million research aid for France’s aeronautics industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: concrete national industrial R&D funding announcement."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:46Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "French government",
+            "class": "member_state"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-23",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Announced amount, not expenditure or measured impact.",
+          "text": "France announced €350 million in aeronautics research support through CORAC.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxOZHFtZTAtVUVFMjBaZFQxdGlJLV8xWUo5aGVQXzdFNUlRZTRZWWRUUGk2cXQxaTZDOVI4dENhOVYtMWRTR1RxQ1kzTmFvMkE2TWliZ0ZZTWFidFJ5Nm5IZFNjWVRnLVJiaUhsTFMwSXJfXzk2c2I4SmlGLVRvWVpYVnJ1ZUo1VHpOVUJXR1Y3cjgwYXdtT2ZDVkJ6NW0td2J2SXhoakFidFpjUGV5THlV?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:de46af859d660e40:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://defence-industry-space.ec.europa.eu/edf-funded-euroguard-vessel-launched-estonia-2026-11-23_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b1acf978",
+      "identity_hash": "66715df76f6c66a5",
+      "reader_title": "European Defence Fund consortium reaches project milestone",
+      "reader_what": "An EDF-supported multinational research and development consortium reached a vessel-launch milestone in Estonia.",
+      "reader_why": "A joint funded project demonstrates progress in cross-border industrial collaboration.",
+      "reader_more": "The Commission reports €65 million in EDF support within a €95 million project involving 29 organisations in ten countries. A project milestone was reached on 18 November. This is not evidence of completed operational deployment.",
+      "deep_analysis": {
+        "work_kind": "funded R&D project milestone",
+        "research_question": "",
+        "main_finding": "A multinational EDF consortium reported a concrete development milestone.",
+        "method_or_basis": "Official Commission project announcement.",
+        "qualification": "Development milestone only; no operational performance or procurement outcome claimed.",
+        "radar_relevance": "C: documented European collaborative defence R&D funding and project progress.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package retrieval audit: retrieved via reader-facing URL; strongest available package material was abstract_or_landing_page; publisher title substantially matches scanner title; NOT independently verified"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://defence-industry-space.ec.europa.eu/edf-funded-euroguard-vessel-launched-estonia-2026-11-23_en — EDF-funded EUROGUARD vessel launched in Estonia"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://defence-industry-space.ec.europa.eu/edf-funded-euroguard-vessel-launched-estonia-2026-11-23_en",
+            "title": "EDF-funded EUROGUARD vessel launched in Estonia",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: documented European collaborative defence R&D funding and project progress."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:47Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11-18",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Development milestone only; no operational performance or procurement outcome claimed.",
+          "text": "An EDF-supported multinational development project reached a documented project milestone in Estonia.",
+          "confidence": "high",
+          "record_key": "link:https://defence-industry-space.ec.europa.eu/edf-funded-euroguard-vessel-launched-estonia-2026-11-23_en",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:66715df76f6c66a5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMi5wFBVV95cUxORUxZWTdXUG5hSjRZYzdpeW9FcVd2RXV0T2lPdUpCMzJrOGhNQTJzZmtEYXlab2FXWG9ieFh4N3E5RXpPdzVqem1yYm0wRnZsd2lvZnBrdmdYbTh3eW1IajJaVXMtN2p3OWtOVm9LM3gxRzBJX0RrekRlOXduTDlUMTFqXzZwMktPdE5CcGZGN0Z0OG9mSG5BYkNXV3JNNWNQUUpOdThuMmtvdEUzM24xWTNrTzh5R2FYc2tnbklNSzNPYTNjcHEzUGtGNV85ZnFtNmJBM1RtRG5TOHVpVm11V3E4djN3aGc?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "40e91925",
+      "identity_hash": "a0c2cdcc9d06b48f",
+      "reader_title": "Ireland launches Intelligence:Applied AI programme",
+      "reader_what": "Ireland launches a government AI programme alongside European AI Innovation Month.",
+      "reader_why": "A government programme coordinates support for AI adoption across businesses and public services.",
+      "reader_more": "The programme was launched at the 14 October summit. European AI Innovation Month also began, and participants endorsed the Dublin Declaration. The article published later records these actual launches rather than a new November event.",
+      "deep_analysis": {
+        "work_kind": "programme launch",
+        "research_question": "",
+        "main_finding": "Ireland launched Intelligence:Applied at the international summit.",
+        "method_or_basis": "Official Irish Council Presidency report.",
+        "qualification": "Launch does not establish budget, uptake or effects; event occurred in October rather than November.",
+        "radar_relevance": "C: a named government programme and European innovation initiative actually launched; not merely conference attendance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://irish-presidency.consilium.europa.eu/en/news/ireland-hosts-major-international-ai-summit-during-presidency-of-the-council-of-the-european-union/ — Ireland hosts major International AI Summit during Presidency of the Council of the European Union"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://irish-presidency.consilium.europa.eu/en/news/ireland-hosts-major-international-ai-summit-during-presidency-of-the-council-of-the-european-union/",
+            "title": "Ireland hosts major International AI Summit during Presidency of the Council of the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C: a named government programme and European innovation initiative actually launched; not merely conference attendance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:48Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Irish government",
+            "class": "member_state"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-10-14",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "IE"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Launch does not establish budget, uptake or effects; event occurred in October rather than November.",
+          "text": "Ireland launched its Intelligence:Applied programme to support AI adoption by businesses, workers and public services.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMi5wFBVV95cUxORUxZWTdXUG5hSjRZYzdpeW9FcVd2RXV0T2lPdUpCMzJrOGhNQTJzZmtEYXlab2FXWG9ieFh4N3E5RXpPdzVqem1yYm0wRnZsd2lvZnBrdmdYbTh3eW1IajJaVXMtN2p3OWtOVm9LM3gxRzBJX0RrekRlOXduTDlUMTFqXzZwMktPdE5CcGZGN0Z0OG9mSG5BYkNXV3JNNWNQUUpOdThuMmtvdEUzM24xWTNrTzh5R2FYc2tnbklNSzNPYTNjcHEzUGtGNV85ZnFtNmJBM1RtRG5TOHVpVm11V3E4djN3aGc?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:a0c2cdcc9d06b48f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMifEFVX3lxTE5JcDNVa2JORXJ4blVPZUZ4U0xaejVWdDljbWhldjl5ZlhhbDNTRHlWZlNUeDgzdFpleUpmcklsRVNab3cwcEE2ODdCRDdmZjlUSllDTkpVcW9PVWVSUkpfYkUwVFp3U2hLSHNNdHZJVWgwOVl5TVZZVjFOSTc?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "67025286",
+      "identity_hash": "10a639bfdfffb2a4",
+      "reader_title": "Research data steward vacancy",
+      "reader_what": "The University of Luxembourg advertises an individual research data steward position.",
+      "reader_more": "The role involves supporting research data management. The posting does not establish a workforce-wide policy, new institutional research infrastructure or measurable change in research capacity.",
+      "deep_analysis": {
+        "work_kind": "vacancy",
+        "research_question": "",
+        "main_finding": "Individual staff recruitment advertisement.",
+        "method_or_basis": "Matching employer and job title in syndicated job listing.",
+        "qualification": "Original Nature/THE listing inaccessible; employer/title match supports content, not original posting identifier.",
+        "radar_relevance": "C gate fails: routine individual vacancy rather than evidenced system-level talent, governance or infrastructure change. A/B gates also fail.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://toluxembourg.com/luxembourg_pages/jobs_listings.php?job=https%3A%2F%2Fen.jobs.lu%2FApplyForJob.aspx%3FId%3D291035 — Research Data Steward – University of Luxembourg"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "syndicated_employer_ad",
+            "url": "https://toluxembourg.com/luxembourg_pages/jobs_listings.php?job=https%3A%2F%2Fen.jobs.lu%2FApplyForJob.aspx%3FId%3D291035",
+            "title": "Research Data Steward – University of Luxembourg",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original vacancy link inaccessible; matching employer advertisement recovered via syndication. No claim about original posting identifier. Original publication was not read in full; admission is based on the specifically identified matching source evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate fails: routine individual vacancy rather than evidenced system-level talent, governance or infrastructure change. A/B gates also fail."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:48Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:fb706a9e22104f94": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "31342969",
+      "identity_hash": "01923dd8ba2c3d50",
+      "reader_title": "European university knowledge transfer strategies differ",
+      "reader_what": "Generalist and lower-prestige universities prioritise local development; specialist and prestigious universities prioritise income generation.",
+      "reader_why": "Institutional characteristics shape the objectives of university knowledge transfer.",
+      "reader_more": "The study distinguishes income generation, faculty services and local development strategies. A survey of 178 European technology transfer office managers is combined with additional data. The associations show diversity rather than one universal transfer strategy.",
+      "deep_analysis": {
+        "work_kind": "empirical university-system study",
+        "research_question": "What determines universities’ knowledge transfer strategies?",
+        "main_finding": "University specialisation and prestige are associated with different knowledge transfer goals.",
+        "method_or_basis": "Survey of 178 European TTO managers and supplementary data; matched article PDF excerpt and repository record.",
+        "qualification": "Observational associations; strategy orientation does not prove transfer effectiveness or causation.",
+        "radar_relevance": "A route 3: direct European university system evidence on structural knowledge transfer mechanisms, useful for understanding institutional heterogeneity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: OpenAlex authenticated DOI lookup matched W2897847182; retrieved via OpenAlex cached full-text PDF; document excerpt contains distinctive scanner title terms; manual identity check required"
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://content.openalex.org/works/W2897847182.pdf — The strategic orientation of universities in knowledge transfer activities"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://cris.unibo.it/handle/11585/647480"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_pdf_excerpt",
+            "url": "https://content.openalex.org/works/W2897847182.pdf",
+            "title": "The strategic orientation of universities in knowledge transfer activities",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://cris.unibo.it/handle/11585/647480",
+            "title": "The strategic orientation of universities in knowledge transfer activities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 3: direct European university system evidence on structural knowledge transfer mechanisms, useful for understanding institutional heterogeneity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:48Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European universities",
+            "class": "university_group"
+          },
+          "mechanism": "prioritises",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2018",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Observational associations; strategy orientation does not prove transfer effectiveness or causation.",
+          "text": "A survey of 178 European university transfer office managers associates specialisation and prestige with different knowledge transfer priorities.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:fb706a9e22104f94",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:01923dd8ba2c3d50:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797050/EPRS_BRI(2026)797050_EN.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1bf0a759",
+      "identity_hash": "5382f9c14cba7ebf",
+      "reader_title": "Ukraine’s defence industrial integration faces institutional barriers",
+      "reader_what": "An EPRS briefing identifies opportunities and obstacles to integrating Ukrainian and EU defence industrial activity.",
+      "reader_why": "Funding, regulatory and cooperation arrangements condition the scope for shared innovation.",
+      "reader_more": "The briefing analyses integration through European funding and research cooperation, alongside financing, regulation and intellectual-property constraints. It describes potential integration mechanisms. It does not establish that the resulting benefits have already materialised.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "What conditions affect integration of Ukraine’s defence industry into the EU industrial base?",
+        "main_finding": "EPRS describes integration opportunities and institutional constraints on cooperation.",
+        "method_or_basis": "Official EPRS briefing text, policy synthesis.",
+        "qualification": "Policy options and potential benefits, not demonstrated integration outcomes.",
+        "radar_relevance": "A routes 1 and 2: substantive analysis of European strategic industrial and R&D collaboration and its institutional conditions.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: source retrieval failed: Stream has ended unexpectedly"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://research.europarl.europa.eu/EPRS_BRI(2026)797050 — Integrating Ukraine’s defence industry into the EU defence industrial base"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://research.europarl.europa.eu/EPRS_BRI(2026)797050",
+            "title": "Integrating Ukraine’s defence industry into the EU defence industrial base",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A routes 1 and 2: substantive analysis of European strategic industrial and R&D collaboration and its institutional conditions."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:49Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliamentary Research Service",
+            "class": "eu_body"
+          },
+          "mechanism": "integrates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Policy options and potential benefits, not demonstrated integration outcomes.",
+          "text": "EPRS identifies funding, regulatory and intellectual-property conditions affecting European industrial research cooperation with Ukraine.",
+          "confidence": "high",
+          "record_key": "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797050/EPRS_BRI(2026)797050_EN.pdf",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:5382f9c14cba7ebf:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPa0gyOWNwT3BmU3hyZURMTHdvUHloTjdnOXhXQ1RLVFdRd3JkWjYzd0JOcEtnYU9XMmZMckFqbl9FYk9tb2ZPdGd1SEtoVVJ1Z2w4VjkzRjR2LXZvZDVMai1vOUNYeFdQcXlOaTFIWk9zblhQQWQxN3V5c3JvRkZyMjl3SGQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1c264888",
+      "identity_hash": "d59ad54e0b3220f2",
+      "reader_title": "Germany responds to reports of a space-security threat",
+      "reader_what": "Germany acknowledges intelligence warnings about a possible Russian threat to space infrastructure.",
+      "reader_more": "The reporting establishes that the warning was taken seriously, not that the reported threat has materialised. No concrete new European research, innovation, funding or infrastructure decision is established by the recovered event coverage.",
+      "deep_analysis": {
+        "work_kind": "security news",
+        "research_question": "",
+        "main_finding": "German government acknowledgement of intelligence reports.",
+        "method_or_basis": "Indexed original FT report and substantive independent reporting of the same government response.",
+        "qualification": "Intelligence warning is not confirmed deployment or a realised infrastructure impact.",
+        "radar_relevance": "C gate fails: reported security warning lacks a verified concrete European R&I change or dependency effect; potential relevance is insufficient. A and B gates also fail.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: no substantive text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://www.theguardian.com/world/2026/nov/23/russia-nuclear-weapons-space-german-intelligence — Germany responds to reports of a space-security threat"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://www.ft.com/content/dd00f616-1fef-4a26-a5f9-2b1bf83cc489"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "independent_reporting",
+            "url": "https://www.theguardian.com/world/2026/nov/23/russia-nuclear-weapons-space-german-intelligence",
+            "title": "Germany responds to reports of a space-security threat",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_indexed_text",
+            "url": "https://www.ft.com/content/dd00f616-1fef-4a26-a5f9-2b1bf83cc489",
+            "title": "Financial Times report on German response to space-security warnings",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original FT full article paywalled; indexed lead and independent coverage establish the same warning. No technical or operational details used. Original publication was not read in full; admission is based on the specifically identified matching source evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate fails: reported security warning lacks a verified concrete European R&I change or dependency effect; potential relevance is insufficient. A and B gates also fail."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:49Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:cfb2c942e936e07e": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "3ef14705",
+      "identity_hash": "f50c89354da55cca",
+      "reader_title": "Applied dramaturgy as a scenario-oriented governance method",
+      "reader_what": "A theoretical framework combines scenario thinking, value analysis and dramaturgy for public governance.",
+      "reader_why": "Scenario-oriented representations help examine transformations and value conflicts not captured by static descriptions.",
+      "reader_more": "The author draws on value-regime theory and conceptual synthesis. Applied dramaturgy is framed as a way to analyse transitions between situations, events and transformations. Its proposed usefulness remains theoretical rather than empirically demonstrated.",
+      "deep_analysis": {
+        "work_kind": "theoretical methodological article",
+        "research_question": "Can applied dramaturgy support scenario-oriented governance?",
+        "main_finding": "Applied dramaturgy is proposed as a reusable framework for analysing changes, values and possible futures.",
+        "method_or_basis": "Matching English article excerpt and official journal page; conceptual synthesis rather than empirical comparison.",
+        "qualification": "The approach is conceptual and lacks empirical validation or demonstrated superiority to existing scenario methods.",
+        "radar_relevance": "B: a transferable proposed scenario-oriented governance framework rather than a routine application of existing forecasting tools.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package retrieved English article via the journal’s source-owned PDF link; excerpt inspected and identity checked against journal page."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://aspects.org.ua/index.php/journal/article/download/1156/1148 — Applied Dramaturgy as an Instrument of Public Governance: Values, Understanding, and Scenarios"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://aspects.org.ua/index.php/journal/article/view/1156"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_pdf_excerpt",
+            "url": "https://aspects.org.ua/index.php/journal/article/download/1156/1148",
+            "title": "Applied Dramaturgy as an Instrument of Public Governance: Values, Understanding, and Scenarios",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_text",
+            "url": "https://aspects.org.ua/index.php/journal/article/view/1156",
+            "title": "Public Administration Aspects journal article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision uses the matching recovered evidence; no inferred outcomes beyond that evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "B: a transferable proposed scenario-oriented governance framework rather than a routine application of existing forecasting tools."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:50Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Svitlana Ivanova",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-02-12",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The approach is conceptual and lacks empirical validation or demonstrated superiority to existing scenario methods.",
+          "text": "Ivanova proposes applied dramaturgy as a conceptual framework combining value analysis and scenario-oriented governance.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:cfb2c942e936e07e",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:f50c89354da55cca:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:068b52b71afd91fd": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1f008e2f",
+      "identity_hash": "1740b23696d09699",
+      "reader_title": "Marie Curie integration grants support researcher retention",
+      "reader_what": "Career Integration Grant recipients were more likely to stay in their host institution and country over time.",
+      "reader_why": "Targeted mobility funding supports longer-term retention of experienced researchers.",
+      "reader_more": "The study examines applicants to the 2011–2013 calls and compares subsequent mobility outcomes. It finds positive differences in institutional and national retention, but no corresponding evidence of tenure or research productivity gains. This provides historical evidence about the grant mechanism.",
+      "deep_analysis": {
+        "work_kind": "empirical research funding evaluation",
+        "research_question": "Does the Career Integration Grant support long-term researcher relocation?",
+        "main_finding": "Recipients had greater long-term retention in the host institution and country.",
+        "method_or_basis": "Matching article PDF excerpt; comparative analysis of applicants and mobility outcomes for 2011–2013 calls.",
+        "qualification": "Specific historical grant cohort; estimated retention differences do not establish universal effects or tenure/productivity gains.",
+        "radar_relevance": "Historical A routes 2 and 3: direct evidence on European research talent retention and mobility funding.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: OpenAlex authenticated DOI lookup matched W4406721807; retrieved via OpenAlex cached full-text PDF; document excerpt contains distinctive scanner title terms; manual identity check required"
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://content.openalex.org/works/W4406721807.pdf — The effect of public funding on long-term relocation of experienced researchers"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_pdf_excerpt",
+            "url": "https://content.openalex.org/works/W4406721807.pdf",
+            "title": "The effect of public funding on long-term relocation of experienced researchers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched DOI, authors and article excerpt; live DOI was inaccessible in earlier attempt. Historical evidence only."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Historical A routes 2 and 3: direct evidence on European research talent retention and mobility funding."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:50Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "talent.retention",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission (Marie Curie Career Integration Grant)",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "Specific historical grant cohort; estimated retention differences do not establish universal effects or tenure/productivity gains.",
+          "text": "An evaluation of Marie Curie Career Integration Grant applicants finds higher long-term institutional and national retention among recipients.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:068b52b71afd91fd",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:1740b23696d09699:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6fb53dbfbfb16cd8": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8e5d086a",
+      "identity_hash": "3eccbefe23286f47",
+      "reader_title": "Horizon Europe partnerships face coordination and reporting burdens",
+      "reader_what": "Evaluation annexes identify administrative and funding barriers to joint calls between European research partnerships.",
+      "reader_why": "Different legal, funding and reporting arrangements impede coordination across partnerships.",
+      "reader_more": "The evaluation covers Cluster 4 and eleven European partnerships. Stakeholder evidence identifies complex joint-call management, timing mismatches and funding limitations. The annexes also document inconsistent leverage definitions that undermine comparisons across partnerships.",
+      "deep_analysis": {
+        "work_kind": "programme evaluation annexes",
+        "research_question": "What affects the performance of Horizon Europe digital and industrial transition activities?",
+        "main_finding": "Cross-partnership coordination faces administrative, legal and funding obstacles; monitoring definitions are inconsistent.",
+        "method_or_basis": "Matching official 2024 evaluation annexes, including cross-partnership analysis, stakeholder consultations and efficiency analysis.",
+        "qualification": "Interim evaluation and stakeholder-reported constraints; no universal causal estimate of programme effects.",
+        "radar_relevance": "Historical A route 3: direct completed evaluation of EU R&I funding, partnership governance and implementation mechanisms.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: rejected identity mismatch (publisher title contradicts scanner title)"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://publica-rest.fraunhofer.de/server/api/core/bitstreams/0a076aaf-f3bc-4306-b26b-1ce8abc9b58c/content — Horizon Europe and the Digital & Industrial Transition: Interim evaluation support study – Annexes to the Final Report (“Phase 2” study)"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://publica-rest.fraunhofer.de/server/api/core/bitstreams/0a076aaf-f3bc-4306-b26b-1ce8abc9b58c/content",
+            "title": "Horizon Europe and the Digital & Industrial Transition: Interim evaluation support study – Annexes to the Final Report (“Phase 2” study)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original repository handle inaccessible; exact annex volume recovered through DOI/title search and matching author list. Relevant annex sections read; not all 651+ pages inspected."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Historical A route 3: direct completed evaluation of EU R&I funding, partnership governance and implementation mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:51Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission DG Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Interim evaluation and stakeholder-reported constraints; no universal causal estimate of programme effects.",
+          "text": "The 2024 evaluation annexes identify administrative, legal and funding barriers to joint calls between European research partnerships.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:6fb53dbfbfb16cd8",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3eccbefe23286f47:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:06226e834506f28a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "143406a1",
+      "identity_hash": "a1fabc3a09c83e3c",
+      "reader_title": "Research funding and citation impact differ across national systems",
+      "reader_what": "Dutch NWO-funded publications outperform other funded publications on citation measures; German DFG results differ.",
+      "reader_why": "Funding arrangements and collaboration interact differently across national research systems.",
+      "reader_more": "The six-country study uses Web of Science data from 2009–2016 and regression analysis. Germany and the Netherlands are substantive country cases, with distinct results across fields. Citation impact is not equivalent to scientific quality or proof of a funding agency’s causal effect.",
+      "deep_analysis": {
+        "work_kind": "comparative bibliometric research",
+        "research_question": "How do national research funding and international collaboration relate to citation impact?",
+        "main_finding": "NWO-funded papers show stronger citation performance than other funded Dutch papers, whereas DFG-funded German papers do not show the same overall advantage.",
+        "method_or_basis": "Author-uploaded matching article text, Web of Science 2009–2016, field-normalised citation measures and OLS regressions.",
+        "qualification": "Historical observational bibliometrics; selection and disciplinary composition limit causal interpretation.",
+        "radar_relevance": "Historical A route 3: two European funding systems are coequal substantive objects of comparative analysis, not incidental mentions; evidence informs funding and evaluation mechanisms.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval audit: reader-facing URL: rejected identity mismatch (document metadata DOI contradicts scanner DOI); OpenAlex authenticated DOI lookup matched W3042621240; no substantive OpenAlex-assisted source recovered"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Substantive matching evidence inspected: https://www.researchgate.net/publication/342900963_An_in-depth_analysis_of_government_funding_and_international_collaboration_in_scientific_research — An in-depth analysis of government funding and international collaboration in scientific research"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Additional matching source inspected: https://link.springer.com/article/10.1007/s11192-020-03595-2"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_full_text",
+            "url": "https://www.researchgate.net/publication/342900963_An_in-depth_analysis_of_government_funding_and_international_collaboration_in_scientific_research",
+            "title": "An in-depth analysis of government funding and international collaboration in scientific research",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_record",
+            "url": "https://link.springer.com/article/10.1007/s11192-020-03595-2",
+            "title": "An in-depth analysis of government funding and international collaboration in scientific research",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Original package reported mismatched DOI text; author-uploaded article matches actual title, DOI and authors exactly, with detailed findings and methods."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Historical A route 3: two European funding systems are coequal substantive objects of comparative analysis, not incidental mentions; evidence informs funding and evaluation mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-25T12:46:51Z",
+      "deep_scan_package_id": "worker-a-20261125T122135Z-d407db1d7b12",
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Netherlands Organisation for Scientific Research",
+            "class": "national_funder"
+          },
+          "mechanism": "funds",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2020-07-13",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "effect",
+          "qualification": "Historical observational bibliometrics; selection and disciplinary composition limit causal interpretation.",
+          "text": "For 2009–2016, NWO-funded Dutch publications had higher citation impact than Dutch publications funded by other agencies.",
+          "confidence": "high",
+          "record_key": "historical:id:06226e834506f28a",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:a1fabc3a09c83e3c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-11-24T08:42:33Z"
+  "claims_updated_at": "2026-11-25T12:46:51Z"
 }
