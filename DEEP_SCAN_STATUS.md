@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **4225** (Main **2251** + Historical **1974**)
-- Automatic queue still needing V2 verification: **37** (Main **2** + Historical **35**)
-- Currently assigned to workers: **37** (Main **2** + Historical **35**)
+- Automatic queue still needing V2 verification: **83** (Main **38** + Historical **45**)
+- Currently assigned to workers: **83** (Main **38** + Historical **45**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **48**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,14 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261125T130019Z-071be4c1eafe`
-- Assigned unresolved records: **2**
-  1. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf` — Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament — recovery attempt 3/3
-  2. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf` — Public hearing with Christine Lagarde, Chair of the European Systemic Risk Board - November 2026 | Think Tank | European Parliament — recovery attempt 3/3
+- Current package: `worker-a-20261127T091153Z-485227b6cc5e`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1017/s1474745626101621` — Clean Energy Statecraft before the WTO: Weaponization Claims, Short Supply, and the Limits of Public Morals
+  2. `link:https://doi.org/10.1007/s10100-026-01046-6` — Ranking of EU member states based on sectoral adoption of artificial intelligence
+  3. `link:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en` — Developing, consolidating and optimising the European research infrastructures landscape, maintaining global leadership (INFRADEV)
+  4. `link:https://www.eui.eu/Documents/ServicesAdmin/DeanOfStudies/Code-of-Ethics-in-Academic-Conduct-and-Research.pdf` — Ethics and Integrity in Academic Research
+  5. `link:https://data.consilium.europa.eu/doc/document/ST-14141-2026-INIT/en/pdf` — CONTEXT OF THE PROPOSAL • Reasons for and objectives of the proposal
+  6. `link:https://doi.org/10.1093/astrogeo/atag065` — From resilience to renewal: Ukrainian astronomy in the European Research Area
+  7. `link:https://ellis.eu/assets/documents/ellis-phd-%26-postdoc-program-info-for-applicants-2026.pdf` — Guidelines for the PhD Central Recruiting Process
+  8. `link:https://doi.org/10.1140/epjh/s13129-026-00134-0` — Negotiating fusion: European science policy and the making of ITER
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261122T090908Z-a1a6708088ec`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261127T091202Z-cb02da2376cc`
+- Assigned unresolved records: **12**
+  1. `historical:id:9cb0892acf058e62` — The futures of artificial intelligence. Implications for Europe’s R&I ecosystem. Part 5: Final report
+  2. `historical:id:2fd959ba67cc2bfb` — Leveraging European values to strengthen technological sovereignty
+  3. `historical:id:2028505d1a43e047` — Digital Sovereignty as strategic indispensability
+  4. `historical:id:76f39d40d8f7b297` — Sending Signals or Building Bridges? Digital Sovereignty in EU Communicative and Co‐Ordinative Discourse
+  5. `historical:id:0b066ff127767e3a` — Missions for governance: Unleashing missions beyond policy
+  6. `historical:id:329869f427838fa2` — Public research and the innovation performance of new technology based firms
+  7. `historical:id:61660a396885a966` — Ten-year evolution of EU industrial R&D in the global context
+  8. `historical:id:7c9d53cd285700e6` — EU Cohesion Policy and Innovation Support in Central and Eastern Europe: A Critical Review
+  - … plus 4 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
