@@ -16,29 +16,29 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261127T091153Z-485227b6cc5e`
+- Current package: `worker-a-20261127T094159Z-ec66bc090532`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1017/s1474745626101621` — Clean Energy Statecraft before the WTO: Weaponization Claims, Short Supply, and the Limits of Public Morals
   2. `link:https://doi.org/10.1007/s10100-026-01046-6` — Ranking of EU member states based on sectoral adoption of artificial intelligence
   3. `link:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en` — Developing, consolidating and optimising the European research infrastructures landscape, maintaining global leadership (INFRADEV)
   4. `link:https://www.eui.eu/Documents/ServicesAdmin/DeanOfStudies/Code-of-Ethics-in-Academic-Conduct-and-Research.pdf` — Ethics and Integrity in Academic Research
   5. `link:https://data.consilium.europa.eu/doc/document/ST-14141-2026-INIT/en/pdf` — CONTEXT OF THE PROPOSAL • Reasons for and objectives of the proposal
-  6. `link:https://doi.org/10.1093/astrogeo/atag065` — From resilience to renewal: Ukrainian astronomy in the European Research Area
-  7. `link:https://ellis.eu/assets/documents/ellis-phd-%26-postdoc-program-info-for-applicants-2026.pdf` — Guidelines for the PhD Central Recruiting Process
-  8. `link:https://doi.org/10.1140/epjh/s13129-026-00134-0` — Negotiating fusion: European science policy and the making of ITER
+  6. `link:https://doi.org/10.1111/1758-5899.70265` — “Paths Projections” of International Power Rivalries: Bringing Process‐Tracing to Scenario‐Building
+  7. `link:https://news.google.com/rss/articles/CBMivwFBVV95cUxOTXo2WlR5N2VkdFVXMW1iSFlVU2lpcVFWV1lGX214R2NqakVfb3ZaR3pTcXhUS2pfVk9MQXJEcV9JUFlOdnQxM085UVVqTk16aTlfdEUwaGc5Q3gwc1BJWXgtNk4yNFRWNzRaMmd2NzFEQnVIc1BlSFY1OTFUODFLZ3JRaEUxcHdoQmtMekJ5YW5ZU2kxMnBSZEYtZVJHcWlNNTUtVlJFTW40SF9BZVF2ZDNXcmRROEJWUGQweV9Raw?oc=5` — EU commission proposes €50bn tech fund to buy into AI, quantum and other strategic companies
+  8. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQR284a1NjQ3lBOUUteEhFTWlldGRrNkkxQWd4SG5aWFJqSC0wV0tUMmdjSVFaT0hySEhrb21sMWVTVTFkODR4ZTVmZ3dXTWJja3lIX2tBZmRHaFd3NjNNOEpmTlFyRFpxTTM0d2hLbFk5RzVoMU9KcnZUc2pENXhqUjhXV2p5ZHZBZW9UQWo3cmhpdkhRYWx5VF9yWGs?oc=5` — Belgium opens Europe's largest satellite factory in Charleroi
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261127T091202Z-cb02da2376cc`
+- Current package: `worker-b-20261127T094207Z-95acc93ed07d`
 - Assigned unresolved records: **12**
-  1. `historical:id:9cb0892acf058e62` — The futures of artificial intelligence. Implications for Europe’s R&I ecosystem. Part 5: Final report
-  2. `historical:id:2fd959ba67cc2bfb` — Leveraging European values to strengthen technological sovereignty
-  3. `historical:id:2028505d1a43e047` — Digital Sovereignty as strategic indispensability
-  4. `historical:id:76f39d40d8f7b297` — Sending Signals or Building Bridges? Digital Sovereignty in EU Communicative and Co‐Ordinative Discourse
-  5. `historical:id:0b066ff127767e3a` — Missions for governance: Unleashing missions beyond policy
-  6. `historical:id:329869f427838fa2` — Public research and the innovation performance of new technology based firms
-  7. `historical:id:61660a396885a966` — Ten-year evolution of EU industrial R&D in the global context
-  8. `historical:id:7c9d53cd285700e6` — EU Cohesion Policy and Innovation Support in Central and Eastern Europe: A Critical Review
+  1. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf` — Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament — recovery attempt 3/3
+  2. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf` — Public hearing with Christine Lagarde, Chair of the European Systemic Risk Board - November 2026 | Think Tank | European Parliament — recovery attempt 3/3
+  3. `historical:id:9cb0892acf058e62` — The futures of artificial intelligence. Implications for Europe’s R&I ecosystem. Part 5: Final report
+  4. `historical:id:2fd959ba67cc2bfb` — Leveraging European values to strengthen technological sovereignty
+  5. `historical:id:2028505d1a43e047` — Digital Sovereignty as strategic indispensability
+  6. `historical:id:76f39d40d8f7b297` — Sending Signals or Building Bridges? Digital Sovereignty in EU Communicative and Co‐Ordinative Discourse
+  7. `historical:id:0b066ff127767e3a` — Missions for governance: Unleashing missions beyond policy
+  8. `historical:id:329869f427838fa2` — Public research and the innovation performance of new technology based firms
   - … plus 4 more in the package manifest
 
 ### Worker SINGLE
