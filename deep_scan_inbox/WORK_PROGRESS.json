@@ -1,0 +1,992 @@
+{
+  "package_id": "worker-b-20261127T091202Z-cb02da2376cc",
+  "completed": {
+    "historical:id:9cb0892acf058e62": {
+      "record_key": "historical:id:9cb0892acf058e62",
+      "source_hash": "01b83252",
+      "identity_hash": "b5eb3ba413f1cd23",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://publica.fraunhofer.de/handle/publica/515902: live route inaccessible; recovered matching work via alternate route below."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "https://publica-rest.fraunhofer.de/server/api/core/bitstreams/7ea7e241-66f2-4a1a-8e7a-1c2eda01c3f1/content: matching source identity and substantive content checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://publica-rest.fraunhofer.de/server/api/core/bitstreams/7ea7e241-66f2-4a1a-8e7a-1c2eda01c3f1/content",
+            "title": "The futures of artificial intelligence. Implications for Europe’s R&I ecosystem. Part 5: Final report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; Scenarios are exploratory, not predictions; recommendations do not represent adopted Commission policy."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A routes 2 and 3: EU AI adoption and future R&I governance are central."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission, Directorate-General for Research and Innovation",
+          "date": "2026-05-04",
+          "authors": "Wenzel Mehnert; Arianna Ferrari; Orestas Strauka; Mariam Chachava; Zilvinas Martinaitis; Kerstin Cuhls; Alexandra Csabi"
+        },
+        "unset": [],
+        "reason": "Corrected against source title page or official bibliographic record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "AI futures for European research and innovation",
+      "reader_what": "European AI adoption remains uneven amid fragmented markets, limited data, skills shortages and investment gaps.",
+      "reader_why": "The report connects AI diffusion barriers with EU research and innovation policy priorities under uncertainty.",
+      "reader_more": "The Foresight on Demand report combines technology mapping, industrial adoption analysis and scenario work. It recommends strengthening adoption and preparing for alternative AI trajectories. These are policy recommendations, not guaranteed futures.",
+      "deep_analysis": {
+        "work_kind": "independent expert foresight report",
+        "research_question": "What alternative AI futures imply for European R&I policy?",
+        "main_finding": "European AI adoption is uneven and constrained by market fragmentation, data access, skills and investment gaps.",
+        "method_or_basis": "Synthesis of technology taxonomy, sector adoption analysis and foresight scenarios in the five-part study.",
+        "qualification": "Scenarios are exploratory, not predictions; recommendations do not represent adopted Commission policy.",
+        "radar_relevance": "A routes 2 and 3: EU AI adoption and future R&I governance are central.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Foresight on Demand consortium",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-05-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Scenarios are exploratory, not predictions; recommendations do not represent adopted Commission policy.",
+          "text": "European AI adoption is uneven and constrained by market fragmentation, data access, skills and investment gaps.",
+          "confidence": "high"
+        }
+      ]
+    },
+    "historical:id:2fd959ba67cc2bfb": {
+      "record_key": "historical:id:2fd959ba67cc2bfb",
+      "source_hash": "d3c16c2e",
+      "identity_hash": "2ee568b74d98ef2a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148990: matching source inspected; bibliography and content checked."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Official JRC PDF excerpt inspected and matched to JRC148990 public metadata and author lab publication."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC148990/JRC148990_01.pdf",
+            "title": "Leveraging European values to strengthen technological sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; included source excerpt also examined. Policy argument, not causal measurement of the recommended interventions."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A routes 1 and 2: European digital dependencies and technical standards are substantive strategic mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission",
+          "date": "2026-11-20",
+          "title": "Leveraging European values to strengthen technological sovereignty - Architecture, network effects, and the limits of ownership"
+        },
+        "unset": [],
+        "reason": "Corrected against source title page or official bibliographic record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European technological sovereignty through architecture",
+      "reader_what": "The JRC brief argues that ownership alone cannot overcome digital lock-in driven by network effects.",
+      "reader_why": "Interoperable designs and influence over technical standards may reduce dependencies even without complete domestic ownership.",
+      "reader_more": "The authors distinguish ownership from influence over technological architectures. They examine standards, cloud, hardware and spectrum and advocate design requirements and coordinated demand.",
+      "deep_analysis": {
+        "work_kind": "policy brief",
+        "research_question": "How can European values and architectural choices strengthen sovereignty?",
+        "main_finding": "The brief argues that interoperability, open architectures and standard-setting can address network lock-in more effectively than ownership alone.",
+        "method_or_basis": "Conceptual analysis across layers of the digital technology stack, supported by examples and literature.",
+        "qualification": "Policy argument, not causal measurement of the recommended interventions.",
+        "radar_relevance": "A routes 1 and 2: European digital dependencies and technical standards are substantive strategic mechanisms.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission JRC",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Policy argument, not causal measurement of the recommended interventions.",
+          "text": "The brief argues that interoperability, open architectures and standard-setting can address network lock-in more effectively than ownership alone.",
+          "confidence": "high"
+        }
+      ]
+    },
+    "historical:id:2028505d1a43e047": {
+      "record_key": "historical:id:2028505d1a43e047",
+      "source_hash": "95938145",
+      "identity_hash": "a5e1e3008a415fab",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148493: matching source inspected; bibliography and content checked."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Official JRC PDF excerpt inspected and matched to JRC148493 metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC148493/JRC148493_01.pdf",
+            "title": "Digital Sovereignty as strategic indispensability",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; included source excerpt also examined. Proposed strategy; future leverage and economic benefits are not measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: direct strategic technological interdependence and European capability."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission"
+        },
+        "unset": [],
+        "reason": "Corrected against source title page or official bibliographic record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Digital sovereignty through strategic indispensability",
+      "reader_what": "The JRC brief proposes complementing independence with capabilities other economies cannot easily replace.",
+      "reader_why": "Critical and hard-to-replace European capabilities can create bargaining leverage in interdependent digital value chains.",
+      "reader_more": "The brief distinguishes criticality from irreplaceability. It advocates strategic indispensability as an alternative to pursuing autonomy through self-sufficiency alone.",
+      "deep_analysis": {
+        "work_kind": "policy brief",
+        "research_question": "How could Europe leverage asymmetric interdependencies for sovereignty?",
+        "main_finding": "The brief advocates developing critical, difficult-to-replace European digital capabilities as a complement to reducing dependence.",
+        "method_or_basis": "Conceptual framework and illustrative technological cases in JRC148493.",
+        "qualification": "Proposed strategy; future leverage and economic benefits are not measured outcomes.",
+        "radar_relevance": "A route 1: direct strategic technological interdependence and European capability.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission JRC",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Proposed strategy; future leverage and economic benefits are not measured outcomes.",
+          "text": "The brief advocates developing critical, difficult-to-replace European digital capabilities as a complement to reducing dependence.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    "historical:id:76f39d40d8f7b297": {
+      "record_key": "historical:id:76f39d40d8f7b297",
+      "source_hash": "f2280527",
+      "identity_hash": "acf9bb531288e25e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1111/jcms.13638: live route inaccessible; recovered matching work via alternate route below."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "https://onlinelibrary.wiley.com/doi/full/10.1111/jcms.13638: matching source identity and substantive content checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jcms.13638",
+            "title": "Sending Signals or Building Bridges? Digital Sovereignty in EU Communicative and Co‐Ordinative Discourse",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; included source excerpt also examined. Discourse analysis supports interpretation of coordination, not measured policy effectiveness."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: evidence of strategic digital governance and EU coordination around technology policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Digital sovereignty as a bridge in EU policymaking",
+      "reader_what": "EU Commission speeches and Parliament debates use digital sovereignty differently, often connecting distinct policy priorities.",
+      "reader_why": "A shared sovereignty vocabulary can help coordinate divergent digital regulation interests across institutions.",
+      "reader_more": "The authors code Commission speeches and Parliament debates on major digital legislation. Parliamentary arguments differ by party and committee, while Commission actors invoke sovereignty more explicitly.",
+      "deep_analysis": {
+        "work_kind": "empirical political science study",
+        "research_question": "Is digital sovereignty primarily external signalling or internal coordination?",
+        "main_finding": "Digital sovereignty serves as a common denominator for different EU policy actors, whose emphases vary by party and committee.",
+        "method_or_basis": "Structured content analysis of speeches and debates about the Digital Strategy and major digital laws.",
+        "qualification": "Discourse analysis supports interpretation of coordination, not measured policy effectiveness.",
+        "radar_relevance": "A route 1: evidence of strategic digital governance and EU coordination around technology policy.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Wenzelburger and König",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Discourse analysis supports interpretation of coordination, not measured policy effectiveness.",
+          "text": "Digital sovereignty serves as a common denominator for different EU policy actors, whose emphases vary by party and committee.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    "historical:id:0b066ff127767e3a": {
+      "record_key": "historical:id:0b066ff127767e3a",
+      "source_hash": "b500cd3a",
+      "identity_hash": "e846a92cc408dfc9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://demoshelsinki.fi/wp-content/uploads/2022/10/Missions-for-Governance-Demos-Helsinki.pdf: matching source inspected; bibliography and content checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://demoshelsinki.fi/wp-content/uploads/2022/10/Missions-for-Governance-Demos-Helsinki.pdf",
+            "title": "Missions for governance: Unleashing missions beyond policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; included source excerpt also examined. Recommendations are normative; no causal test that proposed governance reforms improve results."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 3: substantive European innovation-policy governance analysis, including Horizon Europe missions."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2022-10",
+          "authors": "Anna Björk; Iacopo Gronchi; Juha Leppänen; Katri Sarkia; Racceb Taddesse; Angeliki Vourdaki"
+        },
+        "unset": [],
+        "reason": "Corrected against source title page or official bibliographic record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Mission-oriented innovation needs governance reform",
+      "reader_what": "Demos Helsinki argues that missions need cross-government coordination, experimentation and capabilities beyond existing policy structures.",
+      "reader_why": "Government silos and weak evaluation can hinder implementation of mission-oriented innovation policy.",
+      "reader_more": "The report reviews mission-oriented innovation policy and implementation challenges, including EU Missions. It recommends changes to governance, delivery and learning rather than simply adding mission programmes.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "How can mission-oriented innovation become a way to govern societal transformation?",
+        "main_finding": "The report argues that mission-oriented innovation requires governance changes, including cross-sector coordination and experimentation.",
+        "method_or_basis": "Literature synthesis, policy examples and practitioner survey findings referenced in the report.",
+        "qualification": "Recommendations are normative; no causal test that proposed governance reforms improve results.",
+        "radar_relevance": "A route 3: substantive European innovation-policy governance analysis, including Horizon Europe missions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Demos Helsinki",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Recommendations are normative; no causal test that proposed governance reforms improve results.",
+          "text": "The report argues that mission-oriented innovation requires governance changes, including cross-sector coordination and experimentation.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    "historical:id:329869f427838fa2": {
+      "record_key": "historical:id:329869f427838fa2",
+      "source_hash": "f66b7aa4",
+      "identity_hash": "441db61fda6ff196",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1007/s10961-018-9695-z inaccessible via resolver."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Springer https://link.springer.com/article/10.1007/s10961-018-9695-z matches title, authors and 2019 volume; full text subscription-only."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title search found Springer article and TUM publication record, but no accessible full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title plus Fudickar Hottenrott PDF working paper search returned bibliographic records and citations, no matching open manuscript."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "Springer preview contains abstract and notes; TUM and ZEW publication records found but no open copy."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "Search for title and author working paper variants surfaced RePEc and other citations; no matching substantive open text."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified through Springer and university records; full article behind subscription and no matching open full text found; abstract and limited notes do not meet evidence threshold."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified through Springer and university records; full article behind subscription and no matching open full text found; abstract and limited notes do not meet evidence threshold."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    "historical:id:61660a396885a966": {
+      "record_key": "historical:id:61660a396885a966",
+      "source_hash": "d39370da",
+      "identity_hash": "c032e575e4a4b7f4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://publications.jrc.ec.europa.eu/repository/handle/JRC112653: matching source inspected; bibliography and content checked."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "JRC112653 PDF excerpt examined; repository title, authors and publication date match."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC112653/jrc112653_policy_insights_industrial_ri_10_year_eu_industrial_rd_evolution_in_the_global_context_final.pdf",
+            "title": "Ten-year evolution of EU industrial R&D in the global context",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; included source excerpt also examined. Historical scoreboard coverage of major R&D investors; not a current EU R&D share."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 2: historical EU industrial research investment and sector capability trajectory."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission",
+          "date": "2018-07-20"
+        },
+        "unset": [],
+        "reason": "Corrected against source title page or official bibliographic record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU industrial R&D shifted towards medium-tech sectors",
+      "reader_what": "The JRC finds EU companies accounted for 26% of global industrial R&D, with increased automotive specialisation.",
+      "reader_why": "Sectoral composition of business research investment affects European technological capability and industrial competitiveness.",
+      "reader_more": "The brief uses a decade of company R&D scoreboard data. It reports rising automotive R&D share and declining aerospace and defence share among EU firms.",
+      "deep_analysis": {
+        "work_kind": "industrial R&D policy analysis",
+        "research_question": "How did EU industrial R&D composition evolve relative to global peers?",
+        "main_finding": "EU companies represented about 26% of global industrial R&D in the analysed period and shifted toward medium-tech specialisation.",
+        "method_or_basis": "Industrial R&D Investment Scoreboard company-account data over more than ten years.",
+        "qualification": "Historical scoreboard coverage of major R&D investors; not a current EU R&D share.",
+        "radar_relevance": "A route 2: historical EU industrial research investment and sector capability trajectory.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "industrial.technology_complexity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission JRC",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-07-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical scoreboard coverage of major R&D investors; not a current EU R&D share.",
+          "text": "EU companies represented about 26% of global industrial R&D in the analysed period and shifted toward medium-tech specialisation.",
+          "confidence": "high"
+        }
+      ]
+    },
+    "historical:id:7c9d53cd285700e6": {
+      "record_key": "historical:id:7c9d53cd285700e6",
+      "source_hash": "bfcf41d2",
+      "identity_hash": "ff029164c0289bba",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.ifo.de/DocDL/CESifo-Forum-2018-1-Serbanica-Constantin-EU-Cohesion-Policy-march.pdf: matching source inspected; bibliography and content checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://www.ifo.de/DocDL/CESifo-Forum-2018-1-Serbanica-Constantin-EU-Cohesion-Policy-march.pdf",
+            "title": "EU Cohesion Policy and Innovation Support in Central and Eastern Europe: A Critical Review",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; Historical review; not causal attribution of regional growth to cohesion spending."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A routes 2 and 3: regional innovation policy, funding and capability convergence."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "CESifo Forum",
+          "date": "2018-03"
+        },
+        "unset": [],
+        "reason": "Corrected against source title page or official bibliographic record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Cohesion policy and innovation in Central and Eastern Europe",
+      "reader_what": "Cohesion-funded innovation support evolved toward regional innovation systems and smart specialisation, with persistent implementation challenges.",
+      "reader_why": "The effectiveness of innovation funding depends on regional capabilities and policy design, not spending alone.",
+      "reader_more": "The authors review EU cohesion policy and innovation support in Central and Eastern Europe across programming periods. They examine funding patterns and the challenges of research-driven upgrading.",
+      "deep_analysis": {
+        "work_kind": "policy review",
+        "research_question": "How has EU cohesion policy supported innovation in Central and Eastern Europe?",
+        "main_finding": "The review identifies evolution toward smart specialisation and continuing challenges in building regional innovation capacity.",
+        "method_or_basis": "Review of cohesion programmes, evaluation literature and regional innovation evidence.",
+        "qualification": "Historical review; not causal attribution of regional growth to cohesion spending.",
+        "radar_relevance": "A routes 2 and 3: regional innovation policy, funding and capability convergence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Serbanica and Constantin",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2018-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical review; not causal attribution of regional growth to cohesion spending.",
+          "text": "The review identifies evolution toward smart specialisation and continuing challenges in building regional innovation capacity.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    "historical:id:0c34ae5b07c9c9ad": {
+      "record_key": "historical:id:0c34ae5b07c9c9ad",
+      "source_hash": "cf56ae10",
+      "identity_hash": "3c1a5242ce41ca7b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.ifo.de/DocDL/CESifo%20Forum-2018-4-bickenbach-liu-chinese-FDI-december.pdf: matching source inspected; bibliography and content checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://www.ifo.de/DocDL/CESifo%20Forum-2018-4-bickenbach-liu-chinese-FDI-december.pdf",
+            "title": "Chinese Direct Investment in Europe – Challenges for EU FDI Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; 2018 policy context; does not establish that all Chinese investment causes harmful transfer or that proposals were adopted."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: explicit Europe-China technology transfer and strategic investment mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "CESifo Forum",
+          "date": "2018-12"
+        },
+        "unset": [],
+        "reason": "Corrected against source title page or official bibliographic record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Chinese investment and EU technology-transfer policy",
+      "reader_what": "The authors examine Chinese investment, technology-transfer concerns and proposed EU screening and investment agreement responses.",
+      "reader_why": "Foreign investment can create technology-transfer and market-access asymmetries relevant to European strategic capability.",
+      "reader_more": "The article analyses growth and composition of Chinese investment in Europe. It discusses screening and bilateral investment policy while distinguishing security concerns from economic arguments.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "What policy challenges did Chinese direct investment create for the EU?",
+        "main_finding": "The article identifies concerns about asymmetric technology transfer and examines EU investment screening and bilateral investment agreement initiatives.",
+        "method_or_basis": "Historical investment statistics and analysis of EU policy initiatives.",
+        "qualification": "2018 policy context; does not establish that all Chinese investment causes harmful transfer or that proposals were adopted.",
+        "radar_relevance": "A route 1: explicit Europe-China technology transfer and strategic investment mechanisms.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bickenbach and Liu",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2018-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "2018 policy context; does not establish that all Chinese investment causes harmful transfer or that proposals were adopted.",
+          "text": "The article identifies concerns about asymmetric technology transfer and examines EU investment screening and bilateral investment agreement initiatives.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    "historical:id:01ddb8edf0dc57df": {
+      "record_key": "historical:id:01ddb8edf0dc57df",
+      "source_hash": "3664243f",
+      "identity_hash": "5710f94e554465e1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1007/s40309-017-0111-y: live route inaccessible; recovered matching work via alternate route below."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "https://link.springer.com/article/10.1007/s40309-017-0111-y: matching source identity and substantive content checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source",
+            "url": "https://link.springer.com/article/10.1007/s40309-017-0111-y",
+            "title": "Weak signals and wild cards in water and sanitation services – exploring an approach for water utilities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against matching primary source; included source excerpt also examined. Single sector exploratory experiment; transferability is suggested, not validated across organisations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "B: methodological scrutiny and practical adaptation of horizon scanning, not merely a domain forecast."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Journal of Futures Research"
+        },
+        "unset": [],
+        "reason": "Corrected against source title page or official bibliographic record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Lightweight weak-signal scanning for conservative organisations",
+      "reader_what": "A small experiment recommends integrating flexible weak-signal discussions and reflexive interpretation into routine organisational practice.",
+      "reader_why": "The approach offers a low-resource way to challenge mental models in conservative organisations.",
+      "reader_more": "The authors contrast existing weak-signal and wild-card approaches with a water-utility experiment. They recommend a loose process adapted to context rather than a rigid universal method.",
+      "deep_analysis": {
+        "work_kind": "foresight method study",
+        "research_question": "How can weak-signal and wild-card scanning be useful without substantial additional resources?",
+        "main_finding": "The study scrutinises weak-signal approaches and proposes a lightweight reflexive scanning process embedded in organisational culture.",
+        "method_or_basis": "Literature comparison and small-scale practical experiment.",
+        "qualification": "Single sector exploratory experiment; transferability is suggested, not validated across organisations.",
+        "radar_relevance": "B: methodological scrutiny and practical adaptation of horizon scanning, not merely a domain forecast.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Takala and Heino",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2017-06-04",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Single sector exploratory experiment; transferability is suggested, not validated across organisations.",
+          "text": "The study scrutinises weak-signal approaches and proposes a lightweight reflexive scanning process embedded in organisational culture.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf": {
+      "record_key": "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf",
+      "source_hash": "e2fad6f1",
+      "identity_hash": "86317fd83bc78d6b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "EP PDF 797052 returned browser verification instead of document."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Parliament briefing uses EPRS document number 797052, no DOI in assignment."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "European Parliament Research search listing matches Quantum act: Competitiveness and sovereignty, 20 November 2026."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title plus European Parliament EPRS and 2026 search matched official listing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "Old Think Tank page and PDF blocked; new research.europarl.europa.eu EPRS_BRI(2026)797052 route inaccessible; official search summary only."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "Document-number and title searches returned the official listing and Flemish government reference, not a readable matching full briefing."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "failed",
+            "note": "https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf exact EP document URL returned browser verification instead of PDF; package has no matching substantive source text."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified but official full briefing inaccessible; scanner summary and official preview do not suffice for an authoritative research judgement."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified but official full briefing inaccessible; scanner summary and official preview do not suffice for an authoritative research judgement."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf": {
+      "record_key": "link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf",
+      "source_hash": "fe02fe04",
+      "identity_hash": "329102cfcd9d21e9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "EP PDF 795836 returned browser verification instead of document."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "ECTI briefing number 795836, no DOI in assignment."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title found official European Parliament Research entry dated 23 November 2026."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Christine Lagarde, ESRB hearing, November 2026 and AI investment search found matching briefing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "Official research.europarl.europa.eu/ECTI_BRI(2026)795836 summary accessible; PDF link returned browser verification."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "PDF and document-number searches found official preview and related ECB material, not full matching report."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "failed",
+            "note": "https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf exact EP document URL returned browser verification instead of PDF; package has no matching substantive source text."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified and official summary identifies AI investment risk analysis, but full text inaccessible; hearing scheduled 30 November, not a completed event on 23 November. No authoritative admission judgement from preview alone."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified and official summary identifies AI investment risk analysis, but full text inaccessible; hearing scheduled 30 November, not a completed event on 23 November. No authoritative admission judgement from preview alone."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    }
+  }
+}
