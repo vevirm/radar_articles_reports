@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261127T094159Z-ec66bc090532`
+- Current package: `worker-a-20261127T102110Z-ec66bc090532`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1017/s1474745626101621` — Clean Energy Statecraft before the WTO: Weaponization Claims, Short Supply, and the Limits of Public Morals
   2. `link:https://doi.org/10.1007/s10100-026-01046-6` — Ranking of EU member states based on sectoral adoption of artificial intelligence
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261127T094207Z-95acc93ed07d`
+- Current package: `worker-b-20261127T102117Z-95acc93ed07d`
 - Assigned unresolved records: **12**
   1. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf` — Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament — recovery attempt 3/3
   2. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf` — Public hearing with Christine Lagarde, Chair of the European Systemic Risk Board - November 2026 | Think Tank | European Parliament — recovery attempt 3/3
