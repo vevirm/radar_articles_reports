@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4259** (Main **2277** + Historical **1982**)
-- Automatic queue still needing V2 verification: **79** (Main **34** + Historical **45**)
-- Currently assigned to workers: **79** (Main **34** + Historical **45**)
+- Authoritative V2 verified: **4293** (Main **2308** + Historical **1985**)
+- Automatic queue still needing V2 verification: **45** (Main **3** + Historical **42**)
+- Currently assigned to workers: **45** (Main **3** + Historical **42**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **49**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,29 +16,22 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261128T110103Z-bb94ea2869a7`
-- Assigned unresolved records: **36**
-  1. `historical:id:7bfbe6c9679dcef4` — AI Governance Capacity in Public Administration: A Comparative Analysis of the EU and Türkiye
-  2. `historical:id:efaaff0e767896c4` — Digital sovereignty metrics
-  3. `historical:id:453b8a39fa9725ae` — Advanced materials to reduce critical raw material dependencies in European industry
-  4. `historical:id:1e996b7a54a8604b` — Entrepreneurship and artificial intelligence: a bibliometric analysis
+- Current package: `worker-a-20261128T112238Z-08d4567d889b`
+- Assigned unresolved records: **8**
+  1. `link:https://doi.org/10.1093/astrogeo/atag065` — From resilience to renewal: Ukrainian astronomy in the European Research Area — recovery attempt 2/3
+  2. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxQZElrYVNyeHFFcEJzczZwWTJHNWJlTjVzTjluZldaU0liWFkwMF83WkZ3dDhBR2N0Y1hLQUFGX1o2V3ZWNnlKYksxQ2p5UEl0bnM0VWZqUU1PbVJ0RC0xbW9qd0Q1a2NRUi1YanFZRjJSOVpQOEhObks5YUp1VV80d0tVOUNtajdaeTdwSXRqS1dfb2pCX2JWWEdROE51d0NSODkyeU9qR3VkUU90Nk9Gd29B?oc=5` — AI Boom Hands Lifeline to German Industry Rocked by Car Slump — recovery attempt 2/3
+  3. `link:https://news.google.com/rss/articles/CBMie0FVX3lxTE53NjRVRkpOZjNzaURucU1sZ01Fc2pJM1Y2Sy1ReGVLbVo1TW1ZVENPNmhKRm15TDdLT3ZsQ0g4cFpXSFFqSm44OWRMUFZPNk1OMHFPWll1cnYzVjlqZVVfWU42dFVVMHpmbEs0X3RCSlpqajBuY0ladzFzMA?oc=5` — 16412/26 1 TREE.2.B Council of the European Union The digital space has reached a central role in minors’ daily life, offerin - data.consilium.europa.eu — recovery attempt 2/3
+  4. `historical:id:7bfbe6c9679dcef4` — AI Governance Capacity in Public Administration: A Comparative Analysis of the EU and Türkiye
   5. `historical:id:15ea2d25c0168813` — AI & The Oracle: Future Interfacing Technical Objects and the Reflexive Practitioner in Futures Studies
-  6. `link:https://doi.org/10.1017/s1474745626101621` — Clean Energy Statecraft before the WTO: Weaponization Claims, Short Supply, and the Limits of Public Morals
-  7. `link:https://doi.org/10.1007/s10100-026-01046-6` — Ranking of EU member states based on sectoral adoption of artificial intelligence
-  8. `link:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en` — Developing, consolidating and optimising the European research infrastructures landscape, maintaining global leadership (INFRADEV)
-  - … plus 28 more in the package manifest
+  6. `historical:id:efaaff0e767896c4` — Digital sovereignty metrics
+  7. `historical:id:453b8a39fa9725ae` — Advanced materials to reduce critical raw material dependencies in European industry
+  8. `historical:id:1e996b7a54a8604b` — Entrepreneurship and artificial intelligence: a bibliometric analysis
 
 ### Worker B
-- Current package: `worker-b-20261128T110113Z-5fd501f4c13c`
-- Assigned unresolved records: **8**
-  1. `link:https://doi.org/10.1007/s44217-026-02480-z` — Developing and validating the AI-REFINE process to support pre-service science teachers in co-designing STEM lesson plans with generative AI
-  2. `link:https://news.google.com/rss/articles/CBMie0FVX3lxTE53NjRVRkpOZjNzaURucU1sZ01Fc2pJM1Y2Sy1ReGVLbVo1TW1ZVENPNmhKRm15TDdLT3ZsQ0g4cFpXSFFqSm44OWRMUFZPNk1OMHFPWll1cnYzVjlqZVVfWU42dFVVMHpmbEs0X3RCSlpqajBuY0ladzFzMA?oc=5` — 16412/26 1 TREE.2.B Council of the European Union The digital space has reached a central role in minors’ daily life, offerin - data.consilium.europa.eu
-  3. `link:https://news.google.com/rss/articles/CBMibkFVX3lxTFBZY1JPNHdJMC03eGVlbGhzZXpPQ1YyS3doVDRCRmlMSDVnZjNZaXRoYWJydXdxQ2VNYU5IUWFJb2pGRVFWeVFEWDNTRHMwTE5sbDhxSjY1aDZGQUpvR0pDdFh5SVFrWS1iQXFKLXpR?oc=5` — Chips Act 2.0 - Shaping Europe’s digital future
-  4. `historical:id:400d21a4fd94f9dc` — Challenges & solutions for data sharing in different research fields
-  5. `historical:id:787c40e3805463be` — Testing the science/technology relationship by analysis of patent citations of scientific papers after decomposition of both science and technology
-  6. `historical:id:0c34ae5b07c9c9ad` — Chinese Direct Investment in Europe – Challenges for EU FDI Policy
-  7. `historical:id:01ddb8edf0dc57df` — Weak signals and wild cards in water and sanitation services – exploring an approach for water utilities
-  8. `historical:id:44fc21bd3e3d4cd6` — The emerging dynamic structure of national innovation studies: a bibliometric analysis
+- Current package: `worker-b-20261128T112248Z-98e5fbde1875`
+- Assigned unresolved records: **2**
+  1. `historical:id:0c34ae5b07c9c9ad` — Chinese Direct Investment in Europe – Challenges for EU FDI Policy
+  2. `historical:id:01ddb8edf0dc57df` — Weak signals and wild cards in water and sanitation services – exploring an approach for water utilities
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
