@@ -1,0 +1,2839 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261128T101101Z-f977e3398364",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.11586/2026144",
+      "source_hash": "8461356b",
+      "identity_hash": "4912e94bdb6d4ce5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.11586/2026144 — URL did not resolve in browser"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source at https://www.bertelsmann-stiftung.de/fileadmin/files/BSt/Publikationen/GrauePublikationen/AI_Value_Creation_and_Open-Weight_Models.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/BSt/Publikationen/GrauePublikationen/AI_Value_Creation_and_Open-Weight_Models.pdf",
+            "title": "AI Value Creation and Open-Weight Models",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_landing",
+            "url": "https://www.bertelsmann-stiftung.de/en/publications/publication/did/ai-value-creation-and-open-weight-models",
+            "title": "Publisher catalogue",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance checked against the cited source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 2: evidence on European AI uptake and competitive access to models."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "AI Value Creation and Open-Weight Models: Evidence from software production, consumer banking and private equity",
+          "authors": "Max Schulze, Felix Sieker",
+          "date": "2026-11-05",
+          "type": "research/policy paper"
+        },
+        "unset": [],
+        "reason": "Publisher title page and dated publication listing identify a report, not a journal article."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Open-weight models and European AI uptake",
+      "reader_what": "Selected open-weight models offer competitive capabilities and lower inference prices.",
+      "reader_why": "Model access conditions shape European firms’ ability to retain AI value.",
+      "reader_more": "The report compares three sectors. Productivity gains are better evidenced than new commercial differentiation. Market conditions may change.",
+      "deep_analysis": {
+        "work_kind": "policy research report",
+        "research_question": "How can European firms create value using AI?",
+        "main_finding": "Selected open-weight models offer useful capabilities at lower inference prices; productivity benefits are better evidenced than differentiation.",
+        "method_or_basis": "Three sector case studies, semi-structured interviews and price/capability comparisons.",
+        "qualification": "Selected tasks and cases do not establish economy-wide effects; licensing and market competition may change.",
+        "radar_relevance": "European AI adoption, competition and technological dependency.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Schulze and Sieker",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Selected tasks and cases do not establish economy-wide effects; licensing and market competition may change.",
+          "text": "The report finds lower-priced open-weight models suitable for selected business applications.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.11586/2026086",
+      "source_hash": "fba6fa0d",
+      "identity_hash": "f799bf01b5543756",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.11586/2026086 — URL did not resolve in browser"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source at https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/2026_European-Business-Survey_LAYOUT_WEB.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/2026_European-Business-Survey_LAYOUT_WEB.pdf",
+            "title": "European Business Survey",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_landing",
+            "url": "https://www.bertelsmann-stiftung.de/en/publications/publication/did/european-business-survey-bridging-the-gap-between-geopolitics-and-corporate-strategy",
+            "title": "Publisher catalogue",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance checked against the cited source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A routes 1 and 2: direct survey evidence on geopolitical exposure and European technology innovation priorities."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "European Business Survey: Bridging the Gap between Geopolitics and Corporate Strategy",
+          "date": "2026-09-14",
+          "type": "research/policy paper"
+        },
+        "unset": [],
+        "reason": "Publisher listing and report title establish the date and report format."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European business priorities amid geopolitical uncertainty",
+      "reader_what": "Survey respondents prioritized European technology innovation investment.",
+      "reader_why": "Corporate preferences provide evidence on demand for strategic R&I policy.",
+      "reader_more": "The survey covers geopolitical risks and business responses. Its voluntary sample limits generalization.",
+      "deep_analysis": {
+        "work_kind": "survey report",
+        "research_question": "How do European companies respond to geopolitical uncertainty?",
+        "main_finding": "59% of respondents to the relevant question prioritized EU technology innovation investment.",
+        "method_or_basis": "Voluntary pilot survey of 228 companies; question-level response totals vary.",
+        "qualification": "Nonrepresentative voluntary sample; preferences do not establish policy commitments or actual spending.",
+        "radar_relevance": "Evidence of corporate demand for European technology support.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Surveyed companies",
+            "class": "company"
+          },
+          "mechanism": "prioritises",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-14",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Nonrepresentative voluntary sample; preferences do not establish policy commitments or actual spending.",
+          "text": "Technology innovation investment was a priority for 59% of respondents to the relevant question.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://data.consilium.europa.eu/doc/document/ST-16058-2026-INIT/en/pdf",
+      "source_hash": "1d20c8c8",
+      "identity_hash": "6a1a5a678a06b6ba",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://data.consilium.europa.eu/doc/document/ST-16058-2026-INIT/en/pdf — matching primary source opened and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://data.consilium.europa.eu/doc/document/ST-16058-2026-INIT/en/pdf",
+            "title": "Industrial Accelerator Act: Strengthening Europe’s Resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance checked against the cited source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: dateable Council Presidency negotiating document on EU industrial capacity and conditions for support."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Industrial Accelerator Act: Strengthening Europe’s Resilience",
+          "source": "Council of the European Union",
+          "authors": "Council Presidency"
+        },
+        "unset": [],
+        "reason": "Council document ST 16058/26, dated 26 November; annex heading identifies title."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Council discussion of the Industrial Accelerator Act",
+      "reader_what": "The Presidency advances negotiations over industrial resilience and conditions attached to public support.",
+      "reader_why": "The proposal could change the conditions for European industrial investment.",
+      "reader_more": "The note prepares a ministerial debate. It does not establish adoption of the Act.",
+      "deep_analysis": {
+        "work_kind": "Council policy debate note",
+        "research_question": "How should the proposed Industrial Accelerator Act strengthen industrial resilience?",
+        "main_finding": "The Presidency describes compromise work on conditions for public support and procurement, and seeks ministerial discussion.",
+        "method_or_basis": "Council document 16058/26 and its annex.",
+        "qualification": "Negotiating text and debate questions only; no final legislation or measured impact.",
+        "radar_relevance": "EU industrial capability and conditions for public support.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council Presidency",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "in_negotiation",
+          "status_date": "2026-11-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Negotiating text and debate questions only; no final legislation or measured impact.",
+          "text": "The Presidency reports compromise work on proposed conditions for procurement and public support.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.bruegel.org/working-paper/defence-innovation-and-procurement-reform-empirical-evaluation-us-defense-innovation",
+      "source_hash": "be76dd6f",
+      "identity_hash": "f2be59bbfe76e8bd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://www.bruegel.org/working-paper/defence-innovation-and-procurement-reform-empirical-evaluation-us-defense-innovation — 403 Forbidden"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Located and read matching source at https://ecares.ulb.be/wp-content/uploads/2026/06/WP-ECARES_2026-17_Defense_Innovation.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://ecares.ulb.be/wp-content/uploads/2026/06/WP-ECARES_2026-17_Defense_Innovation.pdf",
+            "title": "Defence innovation and procurement reform: an empirical evaluation of the US Defense Innovation Unit",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance checked against the cited source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: empirical institutional evaluation with explicit European policy implications, rather than a merely incidental EU reference."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Ethan B. Kapstein, Javier Ospital, Guntram B. Wolff"
+        },
+        "unset": [],
+        "reason": "Institutional working paper identifies authors and states that it was first published as a Bruegel working paper; original exact publication date not established."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Evidence on institutional innovation and procurement reform",
+      "reader_what": "The US evaluation finds improved procurement outcomes but no measurable patent effect.",
+      "reader_why": "The study offers evidence for European institutional policy comparisons.",
+      "reader_more": "The authors use firm-level panel data. Effects observed in the US cannot be assumed for Europe.",
+      "deep_analysis": {
+        "work_kind": "empirical policy working paper",
+        "research_question": "What changes are associated with the US institutional procurement reform?",
+        "main_finding": "Participating firms show higher procurement participation and contract outcomes, but no measurable patent effect.",
+        "method_or_basis": "Firm panel and matching with staggered difference-in-differences.",
+        "qualification": "US evidence is observational and does not demonstrate equivalent European effects; patent effects were not detected.",
+        "radar_relevance": "European research and innovation governance comparison.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Kapstein, Ospital and Wolff",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-05",
+          "scope": {
+            "level": "third_country",
+            "countries": [
+              "US"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "US evidence is observational and does not demonstrate equivalent European effects; patent effects were not detected.",
+          "text": "The study finds improved procurement outcomes among participating firms but no detectable patent effect.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.2478/ijmbr-2026-0015",
+      "source_hash": "185c4677",
+      "identity_hash": "6223129f83095169",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.2478/ijmbr-2026-0015 — URL did not resolve in browser"
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected the supplied 24,000-character publisher PDF excerpt from https://reference-global.com/download/article/10.2478/ijmbr-2026-0015.pdf; matching title, DOI, journal and author copyright. Live PDF inaccessible."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://reference-global.com/download/article/10.2478/ijmbr-2026-0015.pdf",
+            "title": "Tuning Into the Musical Life of a Nordic Capital City: Results and Reflections on the Helsinki Live Music Census 2024",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source-owned PDF excerpt, not a new live retrieval. External CORDIS project corroborates related research, not the article identity. Article identity matched directly within the supplied first-party text."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A: local cultural-sector census, not European R&I system evidence. B: application of a sector census, not a new transferable R&I intelligence method. C: no qualifying R&I development."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "local sector empirical study",
+        "research_question": "What does the Helsinki live music census show?",
+        "main_finding": "The article reports on local live music activity and reflects on the census.",
+        "method_or_basis": "Publisher PDF excerpt describing census results and approach.",
+        "qualification": "Live full text was inaccessible; admission rests on the substantive publisher excerpt.",
+        "radar_relevance": "Local cultural economy rather than European R&I governance, capacity or methodology.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.era-learn.eu/news-events/news/european-parliament-confirms-horizon-europe-2028-2034-negotiating-mandate",
+      "source_hash": "7e42c01e",
+      "identity_hash": "0d1ced76e6f5774e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://www.era-learn.eu/news-events/news/european-parliament-confirms-horizon-europe-2028-2034-negotiating-mandate — initial request failed"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source at https://www.era-learn.eu/news-events/news/european-parliament-confirms-horizon-europe-2028-2034-negotiating-mandate"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing",
+            "url": "https://www.era-learn.eu/news-events/news/european-parliament-confirms-horizon-europe-2028-2034-negotiating-mandate",
+            "title": "European Parliament confirms Horizon Europe 2028-2034 negotiating mandate",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_landing",
+            "url": "https://www.era-learn.eu/partnerships-in-a-nutshell/european-partnerships/next-framework-programme-fp10",
+            "title": "Next framework programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance checked against the cited source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: actual Parliament negotiating mandate for the next European R&I framework."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-11-27",
+          "type": "news article"
+        },
+        "unset": [],
+        "reason": "ERA-LEARN article date differs from the event date of 25 November."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Parliament confirms next Horizon Europe negotiating mandate",
+      "reader_what": "Parliament agreed negotiating mandates for Horizon Europe and the European Competitiveness Fund.",
+      "reader_why": "This advances negotiations over the next EU research framework.",
+      "reader_more": "The mandate is not the final regulation. Further legislative work remains.",
+      "deep_analysis": {
+        "work_kind": "policy news",
+        "research_question": "What is the status of negotiations for the next framework programme?",
+        "main_finding": "Parliament confirmed its negotiating mandates for Horizon Europe and the European Competitiveness Fund on 25 November.",
+        "method_or_basis": "ERA-LEARN dated reporting and linked proposal comparison.",
+        "qualification": "Mandates are negotiating positions, not final legislation; the specific programme opinion is pending.",
+        "radar_relevance": "Next EU framework programme governance.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "in_negotiation",
+          "status_date": "2026-11-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Mandates are negotiating positions, not final legislation; the specific programme opinion is pending.",
+          "text": "Parliament adopted its negotiating mandate for the next Horizon Europe framework.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://defence-industry-space.ec.europa.eu/eu-ukraine-export-and-defence-industrial-cooperation-knowledge-hub_en",
+      "source_hash": "2076cf31",
+      "identity_hash": "65cdf4f480169316",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://defence-industry-space.ec.europa.eu/eu-ukraine-export-and-defence-industrial-cooperation-knowledge-hub_en — matching primary source opened and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://defence-industry-space.ec.europa.eu/eu-ukraine-export-and-defence-industrial-cooperation-knowledge-hub_en",
+            "title": "EU-Ukraine Export and Defence Industrial Cooperation Knowledge Hub",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance checked against the cited source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A: informational hub rather than evidence-led research. B: no reusable research method. C: hub aggregates existing information without establishing a specific new R&I development by itself."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "institutional information hub",
+        "research_question": "",
+        "main_finding": "The page collates programme and policy information.",
+        "method_or_basis": "Official Commission portal.",
+        "qualification": "A standing page is not evidence that every listed activity is new.",
+        "radar_relevance": "Generic navigation source; assess any underlying dated decisions separately.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.bruegel.org/working-paper/programmable-sovereignty-coordinated-specialisation-response-n-2-problem-artificial",
+      "source_hash": "3ce29a2c",
+      "identity_hash": "5917b59521a27dd7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://www.bruegel.org/working-paper/programmable-sovereignty-coordinated-specialisation-response-n-2-problem-artificial — 403 Forbidden"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching source at https://aliciagarciaherrero.substack.com/p/programmable-sovereignty-coordinated"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Publisher PDF https://www.bruegel.org/sites/default/files/2026-09/WP%2025%202026_1.pdf and SSRN PDF both 403; Korean library catalogue supplies detailed contents only."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_summary",
+            "url": "https://aliciagarciaherrero.substack.com/p/programmable-sovereignty-coordinated",
+            "title": "Programmable sovereignty: coordinated specialisation as a response to the N-2 problem in artificial intelligence",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_index",
+            "url": "https://dl.nanet.go.kr/detail/NONB22026000005557",
+            "title": "National Assembly Library bibliographic record and detailed contents",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Author summary and detailed independent catalogue consulted; full working paper could not be opened. Main conceptual argument is explicit in the author text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: author-authenticated policy framework on AI dependency and shared European infrastructure; not an empirical demonstration."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Alicia García-Herrero, Soumitra Dutta",
+          "date": "2026-09-01"
+        },
+        "unset": [],
+        "reason": "Korean National Assembly Library catalogue identifies working paper 25/2026, September 2026; its strategy portal dates it 1 September."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "AI sovereignty through shared capacity",
+      "reader_what": "The authors propose shared infrastructure and coordinated governance to reduce dependence on dominant AI producers.",
+      "reader_why": "European pooled research infrastructure is an institutional precedent.",
+      "reader_more": "The approach is a policy proposal rather than evidence of implementation. The author summary identifies EuroHPC as a precedent.",
+      "deep_analysis": {
+        "work_kind": "conceptual policy working paper",
+        "research_question": "How can states without full-stack AI autonomy retain meaningful governance capacity?",
+        "main_finding": "The authors advocate pooled complementary capacities and governance as an alternative to complete national AI autonomy.",
+        "method_or_basis": "Synthesis of two sovereignty literatures; author summary identifies EuroHPC and two other institutional precedents; library contents identify measurement and policy sections.",
+        "qualification": "This is a conceptual proposal, not observed implementation; full text and quantitative tables inaccessible.",
+        "radar_relevance": "European shared compute and technology dependency governance.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "García-Herrero and Dutta",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a conceptual proposal, not observed implementation; full text and quantitative tables inaccessible.",
+          "text": "The authors propose coordinated specialisation and pooled capacity to support AI sovereignty.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.rand.org/multimedia/audio/expert-insights/2020/expert-insights-defence-challenges-and-opportunities-for-norway.html",
+      "source_hash": "2acc1355",
+      "identity_hash": "25da996bb6c387b0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.rand.org/multimedia/audio/expert-insights/2020/expert-insights-defence-challenges-and-opportunities-for-norway.html — matching primary source opened and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing",
+            "url": "https://www.rand.org/multimedia/audio/expert-insights/2020/expert-insights-defence-challenges-and-opportunities-for-norway.html",
+            "title": "Expert Insights: Defence Challenges and Opportunities for Norway",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher episode description read, not audio transcript. Linked underlying report is a different work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A: publisher describes an expert discussion of general defence policy, not central R&I-system evidence. B: no methodological contribution. C: no dateable current R&I decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "expert discussion",
+        "research_question": "",
+        "main_finding": "RAND describes a discussion of allied views on Norwegian defence policy.",
+        "method_or_basis": "Official episode description and linked study identification.",
+        "qualification": "No transcript was accessed; publisher framing establishes the focus of this multimedia item.",
+        "radar_relevance": "General defence policy discussion, not an R&I evidence product.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxOWFYzbUpOeHYtbG1WdUFWTWIxZFZSMlpWdkV1MGlPak1BYnZjOXQ3SjF0STJpNWtOZ1gxT1p1QWpfWndJNTNzTWFOaERHbV81aXVqdVhodTZvM2liV09neDJsTEhjcEZRTFB0ZGt0UERfTndtQzhKTlJYUl93d2pucUx3SXh2aW1ma1ZGZk1JeWJaUUJUVFhlYnlNWEpuTXVIRnotU3EySTgyRURHUnJybFJn?oc=5",
+      "source_hash": "5382873c",
+      "identity_hash": "cf2f6ca5fea9036a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMisgFBVV95cUxOWFYzbUpOeHYtbG1WdUFWTWIxZFZSMlpWdkV1MGlPak1BYnZjOXQ3SjF0STJpNWtOZ1gxT1p1QWpfWndJNTNzTWFOaERHbV81aXVqdVhodTZvM2liV09neDJsTEhjcEZRTFB0ZGt0UERfTndtQzhKTlJYUl93d2pucUx3SXh2aW1ma1ZGZk1JeWJaUUJUVFhlYnlNWEpuTXVIRnotU3EySTgyRURHUnJybFJn?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://www.ecb.europa.eu/press/blog/date/2026/html/ecb.blog20261127~81118f8ec0.fi.html"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://news.bloomberglaw.com/artificial-intelligence/european-workers-ai-use-on-par-with-that-of-us-peers-ecb-says"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.ecb.europa.eu/press/blog/date/2026/html/ecb.blog20261127~81118f8ec0.fi.html",
+            "title": "European and US workplace AI uptake",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          },
+          {
+            "url": "https://news.bloomberglaw.com/artificial-intelligence/european-workers-ai-use-on-par-with-that-of-us-peers-ecb-says",
+            "title": "Matching Bloomberg report",
+            "kind": "news_identity",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Different sampling and survey questions limit direct comparison. Uptake does not establish domestic AI production."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 2: comparative evidence on European AI adoption and investment dependency."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European and US workplace AI uptake",
+      "reader_what": "Survey evidence suggests similar workplace AI uptake in Europe and the United States.",
+      "reader_why": "A route 2: comparative evidence on European AI adoption and investment dependency.",
+      "reader_more": "ECB analysis; Consumer Expectations Survey compared with US Gallup survey. Different sampling and survey questions limit direct comparison. Uptake does not establish domestic AI production.",
+      "deep_analysis": {
+        "work_kind": "ECB analysis",
+        "research_question": "A route 2: comparative evidence on European AI adoption and investment dependency.",
+        "main_finding": "Survey evidence suggests similar workplace AI uptake in Europe and the United States.",
+        "method_or_basis": "ECB analysis; Consumer Expectations Survey compared with US Gallup survey",
+        "qualification": "Different sampling and survey questions limit direct comparison. Uptake does not establish domestic AI production.",
+        "radar_relevance": "A route 2: comparative evidence on European AI adoption and investment dependency.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Central Bank",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-11-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Different sampling and survey questions limit direct comparison. Uptake does not establish domestic AI production.",
+          "text": "Survey evidence suggests similar workplace AI uptake in Europe and the United States.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxQZElrYVNyeHFFcEJzczZwWTJHNWJlTjVzTjluZldaU0liWFkwMF83WkZ3dDhBR2N0Y1hLQUFGX1o2V3ZWNnlKYksxQ2p5UEl0bnM0VWZqUU1PbVJ0RC0xbW9qd0Q1a2NRUi1YanFZRjJSOVpQOEhObks5YUp1VV80d0tVOUNtajdaeTdwSXRqS1dfb2pCX2JWWEdROE51d0NSODkyeU9qR3VkUU90Nk9Gd29B?oc=5",
+      "source_hash": "b106b410",
+      "identity_hash": "a3a2ff3a6493c79f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News RSS route and Bloomberg original did not yield substantive article."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; this is a dated Bloomberg news article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline located in indexed news listings."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Searched headline with Alexander Weber and 27 November 2026; no substantive accessible version."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Bloomberg original https://www.bloomberg.com/news/articles/2026-11-27/ai-boom-hands-lifeline-to-german-industry-rocked-by-car-slump inaccessible."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Aggregator and Storylines timeline confirmed headline/identity, not original reporting."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.web2news.com/source/biz-quicktake/",
+            "title": "AI Boom Hands Lifeline to German Industry Rocked by Car Slump",
+            "kind": "identity_index",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity confirmed, but substantive matching text remains unavailable. Search routes documented; no findings inferred. Exhaustive additional challenge passes are not certified."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Matching identity established; accessible evidence insufficient for a substantive admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMizwFBVV95cUxOUktFUmUyQkFoZmZiekU4eVczcTd4ZEVIS2JoN3dld1ZKR2tfQk0tM2tFVXNPbHhPdUFLZEJSaU01S0t2eFNtZDdReGdDbHc2MnNkWk1qTlJEdzd2RzNBLUY4X2FESlJQV1F6b25mTF9pZWpCTVBtdlpWWWtMYktwOE9ULWVOQVU0ck9aRGdROW5CdUZmVlowaDlvRklHekRudmlIZnI5R3ppanhmUTYtWThiaEFWZGJvTkVPMFBLMzV0N0dtRllwNXdzemEybk0?oc=5",
+      "source_hash": "ca94cf33",
+      "identity_hash": "4b2b5a8b56ec4b49",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMizwFBVV95cUxOUktFUmUyQkFoZmZiekU4eVczcTd4ZEVIS2JoN3dld1ZKR2tfQk0tM2tFVXNPbHhPdUFLZEJSaU01S0t2eFNtZDdReGdDbHc2MnNkWk1qTlJEdzd2RzNBLUY4X2FESlJQV1F6b25mTF9pZWpCTVBtdlpWWWtMYktwOE9ULWVOQVU0ck9aRGdROW5CdUZmVlowaDlvRklHekRudmlIZnI5R3ppanhmUTYtWThiaEFWZGJvTkVPMFBLMzV0N0dtRllwNXdzemEybk0?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://europeansting.com/2026/11/27/metsola-the-next-mff-must-be-europes-investment-plan-in-the-future/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://europeansting.com/2026/11/27/metsola-the-next-mff-must-be-europes-investment-plan-in-the-future/",
+            "title": "Metsola speech on the next EU budget",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. The stated funding position is not a revised negotiating mandate or adopted allocation."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: political advocacy reiterates negotiating priorities, not a new budget decision; A/B: no analytical study or reusable method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "Reproduction of Parliament president speech",
+        "research_question": "C: political advocacy reiterates negotiating priorities, not a new budget decision; A/B: no analytical study or reusable method.",
+        "main_finding": "Speech advocates investment and contests proposed competitiveness funding cuts.",
+        "method_or_basis": "Reproduction of Parliament president speech",
+        "qualification": "The stated funding position is not a revised negotiating mandate or adopted allocation.",
+        "radar_relevance": "C: political advocacy reiterates negotiating priorities, not a new budget decision; A/B: no analytical study or reusable method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxQRDBSU0NUSUszVGwza28tWWFkT0hoZWtudHRXV0VvMURVNGtmRWNSTkxZQXBlNS1lQ2wxLTlHNmlrTWVXM3hzSDVSRmE4Q2hkOGplSVBsZVNWNjhTSHIxWDdOT0FDWm9WVUMzVGpUb0xuWFdmOFc4VW5SZ1pTU2JkYkFsTFdWNVdhT2xZSFhLOFFyc0x0RE1MUDU5b05VcVVpRUhtakl1ZC1JeWxaM2VHeGFLMFltU1RBcTc4Tw?oc=5",
+      "source_hash": "cd0b4e09",
+      "identity_hash": "5887e41a46d592a3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMivAFBVV95cUxQRDBSU0NUSUszVGwza28tWWFkT0hoZWtudHRXV0VvMURVNGtmRWNSTkxZQXBlNS1lQ2wxLTlHNmlrTWVXM3hzSDVSRmE4Q2hkOGplSVBsZVNWNjhTSHIxWDdOT0FDWm9WVUMzVGpUb0xuWFdmOFc4VW5SZ1pTU2JkYkFsTFdWNVdhT2xZSFhLOFFyc0x0RE1MUDU5b05VcVVpRUhtakl1ZC1JeWxaM2VHeGFLMFltU1RBcTc4Tw?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://www.aol.co.uk/articles/eu-wants-more-data-centres-083054000.html"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.aol.co.uk/articles/eu-wants-more-data-centres-083054000.html",
+            "title": "Draft data centre sustainability commitments",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Reported future agreements do not establish adoption or implementation."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: leaked draft, not a verified new official decision; A/B: no independent analytical research or method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "Syndicated Euronews article",
+        "research_question": "C: leaked draft, not a verified new official decision; A/B: no independent analytical research or method.",
+        "main_finding": "Reporting describes a draft approach to voluntary green commitments.",
+        "method_or_basis": "Syndicated Euronews article",
+        "qualification": "Reported future agreements do not establish adoption or implementation.",
+        "radar_relevance": "C: leaked draft, not a verified new official decision; A/B: no independent analytical research or method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMieEFVX3lxTE1CbW4zbXozTlBGdkZHQ1B4RXBCdHRWNURZdUEwVzBZSWt0emtmdVJYZS1lV0ZOVzZudS15VWZ3WDRHcVFWQlZuRkFFZTl2Q0ZRMUpZRXZnNmxoUWtjcnlRaTh1RU9odzBNQmMtQVUwNThpdEx3QnRwcw?oc=5",
+      "source_hash": "0b5a9379",
+      "identity_hash": "9355cd27d36e15f0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMieEFVX3lxTE1CbW4zbXozTlBGdkZHQ1B4RXBCdHRWNURZdUEwVzBZSWt0emtmdVJYZS1lV0ZOVzZudS15VWZ3WDRHcVFWQlZuRkFFZTl2Q0ZRMUpZRXZnNmxoUWtjcnlRaTh1RU9odzBNQmMtQVUwNThpdEx3QnRwcw?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://digital-strategy.ec.europa.eu/en/library/proposal-quantum-act"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://publications.europa.eu/resource/cellar/a4c2f277-e8b5-11f1-b745-01aa75ed71a1.0001.02/DOC_1"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://digital-strategy.ec.europa.eu/en/library/proposal-quantum-act",
+            "title": "Commission proposes Quantum Act",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          },
+          {
+            "url": "https://publications.europa.eu/resource/cellar/a4c2f277-e8b5-11f1-b745-01aa75ed71a1.0001.02/DOC_1",
+            "title": "Quantum Act legislative text",
+            "kind": "official_document",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Proposal only, not adopted law or delivered capacity."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: dated legislative proposal directly affects EU quantum R&I governance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission proposes Quantum Act",
+      "reader_what": "The proposed Act coordinates quantum research, infrastructure and industrial development.",
+      "reader_why": "C: dated legislative proposal directly affects EU quantum R&I governance.",
+      "reader_more": "Official legislative proposal published 25 November 2026. Proposal only, not adopted law or delivered capacity.",
+      "deep_analysis": {
+        "work_kind": "Official legislative proposal published 25 November 2026",
+        "research_question": "C: dated legislative proposal directly affects EU quantum R&I governance.",
+        "main_finding": "The proposed Act coordinates quantum research, infrastructure and industrial development.",
+        "method_or_basis": "Official legislative proposal published 25 November 2026",
+        "qualification": "Proposal only, not adopted law or delivered capacity.",
+        "radar_relevance": "C: dated legislative proposal directly affects EU quantum R&I governance.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "quantum.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-11-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Proposal only, not adopted law or delivered capacity.",
+          "text": "The proposed Act coordinates quantum research, infrastructure and industrial development.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMidkFVX3lxTFBUcC05RHc2cHZGNjZkQ09mWERMcWZTYTBBS054N2xvRTk2cEFJYk1MdTRjeHMyTkEtUEoyTjBKa0Y3aUtIQ3VBTTZQaDlfMTQ3S2xBbFRoT3h3WjlnelkzSl9fa1FBTUlZTXI2QkxBcWZtejNFWnc?oc=5",
+      "source_hash": "3b7bde4b",
+      "identity_hash": "d387794db7096f1e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMidkFVX3lxTFBUcC05RHc2cHZGNjZkQ09mWERMcWZTYTBBS054N2xvRTk2cEFJYk1MdTRjeHMyTkEtUEoyTjBKa0Y3aUtIQ3VBTTZQaDlfMTQ3S2xBbFRoT3h3WjlnelkzSl9fa1FBTUlZTXI2QkxBcWZtejNFWnc?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://digital-strategy.ec.europa.eu/en/faqs/quantum-act-explained"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://digital-strategy.ec.europa.eu/en/faqs/quantum-act-explained",
+            "title": "Quantum Act explanatory FAQ",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Underlying dated proposal is assessed separately."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: explanatory page does not announce a separate policy action; A/B: no original analytical evidence or method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "Official Commission FAQ",
+        "research_question": "C: explanatory page does not announce a separate policy action; A/B: no original analytical evidence or method.",
+        "main_finding": "FAQ explains the same legislative proposal.",
+        "method_or_basis": "Official Commission FAQ",
+        "qualification": "Underlying dated proposal is assessed separately.",
+        "radar_relevance": "C: explanatory page does not announce a separate policy action; A/B: no original analytical evidence or method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://fusionforenergy.europa.eu/ifmif-dones/",
+      "source_hash": "9e4fa43b",
+      "identity_hash": "2fe455321a69e03f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching source accessible: https://fusionforenergy.europa.eu/ifmif-dones/"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://fusionforenergy.europa.eu/ifmif-dones/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://fusionforenergy.europa.eu/ifmif-dones/",
+            "title": "IFMIF-DONES facility overview",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Facility information must not be interpreted as a new procurement or completed facility."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: overview provides no specific new dated development; A/B: no study or method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "Official Fusion for Energy facility page",
+        "research_question": "C: overview provides no specific new dated development; A/B: no study or method.",
+        "main_finding": "Standing page describes a research facility under construction.",
+        "method_or_basis": "Official Fusion for Energy facility page",
+        "qualification": "Facility information must not be interpreted as a new procurement or completed facility.",
+        "radar_relevance": "C: overview provides no specific new dated development; A/B: no study or method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxPSjlnZDloY014TldPUWgtVHBIaFdCOERqT2kxSTBjaG52RE1QckhIRnI1d1VjMjVLMGkwWVI0RHRwSWFYMUpnUXBtTVRoVnVfTWRVam5aUFlDVUg2aDRycXUyVThvVFIzQ2ZjM0hGZVFjT3dkR2YwMVFJZGMzMEdzNWljUVBBWGVMSkVYN25TVXhwTTFnYThpZjE4bGtwdlA2eGxhU3VaaGFzQ2ZBVDN2Nkw0Vm1HQnQzMVhDOGJ2bFplUk92alE?oc=5",
+      "source_hash": "fe34817b",
+      "identity_hash": "02ce6dbe1c8238d8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMixgFBVV95cUxPSjlnZDloY014TldPUWgtVHBIaFdCOERqT2kxSTBjaG52RE1QckhIRnI1d1VjMjVLMGkwWVI0RHRwSWFYMUpnUXBtTVRoVnVfTWRVam5aUFlDVUg2aDRycXUyVThvVFIzQ2ZjM0hGZVFjT3dkR2YwMVFJZGMzMEdzNWljUVBBWGVMSkVYN25TVXhwTTFnYThpZjE4bGtwdlA2eGxhU3VaaGFzQ2ZBVDN2Nkw0Vm1HQnQzMVhDOGJ2bFplUk92alE?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://euobserver.com/241940/interview-france-school-protests-go-deeper-than-rioting-or-reactionism-says-sciences-po-lecturer/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://euobserver.com/241940/interview-france-school-protests-go-deeper-than-rioting-or-reactionism-says-sciences-po-lecturer/",
+            "title": "French school protest interview",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Lecturer affiliation alone does not establish R&I relevance."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A/C: school protest discussion does not establish a European R&I system mechanism or policy action; B: no reusable research method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "News interview",
+        "research_question": "A/C: school protest discussion does not establish a European R&I system mechanism or policy action; B: no reusable research method.",
+        "main_finding": "Interview discusses secondary school conditions and protests.",
+        "method_or_basis": "News interview",
+        "qualification": "Lecturer affiliation alone does not establish R&I relevance.",
+        "radar_relevance": "A/C: school protest discussion does not establish a European R&I system mechanism or policy action; B: no reusable research method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMisAFBVV95cUxPNHNjNXhjcl81Z3N5aTFkZV9HcXgtcEZkclJXUXRoNE0tSFNEWjJ6TXFEVnFWWExOTDExUURUajlPUmxGN2dNeWlYVnBRcFVTSE0wYUxzWlg5S040alZSZ3dqOXlETDR0dG96VDljQndPWGNEXzUtS1Q2SHgzRklwbXEwN2dSQm9mY1NoYldyVWgxUTUyYlpfSno3YzN4T0RhWkFvR29yU1dsQjVUTWRrNw?oc=5",
+      "source_hash": "48f8b975",
+      "identity_hash": "9128aba5a9e4a037",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMisAFBVV95cUxPNHNjNXhjcl81Z3N5aTFkZV9HcXgtcEZkclJXUXRoNE0tSFNEWjJ6TXFEVnFWWExOTDExUURUajlPUmxGN2dNeWlYVnBRcFVTSE0wYUxzWlg5S040alZSZ3dqOXlETDR0dG96VDljQndPWGNEXzUtS1Q2SHgzRklwbXEwN2dSQm9mY1NoYldyVWgxUTUyYlpfSno3YzN4T0RhWkFvR29yU1dsQjVUTWRrNw?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://www.gov.pl/web/obrona-narodowa/wojsko-polskie-siega-po-nowoczesne-i-sprawdzone-technologie-wykorzystujace-sztuczna-inteligencje"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://www.bloomberg.com/news/articles/2026-11-27/poland-signs-300-million-palantir-deal-to-use-ai-for-defense"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.gov.pl/web/obrona-narodowa/wojsko-polskie-siega-po-nowoczesne-i-sprawdzone-technologie-wykorzystujace-sztuczna-inteligencje",
+            "title": "Poland announces AI procurement agreement",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          },
+          {
+            "url": "https://www.bloomberg.com/news/articles/2026-11-27/poland-signs-300-million-palantir-deal-to-use-ai-for-defense",
+            "title": "Matching news identity",
+            "kind": "news_identity",
+            "evidence_used": false
+          },
+          {
+            "url": "https://www.reuters.com/technology/poland-signs-contract-with-palantir-worth-300-mln-over-5-years-2026-11-27/",
+            "title": "Reuters report on signed agreement",
+            "kind": "news_corroboration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Signed agreement is not evidence of deployment or performance. Same procurement event in both records; original news full text not recovered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: dated public procurement has a European strategic technology dependency dimension."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Poland announces AI procurement agreement",
+      "reader_what": "Poland announces a signed agreement to procure AI services from a foreign supplier.",
+      "reader_why": "C: dated public procurement has a European strategic technology dependency dimension.",
+      "reader_more": "Polish ministry announcement; corroborating Reuters report. Signed agreement is not evidence of deployment or performance. Same procurement event in both records; original news full text not recovered.",
+      "deep_analysis": {
+        "work_kind": "Polish ministry announcement",
+        "research_question": "C: dated public procurement has a European strategic technology dependency dimension.",
+        "main_finding": "Poland announces a signed agreement to procure AI services from a foreign supplier.",
+        "method_or_basis": "Polish ministry announcement; corroborating Reuters report",
+        "qualification": "Signed agreement is not evidence of deployment or performance. Same procurement event in both records; original news full text not recovered.",
+        "radar_relevance": "C: dated public procurement has a European strategic technology dependency dimension.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "digital.public_procurement",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Polish Ministry of National Defence",
+            "class": "member_state"
+          },
+          "mechanism": "procures",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-11-27",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "PL"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Signed agreement is not evidence of deployment or performance. Same procurement event in both records; original news full text not recovered.",
+          "text": "Poland announces a signed agreement to procure AI services from a foreign supplier.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMipwFBVV95cUxPMEhiX0RwcFF0TWFLSDNoRXUyUDJyZUxrNTl2UG5xU1JZWEg3alAtZUU3RkpSeHhValN0bjZLc2t3TnBDYmFyanVhRHlTSkVxYkNXM2h1azB2Wk8xei11SVBzSkF3MU42QXlSSElybG9tLTNzSHpJZlBLaWQwOUFpdnd5MFhkYlhVcl9qcnJ1cEUxTG85Q0p4dGdlTXdnTVpHNVJDZklTUQ?oc=5",
+      "source_hash": "446a2a6f",
+      "identity_hash": "37770c1c70c90562",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMipwFBVV95cUxPMEhiX0RwcFF0TWFLSDNoRXUyUDJyZUxrNTl2UG5xU1JZWEg3alAtZUU3RkpSeHhValN0bjZLc2t3TnBDYmFyanVhRHlTSkVxYkNXM2h1azB2Wk8xei11SVBzSkF3MU42QXlSSElybG9tLTNzSHpJZlBLaWQwOUFpdnd5MFhkYlhVcl9qcnJ1cEUxTG85Q0p4dGdlTXdnTVpHNVJDZklTUQ?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://www.gov.pl/web/obrona-narodowa/wojsko-polskie-siega-po-nowoczesne-i-sprawdzone-technologie-wykorzystujace-sztuczna-inteligencje"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://be.linkedin.com/company/politico-europe"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.gov.pl/web/obrona-narodowa/wojsko-polskie-siega-po-nowoczesne-i-sprawdzone-technologie-wykorzystujace-sztuczna-inteligencje",
+            "title": "Poland announces AI procurement agreement",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          },
+          {
+            "url": "https://be.linkedin.com/company/politico-europe",
+            "title": "Matching news identity",
+            "kind": "news_identity",
+            "evidence_used": false
+          },
+          {
+            "url": "https://www.reuters.com/technology/poland-signs-contract-with-palantir-worth-300-mln-over-5-years-2026-11-27/",
+            "title": "Reuters report on signed agreement",
+            "kind": "news_corroboration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Signed agreement is not evidence of deployment or performance. Same procurement event in both records; original news full text not recovered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: dated public procurement has a European strategic technology dependency dimension."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Poland announces AI procurement agreement",
+      "reader_what": "Poland announces a signed agreement to procure AI services from a foreign supplier.",
+      "reader_why": "C: dated public procurement has a European strategic technology dependency dimension.",
+      "reader_more": "Polish ministry announcement; corroborating Reuters report. Signed agreement is not evidence of deployment or performance. Same procurement event in both records; original news full text not recovered.",
+      "deep_analysis": {
+        "work_kind": "Polish ministry announcement",
+        "research_question": "C: dated public procurement has a European strategic technology dependency dimension.",
+        "main_finding": "Poland announces a signed agreement to procure AI services from a foreign supplier.",
+        "method_or_basis": "Polish ministry announcement; corroborating Reuters report",
+        "qualification": "Signed agreement is not evidence of deployment or performance. Same procurement event in both records; original news full text not recovered.",
+        "radar_relevance": "C: dated public procurement has a European strategic technology dependency dimension.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "digital.public_procurement",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Polish Ministry of National Defence",
+            "class": "member_state"
+          },
+          "mechanism": "procures",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-11-27",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "PL"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Signed agreement is not evidence of deployment or performance. Same procurement event in both records; original news full text not recovered.",
+          "text": "Poland announces a signed agreement to procure AI services from a foreign supplier.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://defence-industry-space.ec.europa.eu/battleverses-first-open-cascade-call-attracts-over-400-proposals-across-europe-2026-11-27_en",
+      "source_hash": "a66cd1ae",
+      "identity_hash": "f122d2d905958885",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://defence-industry-space.ec.europa.eu/battleverses-first-open-cascade-call-attracts-over-400-proposals-across-europe-2026-11-27_en; package retrieval: retrieved via reader-facing URL -> source-owned document link; document excerpt contains distinctive scanner title terms; manual identity check required; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://defence-industry-space.ec.europa.eu/battleverses-first-open-cascade-call-attracts-over-400-proposals-across-europe-2026-11-27_en?prefLang=hr"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://defence-industry-space.ec.europa.eu/battleverses-first-open-cascade-call-attracts-over-400-proposals-across-europe-2026-11-27_en?prefLang=hr",
+            "title": "European innovation call attracts applications",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Applications are not awards or demonstrated technological outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: dated application-intake outcome for a European innovation funding programme."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European innovation call attracts applications",
+      "reader_what": "The first cascade call received 427 proposals from 28 countries.",
+      "reader_why": "C: dated application-intake outcome for a European innovation funding programme.",
+      "reader_more": "Official Commission announcement of call results. Applications are not awards or demonstrated technological outcomes.",
+      "deep_analysis": {
+        "work_kind": "Official Commission announcement of call results",
+        "research_question": "C: dated application-intake outcome for a European innovation funding programme.",
+        "main_finding": "The first cascade call received 427 proposals from 28 countries.",
+        "method_or_basis": "Official Commission announcement of call results",
+        "qualification": "Applications are not awards or demonstrated technological outcomes.",
+        "radar_relevance": "C: dated application-intake outcome for a European innovation funding programme.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-11-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Applications are not awards or demonstrated technological outcomes.",
+          "text": "The first cascade call received 427 proposals from 28 countries.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s44217-026-02480-z",
+      "source_hash": "0f610406",
+      "identity_hash": "0c621f5dee5de7a8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://doi.org/10.1007/s44217-026-02480-z; package retrieval: OpenAlex authenticated DOI lookup matched W7162114855; retrieved via OpenAlex cached full-text PDF; document excerpt contains distinctive scanner title terms; manual identity check required; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://link.springer.com/article/10.1007/s44217-026-02480-z"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://link.springer.com/article/10.1007/s44217-026-02480-z",
+            "title": "AI-assisted STEM lesson design",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Small context-specific education study; do not infer European system relevance."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "B: pedagogical design is not a foresight or R&I intelligence method; A: no substantive European R&I nexus; C: no policy action."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "Journal article",
+        "research_question": "B: pedagogical design is not a foresight or R&I intelligence method; A: no substantive European R&I nexus; C: no policy action.",
+        "main_finding": "Study develops a lesson-planning process for pre-service teachers in Vietnam.",
+        "method_or_basis": "Journal article; Delphi and small one-group validation",
+        "qualification": "Small context-specific education study; do not infer European system relevance.",
+        "radar_relevance": "B: pedagogical design is not a foresight or R&I intelligence method; A: no substantive European R&I nexus; C: no policy action.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMie0FVX3lxTE53NjRVRkpOZjNzaURucU1sZ01Fc2pJM1Y2Sy1ReGVLbVo1TW1ZVENPNmhKRm15TDdLT3ZsQ0g4cFpXSFFqSm44OWRMUFZPNk1OMHFPWll1cnYzVjlqZVVfWU42dFVVMHpmbEs0X3RCSlpqajBuY0ladzFzMA?oc=5",
+      "source_hash": "49a20851",
+      "identity_hash": "aed41389433ddfe6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied Google News route and identified Council document URL did not yield matching text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; Council document identifier 16412/26 used."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact document identifier and indexed opening text identified the document."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Searched Council identifier with digital space, minors, and November 2026; no matching accessible full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Official https://data.consilium.europa.eu/doc/document/ST-16412-2026-INIT/en/pdf inaccessible."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Related Council agenda ST 16109/26 identifies policy topic but is not the same document."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://data.consilium.europa.eu/doc/document/ST-16109-2026-INIT/en/pdf",
+            "title": "Council document ST 16412/26 on minors in digital spaces",
+            "kind": "identity_index",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity confirmed, but substantive matching text remains unavailable. Search routes documented; no findings inferred. Exhaustive additional challenge passes are not certified."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Matching identity established; accessible evidence insufficient for a substantive admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMibkFVX3lxTFBZY1JPNHdJMC03eGVlbGhzZXpPQ1YyS3doVDRCRmlMSDVnZjNZaXRoYWJydXdxQ2VNYU5IUWFJb2pGRVFWeVFEWDNTRHMwTE5sbDhxSjY1aDZGQUpvR0pDdFh5SVFrWS1iQXFKLXpR?oc=5",
+      "source_hash": "7cfa5bf9",
+      "identity_hash": "0235d9441f7addf7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMibkFVX3lxTFBZY1JPNHdJMC03eGVlbGhzZXpPQ1YyS3doVDRCRmlMSDVnZjNZaXRoYWJydXdxQ2VNYU5IUWFJb2pGRVFWeVFEWDNTRHMwTE5sbDhxSjY1aDZGQUpvR0pDdFh5SVFrWS1iQXFKLXpR?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://digital-strategy.ec.europa.eu/en/policies/chips-act-2"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/chips-act-2",
+            "title": "Chips Act 2.0 policy overview",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Do not treat crawler or update date as a new legislative milestone."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: no distinct November event evidenced by page update; A/B: no original research or reusable method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "Official policy overview",
+        "research_question": "C: no distinct November event evidenced by page update; A/B: no original research or reusable method.",
+        "main_finding": "Standing policy page explains an earlier legislative proposal.",
+        "method_or_basis": "Official policy overview",
+        "qualification": "Do not treat crawler or update date as a new legislative milestone.",
+        "radar_relevance": "C: no distinct November event evidenced by page update; A/B: no original research or reusable method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:400d21a4fd94f9dc",
+      "source_hash": "1464a12c",
+      "identity_hash": "09a0595e4880ad1c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_applicable",
+            "note": "Historical record has no supplied link; recovered by bibliographic identity."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://www.cost.eu/challenges-solutions-data-sharing-sunga/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.cost.eu/challenges-solutions-data-sharing-sunga/",
+            "title": "Cross-disciplinary research data sharing barriers",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Qualitative workshop findings are not representative estimates or demonstrated policy effects."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 3: European research practice evidence on openness and infrastructure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Cross-disciplinary research data sharing barriers",
+      "reader_what": "Researchers identify privacy, interoperability and repository barriers to sharing data across disciplines.",
+      "reader_why": "A route 3: European research practice evidence on openness and infrastructure.",
+      "reader_more": "COST workshop account; cross-field researcher input. Qualitative workshop findings are not representative estimates or demonstrated policy effects.",
+      "deep_analysis": {
+        "work_kind": "COST workshop account",
+        "research_question": "A route 3: European research practice evidence on openness and infrastructure.",
+        "main_finding": "Researchers identify privacy, interoperability and repository barriers to sharing data across disciplines.",
+        "method_or_basis": "COST workshop account; cross-field researcher input",
+        "qualification": "Qualitative workshop findings are not representative estimates or demonstrated policy effects.",
+        "radar_relevance": "A route 3: European research practice evidence on openness and infrastructure.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.openness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "COST research community",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-09-23",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Qualitative workshop findings are not representative estimates or demonstrated policy effects.",
+          "text": "Researchers identify privacy, interoperability and repository barriers to sharing data across disciplines.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:787c40e3805463be",
+      "source_hash": "de7a781a",
+      "identity_hash": "8601b55b80f82a91",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_applicable",
+            "note": "Historical record has no supplied link; recovered by bibliographic identity."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://link.springer.com/article/10.1007/s11192-018-2774-y"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://link.springer.com/article/10.1007/s11192-018-2774-y",
+            "title": "Mapping relationships between science and technology",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Citation patterns depend on classification and coverage and cannot establish causal knowledge flows."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_SUBSTANTIVE_EU_RI",
+        "reason": "B: transferable technology intelligence method using structured domain decomposition and citation analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Mapping relationships between science and technology",
+      "reader_what": "Patent citations mapped across science and technology domains reveal many-to-many relationships.",
+      "reader_why": "B: transferable technology intelligence method using structured domain decomposition and citation analysis.",
+      "reader_more": "Journal article; patent citations across 44 technology domains and 176 scientific disciplines. Citation patterns depend on classification and coverage and cannot establish causal knowledge flows.",
+      "deep_analysis": {
+        "work_kind": "Journal article",
+        "research_question": "B: transferable technology intelligence method using structured domain decomposition and citation analysis.",
+        "main_finding": "Patent citations mapped across science and technology domains reveal many-to-many relationships.",
+        "method_or_basis": "Journal article; patent citations across 44 technology domains and 176 scientific disciplines",
+        "qualification": "Citation patterns depend on classification and coverage and cannot establish causal knowledge flows.",
+        "radar_relevance": "B: transferable technology intelligence method using structured domain decomposition and citation analysis.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.technology_detection",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Fang Han and Christopher Magee",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2018-05-19",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Citation patterns depend on classification and coverage and cannot establish causal knowledge flows.",
+          "text": "Patent citations mapped across science and technology domains reveal many-to-many relationships.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:44fc21bd3e3d4cd6",
+      "source_hash": "b80bfa37",
+      "identity_hash": "19d58f7f0c9fb1d6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_applicable",
+            "note": "Historical record has no supplied link; recovered by bibliographic identity."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://link.springer.com/article/10.1007/s11192-015-1778-0"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://link.springer.com/article/10.1007/s11192-015-1778-0",
+            "title": "Bibliometrics of national innovation scholarship",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Bibliometric prominence must not be equated with national innovation performance."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A: maps scholarship, not actual European R&I system performance; B: conventional bibliometrics without a qualifying new method; C: no event."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "Journal article",
+        "research_question": "A: maps scholarship, not actual European R&I system performance; B: conventional bibliometrics without a qualifying new method; C: no event.",
+        "main_finding": "Article maps the structure and evolution of national innovation studies.",
+        "method_or_basis": "Journal article; bibliometric mapping using existing tools",
+        "qualification": "Bibliometric prominence must not be equated with national innovation performance.",
+        "radar_relevance": "A: maps scholarship, not actual European R&I system performance; B: conventional bibliometrics without a qualifying new method; C: no event.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1017/s1474745626101621",
+      "source_hash": "57dd89c7",
+      "identity_hash": "1eb618c857751a33",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://doi.org/10.1017/s1474745626101621; package retrieval: retrieved via reader-facing URL -> source-owned document link; document excerpt contains distinctive scanner title terms; manual identity check required; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://www.cambridge.org/core/journals/world-trade-review/article/clean-energy-statecraft-before-the-wto-weaponization-claims-short-supply-and-the-limits-of-public-morals/99E3D420C958F77EAAA4345649BA2A0C"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.cambridge.org/core/journals/world-trade-review/article/clean-energy-statecraft-before-the-wto-weaponization-claims-short-supply-and-the-limits-of-public-morals/99E3D420C958F77EAAA4345649BA2A0C",
+            "title": "WTO constraints on clean technology policy",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Interpretation and policy argument, not a WTO ruling or measured policy effect."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 1: EU strategic industrial policy is assessed against international legal constraints."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "WTO constraints on clean technology policy",
+      "reader_what": "Legal analysis identifies constraints on strategic clean energy trade and local-content measures.",
+      "reader_why": "A route 1: EU strategic industrial policy is assessed against international legal constraints.",
+      "reader_more": "Legal scholarship; analysis of WTO exceptions and European industrial policy. Interpretation and policy argument, not a WTO ruling or measured policy effect.",
+      "deep_analysis": {
+        "work_kind": "Legal scholarship",
+        "research_question": "A route 1: EU strategic industrial policy is assessed against international legal constraints.",
+        "main_finding": "Legal analysis identifies constraints on strategic clean energy trade and local-content measures.",
+        "method_or_basis": "Legal scholarship; analysis of WTO exceptions and European industrial policy",
+        "qualification": "Interpretation and policy argument, not a WTO ruling or measured policy effect.",
+        "radar_relevance": "A route 1: EU strategic industrial policy is assessed against international legal constraints.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Anatole Boute",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-11-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Interpretation and policy argument, not a WTO ruling or measured policy effect.",
+          "text": "Legal analysis identifies constraints on strategic clean energy trade and local-content measures.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s10100-026-01046-6",
+      "source_hash": "e3fc45b9",
+      "identity_hash": "7f2fbce7fe43eeab",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://doi.org/10.1007/s10100-026-01046-6; package retrieval: OpenAlex authenticated DOI lookup matched W7239358840; retrieved via OpenAlex cached full-text PDF; document excerpt contains distinctive scanner title terms; manual identity check required; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://link.springer.com/article/10.1007/s10100-026-01046-6"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://link.springer.com/article/10.1007/s10100-026-01046-6",
+            "title": "Comparing sectoral AI adoption across EU countries",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Rankings depend on indicators and sector composition; not causal evidence or a complete measure of digitalisation."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A route 2: comparative evidence on EU AI adoption and uneven capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Comparing sectoral AI adoption across EU countries",
+      "reader_what": "Sector-level rankings reveal variation in EU AI adoption and sensitivity to sectoral outliers.",
+      "reader_why": "A route 2: comparative evidence on EU AI adoption and uneven capability.",
+      "reader_more": "Journal article; 2024 Eurostat sector data, ranking and efficiency methods. Rankings depend on indicators and sector composition; not causal evidence or a complete measure of digitalisation.",
+      "deep_analysis": {
+        "work_kind": "Journal article",
+        "research_question": "A route 2: comparative evidence on EU AI adoption and uneven capability.",
+        "main_finding": "Sector-level rankings reveal variation in EU AI adoption and sensitivity to sectoral outliers.",
+        "method_or_basis": "Journal article; 2024 Eurostat sector data, ranking and efficiency methods",
+        "qualification": "Rankings depend on indicators and sector composition; not causal evidence or a complete measure of digitalisation.",
+        "radar_relevance": "A route 2: comparative evidence on EU AI adoption and uneven capability.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Zoltán Bánhidi, Imre Dobos, Gergely Lülök",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-11-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Rankings depend on indicators and sector composition; not causal evidence or a complete measure of digitalisation.",
+          "text": "Sector-level rankings reveal variation in EU AI adoption and sensitivity to sectoral outliers.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en",
+      "source_hash": "c8d36dee",
+      "identity_hash": "7b00f309eaab8646",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching source accessible: https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en",
+            "title": "Research infrastructure funding programme overview",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Individual dated calls or awards require separate assessment."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: routine programme listing does not establish a new decision; A/B: no substantive study or new method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "European Research Executive Agency programme page",
+        "research_question": "C: routine programme listing does not establish a new decision; A/B: no substantive study or new method.",
+        "main_finding": "Page lists Horizon Europe research infrastructure funding opportunities.",
+        "method_or_basis": "European Research Executive Agency programme page",
+        "qualification": "Individual dated calls or awards require separate assessment.",
+        "radar_relevance": "C: routine programme listing does not establish a new decision; A/B: no substantive study or new method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.eui.eu/Documents/ServicesAdmin/DeanOfStudies/Code-of-Ethics-in-Academic-Conduct-and-Research.pdf",
+      "source_hash": "c64c72ac",
+      "identity_hash": "02563042ffcd63b9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://www.eui.eu/Documents/ServicesAdmin/DeanOfStudies/Code-of-Ethics-in-Academic-Conduct-and-Research.pdf; package retrieval: retrieved via reader-facing URL; document excerpt contains distinctive scanner title terms; manual identity check required; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://www.eui.eu/en/services/academic-service/ethics-and-integrity-in-academic-research"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://www.eui.eu/Documents/ServicesAdmin/DeanOfStudies/Code-of-Ethics-in-Academic-Conduct-and-Research.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.eui.eu/en/services/academic-service/ethics-and-integrity-in-academic-research",
+            "title": "EUI academic ethics information",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          },
+          {
+            "url": "https://www.eui.eu/Documents/ServicesAdmin/DeanOfStudies/Code-of-Ethics-in-Academic-Conduct-and-Research.pdf",
+            "title": "EUI Code of Ethics",
+            "kind": "official_document",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Page update does not establish new adoption of the code."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A: single-institution guidance, not evaluated system evidence; B: no new method; C: no verified new policy event."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "EUI guidance and academic code",
+        "research_question": "A: single-institution guidance, not evaluated system evidence; B: no new method; C: no verified new policy event.",
+        "main_finding": "Institutional page provides academic conduct and research integrity guidance.",
+        "method_or_basis": "EUI guidance and academic code",
+        "qualification": "Page update does not establish new adoption of the code.",
+        "radar_relevance": "A: single-institution guidance, not evaluated system evidence; B: no new method; C: no verified new policy event.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://data.consilium.europa.eu/doc/document/ST-14141-2026-INIT/en/pdf",
+      "source_hash": "06abcacf",
+      "identity_hash": "d6bc3f0683c62418",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching source accessible: https://data.consilium.europa.eu/doc/document/ST-14141-2026-INIT/en/pdf"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://data.consilium.europa.eu/doc/document/ST-14141-2026-INIT/en/pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://data.consilium.europa.eu/doc/document/ST-14141-2026-INIT/en/pdf",
+            "title": "EU standardisation regulation proposal",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Proposal rather than enacted regulation or demonstrated faster standards development."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: formal legislative proposal relevant to strategic technology standards and industrial competitiveness."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU standardisation regulation proposal",
+      "reader_what": "The Commission proposes changes to European standardisation coordination and processes.",
+      "reader_why": "C: formal legislative proposal relevant to strategic technology standards and industrial competitiveness.",
+      "reader_more": "Council document ST 14141/26; Commission proposal COM(2026)780. Proposal rather than enacted regulation or demonstrated faster standards development.",
+      "deep_analysis": {
+        "work_kind": "Council document ST 14141/26",
+        "research_question": "C: formal legislative proposal relevant to strategic technology standards and industrial competitiveness.",
+        "main_finding": "The Commission proposes changes to European standardisation coordination and processes.",
+        "method_or_basis": "Council document ST 14141/26; Commission proposal COM(2026)780",
+        "qualification": "Proposal rather than enacted regulation or demonstrated faster standards development.",
+        "radar_relevance": "C: formal legislative proposal relevant to strategic technology standards and industrial competitiveness.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-10-06",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Proposal rather than enacted regulation or demonstrated faster standards development.",
+          "text": "The Commission proposes changes to European standardisation coordination and processes.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/1758-5899.70265",
+      "source_hash": "01c10177",
+      "identity_hash": "c3e7fdcec20de53c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://doi.org/10.1111/1758-5899.70265; package retrieval: OpenAlex authenticated DOI lookup matched W7239386643; retrieved via OpenAlex cached full-text PDF; document excerpt contains distinctive scanner title terms; manual identity check required; evidence used from the alternative route below."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Examined matching stored source text at https://content.openalex.org/works/W7239386643.pdf"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://sites.google.com/view/paths-projections/home"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://content.openalex.org/works/W7239386643.pdf",
+            "title": "Process tracing for scenario construction",
+            "kind": "package_matching_text",
+            "evidence_used": true
+          },
+          {
+            "url": "https://sites.google.com/view/paths-projections/home",
+            "title": "Paths Projections research project",
+            "kind": "author_project",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matching package text and bibliographic identity inspected. Illustrations do not establish predictive accuracy; conditional scenarios are not forecasts."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_SUBSTANTIVE_EU_RI",
+        "reason": "B: explicit transferable scenario-building method for strategic anticipation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Process tracing for scenario construction",
+      "reader_what": "The paper combines process tracing with scenario building to articulate conditional pathways.",
+      "reader_why": "B: explicit transferable scenario-building method for strategic anticipation.",
+      "reader_more": "Journal article; methodological framework and illustrative application. Illustrations do not establish predictive accuracy; conditional scenarios are not forecasts.",
+      "deep_analysis": {
+        "work_kind": "Journal article",
+        "research_question": "B: explicit transferable scenario-building method for strategic anticipation.",
+        "main_finding": "The paper combines process tracing with scenario building to articulate conditional pathways.",
+        "method_or_basis": "Journal article; methodological framework and illustrative application",
+        "qualification": "Illustrations do not establish predictive accuracy; conditional scenarios are not forecasts.",
+        "radar_relevance": "B: explicit transferable scenario-building method for strategic anticipation.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Nadia El Ghali, Andreas Kruck, Simon G. Weisser",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-11-24",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Illustrations do not establish predictive accuracy; conditional scenarios are not forecasts.",
+          "text": "The paper combines process tracing with scenario building to articulate conditional pathways.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxOTXo2WlR5N2VkdFVXMW1iSFlVU2lpcVFWV1lGX214R2NqakVfb3ZaR3pTcXhUS2pfVk9MQXJEcV9JUFlOdnQxM085UVVqTk16aTlfdEUwaGc5Q3gwc1BJWXgtNk4yNFRWNzRaMmd2NzFEQnVIc1BlSFY1OTFUODFLZ3JRaEUxcHdoQmtMekJ5YW5ZU2kxMnBSZEYtZVJHcWlNNTUtVlJFTW40SF9BZVF2ZDNXcmRROEJWUGQweV9Raw?oc=5",
+      "source_hash": "611f5a57",
+      "identity_hash": "38f840ca60c8397a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMivwFBVV95cUxOTXo2WlR5N2VkdFVXMW1iSFlVU2lpcVFWV1lGX214R2NqakVfb3ZaR3pTcXhUS2pfVk9MQXJEcV9JUFlOdnQxM085UVVqTk16aTlfdEUwaGc5Q3gwc1BJWXgtNk4yNFRWNzRaMmd2NzFEQnVIc1BlSFY1OTFUODFLZ3JRaEUxcHdoQmtMekJ5YW5ZU2kxMnBSZEYtZVJHcWlNNTUtVlJFTW40SF9BZVF2ZDNXcmRROEJWUGQweV9Raw?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://digital-strategy.ec.europa.eu/en/news/commission-proposes-quantum-act-and-new-sovereign-tech-equity-fund-strengthen-europes-industrial"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://euobserver.com/251514/eu-commission-proposes-e50bn-tech-fund-to-buy-into-ai-quantum-and-other-strategic-companies/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://digital-strategy.ec.europa.eu/en/news/commission-proposes-quantum-act-and-new-sovereign-tech-equity-fund-strengthen-europes-industrial",
+            "title": "Commission proposes sovereign technology equity fund",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          },
+          {
+            "url": "https://euobserver.com/251514/eu-commission-proposes-e50bn-tech-fund-to-buy-into-ai-quantum-and-other-strategic-companies/",
+            "title": "Matching news report",
+            "kind": "news_corroboration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: formal strategic technology finance proposal with direct EU R&I relevance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission proposes sovereign technology equity fund",
+      "reader_what": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+      "reader_why": "C: formal strategic technology finance proposal with direct EU R&I relevance.",
+      "reader_more": "Official Commission announcement; matching news report. The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+      "deep_analysis": {
+        "work_kind": "Official Commission announcement",
+        "research_question": "C: formal strategic technology finance proposal with direct EU R&I relevance.",
+        "main_finding": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+        "method_or_basis": "Official Commission announcement; matching news report",
+        "qualification": "The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+        "radar_relevance": "C: formal strategic technology finance proposal with direct EU R&I relevance.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-11-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+          "text": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQR284a1NjQ3lBOUUteEhFTWlldGRrNkkxQWd4SG5aWFJqSC0wV0tUMmdjSVFaT0hySEhrb21sMWVTVTFkODR4ZTVmZ3dXTWJja3lIX2tBZmRHaFd3NjNNOEpmTlFyRFpxTTM0d2hLbFk5RzVoMU9KcnZUc2pENXhqUjhXV2p5ZHZBZW9UQWo3cmhpdkhRYWx5VF9yWGs?oc=5",
+      "source_hash": "0d845a9b",
+      "identity_hash": "f58488a2e983e104",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMinAFBVV95cUxQR284a1NjQ3lBOUUteEhFTWlldGRrNkkxQWd4SG5aWFJqSC0wV0tUMmdjSVFaT0hySEhrb21sMWVTVTFkODR4ZTVmZ3dXTWJja3lIX2tBZmRHaFd3NjNNOEpmTlFyRFpxTTM0d2hLbFk5RzVoMU9KcnZUc2pENXhqUjhXV2p5ZHZBZW9UQWo3cmhpdkhRYWx5VF9yWGs?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://www.euronews.com/2026/11/25/belgium-opens-europes-largest-satellite-factory-in-charleroi"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://www.euronews.com/2026/11/25/belgium-opens-europes-largest-satellite-factory-in-charleroi",
+            "title": "Belgian satellite manufacturing facility inaugurated",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. Inauguration is not operational output; production targets are plans."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: dateable industrial technology capacity investment linked to European space infrastructure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Belgian satellite manufacturing facility inaugurated",
+      "reader_what": "A satellite manufacturing facility is inaugurated in Charleroi with planned future production capacity.",
+      "reader_why": "C: dateable industrial technology capacity investment linked to European space infrastructure.",
+      "reader_more": "Euronews report on 24 November inauguration. Inauguration is not operational output; production targets are plans.",
+      "deep_analysis": {
+        "work_kind": "Euronews report on 24 November inauguration",
+        "research_question": "C: dateable industrial technology capacity investment linked to European space infrastructure.",
+        "main_finding": "A satellite manufacturing facility is inaugurated in Charleroi with planned future production capacity.",
+        "method_or_basis": "Euronews report on 24 November inauguration",
+        "qualification": "Inauguration is not operational output; production targets are plans.",
+        "radar_relevance": "C: dateable industrial technology capacity investment linked to European space infrastructure.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Aerospacelab",
+            "class": "company"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-11-24",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "BE"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Inauguration is not operational output; production targets are plans.",
+          "text": "A satellite manufacturing facility is inaugurated in Charleroi with planned future production capacity.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMizAFBVV95cUxNbFFJY1FtV2pxNXN5Y2RiOTBxWkgwWXFpc1I5NF9oZDdZaDRWNWZYWFBYNlUtX1daRm42U2NkVUpsTDI0UXJpa205eThUQnNLbVdvRm1fdW1zU0pmeTZhaEdNeFY2d3pzbWtJYXZkeVFKRGdFeFhEYWJzWmlVYkN5Nm85SWpwaTk4REs2OW9MNDBaTzcxdjhQclNkTDg1RWdhZnIwVGFEbzRuMEdxMkdfenpWRUpKZm9TSnRvVDlia2dkUjFJTkw0Q1RwMGE?oc=5",
+      "source_hash": "37257c24",
+      "identity_hash": "7fb0e38f6bfb14c3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMizAFBVV95cUxNbFFJY1FtV2pxNXN5Y2RiOTBxWkgwWXFpc1I5NF9oZDdZaDRWNWZYWFBYNlUtX1daRm42U2NkVUpsTDI0UXJpa205eThUQnNLbVdvRm1fdW1zU0pmeTZhaEdNeFY2d3pzbWtJYXZkeVFKRGdFeFhEYWJzWmlVYkN5Nm85SWpwaTk4REs2OW9MNDBaTzcxdjhQclNkTDg1RWdhZnIwVGFEbzRuMEdxMkdfenpWRUpKZm9TSnRvVDlia2dkUjFJTkw0Q1RwMGE?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://digital-strategy.ec.europa.eu/en/news/commission-proposes-quantum-act-and-new-sovereign-tech-equity-fund-strengthen-europes-industrial"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-11-eu-plans-tech-sovereignty-fund-and-quantum-research-push/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://digital-strategy.ec.europa.eu/en/news/commission-proposes-quantum-act-and-new-sovereign-tech-equity-fund-strengthen-europes-industrial",
+            "title": "Commission proposes sovereign technology equity fund",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          },
+          {
+            "url": "https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-11-eu-plans-tech-sovereignty-fund-and-quantum-research-push/",
+            "title": "Matching news report",
+            "kind": "news_identity",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: official proposal for strategic technology finance and research capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission proposes sovereign technology equity fund",
+      "reader_what": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+      "reader_why": "C: official proposal for strategic technology finance and research capacity.",
+      "reader_more": "Official Commission announcement; matching news identity. The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+      "deep_analysis": {
+        "work_kind": "Official Commission announcement",
+        "research_question": "C: official proposal for strategic technology finance and research capacity.",
+        "main_finding": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+        "method_or_basis": "Official Commission announcement; matching news identity",
+        "qualification": "The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+        "radar_relevance": "C: official proposal for strategic technology finance and research capacity.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-11-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+          "text": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxNQXB4bkpfdVM2Rkh0NTZKZmIxOHJkOEZGMnNkdy1mVHl5T2NTSmxzQVUzUHd4eHBKeFFKQU5DUnFmTG9neTRHakJCSkF2aTk3eUlPdEVZMWI2YUVGZjBoTTVjQkJqc3hmUW9ua2JQR3BsTHVKSDdoWU5oOE1qUC1hdkhYZVZRdFNMbEc2WWtQaXJHYkNxMmxPU2ZLU0EyQ0hxb2JEZjZUWEtRYXFSUUVKSm56MlZRdkMzWmlvRnBNbkc?oc=5",
+      "source_hash": "800cd007",
+      "identity_hash": "ac7d12e385a82b72",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied route: https://news.google.com/rss/articles/CBMiwAFBVV95cUxNQXB4bkpfdVM2Rkh0NTZKZmIxOHJkOEZGMnNkdy1mVHl5T2NTSmxzQVUzUHd4eHBKeFFKQU5DUnFmTG9neTRHakJCSkF2aTk3eUlPdEVZMWI2YUVGZjBoTTVjQkJqc3hmUW9ua2JQR3BsTHVKSDdoWU5oOE1qUC1hdkhYZVZRdFNMbEc2WWtQaXJHYkNxMmxPU2ZLU0EyQ0hxb2JEZjZUWEtRYXFSUUVKSm56MlZRdkMzWmlvRnBNbkc?oc=5; package retrieval: reader-facing URL: no substantive text; evidence used from the alternative route below."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located substantive matching source or official underlying action at https://digital-strategy.ec.europa.eu/en/news/commission-proposes-quantum-act-and-new-sovereign-tech-equity-fund-strengthen-europes-industrial"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Corroborating route: https://www.reuters.com/world/china/europe-plans-50-billion-sovereign-tech-equity-fund-boost-quantum-technology-2026-11-25/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "url": "https://digital-strategy.ec.europa.eu/en/news/commission-proposes-quantum-act-and-new-sovereign-tech-equity-fund-strengthen-europes-industrial",
+            "title": "Commission proposes sovereign technology equity fund",
+            "kind": "official_or_publisher_source",
+            "evidence_used": true
+          },
+          {
+            "url": "https://www.reuters.com/world/china/europe-plans-50-billion-sovereign-tech-equity-fund-boost-quantum-technology-2026-11-25/",
+            "title": "Matching news report",
+            "kind": "news_identity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work or underlying official action checked. The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI",
+        "reason": "C: official proposal for strategic technology finance and research capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission proposes sovereign technology equity fund",
+      "reader_what": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+      "reader_why": "C: official proposal for strategic technology finance and research capacity.",
+      "reader_more": "Official Commission announcement; matching news identity. The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+      "deep_analysis": {
+        "work_kind": "Official Commission announcement",
+        "research_question": "C: official proposal for strategic technology finance and research capacity.",
+        "main_finding": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+        "method_or_basis": "Official Commission announcement; matching news identity",
+        "qualification": "The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+        "radar_relevance": "C: official proposal for strategic technology finance and research capacity.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-11-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The reported EUR 50 billion ambition is not an adopted allocation or committed capital. This is the same announcement covered by other records.",
+          "text": "The Commission proposes a sovereign technology equity fund for strategic European companies.",
+          "confidence": "medium"
+        }
+      ]
+    }
+  ]
+}
