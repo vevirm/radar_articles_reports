@@ -7,39 +7,39 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **4225** (Main **2251** + Historical **1974**)
-- Automatic queue still needing V2 verification: **83** (Main **38** + Historical **45**)
-- Currently assigned to workers: **83** (Main **38** + Historical **45**)
+- Automatic queue still needing V2 verification: **109** (Main **61** + Historical **48**)
+- Currently assigned to workers: **107** (Main **61** + Historical **46**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **2**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261127T102110Z-ec66bc090532`
+- Current package: `worker-a-20261128T101101Z-f977e3398364`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1017/s1474745626101621` — Clean Energy Statecraft before the WTO: Weaponization Claims, Short Supply, and the Limits of Public Morals
-  2. `link:https://doi.org/10.1007/s10100-026-01046-6` — Ranking of EU member states based on sectoral adoption of artificial intelligence
-  3. `link:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en` — Developing, consolidating and optimising the European research infrastructures landscape, maintaining global leadership (INFRADEV)
-  4. `link:https://www.eui.eu/Documents/ServicesAdmin/DeanOfStudies/Code-of-Ethics-in-Academic-Conduct-and-Research.pdf` — Ethics and Integrity in Academic Research
-  5. `link:https://data.consilium.europa.eu/doc/document/ST-14141-2026-INIT/en/pdf` — CONTEXT OF THE PROPOSAL • Reasons for and objectives of the proposal
-  6. `link:https://doi.org/10.1111/1758-5899.70265` — “Paths Projections” of International Power Rivalries: Bringing Process‐Tracing to Scenario‐Building
-  7. `link:https://news.google.com/rss/articles/CBMivwFBVV95cUxOTXo2WlR5N2VkdFVXMW1iSFlVU2lpcVFWV1lGX214R2NqakVfb3ZaR3pTcXhUS2pfVk9MQXJEcV9JUFlOdnQxM085UVVqTk16aTlfdEUwaGc5Q3gwc1BJWXgtNk4yNFRWNzRaMmd2NzFEQnVIc1BlSFY1OTFUODFLZ3JRaEUxcHdoQmtMekJ5YW5ZU2kxMnBSZEYtZVJHcWlNNTUtVlJFTW40SF9BZVF2ZDNXcmRROEJWUGQweV9Raw?oc=5` — EU commission proposes €50bn tech fund to buy into AI, quantum and other strategic companies
-  8. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQR284a1NjQ3lBOUUteEhFTWlldGRrNkkxQWd4SG5aWFJqSC0wV0tUMmdjSVFaT0hySEhrb21sMWVTVTFkODR4ZTVmZ3dXTWJja3lIX2tBZmRHaFd3NjNNOEpmTlFyRFpxTTM0d2hLbFk5RzVoMU9KcnZUc2pENXhqUjhXV2p5ZHZBZW9UQWo3cmhpdkhRYWx5VF9yWGs?oc=5` — Belgium opens Europe's largest satellite factory in Charleroi
+  1. `link:https://doi.org/10.11586/2026144` — AI Value Creation and Open-Weight Models
+  2. `link:https://doi.org/10.11586/2026086` — European Business Survey
+  3. `link:https://data.consilium.europa.eu/doc/document/ST-16058-2026-INIT/en/pdf` — 16058/26 2 ANNEX COMPET.1 EN ANNEX Industrial Accelerator Act: Strengthening Europe’s Resilience Time is of the essence for European industry.
+  4. `link:https://www.bruegel.org/working-paper/defence-innovation-and-procurement-reform-empirical-evaluation-us-defense-innovation` — Defence innovation and procurement reform: an empirical evaluation of the US Defense Innovation Unit
+  5. `link:https://doi.org/10.2478/ijmbr-2026-0015` — Tuning Into the Musical Life of a Nordic Capital City: Results and Reflections on the Helsinki Live Music Census 2024
+  6. `link:https://www.era-learn.eu/news-events/news/european-parliament-confirms-horizon-europe-2028-2034-negotiating-mandate` — European Parliament confirms Horizon Europe 2028-2034 negotiating mandate
+  7. `link:https://defence-industry-space.ec.europa.eu/eu-ukraine-export-and-defence-industrial-cooperation-knowledge-hub_en` — EU-Ukraine Export and Defence Industrial Cooperation Knowledge Hub
+  8. `link:https://www.bruegel.org/working-paper/programmable-sovereignty-coordinated-specialisation-response-n-2-problem-artificial` — Programmable sovereignty: coordinated specialisation as a response to the N-2 problem in artificial intelligence
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261127T102117Z-95acc93ed07d`
-- Assigned unresolved records: **12**
+- Current package: `worker-b-20261128T101112Z-ecf9652ad434`
+- Assigned unresolved records: **36**
   1. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf` — Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament — recovery attempt 3/3
   2. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf` — Public hearing with Christine Lagarde, Chair of the European Systemic Risk Board - November 2026 | Think Tank | European Parliament — recovery attempt 3/3
-  3. `historical:id:9cb0892acf058e62` — The futures of artificial intelligence. Implications for Europe’s R&I ecosystem. Part 5: Final report
-  4. `historical:id:2fd959ba67cc2bfb` — Leveraging European values to strengthen technological sovereignty
-  5. `historical:id:2028505d1a43e047` — Digital Sovereignty as strategic indispensability
-  6. `historical:id:76f39d40d8f7b297` — Sending Signals or Building Bridges? Digital Sovereignty in EU Communicative and Co‐Ordinative Discourse
-  7. `historical:id:0b066ff127767e3a` — Missions for governance: Unleashing missions beyond policy
-  8. `historical:id:329869f427838fa2` — Public research and the innovation performance of new technology based firms
-  - … plus 4 more in the package manifest
+  3. `link:https://news.google.com/rss/articles/CBMiowFBVV95cUxOZVRuSWh2a1RjYjcyUnpwMmxXeEFTY3FSZm1HbVRwMGx5eGRDMWdLNXhTVFllYUVBMXpIelVFMFREMUJoRERGV1phLU9WWGFHSlBjaElDT2JDWEFCcTFvZkFhQV8yT3hCdTlwQUUzX2lycV9BV25KSWplUTFUcTRlRWphd1E1UWNBZGxhTDZYM2E5SXNGM1hYMThOVkVGVm5kbklJ?oc=5` — Postdoc in Quantum Estimation Theory and Metrology job with University of Luxembourg | 12867174
+  4. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxOY1NWdHJLMjJEZGJueVhNUmN6dFZNbzR4VEl6SWZIeE9zVHVqdzlNVkFPTTdVOHBjSzhxRWl2SDFJVHMxXzlRMEZjOHhNakhMb2VHbnFXcGJCbWFqV05Mb2U3OVpURDNUWUZPV3pVYlo1TUJLUHNxUXY0Qy1OY2I0bE8xRTYwMzZEZlVaR01JVnl5bHFhQjgwYXZPRjk0T1VaS3VQT3VSZHE0eGtKUlZvbDlSUHc1MzVfdjRLYWhvNTc3U2c2YVpTZUtjRVJyZw?oc=5` — 2027 EU budget: focus on research, connectivity and civil protection
+  5. `link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxNRGRSOW5JdWhoUDA5TE5iX0lzQUdtaW9jcExpQW1LelFxeExHNW1Hc1AzN2dkQkQ4M1EyNE9VcDc1WnZnbnZNeUVxRHM1d09DdTVObkZwUzgtYklaZktqZmpRdEVHbU14akdVZWpIcTF6U0dKVGhqY2JvWkVwTnZIT0Jra1FsdnhtbHA1RWJTc195N25pNVRKc0pwbTJCM3ZST1RNRVNyTjhrR0tEVWQydUlUQV8tSkxpQno0X01CVXo1MVNLR2ljQ2c5aDdiS2ZHeDBGWi03VHh3UnFZZlZkRFZpcFFTYy13N0hR?oc=5` — Europe’s quantum leap: strengthening industrial capacity and security with new quantum technologies
+  6. `link:https://news.google.com/rss/articles/CBMinAJBVV95cUxNT3lPNGRhX09OZExLTUtRUXJINzdsVWtSMXB1azhiOXAxVDR2RWh4eER5eGlmcmlSQmdvQ19rb2Q0ZWFxZ21ZcnE5dEhDT2FhZ1h0ek1zbGZiU3FRd3JRSWNTS295ZXRPTFQ5bWRSbG9SSTZRLW9XU2s3eGQ0WUpsc0dNRF9QcmNFM3dtUjdDSVA3a1VzMm5tVDdSeldzWUU5T1FOQWNYZ0RsRHhNZzQwQzdNZXVzWU9rdFNwTGdYYTMzb2tIYXI5dFZ0Tkt3UjlFZzB4N0F6dkxlLS1MRUQ0ZndMWmtVbGZJN3dyaERraUdJbkcxdXFsdDI4SkpLWnlRZU91WjVYMkN5ZDNfSk9MS0YzY05Ha0dGVmZ6Sg?oc=5` — African Union and European Union publish their renewed Roadmap for research and innovation on food and nutrition security and sustainable agriculture - European Commission
+  7. `link:https://news.google.com/rss/articles/CBMi2gFBVV95cUxQc2Jfd3U3MmljUlJ4QXhtblh5QTJhdU1lR2Rkbng5OWRQOUF5eEhwMldfcnpLcGljZkUydURLcmVGTk5MMUgtS0ZoQnBjOUh1b0RjZDdkSENfS0xEcHBBR0ppS3g4Y0NwUVlsaTJPU2d1Q0JvcFJiWVU4allkTFgwOE10ZXVLSXMtd19PUEYtdGFaMlFBUmhjZV94RV9LSnZNTGFPMWJ4TjlKajMtMVEwaVgyY1Fud0VHZHNURFBZWjNBTGEyQjNYU0F6YTlGTWJ2QnRRcFVnY1RPZw?oc=5` — Commission proposes Quantum Act and new Sovereign Tech Equity Fund to strengthen Europe's industrial capacity and security - Shaping Europe’s digital future
+  8. `link:https://news.google.com/rss/articles/CBMiygFBVV95cUxNUFNVR2RDLUo4QjN1elB1Y2RfSzVkTk51VkdiX2tKdHhXbWVZWG4xSjZQbF9UeWI4cHhjbEpFNklrdXFHT2RpekdZRnM1U3dlT2JnX2FvVGJMOWdIU01mNlhKTE9FbEdweHBCVDNLLWU5TEVpaWJCVEFDbnJnTnZsbTdqeWhxNGwxcURkclEtcWhkRzNMTnNaZkJMQU9ORVNCVURJMFJjQ2ZwQzlYeE9vNTR5dUEzRTQ2N0pOck9JVzhIdFpKc3hJUEdR?oc=5` — Anthropic-Backed Startup Led by Ex-Hg Execs Seeks Europe AI Edge
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
