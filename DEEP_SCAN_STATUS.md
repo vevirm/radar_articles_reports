@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261128T112238Z-08d4567d889b`
+- Current package: `worker-a-20261128T113444Z-08d4567d889b`
 - Assigned unresolved records: **8**
   1. `link:https://doi.org/10.1093/astrogeo/atag065` — From resilience to renewal: Ukrainian astronomy in the European Research Area — recovery attempt 2/3
   2. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxQZElrYVNyeHFFcEJzczZwWTJHNWJlTjVzTjluZldaU0liWFkwMF83WkZ3dDhBR2N0Y1hLQUFGX1o2V3ZWNnlKYksxQ2p5UEl0bnM0VWZqUU1PbVJ0RC0xbW9qd0Q1a2NRUi1YanFZRjJSOVpQOEhObks5YUp1VV80d0tVOUNtajdaeTdwSXRqS1dfb2pCX2JWWEdROE51d0NSODkyeU9qR3VkUU90Nk9Gd29B?oc=5` — AI Boom Hands Lifeline to German Industry Rocked by Car Slump — recovery attempt 2/3
@@ -28,7 +28,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   8. `historical:id:1e996b7a54a8604b` — Entrepreneurship and artificial intelligence: a bibliometric analysis
 
 ### Worker B
-- Current package: `worker-b-20261128T112248Z-98e5fbde1875`
+- Current package: `worker-b-20261128T113504Z-98e5fbde1875`
 - Assigned unresolved records: **2**
   1. `historical:id:0c34ae5b07c9c9ad` — Chinese Direct Investment in Europe – Challenges for EU FDI Policy
   2. `historical:id:01ddb8edf0dc57df` — Weak signals and wild cards in water and sanitation services – exploring an approach for water utilities
