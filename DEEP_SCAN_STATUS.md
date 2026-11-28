@@ -6,40 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **4225** (Main **2251** + Historical **1974**)
-- Automatic queue still needing V2 verification: **109** (Main **61** + Historical **48**)
-- Currently assigned to workers: **107** (Main **61** + Historical **46**)
+- Authoritative V2 verified: **4259** (Main **2277** + Historical **1982**)
+- Automatic queue still needing V2 verification: **79** (Main **34** + Historical **45**)
+- Currently assigned to workers: **79** (Main **34** + Historical **45**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **2**
+- Hands-on verification needed: **49**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261128T101101Z-f977e3398364`
+- Current package: `worker-a-20261128T110103Z-bb94ea2869a7`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.11586/2026144` — AI Value Creation and Open-Weight Models
-  2. `link:https://doi.org/10.11586/2026086` — European Business Survey
-  3. `link:https://data.consilium.europa.eu/doc/document/ST-16058-2026-INIT/en/pdf` — 16058/26 2 ANNEX COMPET.1 EN ANNEX Industrial Accelerator Act: Strengthening Europe’s Resilience Time is of the essence for European industry.
-  4. `link:https://www.bruegel.org/working-paper/defence-innovation-and-procurement-reform-empirical-evaluation-us-defense-innovation` — Defence innovation and procurement reform: an empirical evaluation of the US Defense Innovation Unit
-  5. `link:https://doi.org/10.2478/ijmbr-2026-0015` — Tuning Into the Musical Life of a Nordic Capital City: Results and Reflections on the Helsinki Live Music Census 2024
-  6. `link:https://www.era-learn.eu/news-events/news/european-parliament-confirms-horizon-europe-2028-2034-negotiating-mandate` — European Parliament confirms Horizon Europe 2028-2034 negotiating mandate
-  7. `link:https://defence-industry-space.ec.europa.eu/eu-ukraine-export-and-defence-industrial-cooperation-knowledge-hub_en` — EU-Ukraine Export and Defence Industrial Cooperation Knowledge Hub
-  8. `link:https://www.bruegel.org/working-paper/programmable-sovereignty-coordinated-specialisation-response-n-2-problem-artificial` — Programmable sovereignty: coordinated specialisation as a response to the N-2 problem in artificial intelligence
+  1. `historical:id:7bfbe6c9679dcef4` — AI Governance Capacity in Public Administration: A Comparative Analysis of the EU and Türkiye
+  2. `historical:id:efaaff0e767896c4` — Digital sovereignty metrics
+  3. `historical:id:453b8a39fa9725ae` — Advanced materials to reduce critical raw material dependencies in European industry
+  4. `historical:id:1e996b7a54a8604b` — Entrepreneurship and artificial intelligence: a bibliometric analysis
+  5. `historical:id:15ea2d25c0168813` — AI & The Oracle: Future Interfacing Technical Objects and the Reflexive Practitioner in Futures Studies
+  6. `link:https://doi.org/10.1017/s1474745626101621` — Clean Energy Statecraft before the WTO: Weaponization Claims, Short Supply, and the Limits of Public Morals
+  7. `link:https://doi.org/10.1007/s10100-026-01046-6` — Ranking of EU member states based on sectoral adoption of artificial intelligence
+  8. `link:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en` — Developing, consolidating and optimising the European research infrastructures landscape, maintaining global leadership (INFRADEV)
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261128T101112Z-ecf9652ad434`
-- Assigned unresolved records: **36**
-  1. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf` — Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament — recovery attempt 3/3
-  2. `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/795836/ECTI_BRI(2026)795836_EN.pdf` — Public hearing with Christine Lagarde, Chair of the European Systemic Risk Board - November 2026 | Think Tank | European Parliament — recovery attempt 3/3
-  3. `link:https://news.google.com/rss/articles/CBMiowFBVV95cUxOZVRuSWh2a1RjYjcyUnpwMmxXeEFTY3FSZm1HbVRwMGx5eGRDMWdLNXhTVFllYUVBMXpIelVFMFREMUJoRERGV1phLU9WWGFHSlBjaElDT2JDWEFCcTFvZkFhQV8yT3hCdTlwQUUzX2lycV9BV25KSWplUTFUcTRlRWphd1E1UWNBZGxhTDZYM2E5SXNGM1hYMThOVkVGVm5kbklJ?oc=5` — Postdoc in Quantum Estimation Theory and Metrology job with University of Luxembourg | 12867174
-  4. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxOY1NWdHJLMjJEZGJueVhNUmN6dFZNbzR4VEl6SWZIeE9zVHVqdzlNVkFPTTdVOHBjSzhxRWl2SDFJVHMxXzlRMEZjOHhNakhMb2VHbnFXcGJCbWFqV05Mb2U3OVpURDNUWUZPV3pVYlo1TUJLUHNxUXY0Qy1OY2I0bE8xRTYwMzZEZlVaR01JVnl5bHFhQjgwYXZPRjk0T1VaS3VQT3VSZHE0eGtKUlZvbDlSUHc1MzVfdjRLYWhvNTc3U2c2YVpTZUtjRVJyZw?oc=5` — 2027 EU budget: focus on research, connectivity and civil protection
-  5. `link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxNRGRSOW5JdWhoUDA5TE5iX0lzQUdtaW9jcExpQW1LelFxeExHNW1Hc1AzN2dkQkQ4M1EyNE9VcDc1WnZnbnZNeUVxRHM1d09DdTVObkZwUzgtYklaZktqZmpRdEVHbU14akdVZWpIcTF6U0dKVGhqY2JvWkVwTnZIT0Jra1FsdnhtbHA1RWJTc195N25pNVRKc0pwbTJCM3ZST1RNRVNyTjhrR0tEVWQydUlUQV8tSkxpQno0X01CVXo1MVNLR2ljQ2c5aDdiS2ZHeDBGWi03VHh3UnFZZlZkRFZpcFFTYy13N0hR?oc=5` — Europe’s quantum leap: strengthening industrial capacity and security with new quantum technologies
-  6. `link:https://news.google.com/rss/articles/CBMinAJBVV95cUxNT3lPNGRhX09OZExLTUtRUXJINzdsVWtSMXB1azhiOXAxVDR2RWh4eER5eGlmcmlSQmdvQ19rb2Q0ZWFxZ21ZcnE5dEhDT2FhZ1h0ek1zbGZiU3FRd3JRSWNTS295ZXRPTFQ5bWRSbG9SSTZRLW9XU2s3eGQ0WUpsc0dNRF9QcmNFM3dtUjdDSVA3a1VzMm5tVDdSeldzWUU5T1FOQWNYZ0RsRHhNZzQwQzdNZXVzWU9rdFNwTGdYYTMzb2tIYXI5dFZ0Tkt3UjlFZzB4N0F6dkxlLS1MRUQ0ZndMWmtVbGZJN3dyaERraUdJbkcxdXFsdDI4SkpLWnlRZU91WjVYMkN5ZDNfSk9MS0YzY05Ha0dGVmZ6Sg?oc=5` — African Union and European Union publish their renewed Roadmap for research and innovation on food and nutrition security and sustainable agriculture - European Commission
-  7. `link:https://news.google.com/rss/articles/CBMi2gFBVV95cUxQc2Jfd3U3MmljUlJ4QXhtblh5QTJhdU1lR2Rkbng5OWRQOUF5eEhwMldfcnpLcGljZkUydURLcmVGTk5MMUgtS0ZoQnBjOUh1b0RjZDdkSENfS0xEcHBBR0ppS3g4Y0NwUVlsaTJPU2d1Q0JvcFJiWVU4allkTFgwOE10ZXVLSXMtd19PUEYtdGFaMlFBUmhjZV94RV9LSnZNTGFPMWJ4TjlKajMtMVEwaVgyY1Fud0VHZHNURFBZWjNBTGEyQjNYU0F6YTlGTWJ2QnRRcFVnY1RPZw?oc=5` — Commission proposes Quantum Act and new Sovereign Tech Equity Fund to strengthen Europe's industrial capacity and security - Shaping Europe’s digital future
-  8. `link:https://news.google.com/rss/articles/CBMiygFBVV95cUxNUFNVR2RDLUo4QjN1elB1Y2RfSzVkTk51VkdiX2tKdHhXbWVZWG4xSjZQbF9UeWI4cHhjbEpFNklrdXFHT2RpekdZRnM1U3dlT2JnX2FvVGJMOWdIU01mNlhKTE9FbEdweHBCVDNLLWU5TEVpaWJCVEFDbnJnTnZsbTdqeWhxNGwxcURkclEtcWhkRzNMTnNaZkJMQU9ORVNCVURJMFJjQ2ZwQzlYeE9vNTR5dUEzRTQ2N0pOck9JVzhIdFpKc3hJUEdR?oc=5` — Anthropic-Backed Startup Led by Ex-Hg Execs Seeks Europe AI Edge
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20261128T110113Z-5fd501f4c13c`
+- Assigned unresolved records: **8**
+  1. `link:https://doi.org/10.1007/s44217-026-02480-z` — Developing and validating the AI-REFINE process to support pre-service science teachers in co-designing STEM lesson plans with generative AI
+  2. `link:https://news.google.com/rss/articles/CBMie0FVX3lxTE53NjRVRkpOZjNzaURucU1sZ01Fc2pJM1Y2Sy1ReGVLbVo1TW1ZVENPNmhKRm15TDdLT3ZsQ0g4cFpXSFFqSm44OWRMUFZPNk1OMHFPWll1cnYzVjlqZVVfWU42dFVVMHpmbEs0X3RCSlpqajBuY0ladzFzMA?oc=5` — 16412/26 1 TREE.2.B Council of the European Union The digital space has reached a central role in minors’ daily life, offerin - data.consilium.europa.eu
+  3. `link:https://news.google.com/rss/articles/CBMibkFVX3lxTFBZY1JPNHdJMC03eGVlbGhzZXpPQ1YyS3doVDRCRmlMSDVnZjNZaXRoYWJydXdxQ2VNYU5IUWFJb2pGRVFWeVFEWDNTRHMwTE5sbDhxSjY1aDZGQUpvR0pDdFh5SVFrWS1iQXFKLXpR?oc=5` — Chips Act 2.0 - Shaping Europe’s digital future
+  4. `historical:id:400d21a4fd94f9dc` — Challenges & solutions for data sharing in different research fields
+  5. `historical:id:787c40e3805463be` — Testing the science/technology relationship by analysis of patent citations of scientific papers after decomposition of both science and technology
+  6. `historical:id:0c34ae5b07c9c9ad` — Chinese Direct Investment in Europe – Challenges for EU FDI Policy
+  7. `historical:id:01ddb8edf0dc57df` — Weak signals and wild cards in water and sanitation services – exploring an approach for water utilities
+  8. `historical:id:44fc21bd3e3d4cd6` — The emerging dynamic structure of national innovation studies: a bibliometric analysis
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
@@ -106,3 +105,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1080/08911916.2026.2743824` — **Beyond the European Chips Act: Mobilizing Public Banks to Solve Europe’s Semiconductor Supply Chain Paradox** — attempts: 3/3 — International Journal of Political Economy — 2026-11-04 — This third-attempt hard-final item has publisher-verified identity, but DOI/publisher text is blocked and an OpenAlex GROBID document is demonstrably a different MOSFET textbook chapter. — https://doi.org/10.1080/08911916.2026.2743824
 - `link:https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf` — **How can Europe address its pressing AI compute infrastructure shortfall?** — attempts: 3/3 — Bruegel — 2026-10-27 — Primary Bruegel policy brief and PDF were access-restricted; independent metadata and third-party summaries do not substitute for substantive original full text. — https://www.bruegel.org/sites/default/files/2026-09/PB%2018%202026.pdf
 - `link:https://doi.org/10.1080/09662839.2026.2750174` — **Small states, big tech: exploring small states' role in enacting European digital sovereignty** — attempts: 3/3 — European Security — 2026-11-17 — The three named authors and current journal article are corroborated by an author’s public publication announcement and an earlier preprint, but the original DOI-linked journal full text was inaccessible and the accessible preprint abstract alone does not satisfy the substantive importer evidence standard. Third-attempt hard-final recovery exhausted available primary/publisher and legitimate preprint routes without identifying a readable matching full journal text. — https://doi.org/10.1080/09662839.2026.2750174
+- `link:https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf` — **Quantum act: Competitiveness and sovereignty | Think Tank | European Parliament** — attempts: 3/3 — European Parliament / STOA — 2026-11-20 — Identity verified through independent official listing; substantive document not accessible. — https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/797052/EPRS_BRI(2026)797052_EN.pdf
